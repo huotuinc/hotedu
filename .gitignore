@@ -1,3 +1,5 @@
 /target/
 /.idea/
+web/target
+service/target
 *.iml
