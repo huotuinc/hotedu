@@ -16,6 +16,7 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <lib.version>1.6-SNAPSHOT</lib.version>
     </properties>
 
     <dependencies>
@@ -27,7 +28,7 @@
         <dependency>
             <groupId>org.luffy.lib</groupId>
             <artifactId>libspringtest</artifactId>
-            <version>1.4-SNAPSHOT</version>
+            <version>${lib.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

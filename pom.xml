@@ -13,6 +13,13 @@
         <module>service</module>
     </modules>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>repo-jc</id>
+            <name>JiangCai Repository</name>
+            <url>http://115.29.228.62:8082/nexus/content/groups/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
     <repositories>
         <repository>
             <id>repo-jc</id>
