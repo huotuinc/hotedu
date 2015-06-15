@@ -14,8 +14,8 @@
       <h1 class="topbar-logo none"><a href="index.html" class="navbar-brand">云商学院后台管理</a></h1>
       <ul class="navbar-list clearfix">
         <li><a  href="index.html">首页</a></li>
-        <li><a class="on" href="招聘信息.html">网站维护</a></li>
-				<li><a href="申请领证列表.html">代理商管理</a></li>
+        <li><a class="on" href="wantedes.html">网站维护</a></li>
+				<li><a href="certificateapplications.html">代理商管理</a></li>
       </ul>
     </div>
     <div class="top-info-wrap">
@@ -34,43 +34,43 @@
       <ul class="sidebar-list">
         <li> <a href="#" style="height:30px; line-height:30px;">企业信息</a>
           <ul class="sub-menu">
-            <li><a href="招聘信息.html">招聘信息</a></li>
-            <li><a href="发布企业.html">发布企业</a></li>
+            <li><a href="wantedes.html">招聘信息</a></li>
+            <li><a href="enterprises.html">发布企业</a></li>
           </ul>
         </li>
         <li> <a href="#" style="height:30px; line-height:30px;">banner图</a>
           <ul class="sub-menu">
-            <li><a href="banner图.html">banner图</a></li>
+            <li><a href="banners.html">banner图</a></li>
           </ul>
         </li>
         <li> <a href="#" style="height:30px; line-height:30px;">考试指南</a>
           <ul class="sub-menu">
-            <li><a href="考试指南.html">考试指南</a></li>
+            <li><a href="guides.html">考试指南</a></li>
           </ul>
         </li>
         <li> <a href="#" style="height:30px; line-height:30px;">友情链接</a>
           <ul class="sub-menu">
-            <li><a href="友情链接.html">友情链接</a></li>
+            <li><a href="links.html">友情链接</a></li>
           </ul>
         </li>
         <li> <a href="#" style="height:30px; line-height:30px;">常见问题</a>
           <ul class="sub-menu">
-            <li><a href="常见问题.html">常见问题</a></li>
+            <li><a href="qa.html">常见问题</a></li>
           </ul>
         </li>
         <li> <a href="#" style="height:30px; line-height:30px;">资讯动态</a>
           <ul class="sub-menu">
-            <li><a href="资讯动态.html">资讯动态</a></li>
+            <li><a href="messagecontents.html">资讯动态</a></li>
           </ul>
         </li>
         <li> <a href="#" style="height:30px; line-height:30px;">公司简介</a>
           <ul class="sub-menu">
-            <li  class="on"><a href="公司简介编辑.html">公司简介编辑</a></li>
+            <li><a href="editenterprise.html">公司简介编辑</a></li>
           </ul>
         </li>
         <li> <a href="#" style="height:30px; line-height:30px;">视频</a>
           <ul class="sub-menu">
-            <li><a href="教学视频.html">教学视频</a></li>
+            <li  class="on"><a href="videos.html">教学视频</a></li>
             <li><a href="精彩录制.html">精彩录制</a></li>
             <li><a href="经验分享.html">经验分享</a></li>
             <li><a href="其他视频.html">其他视频</a></li>
@@ -78,7 +78,7 @@
         </li>
         <li> <a href="#" style="height:30px; line-height:30px;">师资力量</a>
           <ul class="sub-menu">
-            <li><a href="师资力量.html">师资力量</a></li>
+            <li><a href="tutors.html">师资力量</a></li>
           </ul>
         </li>
       </ul>
@@ -87,7 +87,7 @@
   <!--/sidebar-->
   <div class="main-wrap">
     <div class="crumb-wrap">
-      <div class="crumb-list"><i class="icon-font"></i><a href="招聘信息.html">网站维护</a><span class="crumb-step">&gt;</span><a href="公司简介编辑.html"><span class="crumb-name">公司简介编辑</span></a><span class="crumb-step">&gt;</span></div>
+      <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html">网站维护</a><span class="crumb-step">&gt;</span><a href="videos.html"><span class="crumb-name">考试指南</span></a><span class="crumb-step">&gt;</span><span class="crumb-name">新增视频</span></div>
     </div>
     <div class="result-wrap">
       <form action="#" method="post" id="myform" name="myform">
@@ -96,18 +96,26 @@
             <table width="100%" class="insert-tab">
               <tbody>
                 <tr>
-                  <th><i class="require-red">*</i>标题：</th>
+                  <th><i class="require-red">*</i>视频名称：</th>
                   <td><input type="text" id="" value="" size="70" name="description" class="common-text"></td>
                 </tr>
                 <tr>
-                  <th><i class="require-red">*</i>描述：</th>
+                  <th><i class="require-red">*</i>URL地址：</th>
                   <td><textarea name="content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
                 </tr>
-               
+                <tr>
+                  <th>权限 </th>
+                  <td><input type="radio" >
+                    &nbsp;免费&nbsp;&nbsp;
+                    <input type="radio">
+                    &nbsp;会员&nbsp;&nbsp;
+                   </td>
+                </tr>
                 <tr>
                   <th></th>
-                  <td><input type="submit" value="保存" class="btn btn-primary btn6 mr10">
-                    <input type="button" value="返回" onclick="history.go(-1)" class="btn btn6"></td>
+                  <td><input type="submit" value="提交" class="btn btn-primary btn6 mr10">
+                   <input type="button" value="返回" onclick="history.go(-1)" class="btn btn6"></td>
+                   
                 </tr>
               </tbody>
             </table>
