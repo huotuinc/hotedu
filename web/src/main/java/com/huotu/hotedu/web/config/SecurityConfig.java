@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -44,13 +45,15 @@ public class SecurityConfig {
 
     @Configuration
     public static class ClassicWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+        @Autowired
+        private Environment env;
         // Since we didn't specify an AuthenticationManager for this class,
         // the global instance is used
 
         public void configure(WebSecurity web) throws Exception {
-//            web
-//                    .ignoring()
-//                    .antMatchers("/static/**", "/status");
+            web
+                    .debug(!env.acceptsProfiles("prod"))
+                    .ignoring().antMatchers("/background/**","/pc/**");
         }
 
         protected void configure(HttpSecurity http) throws Exception {

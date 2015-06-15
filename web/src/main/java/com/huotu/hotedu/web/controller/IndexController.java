@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class IndexController {
 
-    @RequestMapping
+    @RequestMapping("/sayMyname")
     @ResponseBody
     public String sayMyname(@AuthenticationPrincipal Login who){
         return who.getLoginName();
