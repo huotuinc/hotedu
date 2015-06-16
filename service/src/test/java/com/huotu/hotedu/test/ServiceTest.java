@@ -9,9 +9,11 @@ import com.huotu.hotedu.repository.MemberRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -21,6 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
+@Transactional
 public class ServiceTest {
 
     @Autowired
@@ -31,6 +34,7 @@ public class ServiceTest {
     ManagerRepository managerRepository;
 
     @Test
+//    @Rollback
     public void justgo(){
         System.out.println("ServiceTest.justgo");
         Member member = new Member();
