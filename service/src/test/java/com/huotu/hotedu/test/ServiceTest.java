@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -21,6 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
+@Transactional
 public class ServiceTest {
 
     @Autowired
@@ -31,6 +35,7 @@ public class ServiceTest {
     ManagerRepository managerRepository;
 
     @Test
+//    @Rollback
     public void justgo(){
         System.out.println("ServiceTest.justgo");
         Member member = new Member();
@@ -49,5 +54,17 @@ public class ServiceTest {
 
         Login thisone = loginRepository.findOne(manager.getId());
         System.out.println("ServiceTest.justgo");
+
+        //PO JO test
+        manager.setManagerField("foo");
+        managerRepository.save(manager);
+
+        assertEquals("foo", managerRepository.getOne(manager.getId()).getManagerField());
+
+        managerRepository.updateManagerField("bar");
+        System.out.println(manager.getManagerField());
+        managerRepository.refresh(manager);
+//        Manager newManager = entityManagerFactory.createEntityManager().merge(manager);
+        assertEquals("bar", managerRepository.getOne(manager.getId()).getManagerField());
     }
 }
