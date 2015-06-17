@@ -1,6 +1,7 @@
 package com.huotu.hotedu.config;
 
 import org.luffy.lib.libspring.config.LibJpaConfig;
+import org.luffy.lib.libspring.data.ClassicsRepositoryFactoryBean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -12,6 +13,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 @Configuration
 @DependsOn("entityManagerFactory")
-@EnableJpaRepositories("com.huotu.hotedu.repository")
+@EnableJpaRepositories(value="com.huotu.hotedu.repository",repositoryFactoryBeanClass = ClassicsRepositoryFactoryBean.class)
 public class JpaConfig extends LibJpaConfig {
 }
