@@ -5,14 +5,7 @@
     <title>云商学院后台管理</title>
     <link rel="stylesheet" type="text/css" href="css/common.css"/>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="css/alert.css"/>
-    <script type="text/javascript" src="js/libs/jquery.min.js"></script>
     <script type="text/javascript" src="js/libs/modernizr.min.js"></script>
-    <script type="text/javascript">
-        window.onload=function(){
-            $("#apptc").hide();
-        };
-    </script>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -28,8 +21,8 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li><a href="#">admin</a></li>
-                <li><a href="修改密码.html">修改密码</a></li>
+                   <li><a href="login.html">admin</a></li>
+                <li><a href="Changethepassword.html">修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
         </div>
@@ -52,14 +45,7 @@
                     </ul>
                 </li>
 				
-				   <li>
-                    <a href="#" style="height:30px; line-height:30px;">查看代理名下</a>
-                    <ul class="sub-menu">
-                    <li><a href="agent.html">查看代理名下</a></li>
-					 <li><a href="batch.html">班级详情</a></li>
-                    </ul>
-                </li>
-				
+		
 				
             </ul>
 			
@@ -79,60 +65,7 @@
             <form name="myform" id="myform" method="post">
           
                 <div class="result-content">
-
-                    <div id="apptc">
-                        <div class="tko">
-                            <div class="result-wrap">
-
-                                <div class="result-content">
-                                    <ul class="sys-info-list">
-
-                                        <li>
-                                            <label class="res-lab">收件人：</label><span class="res-info">XXX</span>
-                                        </li>
-                                        <li>
-                                            <label class="res-lab">申请时间：</label><span class="res-info">20150401 12：00：00</span>
-                                        </li>
-                                        <li>
-                                            <label class="res-lab">收件地址:</label><span class="res-info">文一路</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="result-wrap">
-                                <form action="#" method="post" id="myform" name="myform">
-                                    <div class="config-items">
-                                        <div class="result-content">
-                                            <table width="100%" class="insert-tab">
-                                                <tbody>
-                                                <tr>
-                                                    <th><i class="require-red">*</i>证书编号：</th>
-                                                    <td><input type="text" id="" value="" size="70" name="description" class="common-text"></td>
-                                                </tr>
-
-                                                <tr>
-                                                    <th></th>
-                                                    <td>
-                                                        <input id="submitexit" type="submit" value="提交" class="btn btn-primary btn6 mr10">
-                                                        <input type="button" value="返回" onclick="history.go(-1)" class="btn btn6">
-                                                    </td>
-                                                </tr>
-                                                </tbody></table>
-                                        </div>
-                                    </div>
-
-                                </form>
-                            </div>
-                        </div>
-                        <div id="tcbg" class=""></div>
-                    </div>
-
-
-
-
-
-
-                    <table id="applicationtable" class="result-tab" width="100%">
+                    <table class="result-tab" width="100%">
                         <tr>
                            
                            
@@ -149,15 +82,15 @@
                             
                           
                             <td>01</td>
-                            <td title="">slt</td>
+                            <td title="">某某</td>
                             <td >杭州</td>
                             <td>15068564912</td>
 							<td>2015/01/01 </td>
                             <td>申请发证</td>
                             <td>201504第一期</td>
                             <td> 
-							 <a class="link-update" href="#">查看</a><br>
-                                <a class="link-update" href="#">发证</a>
+							 <a class="link-update" href="prentice.html">查看</a><br>
+                                <a class="link-update" href="sendcertificate.html">发证</a>
                                 
                             </td>
                         </tr>
@@ -172,8 +105,8 @@
                             <td>申请发证</td>
                             <td>201504第一期</td>
                             <td> 
-							 <a class="link-update" href="#">查看</a><br>
-                                <a class="link-update" href="#">发证</a>
+							 <a class="link-update" href="prentice.html">查看</a><br>
+                                <a class="link-update" href="sendcertificate.html">发证</a>
                                 
                             </td>
                         </tr>
