@@ -8,3 +8,7 @@
     z-index: 109;
 }
 .tko{border:1px solid #ddd; padding:20px; margin:0 auto; position:fixed;top:20%;left:36%; background-color:#fff; margin:10px; border-radius:4px;z-index: 899;}
+
+.warning-style{
+    color: #da4f49;
+}
