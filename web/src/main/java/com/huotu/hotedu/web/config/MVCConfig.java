@@ -1,9 +1,11 @@
 package com.huotu.hotedu.web.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
@@ -26,6 +28,14 @@ public class MVCConfig  extends WebMvcConfigurerAdapter {
 
     @Autowired
     private Environment env;
+
+    /**
+     * for upload
+     */
+    @Bean
+    public CommonsMultipartResolver multipartResolver(){
+        return new CommonsMultipartResolver();
+    }
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {

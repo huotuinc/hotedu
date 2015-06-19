@@ -19,4 +19,9 @@ public class IndexController {
     public String sayMyname(@AuthenticationPrincipal Login who){
         return who.getLoginName();
     }
+
+    @RequestMapping("/")
+    public String index(){
+        return "backend/index";
+    }
 }

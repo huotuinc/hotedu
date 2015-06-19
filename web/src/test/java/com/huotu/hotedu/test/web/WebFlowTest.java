@@ -53,6 +53,14 @@ public class WebFlowTest extends SpringWebTest {
     private LoginRepository loginRepository;
 
     @Test
+    public void index() throws Exception {
+        mockMvc.perform(
+                get("/")
+        )
+                .andDo(print());
+    }
+
+    @Test
     public void sayMyname() throws Exception {
         mockMvc.perform(
                 get("/sayMyname")
