@@ -18,7 +18,10 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan({"com.huotu.hotedu.web.controller"})
+@ComponentScan({
+        "com.huotu.hotedu.web.service",
+        "com.huotu.hotedu.web.controller"
+})
 public class MVCConfig  extends WebMvcConfigurerAdapter {
 
     @Autowired
