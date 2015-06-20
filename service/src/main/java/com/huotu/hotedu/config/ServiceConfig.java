@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @DependsOn("entityManagerFactory")
 @ComponentScan({"com.huotu.hotedu.service"})
+@EnableTransactionManagement
 public class ServiceConfig {
 
     /**
