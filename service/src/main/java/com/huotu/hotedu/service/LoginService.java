@@ -17,7 +17,7 @@ import java.util.Date;
  * @author luffy luffy.ja at gmail.com
  */
 @Service
-public class LoginService implements UserDetailsService{
+public class LoginService implements UserDetailsService {
 
     @Autowired
     private LoginRepository loginRepository;
@@ -27,7 +27,7 @@ public class LoginService implements UserDetailsService{
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Login login = loginRepository.findByLoginName(username);
-        if (login==null)
+        if (login == null)
             throw new UsernameNotFoundException("无效的用户名。");
         login.setLastLoginDate(new Date());
         return login;
@@ -35,10 +35,11 @@ public class LoginService implements UserDetailsService{
 
     /**
      * 新建一个可登陆用户
-     * @param login 准备新建的可登陆用户
+     *
+     * @param login    准备新建的可登陆用户
      * @param password 明文密码
      */
-    public Login newLogin(Login login,CharSequence password){
+    public <T extends Login> T newLogin(T login, CharSequence password) {
         login.setPassword(passwordEncoder.encode(password));
         login.setEnabled(true);
 
