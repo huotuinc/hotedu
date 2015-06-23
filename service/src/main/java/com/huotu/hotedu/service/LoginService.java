@@ -38,10 +38,10 @@ public class LoginService implements UserDetailsService{
      * @param login 准备新建的可登陆用户
      * @param password 明文密码
      */
-    public void newLogin(Login login,CharSequence password){
+    public Login newLogin(Login login,CharSequence password){
         login.setPassword(passwordEncoder.encode(password));
         login.setEnabled(true);
 
-        loginRepository.save(login);
+        return loginRepository.save(login);
     }
 }
