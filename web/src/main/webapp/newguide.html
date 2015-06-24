@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>云商学院后台管理</title>
-<link rel="stylesheet" type="text/css" href="css/common.css"/>
-<link rel="stylesheet" type="text/css" href="css/main.css"/>
-<script type="text/javascript" src="js/libs/modernizr.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/common.css"/>
+<link rel="stylesheet" type="text/css" href="/css/main.css"/>
+<script type="text/javascript" src="/js/libs/modernizr.min.js"></script>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -29,7 +29,7 @@
 </div>
 <div class="container clearfix">
   <div class="sidebar-wrap">
-    <div class="sidebar-title"> <img src="images/htlogo.png" style=" width:160px;margin-left: -10px;"> </div>
+    <div class="sidebar-title"> <img src="/images/htlogo.png" style=" width:160px;margin-left: -10px;"> </div>
     <div class="sidebar-content">
       <ul class="sidebar-list">
         <li> <a href="#" style="height:30px; line-height:30px;">企业信息</a>
@@ -45,7 +45,7 @@
         </li>
         <li> <a href="#" style="height:30px; line-height:30px;">考试指南</a>
           <ul class="sub-menu">
-            <li><a href="guides.html">考试指南</a></li>
+            <li  class="on"><a href="guides.html">考试指南</a></li>
           </ul>
         </li>
         <li> <a href="#" style="height:30px; line-height:30px;">友情链接</a>
@@ -65,7 +65,7 @@
         </li>
         <li> <a href="#" style="height:30px; line-height:30px;">公司简介</a>
           <ul class="sub-menu">
-            <li  class="on"><a href="editenterprise.html">公司简介编辑</a></li>
+            <li><a href="editenterprise.html">公司简介编辑</a></li>
           </ul>
         </li>
         <li> <a href="#" style="height:30px; line-height:30px;">视频</a>
@@ -87,7 +87,7 @@
   <!--/sidebar-->
   <div class="main-wrap">
     <div class="crumb-wrap">
-      <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html">网站维护</a><span class="crumb-step">&gt;</span><a href="editenterprise.html"><span class="crumb-name">公司简介编辑</span></a><span class="crumb-step">&gt;</span></div>
+      <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html">网站维护</a><span class="crumb-step">&gt;</span><a href="guides.html"><span class="crumb-name">考试指南</span></a><span class="crumb-step">&gt;</span><span class="crumb-name">新建</span></div>
     </div>
     <div class="result-wrap">
       <form action="#" method="post" id="myform" name="myform">
@@ -103,7 +103,14 @@
                   <th><i class="require-red">*</i>描述：</th>
                   <td><textarea name="content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
                 </tr>
-               
+                <tr>
+                  <th>置顶</th>
+                  <td><input type="radio" >
+                    &nbsp;是&nbsp;&nbsp;
+                    <input type="radio">
+                    &nbsp;否&nbsp;&nbsp;
+                   </td>
+                </tr>
                 <tr>
                   <th></th>
                   <td><input type="submit" value="保存" class="btn btn-primary btn6 mr10">

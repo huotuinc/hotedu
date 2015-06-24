@@ -53,18 +53,30 @@ public class SecurityConfig {
         public void configure(WebSecurity web) throws Exception {
             web
                     .debug(!env.acceptsProfiles("prod"))
-                    .ignoring().antMatchers("/background/**","/pc/**");
+//                    .ignoring()
+//                    .antMatchers(
+//                            "/css/**",
+//                            "/images/**"
+//                    )
+            ;
         }
-
+        //设置拦截规则
         protected void configure(HttpSecurity http) throws Exception {
             http
-                    .csrf().disable()
+
+                    //确保任何请求应用程序的用户需要通过身份验证
                     .authorizeRequests()
+                    .antMatchers("/css/**","/images/**").permitAll()   // 允许未登录用户访问静态资源
                     .anyRequest().authenticated()
                     .and()
+                            //开启默认登录页面,允许用户进行身份验证和基于表单的登录
+                    .csrf().disable()
                     .formLogin()
-                    .and()
-                    .httpBasic();
+                    .loginPage("/login")
+                    .permitAll();
+//                    .and()
+                    //允许用户进行HTTP基本身份验证
+//                    .httpBasic();
 //            http
 //                    .authorizeRequests()
 //                    .anyRequest().hasRole("USER")

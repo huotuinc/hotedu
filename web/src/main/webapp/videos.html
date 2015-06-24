@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>云商学院后台管理</title>
-    <link rel="stylesheet" type="text/css" href="css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="css/main.css"/>
-    <script type="text/javascript" src="js/libs/modernizr.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <script type="text/javascript" src="/js/libs/modernizr.min.js"></script>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -21,7 +21,7 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                  <li><a href="login.html">admin</a></li>
+                 <li><a href="login.html">admin</a></li>
                 <li><a href="Changethepassword.html">修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
@@ -31,7 +31,7 @@
 <div class="container clearfix">
      <div class="sidebar-wrap">
   <div class="sidebar-title">
-         	<img src="images/htlogo.png" style=" width:160px;margin-left: -10px;">
+         	<img src="/images/htlogo.png" style=" width:160px;margin-left: -10px;">
         </div> 
         <div class="sidebar-content">
              <ul class="sidebar-list">
@@ -39,10 +39,11 @@
                     <a href="#" style="height:30px; line-height:30px;">企业信息</a>
                     <ul class="sub-menu">
 					 <li><a href="wantedes.html">招聘信息</a></li>
-						<li ><a href="enterprises.html">发布企业</a></li>
+						<li><a href="enterprises.html">发布企业</a></li>
                     </ul>
-                </li>
-              <li>
+                   </li>
+                   
+                   <li>
                     <a href="#" style="height:30px; line-height:30px;">banner图</a>
                     <ul class="sub-menu">
 					 <li><a href="banners.html">banner图</a></li>
@@ -76,6 +77,7 @@
 					 <li><a href="messagecontents.html">资讯动态</a></li>
                     </ul>
                    </li>
+			
 				 <li>
 				  <a href="#" style="height:30px; line-height:30px;">公司简介</a>
 				   <ul class="sub-menu">						                   
@@ -86,41 +88,39 @@
 				 <li>
 				  <a href="#" style="height:30px; line-height:30px;">视频</a>
 				   <ul class="sub-menu">						                   
-                        <li><a href="videos.html">教学视频</a></li>
+                        <li class="on"><a href="videos.html">教学视频</a></li>
 						<li><a href="精彩录制.html">精彩录制</a></li>		
 						<li><a href="经验分享.html">经验分享</a></li>		
 						<li><a href="其他视频.html">其他视频</a></li>							 
                     </ul>
 				</li>
 				
-					 <li>
+				
+		      <li>
 				  <a href="#" style="height:30px; line-height:30px;">师资力量</a>
 				   <ul class="sub-menu">						                   
-                        <li class="on"><a href="tutors.html">师资力量</a></li>
+                        <li><a href="tutors.html">师资力量</a></li>
                     </ul>
 				</li>
-		
             </ul>
 			
 		
         </div>
     </div>
-    <!--/sidebar-->
+       <!--/sidebar-->
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">师资力量</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">教学视频</span></div>
         </div>
         <div class="search-wrap">
             <div class="search-content">
                 <form action="#" method="post">
+             
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
-							<td>  <select name="search-sort" id="" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
-                                    <option value="">区域</option>                                   
-									 
-                                </select></td>
+							
                             <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"></td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"></td>
                         </tr>
@@ -130,10 +130,10 @@
         </div>
         <div class="result-wrap">
             <form name="myform" id="myform" method="post">
-          <div class="result-title">
+              <div class="result-title">
                     <div class="result-list">
                       
-                    <a href="newtutor.html"><i class="icon-font"></i>新增</a>
+                    <a href="newvideo.html"><i class="icon-font"></i>新增视频</a>
                         
                     </div>
                 </div>
@@ -143,27 +143,40 @@
                            
                            
                             <th style="width:80px">序号</th>
-                            <th style="width:80px;">教师</th>
-                            <th style="width:80px">职称</th>
-                            <th style="width:80px">区域</th>
+                            <th style="width:80px;">片名</th>
+                            <th style="width:100px">时长</th>
                             <th style="width:100px">上传时间</th>
+                            <th style="width:100px">权限</th>
                             <th style="width:80px">操作</th>
                         </tr>
-                        <tr>
+                         <tr>
                             
                           
                             <td>01</td>
-                            <td title="">XXX</td>
-							<td></td>
-                            <td></td>
+                            <td title="">第一章第一节</td>
+                            <td title="">2：30：00</td>
                             <td>2015.01.01/13.00.00</td>
+                            <td title="">免费</td>
                             <td> 
-							 <a class="link-update" href="newtutor.html">修改</a><br>
+							 <a class="link-update" href="newvideo.html">修改</a><br>
                                 <a class="link-update" href="#">删除</a>
                                 
                             </td>
                         </tr>
-                        
+                          <tr>
+                            
+                          
+                            <td>01</td>
+                            <td title="">第一章第一节</td>
+                            <td title="">2：30：00</td>
+                            <td>2015.01.01/13.00.00</td>
+                            <td title="">免费</td>
+                            <td> 
+							 <a class="link-update" href="newvideo.html">修改</a><br>
+                                <a class="link-update" href="#">删除</a>
+                                
+                            </td>
+                        </tr>
                     </table>
                     <div class="list-page"> 2 条 1/1 页</div>
                 </div>
