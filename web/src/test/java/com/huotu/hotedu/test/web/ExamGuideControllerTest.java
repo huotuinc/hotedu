@@ -1,8 +1,11 @@
 package com.huotu.hotedu.test.web;
 
+import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.entity.Member;
+import com.huotu.hotedu.repository.ExamGuideRepository;
 import com.huotu.hotedu.repository.LoginRepository;
 import com.huotu.hotedu.repository.MemberRepository;
+import com.huotu.hotedu.service.ExamGuideService;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.test.TestWebConfig;
 import libspringtest.SpringWebTest;
@@ -16,8 +19,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -30,70 +34,35 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @WebAppConfiguration
 public class ExamGuideControllerTest extends SpringWebTest {
 
-    protected MockHttpSession loginAs(String userName, String password) throws Exception {
-        MockHttpSession session = (MockHttpSession) this.mockMvc.perform(get("/"))
-                .andReturn().getRequest().getSession(true);
-        //bad password
-        session = (MockHttpSession) this.mockMvc.perform(post("/login").session(session)
-                .param("username", userName).param("password", password))
-                .andDo(print())
-                .andReturn().getRequest().getSession();
+//    protected MockHttpSession loginAs(String userName, String password) throws Exception {
+//        MockHttpSession session = (MockHttpSession) this.mockMvc.perform(get("/"))
+//                .andReturn().getRequest().getSession(true);
+//        //bad password
+//        session = (MockHttpSession) this.mockMvc.perform(post("/login").session(session)
+//                .param("username", userName).param("password", password))
+//                .andDo(print())
+//                .andReturn().getRequest().getSession();
+//
+////         CsrfToken token = new HttpSessionCsrfTokenRepository().loadToken(request);
+//        saveAuthedSession(session);
+//        return session;
+//    }
 
-//         CsrfToken token = new HttpSessionCsrfTokenRepository().loadToken(request);
-        saveAuthedSession(session);
-        return session;
-    }
+    @Autowired
+    private ExamGuideService examGuideService;
+    @Autowired
+    private ExamGuideRepository examGuideRepository;
 
-    @Autowired
-    private LoginService loginService;
-    @Autowired
-    private MemberRepository memberRepository;
-    @Autowired
-    private LoginRepository loginRepository;
 
     @Test
-    public void index() throws Exception {
+    public void loadexam() throws Exception {
         mockMvc.perform(
-                get("/")
+                get("/load/examGuide")
         )
-                .andDo(print());
-    }
-    @Test
-    public void login() throws  Exception{
-//        mockMvc.perform(
-//                get("/login")
-//        ).andDo(print()).andExpect(model().attributeExists("slt"))
-//        ;
-    }
-    @Test
-    public void sayMyname() throws Exception {
-//        mockMvc.perform(
-//                get("/sayMyname")
-//        )
-//                .andExpect(status().isFound()) // forward to /login
-//        ;
-//
-//        checkMemeber("memberdemo");
-//
-//        MockHttpSession session = loginAs("memberdemo", "memberdemo");
-//
-//        mockMvc.perform(
-//                get("/sayMyname")
-//                        .session(session)
-//        )
-//                .andExpect(status().isOk())
-//                .andExpect(content().string("memberdemo"))
-//        ;
-
+                ;
     }
 
-    private void checkMemeber(String name) {
-        try {
-            loginService.loadUserByUsername(name);
-        } catch (UsernameNotFoundException ex) {
-            Member member = new Member();
-            member.setLoginName(name);
-            loginService.newLogin(member, name);
-        }
-    }
+
+
+
 }

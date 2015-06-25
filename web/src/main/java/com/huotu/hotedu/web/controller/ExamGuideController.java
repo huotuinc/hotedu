@@ -1,6 +1,7 @@
 package com.huotu.hotedu.web.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ExamGuideController {
 
-    @RequestMapping("/login")
-    public String index(){
-        return "/login";
+    @RequestMapping("/load/examGuide")
+    public String loadExamGuide(){
+        return "/guides";
     }
 }
