@@ -17,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import javax.management.Query;
 import java.util.Date;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -68,6 +69,7 @@ public class MessageContentControllerTest extends SpringWebTest {
         messageContent.setTitle("slt");
         messageContent.setContent("asdfasdfasdfasdfasfeadsf");
         messageContentRepository.save(messageContent);
+        messageContentRepository.findAll();
 
 
 

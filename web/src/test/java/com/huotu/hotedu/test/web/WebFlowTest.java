@@ -1,6 +1,9 @@
 package com.huotu.hotedu.test.web;
 
+import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.entity.Member;
+import com.huotu.hotedu.entity.MessageContent;
+import com.huotu.hotedu.repository.ExamGuideRepository;
 import com.huotu.hotedu.repository.LoginRepository;
 import com.huotu.hotedu.repository.MemberRepository;
 import com.huotu.hotedu.service.LoginService;
@@ -48,9 +51,7 @@ public class WebFlowTest extends SpringWebTest {
     @Autowired
     private LoginService loginService;
     @Autowired
-    private MemberRepository memberRepository;
-    @Autowired
-    private LoginRepository loginRepository;
+    private ExamGuideRepository examGuideRepository;
 
     @Test
     public void index() throws Exception {
@@ -61,14 +62,18 @@ public class WebFlowTest extends SpringWebTest {
     }
     @Test
     public void login() throws  Exception{
+        ExamGuide exam=new ExamGuide();
+        exam.setTitle("dd");
+        exam.setContent("asdfe");
+        exam.setTop(true);
+        exam.setLastUploadDate(new Date());
+        examGuideRepository.save(exam);
+        mockMvc.perform(
+                get("/load/examGuide")
+        ).andDo(print())
+        ;
 
     }
-    @Test
-    public void sayMyname() throws Exception {
-
-
-    }
-
     private void checkMemeber(String name) {
         try {
             loginService.loadUserByUsername(name);
