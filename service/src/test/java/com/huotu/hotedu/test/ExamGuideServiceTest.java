@@ -1,12 +1,12 @@
 package com.huotu.hotedu.test;
 
-//import com.huotu.hotedu.entity.ExamGuide;
+import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.entity.Qa;
 import com.huotu.hotedu.entity.MessageContent;
-//import com.huotu.hotedu.repository.ExamGuideRepository;
+import com.huotu.hotedu.repository.ExamGuideRepository;
 import com.huotu.hotedu.repository.MessageContentRepository;
 import com.huotu.hotedu.repository.QaRepository;
-//import com.huotu.hotedu.service.ExamGuideService;
+import com.huotu.hotedu.service.ExamGuideService;
 import com.huotu.hotedu.service.QaService;
 import com.huotu.hotedu.service.MessageContentService;
 import org.junit.Test;
@@ -17,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.crypto.ExemptionMechanism;
 import java.util.Date;
 import java.util.List;
 
@@ -34,10 +35,10 @@ import static org.junit.Assert.assertEquals;
 public class ExamGuideServiceTest {
 
 
-//    @Autowired
-//    ExamGuideRepository examGuideRepository;
-//    @Autowired
-//    private ExamGuideService guideService;
+    @Autowired
+    ExamGuideRepository examGuideRepository;
+    @Autowired
+    private ExamGuideService guideService;
     @Autowired
     QaRepository qaRepository;
     @Autowired
@@ -51,6 +52,13 @@ public class ExamGuideServiceTest {
 
     @Test
     public void loadExamGuide(){
+        ExamGuide examGuide =new ExamGuide();
+        examGuide.setContent("examguide");
+        examGuide.setTitle("title examguide");
+        examGuide.setLastUploadDate(new Date());
+        examGuide.setTop(true);
+        examGuideRepository.save(examGuide);
+        List<ExamGuide> list=guideService.loadExamGuide();
 
     }
     @Test
@@ -64,6 +72,8 @@ public class ExamGuideServiceTest {
         List<Qa> list=qaService.loadQa();
         System.out.println(list);
     }
+
+
 
     @Test
     public void loadMessageContent(){

@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title></title>
@@ -52,7 +52,7 @@
                         <li>
                     <a href="#" style="height:30px; line-height:30px;">考试指南</a>
                     <ul class="sub-menu">
-					 <li><a href="guides.html">考试指南</a></li>
+					 <li><a href="#" th:href="@{/load/examGuide}">考试指南动态测试</a></li>
                     </ul>
                    </li> 
 				
