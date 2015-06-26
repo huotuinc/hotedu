@@ -20,8 +20,6 @@ public class MessageContentService {
 
     //返回所有常见问题
     public List<MessageContent> loadMessageContent(){
-        List<MessageContent> list=new ArrayList<MessageContent>();
-        list=messageContentRepository.findAll();
-        return list;
+        return messageContentRepository.findAll();
     }
 }
