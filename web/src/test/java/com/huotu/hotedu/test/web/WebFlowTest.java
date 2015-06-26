@@ -1,9 +1,7 @@
 package com.huotu.hotedu.test.web;
 
 import com.huotu.hotedu.entity.Member;
-import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.repository.LoginRepository;
-import com.huotu.hotedu.repository.ExamGuideRepository;
 import com.huotu.hotedu.repository.MemberRepository;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.test.TestWebConfig;
@@ -38,21 +36,17 @@ public class WebFlowTest extends SpringWebTest {
     protected MockHttpSession loginAs(String userName, String password) throws Exception {
         MockHttpSession session = (MockHttpSession) this.mockMvc.perform(get("/"))
                 .andReturn().getRequest().getSession(true);
-        //bad password
         session = (MockHttpSession) this.mockMvc.perform(post("/login").session(session)
                 .param("username", userName).param("password", password))
                 .andDo(print())
                 .andReturn().getRequest().getSession();
 
-//         CsrfToken token = new HttpSessionCsrfTokenRepository().loadToken(request);
         saveAuthedSession(session);
         return session;
     }
 
     @Autowired
     private LoginService loginService;
-    @Autowired
-    private ExamGuideRepository examGuideRepository;
     @Autowired
     private MemberRepository memberRepository;
     @Autowired
@@ -67,36 +61,11 @@ public class WebFlowTest extends SpringWebTest {
     }
     @Test
     public void login() throws  Exception{
-        ExamGuide examGuide=new ExamGuide();
-        examGuide.setContent("123456");
-        examGuide.setTitle("我的第一次测试");
-        examGuide.setTop(false);
-        examGuide.setLastUploadDate(new Date());
-        examGuideRepository.save(examGuide);
-        mockMvc.perform(
-                get("/load/examGuide")
-        ).andDo(print()).andExpect(model().attributeExists("list"))
-        ;
+
     }
     @Test
     public void sayMyname() throws Exception {
-//        mockMvc.perform(
-//                get("/sayMyname")
-//        )
-//                .andExpect(status().isFound()) // forward to /login
-//        ;
-//
-//        checkMemeber("memberdemo");
-//
-//        MockHttpSession session = loginAs("memberdemo", "memberdemo");
-//
-//        mockMvc.perform(
-//                get("/sayMyname")
-//                        .session(session)
-//        )
-//                .andExpect(status().isOk())
-//                .andExpect(content().string("memberdemo"))
-//        ;
+
 
     }
 

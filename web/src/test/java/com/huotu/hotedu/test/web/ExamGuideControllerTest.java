@@ -1,11 +1,11 @@
 package com.huotu.hotedu.test.web;
 
-import com.huotu.hotedu.entity.ExamGuide;
+//import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.entity.Member;
-import com.huotu.hotedu.repository.ExamGuideRepository;
+//import com.huotu.hotedu.repository.ExamGuideRepository;
 import com.huotu.hotedu.repository.LoginRepository;
 import com.huotu.hotedu.repository.MemberRepository;
-import com.huotu.hotedu.service.ExamGuideService;
+//import com.huotu.hotedu.service.ExamGuideService;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.test.TestWebConfig;
 import libspringtest.SpringWebTest;
@@ -34,17 +34,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @ContextConfiguration(classes = TestWebConfig.class)
 @WebAppConfiguration
 public class ExamGuideControllerTest extends SpringWebTest {
-    @Autowired
-    private ExamGuideService examGuideService;
-    @Autowired
-    private ExamGuideRepository examGuideRepository;
+//    @Autowired
+//    private ExamGuideService examGuideService;
+//    @Autowired
+//    private ExamGuideRepository examGuideRepository;
 
 
     @Test
     public void loadexam() throws Exception {
-//        mockMvc.perform(
-//                get("/load/examGuide")
-//        ).andDo(print()).andExpect()
+
     }
 
 

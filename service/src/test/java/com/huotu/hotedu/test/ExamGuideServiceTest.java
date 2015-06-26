@@ -1,12 +1,12 @@
 package com.huotu.hotedu.test;
 
-import com.huotu.hotedu.entity.ExamGuide;
+//import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.entity.Qa;
 import com.huotu.hotedu.entity.MessageContent;
-import com.huotu.hotedu.repository.ExamGuideRepository;
+//import com.huotu.hotedu.repository.ExamGuideRepository;
 import com.huotu.hotedu.repository.MessageContentRepository;
 import com.huotu.hotedu.repository.QaRepository;
-import com.huotu.hotedu.service.ExamGuideService;
+//import com.huotu.hotedu.service.ExamGuideService;
 import com.huotu.hotedu.service.QaService;
 import com.huotu.hotedu.service.MessageContentService;
 import org.junit.Test;
@@ -34,10 +34,10 @@ import static org.junit.Assert.assertEquals;
 public class ExamGuideServiceTest {
 
 
-    @Autowired
-    ExamGuideRepository examGuideRepository;
-    @Autowired
-    private ExamGuideService guideService;
+//    @Autowired
+//    ExamGuideRepository examGuideRepository;
+//    @Autowired
+//    private ExamGuideService guideService;
     @Autowired
     QaRepository qaRepository;
     @Autowired
@@ -51,14 +51,7 @@ public class ExamGuideServiceTest {
 
     @Test
     public void loadExamGuide(){
-        ExamGuide examGuide=new ExamGuide();
-        examGuide.setContent("123456");
-        examGuide.setTitle("我的第一次测试");
-        examGuide.setTop(false);
-        examGuide.setLastUploadDate(new Date());
-        examGuideRepository.save(examGuide);
-        List<ExamGuide> list=guideService.loadExamGuide();
-        System.out.println(list);
+
     }
     @Test
     public void loadQa(){

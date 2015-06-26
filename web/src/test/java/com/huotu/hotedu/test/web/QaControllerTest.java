@@ -1,9 +1,7 @@
 package com.huotu.hotedu.test.web;
 
-import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.entity.Qa;
-import com.huotu.hotedu.repository.ExamGuideRepository;
 import com.huotu.hotedu.repository.LoginRepository;
 import com.huotu.hotedu.repository.MemberRepository;
 import com.huotu.hotedu.repository.QaRepository;
@@ -52,8 +50,6 @@ public class QaControllerTest extends SpringWebTest {
 
     @Autowired
     private LoginService loginService;
-    @Autowired
-    private ExamGuideRepository examGuideRepository;
     @Autowired
     private MemberRepository memberRepository;
     @Autowired
