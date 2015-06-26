@@ -1,127 +1,113 @@
+
 <!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title></title>
+    <title>云商学院后台管理</title>
     <link rel="stylesheet" type="text/css" href="css/common.css"/>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <script type="text/javascript" src="js/libs/modernizr.min.js"></script>
+    <script type="text/javascript" src="js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="js/menu.js"></script>
 </head>
 <body>
+
 <div class="topbar-wrap white">
     <div class="topbar-inner clearfix">
         <div class="topbar-logo-wrap clearfix">
             <h1 class="topbar-logo none"><a href="index.html" class="navbar-brand">云商学院后台管理</a></h1>
             <ul class="navbar-list clearfix">
-                <li><a class="on" href="index.html">首页</a></li>
-				<li><a  href="wantedes.html">网站维护</a></li>
-				<li><a  href="certificateapplications.html">代理商管理</a></li>
-                
+                <li><a class="on" href="index.html" th:href="@{/load/index}">首页</a></li>
+                <li><a href="wantedes.html" th:href="@{/load/wantedes}">网站维护</a></li>
+                <li><a href="certificateapplications.html" th:href="@{/load/certificateapplications}">代理商管理</a></li>
             </ul>
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li><a href="login.html">admin</a></li>
-                <li><a href="Changethepassword.html">修改密码</a></li>
+                <li>${#object.userName}</li>
+                <li><a href="changethepassword.html" th:href="@{/modify/passowrd(userId=${#objects.userId},oldPwd=
+                    ${#objects.oldPwd},newPwd=${#objects.newPwd})}">修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
         </div>
     </div>
 </div>
+
 <div class="container clearfix">
-     <div class="sidebar-wrap">
-  <div class="sidebar-title">
-         	<img src="images/htlogo.png" style=" width:160px;margin-left: -10px;"/>
-        </div> 
+    <div class="sidebar-wrap">
+        <div class="sidebar-title">
+            <img src="images/htlogo.png" style=" width:160px;margin-left: -10px;"/>
+        </div>
         <div class="sidebar-content">
-             <ul class="sidebar-list">
-			   <li>
+            <ul class="sidebar-list">
+                <li>
                     <a href="#" style="height:30px; line-height:30px;">企业信息</a>
                     <ul class="sub-menu">
-					 <li><a href="wantedes.html">招聘信息</a></li>
-						<li ><a href="enterprises.html">发布企业</a></li>
+                        <li><a href="wantedes.html" th:href="@{/search/wantedes(key=${},info=${})}">招聘信息</a></li>
+                        <li><a href="enterprises.html" th:href="@{/search/enterprises(info=${})}">发布企业</a></li>
                     </ul>
                 </li>
-               <li>
+                <li>
                     <a href="#" style="height:30px; line-height:30px;">banner图</a>
                     <ul class="sub-menu">
-					 <li><a href="banners.html">banner图</a></li>
-                    </ul>
-                   </li>
-                   
-                        <li>
-                    <a href="#" style="height:30px; line-height:30px;">考试指南</a>
-                    <ul class="sub-menu">
-					 <li><a href="guides.html">考试指南</a></li>
-                    </ul>
-                   </li> 
-				
-				    <li>
-                    <a href="#" style="height:30px; line-height:30px;">友情链接</a>
-                    <ul class="sub-menu">
-					 <li><a href="links.html">友情链接</a></li>
-                    </ul>
-                   </li> 
-                   
-                      <li>
-                    <a href="#" style="height:30px; line-height:30px;">常见问题</a>
-                    <ul class="sub-menu">
-					 <li><a href="qa.html">常见问题</a></li>
-                    </ul>
-                   </li>
-                   
-                      <li>
-                    <a href="#" style="height:30px; line-height:30px;">资讯动态</a>
-                    <ul class="sub-menu">
-					 <li><a href="messagecontents.html">资讯动态</a></li>
-                    </ul>
-                   </li>
-                   
-				  <li>
-				  <a href="#" style="height:30px; line-height:30px;">公司简介</a>
-				   <ul class="sub-menu">						                   
-                        <li><a href="editenterprise.html">公司简介编辑</a></li>
-                    </ul>
-				</li>
-				
-				 <li>
-				  <a href="#" style="height:30px; line-height:30px;">视频</a>
-				   <ul class="sub-menu">						                   
-                        <li><a href="videos.html">教学视频</a></li>
-						<li><a href="精彩录制.html">精彩录制</a></li>		
-						<li><a href="经验分享.html">经验分享</a></li>		
-						<li><a href="其他视频.html">其他视频</a></li>							 
-                    </ul>
-				</li>
-				 <li>
-				  <a href="#" style="height:30px; line-height:30px;">师资力量</a>
-				   <ul class="sub-menu">						                   
-                        <li><a href="tutors.html">师资力量</a></li>
-                    </ul>
-				</li>
-		
-            </ul>
-			
-			
-			<!---->
-			 <ul class="sidebar-list">
-			   <li>
-                    <a href="#" style="height:30px; line-height:30px;">管理代理商</a>
-                    <ul class="sub-menu">
-					 <li><a href="certificateapplications.html">申请领证列表</a></li>
-						<li><a href="agents.html">代理商列表</a></li>
+                        <li><a href="banners.html" th:href="@{/load/banners}">banner图</a></li>
                     </ul>
                 </li>
-	
-				
+                <li>
+                    <a href="#" style="height:30px; line-height:30px;">考试指南</a>
+                    <ul class="sub-menu">
+                        <li><a href="guides.html" th:href="@{/load/examGuide}">考试指南</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" style="height:30px; line-height:30px;">友情链接</a>
+                    <ul class="sub-menu">
+                        <li><a href="links.html" th:href="@{/search/links(info=${})}">友情链接</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" style="height:30px; line-height:30px;">常见问题</a>
+                    <ul class="sub-menu">
+                        <li><a href="qa.html" th:href="@{/search/qa(info=${})}">常见问题</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" style="height:30px; line-height:30px;">资讯动态</a>
+                    <ul class="sub-menu">
+                        <li><a href="messagecontents.html" th:href="@{/search/messagecontents(info=${})}">资讯动态</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" style="height:30px; line-height:30px;">公司简介</a>
+                    <ul class="sub-menu">
+                        <li><a href="editenterprise.html" th:href="">公司简介编辑</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" style="height:30px; line-height:30px;">视频</a>
+                    <ul class="sub-menu">
+                        <li><a href="videos.html" th:href="@{/search/videos(info=${})}">教学视频</a></li>
+                        <li><a href="精彩录制.html">精彩录制</a></li>
+                        <li><a href="经验分享.html">经验分享</a></li>
+                        <li><a href="其他视频.html">其他视频</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" style="height:30px; line-height:30px;">师资力量</a>
+                    <ul class="sub-menu">
+                        <li><a href="tutors.html">师资力量</a></li>
+                    </ul>
+                </li>
             </ul>
-			
-			<!---->
-			
-			
-			
-			
-			
+            <ul class="sidebar-list">
+                <li>
+                    <a href="#" style="height:30px; line-height:30px;">管理代理商</a>
+                    <ul class="sub-menu">
+                        <li><a href="certificateapplications.html">申请领证列表</a></li>
+                        <li><a href="agents.html">代理商列表</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
     <!--/sidebar-->
@@ -135,12 +121,11 @@
             </div>
             <div class="result-content">
                 <div class="short-wrap">
-				<a href="#"><i class="icon-font">&#xe041;</i>系统公告</a>
+                    <a href="#"><i class="icon-font">&#xe041;</i>系统公告</a>
                     <a href="#"><i class="icon-font">&#xe001;</i>推送消息</a>
                     <a href="#"><i class="icon-font">&#xe005;</i>任务审核</a>
                     <a href="#"><i class="icon-font">&#xe048;</i>手动充值</a>
-                    
-                    
+
                 </div>
             </div>
         </div>
@@ -159,8 +144,6 @@
                     <li>
                         <label class="res-lab">PHP运行方式</label><span class="res-info">apache2handler</span>
                     </li>
-                     
-                    
                     <li>
                         <label class="res-lab">北京时间</label><span class="res-info">2014年3月18日 21:08:24</span>
                     </li>
@@ -182,7 +165,7 @@
                     <li>
                         <label class="res-lab">云商学院任务平台：</label><span class="res-info"><a href="task.fanmore.cn" target="_blank">task.fanmore.cn</a></span>
                     </li>
-                     <li>
+                    <li>
                         <label class="res-lab">伙伴+平台：</label><span class="res-info"><a href="login.huobanplus.com" target="_blank">login.huobanplus.com</a></span>
                     </li>
                 </ul>

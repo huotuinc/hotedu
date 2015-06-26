@@ -44,6 +44,7 @@
 	color: #1963AA;
 }
 .sub-menu {
+	display:none;
 	background: #fff;
 }
 .sub-menu li {
@@ -227,8 +228,8 @@
 	text-align: center;
 }
 /**/
- 
- 
+
+
 .sub-menu li.on {
 	background-color: #FF4F36;
 	color: #fff
