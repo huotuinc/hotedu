@@ -1,10 +1,9 @@
 package com.huotu.hotedu.test.web;
 
 import com.huotu.hotedu.entity.Member;
-import com.huotu.hotedu.entity.ExamGuide;
-import com.huotu.hotedu.repository.LoginRepository;
-import com.huotu.hotedu.repository.ExamGuideRepository;
-import com.huotu.hotedu.repository.MemberRepository;
+import com.huotu.hotedu.entity.MessageContent;
+import com.huotu.hotedu.entity.Qa;
+import com.huotu.hotedu.repository.*;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.test.TestWebConfig;
 import libspringtest.SpringWebTest;
@@ -20,9 +19,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.Date;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -33,18 +33,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestWebConfig.class)
 @WebAppConfiguration
-public class WebFlowTest extends SpringWebTest {
+public class MessageContentControllerTest extends SpringWebTest {
 
     protected MockHttpSession loginAs(String userName, String password) throws Exception {
         MockHttpSession session = (MockHttpSession) this.mockMvc.perform(get("/"))
                 .andReturn().getRequest().getSession(true);
-        //bad password
         session = (MockHttpSession) this.mockMvc.perform(post("/login").session(session)
                 .param("username", userName).param("password", password))
                 .andDo(print())
                 .andReturn().getRequest().getSession();
 
-//         CsrfToken token = new HttpSessionCsrfTokenRepository().loadToken(request);
         saveAuthedSession(session);
         return session;
     }
@@ -52,11 +50,8 @@ public class WebFlowTest extends SpringWebTest {
     @Autowired
     private LoginService loginService;
     @Autowired
-    private ExamGuideRepository examGuideRepository;
-    @Autowired
-    private MemberRepository memberRepository;
-    @Autowired
-    private LoginRepository loginRepository;
+    private MessageContentRepository messageContentRepository;
+
 
     @Test
     public void index() throws Exception {
@@ -67,39 +62,21 @@ public class WebFlowTest extends SpringWebTest {
     }
     @Test
     public void login() throws  Exception{
-        ExamGuide examGuide=new ExamGuide();
-        examGuide.setContent("123456");
-        examGuide.setTitle("我的第一次测试");
-        examGuide.setTop(false);
-        examGuide.setLastUploadDate(new Date());
-        examGuideRepository.save(examGuide);
+        MessageContent messageContent=new MessageContent();
+        messageContent.setLastUploadDate(new Date());
+        messageContent.setTop(true);
+        messageContent.setTitle("slt");
+        messageContent.setContent("asdfasdfasdfasdfasfeadsf");
+        messageContentRepository.save(messageContent);
+
+
+
+
         mockMvc.perform(
-                get("/load/examGuide")
+                get("/load/messageContent")
         ).andDo(print()).andExpect(model().attributeExists("list"))
         ;
     }
-    @Test
-    public void sayMyname() throws Exception {
-//        mockMvc.perform(
-//                get("/sayMyname")
-//        )
-//                .andExpect(status().isFound()) // forward to /login
-//        ;
-//
-//        checkMemeber("memberdemo");
-//
-//        MockHttpSession session = loginAs("memberdemo", "memberdemo");
-//
-//        mockMvc.perform(
-//                get("/sayMyname")
-//                        .session(session)
-//        )
-//                .andExpect(status().isOk())
-//                .andExpect(content().string("memberdemo"))
-//        ;
-
-    }
-
     private void checkMemeber(String name) {
         try {
             loginService.loadUserByUsername(name);

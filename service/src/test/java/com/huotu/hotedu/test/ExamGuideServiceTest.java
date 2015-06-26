@@ -1,14 +1,14 @@
 package com.huotu.hotedu.test;
 
 import com.huotu.hotedu.entity.ExamGuide;
-import com.huotu.hotedu.entity.Login;
-import com.huotu.hotedu.entity.Manager;
-import com.huotu.hotedu.entity.Member;
+import com.huotu.hotedu.entity.Qa;
+import com.huotu.hotedu.entity.MessageContent;
 import com.huotu.hotedu.repository.ExamGuideRepository;
-import com.huotu.hotedu.repository.LoginRepository;
-import com.huotu.hotedu.repository.ManagerRepository;
-import com.huotu.hotedu.repository.MemberRepository;
+import com.huotu.hotedu.repository.MessageContentRepository;
+import com.huotu.hotedu.repository.QaRepository;
 import com.huotu.hotedu.service.ExamGuideService;
+import com.huotu.hotedu.service.QaService;
+import com.huotu.hotedu.service.MessageContentService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,16 +33,20 @@ import static org.junit.Assert.assertEquals;
 @Transactional
 public class ExamGuideServiceTest {
 
-    @Autowired
-    LoginRepository loginRepository;
-    @Autowired
-    MemberRepository memberRepository;
-    @Autowired
-    ManagerRepository managerRepository;
+
     @Autowired
     ExamGuideRepository examGuideRepository;
     @Autowired
     private ExamGuideService guideService;
+    @Autowired
+    QaRepository qaRepository;
+    @Autowired
+    private QaService qaService;
+
+    @Autowired
+    private MessageContentRepository messageContentRepository;
+    @Autowired
+    private MessageContentService messageContentsService;
 
 
     @Test
@@ -56,39 +60,29 @@ public class ExamGuideServiceTest {
         List<ExamGuide> list=guideService.loadExamGuide();
         System.out.println(list);
     }
-
+    @Test
+    public void loadQa(){
+        Qa qa=new Qa();
+        qa.setContent("qaqaqaqa");
+        qa.setTitle("我的第二次测试");
+        qa.setTop(true);
+        qa.setLastUploadDate(new Date());
+        qaRepository.save(qa);
+        List<Qa> list=qaService.loadQa();
+        System.out.println(list);
+    }
 
     @Test
-//    @Rollback
-    public void justgo(){
-        System.out.println("ServiceTest.justgo");
-        Member member = new Member();
-        member.setLoginName("iammember");
-        member.setMemeberField("yoha");
+    public void loadMessageContent(){
+        MessageContent messageContent=new MessageContent();
+        messageContent.setContent("mmmmmmmm");
+        messageContent.setTitle("我的第三次测试");
+        messageContent.setTop(true);
+        messageContent.setLastUploadDate(new Date());
+        messageContentRepository.save(messageContent);
+        List<MessageContent> list=messageContentsService.loadMessageContent();
+        System.out.println(list);
 
-        member = memberRepository.save(member);
-
-        Manager manager = new Manager();
-        manager.setLoginName("iammanager");
-        manager.setManagerField("oha");
-        manager = managerRepository.save(manager);
-
-        Login otherMember = loginRepository.findByLoginName(member.getLoginName());
-        Login otherManager = loginRepository.findByLoginName(manager.getLoginName());
-
-        Login thisone = loginRepository.findOne(manager.getId());
-        System.out.println("ServiceTest.justgo");
-
-        //PO JO test
-        manager.setManagerField("foo");
-        managerRepository.save(manager);
-
-        assertEquals("foo", managerRepository.getOne(manager.getId()).getManagerField());
-
-        managerRepository.updateManagerField("bar");
-        System.out.println(manager.getManagerField());
-        managerRepository.refresh(manager);
-//        Manager newManager = entityManagerFactory.createEntityManager().merge(manager);
-        assertEquals("bar", managerRepository.getOne(manager.getId()).getManagerField());
     }
+
 }

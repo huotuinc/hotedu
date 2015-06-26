@@ -1,18 +1,25 @@
 package com.huotu.hotedu.test;
 
+import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.entity.Login;
 import com.huotu.hotedu.entity.Manager;
 import com.huotu.hotedu.entity.Member;
+import com.huotu.hotedu.repository.ExamGuideRepository;
 import com.huotu.hotedu.repository.LoginRepository;
 import com.huotu.hotedu.repository.ManagerRepository;
 import com.huotu.hotedu.repository.MemberRepository;
+import com.huotu.hotedu.service.ExamGuideService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -33,6 +40,10 @@ public class ServiceTest {
     MemberRepository memberRepository;
     @Autowired
     ManagerRepository managerRepository;
+
+
+
+
 
     @Test
 //    @Rollback

@@ -1,11 +1,11 @@
 <!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
-    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
-    <script type="text/javascript" src="/js/libs/modernizr.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <!--<script type="text/javascript" src="/js/libs/modernizr.min.js"></script>-->
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -16,7 +16,7 @@
                 <li><a  href="index.html">首页</a></li>
 				<li><a class="on" href="wantedes.html">网站维护</a></li>
 				<li><a href="certificateapplications.html">代理商管理</a></li>
-                
+
             </ul>
         </div>
         <div class="top-info-wrap">
@@ -31,8 +31,8 @@
 <div class="container clearfix">
      <div class="sidebar-wrap">
   <div class="sidebar-title">
-         	<img src="/images/htlogo.png" style=" width:160px;margin-left: -10px;">
-        </div> 
+         	<img src="/images/htlogo.png" style=" width:160px;margin-left: -10px;"/>
+        </div>
         <div class="sidebar-content">
              <ul class="sidebar-list">
 			   <li>
@@ -42,69 +42,69 @@
 						<li><a href="enterprises.html">发布企业</a></li>
                     </ul>
                    </li>
-                   
+
                    <li>
                     <a href="#" style="height:30px; line-height:30px;">banner图</a>
                     <ul class="sub-menu">
 					 <li><a href="banners.html">banner图</a></li>
                     </ul>
                    </li>
-                   
+
                         <li>
                     <a href="#" style="height:30px; line-height:30px;">考试指南</a>
                     <ul class="sub-menu">
-					 <li class="on"><a href="guides.html">考试指南</a></li>
+					 <li th:text="456132" class="on"><a href="#">考试指南</a></li>
                     </ul>
-                   </li> 
-				
+                   </li>
+
 				    <li>
                     <a href="#" style="height:30px; line-height:30px;">友情链接</a>
                     <ul class="sub-menu">
 					 <li><a href="links.html">友情链接</a></li>
                     </ul>
-                   </li> 
-                   
+                   </li>
+
                       <li>
                     <a href="#" style="height:30px; line-height:30px;">常见问题</a>
                     <ul class="sub-menu">
 					 <li><a href="qa.html">常见问题</a></li>
                     </ul>
                    </li>
-                   
+
                       <li>
                     <a href="#" style="height:30px; line-height:30px;">资讯动态</a>
                     <ul class="sub-menu">
 					 <li><a href="messagecontents.html">资讯动态</a></li>
                     </ul>
                    </li>
-			
+
 				 <li>
 				  <a href="#" style="height:30px; line-height:30px;">公司简介</a>
-				   <ul class="sub-menu">						                   
+				   <ul class="sub-menu">
                         <li><a href="editenterprise.html">公司简介编辑</a></li>
                     </ul>
 				</li>
-				
+
 				 <li>
 				  <a href="#" style="height:30px; line-height:30px;">视频</a>
-				   <ul class="sub-menu">						                   
+				   <ul class="sub-menu">
                         <li><a href="videos.html">教学视频</a></li>
-						<li><a href="精彩录制.html">精彩录制</a></li>		
-						<li><a href="经验分享.html">经验分享</a></li>		
-						<li><a href="其他视频.html">其他视频</a></li>							 
+						<li><a href="精彩录制.html">精彩录制</a></li>
+						<li><a href="经验分享.html">经验分享</a></li>
+						<li><a href="其他视频.html">其他视频</a></li>
                     </ul>
 				</li>
-				
-				
+
+
 		      <li>
 				  <a href="#" style="height:30px; line-height:30px;">师资力量</a>
-				   <ul class="sub-menu">						                   
+				   <ul class="sub-menu">
                         <li><a href="tutors.html">师资力量</a></li>
                     </ul>
 				</li>
             </ul>
-			
-		
+
+
         </div>
     </div>
        <!--/sidebar-->
@@ -116,13 +116,13 @@
         <div class="search-wrap">
             <div class="search-content">
                 <form action="#" method="post">
-             
+
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
-							
-                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"></td>
-                            <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"></td>
+
+                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"/></td>
+                            <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
                 </form>
@@ -132,76 +132,61 @@
             <form name="myform" id="myform" method="post">
               <div class="result-title">
                     <div class="result-list">
-                      
+
                     <a href="newguide.html"><i class="icon-font"></i>新建</a>
-                        
+
                     </div>
                 </div>
                 <div class="result-content">
                     <table class="result-tab" width="100%">
                         <tr>
-                           
-                           
+
+
                             <th style="width:80px">序号</th>
                             <th style="width:80px;">标题</th>
                             <th style="width:100px">上传时间</th>
                             <th style="width:100px">置顶</th>
                             <th style="width:80px">操作</th>
                         </tr>
+
                          <tr>
-                            
-                          
+
+
                             <td>01</td>
                             <td title="">mou某mou某mou某mou某</td>
                             <td>2015.01.01/13.00.00</td>
                             <td title="">置顶</td>
-                            <td> 
-							 <a class="link-update" href="newguide.html">修改</a><br>
-                                <a class="link-update" href="#">删除</a>
-                                
-                            </td>
+                            <td><a class="link-update" href="newguide.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
                         </tr>
                         <tr>
-                            
-                          
+
+
                             <td>01</td>
                             <td title="">mou某mou某mou某mou某</td>
                             <td>2015.01.01/13.00.00</td>
                             <td title=""></td>
-                            <td> 
-							 <a class="link-update" href="newguide.html">修改</a><br>
-                                <a class="link-update" href="#">删除</a>
-                                
-                            </td>
+                            <td><a class="link-update" href="newguide.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
                         </tr>
 						   <tr>
-                            
-                          
+
+
                             <td>01</td>
                             <td title="">mou某mou某mou某mou某</td>
                             <td>2015.01.01/13.00.00</td>
                             <td title=""></td>
-                            <td> 
-							 <a class="link-update" href="newguide.html">修改</a><br>
-                                <a class="link-update" href="#">删除</a>
-                                
-                            </td>
+                            <td><a class="link-update" href="newguide.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
                         </tr>
 						     <tr>
-                            
-                          
+
+
                             <td>01</td>
                             <td title="">mou某mou某mou某mou某</td>
                             <td>2015.01.01/13.00.00</td>
                             <td title=""></td>
-                            <td> 
-							 <a class="link-update" href="newguide.html">修改</a><br>
-                                <a class="link-update" href="#">删除</a>
-                                
-                            </td>
+                            <td><a class="link-update" href="newguide.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
                         </tr>
                     </table>
-                    <div class="list-page"> 2 条 1/1 页</div>
+                    <div class="list-page"> 2 条 1/1 页11</div>
                 </div>
             </form>
         </div>

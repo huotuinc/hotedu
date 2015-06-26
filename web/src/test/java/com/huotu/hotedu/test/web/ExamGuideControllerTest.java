@@ -18,6 +18,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.ui.Model;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -33,21 +34,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @ContextConfiguration(classes = TestWebConfig.class)
 @WebAppConfiguration
 public class ExamGuideControllerTest extends SpringWebTest {
-
-//    protected MockHttpSession loginAs(String userName, String password) throws Exception {
-//        MockHttpSession session = (MockHttpSession) this.mockMvc.perform(get("/"))
-//                .andReturn().getRequest().getSession(true);
-//        //bad password
-//        session = (MockHttpSession) this.mockMvc.perform(post("/login").session(session)
-//                .param("username", userName).param("password", password))
-//                .andDo(print())
-//                .andReturn().getRequest().getSession();
-//
-////         CsrfToken token = new HttpSessionCsrfTokenRepository().loadToken(request);
-//        saveAuthedSession(session);
-//        return session;
-//    }
-
     @Autowired
     private ExamGuideService examGuideService;
     @Autowired
@@ -56,10 +42,9 @@ public class ExamGuideControllerTest extends SpringWebTest {
 
     @Test
     public void loadexam() throws Exception {
-        mockMvc.perform(
-                get("/load/examGuide")
-        )
-                ;
+//        mockMvc.perform(
+//                get("/load/examGuide")
+//        ).andDo(print()).andExpect()
     }
 
 

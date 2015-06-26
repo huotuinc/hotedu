@@ -1,10 +1,9 @@
 package com.huotu.hotedu.web.controller;
 
-import com.huotu.hotedu.entity.ExamGuide;
-import com.huotu.hotedu.service.ExamGuideService;
+import com.huotu.hotedu.entity.MessageContent;
+import com.huotu.hotedu.service.MessageContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,15 +17,15 @@ import java.util.Map;
  * @author luffy luffy.ja at gmail.com
  */
 @Controller
-public class ExamGuideController {
+public class MessageContentController {
     @Autowired
-    private ExamGuideService examGuideService;
+    private MessageContentService messageContentService;
 
-    @RequestMapping("/load/examGuide")
-    public ModelAndView loadExamGuide() {
+    @RequestMapping("/load/messageContent")
+    public ModelAndView loadMessageContentController() {
         Map model=new HashMap<>();
-        List<ExamGuide> list=examGuideService.loadExamGuide();
-        model.put("list",model);
-        return new ModelAndView("list",model);
+        List<MessageContent>list=messageContentService.loadMessageContent();
+        model.put("list",list);
+        return new ModelAndView("/messagecontents",model);
     }
 }

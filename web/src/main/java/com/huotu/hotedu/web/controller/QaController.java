@@ -1,7 +1,8 @@
 package com.huotu.hotedu.web.controller;
 
-import com.huotu.hotedu.entity.ExamGuide;
-import com.huotu.hotedu.service.ExamGuideService;
+import com.huotu.hotedu.entity.Qa;
+import com.huotu.hotedu.service.QaService;
+import com.sun.javafx.collections.MappingChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,15 +19,15 @@ import java.util.Map;
  * @author luffy luffy.ja at gmail.com
  */
 @Controller
-public class ExamGuideController {
+public class QaController {
     @Autowired
-    private ExamGuideService examGuideService;
+    private QaService qaService;
 
-    @RequestMapping("/load/examGuide")
-    public ModelAndView loadExamGuide() {
+    @RequestMapping("/load/qa")
+    public ModelAndView loadQa() {
         Map model=new HashMap<>();
-        List<ExamGuide> list=examGuideService.loadExamGuide();
-        model.put("list",model);
-        return new ModelAndView("list",model);
+        List<Qa>list=qaService.loadQa();
+        model.put("list",list);
+        return new ModelAndView("/qa",model);
     }
 }
