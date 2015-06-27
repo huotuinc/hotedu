@@ -99,6 +99,7 @@ public class ExamGuideServiceTest {
 
         List<ExamGuide> allList = examGuideRepository.findAll();
 
+        //http://stackoverflow.com/questions/15802989/subsitute-for-month-year-date-functions-in-jpa
         List<ExamGuide> list  = examGuideRepository.queryHql("select u from ExamGuide u where FUNC('DATE', u.lastUploadDate)=:date ",ExamGuide.class, examGuideTypedQuery -> {
             Date date = new Date();
             examGuideTypedQuery.setParameter("date",date, TemporalType.DATE);
