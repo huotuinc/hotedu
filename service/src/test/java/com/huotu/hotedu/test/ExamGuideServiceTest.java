@@ -12,12 +12,21 @@ import com.huotu.hotedu.service.MessageContentService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.util.DateUtils;
 
 import javax.crypto.ExemptionMechanism;
+import javax.persistence.TemporalType;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -51,14 +60,56 @@ public class ExamGuideServiceTest {
 
 
     @Test
+    @Rollback
     public void loadExamGuide(){
         ExamGuide examGuide =new ExamGuide();
         examGuide.setContent("examguide");
-        examGuide.setTitle("title examguide");
+        examGuide.setTitle("title examguide1");
         examGuide.setLastUploadDate(new Date());
         examGuide.setTop(true);
         examGuideRepository.save(examGuide);
-        List<ExamGuide> list=guideService.loadExamGuide();
+
+        examGuide =new ExamGuide();
+        examGuide.setContent("examguide");
+        examGuide.setTitle("title examguide2");
+        examGuide.setLastUploadDate(new Date());
+        examGuide.setTop(true);
+        examGuideRepository.save(examGuide);
+
+        examGuide =new ExamGuide();
+        examGuide.setContent("examguide");
+        examGuide.setTitle("title examguide3");
+        examGuide.setLastUploadDate(new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000));
+        examGuide.setTop(true);
+        examGuideRepository.save(examGuide);
+
+        examGuide =new ExamGuide();
+        examGuide.setContent("examguide");
+        examGuide.setTitle("title examguide4");
+        examGuide.setLastUploadDate(new Date(System.currentTimeMillis() - 5 * 60 * 60 * 1000));
+        examGuide.setTop(true);
+        examGuideRepository.save(examGuide);
+
+        examGuide =new ExamGuide();
+        examGuide.setContent("examguide");
+        examGuide.setTitle("title examguide5");
+        examGuide.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000));
+        examGuide.setTop(true);
+        examGuideRepository.save(examGuide);
+
+        List<ExamGuide> allList = examGuideRepository.findAll();
+
+        List<ExamGuide> list  = examGuideRepository.queryHql("select u from ExamGuide u where FUNC('DATE', u.lastUploadDate)=:date ",ExamGuide.class, examGuideTypedQuery -> {
+            Date date = new Date();
+            examGuideTypedQuery.setParameter("date",date, TemporalType.DATE);
+        });
+
+
+        List<ExamGuide> list2 = examGuideRepository.findAll((root, query, cb) -> {
+            return cb.equal(cb.function("DATE",Date.class,root.get("lastUploadDate").as(Date.class)),new java.sql.Date(System.currentTimeMillis()));
+        });
+
+        System.out.println(list);
 
     }
     @Test

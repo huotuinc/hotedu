@@ -74,7 +74,7 @@ public class ServiceTest {
 
         managerRepository.updateManagerField("bar");
         System.out.println(manager.getManagerField());
-        managerRepository.refresh(manager);
+        manager=managerRepository.refresh(manager, manager.getId());
 //        Manager newManager = entityManagerFactory.createEntityManager().merge(manager);
         assertEquals("bar", managerRepository.getOne(manager.getId()).getManagerField());
     }
