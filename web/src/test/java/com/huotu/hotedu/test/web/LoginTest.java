@@ -1,10 +1,7 @@
 package com.huotu.hotedu.test.web;
 
 import com.huotu.hotedu.entity.Member;
-import com.huotu.hotedu.entity.Qa;
-import com.huotu.hotedu.repository.LoginRepository;
-import com.huotu.hotedu.repository.MemberRepository;
-import com.huotu.hotedu.repository.QaRepository;
+import com.huotu.hotedu.repository.ExamGuideRepository;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.test.TestWebConfig;
 import libspringtest.SpringWebTest;
@@ -18,12 +15,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import java.util.Date;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -34,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestWebConfig.class)
 @WebAppConfiguration
-public class QaControllerTest extends SpringWebTest {
+public class LoginTest extends SpringWebTest {
 
     protected MockHttpSession loginAs(String userName, String password) throws Exception {
         MockHttpSession session = (MockHttpSession) this.mockMvc.perform(get("/"))
@@ -51,11 +45,7 @@ public class QaControllerTest extends SpringWebTest {
     @Autowired
     private LoginService loginService;
     @Autowired
-    private MemberRepository memberRepository;
-    @Autowired
-    private LoginRepository loginRepository;
-    @Autowired
-    private QaRepository qaRepository;
+    private ExamGuideRepository examGuideRepository;
 
     @Test
     public void index() throws Exception {
@@ -66,24 +56,12 @@ public class QaControllerTest extends SpringWebTest {
     }
     @Test
     public void login() throws  Exception{
-//        Qa qa=new Qa();
-//        qa.setContent("qaqaqaqa");
-//        qa.setTitle("我的第二次测试");
-//        qa.setTop(true);
-//        qa.setLastUploadDate(new Date());
-//        qaRepository.save(qa);
-//
-//        Qa qb=new Qa();
-//        qb.setContent("qbqbqbqbqb");
-//        qb.setTitle("我的第二次测试bbbb");
-//        qb.setTop(false);
-//        qb.setLastUploadDate(new Date());
-//        qaRepository.save(qb);
-//
-//        mockMvc.perform(
-//                get("/load/qa")
-//        ).andDo(print()).andExpect(model().attributeExists("list"))
-//        ;
+
+        mockMvc.perform(
+                get("/backend/index")
+        ).andDo(print())
+        ;
+
     }
     private void checkMemeber(String name) {
         try {

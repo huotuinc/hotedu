@@ -62,16 +62,16 @@ public class WebFlowTest extends SpringWebTest {
     }
     @Test
     public void login() throws  Exception{
-        ExamGuide exam=new ExamGuide();
-        exam.setTitle("dd");
-        exam.setContent("asdfe");
-        exam.setTop(true);
-        exam.setLastUploadDate(new Date());
-        examGuideRepository.save(exam);
-        mockMvc.perform(
-                get("/load/examGuide")
-        ).andDo(print())
-        ;
+//        ExamGuide exam=new ExamGuide();
+//        exam.setTitle("dd");
+//        exam.setContent("asdfe");
+//        exam.setTop(true);
+//        exam.setLastUploadDate(new Date());
+//        examGuideRepository.save(exam);
+//        mockMvc.perform(
+//                get("/load/examGuide")
+//        ).andDo(print())
+//        ;
 
     }
     private void checkMemeber(String name) {

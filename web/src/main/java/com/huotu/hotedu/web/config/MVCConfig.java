@@ -6,12 +6,15 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+
+import java.util.List;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -42,6 +45,19 @@ public class MVCConfig  extends WebMvcConfigurerAdapter {
         configurer.enable();
     }
 
+    //错误处理
+    @Override
+    public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
+        super.configureHandlerExceptionResolvers(exceptionResolvers);
+
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        super.addResourceHandlers(registry);
+        registry.addResourceHandler("/css/**","/fonts/**","/images/**","/js/**")
+                .addResourceLocations("/backend/css/**","/backend/fonts/**","/backend/images/**","/backend/js/**");
+    }
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {

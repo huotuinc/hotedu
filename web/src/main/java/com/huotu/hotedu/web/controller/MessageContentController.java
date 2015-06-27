@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * Created by luffy on 2015/6/10.
- *
+ * 资讯动态有关的Controller
  * @author luffy luffy.ja at gmail.com
  */
 @Controller
@@ -21,7 +21,7 @@ public class MessageContentController {
     @Autowired
     private MessageContentService messageContentService;
 
-    @RequestMapping("/load/messageContent")
+    @RequestMapping("/backend/load/messagecontents")
     public ModelAndView loadMessageContentController() {
         Map model=new HashMap<>();
         List<MessageContent>list=messageContentService.loadMessageContent();

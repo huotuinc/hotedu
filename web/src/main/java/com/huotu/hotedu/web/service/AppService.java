@@ -34,6 +34,7 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 Manager manager = new Manager();
                 manager.setLoginName("admin");
                 loginService.newLogin(manager,"admin");
+                System.out.println("测试用户以添加！");
             }
 
         }

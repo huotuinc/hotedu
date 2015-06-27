@@ -63,21 +63,21 @@ public class MessageContentControllerTest extends SpringWebTest {
     }
     @Test
     public void login() throws  Exception{
-        MessageContent messageContent=new MessageContent();
-        messageContent.setLastUploadDate(new Date());
-        messageContent.setTop(true);
-        messageContent.setTitle("slt");
-        messageContent.setContent("asdfasdfasdfasdfasfeadsf");
-        messageContentRepository.save(messageContent);
-        messageContentRepository.findAll();
-
-
-
-
-        mockMvc.perform(
-                get("/load/messageContent")
-        ).andDo(print()).andExpect(model().attributeExists("list"))
-        ;
+//        MessageContent messageContent=new MessageContent();
+//        messageContent.setLastUploadDate(new Date());
+//        messageContent.setTop(true);
+//        messageContent.setTitle("slt");
+//        messageContent.setContent("asdfasdfasdfasdfasfeadsf");
+//        messageContentRepository.save(messageContent);
+//        messageContentRepository.findAll();
+//
+//
+//
+//
+//        mockMvc.perform(
+//                get("/load/messageContent")
+//        ).andDo(print()).andExpect(model().attributeExists("list"))
+//        ;
     }
     private void checkMemeber(String name) {
         try {

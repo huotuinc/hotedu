@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by luffy on 2015/6/10.
- *
+ * 进入后台首页的Controller
  * @author luffy luffy.ja at gmail.com
  */
 @Controller

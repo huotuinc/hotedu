@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * Created by luffy on 2015/6/10.
- *
+ * 常见问题有关的Controller
  * @author luffy luffy.ja at gmail.com
  */
 @Controller
@@ -23,7 +23,7 @@ public class QaController {
     @Autowired
     private QaService qaService;
 
-    @RequestMapping("/load/qa")
+    @RequestMapping("/backend/load/qa")
     public ModelAndView loadQa() {
         Map model=new HashMap<>();
         List<Qa>list=qaService.loadQa();

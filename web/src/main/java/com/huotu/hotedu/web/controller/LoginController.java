@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by luffy on 2015/6/10.
- *
+ * 登录有关的Controller
  * @author luffy luffy.ja at gmail.com
  */
 @Controller

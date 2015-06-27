@@ -53,11 +53,13 @@ public class SecurityConfig {
         public void configure(WebSecurity web) throws Exception {
             web
                     .debug(!env.acceptsProfiles("prod"))
-//                    .ignoring()
-//                    .antMatchers(
-//                            "/css/**",
-//                            "/images/**"
-//                    )
+                    .ignoring()
+                    .antMatchers(
+                            "/backend/css/**",
+                            "/backend/images/**",
+                            "/backend/js/**",
+                            "/backend/fonts/**"
+                    )
             ;
         }
         //设置拦截规则
@@ -66,7 +68,7 @@ public class SecurityConfig {
 
                     //确保任何请求应用程序的用户需要通过身份验证
                     .authorizeRequests()
-                    .antMatchers("/backend/css/**","/backend/images/**").permitAll()   // 允许未登录用户访问静态资源
+                    .antMatchers("/backend/css/**","/backend/images/**","/backend/fonts/**","/backend/js/**").permitAll()   // 允许未登录用户访问静态资源
                     .anyRequest().authenticated()
                     .and()
                             //开启默认登录页面,允许用户进行身份验证和基于表单的登录

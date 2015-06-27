@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
  * Created by luffy on 2015/6/10.
- *
+ * 考试指南的Controller
  * @author luffy luffy.ja at gmail.com
  */
 @Controller
@@ -22,7 +22,7 @@ public class ExamGuideController {
     @Autowired
     private ExamGuideService examGuideService;
 
-    @RequestMapping("/load/examGuide")
+    @RequestMapping("/backend/load/examGuide")
     public String loadExamGuide(Model model){
         model.addAttribute("list",examGuideService.loadExamGuide());
 //        System.out.println("进入/load/examGuide");
