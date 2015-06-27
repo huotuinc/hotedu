@@ -31,6 +31,6 @@ public class ExamGuideController {
 //        model.put("list",list);
 //        model.put("slt","456");
 //        return new ModelAndView("/guides",model);
-        return "/guides";
+        return "/backend/guides";
     }
 }

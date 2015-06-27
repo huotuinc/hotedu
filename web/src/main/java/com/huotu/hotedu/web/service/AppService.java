@@ -1,6 +1,7 @@
 package com.huotu.hotedu.web.service;
 
 import com.huotu.hotedu.entity.Manager;
+import com.huotu.hotedu.repository.ExamGuideRepository;
 import com.huotu.hotedu.repository.ManagerRepository;
 import com.huotu.hotedu.service.LoginService;
 import org.apache.commons.logging.Log;
@@ -22,6 +23,8 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
     private ManagerRepository managerRepository;
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private ExamGuideRepository examGuideRepository;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -34,5 +37,23 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
             }
 
         }
+
+        if (event.getApplicationContext().getParent() == null) {
+            // 做一些初始化工作 比如
+            if (examGuideRepository.count()==0){
+                /// do something
+            }
+        }
+
+
+
+
+
     }
+
+
+
+
+
+
 }

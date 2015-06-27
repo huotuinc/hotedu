@@ -26,6 +26,6 @@ public class MessageContentController {
         Map model=new HashMap<>();
         List<MessageContent>list=messageContentService.loadMessageContent();
         model.put("list",list);
-        return new ModelAndView("/messagecontents",model);
+        return new ModelAndView("/backend/messagecontents",model);
     }
 }

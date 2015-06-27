@@ -28,6 +28,6 @@ public class QaController {
         Map model=new HashMap<>();
         List<Qa>list=qaService.loadQa();
         model.put("list",list);
-        return new ModelAndView("/qa",model);
+        return new ModelAndView("/backend/qa",model);
     }
 }
