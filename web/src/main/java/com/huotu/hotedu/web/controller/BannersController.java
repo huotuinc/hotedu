@@ -13,7 +13,14 @@ public class BannersController {
     @RequestMapping("/backend/load/banners")
     public String loadBannersController() {
         return "/backend/banners";
-
     }
+
+
+
+    @RequestMapping("/backend/search/banners")
+    public String searchBannersController() {
+        return "";
+    }
+
 
 }

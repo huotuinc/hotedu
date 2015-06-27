@@ -20,7 +20,7 @@ public class IndexController {
         return who.getLoginName();
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/backend/index")
     public String index(){
         return "/backend/index";
     }
