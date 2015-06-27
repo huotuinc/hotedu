@@ -2,7 +2,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
     <link rel="stylesheet" type="text/css" href="css/common.css"/>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
@@ -24,8 +24,7 @@
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
                 <li>${#object.userName}</li>
-                <li><a href="changethepassword.html" th:href="@{/modify/passowrd(userId=${#objects.userId},oldPwd=
-                    ${#objects.oldPwd},newPwd=${#objects.newPwd})}">修改密码</a></li>
+                <li><a href="changethepassword.html" >修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
         </div>
@@ -82,16 +81,13 @@
 
                             <tr>
                                 <th><i class="require-red">*</i>证书编号：</th>
-                                <td><input type="text" id="" value="" size="70" name="description" class="common-text"></td>
+                                <td><input type="text" id="" value="" size="70" name="description" class="common-text"/></td>
                             </tr>
 
                             <tr>
 
                                 <th></th>
-                                <td>
-                                    <input type="submit" value="提交" class="btn btn-primary btn6 mr10">
-                                    <input type="button" value="返回" onclick="history.go(-1)" class="btn btn6">
-                                </td>
+                                <td><input type="submit" value="提交" class="btn btn-primary btn6 mr10"/><input type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
                             </tr>
                             </tbody></table>
                     </div>
