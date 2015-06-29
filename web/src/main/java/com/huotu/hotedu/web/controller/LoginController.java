@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class LoginController {
-
+    //进入登录界面
     @RequestMapping("/backend/login")
     public String index(){
         return "/backend/login";

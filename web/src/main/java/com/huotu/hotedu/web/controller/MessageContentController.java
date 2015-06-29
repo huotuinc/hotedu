@@ -20,12 +20,19 @@ import java.util.Map;
 public class MessageContentController {
     @Autowired
     private MessageContentService messageContentService;
-
+    //后台显示所有资讯动态
     @RequestMapping("/backend/load/messagecontents")
     public ModelAndView loadMessageContentController() {
         Map model=new HashMap<>();
         List<MessageContent>list=messageContentService.loadMessageContent();
         model.put("list",list);
         return new ModelAndView("/backend/messagecontents",model);
+    }
+
+
+    //后台显示检索之后的资讯动态
+    @RequestMapping("/backend/search/messagecontents")
+    public String searchMessagecontentsController() {
+        return "";
     }
 }

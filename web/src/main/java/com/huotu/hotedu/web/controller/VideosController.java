@@ -10,10 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class VideosController {
+    //后台显示所有视频信息
     @RequestMapping("/backend/load/videos")
     public String loadWantedesController() {
         return "/backend/videos";
 
+    }
+
+
+    //后台显示检索之后的视频信息
+    @RequestMapping("/backend/search/videos")
+    public String searchVideosController() {
+        return "";
     }
 
 }

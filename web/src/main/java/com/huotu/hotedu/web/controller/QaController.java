@@ -22,12 +22,19 @@ import java.util.Map;
 public class QaController {
     @Autowired
     private QaService qaService;
-
+    //后台显示所有常见问题信息
     @RequestMapping("/backend/load/qa")
     public ModelAndView loadQa() {
         Map model=new HashMap<>();
         List<Qa>list=qaService.loadQa();
         model.put("list",list);
         return new ModelAndView("/backend/qa",model);
+    }
+
+
+    //后台显示检索之后的常见问题信息
+    @RequestMapping("/backend/search/qa")
+    public String searchQaController() {
+        return "";
     }
 }

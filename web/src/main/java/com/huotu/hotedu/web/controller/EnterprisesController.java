@@ -17,9 +17,30 @@ import java.util.Map;
 @Controller
 public class EnterprisesController {
 
+    //后台显示所有招聘信息
     @RequestMapping("/backend/load/wantedes")
     public String loadWantedesController() {
         return "/backend/wantedes";
+    }
 
+
+    //后台显示所有发布企业的信息
+    @RequestMapping("/backend/load/enterprises")
+    public String loadEnterprisesController() {
+        return "/backend/enterprises";
+    }
+
+
+
+
+    //后台显示检索之后的招聘信息
+    @RequestMapping("/backend/search/wantedes")
+    public String SearchWantedesController() {
+        return "";
+    }
+    //后台显示检索之后的发布企业信息
+    @RequestMapping("/backend/search/enterprises")
+    public String SearchEnterprisesController() {
+        return "";
     }
 }

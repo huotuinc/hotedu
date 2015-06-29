@@ -21,7 +21,7 @@ import java.util.Map;
 public class ExamGuideController {
     @Autowired
     private ExamGuideService examGuideService;
-
+    //后台显示所有考试指南信息
     @RequestMapping("/backend/load/examGuide")
     public String loadExamGuide(Model model){
         model.addAttribute("list",examGuideService.loadExamGuide());
@@ -33,4 +33,10 @@ public class ExamGuideController {
 //        return new ModelAndView("/guides",model);
         return "/backend/guides";
     }
+    //后台显示检索之后考试指南信息
+    @RequestMapping("/backend/search/guides")
+    public String searchGuidesController() {
+        return "";
+    }
+
 }

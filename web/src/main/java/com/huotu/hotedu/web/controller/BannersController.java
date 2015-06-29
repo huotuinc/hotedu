@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class BannersController {
+    //后台显示所有Banner图
     @RequestMapping("/backend/load/banners")
     public String loadBannersController() {
         return "/backend/banners";
     }
 
 
-
+    //后台显示检索过之后的Banner图
     @RequestMapping("/backend/search/banners")
     public String searchBannersController() {
         return "";

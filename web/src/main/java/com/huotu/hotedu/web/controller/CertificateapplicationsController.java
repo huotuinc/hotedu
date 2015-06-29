@@ -11,11 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class CertificateapplicationsController {
+    //后台显示所有代理商列表
     @RequestMapping("/backend/load/certificateapplications")
     public String loadCertificateapplicationsController() {
         return "/backend/certificateapplications";
-
     }
+
+
+    //后台显示检索之后的代理商
+    @RequestMapping("/backend/search/agents")
+    public String searchAgentsController() {
+        return "";
+    }
+
 
 
 }

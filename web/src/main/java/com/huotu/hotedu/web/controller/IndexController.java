@@ -19,7 +19,7 @@ public class IndexController {
     public String sayMyname(@AuthenticationPrincipal Login who){
         return who.getLoginName();
     }
-
+    //登录首页
     @RequestMapping("/backend/index")
     public String index(){
         return "/backend/index";
