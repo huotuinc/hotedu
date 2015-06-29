@@ -5,9 +5,8 @@
     <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
     <link rel="stylesheet" type="text/css" href="css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="css/main.css"/>
-    <script type="text/javascript" src="js/libs/modernizr.min.js"></script>
-    <script type="text/javascript" src="js/libs/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>  <script type="text/javascript" src="js/libs/jquery.min.js"></script>
+  <script type="text/javascript" src="js/libs/modernizr.min.js"></script>
     <!--<script type="text/javascript" src="js/menu.js"></script>-->
 </head>
 <body>
@@ -17,8 +16,8 @@
             <h1 class="topbar-logo none"><a href="index.html" class="navbar-brand">云商学院后台管理</a></h1>
             <ul class="navbar-list clearfix">
                 <li><a href="index.html" th:href="@{/}">首页</a></li>
-                <li><a class="on" href="wantedes.html" th:href="@{/load/wantedes}">网站维护</a></li>
-                <li><a href="certificateapplications.html" th:href="@{/load/certificateapplications}">代理商管理</a></li>
+                <li><a class="on" href="wantedes.html" th:href="@{/backend/load/wantedes}">网站维护</a></li>
+                <li><a href="certificateapplications.html" th:href="@{/backend/load/certificateapplications}">代理商管理</a></li>
             </ul>
         </div>
         <div class="top-info-wrap">
@@ -48,45 +47,45 @@
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">banner图</a>
                     <ul class="sub-menu">
-                        <li><a href="banners.html" th:href="@{/load/banners}">banner图</a></li>
+                        <li><a href="banners.html" th:href="@{/backend/load/banners}">banner图</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">考试指南</a>
                     <ul class="sub-menu">
-                        <li><a href="guides.html" th:href="@{/search/guides}">考试指南</a></li>
+                        <li><a href="guides.html" th:href="@{/backend/load/guides}">考试指南</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">友情链接</a>
                     <ul class="sub-menu">
-                        <li><a href="links.html" th:href="@{/search/links}">友情链接</a></li>
+                        <li><a href="links.html" th:href="@{/backend/load/links}">友情链接</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">常见问题</a>
                     <ul class="sub-menu">
-                        <li><a href="qa.html" th:href="@{/search/qa}">常见问题</a></li>
+                        <li><a href="qa.html" th:href="@{/backend/load/qa}">常见问题</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">资讯动态</a>
                     <ul class="sub-menu">
-                        <li><a href="messagecontents.html" th:href="@{/search/messagecontents}">资讯动态</a></li>
+                        <li><a href="messagecontents.html" th:href="@{/backend/load/messagecontents}">资讯动态</a></li>
                     </ul>
                 </li>
 
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">公司简介</a>
                     <ul class="sub-menu">
-                        <li><a href="editenterprise.html" th:href="">公司简介编辑</a></li>
+                        <li><a href="editenterprise.html" >公司简介编辑</a></li>
                     </ul>
                 </li>
 
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">视频</a>
                     <ul class="sub-menu">
-                        <li><a href="videos.html" th:href="@{/search/videos}">教学视频</a></li>
+                        <li><a href="videos.html" th:href="@{/backend/load/videos}">教学视频</a></li>
                         <li><a href="精彩录制.html">精彩录制</a></li>
                         <li><a href="经验分享.html">经验分享</a></li>
                         <li><a href="其他视频.html">其他视频</a></li>
