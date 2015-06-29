@@ -20,7 +20,7 @@ public class IndexController {
         return who.getLoginName();
     }
     //登录首页
-    @RequestMapping("/backend/index")
+    @RequestMapping("/")
     public String index(){
         return "/backend/index";
     }

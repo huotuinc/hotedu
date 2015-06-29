@@ -55,8 +55,11 @@ public class MVCConfig  extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         super.addResourceHandlers(registry);
-        registry.addResourceHandler("/css/**","/fonts/**","/images/**","/js/**")
-                .addResourceLocations("/backend/css/**","/backend/fonts/**","/backend/images/**","/backend/js/**");
+        registry.addResourceHandler("/css/**").addResourceLocations("/backend/css/");
+        registry.addResourceHandler("/font/**").addResourceLocations("/backend/font/");
+        registry.addResourceHandler("/images/**").addResourceLocations("/backend/images/");
+        registry.addResourceHandler("/js/**").addResourceLocations("/backend/js/");
+
     }
 
     @Override
