@@ -11,10 +11,10 @@ import java.util.Date;
  */
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"title"}))
-//@Inheritance(strategy=InheritanceType.JOINED)  //有待解答
+//@Inheritance(strategy=InheritanceType.JOINED)  //有待解答 已在邮件中答复 :D
 public  class ExamGuide implements Serializable {
 
-    private static final long serialVersionUID = -349012453592429794L;//有待解答
+    private static final long serialVersionUID = -349012453592429794L;//有待解答...Serializable标准而已
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,10 +26,6 @@ public  class ExamGuide implements Serializable {
     private boolean top=true;
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUploadDate;
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
     public Long getId() {
         return id;
