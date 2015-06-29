@@ -21,8 +21,6 @@ public class ExamGuideService {
 
     //返回所有考试指南
     public List<ExamGuide> loadExamGuide(){
-        List<ExamGuide> list=new ArrayList<ExamGuide>();
-        list=examGuideRepository.findAll();
-        return list;
+        return examGuideRepository.findAll();
     }
 }

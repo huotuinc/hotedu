@@ -20,8 +20,6 @@ public class QaService {
 
     //返回所有常见问题
     public List<Qa> loadQa(){
-        List<Qa> list=new ArrayList<Qa>();
-        list=qaRepository.findAll();
-        return list;
+        return qaRepository.findAll();
     }
 }
