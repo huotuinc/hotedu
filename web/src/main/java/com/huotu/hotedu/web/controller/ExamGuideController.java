@@ -24,7 +24,7 @@ public class ExamGuideController {
     //后台显示所有考试指南信息
     @RequestMapping("/backend/load/examGuide")
     public String loadExamGuide(Model model){
-        model.addAttribute("allGuideList",examGuideService.loadExamGuide());
+        model.addAttribute("allGuideList",examGuideService.searchExamGuide());
         return "/backend/guides";
     }
 
