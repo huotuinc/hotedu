@@ -10,44 +10,19 @@
     <script type="text/javascript" src="js/libs/jquery.min.js"></script>
     <script type="text/javascript" src="js/libs/modernizr.min.js"></script>
     <!--<script type="text/javascript" src="js/menu.js"></script>-->
+    <script type="text/javascript">
+        $(function(){
+            $(".tsidebar").load("sidebarpage.html",function(){
+                $("#tsidebar1").css("display","none");
+                $("#tsidebar2").css("display","block");
+            });
+        });
+    </script>
 </head>
 <body>
-<div class="topbar-wrap white">
-    <div class="topbar-inner clearfix">
-        <div class="topbar-logo-wrap clearfix">
-            <h1 class="topbar-logo none"><a href="index.html" class="navbar-brand">云商学院后台管理</a></h1>
-            <ul class="navbar-list clearfix">
-                <li><a href="index.html" th:href="@{/}">首页</a></li>
-                <li><a href="wantedes.html" th:href="@{/load/wantedes}">网站维护</a></li>
-                <li><a class="on" href="certificateapplications.html" th:href="@{/load/certificateapplications}">代理商管理</a></li>
-            </ul>
-        </div>
-        <div class="top-info-wrap">
-            <ul class="top-info-list clearfix">
-                <li>${#object.userName}</li>
-                <li><a href="changethepassword.html" >修改密码</a></li>
-                <li><a href="#">退出</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
+<div class="thead"></div>
 <div class="container clearfix">
-    <div class="sidebar-wrap">
-        <div class="sidebar-title">
-            <img src="images/htlogo.png" style=" width:160px;margin-left: -10px;"/>
-        </div>
-        <div class="sidebar-content">
-            <ul class="sidebar-list">
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">管理代理商</a>
-                    <ul class="sub-menu" style="display:block;">
-                        <li><a href="certificateapplications.html">申请领证列表</a></li>
-                        <li class="on"><a href="agents.html">代理商列表</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <div class="tsidebar"></div>
     <!--/sidebar-->
     <div class="main-wrap">
 
@@ -68,7 +43,6 @@
                     <li>
                         <label class="res-lab">考试时间:</label><span class="res-info">2015.01.01/13.00.00</span>
                     </li>
-
 
                     <li>
                         <label class="res-lab">考试地点：</label><span class="res-info">XXXX</span>
