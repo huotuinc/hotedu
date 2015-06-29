@@ -25,14 +25,10 @@ public class ExamGuideController {
     @RequestMapping("/backend/load/examGuide")
     public String loadExamGuide(Model model){
         model.addAttribute("allGuideList",examGuideService.loadExamGuide());
-//        System.out.println("进入/load/examGuide");
-//        Map model=new HashMap<>();
-//        List<ExamGuide> list=examGuideService.loadExamGuide();
-//        model.put("list",list);
-//        model.put("slt","456");
-//        return new ModelAndView("/guides",model);
         return "/backend/guides";
     }
+
+
     //后台显示检索之后考试指南信息
     @RequestMapping("/backend/search/guides")
     public String searchGuidesController() {

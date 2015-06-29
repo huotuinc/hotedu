@@ -1,9 +1,7 @@
 package com.huotu.hotedu.web.service;
 
-import com.huotu.hotedu.entity.ExamGuide;
-import com.huotu.hotedu.entity.Manager;
-import com.huotu.hotedu.repository.ExamGuideRepository;
-import com.huotu.hotedu.repository.ManagerRepository;
+import com.huotu.hotedu.entity.*;
+import com.huotu.hotedu.repository.*;
 import com.huotu.hotedu.service.LoginService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,6 +26,17 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
     private LoginService loginService;
     @Autowired
     private ExamGuideRepository examGuideRepository;
+    @Autowired
+    private LinkRepository linkRepository;
+    @Autowired
+    private TutorRepository tutorRepository;
+    @Autowired
+    private CompanyRepository companyRepository;
+    @Autowired
+    private QaRepository qaRepository;
+    @Autowired
+    private MessageContentRepository messageContentRepository;
+
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -51,37 +60,82 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 examGuide.setLastUploadDate(new Date());
                 examGuide.setTop(true);
                 examGuideRepository.save(examGuide);
-
                 examGuide =new ExamGuide();
                 examGuide.setContent("examguide");
                 examGuide.setTitle("title examguide2");
                 examGuide.setLastUploadDate(new Date());
                 examGuide.setTop(true);
                 examGuideRepository.save(examGuide);
-
                 examGuide =new ExamGuide();
                 examGuide.setContent("examguide");
                 examGuide.setTitle("title examguide3");
                 examGuide.setLastUploadDate(new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000));
                 examGuide.setTop(true);
                 examGuideRepository.save(examGuide);
-
                 examGuide =new ExamGuide();
                 examGuide.setContent("examguide");
                 examGuide.setTitle("title examguide4");
                 examGuide.setLastUploadDate(new Date(System.currentTimeMillis() - 5 * 60 * 60 * 1000));
                 examGuide.setTop(true);
                 examGuideRepository.save(examGuide);
-
                 examGuide =new ExamGuide();
                 examGuide.setContent("examguide");
                 examGuide.setTitle("title examguide5");
                 examGuide.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000));
                 examGuide.setTop(true);
                 examGuideRepository.save(examGuide);
-
                 /// do something
             }
+          if(linkRepository.count()==0){
+              Link link=new Link();
+              link.setTitle("spring");
+              link.setUrl("spring.io");
+              linkRepository.save(link);
+              link=new Link();
+              link.setTitle("百度");
+              link.setUrl("www.baidu.com");
+              linkRepository.save(link);
+              link=new Link();
+              link.setTitle("粉猫");
+              link.setUrl("www.fanmore.cn");
+              linkRepository.save(link);
+          }
+            if(messageContentRepository.count()==0){
+                MessageContent messageContent;
+                for(int i=0;i<5;i++){
+                    messageContent=new MessageContent();
+                    messageContent.setTitle("messageContent"+i);
+                    messageContent.setContent("content message Content"+i);
+                    messageContent.setLastUploadDate(new Date(System.currentTimeMillis()+24*60*60*1000*(i+1)));
+                    messageContentRepository.save(messageContent);
+                }
+            }
+
+            if (tutorRepository.count()==0){
+                Tutor tutor;
+                for(int i=0;i<7;i++){
+                    tutor=new Tutor();
+                    tutor.setName("tutor"+i);
+                    tutor.setIntroduction("i am a tutor my name is"+i);
+                    tutor.setArea("杭州");
+                    tutor.setQualification("教授");
+                    tutor.setPicture("slt.jpg");
+                    tutorRepository.save(tutor);
+                }
+            }
+
+
+            if (qaRepository.count()==0){
+                Qa qa;
+                for(int i=0;i<4;i++){
+                    qa=new Qa();
+                    qa.setTitle("qa"+i);
+                    qa.setContent("问题"+(i+1));
+                    qa.setLastUploadDate(new Date(System.currentTimeMillis()+24*60*60*1000*(i+1)));
+                    qa.setTop(true);
+                }
+            }
+
         }
 
 

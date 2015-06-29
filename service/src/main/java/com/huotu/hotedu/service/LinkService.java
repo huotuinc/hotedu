@@ -1,10 +1,11 @@
 package com.huotu.hotedu.service;
 import com.huotu.hotedu.entity.ExamGuide;
+import com.huotu.hotedu.entity.Link;
 import com.huotu.hotedu.repository.ExamGuideRepository;
+import com.huotu.hotedu.repository.LinkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,14 +14,13 @@ import java.util.List;
  * @author shiliting
  */
 @Service
-public class ExamGuideService {
+public class LinkService {
 
     @Autowired
-    private ExamGuideRepository examGuideRepository;
+    private LinkRepository linkRepository;
 
-    //返回所有考试指南
-    public List<ExamGuide> loadExamGuide(){
-        return examGuideRepository.findAll();
+    //返回所有超链接信息
+    public List<Link> loadLink(){
+        return linkRepository.findAll();
     }
-
 }
