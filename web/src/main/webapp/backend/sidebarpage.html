@@ -1,4 +1,7 @@
- <div class="sidebar-wrap">
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<div class="sidebar-wrap">
         <div class="sidebar-title">
             <img src="images/htlogo.png" style=" width:160px;margin-left: -10px;"/>
         </div>
@@ -21,7 +24,7 @@
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">考试指南</a>
                     <ul class="sub-menu">
-                        <li><a href="guides.html" th:href="@{/backend/load/examGuide}">考试指南</a></li>
+                        <li><a href="#" th:href="@{/backend/load/examGuide}">考试指南</a></li>
                     </ul>
                 </li>
                 <li>
@@ -78,3 +81,5 @@
             </div>
         </div>
  </div>
+</body>
+</html>
