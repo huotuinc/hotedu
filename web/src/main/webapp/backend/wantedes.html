@@ -5,7 +5,8 @@
     <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
-    <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>  <script type="text/javascript" src="js/libs/jquery.min.js" th:href="@{/backend/js/libs/jquery.min.js}"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
+    <script type="text/javascript" src="js/libs/jquery.min.js" th:href="@{/backend/js/libs/jquery.min.js}"></script>
   <script type="text/javascript" src="js/libs/modernizr.min.js" th:href="@{/backend/js/libs/modernizr.min.js}"></script>
     <!--<script type="text/javascript" src="js/menu.js"></script>-->
 </head>
@@ -78,7 +79,7 @@
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">公司简介</a>
                     <ul class="sub-menu">
-                        <li><a href="editenterprise.html">公司简介编辑</a></li>
+                        <li><a href="editenterprise.html" th:href="@{/backend/load/editenterprise}">公司简介编辑</a></li>
                     </ul>
                 </li>
 
