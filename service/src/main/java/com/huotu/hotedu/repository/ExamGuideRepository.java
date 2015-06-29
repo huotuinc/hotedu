@@ -14,4 +14,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ExamGuideRepository extends JpaRepository<ExamGuide,Long>,ClassicsRepository<ExamGuide>,JpaSpecificationExecutor<ExamGuide>{
 
+
 }

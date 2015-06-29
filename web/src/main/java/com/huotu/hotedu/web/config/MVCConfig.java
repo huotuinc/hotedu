@@ -52,15 +52,17 @@ public class MVCConfig  extends WebMvcConfigurerAdapter {
 
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        super.addResourceHandlers(registry);
-        registry.addResourceHandler("/css/**").addResourceLocations("/backend/css/");
-        registry.addResourceHandler("/font/**").addResourceLocations("/backend/font/");
-        registry.addResourceHandler("/images/**").addResourceLocations("/backend/images/");
-        registry.addResourceHandler("/js/**").addResourceLocations("/backend/js/");
-
-    }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        super.addResourceHandlers(registry);
+//        registry.addResourceHandler("css/**").addResourceLocations("/backend/css/");
+//        registry.addResourceHandler("font/**").addResourceLocations("/backend/font/");
+//        registry.addResourceHandler("images/**").addResourceLocations("/backend/images/");
+//        registry.addResourceHandler("js/**").addResourceLocations("/backend/js/");
+//
+//
+//
+//    }
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {

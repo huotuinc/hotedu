@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TutorsController {
     //后台显示所有师资力量
-    @RequestMapping("/backend/load/Tutors")
+    @RequestMapping("/backend/load/tutors")
     public String loadWantedesController() {
         return "/backend/tutors";
 

@@ -29,8 +29,8 @@ public class ExamGuideService {
     }
 
     //分页
-    public Page<ExamGuide> searchExamGuide(){
-        return  examGuideRepository.findAll(new PageRequest(0, 2));
+    public Page<ExamGuide> searchExamGuide(int n,int pagesize){
+        return  examGuideRepository.findAll(new PageRequest(n, pagesize));
     }
 
 }

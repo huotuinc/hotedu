@@ -21,10 +21,11 @@ import java.util.Map;
 public class ExamGuideController {
     @Autowired
     private ExamGuideService examGuideService;
-    //后台显示所有考试指南信息
+    //后台显示检索之后考试指南信息
     @RequestMapping("/backend/load/examGuide")
     public String loadExamGuide(Model model){
-        model.addAttribute("allGuideList",examGuideService.searchExamGuide());
+
+        model.addAttribute("allGuideList",examGuideService.searchExamGuide(0,3));
         return "/backend/guides";
     }
 
