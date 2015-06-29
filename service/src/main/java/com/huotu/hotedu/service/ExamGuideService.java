@@ -2,6 +2,7 @@ package com.huotu.hotedu.service;
 import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.repository.ExamGuideRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +29,8 @@ public class ExamGuideService {
     }
 
     //分页
-    public List<ExamGuide> searchExamGuide(){
-        examGuideRepository.findAll(new PageRequest(0,2));
-        return examGuideRepository.findAll();
+    public Page<ExamGuide> searchExamGuide(){
+        return  examGuideRepository.findAll(new PageRequest(0, 2));
     }
 
 }
