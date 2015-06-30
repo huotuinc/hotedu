@@ -25,7 +25,7 @@ public class ExamGuideController {
     @RequestMapping("/backend/load/examGuide")
     public String loadExamGuide(Model model){
 
-        model.addAttribute("allGuideList",examGuideService.searchExamGuide(0,3));
+        model.addAttribute("allGuideList",examGuideService.searchExamGuide(0,3,"t"));
         return "/backend/guides";
     }
 
