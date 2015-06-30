@@ -108,12 +108,11 @@
         </div>
         <div class="search-wrap">
             <div class="search-content">
-                <form action="#" method="post">
-
+                <form action="#" th:action="@{/backend/search/examGuide}" method="post">
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
-                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"/></td>
+                            <td><input class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}" id="keywords" type="text"/></td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
@@ -147,7 +146,10 @@
                             <td><a class="link-update" href="newguide.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
                         </tr>
                         </table>
-                    <div class="list-page"><a href="#" th:href="@{/backend/load/examGuide}">上一页</a><a href="#" th:href="@{/backend/load/examGuide}">下一页</a> 2 条 1/1 页</div>
+                    <div class="list-page">
+                        <a href="#" th:href="@{/backend/page/examGuide(n=${n}-1,pageSize=${pageSize},keywords=${keywords},sumpage=${sumpage})}">上一页</a>
+                        <a href="#" th:href="@{/backend/page/examGuide(n=${n}+1,pageSize=${pageSize},keywords=${keywords},sumpage=${sumpage})}">下一页</a>
+                        <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span th:text="${sumpage}">1</span> 页</div>
                 </div>
             </form>
         </div>

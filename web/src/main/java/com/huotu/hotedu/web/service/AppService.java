@@ -11,6 +11,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Random;
 
 /**
  * @author CJ
@@ -78,10 +79,19 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 examGuide.setLastUploadDate(new Date(System.currentTimeMillis() - 5 * 60 * 60 * 1000));
                 examGuide.setTop(true);
                 examGuideRepository.save(examGuide);
+                Random r=new Random();
+                for(int i=0;i<34;i++){
+                    examGuide=new ExamGuide();
+                    examGuide.setTitle(String.valueOf(r.nextInt()*20));
+                    examGuide.setContent(String.valueOf(r.nextDouble()));
+                    examGuide.setLastUploadDate(new Date(System.currentTimeMillis()+i*100000));
+                    examGuide.setTop(i%3==0? true:false);
+                    examGuideRepository.save(examGuide);
+                }
                 examGuide =new ExamGuide();
-                examGuide.setContent("examguide");
-                examGuide.setTitle("title examguide5");
-                examGuide.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000));
+                examGuide.setContent("中文测试标题");
+                examGuide.setTitle("中文测试内容");
+                examGuide.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 2000));
                 examGuide.setTop(true);
                 examGuideRepository.save(examGuide);
                 /// do something
