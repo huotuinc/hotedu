@@ -1,7 +1,11 @@
 package com.huotu.hotedu.entity;
 
+import org.springframework.security.core.GrantedAuthority;
+import sun.rmi.runtime.Log;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 
 /**
  * Created by shiliting on 2015/6/25.
@@ -9,7 +13,7 @@ import java.io.Serializable;
  * @author shiliting
  */
 @Entity
-public  class Tutor implements Serializable {
+public  class Tutor extends Login implements Serializable {
 
     private static final long serialVersionUID = -349012453592429794L;
     @Id
@@ -72,5 +76,10 @@ public  class Tutor implements Serializable {
 
     public void setArea(String area) {
         this.area = area;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 }

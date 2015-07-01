@@ -60,7 +60,13 @@ public class ExamGuideService {
     }
 
     //修改一条考试信息
-    public void modify(){
+    public void modify(ExamGuide examGuide){
+        examGuideRepository.save(examGuide);
+
+    }
+    //查找一条考试消息
+    public ExamGuide findOneById(Long id){
+        return examGuideRepository.findOne(id);
     }
 
 }

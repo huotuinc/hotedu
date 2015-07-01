@@ -1,9 +1,13 @@
 package com.huotu.hotedu.web.controller;
 
+import com.huotu.hotedu.entity.Login;
 import com.huotu.hotedu.entity.Qa;
 import com.huotu.hotedu.service.QaService;
 import com.sun.javafx.collections.MappingChange;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +27,10 @@ public class QaController {
     @Autowired
     private QaService qaService;
     //后台显示所有常见问题信息
+    @PostAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/load/qa")
-    public ModelAndView loadQa() {
+    public ModelAndView loadQa(@AuthenticationPrincipal Login login) {
+        HttpStatus a;
         Map model=new HashMap<>();
         List<Qa>list=qaService.loadQa();
         model.put("list",list);

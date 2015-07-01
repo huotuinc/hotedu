@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.awt.print.Pageable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,10 +91,46 @@ public class ExamGuideController {
 
 
     //后台单击新建按钮
-    @RequestMapping("/backend/add/examGuide")
-    public String AddExamGuide(){
+    @RequestMapping("/backend/save/examGuide")
+    public String AddExamGuide(Model model){
         return "/backend/newguide";
+    }
+    //后台单机修改按钮
+    @RequestMapping("/backend/modify/examGuide")
+    public String ModifyExamGuide(Long id,int n,String keywords,int sumpage, Model model){
+        ExamGuide examGuide=examGuideService.findOneById(id);
+        model.addAttribute("examGuide",examGuide);
+//        model.addAttribute("title",examGuide.getTitle());
+//        model.addAttribute("content",examGuide.getContent());
+//        model.addAttribute("toptrue",examGuide.isTop());
+//        model.addAttribute("topfalse",!examGuide.isTop());
+        model.addAttribute("n",n);
+        model.addAttribute("keywords",keywords);
+        model.addAttribute("sumpage",sumpage);
+        return "/backend/modifyguide";
     }
 
 
+    //后台单击添加保存按钮
+    @RequestMapping("/backend/addsave/examGuide")
+    public String AddSaveExamGuide(String title,String content,String top,Model model){
+        ExamGuide examGuide=new ExamGuide();
+        examGuide.setTitle(title);
+        examGuide.setContent(content);
+        examGuide.setLastUploadDate(new Date());
+        examGuide.setTop("1".equals(top)? true:false);
+        examGuideService.addExamGuide(examGuide);
+        return "redirect:/backend/load/examGuide";
+    }
+
+
+    //后台单击修改保存按钮
+    @RequestMapping("/backend/modifysave/examGuide")
+    public String ModifySaveExamGuide(int n,String keywords,int sumpage,String title,String content,Boolean top,ExamGuide examGuide,Model model){
+        examGuide.setTitle(title);
+        examGuide.setContent(content);
+        examGuide.setTop(top);
+        examGuideService.modify(examGuide);
+        return "redirect:/backend/page/examGuide?n="+n+"&keywords="+keywords+"&sumpage="+sumpage;
+    }
 }

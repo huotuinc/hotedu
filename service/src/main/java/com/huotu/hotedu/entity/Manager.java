@@ -1,12 +1,15 @@
 package com.huotu.hotedu.entity;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
  * Created by luffy on 2015/6/10.
+ * 系统管理员
  *
  * @author luffy luffy.ja at gmail.com
  */
@@ -24,6 +27,10 @@ public class Manager extends Login{
     private String managerField;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Arrays.asList(
+                new SimpleGrantedAuthority("ROLE_USER"),
+                new SimpleGrantedAuthority("ROLE_ADMIN"),
+                new SimpleGrantedAuthority("ROLE_GRANT")
+        );
     }
 }

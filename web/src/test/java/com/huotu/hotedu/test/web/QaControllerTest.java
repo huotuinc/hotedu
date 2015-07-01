@@ -80,10 +80,10 @@ public class QaControllerTest extends SpringWebTest {
 //        qb.setLastUploadDate(new Date());
 //        qaRepository.save(qb);
 //
-//        mockMvc.perform(
-//                get("/load/qa")
-//        ).andDo(print()).andExpect(model().attributeExists("list"))
-//        ;
+        mockMvc.perform(
+                get("/backend/modify/examGuide")
+        ).andDo(print())
+        ;
     }
     private void checkMemeber(String name) {
         try {

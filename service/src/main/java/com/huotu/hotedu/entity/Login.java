@@ -8,6 +8,7 @@ import java.util.Date;
 
 /**
  * Created by luffy on 2015/6/10.
+ * 可登录角色
  *
  * @author luffy luffy.ja at gmail.com
  */
