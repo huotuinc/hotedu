@@ -45,8 +45,8 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
             log.info("user.dir="+System.getProperty("user.dir"));
             if (managerRepository.count()==0){
                 Manager manager = new Manager();
-                manager.setLoginName("admin");
-                loginService.newLogin(manager,"admin");
+                manager.setLoginName("admins");
+                loginService.newLogin(manager,"admins");
                 System.out.println("测试用户以添加！");
             }
 

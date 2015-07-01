@@ -106,15 +106,16 @@
         </div>
         <div class="search-wrap">
             <div class="search-content">
-                <form action="#" method="post">
+                <form action="#" th:action="@{/backend/search/examGuide}" method="post">
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
-                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"/></td>
+                            <td><input class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}" id="keywords" type="text"/></td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
                 </form>
+
             </div>
         </div>
         <div class="result-wrap">
