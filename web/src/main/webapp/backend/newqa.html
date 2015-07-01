@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8"/>
   <title>云商学院后台管理</title>
@@ -8,8 +8,6 @@
   <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
   <script type="text/javascript" src="js/libs/jquery.min.js" th:href="@{/backend/js/libs/jquery.min.js}"></script>
   <script type="text/javascript" src="js/libs/modernizr.min.js" th:href="@{/backend/js/libs/modernizr.min.js}"></script>
-
-
   <!--<script type="text/javascript" src="js/menu.js"></script>-->
 </head>
 <body>
@@ -25,14 +23,13 @@
     </div>
     <div class="top-info-wrap">
       <ul class="top-info-list clearfix">
-        <li>${#object.userName}</li>
+        <li><span th:text="${#authentication.name}"></span></li>
         <li><a href="changethepassword.html" >修改密码</a></li>
         <li><a href="#">退出</a></li>
       </ul>
     </div>
   </div>
 </div>
-
 <div class="container clearfix">
   <div class="sidebar-wrap">
     <div class="sidebar-title">
@@ -44,7 +41,7 @@
           <a href="#" style="height:30px; line-height:30px;">企业信息</a>
           <ul class="sub-menu">
             <li><a href="wantedes.html" >招聘信息</a></li>
-            <li><a href="enterprises.html" >发布企业</a></li>
+            <li><a href="enterprises.html" th:href=" @{/backend/load/enterprises}">发布企业</a></li>
           </ul>
         </li>
         <li>
@@ -106,7 +103,7 @@
   <!--/sidebar-->
   <div class="main-wrap">
     <div class="crumb-wrap">
-      <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html">网站维护</a><span class="crumb-step">&gt;</span><a href="qa.html"><span class="crumb-name">常见问题</span></a><span class="crumb-step">&gt;</span><span class="crumb-name">新建</span></div>
+      <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html" th:href="@{/backend/load/wantedes}">网站维护</a><span class="crumb-step">&gt;</span><a href="qa.html"><span class="crumb-name">常见问题</span></a><span class="crumb-step">&gt;</span><span class="crumb-name">新建</span></div>
     </div>
     <div class="result-wrap">
       <form action="#" method="post" id="myform" name="myform">

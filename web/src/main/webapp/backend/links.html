@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://xmlns.jcp.org/jsf/passthrough">
 <head>
     <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
@@ -23,7 +23,7 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li>${#object.userName}</li>
+                <li><span sec:authentication="name"></span></li>
                 <li><a href="changethepassword.html" >修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
@@ -41,7 +41,7 @@
                     <a href="#" style="height:30px; line-height:30px;">企业信息</a>
                     <ul class="sub-menu">
                         <li><a href="wantedes.html" >招聘信息</a></li>
-                        <li><a href="enterprises.html" >发布企业</a></li>
+                        <li><a href="enterprises.html" th:href=" @{/backend/load/enterprises}">发布企业</a></li>
                     </ul>
                 </li>
                 <li>
@@ -74,7 +74,6 @@
                         <li><a href="messagecontents.html" th:href="@{/backend/load/messagecontents}">资讯动态</a></li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">公司简介</a>
                     <ul class="sub-menu">
@@ -104,7 +103,7 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">友情链接</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html" th:href="@{/backend/load/wantedes}">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">友情链接</span></div>
         </div>
         <div class="search-wrap">
             <div class="search-content">
@@ -126,14 +125,11 @@
                     <div class="result-list">
 
                         <a href="newlink.html"><i class="icon-font">+</i>新建</a>
-
                     </div>
                 </div>
                 <div class="result-content">
                     <table class="result-tab" width="100%">
                         <tr>
-
-
                             <th style="width:80px">序号</th>
                             <th style="width:80px;">名称</th>
                             <th style="width:100px">地址</th>
@@ -141,8 +137,6 @@
                             <th style="width:80px">操作</th>
                         </tr>
                         <tr>
-
-
                             <td>01</td>
                             <td title="">粉猫</td>
                             <td title="">www.fanmore.com</td>
@@ -150,7 +144,6 @@
                             <td><a class="link-update" href="newlink.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
                         </tr>
                         <tr>
-
                             <td>01</td>
                             <td title="">商务通</td>
                             <td title="">www.fanmore.com</td>

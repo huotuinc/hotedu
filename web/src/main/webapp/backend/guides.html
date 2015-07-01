@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://xmlns.jcp.org/jsf/passthrough">
 <head>
     <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
@@ -21,7 +21,7 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li>admin</li>
+                <li><span th:text="${#authentication.name}"></span></li>
                 <li><a href="changethepassword.html" >修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
@@ -39,7 +39,7 @@
                     <a href="#" style="height:30px; line-height:30px;">企业信息</a>
                     <ul class="sub-menu">
                         <li><a href="wantedes.html" >招聘信息</a></li>
-                        <li><a href="enterprises.html" >发布企业</a></li>
+                        <li><a href="enterprises.html" th:href=" @{/backend/load/enterprises}">发布企业</a></li>
                     </ul>
                 </li>
                 <li>
@@ -96,23 +96,21 @@
                     </ul>
                 </li>
             </ul>
-
-
         </div>
     </div>
     <!--/sidebar-->
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">考试指南</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html" th:href="@{/backend/load/wantedes}">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">考试指南</span></div>
         </div>
         <div class="search-wrap">
             <div class="search-content">
-                <form action="#" th:action="@{/backend/search/examGuide}" method="post">
+                <form action="#" method="post">
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
-                            <td><input class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}" id="keywords" type="text"/></td>
+                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"/></td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>

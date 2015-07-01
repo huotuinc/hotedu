@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8"/>
   <title>云商学院后台管理</title>
@@ -23,7 +23,7 @@
     </div>
     <div class="top-info-wrap">
       <ul class="top-info-list clearfix">
-        <li>${#object.userName}</li>
+        <li><span th:text="${#authentication.name}"></span></li>
         <li><a href="changethepassword.html" >修改密码</a></li>
         <li><a href="#">退出</a></li>
       </ul>
@@ -42,7 +42,7 @@
           <a href="#" style="height:30px; line-height:30px;">企业信息</a>
           <ul class="sub-menu">
             <li><a href="wantedes.html" >招聘信息</a></li>
-            <li><a href="enterprises.html" >发布企业</a></li>
+            <li><a href="enterprises.html" th:href=" @{/backend/load/enterprises}">发布企业</a></li>
           </ul>
         </li>
         <li>
@@ -75,14 +75,12 @@
             <li><a href="messagecontents.html" th:href="@{/backend/load/messagecontents}">资讯动态</a></li>
           </ul>
         </li>
-
         <li>
           <a href="#" style="height:30px; line-height:30px;">公司简介</a>
           <ul class="sub-menu">
             <li><a href="editenterprise.html" th:href="@{/backend/load/editenterprise}">公司简介编辑</a></li>
           </ul>
         </li>
-
         <li>
           <a href="#" style="height:30px; line-height:30px;">视频</a>
           <ul class="sub-menu">
@@ -104,7 +102,7 @@
   <!--/sidebar-->
   <div class="main-wrap">
     <div class="crumb-wrap">
-      <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html">网站维护</a><span class="crumb-step">&gt;</span><a href="videos.html"><span class="crumb-name">考试指南</span></a><span class="crumb-step">&gt;</span><span class="crumb-name">新增视频</span></div>
+      <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html" th:href="@{/backend/load/wantedes}">网站维护</a><span class="crumb-step">&gt;</span><a href="videos.html"><span class="crumb-name">考试指南</span></a><span class="crumb-step">&gt;</span><span class="crumb-name">新增视频</span></div>
     </div>
     <div class="result-wrap">
       <form action="#" method="post" id="myform" name="myform">

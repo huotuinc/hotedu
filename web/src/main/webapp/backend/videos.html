@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
@@ -23,14 +23,13 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li>${#object.userName}</li>
+                <li><span th:text="${#authentication.name}"></span></li>
                 <li><a href="changethepassword.html" >修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
         </div>
     </div>
 </div>
-
 <div class="container clearfix">
     <div class="sidebar-wrap">
         <div class="sidebar-title">
@@ -42,7 +41,7 @@
                     <a href="#" style="height:30px; line-height:30px;">企业信息</a>
                     <ul class="sub-menu">
                         <li><a href="wantedes.html" >招聘信息</a></li>
-                        <li><a href="enterprises.html" >发布企业</a></li>
+                        <li><a href="enterprises.html" th:href=" @{/backend/load/enterprises}">发布企业</a></li>
                     </ul>
                 </li>
                 <li>
@@ -75,14 +74,12 @@
                         <li><a href="messagecontents.html" th:href="@{/backend/load/messagecontents}">资讯动态</a></li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">公司简介</a>
                     <ul class="sub-menu">
                         <li><a href="editenterprise.html" th:href="@{/backend/load/editenterprise}">公司简介编辑</a></li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">视频</a>
                     <ul class="sub-menu"  style="display:block;">
@@ -105,12 +102,11 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">教学视频</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html" th:href="@{/backend/load/wantedes}">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">教学视频</span></div>
         </div>
         <div class="search-wrap">
             <div class="search-content">
                 <form action="#" method="post">
-
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
@@ -134,16 +130,12 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-
                         <a href="newvideo.html"><i class="icon-font"></i>新增视频</a>
-
                     </div>
                 </div>
                 <div class="result-content">
                     <table class="result-tab" width="100%">
                         <tr>
-
-
                             <th style="width:80px">序号</th>
                             <th style="width:80px;">片名</th>
                             <th style="width:100px">时长</th>
@@ -152,7 +144,6 @@
                             <th style="width:80px">操作</th>
                         </tr>
                         <tr>
-
                             <td>01</td>
                             <td title="">第一章第一节</td>
                             <td title="">2：30：00</td>
@@ -161,7 +152,6 @@
                             <td><a class="link-update" href="newvideo.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
                         </tr>
                         <tr>
-
                             <td>01</td>
                             <td title="">第一章第一节</td>
                             <td title="">2：30：00</td>

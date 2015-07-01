@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
@@ -23,7 +23,7 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li>${#object.userName}</li>
+                <li><span th:text="${#authentication.name}"></span></li>
                 <li><a href="changethepassword.html" >修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
@@ -41,7 +41,7 @@
                     <a href="#" style="height:30px; line-height:30px;">企业信息</a>
                     <ul class="sub-menu" style="display:block;">
                         <li class="on"><a href="wantedes.html" >招聘信息</a></li>
-                        <li><a href="enterprises.html" >发布企业</a></li>
+                        <li><a href="enterprises.html" th:href=" @{/backend/load/enterprises}">发布企业</a></li>
                     </ul>
                 </li>
                 <li>
@@ -104,7 +104,7 @@
     <!--/sidebar-->
     <div class="main-wrap">
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html">网站维护</a><span class="crumb-step">&gt;</span><a href="wantedes.html"><span class="crumb-name">招聘信息</span></a><span class="crumb-step">&gt;</span><span class="crumb-name">查看</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html" th:href="@{/backend/load/wantedes}">网站维护</a><span class="crumb-step">&gt;</span><a href="wantedes.html"><span class="crumb-name">招聘信息</span></a><span class="crumb-step">&gt;</span><span class="crumb-name">查看</span></div>
         </div>
         <div class="result-wrap">
             <div class="result-title">
@@ -112,19 +112,10 @@
             </div>
             <div class="result-content">
                 <ul class="sys-info-list">
-                    <li>
-                        <label class="res-lab">照片：</label><span class="res-info"><img src="images/ok.png" width="80px" height="80px"/></span>
-                    </li>
-                    <li>
-                        <label class="res-lab">姓名：</label><span class="res-info">王明</span>
-                    </li>
-                    <li>
-                        <label class="res-lab">联系方式：</label><span class="res-info">15623458951</span>
-                    </li>
-                    <li>
-                        <label class="res-lab">区域：</label><span class="res-info">浙江省杭州市滨江区</span>
-                    </li>
-
+                    <li><label class="res-lab">照片：</label><span class="res-info"><img src="images/ok.png" width="80px" height="80px"/></span></li>
+                    <li><label class="res-lab">姓名：</label><span class="res-info">王明</span></li>
+                    <li><label class="res-lab">联系方式：</label><span class="res-info">15623458951</span></li>
+                    <li><label class="res-lab">区域：</label><span class="res-info">浙江省杭州市滨江区</span></li>
                 </ul>
             </div>
         </div>

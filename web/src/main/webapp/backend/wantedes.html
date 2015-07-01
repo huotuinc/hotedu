@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
@@ -23,14 +23,13 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li>${#object.userName}</li>
+                <li><span th:text="${#authentication.name}"></span></li>
                 <li><a href="changethepassword.html" >修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
         </div>
     </div>
 </div>
-
 <div class="container clearfix">
     <div class="sidebar-wrap">
         <div class="sidebar-title">
@@ -42,7 +41,7 @@
                     <a href="#" style="height:30px; line-height:30px;">企业信息</a>
                     <ul class="sub-menu" style="display:block;">
                         <li class="on"><a href="wantedes.html" >招聘信息</a></li>
-                        <li><a href="enterprises.html" >发布企业</a></li>
+                        <li><a href="enterprises.html" th:href=" @{/backend/load/enterprises}">发布企业</a></li>
                     </ul>
                 </li>
                 <li>
@@ -82,7 +81,6 @@
                         <li><a href="editenterprise.html" th:href="@{/backend/load/editenterprise}">公司简介编辑</a></li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">视频</a>
                     <ul class="sub-menu">
@@ -105,7 +103,7 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">招聘信息</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html" th:href="@{/backend/load/wantedes}">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">招聘信息</span></div>
         </div>
         <div class="search-wrap">
             <div class="search-content">
@@ -132,7 +130,6 @@
         </div>
         <div class="result-wrap">
             <form name="myform" id="myform" method="post">
-
                 <div class="result-content">
                     <table class="result-tab" width="100%">
                         <tr>
@@ -146,7 +143,6 @@
                             <th style="width:80px">操作</th>
                         </tr>
                         <tr>
-
                             <td>01</td>
                             <td title="">小薇</td>
                             <td >粉猫</td>
@@ -157,8 +153,6 @@
                             <td><a class="link-update" href="information.html">查看</a><br/><a class="link-update" href="#">删除</a></td>
                         </tr>
                         <tr>
-
-
                             <td>01</td>
                             <td title="">小薇</td>
                             <td >粉猫</td>
@@ -169,7 +163,6 @@
                             <td><a class="link-update" href="information.html">查看</a><br/><a class="link-update" href="#">删除</a></td>
                         </tr>
                         <tr>
-
                             <td>01</td>
                             <td title="">小薇</td>
                             <td >粉猫</td>
@@ -180,7 +173,6 @@
                             <td><a class="link-update" href="information.html">查看</a><br/></td>
                         </tr>
                         <tr>
-
                             <td>01</td>
                             <td title="">小薇</td>
                             <td >粉猫</td>

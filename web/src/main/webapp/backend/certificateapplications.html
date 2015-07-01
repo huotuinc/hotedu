@@ -1,13 +1,13 @@
 
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
     <script type="text/javascript" src="js/libs/jquery.min.js" th:href="@{/backend/js/libs/jquery.min.js}"></script>
-  <script type="text/javascript" src="js/libs/modernizr.min.js" th:href="@{/backend/js/libs/modernizr.min.js}"></script>
+    <script type="text/javascript" src="js/libs/modernizr.min.js" th:href="@{/backend/js/libs/modernizr.min.js}"></script>
     <!--<script type="text/javascript" src="js/menu.js"></script>-->
 </head>
 <body>
@@ -23,7 +23,7 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li>${#object.userName}</li>
+                <li><span th:text="${#authentication.name}"></span></li>
                 <li><a href="changethepassword.html" >修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
@@ -40,8 +40,8 @@
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">管理代理商</a>
                     <ul class="sub-menu"  style="display:block;">
-                        <li class="on"><a href="certificateapplications.html">申请领证列表</a></li>
-                        <li><a href="agents.html">代理商列表</a></li>
+                        <li class="on"><a href="certificateapplications.html" th:href="@{/backend/load/certificateapplications}">申请领证列表</a></li>
+                        <li><a href="agents.html" th:href="@{/backend/load/agents}">代理商列表</a></li>
                     </ul>
                 </li>
             </ul>
@@ -49,14 +49,11 @@
     </div>
     <!--/sidebar-->
     <div class="main-wrap">
-
         <div class="crumb-wrap">
             <div class="crumb-list"><i class="icon-font"></i><a href="certificateapplications.html">管理代理商</a><span class="crumb-step">&gt;</span><span class="crumb-name">申请领证列表</span></div>
         </div>
-
         <div class="result-wrap">
             <form name="myform" id="myform" method="post">
-
                 <div class="result-content">
                     <table class="result-tab" width="100%">
                         <tr>

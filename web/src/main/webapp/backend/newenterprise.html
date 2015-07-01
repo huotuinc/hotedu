@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
@@ -23,7 +23,7 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li>${#object.userName}</li>
+                <li><span th:text="${#authentication.name}"></span></li>
                 <li><a href="changethepassword.html" >修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
@@ -41,7 +41,7 @@
                     <a href="#" style="height:30px; line-height:30px;">企业信息</a>
                     <ul class="sub-menu"  style="display:block;">
                         <li><a href="wantedes.html" >招聘信息</a></li>
-                        <li class="on"><a href="enterprises.html" >发布企业</a></li>
+                        <li class="on"><a href="enterprises.html" th:href=" @{/backend/load/enterprises}">发布企业</a></li>
                     </ul>
                 </li>
                 <li>
@@ -74,14 +74,12 @@
                         <li><a href="messagecontents.html" th:href="@{/backend/load/messagecontents}">资讯动态</a></li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">公司简介</a>
                     <ul class="sub-menu">
                         <li><a href="editenterprise.html" th:href="@{/backend/load/editenterprise}">公司简介编辑</a></li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">视频</a>
                     <ul class="sub-menu">
@@ -98,20 +96,17 @@
                     </ul>
                 </li>
             </ul>
-
         </div>
     </div>
     <!--/sidebar-->
     <div class="main-wrap">
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html">网站维护</a><span class="crumb-step">&gt;</span><a href="enterprises.html"><span class="crumb-name">发布企业</span></a><span class="crumb-step">&gt;</span><span class="crumb-name">新建</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html" th:href="@{/backend/load/wantedes}">网站维护</a><span class="crumb-step">&gt;</span><a href="enterprises.html"><span class="crumb-name">发布企业</span></a><span class="crumb-step">&gt;</span><span class="crumb-name">新建</span></div>
         </div>
         <div class="result-wrap">
             <form action="#" method="post" id="myform" name="myform">
                 <div class="config-items">
-
                     <div class="result-content">
-
                         <table width="100%" class="insert-tab">
                             <tbody>
                             <tr>
@@ -122,17 +117,14 @@
                                 <th><i class="require-red">*</i>电话：</th>
                                 <td><input type="text" id="" value="" size="70" name="description" class="common-text"/></td>
                             </tr>
-
                             <tr>
                                 <th><i class="require-red">*</i>企业名称：</th>
                                 <td><input type="text" id="" value="" size="70" name="description" class="common-text"/></td>
                             </tr>
-
                             <tr>
                                 <th><i class="require-red">*</i>招聘描述：</th>
                                 <td><textarea name="content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"/></td>
                             </tr>
-
                             <tr>
                                 <th></th>
                                 <td><input type="submit" value="保存" class="btn btn-primary btn6 mr10"/><input type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
@@ -140,7 +132,6 @@
                             </tbody></table>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>

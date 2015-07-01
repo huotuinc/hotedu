@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
@@ -23,7 +23,7 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li>${#object.userName}</li>
+                <li><span th:text="${#authentication.name}"></span></li>
                 <li><a href="changethepassword.html" >修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
@@ -41,7 +41,7 @@
                     <a href="#" style="height:30px; line-height:30px;">企业信息</a>
                     <ul class="sub-menu" style="display:block;">
                         <li><a href="wantedes.html" >招聘信息</a></li>
-                        <li class="on"><a href="enterprises.html" >发布企业</a></li>
+                        <li class="on"><a href="enterprises.html" th:href=" @{/backend/load/enterprises}">发布企业</a></li>
                     </ul>
                 </li>
                 <li>
@@ -98,14 +98,13 @@
                     </ul>
                 </li>
             </ul>
-
         </div>
     </div>
     <!--/sidebar-->
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">发布企业</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html" th:href="@{/backend/load/wantedes}">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">发布企业</span></div>
         </div>
         <div class="search-wrap">
             <div class="search-content">
@@ -132,9 +131,7 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-
                         <a href="newenterprise.html"><i class="icon-font"></i>新建企业</a>
-
                     </div>
                 </div>
                 <div class="result-content">
@@ -147,7 +144,6 @@
                             <th style="width:80px">操作</th>
                         </tr>
                         <tr>
-
                             <td>01</td>
                             <td title="">小薇</td>
                             <td >粉猫</td>
@@ -155,7 +151,6 @@
                             <td><a class="link-update" href="newenterprise.html">修改</a><br/><a class="link-update" >删除</a></td>
                         </tr>
                         <tr>
-
                             <td>01</td>
                             <td title="">小薇</td>
                             <td >粉猫</td>
@@ -163,7 +158,6 @@
                             <td><a class="link-update" href="newenterprise.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
                         </tr>
                         <tr>
-
                             <td>01</td>
                             <td title="">小薇</td>
                             <td >粉猫</td>
