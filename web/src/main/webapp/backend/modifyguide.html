@@ -107,7 +107,7 @@
       <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html" th:href="@{/backend/load/wantedes}">网站维护</a><span class="crumb-step">&gt;</span><a href="guides.html"><span class="crumb-name">考试指南</span></a><span class="crumb-step">&gt;</span><span class="crumb-name">修改</span></div>
     </div>
     <div class="result-wrap">
-      <form action="#" th:action="@{/backend/modifysave/examGuide(n=${n},keywords=${keywords},sumpage=${sumpage})}" method="post" id="myform" name="myform">
+      <form action="#" th:action="@{/backend/modifysave/examGuide(n=${n},keywords=${keywords},sumpage=${sumpage},examGuide=${examGuide})}" method="post" id="myform" name="myform">
         <div class="config-items">
           <div class="result-content">
             <table width="100%" class="insert-tab">
@@ -118,7 +118,7 @@
               </tr>
               <tr>
                 <th><i class="require-red">*</i>描述：</th>
-                <td><textarea name="content" th:value="${examGuide.content}" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
+                <td><textarea name="content" th:text="${examGuide.content}" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
               </tr>
               <tr>
                 <th>置顶</th>

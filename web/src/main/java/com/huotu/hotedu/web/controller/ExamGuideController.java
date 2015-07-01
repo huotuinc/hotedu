@@ -130,6 +130,7 @@ public class ExamGuideController {
         examGuide.setTitle(title);
         examGuide.setContent(content);
         examGuide.setTop(top);
+        examGuide.setLastUploadDate(new Date());
         examGuideService.modify(examGuide);
         return "redirect:/backend/page/examGuide?n="+n+"&keywords="+keywords+"&sumpage="+sumpage;
     }
