@@ -143,13 +143,13 @@
                             <td th:text="${g.lastUploadDate}">2015.01.01/13.00.00</td>
                             <td th:text="${g.top}" title="">置顶</td>
                             <td><a class="link-update" href="newguide.html">修改</a><br/>
-                                <a class="link-update" href="#" th:href="@{/backend/del/examGuide(id=${g.id},n=${n},pageSize=${pageSize},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}">删除</a>
+                                <a class="link-update" href="#" th:href="@{/backend/del/examGuide(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}">删除</a>
                             </td>
                         </tr>
                         </table>
                     <div class="list-page">
-                        <a href="#" th:href="@{/backend/page/examGuide(n=${n}-1,pageSize=${pageSize},keywords=${keywords},sumpage=${sumpage})}">上一页</a>
-                        <a href="#" th:href="@{/backend/page/examGuide(n=${n}+1,pageSize=${pageSize},keywords=${keywords},sumpage=${sumpage})}">下一页</a>
+                        <a href="#" th:href="@{/backend/page/examGuide(n=${n}-1,keywords=${keywords},sumpage=${sumpage})}">上一页</a>
+                        <a href="#" th:href="@{/backend/page/examGuide(n=${n}+1,keywords=${keywords},sumpage=${sumpage})}">下一页</a>
                         <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span th:text="${sumpage}">1</span> 页</div>
                 </div>
             </form>
