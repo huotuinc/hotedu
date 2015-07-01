@@ -60,6 +60,7 @@ public class ExamGuideController {
         }else if(n + 1 > sumpage){//如果超过分页的最后一页了，将页数设置为最后一页
             n--;
         }
+
         Page<ExamGuide> pages = examGuideService.searchExamGuide(n, pageSize, keywords);
         model.addAttribute("allGuideList",pages);
         model.addAttribute("sumpage",sumpage);
@@ -69,27 +70,6 @@ public class ExamGuideController {
         model.addAttribute("sumElement",pages.getTotalElements());
         return "/backend/guides";
     }
-
-    //后台单击删除按钮返回的信息
-    @RequestMapping("/backend/del/examGuide")
-    public String DelExamGuide(int n,int pageSize,int sumpage,String keywords,Long id,Long sumElement,Model model){
-        examGuideService.delExamGuide(id);
-        if((sumElement-1)%pageSize==0){
-            sumpage--;
-            if(n>0){n--;}
-
-        }
-        sumElement--;
-        Page<ExamGuide> pages = examGuideService.searchExamGuide(n, pageSize, keywords);
-        model.addAttribute("sumpage",sumpage);
-        model.addAttribute("allGuideList",pages);
-        model.addAttribute("n",n);
-        model.addAttribute("pageSize",pageSize);
-        model.addAttribute("keywords",keywords);
-        model.addAttribute("sumElement",sumElement);
-        return "/backend/guides";
-    }
-
 
 
 }

@@ -98,8 +98,12 @@ public class MVCConfig  extends WebMvcConfigurerAdapter {
         resolver.setOrder(1);
 //        resolver.setViewNames(new String[]{"*.html"});
         resolver.setCharacterEncoding("UTF-8");
-//        resolver.setPrefix("/WEB-INF/views/");
-//        resolver.setSuffix(".jsp");
+
+        //在初始化Thymeleaf的时候 应该增加它的方言,spring添加方言
+//        engine.addDialect(new SpringSecurityDialect());
+//        engine.addDialect(new org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect());
+//      resolver.setPrefix("/WEB-INF/views/");
+//      resolver.setSuffix(".jsp");
         return resolver;
     }
 
