@@ -75,8 +75,8 @@ public class ExamGuideController {
     public String DelExamGuide(int n,int pageSize,int sumpage,String keywords,Long id,Long sumElement,Model model){
         examGuideService.delExamGuide(id);
         if((sumElement-1)%pageSize==0){
+            if(n>0&&n+1==sumpage){n--;}
             sumpage--;
-            if(n>0){n--;}
 
         }
         sumElement--;
