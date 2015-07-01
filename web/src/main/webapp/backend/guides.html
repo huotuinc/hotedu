@@ -106,7 +106,7 @@
         </div>
         <div class="search-wrap">
             <div class="search-content">
-                <form action="#" th:action="@{/backend/search/examGuide}" method="post">
+                <form action="#" th:action="@{/backend/search/examGuide}" method="get">
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
@@ -122,7 +122,7 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="newguide.html"><i class="icon-font">+</i>新建</a>
+                        <a href="newguide.html" th:href="@{/backend/add/examGuide}"><i class="icon-font">+</i>新建</a>
                     </div>
                 </div>
                 <div class="result-content">

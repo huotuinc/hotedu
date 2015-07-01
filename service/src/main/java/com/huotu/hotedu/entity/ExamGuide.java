@@ -10,7 +10,7 @@ import java.util.Date;
  * @author shiliting
  */
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"title"}))
+//@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"title"}))
 //@Inheritance(strategy=InheritanceType.JOINED)  //有待解答 已在邮件中答复 :D
 public  class ExamGuide implements Serializable {
 
