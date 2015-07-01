@@ -6,8 +6,25 @@
     <title>云商学院后台管理</title>
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" th:href="@{/backend/css/jquery-ui.css}"/>
     <script type="text/javascript" src="js/libs/jquery.min.js" th:href="@{/backend/js/libs/jquery.min.js}"></script>
-  <script type="text/javascript" src="js/libs/modernizr.min.js" th:href="@{/backend/js/libs/modernizr.min.js}"></script>
+    <script type="text/javascript" src="js/libs/modernizr.min.js" th:href="@{/backend/js/libs/modernizr.min.js}"></script>
+    <script type="text/javascript" src="js/date/jquery-ui.js" th:href="@{/backend/js/date/jquery-ui}"></script>
+    <script type="text/javascript" src="js/date/mydate.js" th:href="@{/backend/js/date/mydate.js}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#searchSort").bind("change",function(){
+                if($(this).val()==3){
+                    $("#vedio_nodate").hide();
+                    $("#vedio_date").show();
+                }
+                else{
+                    $("#vedio_nodate").show();
+                    $("#vedio_date").hide();
+                }
+            });
+        })
+    </script>
     <!--<script type="text/javascript" src="js/menu.js"></script>-->
 </head>
 <body>
@@ -100,7 +117,6 @@
     </div>
     <!--/sidebar-->
     <div class="main-wrap">
-
         <div class="crumb-wrap">
             <div class="crumb-list"><i class="icon-font"></i><a href="wantedes.html" th:href="@{/backend/load/wantedes}">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">教学视频</span></div>
         </div>
@@ -112,14 +128,17 @@
                             <th width="10"></th>
                             <td>
                                 <select name="search-sort" id="searchSort" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
-                                    <option value="全部">全部</option>
-                                    <option value="片名">片名</option>
-                                    <option value="权限">权限</option>
-                                    <option value="上传时间">上传时间</option>
-                                    <option value="时长">时长</option>
+                                    <option value="0">全部</option>
+                                    <option value="1">片名</option>
+                                    <option value="2">权限</option>
+                                    <option value="3">上传时间</option>
+                                    <option value="4">时长</option>
                                 </select>
                             </td>
-                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"/></td>
+                            <td>
+                                <div id="vedio_nodate"><input class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}" id="" type="text"/></div>
+                                <div id="vedio_date" style="display:none;"><input class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}" type="text" id="datepicker" /></div>
+                            </td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
@@ -130,7 +149,7 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="newvideo.html"><i class="icon-font"></i>新增视频</a>
+                        <a href="newvideo.html"><i class="icon-font">+</i>新增视频</a>
                     </div>
                 </div>
                 <div class="result-content">
