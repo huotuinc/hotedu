@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author shiliting
  */
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"title"}))
+//@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"title"}))
 public  class Link implements Serializable {
 
     private static final long serialVersionUID = -349012453592429794L;

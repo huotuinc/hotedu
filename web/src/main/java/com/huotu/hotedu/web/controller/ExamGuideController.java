@@ -87,4 +87,12 @@ public class ExamGuideController {
 
 
 
+
+    //后台单击新建按钮
+    @RequestMapping("/backend/add/examGuide")
+    public String AddExamGuide(){
+        return "/backend/newguide";
+    }
+
+
 }
