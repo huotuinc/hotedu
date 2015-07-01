@@ -61,6 +61,7 @@ public class MVCConfig  extends WebMvcConfigurerAdapter {
 //        registry.addResourceHandler("/js/**").addResourceLocations("/backend/js/");
 //
 //    }
+    //kkkkk
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {

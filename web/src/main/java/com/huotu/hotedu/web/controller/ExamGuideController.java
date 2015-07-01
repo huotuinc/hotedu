@@ -36,7 +36,7 @@ public class ExamGuideController {
         return "/backend/guides";
     }
 
-
+    //后台单机搜索按钮显示的考试指南消息
     @RequestMapping("/backend/search/examGuide")
     public String searchExamGuide(String keywords,Model model){
         Page<ExamGuide> pages=examGuideService.searchExamGuide(0,10,keywords);
@@ -58,11 +58,15 @@ public class ExamGuideController {
     //后台单击考试指南的分页
     @RequestMapping("/backend/page/examGuide")
     public String pageExamGuide(int n,int pageSize,int sumpage,String keywords,Model model){
+
         //如果已经到分页的第一页了，将页数设置为0
-        if(n<0) n++;
-        //如果超过分页的最后一页了，将页数设置为最后一页
-        if(n+1>sumpage) n--;
-        Page<ExamGuide> pages=examGuideService.searchExamGuide(n, pageSize,keywords);
+        if (n < 0){
+            n++;
+        }else if(n + 1 > sumpage){//如果超过分页的最后一页了，将页数设置为最后一页
+            n--;
+        }
+
+        Page<ExamGuide> pages = examGuideService.searchExamGuide(n, pageSize, keywords);
         model.addAttribute("allGuideList",pages);
         model.addAttribute("sumpage",sumpage);
         model.addAttribute("n",n);
@@ -71,6 +75,22 @@ public class ExamGuideController {
         model.addAttribute("sumElement",pages.getTotalElements());
         return "/backend/guides";
     }
+
+    //后台单击删除按钮返回的信息
+    @RequestMapping("/backend/del/examGuide")
+    public String DelExamGuide(Long id,Model model){
+
+//
+//        Page<ExamGuide> pages = examGuideService.searchExamGuide(n, pageSize, keywords);
+//        model.addAttribute("allGuideList",pages);
+//        model.addAttribute("sumpage",sumpage);
+//        model.addAttribute("n",n);
+//        model.addAttribute("pageSize",pageSize);
+//        model.addAttribute("keywords",keywords);
+//        model.addAttribute("sumElement",pages.getTotalElements());
+        return "/backend/guides";
+    }
+
 
 
 }
