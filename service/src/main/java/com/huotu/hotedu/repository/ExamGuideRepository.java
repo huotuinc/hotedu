@@ -19,4 +19,5 @@ public interface ExamGuideRepository extends JpaRepository<ExamGuide,Long>,Class
 //
 //    List<ExamGuide> findBy
 
+
 }
