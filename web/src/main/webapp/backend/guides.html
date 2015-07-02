@@ -5,8 +5,16 @@
     <title>云商学院后台管理</title>
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
-    <script type="text/javascript" src="js/libs/jquery.min.js" th:href="@{/backend/js/libs/jquery.min.js}"></script>
-    <script type="text/javascript" src="js/libs/modernizr.min.js" th:href="@{/backend/js/libs/modernizr.min.js}"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
+    <script type="text/javascript" src="js/libs/jquery.min.js" th:src="@{/backend/js/libs/jquery.min.js}"></script>
+    <script type="text/javascript" src="js/libs/modernizr.min.js" th:src="@{/backend/js/libs/modernizr.min.js}"></script>
+    <script type="text/javascript" src="js/jquery.confirm.js" th:src="@{/backend/js/jquery.confirm.js}" charset="gb2312"></script>
+
+    <!--<script type="text/javascript">-->
+        <!--function check_del(h){-->
+            <!--$.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {$(h).parents().children().eq(3)[0].click();});-->
+          <!--}-->
+    <!--</script>-->
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -115,7 +123,6 @@
                         </tr>
                     </table>
                 </form>
-
             </div>
         </div>
         <div class="result-wrap">
@@ -132,18 +139,19 @@
                             <th style="width:80px;">标题</th>
                             <th style="width:100px">上传时间</th>
                             <th style="width:100px">置顶</th>
-                             <th style="width:80px">操作</th>
+                            <th style="width:80px">操作</th>
                         </tr>
-                        <tr th:remove="all"><td>01</td><td title="">mou某mou某mou某mou某</td><td>2015.01.01/13.00.00</td><td title=""></td><td><a class="link-update" href="newguide.html">修改</a><br/><a class="link-update" href="#">删除</a></td></tr>
-                        <tr th:remove="all"><td>01</td><td title="">mou某mou某mou某mou某</td><td>2015.01.01/13.00.00</td><td title=""></td><td><a class="link-update" href="newguide.html">修改</a><br/><a class="link-update" href="#">删除</a></td></tr>
-                        <tr th:remove="all"><td>01</td><td title="">mou某mou某mou某mou某</td><td>2015.01.01/13.00.00</td><td title=""></td><td><a class="link-update" href="newguide.html">修改</a><br/><a class="link-update" href="#">删除</a></td></tr>
+                        <tr th:remove="all"><td>01</td><td title="">mou某mou某mou某mou某</td><td>2015.01.01/13.00.00</td><td title=""></td><td><a class="link-update" href="newguide.html">修改</a><br/><a class="link-delete" href="#">删除</a></td></tr>
+                        <tr th:remove="all"><td>01</td><td title="">mou某mou某mou某mou某</td><td>2015.01.01/13.00.00</td><td title=""></td><td><a class="link-update" href="newguide.html">修改</a><br/><a class="link-delete" href="#">删除</a></td></tr>
+                        <tr th:remove="all"><td>01</td><td title="">mou某mou某mou某mou某</td><td>2015.01.01/13.00.00</td><td title=""></td><td><a class="link-update" href="newguide.html">修改</a><br/><a class="link-delete" href="#">删除</a></td></tr>
                         <tr th:each="g:${allGuideList}">
                             <td th:text="${g.id}">01</td>
                             <td title="" th:text="${g.title}">mou某mou某mou某mou某</td>
                             <td th:text="${g.lastUploadDate}">2015.01.01/13.00.00</td>
                             <td th:text="${g.top}" title="">置顶</td>
                             <td><a class="link-update" href="newguide.html" th:href="@{/backend/modify/examGuide(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage})}">修改</a><br/>
-                                <a class="link-update" href="#" th:href="@{/backend/del/examGuide(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}">删除</a>
+                                <a class="link-update" href="#" onclick="check_del(this)">删除</a>
+                                <a class="real-delete" href="#" th:href="@{/backend/del/examGuide(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
                             </td>
                         </tr>
                         </table>
