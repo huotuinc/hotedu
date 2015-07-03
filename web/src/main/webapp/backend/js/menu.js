@@ -1,3 +1,4 @@
+//菜单栏动态隐藏效果
 $(function(){
     $(".sidebar-list > li > a").click(function(){
 		 $(this).parents().siblings().find(".sidebar-list").hide(300);
