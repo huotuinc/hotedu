@@ -90,7 +90,6 @@ public class MVCConfig  extends WebMvcConfigurerAdapter {
             rootTemplateResolver.setCacheable(false);
         }
 
-
         engine.setTemplateResolver(rootTemplateResolver);
 
         resolver.setTemplateEngine(engine);
