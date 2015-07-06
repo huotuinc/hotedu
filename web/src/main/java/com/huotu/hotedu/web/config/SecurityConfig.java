@@ -59,8 +59,7 @@ public class SecurityConfig {
                             "/backend/images/**",
                             "/backend/js/**",
                             "/backend/fonts/**"
-                    )
-            ;
+                    );
         }
         //设置拦截规则
         protected void configure(HttpSecurity http) throws Exception {
