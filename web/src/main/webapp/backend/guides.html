@@ -151,7 +151,7 @@
                             <td title="" th:text="${g.title}">mou某mou某mou某mou某</td>
                             <td th:text="${g.lastUploadDate}">2015.01.01/13.00.00</td>
                             <td th:text="${g.top}" title="">置顶</td>
-                            <td><a class="link-update" href="newguide.html" th:href="@{/backend/modify/examGuide(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage})}">修改</a><br/>
+                            <td><a class="link-update" href="newguide.html" th:href="@{/backend/modify/examGuide(id=${g.id})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a>
                                 <a class="real-delete" href="#" th:href="@{/backend/del/examGuide(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
                             </td>

@@ -91,22 +91,22 @@ public class ExamGuideController {
 
 
     //后台单击新建按钮
-    @RequestMapping("/backend/save/examGuide")
+    @RequestMapping("/backend/add/examGuide")
     public String AddExamGuide(Model model){
         return "/backend/newguide";
     }
     //后台单机修改按钮
     @RequestMapping("/backend/modify/examGuide")
-    public String ModifyExamGuide(Long id,int n,String keywords,int sumpage, Model model){
+    public String ModifyExamGuide(Long id, Model model){
         ExamGuide examGuide=examGuideService.findOneById(id);
         model.addAttribute("examGuide",examGuide);
-//        model.addAttribute("title",examGuide.getTitle());
-//        model.addAttribute("content",examGuide.getContent());
+ //       model.addAttribute("title",examGuide.getTitle());
+ //       model.addAttribute("content",examGuide.getContent());
 //        model.addAttribute("toptrue",examGuide.isTop());
 //        model.addAttribute("topfalse",!examGuide.isTop());
-        model.addAttribute("n",n);
-        model.addAttribute("keywords",keywords);
-        model.addAttribute("sumpage",sumpage);
+   //     model.addAttribute("id",id);
+  //      model.addAttribute("keywords",keywords);
+  //      model.addAttribute("sumpage",sumpage);
         return "/backend/modifyguide";
     }
 
@@ -126,12 +126,13 @@ public class ExamGuideController {
 
     //后台单击修改保存按钮
     @RequestMapping("/backend/modifysave/examGuide")
-    public String ModifySaveExamGuide(int n,String keywords,int sumpage,String title,String content,Boolean top,ExamGuide examGuide,Model model){
+    public String ModifySaveExamGuide(Long id,String title,String content,Boolean top,Model model){
+        ExamGuide examGuide=examGuideService.findOneById(id);
         examGuide.setTitle(title);
         examGuide.setContent(content);
         examGuide.setTop(top);
         examGuide.setLastUploadDate(new Date());
         examGuideService.modify(examGuide);
-        return "redirect:/backend/page/examGuide?n="+n+"&keywords="+keywords+"&sumpage="+sumpage;
+        return "redirect:/backend/load/examGuide";
     }
 }

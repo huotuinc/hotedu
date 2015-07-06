@@ -27,7 +27,7 @@ public class QaController {
     @Autowired
     private QaService qaService;
     //后台显示所有常见问题信息
-    @PostAuthorize("hasRole('EDITOR')")
+   // @PostAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/load/qa")
     public ModelAndView loadQa(@AuthenticationPrincipal Login login) {
         HttpStatus a;
