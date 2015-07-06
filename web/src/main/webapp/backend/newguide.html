@@ -29,7 +29,7 @@
     <div class="top-info-wrap">
       <ul class="top-info-list clearfix">
         <li><span th:text="${#authentication.name}"></span></li>
-        <li><a href="changethepassword.html" >修改密码</a></li>
+        <li><a href="changethepassword.html" th:href="@{/backend/load/changethepassword}">修改密码</a></li>
         <li><a href="#">退出</a></li>
       </ul>
     </div>
@@ -47,7 +47,7 @@
         <li>
           <a href="#" style="height:30px; line-height:30px;">企业信息</a>
           <ul class="sub-menu">
-            <li><a href="wantedes.html" >招聘信息</a></li>
+            <li><a href="wantedes.html" th:href="@{/backend/load/wantedes}">招聘信息</a></li>
             <li><a href="enterprises.html" th:href=" @{/backend/load/enterprises}">发布企业</a></li>
           </ul>
         </li>
