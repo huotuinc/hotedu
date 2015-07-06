@@ -129,7 +129,7 @@
               </tr>
               <tr>
                 <th>置顶</th>
-                <td><input type="radio" name="top" value="1" th:checked="${examGuide.top}"/>&nbsp;是&nbsp;&nbsp;<input type="radio" name="top" value="0"/>&nbsp;否&nbsp;&nbsp;</td>
+                <td><input type="radio" name="top" value="1" th:checked="${examGuide.top}"/>&nbsp;是&nbsp;&nbsp;<input type="radio" name="top" value="0" th:checked="!${examGuide.top}"/>&nbsp;否&nbsp;&nbsp;</td>
               </tr>
               <tr>
                 <th></th>
