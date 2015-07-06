@@ -72,7 +72,8 @@
         // Add event and delta to the front of the arguments
         args.unshift(event, delta, deltaX, deltaY);
 
-        return $.event.handle.apply(this, args);
+        //ĞŞ¸ÄhandleÎªdispatch
+        return $.event.dispatch.apply(this, args);
     }
 
 })(jQuery);
