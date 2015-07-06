@@ -1,24 +1,14 @@
 package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.Qa;
-import com.huotu.hotedu.entity.Login;
-import com.huotu.hotedu.entity.Qa;
 import com.huotu.hotedu.service.QaService;
-import com.sun.javafx.collections.MappingChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by luffy on 2015/6/10.

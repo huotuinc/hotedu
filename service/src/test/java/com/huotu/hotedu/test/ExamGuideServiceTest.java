@@ -129,14 +129,14 @@ public class ExamGuideServiceTest {
 
     @Test
     public void loadMessageContent(){
-        MessageContent messageContent=new MessageContent();
-        messageContent.setContent("mmmmmmmm");
-        messageContent.setTitle("我的第三次测试");
-        messageContent.setTop(true);
-        messageContent.setLastUploadDate(new Date());
-        messageContentRepository.save(messageContent);
-        List<MessageContent> list=messageContentsService.loadMessageContent();
-        System.out.println(list);
+//        MessageContent messageContent=new MessageContent();
+//        messageContent.setContent("mmmmmmmm");
+//        messageContent.setTitle("我的第三次测试");
+//        messageContent.setTop(true);
+//        messageContent.setLastUploadDate(new Date());
+//        messageContentRepository.save(messageContent);
+//        List<MessageContent> list=messageContentsService.loadMessageContent();
+//        System.out.println(list);
 
     }
 

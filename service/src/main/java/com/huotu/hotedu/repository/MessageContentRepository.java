@@ -1,7 +1,9 @@
 package com.huotu.hotedu.repository;
 
 import com.huotu.hotedu.entity.MessageContent;
+import org.luffy.lib.libspring.data.ClassicsRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,6 +12,6 @@ import org.springframework.stereotype.Repository;
  * @author shiliting
  */
 @Repository
-public interface MessageContentRepository extends JpaRepository<MessageContent,Long>{
+public interface MessageContentRepository extends JpaRepository<MessageContent,Long>,ClassicsRepository<MessageContent>,JpaSpecificationExecutor<MessageContent> {
 
 }
