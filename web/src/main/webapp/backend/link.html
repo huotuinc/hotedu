@@ -8,6 +8,9 @@
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
     <script type="text/javascript" src="js/libs/jquery.min.js" th:src="@{/backend/js/libs/jquery.min.js}"></script>
     <script type="text/javascript" src="js/libs/modernizr.min.js" th:src="@{/backend/js/libs/modernizr.min.js}"></script>
+    <!--警告框控件-->
+    <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
+    <script type="text/javascript" src="js/jquery.confirm.js" th:src="@{/backend/js/jquery.confirm.js}" charset="gb2312"></script>
     <!--滚动条-->
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
     <script type="text/javascript" src="js/scroll/jquery.mousewheel.js" th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
@@ -27,7 +30,7 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li><span sec:authentication="name"></span></li>
+                <li><span th:text="${#authentication.name}"></span></li>
                 <li><a href="changethepassword.html" th:href="@{/backend/load/changethepassword}">修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
@@ -64,7 +67,7 @@
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">友情链接</a>
                     <ul class="sub-menu" style="display:block;">
-                        <li class="on"><a href="links.html" th:href="@{/backend/load/links}">友情链接</a></li>
+                        <li class="on"><a href="link.html" th:href="@{/backend/load/link}">友情链接</a></li>
                     </ul>
                 </li>
                 <li>
@@ -113,12 +116,11 @@
         </div>
         <div class="search-wrap">
             <div class="search-content">
-                <form action="#" method="post">
-
+                <form action="#" th:action="@{/backend/search/link}" method="get">
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
-                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"/></td>
+                            <td><input class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}" id="keywords" type="text"/></td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
@@ -142,22 +144,23 @@
                             <th style="width:100px">上传时间</th>
                             <th style="width:80px">操作</th>
                         </tr>
-                        <tr>
-                            <td>01</td>
-                            <td title="">粉猫</td>
-                            <td title="">www.fanmore.com</td>
-                            <td>2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="newlink.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td>01</td>
-                            <td title="">商务通</td>
-                            <td title="">www.fanmore.com</td>
-                            <td>2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="newlink.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
+                        <tr th:remove="all"><td>01</td><td title="">粉猫</td><td title="">www.fanmore.com</td><td>2015.01.01/13.00.00</td><td><a class="link-update" href="newlink.html">修改</a><br/><a class="link-delete" href="#">删除</a></td></tr>
+                        <tr th:remove="all"><td>01</td><td title="">商务通</td><td title="">www.fanmore.com</td><td>2015.01.01/13.00.00</td><td><a class="link-update" href="newlink.html">修改</a><br/><a class="link-delete" href="#">删除</a></td></tr>
+                        <tr th:each="g:${allLinkList}">
+                            <td th:text="${g.id}">01</td>
+                            <td th:text="${g.title}">粉猫</td>
+                            <td th:text="${g.url}">www.fanmore.com</td>
+                            <td th:text="${g.lastUploadDate}">2015.01.01/13.00.00</td>
+                            <td><a class="link-update" href="newlink.html" th:href="@{/backend/modify/link(id=${g.id})}">修改</a><br/>
+                                <a class="link-update" href="#" onclick="check_del(this)">删除</a>
+                                <a class="real-delete" href="#" th:href="@{/backend/del/link(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
+                            </td>
                         </tr>
                     </table>
-                    <div class="list-page"> 2 条 1/1 页</div>
+                    <div class="list-page">
+                        <a href="#" th:href="@{/backend/page/link(n=${n}-1,keywords=${keywords},sumpage=${sumpage})}">上一页</a>
+                        <a href="#" th:href="@{/backend/page/link(n=${n}+1,keywords=${keywords},sumpage=${sumpage})}">下一页</a>
+                        <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span th:text="${sumpage}">1</span> 页</div>
                 </div>
             </form>
         </div>

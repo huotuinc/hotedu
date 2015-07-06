@@ -2,6 +2,7 @@ package com.huotu.hotedu.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by shiliting on 2015/6/25.
@@ -20,6 +21,8 @@ public  class Link implements Serializable {
     private String title;
     @Column
     private String url;
+    @Column
+    private Date lastUploadDate;
 
     public Long getId() {
         return id;
@@ -43,5 +46,13 @@ public  class Link implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Date getLastUploadDate() {
+        return lastUploadDate;
+    }
+
+    public void setLastUploadDate(Date lastUploadDate) {
+        this.lastUploadDate = lastUploadDate;
     }
 }

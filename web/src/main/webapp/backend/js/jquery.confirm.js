@@ -82,14 +82,15 @@
 })(jQuery);
 
 $(document).ready(function () {
-//            $("#add").bind("click", function () {
-//                $.MsgBox.Alert("消息", "哈哈，添加成功！");
-//            });
+            //静态页面弹出添加时后应有
+            //$("#link-add").bind("click", function () {
+            //    $.MsgBox.Alert("消息", "添加成功！");
+            //});
 //              回调函数可以直接写方法function(){}
-    $(".link-delete").bind("click", function () {
-        $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
-            alert("你居然真的删除了..."); });
-    });
+            $(".link-delete").bind("click", function () {
+                $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
+                    alert("你居然真的删除了..."); });
+            });
 //            function test() {
 //                alert("你点击了确定,进行了修改");
 //            }
@@ -106,4 +107,8 @@ $(document).ready(function () {
 //.click() 就是点击当前链接的效果
 function check_del(h){
     $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {$(h).parents().children().eq(3)[0].click();});
+}
+
+function check_add(){
+     $.MsgBox.Alert("消息", "添加成功！");
 }
