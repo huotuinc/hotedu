@@ -100,13 +100,6 @@ public class ExamGuideController {
     public String ModifyExamGuide(Long id, Model model){
         ExamGuide examGuide=examGuideService.findOneById(id);
         model.addAttribute("examGuide",examGuide);
- //       model.addAttribute("title",examGuide.getTitle());
- //       model.addAttribute("content",examGuide.getContent());
-//        model.addAttribute("toptrue",examGuide.isTop());
-//        model.addAttribute("topfalse",!examGuide.isTop());
-   //     model.addAttribute("id",id);
-  //      model.addAttribute("keywords",keywords);
-  //      model.addAttribute("sumpage",sumpage);
         return "/backend/modifyguide";
     }
 

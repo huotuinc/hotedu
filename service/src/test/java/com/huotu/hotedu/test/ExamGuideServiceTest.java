@@ -115,14 +115,14 @@ public class ExamGuideServiceTest {
     }
     @Test
     public void loadQa(){
-        Qa qa=new Qa();
-        qa.setContent("qaqaqaqa");
-        qa.setTitle("我的第二次测试");
-        qa.setTop(true);
-        qa.setLastUploadDate(new Date());
-        qaRepository.save(qa);
-        List<Qa> list=qaService.loadQa();
-        System.out.println(list);
+//        Qa qa=new Qa();
+//        qa.setContent("qaqaqaqa");
+//        qa.setTitle("我的第二次测试");
+//        qa.setTop(true);
+//        qa.setLastUploadDate(new Date());
+//        qaRepository.save(qa);
+//        List<Qa> list=qaService.loadQa();
+//        System.out.println(list);
     }
 
 

@@ -54,7 +54,7 @@ public class ExamGuideService {
         examGuideRepository.delete(id);
     }
 
-    //删除增加一条考试信息
+    //增加一条考试信息
     public void addExamGuide(ExamGuide examGuide){
         examGuideRepository.save(examGuide);
     }
