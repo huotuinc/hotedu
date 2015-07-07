@@ -1,9 +1,9 @@
-//jquery¾¯¸æ¿òµ¯´°
+//jqueryè­¦å‘Šæ¡†å¼¹çª—
 (function($) {
     $.MsgBox = {
         Alert: function (title, msg) {
             GenerateHtml("alert", title, msg);
-            btnOk();  //alertÖ»ÊÇµ¯³öÏûÏ¢£¬Òò´ËÃ»±ØÒªÓÃµ½»Øµ÷º¯Êıcallback
+            btnOk();  //alertåªæ˜¯å¼¹å‡ºæ¶ˆæ¯ï¼Œå› æ­¤æ²¡å¿…è¦ç”¨åˆ°å›è°ƒå‡½æ•°callback
             btnNo();
         },
         Confirm: function (title, msg, callback) {
@@ -17,23 +17,23 @@
             btnNo();
         }
     }
-    //Éú³ÉHtml
+    //ç”ŸæˆHtml
     var GenerateHtml = function (type, title, msg) {
         var _html = "";
         _html += '<div id="mb_box"></div><div id="mb_con"><span id="mb_tit">' + title + '</span>';
         _html += '<a id="mb_ico">x</a><div id="mb_msg">' + msg + '</div><div id="mb_btnbox">';
         if (type == "alert") {
-            _html += '<input id="mb_btn_ok" type="button" value="È·¶¨" />';
+            _html += '<input id="mb_btn_ok" type="button" value="ç¡®å®š" />';
         }
         if (type == "confirm" ||type=="Save") {
-            _html += '<input id="mb_btn_ok" type="button" value="È·¶¨" />';
-            _html += '<input id="mb_btn_no" type="button" value="È¡Ïû" />';
+            _html += '<input id="mb_btn_ok" type="button" value="ç¡®å®š" />';
+            _html += '<input id="mb_btn_no" type="button" value="å–æ¶ˆ" />';
         }
         _html += '</div></div>';
-        //±ØĞëÏÈ½«_htmlÌí¼Óµ½body£¬ÔÙÉèÖÃCssÑùÊ½
+        //å¿…é¡»å…ˆå°†_htmlæ·»åŠ åˆ°bodyï¼Œå†è®¾ç½®Cssæ ·å¼
         $("body").append(_html); GenerateCss();
     }
-    //Éú³ÉCss
+    //ç”ŸæˆCss
     var GenerateCss = function () {
         $("#mb_box").css({ width: '100%', height: '100%', zIndex: '99999', position: 'fixed',
             filter: 'Alpha(opacity=60)', backgroundColor: 'black', top: '0', left: '0', opacity: '0.6'
@@ -50,26 +50,26 @@
         });
         $("#mb_ico").css({ display: 'block', position: 'absolute', right: '10px', top: '9px',
             border: '1px solid Gray', width: '18px', height: '18px', textAlign: 'center',
-            lineHeight: '16px', cursor: 'pointer', borderRadius: '12px', fontFamily: 'Î¢ÈíÑÅºÚ'
+            lineHeight: '16px', cursor: 'pointer', borderRadius: '12px', fontFamily: 'å¾®è½¯é›…é»‘'
         });
         $("#mb_btnbox").css({ margin: '15px 0 10px 0', textAlign: 'center' });
         $("#mb_btn_ok,#mb_btn_no").css({ width: '85px', height: '30px', color: 'white', border: 'none' });
         $("#mb_btn_ok").css({ backgroundColor: '#168bbb' });
         $("#mb_btn_no").css({ backgroundColor: 'gray', marginLeft: '20px' });
-        //ÓÒÉÏ½Ç¹Ø±Õ°´Å¥hoverÑùÊ½
+        //å³ä¸Šè§’å…³é—­æŒ‰é’®hoveræ ·å¼
         $("#mb_ico").hover(function () {
             $(this).css({ backgroundColor: 'Red', color: 'White' });
         }, function () {
             $(this).css({ backgroundColor: '#DDD', color: 'black' });
         });
-        var _widht = document.documentElement.clientWidth;  //ÆÁÄ»¿í
-        var _height = document.documentElement.clientHeight; //ÆÁÄ»¸ß
+        var _widht = document.documentElement.clientWidth;  //å±å¹•å®½
+        var _height = document.documentElement.clientHeight; //å±å¹•é«˜
         var boxWidth = $("#mb_con").width();
         var boxHeight = $("#mb_con").height();
-        //ÈÃÌáÊ¾¿ò¾ÓÖĞ
+        //è®©æç¤ºæ¡†å±…ä¸­
         $("#mb_con").css({ top: (_height - boxHeight) / 2 + "px", left: (_widht - boxWidth) / 2 + "px" });
     }
-    //È·¶¨°´Å¥ÊÂ¼ş
+    //ç¡®å®šæŒ‰é’®äº‹ä»¶
     var btnOk = function (callback) {
         $("#mb_btn_ok").click(function () {
             $("#mb_box,#mb_con").remove();
@@ -78,7 +78,7 @@
             }
         });
     }
-    //È¡Ïû°´Å¥ÊÂ¼ş
+    //å–æ¶ˆæŒ‰é’®äº‹ä»¶
     var btnNo = function () {
         $("#mb_btn_no,#mb_ico").click(function () {
             $("#mb_box,#mb_con").remove();
@@ -87,40 +87,40 @@
 })(jQuery);
 
 $(document).ready(function () {
-            //¾²Ì¬Ò³Ãæµ¯³öÌí¼ÓÊ±ºóÓ¦ÓĞ
-            //$("#link-add").bind("click", function () {
-            //    $.MsgBox.Alert("ÏûÏ¢", "Ìí¼Ó³É¹¦£¡");
-            //});
-//              »Øµ÷º¯Êı¿ÉÒÔÖ±½ÓĞ´·½·¨function(){}
-            $(".link-delete").bind("click", function () {
-                $.MsgBox.Confirm("ÎÂÜ°ÌáÊ¾", "Ö´ĞĞÉ¾³ıºó½«ÎŞ·¨»Ö¸´£¬È·¶¨¼ÌĞøÂğ£¿", function () {
-                    alert("Äã¾ÓÈ»ÕæµÄÉ¾³ıÁË..."); });
-            });
+    //é™æ€é¡µé¢å¼¹å‡ºæ·»åŠ æ—¶ååº”æœ‰
+    //$("#link-add").bind("click", function () {
+    //    $.MsgBox.Alert("æ¶ˆæ¯", "æ·»åŠ æˆåŠŸï¼");
+    //});
+//              å›è°ƒå‡½æ•°å¯ä»¥ç›´æ¥å†™æ–¹æ³•function(){}
+    $(".link-delete").bind("click", function () {
+        $.MsgBox.Confirm("æ¸©é¦¨æç¤º", "æ‰§è¡Œåˆ é™¤åå°†æ— æ³•æ¢å¤ï¼Œç¡®å®šç»§ç»­å—ï¼Ÿ", function () {
+            alert("ä½ å±…ç„¶çœŸçš„åˆ é™¤äº†..."); });
+    });
 //            function test() {
-//                alert("Äãµã»÷ÁËÈ·¶¨,½øĞĞÁËĞŞ¸Ä");
+//                alert("ä½ ç‚¹å‡»äº†ç¡®å®š,è¿›è¡Œäº†ä¿®æ”¹");
 //            }
-//            //Ò²¿ÉÒÔ´«·½·¨Ãû test
+//            //ä¹Ÿå¯ä»¥ä¼ æ–¹æ³•å test
 //            $("#update").bind("click", function () {
-//                $.MsgBox.Confirm("ÎÂÜ°ÌáÊ¾", "È·¶¨Òª½øĞĞĞŞ¸ÄÂğ£¿", test);
+//                $.MsgBox.Confirm("æ¸©é¦¨æç¤º", "ç¡®å®šè¦è¿›è¡Œä¿®æ”¹å—ï¼Ÿ", test);
 //            });
 });
 
-//»ñÈ¡Í¬tdÏÂµÄµÚ3¸ö³¬Á´½Ó£¬ÕæÕıÉ¾³ıµÄa href
-//×¢Òâ´«µİµÄ²ÎÊı£¬$.MsgBoxÒÑ¾­½«this¸ÄÎªµ¯³ö¿òÁË
-//Confirmº¯ÊıµÄÔÚÕâ¸öjsÀïÃæ¶¨Òå£¬µÚÈı¸ö¹¦ÄÜÎªµã»÷È·¶¨ºóµÄ¹¦ÄÜ
-//$(h).parents().children().eq(3)[0]¾ÍÊÇ»ñÈ¡µ½ÁËÍ¬tdÏÂµÄµÚÈı¸öº¢×Ó .find()²»ÄÜ×¼È·ÕÒµ½ .next()Ò²Ñ¡²»ÖĞ£¬ÕâÀïÓÃÇ°Ì¨µ÷ÊÔ
-//.click() ¾ÍÊÇµã»÷µ±Ç°Á´½ÓµÄĞ§¹û
+//è·å–åŒtdä¸‹çš„ç¬¬3ä¸ªè¶…é“¾æ¥ï¼ŒçœŸæ­£åˆ é™¤çš„a href
+//æ³¨æ„ä¼ é€’çš„å‚æ•°ï¼Œ$.MsgBoxå·²ç»å°†thisæ”¹ä¸ºå¼¹å‡ºæ¡†äº†
+//Confirmå‡½æ•°çš„åœ¨è¿™ä¸ªjsé‡Œé¢å®šä¹‰ï¼Œç¬¬ä¸‰ä¸ªåŠŸèƒ½ä¸ºç‚¹å‡»ç¡®å®šåçš„åŠŸèƒ½
+//$(h).parents().children().eq(3)[0]å°±æ˜¯è·å–åˆ°äº†åŒtdä¸‹çš„ç¬¬ä¸‰ä¸ªå­©å­ .find()ä¸èƒ½å‡†ç¡®æ‰¾åˆ° .next()ä¹Ÿé€‰ä¸ä¸­ï¼Œè¿™é‡Œç”¨å‰å°è°ƒè¯•
+//.click() å°±æ˜¯ç‚¹å‡»å½“å‰é“¾æ¥çš„æ•ˆæœ
 function check_del(h){
-    $.MsgBox.Confirm("ÎÂÜ°ÌáÊ¾", "Ö´ĞĞÉ¾³ıºó½«ÎŞ·¨»Ö¸´£¬È·¶¨¼ÌĞøÂğ£¿", function () {$(h).parents().children().eq(3)[0].click();});
+    $.MsgBox.Confirm("æ¸©é¦¨æç¤º", "æ‰§è¡Œåˆ é™¤åå°†æ— æ³•æ¢å¤ï¼Œç¡®å®šç»§ç»­å—ï¼Ÿ", function () {$(h).parents().children().eq(3)[0].click();});
 }
 
 function check_save(){
     if(true){
-        $.MsgBox.Save("ÎÂÜ°ÌáÊ¾", "¼´½«±£´æÄÚÈİ£¬È·¶¨¼ÌĞøÂğ£¿");
+        $.MsgBox.Save("æ¸©é¦¨æç¤º", "å³å°†ä¿å­˜å†…å®¹ï¼Œç¡®å®šç»§ç»­å—ï¼Ÿ");
         return false;
     }
 }
 
 function check_add(){
-     $.MsgBox.Alert("ÏûÏ¢", "Ìí¼Ó³É¹¦£¡");
+    $.MsgBox.Alert("æ¶ˆæ¯", "æ·»åŠ æˆåŠŸï¼");
 }

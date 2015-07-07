@@ -20,6 +20,12 @@ public class HuotuController {
     @RequestMapping("/backend/load/editenterprise")
     public String loadHuotu(Model model){
         List<Huotu> list=huotuService.findHuotu();
+        if(list.size()==0){
+            Huotu huotu=new Huotu();
+            huotu.setTitle("");
+            huotu.setIntroduction("");
+            list.add(huotu);
+        }
         model.addAttribute("Huotu",list);
         return "/backend/editenterprise";
     }
@@ -30,7 +36,7 @@ public class HuotuController {
     public String SaveHuotu(String title,String introduction,Model model){
         Huotu huotu=null;
         List<Huotu> list=huotuService.findHuotu();
-        if(list==null){
+        if(list.size()==0){
             huotu=new Huotu();
         }else{
             for(Huotu h:list){
