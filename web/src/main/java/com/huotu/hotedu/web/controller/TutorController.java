@@ -9,18 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author shiliting shiliting at gmail.com
  */
 @Controller
-public class TutorsController {
+public class TutorController {
     //后台显示所有师资力量
-    @RequestMapping("/backend/load/tutors")
+    @RequestMapping("/backend/load/tutor")
     public String loadTutorsController() {
-        return "/backend/tutors";
+        return "/backend/tutor";
 
     }
 
-
-
     //后台显示检索之后的师资力量
-    @RequestMapping("/backend/search/tutors")
+    @RequestMapping("/backend/search/tutor")
     public String searchTutorsController() {
         return "";
     }
