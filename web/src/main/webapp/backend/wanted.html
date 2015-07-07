@@ -34,6 +34,7 @@
     <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js" th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
 </head>
 <body>
+<!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
 <div class="topbar-wrap white">
     <div class="topbar-inner clearfix">
         <div class="topbar-logo-wrap clearfix">
@@ -46,7 +47,8 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li><span th:text="${#authentication.name}"></span></li>
+                <li>
+                <span th:text="${#authentication.name}"></span></li>
                 <li><a href="changethepassword.html" >修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
