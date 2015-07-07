@@ -123,7 +123,7 @@ function check_del(h){
     $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {$(h).parents().children().eq(3)[0].click();});
 }
 
-function check_save(h){
+function check_save(){
     $.MsgBox.Confirm("温馨提示", "即将保存内容，确定继续吗？", function () { $("#mysaveform").submit();});
 }
 
