@@ -78,7 +78,7 @@
                     <li>
                         <a href="#" style="height:30px; line-height:30px;">资讯动态</a>
                         <ul class="sub-menu">
-                            <li class="on"><a href="messagecontents.html" th:href="@{/backend/load/messagecontents}">资讯动态</a></li>
+                            <li class="on"><a href="messagecontent.html" th:href="@{/backend/load/messagecontent}">资讯动态</a></li>
                         </ul>
                     </li>
 
@@ -116,7 +116,7 @@
         </div>
         <div class="search-wrap">
             <div class="search-content">
-                <form action="#" th:action="@{/backend/search/messagecontents}" method="get">
+                <form action="#" th:action="@{/backend/search/messagecontent}" method="get">
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
@@ -131,7 +131,7 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="newmessagecontent.html" th:href="@{/backend/add/messagecontents}"><i class="icon-font">+</i>新建</a>
+                        <a href="newmessagecontent.html" th:href="@{/backend/add/messagecontent}"><i class="icon-font">+</i>新建</a>
                     </div>
                 </div>
                 <div class="result-content">
@@ -151,15 +151,15 @@
                             <td title="" th:text="${g.title}">mou某mou某mou某mou某</td>
                             <td th:text="${g.lastUploadDate}">2015.01.01/13.00.00</td>
                             <td th:text="${g.top}" title="">置顶</td>
-                            <td><a class="link-update" href="newguide.html" th:href="@{/backend/modify/messagecontents(id=${g.id})}">修改</a><br/>
+                            <td><a class="link-update" href="newguide.html" th:href="@{/backend/modify/messagecontent(id=${g.id})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a>
-                                <a class="real-delete" href="#" th:href="@{/backend/del/messagecontents(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
+                                <a class="real-delete" href="#" th:href="@{/backend/del/messagecontent(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
                             </td>
                         </tr>
                     </table>
                     <div class="list-page">
-                        <a href="#" th:href="@{/backend/page/messagecontents(n=${n}-1,keywords=${keywords},sumpage=${sumpage})}">上一页</a>
-                        <a href="#" th:href="@{/backend/page/messagecontents(n=${n}+1,keywords=${keywords},sumpage=${sumpage})}">下一页</a>
+                        <a href="#" th:href="@{/backend/page/messagecontent(n=${n}-1,keywords=${keywords},sumpage=${sumpage})}">上一页</a>
+                        <a href="#" th:href="@{/backend/page/messagecontent(n=${n}+1,keywords=${keywords},sumpage=${sumpage})}">下一页</a>
                         <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span th:text="${sumpage}">1</span> 页</div>
                 </div>
             </form>
