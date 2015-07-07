@@ -9,7 +9,7 @@ import java.util.Collection;
 
 /**
  * Created by shiliting on 2015/6/25.
- *
+ * 导师
  * @author shiliting
  */
 @Entity

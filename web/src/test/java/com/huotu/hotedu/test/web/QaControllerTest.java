@@ -39,6 +39,7 @@ public class QaControllerTest extends SpringWebTest {
     protected MockHttpSession loginAs(String userName, String password) throws Exception {
         MockHttpSession session = (MockHttpSession) this.mockMvc.perform(get("/"))
                 .andReturn().getRequest().getSession(true);
+
         session = (MockHttpSession) this.mockMvc.perform(post("/login").session(session)
                 .param("username", userName).param("password", password))
                 .andDo(print())
@@ -66,24 +67,8 @@ public class QaControllerTest extends SpringWebTest {
     }
     @Test
     public void login() throws  Exception{
-//        Qa qa=new Qa();
-//        qa.setContent("qaqaqaqa");
-//        qa.setTitle("我的第二次测试");
-//        qa.setTop(true);
-//        qa.setLastUploadDate(new Date());
-//        qaRepository.save(qa);
-//
-//        Qa qb=new Qa();
-//        qb.setContent("qbqbqbqbqb");
-//        qb.setTitle("我的第二次测试bbbb");
-//        qb.setTop(false);
-//        qb.setLastUploadDate(new Date());
-//        qaRepository.save(qb);
-//
-        mockMvc.perform(
-                get("/backend/modify/examGuide")
-        ).andDo(print())
-        ;
+
+        mockMvc.perform(get("/backend/load/examGuide")).andDo(print());
     }
     private void checkMemeber(String name) {
         try {

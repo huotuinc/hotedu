@@ -5,7 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 
 /**
- * 一些文案工作，比如QA 比如考试指南
+ * 文案处理员
  * Created by Administrator on 2015/7/1.
  */
 public class Editor extends Login{

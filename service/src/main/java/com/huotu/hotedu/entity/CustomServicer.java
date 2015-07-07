@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import java.util.Collection;
 
 /**
- * 可以处理一些用户疑问
+ * 客服
  * Created by Administrator on 2015/7/1.
  */
 @Entity

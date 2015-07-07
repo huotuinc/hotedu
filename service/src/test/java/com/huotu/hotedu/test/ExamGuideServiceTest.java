@@ -12,6 +12,7 @@ import com.huotu.hotedu.service.MessageContentService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
@@ -115,14 +116,11 @@ public class ExamGuideServiceTest {
     }
     @Test
     public void loadQa(){
-//        Qa qa=new Qa();
-//        qa.setContent("qaqaqaqa");
-//        qa.setTitle("我的第二次测试");
-//        qa.setTop(true);
-//        qa.setLastUploadDate(new Date());
-//        qaRepository.save(qa);
-//        List<Qa> list=qaService.loadQa();
-//        System.out.println(list);
+        Page<Qa> pages=qaService.loadQa(0, 10);
+        for(Qa q:pages){
+            System.out.println(q);
+        }
+
     }
 
 
