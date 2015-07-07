@@ -10,7 +10,7 @@ import java.util.Date;
  * @author shiliting
  */
 @Entity
-public  class Company implements Serializable {
+public  class Huotu implements Serializable {
 
     private static final long serialVersionUID = -349012453592429794L;
     @Id

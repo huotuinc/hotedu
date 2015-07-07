@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class EditenterpriseController {
     //后台显示所有公司简介
-    @RequestMapping("/backend/load/editenterprise")
-    public String loadEditenterpriseController() {
-        return "/backend/editenterprise";
-    }
+//    @RequestMapping("/backend/load/editenterprise")
+//    public String loadEditenterpriseController() {
+//        return "/backend/editenterprise";
+//    }
 
 }

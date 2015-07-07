@@ -1,12 +1,8 @@
 package com.huotu.hotedu.service;
-import com.huotu.hotedu.entity.Company;
-import com.huotu.hotedu.entity.Link;
+import com.huotu.hotedu.entity.Huotu;
 import com.huotu.hotedu.repository.CompanyRepository;
-import com.huotu.hotedu.repository.LinkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Created by shiliting 2015/6/25.
@@ -20,7 +16,7 @@ public class CompanyService {
     private CompanyRepository companyRepository;
 
     //返回我们的公司
-    public Company loadCompany(Long id){
+    public Huotu loadCompany(Long id){
         return companyRepository.findOne(id);
     }
 
