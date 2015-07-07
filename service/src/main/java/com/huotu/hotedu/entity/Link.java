@@ -21,7 +21,7 @@ public  class Link implements Serializable {
     private String title;
     @Column
     private String url;
-    @Column
+    @Temporal(TemporalType.TIMESTAMP)
     private Date lastUploadDate;
 
     public Long getId() {

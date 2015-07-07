@@ -34,7 +34,7 @@ public class ExamGuideController {
         model.addAttribute("n",0);
         model.addAttribute("keywords","");
         model.addAttribute("sumElement",sumElement);
-        return "/backend/examguide";
+        return "/backend/guides";
     }
 
     //后台单机搜索按钮显示的考试指南消息
@@ -47,7 +47,7 @@ public class ExamGuideController {
         model.addAttribute("n",0);
         model.addAttribute("keywords",keywords);
         model.addAttribute("sumElement",sumElement);
-        return "/backend/examguide";
+        return "/backend/guides";
     }
 
     //后台单击考试指南的分页
@@ -65,7 +65,7 @@ public class ExamGuideController {
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
         model.addAttribute("sumElement",pages.getTotalElements());
-        return "/backend/examguide";
+        return "/backend/guides";
     }
 
     //后台单击删除按钮返回的信息
@@ -84,7 +84,7 @@ public class ExamGuideController {
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
         model.addAttribute("sumElement",sumElement);
-        return "/backend/examguide";
+        return "/backend/guides";
     }
 
 
