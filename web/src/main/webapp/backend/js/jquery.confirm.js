@@ -10,6 +10,11 @@
             GenerateHtml("confirm", title, msg);
             btnOk(callback);
             btnNo();
+        },
+        Save: function (title, msg) {
+            GenerateHtml("confirm", title, msg);
+            btnOk();
+            btnNo();
         }
     }
     //生成Html
@@ -20,7 +25,7 @@
         if (type == "alert") {
             _html += '<input id="mb_btn_ok" type="button" value="确定" />';
         }
-        if (type == "confirm") {
+        if (type == "confirm" ||type=="Save") {
             _html += '<input id="mb_btn_ok" type="button" value="确定" />';
             _html += '<input id="mb_btn_no" type="button" value="取消" />';
         }
@@ -107,6 +112,13 @@ $(document).ready(function () {
 //.click() 就是点击当前链接的效果
 function check_del(h){
     $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {$(h).parents().children().eq(3)[0].click();});
+}
+
+function check_save(){
+    if(true){
+        $.MsgBox.Save("温馨提示", "即将保存内容，确定继续吗？");
+        return false;
+    }
 }
 
 function check_add(){
