@@ -1,5 +1,5 @@
 $(function (){
-    $("#datepicker").datepicker({
+    $("#dateStart").datepicker({
         dateFormat:'yy.mm.dd',  //更改时间显示模式
         showAnim:"fadeIn",       //显示日历的效果slide、fadeIn、show等
         changeMonth:false,       //是否显示月份的下拉菜单，默认为false
@@ -7,7 +7,25 @@ $(function (){
         showWeek:false,          //是否显示星期,默认为false
         showButtonPanel:true,   //是否显示取消按钮，并含有today按钮，默认为false
         yearRange:'2010:2060',  //显示可供选择的年份
-        defaultDate:+0          //表示默认日期是在当前日期加0天
+        defaultDate:+0,          //表示默认日期是在当前日期加0天
+        onSelect:function(dateText,inst){
+            $("#dateEnd").datepicker("option","minDate",dateText);
+        }
+});
+
+    $("#dateEnd").datepicker({
+        dateFormat:'yy.mm.dd',  //更改时间显示模式
+        showAnim:"fadeIn",       //显示日历的效果slide、fadeIn、show等
+        changeMonth:false,       //是否显示月份的下拉菜单，默认为false
+        changeYear:true,        //是否显示年份的下拉菜单，默认为false
+        showWeek:false,          //是否显示星期,默认为false
+        showButtonPanel:true,   //是否显示取消按钮，并含有today按钮，默认为false
+        yearRange:'2010:2060',  //显示可供选择的年份
+        defaultDate:+0,          //表示默认日期是在当前日期加0天
+        onSelect:function(dateText,inst){
+            $("#dateStart").datepicker("option","maxDate",dateText);
+        }
+
 
     });
 
