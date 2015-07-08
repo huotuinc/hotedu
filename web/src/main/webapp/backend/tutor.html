@@ -15,7 +15,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#searchSort").bind("change",function(){
-                if($(this).val()==4){
+                if($(this).val()=="date"){
                     $("#vedio_nodate").hide();
                     $("#vedio_date").show();
                 }
@@ -45,7 +45,7 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li>admin</li>
+                <li><span th:text="${#authentication.name}"></span></li>
                 <li><a href="changethepassword.html" th:href="@{/backend/load/changethepassword}">修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
@@ -129,17 +129,17 @@
         </div>
         <div class="search-wrap">
             <div class="search-content">
-                <form action="#" method="post">
+                <form action="#" th:action="@{/backend/search/tutor}" method="get">
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
                             <td>
-                                <select name="search-sort" id="searchSort" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
-                                    <option value="0">全部</option>
-                                    <option value="1">教师</option>
-                                    <option value="2">职称</option>
-                                    <option value="3">区域</option>
-                                    <option value="4">上传时间</option>
+                                <select name="searchSort" id="searchSort" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
+                                    <option selected="selected" th:selected="${searchSort}=='all'? 'selected':''" value="all">全部</option>
+                                    <option th:selected="${searchSort}=='name'? 'selected':''" value="name">教师</option>
+                                    <option th:selected="${searchSort}=='qualification'? 'selected':''" value="qualification">职称</option>
+                                    <option th:selected="${searchSort}=='area'? 'selected':''" value="area">区域</option>
+                                    <option th:selected="${searchSort}=='date'? 'selected':''" value="date">上传时间</option>
                                 </select>
                             </td>
                             <td>
@@ -156,7 +156,7 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="newtutor.html"><i class="icon-font">+</i>新增</a>
+                        <a href="newtutor.html" th:href="@{/backend/add/tutor}"><i class="icon-font">+</i>新增</a>
                     </div>
                 </div>
                 <div class="result-content">
@@ -169,7 +169,7 @@
                             <th style="width:100px">上传时间</th>
                             <th style="width:80px">操作</th>
                         </tr>
-                        <tr>
+                        <tr th:remove="all">
                             <td>01</td>
                             <td title="">XXX</td>
                             <td></td>
@@ -177,8 +177,23 @@
                             <td>2015.01.01/13.00.00</td>
                             <td><a class="link-update" href="newtutor.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
                         </tr>
+                        <tr th:each="g:${allTutorList}">
+                            <td th:text="${g.id}">01</td>
+                            <td th:text="${g.name}"></td>
+                            <td th:text="${g.qualification}"></td>
+                            <td th:text="${g.area}"></td>
+                            <td th:text="${g.lastUploadDate}"></td>
+                            <td><a class="link-update" href="newtutor.html" th:href="@{/backend/modify/tutor(id=${g.id})}">修改</a><br/>
+                                <a class="link-update" href="#" onclick="check_del(this)">删除</a>
+                                <a class="real-delete" href="#" th:href="@{/backend/del/tutor(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
+                            </td>
+                        </tr>
                     </table>
-                    <div class="list-page"> 2 条 1/1 页</div>
+                    <div class="list-page">
+                        <a href="#" th:href="@{/backend/page/tutor(n=${n}-1,keywords=${keywords},sumpage=${sumpage})}">上一页</a>
+                        <a href="#" th:href="@{/backend/page/tutor(n=${n}+1,keywords=${keywords},sumpage=${sumpage})}">下一页</a>
+                        <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span th:text="${sumpage}">1</span> 页
+                    </div>
                 </div>
             </form>
         </div>

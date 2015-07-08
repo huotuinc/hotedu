@@ -1,11 +1,11 @@
 package com.huotu.hotedu.entity;
 
 import org.springframework.security.core.GrantedAuthority;
-import sun.rmi.runtime.Log;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by shiliting on 2015/6/25.
@@ -24,11 +24,13 @@ public  class Tutor extends Login implements Serializable {
     @Column
     private String introduction;
     @Column
-    private String picture;
+    private String pictureUri;
     @Column
     private String qualification;
     @Column
     private String area;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastUploadDate;
 
     public Long getId() {
         return id;
@@ -54,12 +56,12 @@ public  class Tutor extends Login implements Serializable {
         this.introduction = introduction;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getPictureUri() {
+        return pictureUri;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setPictureUri(String pictureUri) {
+        this.pictureUri = pictureUri;
     }
 
     public String getQualification() {
@@ -76,6 +78,14 @@ public  class Tutor extends Login implements Serializable {
 
     public void setArea(String area) {
         this.area = area;
+    }
+
+    public Date getLastUploadDate() {
+        return lastUploadDate;
+    }
+
+    public void setLastUploadDate(Date lastUploadDate) {
+        this.lastUploadDate = lastUploadDate;
     }
 
     @Override

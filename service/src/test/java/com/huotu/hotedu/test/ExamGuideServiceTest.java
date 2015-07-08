@@ -2,36 +2,24 @@ package com.huotu.hotedu.test;
 
 import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.entity.Qa;
-import com.huotu.hotedu.entity.MessageContent;
 import com.huotu.hotedu.repository.ExamGuideRepository;
 import com.huotu.hotedu.repository.MessageContentRepository;
 import com.huotu.hotedu.repository.QaRepository;
 import com.huotu.hotedu.service.ExamGuideService;
 import com.huotu.hotedu.service.QaService;
-import com.huotu.hotedu.service.MessageContentService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.thymeleaf.util.DateUtils;
 
-import javax.crypto.ExemptionMechanism;
 import javax.persistence.TemporalType;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -48,16 +36,9 @@ public class ExamGuideServiceTest {
     @Autowired
     ExamGuideRepository examGuideRepository;
     @Autowired
-    private ExamGuideService guideService;
-    @Autowired
     QaRepository qaRepository;
     @Autowired
     private QaService qaService;
-
-    @Autowired
-    private MessageContentRepository messageContentRepository;
-    @Autowired
-    private MessageContentService messageContentsService;
 
 
     @Test
