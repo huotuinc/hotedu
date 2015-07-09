@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class HuotuController {
     //后台单击添加保存按钮
     @RequestMapping("/backend/save/editenterprise")
     //TODO 方法名应该以小写开头 by CJ
-    public String SaveHuotu(String title,String introduction,Model model){
+    public String saveHuotu(String title,String introduction,Model model){
         Huotu huotu=null;
         List<Huotu> list=huotuService.findHuotu();
         if(list.size()==0){

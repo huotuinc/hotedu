@@ -8,11 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.awt.print.Pageable;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -70,7 +66,7 @@ public class ExamGuideController {
 
     //后台单击删除按钮返回的信息
     @RequestMapping("/backend/del/examGuide")
-    public String DelExamGuide(int n,int sumpage,String keywords,Long id,Long sumElement,Model model){
+    public String delExamGuide(int n,int sumpage,String keywords,Long id,Long sumElement,Model model){
         examGuideService.delExamGuide(id);
         if((sumElement-1)%PAGE_SIZE==0){
             if(n>0&&n+1==sumpage){n--;}
@@ -92,7 +88,7 @@ public class ExamGuideController {
 
     //后台单击新建按钮
     @RequestMapping("/backend/add/examGuide")
-    public String AddExamGuide(Model model){
+    public String addExamGuide(Model model){
         return "/backend/newguide";
     }
     //后台单机修改按钮
@@ -106,7 +102,7 @@ public class ExamGuideController {
 
     //后台单击添加保存按钮
     @RequestMapping("/backend/addsave/examGuide")
-    public String AddSaveExamGuide(String title,String content,String top,Model model){
+    public String addSaveExamGuide(String title,String content,String top,Model model){
         ExamGuide examGuide=new ExamGuide();
         examGuide.setTitle(title);
         examGuide.setContent(content);
@@ -119,7 +115,7 @@ public class ExamGuideController {
 
     //后台单击修改保存按钮
     @RequestMapping("/backend/modifysave/examGuide")
-    public String ModifySaveExamGuide(Long id,String title,String content,Boolean top,Model model){
+    public String modifySaveExamGuide(Long id,String title,String content,Boolean top,Model model){
         ExamGuide examGuide=examGuideService.findOneById(id);
         examGuide.setTitle(title);
         examGuide.setContent(content);

@@ -109,7 +109,7 @@ public class TutorController {
 
     //后台单击删除按钮返回的信息
     @RequestMapping("/backend/del/tutor")
-    public String DelTutor(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Long id,Long sumElement,Model model){
+    public String delTutor(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Long id,Long sumElement,Model model){
         tutorService.delTutor(id);
         //如果删除一条记录后总记录数为10的倍数，则修改总页数
         if((sumElement-1)%PAGE_SIZE==0){
@@ -166,7 +166,7 @@ public class TutorController {
 
     //后台单击添加保存按钮
     @RequestMapping(value = "/backend/addsave/tutor",method = RequestMethod.POST)
-    public String AddSaveTutor(String name,String introduction,String qualification,String area,@RequestParam("smallimg") MultipartFile file,Model model){
+    public String addSaveTutor(String name,String introduction,String qualification,String area,@RequestParam("smallimg") MultipartFile file,Model model){
         Tutor tutor=new Tutor();
 
 

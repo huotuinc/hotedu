@@ -7,12 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -70,7 +66,7 @@ public class MessageContentController {
 
     //后台单击删除按钮返回的信息
     @RequestMapping("/backend/del/messagecontent")
-    public String DelMessageContent(int n,int sumpage,String keywords,Long id,Long sumElement,Model model){
+    public String delMessageContent(int n,int sumpage,String keywords,Long id,Long sumElement,Model model){
         messageContentService.delMessageContent(id);
         if((sumElement-1)%PAGE_SIZE==0){
             if(n>0&&n+1==sumpage){n--;}
@@ -92,7 +88,7 @@ public class MessageContentController {
 
     //后台单击新建按钮
     @RequestMapping("/backend/add/messagecontent")
-    public String AddMessageContent(Model model){
+    public String addMessageContent(Model model){
         return "/backend/newmessagecontent";
     }
     //后台单机修改按钮
@@ -106,7 +102,7 @@ public class MessageContentController {
 
     //后台单击添加保存按钮
     @RequestMapping("/backend/addsave/messagecontent")
-    public String AddSaveMessageContent(String title,String content,String top,Model model){
+    public String addSaveMessageContent(String title,String content,String top,Model model){
         MessageContent messageContent=new MessageContent();
         messageContent.setTitle(title);
         messageContent.setContent(content);
@@ -119,7 +115,7 @@ public class MessageContentController {
 
     //后台单击修改保存按钮
     @RequestMapping("/backend/modifysave/messagecontent")
-    public String ModifySaveMessageContent(Long id,String title,String content,Boolean top,Model model){
+    public String modifySaveMessageContent(Long id,String title,String content,Boolean top,Model model){
         MessageContent messageContent=messageContentService.findOneById(id);
         messageContent.setTitle(title);
         messageContent.setContent(content);

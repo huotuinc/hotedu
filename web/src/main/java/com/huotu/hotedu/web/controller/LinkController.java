@@ -1,6 +1,5 @@
 package com.huotu.hotedu.web.controller;
 
-import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.entity.Link;
 import com.huotu.hotedu.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +68,7 @@ public class LinkController {
 
     //后台单击删除按钮返回的信息
     @RequestMapping("/backend/del/link")
-    public String DelLink(int n,int sumpage,String keywords,Long id,Long sumElement,Model model){
+    public String delLink(int n,int sumpage,String keywords,Long id,Long sumElement,Model model){
         linkService.delLink(id);
         if((sumElement-1)%PAGE_SIZE==0){
             if(n>0&&n+1==sumpage){n--;}

@@ -68,7 +68,7 @@ public class QaController {
 
     //后台单击删除按钮返回的信息
     @RequestMapping("/backend/del/qa")
-    public String DelQa(int n,int sumpage,String keywords,Long id,Long sumElement,Model model){
+    public String delQa(int n,int sumpage,String keywords,Long id,Long sumElement,Model model){
         qaService.delQa(id);
         if((sumElement-1)%PAGE_SIZE==0){
             if(n>0&&n+1==sumpage){n--;}
@@ -90,12 +90,12 @@ public class QaController {
 
     //后台单击新建按钮
     @RequestMapping("/backend/add/qa")
-    public String AddQa(Model model){
+    public String addQa(Model model){
         return "/backend/newqa";
     }
     //后台单机修改按钮
     @RequestMapping("/backend/modify/qa")
-    public String ModifyQa(Long id, Model model){
+    public String modifyQa(Long id, Model model){
         Qa qa=qaService.findOneById(id);
         model.addAttribute("qa",qa);
         return "/backend/modifyqa";
@@ -104,7 +104,7 @@ public class QaController {
 
     //后台单击添加保存按钮
     @RequestMapping("/backend/addsave/qa")
-    public String AddSaveQa(String title,String content,String top,Model model){
+    public String addSaveQa(String title,String content,String top,Model model){
         Qa qa=new Qa();
         qa.setTitle(title);
         qa.setContent(content);
@@ -117,7 +117,7 @@ public class QaController {
 
     //后台单击修改保存按钮
     @RequestMapping("/backend/modifysave/qa")
-    public String ModifySaveQa(Long id,String title,String content,Boolean top,Model model){
+    public String modifySaveQa(Long id,String title,String content,Boolean top,Model model){
         Qa qa=qaService.findOneById(id);
         qa.setTitle(title);
         qa.setContent(content);
