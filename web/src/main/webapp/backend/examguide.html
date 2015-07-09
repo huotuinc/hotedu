@@ -135,7 +135,8 @@
                     </div>
                 </div>
                 <div class="result-content">
-                    <table class="result-tab" width="100%">
+                    <table id="examguideTable" class="result-tab" width="100%">
+                        <thead>
                         <tr>
                             <th style="width:80px">序号</th>
                             <th style="width:80px;">标题</th>
@@ -143,9 +144,8 @@
                             <th style="width:100px">置顶</th>
                             <th style="width:80px">操作</th>
                         </tr>
-                        <tr th:remove="all"><td>01</td><td title="">mou某mou某mou某mou某</td><td>2015.01.01/13.00.00</td><td title=""></td><td><a class="link-update" href="newguide.html">修改</a><br/><a class="link-delete" href="#">删除</a></td></tr>
-                        <tr th:remove="all"><td>01</td><td title="">mou某mou某mou某mou某</td><td>2015.01.01/13.00.00</td><td title=""></td><td><a class="link-update" href="newguide.html">修改</a><br/><a class="link-delete" href="#">删除</a></td></tr>
-                        <tr th:remove="all"><td>01</td><td title="">mou某mou某mou某mou某</td><td>2015.01.01/13.00.00</td><td title=""></td><td><a class="link-update" href="newguide.html">修改</a><br/><a class="link-delete" href="#">删除</a></td></tr>
+                        </thead>
+                        <tbody>
                         <tr th:each="g:${allGuideList}">
                             <td th:text="${g.id}">01</td>
                             <td title="" th:text="${g.title}">mou某mou某mou某mou某</td>
@@ -156,7 +156,43 @@
                                 <a class="real-delete" href="#" th:href="@{/backend/delExamGuide(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
                             </td>
                         </tr>
+                        </tbody>
                         </table>
+                    <script>
+                        var arr = [{"title": "aaaaaaa", "date": "2015.01.01/13.00.00", "istop": "no"},{"title": "bbbbbbb", "date": "2015.01.02/14.00.00", "istop": "no"},{"title": "ccccccc", "date": "2015.01.01/13.00.00", "istop": "no"},{"title": "ddddddd", "date": "2015.01.02/14.00.00", "istop": "no"},{"title": "eeeeeee", "date": "2015.01.01/13.00.00", "istop": "no"},{"title": "fffffff", "date": "2015.01.02/14.00.00", "istop": "no"},{"title": "ggggggg", "date": "2015.01.01/13.00.00", "istop": "yes"},{"title": "hhhhhhh", "date": "2015.01.02/14.00.00", "istop": "no"}];
+
+                        var tpl = "<tr th:remove='all'><td>{{indexNum}}</td> <td>{{title}}</td> <td>{{date}}</td><td>{{istop}}</td><td><a class='link-update' href='newguide.html'>修改</a><br/><a class='delete' href='#' onClick='check_del(this)'>删除</a><a class='delete123'></a></td></tr>";
+
+                        $('table').on('click', '.delete123', function() {
+                            var $par = $(this).parent().parent(),
+                                    indexNum = $par.children().eq(0).text();
+                            if(arr.length > indexNum - 1) {
+                                arr.splice(indexNum - 1, 1);
+                                drawHTML();
+                            }else {
+                                alert('delete failed');
+                            }
+                        });
+
+                        function drawHTML(res) {
+                            var dArr = arr;
+                            if(res) {
+                                dArr = res;
+                            }
+                            var strArr = [],
+                                    i = 0,
+                                    len = dArr.length;
+                            for(; i < len; i++) {
+                                var a = dArr[i];
+                                strArr[strArr.length] = tpl.replace("{{indexNum}}", i+1)
+                                        .replace("{{title}}", a.title)
+                                        .replace("{{date}}", a.date)
+                                        .replace("{{istop}}", a.istop);
+                            }
+                            $('#examguideTable > tbody').html(strArr.join(''));
+                        }
+                        drawHTML();
+                    </script>
                     <div class="list-page">
                         <a href="#" th:href="@{/backend/pageExamGuide(n=${n}-1,keywords=${keywords},sumpage=${sumpage})}">上一页</a>
                         <a href="#" th:href="@{/backend/pageExamGuide(n=${n}+1,keywords=${keywords},sumpage=${sumpage})}">下一页</a>
