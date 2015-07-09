@@ -16,9 +16,9 @@ import java.util.Date;
 public  class Tutor extends Login implements Serializable {
 
     private static final long serialVersionUID = -349012453592429794L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
     @Column
     private String name;
     @Column
@@ -32,13 +32,13 @@ public  class Tutor extends Login implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUploadDate;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getName() {
         return name;

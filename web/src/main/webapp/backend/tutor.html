@@ -183,15 +183,15 @@
                             <td th:text="${g.qualification}"></td>
                             <td th:text="${g.area}"></td>
                             <td th:text="${g.lastUploadDate}"></td>
-                            <td><a class="link-update" href="newtutor.html" th:href="@{/backend/modify/tutor(id=${g.id})}">修改</a><br/>
+                            <td><a class="link-update" href="newtutor.html" th:href="@{/backend/modifyTutor(id=${g.id})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a>
-                                <a class="real-delete" href="#" th:href="@{/backend/delTutor(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
+                                <a class="real-delete" href="#" th:href="@{/backend/delTutor(id=${g.id},n=${n},keywords=${keywords},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
                             </td>
                         </tr>
                     </table>
                     <div class="list-page">
-                        <a href="#" th:href="@{/backend/pageTutor(n=${n}-1,keywords=${keywords},sumpage=${sumpage})}">上一页</a>
-                        <a href="#" th:href="@{/backend/pageTutor(n=${n}+1,keywords=${keywords},sumpage=${sumpage})}">下一页</a>
+                        <a href="#" th:href="@{/backend/pageTutor(n=${n}-1,keywords=${keywords},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage})}">上一页</a>
+                        <a href="#" th:href="@{/backend/pageTutor(n=${n}+1,keywords=${keywords},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage})}">下一页</a>
                         <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span th:text="${sumpage}">1</span> 页
                     </div>
                 </div>

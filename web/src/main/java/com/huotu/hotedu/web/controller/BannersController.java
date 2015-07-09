@@ -22,6 +22,4 @@ public class BannersController {
     public String searchBannersController() {
         return "";
     }
-
-
 }

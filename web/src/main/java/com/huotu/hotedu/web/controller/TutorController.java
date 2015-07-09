@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -27,7 +28,7 @@ public class TutorController {
     @Autowired
     TutorService tutorService;
     public static final int PAGE_SIZE=10;//每张页面的记录数
-    public static final String FILE_PATH="/image/tutor/";
+    public static final String FILE_PATH="C:/Users/Administrator/IdeaProjects/hotedu/web/src/main/webapp/image/company/";
     //后台单击师资力量显示的消息
     @RequestMapping("/backend/loadTutor")
     public String loadTutor(Model model){
@@ -169,12 +170,15 @@ public class TutorController {
 
     //后台单击添加保存按钮
     @RequestMapping(value = "/backend/addSaveTutor",method = RequestMethod.POST)
-    public String addSaveTutor(String name,String introduction,String qualification,String area,@RequestParam("smallimg") MultipartFile file,Model model){
-        Tutor tutor=new Tutor();
+    public String addSaveTutor(String name,String introduction,String qualification,String area,@RequestParam("smallimg") MultipartFile file,Model model) throws Exception{
         try {
-            String fileName = file.getOriginalFilename();
+            if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+            System.out.println("文件大小：" + file.getSize());
+            if(file.getSize()==0){throw new Exception("文件为空！");}
+            if(file.getSize()>1024*1024*5){throw new Exception("文件太大");}
 
-            File tempFile = new File("/image", new Date().getTime() + String.valueOf(fileName));
+            String filePath=new Date().getTime()+String.valueOf(file.getOriginalFilename());
+            File tempFile = new File(FILE_PATH, filePath);
             if (!tempFile.getParentFile().exists()) {
                 tempFile.getParentFile().mkdir();
             }
@@ -182,14 +186,21 @@ public class TutorController {
                 tempFile.createNewFile();
             }
             file.transferTo(tempFile);
+            Tutor tutor=new Tutor();
+            tutor.setPictureUri(filePath);
+            tutor.setQualification(qualification);
+            tutor.setArea(area);
+            tutor.setIntroduction(introduction);
+            tutor.setName(name);
+            tutor.setLastUploadDate(new Date());
+            tutorService.addTutor(tutor);
+            return "redirect:/backend/loadTutor";
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return "redirect:/backend/error";
 
-
-        tutor.setLastUploadDate(new Date());
-        tutorService.addTutor(tutor);
-        return "redirect:/backend/loadTutor";
     }
 
 
