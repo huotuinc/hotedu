@@ -17,7 +17,7 @@ public class VideoController {
     }
 
     //后台显示检索之后的视频信息
-    @RequestMapping("/backend/search/video")
+    @RequestMapping("/backend/searchVideo")
     public String searchVideosController() {
         return "";
     }

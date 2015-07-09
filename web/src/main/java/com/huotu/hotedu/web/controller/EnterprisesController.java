@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class EnterprisesController {
 
     //后台显示所有招聘信息
-    @RequestMapping("/backend/load/wantedes")
+    @RequestMapping("/backend/loadWantedes")
     public String loadWantedesController() {
         return "/backend/wantedes";
     }
 
 
     //后台显示所有发布企业的信息
-    @RequestMapping("/backend/load/enterprises")
+    @RequestMapping("/backend/loadEnterprises")
     public String loadEnterprisesController() {
         return "/backend/enterprises";
     }
@@ -28,12 +28,12 @@ public class EnterprisesController {
 
 
     //后台显示检索之后的招聘信息
-    @RequestMapping("/backend/search/wantedes")
+    @RequestMapping("/backend/searchWantedes")
     public String searchWantedesController() {
         return "";
     }
     //后台显示检索之后的发布企业信息
-    @RequestMapping("/backend/search/enterprises")
+    @RequestMapping("/backend/searchEnterprises")
     public String searchEnterprisesController() {
         return "";
     }

@@ -21,14 +21,14 @@
       <h1 class="topbar-logo none"><a href="index.html" class="navbar-brand">云商学院后台管理</a></h1>
       <ul class="navbar-list clearfix">
         <li><a href="index.html" th:href="@{/}">首页</a></li>
-        <li><a class="on" href="wanted.html" th:href="@{/backend/load/wanted}">网站维护</a></li>
-        <li><a href="certificateapplications.html" th:href="@{/backend/load/certificateapplications}">代理商管理</a></li>
+        <li><a class="on" href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a></li>
+        <li><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a></li>
       </ul>
     </div>
     <div class="top-info-wrap">
       <ul class="top-info-list clearfix">
         <li><span th:text="${#authentication.name}"></span></li>
-        <li><a href="changethepassword.html" th:href="@{/backend/load/changethepassword}">修改密码</a></li>
+        <li><a href="changethepassword.html" th:href="@{/backend/loadChangethepassword}">修改密码</a></li>
         <li><a href="#">退出</a></li>
       </ul>
     </div>
@@ -45,8 +45,8 @@
         <li>
           <a href="#" style="height:30px; line-height:30px;">企业信息</a>
           <ul class="sub-menu">
-            <li><a href="wanted.html" th:href="@{/backend/load/wanted}">招聘信息</a></li>
-            <li><a href="enterprises.html" th:href=" @{/backend/load/enterprises}">发布企业</a></li>
+            <li><a href="wanted.html" th:href="@{/backend/loadWanted}">招聘信息</a></li>
+            <li><a href="enterprises.html" th:href=" @{/backend/loadEnterprises}">发布企业</a></li>
           </ul>
         </li>
         <li>
@@ -58,32 +58,32 @@
         <li>
           <a href="#" style="height:30px; line-height:30px;">考试指南</a>
           <ul class="sub-menu">
-            <li><a href="examguide.html" th:href="@{/backend/load/examGuide}">考试指南</a></li>
+            <li><a href="examguide.html" th:href="@{/backend/loadExamGuide}">考试指南</a></li>
           </ul>
         </li>
         <li>
           <a href="#" style="height:30px; line-height:30px;">友情链接</a>
           <ul class="sub-menu">
-            <li><a href="link.html" th:href="@{/backend/load/link}">友情链接</a></li>
+            <li><a href="link.html" th:href="@{/backend/loadLink}">友情链接</a></li>
           </ul>
         </li>
         <li>
           <a href="#" style="height:30px; line-height:30px;">常见问题</a>
           <ul class="sub-menu" style="display:block;">
-            <li class="on"><a href="qa.html" th:href="@{/backend/load/qa}">常见问题</a></li>
+            <li class="on"><a href="qa.html" th:href="@{/backend/loadQa}">常见问题</a></li>
           </ul>
         </li>
         <li>
           <a href="#" style="height:30px; line-height:30px;">资讯动态</a>
           <ul class="sub-menu">
-            <li><a href="messagecontent.html" th:href="@{/backend/load/messagecontent}">资讯动态</a></li>
+            <li><a href="messagecontent.html" th:href="@{/backend/loadMessagecontent}">资讯动态</a></li>
           </ul>
         </li>
 
         <li>
           <a href="#" style="height:30px; line-height:30px;">公司简介</a>
           <ul class="sub-menu">
-            <li><a href="editenterprise.html" th:href="@{/backend/load/editenterprise}">公司简介编辑</a></li>
+            <li><a href="editenterprise.html" th:href="@{/backend/loadEditenterprise}">公司简介编辑</a></li>
           </ul>
         </li>
 
@@ -99,7 +99,7 @@
         <li>
           <a href="#" style="height:30px; line-height:30px;">师资力量</a>
           <ul class="sub-menu">
-            <li><a href="tutor.html" th:href="@{/backend/load/tutor}">师资力量</a></li>
+            <li><a href="tutor.html" th:href="@{/backend/loadTutor}">师资力量</a></li>
           </ul>
         </li>
       </ul>
@@ -109,10 +109,10 @@
   <!--/sidebar-->
   <div class="main-wrap">
     <div class="crumb-wrap">
-      <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/load/wanted}">网站维护</a><span class="crumb-step">&gt;</span><a href="qa.html"><span class="crumb-name">常见问题</span></a><span class="crumb-step">&gt;</span><span class="crumb-name">新建</span></div>
+      <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span class="crumb-step">&gt;</span><a href="qa.html"><span class="crumb-name">常见问题</span></a><span class="crumb-step">&gt;</span><span class="crumb-name">新建</span></div>
     </div>
     <div class="result-wrap">
-      <form action="#"  th:action="@{/backend/addsave/qa}" method="post" id="myform" name="myform">
+      <form action="#"  th:action="@{/backend/addSaveQa}" method="post" id="myform" name="myform">
         <div class="config-items">
           <div class="result-content">
             <table width="100%" class="insert-tab">

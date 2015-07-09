@@ -60,7 +60,7 @@ public class ExamGuideControllerTest extends SpringWebTest {
     @Test
     public void index() throws Exception {
         mockMvc.perform(
-                get("/backend/page/link?n=0;keywords='';sumpage=1")
+                get("/backend/pageLink?n=0;keywords='';sumpage=1")
         ).andDo(print());
     }
     @Test

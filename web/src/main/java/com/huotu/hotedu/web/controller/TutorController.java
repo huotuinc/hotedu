@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,8 +27,9 @@ public class TutorController {
     @Autowired
     TutorService tutorService;
     public static final int PAGE_SIZE=10;//每张页面的记录数
+    public static final String FILE_PATH="/image/tutor/";
     //后台单击师资力量显示的消息
-    @RequestMapping("/backend/load/tutor")
+    @RequestMapping("/backend/loadTutor")
     public String loadTutor(Model model){
         Page<Tutor> pages=tutorService.loadTutor(0, PAGE_SIZE);
         long sumElement=pages.getTotalElements();
@@ -40,7 +43,7 @@ public class TutorController {
     }
 
     //后台单机搜索按钮显示的师资力量消息
-    @RequestMapping("/backend/search/tutor")
+    @RequestMapping("/backend/searchTutor")
     public String searchTutor(String searchSort,String keywords,String dateStart,String dateEnd,Model model){
         Page<Tutor> pages=null;
         if("date".equals(searchSort)){
@@ -72,7 +75,7 @@ public class TutorController {
     }
 
     //后台单击师资力量的分页
-    @RequestMapping("/backend/page/tutor")
+    @RequestMapping("/backend/pageTutor")
     public String pageTutor(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Model model){
         //如果已经到分页的第一页了，将页数设置为0
         if (n < 0){
@@ -108,7 +111,7 @@ public class TutorController {
     }
 
     //后台单击删除按钮返回的信息
-    @RequestMapping("/backend/del/tutor")
+    @RequestMapping("/backend/delTutor")
     public String delTutor(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Long id,Long sumElement,Model model){
         tutorService.delTutor(id);
         //如果删除一条记录后总记录数为10的倍数，则修改总页数
@@ -151,7 +154,7 @@ public class TutorController {
 
 
     //后台单击新建按钮
-    @RequestMapping("/backend/add/tutor")
+    @RequestMapping("/backend/addTutor")
     public String AddTutor(Model model){
         return "/backend/newtutor";
     }
@@ -160,21 +163,33 @@ public class TutorController {
     public String ModifyTutor(Long id, Model model){
         Tutor tutor=tutorService.findOneById(id);
         model.addAttribute("tutor",tutor);
-        return "/backend/modiftutor";
+        return "/backend/modifytutor";
     }
 
 
     //后台单击添加保存按钮
-    @RequestMapping(value = "/backend/addsave/tutor",method = RequestMethod.POST)
+    @RequestMapping(value = "/backend/addSaveTutor",method = RequestMethod.POST)
     public String addSaveTutor(String name,String introduction,String qualification,String area,@RequestParam("smallimg") MultipartFile file,Model model){
         Tutor tutor=new Tutor();
+        try {
+            String fileName = file.getOriginalFilename();
 
-
+            File tempFile = new File("/image", new Date().getTime() + String.valueOf(fileName));
+            if (!tempFile.getParentFile().exists()) {
+                tempFile.getParentFile().mkdir();
+            }
+            if (!tempFile.exists()) {
+                tempFile.createNewFile();
+            }
+            file.transferTo(tempFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         tutor.setLastUploadDate(new Date());
         tutorService.addTutor(tutor);
-        return "redirect:/backend/load/tutor";
+        return "redirect:/backend/loadTutor";
     }
 
 
@@ -187,7 +202,7 @@ public class TutorController {
 ////        tutor.setTop(top);
 ////        tutor.setLastUploadDate(new Date());
 ////        tutorService.modify(tutor);
-//        return "redirect:/backend/load/tutor";
+//        return "redirect:/backend/loadTutor";
 //    }
 
 }

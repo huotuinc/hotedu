@@ -18,7 +18,7 @@ public class HuotuController {
     @Autowired
     private HuotuService huotuService;
     //后台单击公司简介的消息
-    @RequestMapping("/backend/load/editenterprise")
+    @RequestMapping("/backend/loadEditenterprise")
     public String loadHuotu(Model model){
         List<Huotu> list=huotuService.findHuotu();
         if(list.size()==0){
@@ -33,7 +33,7 @@ public class HuotuController {
 
 
     //后台单击添加保存按钮
-    @RequestMapping("/backend/save/editenterprise")
+    @RequestMapping("/backend/saveEditenterprise")
     //TODO 方法名应该以小写开头 by CJ
     public String saveHuotu(String title,String introduction,Model model){
         Huotu huotu=null;
@@ -48,6 +48,6 @@ public class HuotuController {
         huotu.setTitle(title);
         huotu.setIntroduction(introduction);
         huotuService.modifyHuotu(huotu);
-        return "redirect:/backend/load/editenterprise";
+        return "redirect:/backend/loadEditenterprise";
     }
 }

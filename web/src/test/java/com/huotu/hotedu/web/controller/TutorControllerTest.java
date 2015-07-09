@@ -23,7 +23,7 @@ public class TutorControllerTest extends SpringWebTest{
     @Test
     public void testAddSaveTutor() throws Exception {
         mockMvc.perform(
-                fileUpload("/backend/addsave/tutor")
+                fileUpload("/backend/addSaveTutor")
                 .file("smallimg",new byte[]{1,2,3})
         );
     }

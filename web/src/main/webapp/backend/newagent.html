@@ -21,14 +21,14 @@
             <h1 class="topbar-logo none"><a href="index.html" class="navbar-brand">云商学院后台管理</a></h1>
             <ul class="navbar-list clearfix">
                 <li><a href="index.html" th:href="@{/}">首页</a></li>
-                <li><a href="wanted.html" th:href="@{/backend/load/wanted}">网站维护</a></li>
-                <li><a class="on" href="certificateapplications.html" th:href="@{/backend/load/certificateapplications}">代理商管理</a></li>
+                <li><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a></li>
+                <li><a class="on" href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a></li>
             </ul>
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
                 <li><span th:text="${#authentication.name}"></span></li>
-                <li><a href="changethepassword.html" th:href="@{/backend/load/changethepassword}">修改密码</a></li>
+                <li><a href="changethepassword.html" th:href="@{/backend/loadChangethepassword}">修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
         </div>
@@ -45,8 +45,8 @@
                 <li>
                     <a href="#" style="height:30px; line-height:30px;">管理代理商</a>
                     <ul class="sub-menu" style="display: block;">
-                        <li><a href="certificateapplications.html" th:href="@{/backend/load/certificateapplications}">申请领证列表</a></li>
-                        <li class="on"><a href="agents.html" th:href="@{/backend/load/agents}">代理商列表</a></li>
+                        <li><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">申请领证列表</a></li>
+                        <li class="on"><a href="agents.html" th:href="@{/backend/loadAgents}">代理商列表</a></li>
                     </ul>
                 </li>
             </ul>

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Date;
 
 /**
- * Created by luffy on 2015/6/10.
+ * Created by shiliting on 2015/6/10.
  * 常见问题有关的Controller
- * @author luffy luffy.ja at gmail.com
+ * @author shiliting shiliting741@163.com
  */
 @Controller
 public class QaController {
@@ -23,7 +23,7 @@ public class QaController {
 
     public static final int PAGE_SIZE=10;//每张页面的记录数
     //后台单击常见问题链接显示的消息
-    @RequestMapping("/backend/load/qa")
+    @RequestMapping("/backend/loadQa")
     public String loadQa(Model model){
         Page<Qa> pages=qaService.loadQa(0,PAGE_SIZE);
         long sumElement=pages.getTotalElements();
@@ -36,7 +36,7 @@ public class QaController {
     }
 
     //后台单机搜索按钮显示的常见问题消息
-    @RequestMapping("/backend/search/qa")
+    @RequestMapping("/backend/searchQa")
     public String searchQa(String keywords,Model model){
         Page<Qa> pages=qaService.searchQa(0,PAGE_SIZE,keywords);
         long sumElement=pages.getTotalElements();
@@ -49,7 +49,7 @@ public class QaController {
     }
 
     //后台单击常见问题的分页
-    @RequestMapping("/backend/page/qa")
+    @RequestMapping("/backend/pageQa")
     public String pageQa(int n,int sumpage,String keywords,Model model){
         //如果已经到分页的第一页了，将页数设置为0
         if (n < 0){
@@ -67,7 +67,7 @@ public class QaController {
     }
 
     //后台单击删除按钮返回的信息
-    @RequestMapping("/backend/del/qa")
+    @RequestMapping("/backend/delQa")
     public String delQa(int n,int sumpage,String keywords,Long id,Long sumElement,Model model){
         qaService.delQa(id);
         if((sumElement-1)%PAGE_SIZE==0){
@@ -89,12 +89,12 @@ public class QaController {
 
 
     //后台单击新建按钮
-    @RequestMapping("/backend/add/qa")
+    @RequestMapping("/backend/addQa")
     public String addQa(Model model){
         return "/backend/newqa";
     }
     //后台单机修改按钮
-    @RequestMapping("/backend/modify/qa")
+    @RequestMapping("/backend/modifyQa")
     public String modifyQa(Long id, Model model){
         Qa qa=qaService.findOneById(id);
         model.addAttribute("qa",qa);
@@ -103,7 +103,7 @@ public class QaController {
 
 
     //后台单击添加保存按钮
-    @RequestMapping("/backend/addsave/qa")
+    @RequestMapping("/backend/addSaveQa")
     public String addSaveQa(String title,String content,String top,Model model){
         Qa qa=new Qa();
         qa.setTitle(title);
@@ -111,12 +111,12 @@ public class QaController {
         qa.setLastUploadDate(new Date());
         qa.setTop("1".equals(top)? true:false);
         qaService.addQa(qa);
-        return "redirect:/backend/load/qa";
+        return "redirect:/backend/loadQa";
     }
 
 
     //后台单击修改保存按钮
-    @RequestMapping("/backend/modifysave/qa")
+    @RequestMapping("/backend/modifySaveQa")
     public String modifySaveQa(Long id,String title,String content,Boolean top,Model model){
         Qa qa=qaService.findOneById(id);
         qa.setTitle(title);
@@ -124,7 +124,7 @@ public class QaController {
         qa.setTop(top);
         qa.setLastUploadDate(new Date());
         qaService.modify(qa);
-        return "redirect:/backend/load/qa";
+        return "redirect:/backend/loadQa";
     }
 
 

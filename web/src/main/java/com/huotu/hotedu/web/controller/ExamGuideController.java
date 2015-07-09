@@ -21,7 +21,7 @@ public class ExamGuideController {
     private ExamGuideService examGuideService;
     public static final int PAGE_SIZE=10;//每张页面的记录数
     //后台单击考试指南链接显示的消息
-    @RequestMapping("/backend/load/examGuide")
+    @RequestMapping("/backend/loadExamGuide")
     public String loadExamGuide(Model model){
         Page<ExamGuide> pages=examGuideService.loadExamGuide(0,PAGE_SIZE);
         long sumElement=pages.getTotalElements();
@@ -34,7 +34,7 @@ public class ExamGuideController {
     }
 
     //后台单机搜索按钮显示的考试指南消息
-    @RequestMapping("/backend/search/examGuide")
+    @RequestMapping("/backend/searchExamGuide")
     public String searchExamGuide(String keywords,Model model){
         Page<ExamGuide> pages=examGuideService.searchExamGuide(0,PAGE_SIZE,keywords);
         long sumElement=pages.getTotalElements();
@@ -47,7 +47,7 @@ public class ExamGuideController {
     }
 
     //后台单击考试指南的分页
-    @RequestMapping("/backend/page/examGuide")
+    @RequestMapping("/backend/pageExamGuide")
     public String pageExamGuide(int n,int sumpage,String keywords,Model model){
         //如果已经到分页的第一页了，将页数设置为0
         if (n < 0){
@@ -65,7 +65,7 @@ public class ExamGuideController {
     }
 
     //后台单击删除按钮返回的信息
-    @RequestMapping("/backend/del/examGuide")
+    @RequestMapping("/backend/delExamGuide")
     public String delExamGuide(int n,int sumpage,String keywords,Long id,Long sumElement,Model model){
         examGuideService.delExamGuide(id);
         if((sumElement-1)%PAGE_SIZE==0){
@@ -87,12 +87,12 @@ public class ExamGuideController {
 
 
     //后台单击新建按钮
-    @RequestMapping("/backend/add/examGuide")
+    @RequestMapping("/backend/addExamGuide")
     public String addExamGuide(Model model){
         return "/backend/newguide";
     }
     //后台单机修改按钮
-    @RequestMapping("/backend/modify/examGuide")
+    @RequestMapping("/backend/modifyExamGuide")
     public String ModifyExamGuide(Long id, Model model){
         ExamGuide examGuide=examGuideService.findOneById(id);
         model.addAttribute("examGuide",examGuide);
@@ -101,7 +101,7 @@ public class ExamGuideController {
 
 
     //后台单击添加保存按钮
-    @RequestMapping("/backend/addsave/examGuide")
+    @RequestMapping("/backend/addSaveExamGuide")
     public String addSaveExamGuide(String title,String content,String top,Model model){
         ExamGuide examGuide=new ExamGuide();
         examGuide.setTitle(title);
@@ -109,12 +109,12 @@ public class ExamGuideController {
         examGuide.setLastUploadDate(new Date());
         examGuide.setTop("1".equals(top)? true:false);
         examGuideService.addExamGuide(examGuide);
-        return "redirect:/backend/load/examGuide";
+        return "redirect:/backend/loadExamGuide";
     }
 
 
     //后台单击修改保存按钮
-    @RequestMapping("/backend/modifysave/examGuide")
+    @RequestMapping("/backend/modifySaveExamGuide")
     public String modifySaveExamGuide(Long id,String title,String content,Boolean top,Model model){
         ExamGuide examGuide=examGuideService.findOneById(id);
         examGuide.setTitle(title);
@@ -122,6 +122,6 @@ public class ExamGuideController {
         examGuide.setTop(top);
         examGuide.setLastUploadDate(new Date());
         examGuideService.modify(examGuide);
-        return "redirect:/backend/load/examGuide";
+        return "redirect:/backend/loadExamGuide";
     }
 }

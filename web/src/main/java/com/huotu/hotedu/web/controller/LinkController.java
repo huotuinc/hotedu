@@ -21,7 +21,7 @@ public class LinkController {
     public static final int PAGE_SIZE=10;
 
     //后台单击友情链接链接显示的消息
-    @RequestMapping("/backend/load/link")
+    @RequestMapping("/backend/loadLink")
     public String loadExamGuide(Model model){
         Page<Link> pages=linkService.loadLink(0,PAGE_SIZE);
         long sumElement=pages.getTotalElements();
@@ -34,7 +34,7 @@ public class LinkController {
     }
 
     //后台显示检索之后的友情链接
-    @RequestMapping("/backend/search/link")
+    @RequestMapping("/backend/searchLink")
     public String searchLinkController(String keywords,Model model) {
 
         Page<Link> pages=linkService.searchLink(0, PAGE_SIZE, keywords);
@@ -49,7 +49,7 @@ public class LinkController {
     }
 
     //后台单击友情链接的分页
-    @RequestMapping("/backend/page/link")
+    @RequestMapping("/backend/pageLink")
     public String pageLink(int n,int sumpage,String keywords,Model model){
         //如果已经到分页的第一页了，将页数设置为0
         if (n < 0){
@@ -67,7 +67,7 @@ public class LinkController {
     }
 
     //后台单击删除按钮返回的信息
-    @RequestMapping("/backend/del/link")
+    @RequestMapping("/backend/delLink")
     public String delLink(int n,int sumpage,String keywords,Long id,Long sumElement,Model model){
         linkService.delLink(id);
         if((sumElement-1)%PAGE_SIZE==0){
@@ -85,7 +85,7 @@ public class LinkController {
     }
 
     //后台单击新建按钮
-    @RequestMapping("/backend/add/link")
+    @RequestMapping("/backend/addLink")
     public String AddLink(Model model){
         return "/backend/newlink";
     }
@@ -99,25 +99,25 @@ public class LinkController {
     }
 
     //后台单击添加保存按钮
-    @RequestMapping("/backend/addsave/link")
+    @RequestMapping("/backend/addSaveLink")
     public String AddSaveLink(String title,String url,Model model){
         Link link=new Link();
         link.setTitle(title);
         link.setUrl(url);
         link.setLastUploadDate(new Date());
         linkService.addLink(link);
-        return "redirect:/backend/load/link";
+        return "redirect:/backend/loadLink";
     }
 
 
     //后台单击修改保存按钮
-    @RequestMapping("/backend/modifysave/link")
+    @RequestMapping("/backend/modifySaveLink")
     public String ModifySaveLink(Long id,String title,String url,Model model){
         Link link=linkService.findOneById(id);
         link.setTitle(title);
         link.setUrl(url);
         link.setLastUploadDate(new Date());
         linkService.modify(link);
-        return "redirect:/backend/load/link";
+        return "redirect:/backend/loadLink";
     }
 }

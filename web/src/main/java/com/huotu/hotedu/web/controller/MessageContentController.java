@@ -21,7 +21,7 @@ public class MessageContentController {
     private MessageContentService messageContentService;
     public static final int PAGE_SIZE=10;//每张页面的记录数
     //后台单击考试指南链接显示的消息
-    @RequestMapping("/backend/load/messagecontent")
+    @RequestMapping("/backend/loadMessagecontent")
     public String loadMessageContent(Model model){
         Page<MessageContent> pages=messageContentService.loadMessageContent(0, PAGE_SIZE);
         long sumElement=pages.getTotalElements();
@@ -34,7 +34,7 @@ public class MessageContentController {
     }
 
     //后台单机搜索按钮显示的考试指南消息
-    @RequestMapping("/backend/search/messagecontent")
+    @RequestMapping("/backend/searchMessagecontent")
     public String searchMessageContent(String keywords,Model model){
         Page<MessageContent> pages=messageContentService.searchMessageContent(0, PAGE_SIZE, keywords);
         long sumElement=pages.getTotalElements();
@@ -47,7 +47,7 @@ public class MessageContentController {
     }
 
     //后台单击考试指南的分页
-    @RequestMapping("/backend/page/messagecontent")
+    @RequestMapping("/backend/pageMessagecontent")
     public String pageMessageContent(int n,int sumpage,String keywords,Model model){
         //如果已经到分页的第一页了，将页数设置为0
         if (n < 0){
@@ -65,7 +65,7 @@ public class MessageContentController {
     }
 
     //后台单击删除按钮返回的信息
-    @RequestMapping("/backend/del/messagecontent")
+    @RequestMapping("/backend/delMessagecontent")
     public String delMessageContent(int n,int sumpage,String keywords,Long id,Long sumElement,Model model){
         messageContentService.delMessageContent(id);
         if((sumElement-1)%PAGE_SIZE==0){
@@ -87,7 +87,7 @@ public class MessageContentController {
 
 
     //后台单击新建按钮
-    @RequestMapping("/backend/add/messagecontent")
+    @RequestMapping("/backend/addMessagecontent")
     public String addMessageContent(Model model){
         return "/backend/newmessagecontent";
     }
@@ -101,7 +101,7 @@ public class MessageContentController {
 
 
     //后台单击添加保存按钮
-    @RequestMapping("/backend/addsave/messagecontent")
+    @RequestMapping("/backend/addSaveMessagecontent")
     public String addSaveMessageContent(String title,String content,String top,Model model){
         MessageContent messageContent=new MessageContent();
         messageContent.setTitle(title);
@@ -109,12 +109,12 @@ public class MessageContentController {
         messageContent.setLastUploadDate(new Date());
         messageContent.setTop("1".equals(top)? true:false);
         messageContentService.addMessageContent(messageContent);
-        return "redirect:/backend/load/messagecontent";
+        return "redirect:/backend/loadMessagecontent";
     }
 
 
     //后台单击修改保存按钮
-    @RequestMapping("/backend/modifysave/messagecontent")
+    @RequestMapping("/backend/modifySaveMessagecontent")
     public String modifySaveMessageContent(Long id,String title,String content,Boolean top,Model model){
         MessageContent messageContent=messageContentService.findOneById(id);
         messageContent.setTitle(title);
@@ -122,6 +122,6 @@ public class MessageContentController {
         messageContent.setTop(top);
         messageContent.setLastUploadDate(new Date());
         messageContentService.modify(messageContent);
-        return "redirect:/backend/load/messagecontent";
+        return "redirect:/backend/loadMessagecontent";
     }
 }

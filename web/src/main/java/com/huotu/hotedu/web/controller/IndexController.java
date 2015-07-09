@@ -21,7 +21,7 @@ public class IndexController {
     }
 
     @RequestMapping("/")
-    public String index(){
+    public String loadIndex(){
         return "/backend/index";
     }
 }
