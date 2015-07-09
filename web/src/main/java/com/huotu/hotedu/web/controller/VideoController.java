@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class VideoController {
     //后台显示所有视频信息
-    @RequestMapping("/backend/load/video")
+    @RequestMapping("/backend/loadVideos")
     public String loadWantedesController() {
         return "/backend/video";
     }
