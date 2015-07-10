@@ -16,8 +16,8 @@ import java.util.Date;
 public  class Tutor extends Login implements Serializable {
 
     private static final long serialVersionUID = -349012453592429794L;
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Id
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id;
     @Column
     private String name;

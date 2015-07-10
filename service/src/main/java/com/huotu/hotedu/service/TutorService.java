@@ -11,6 +11,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Date;
 
 /**
@@ -19,7 +23,7 @@ import java.util.Date;
  * @author shiliting
  */
 @Service
-public class TutorService {
+public class TutorService implements StaticResourceService {
 
     @Autowired
     private TutorRepository tutorRepository;
@@ -74,9 +78,16 @@ public class TutorService {
 
 
 
-    //删除一个导师
+    //删除一个导师(包括他的照片)
     public void delTutor(Long id){
-        tutorRepository.delete(id);
+        try {
+            URI uri=new URI(findOneById(id).getPictureUri());
+            tutorRepository.delete(id);
+
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
     }
 
     //增加一位导师
@@ -93,4 +104,25 @@ public class TutorService {
         return tutorRepository.findOne(id);
     }
 
+    @Override
+    public URI uploadResource(String path, InputStream data) throws IOException, IllegalStateException, URISyntaxException {
+        return null;
+    }
+
+    @Override
+    public URI getResource(String path) throws URISyntaxException {
+        return null;
+    }
+
+    @Override
+    public void deleteResource(String path) throws IOException {
+
+    }
+
+    @Override
+    public void deleteResource(URI uri) throws IOException {
+
+
+
+    }
 }

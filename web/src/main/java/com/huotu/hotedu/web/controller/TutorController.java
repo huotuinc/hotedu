@@ -38,6 +38,8 @@ public class TutorController {
         model.addAttribute("sumpage",sumElement/pages.getSize()+(sumElement%pages.getSize()>0? 1:0));
         model.addAttribute("n",0);
         model.addAttribute("keywords","");
+        model.addAttribute("dateStart","");
+        model.addAttribute("dateEnd","");
         model.addAttribute("searchSort","all");
         model.addAttribute("sumElement",sumElement);
         return "/backend/tutor";
@@ -45,7 +47,7 @@ public class TutorController {
 
     //后台单机搜索按钮显示的师资力量消息
     @RequestMapping("/backend/searchTutor")
-    public String searchTutor(String searchSort,String keywords,String dateStart,String dateEnd,Model model){
+    public String searchTutor(String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
         Page<Tutor> pages=null;
         if("date".equals(searchSort)){
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -63,6 +65,9 @@ public class TutorController {
         }else{
             pages=tutorService.searchTutorType(0,PAGE_SIZE,keywords,searchSort);
 
+        }
+        if(pages==null){
+            throw new Exception("没有数据！");
         }
         long sumElement=pages.getTotalElements();
         model.addAttribute("allTutorList",pages);
@@ -115,11 +120,12 @@ public class TutorController {
     @RequestMapping("/backend/delTutor")
     public String delTutor(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Long id,Long sumElement,Model model){
         tutorService.delTutor(id);
+
+
         //如果删除一条记录后总记录数为10的倍数，则修改总页数
         if((sumElement-1)%PAGE_SIZE==0){
             if(n>0&&n+1==sumpage){n--;}
             sumpage--;
-
         }
         sumElement--;
 
@@ -185,9 +191,9 @@ public class TutorController {
             if (!tempFile.exists()) {
                 tempFile.createNewFile();
             }
-            file.transferTo(tempFile);
+            file.transferTo(tempFile);//保存图片
             Tutor tutor=new Tutor();
-            tutor.setPictureUri(filePath);
+            tutor.setPictureUri(FILE_PATH+filePath);
             tutor.setQualification(qualification);
             tutor.setArea(area);
             tutor.setIntroduction(introduction);
