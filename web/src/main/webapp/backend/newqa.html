@@ -6,145 +6,158 @@
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
     <script type="text/javascript" src="js/libs/jquery.min.js" th:src="@{/backend/js/libs/jquery.min.js}"></script>
-    <script type="text/javascript" src="js/libs/modernizr.min.js" th:src="@{/backend/js/libs/modernizr.min.js}"></script>
+    <script type="text/javascript" src="js/libs/modernizr.min.js"
+            th:src="@{/backend/js/libs/modernizr.min.js}"></script>
+    <!--警告框控件-->
+    <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
+    <script type="text/javascript" src="js/jquery.confirm.js" th:src="@{/backend/js/jquery.confirm.js}"></script>
     <!--滚动条-->
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
-    <script type="text/javascript" src="js/scroll/jquery.mousewheel.js" th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
-    <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js" th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
-    <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js" th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
+    <script type="text/javascript" src="js/scroll/jquery.mousewheel.js"
+            th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
+    <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js"
+            th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
+    <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
+            th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
 </head>
 <body>
 <div class="topbar-wrap white">
-  <div class="topbar-inner clearfix">
-    <div class="topbar-logo-wrap clearfix">
-      <h1 class="topbar-logo none"><a href="index.html" class="navbar-brand">云商学院后台管理</a></h1>
-      <ul class="navbar-list clearfix">
-        <li><a href="index.html" th:href="@{/}">首页</a></li>
-        <li><a class="on" href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a></li>
-        <li><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a></li>
-      </ul>
+    <div class="topbar-inner clearfix">
+        <div class="topbar-logo-wrap clearfix">
+            <h1 class="topbar-logo none"><a href="index.html" class="navbar-brand">云商学院后台管理</a></h1>
+            <ul class="navbar-list clearfix">
+                <li><a href="index.html" th:href="@{/}">首页</a></li>
+                <li><a class="on" href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a></li>
+                <li><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a>
+                </li>
+            </ul>
+        </div>
+        <div class="top-info-wrap">
+            <ul class="top-info-list clearfix">
+                <li><span th:text="${#authentication.name}"></span></li>
+                <li><a href="changethepassword.html" th:href="@{/backend/loadChangethepassword}">修改密码</a></li>
+                <li><a href="#">退出</a></li>
+            </ul>
+        </div>
     </div>
-    <div class="top-info-wrap">
-      <ul class="top-info-list clearfix">
-        <li><span th:text="${#authentication.name}"></span></li>
-        <li><a href="changethepassword.html" th:href="@{/backend/loadChangethepassword}">修改密码</a></li>
-        <li><a href="#">退出</a></li>
-      </ul>
-    </div>
-  </div>
 </div>
 <div class="container clearfix">
-  <div class="sidebar-wrap">
-    <div class="sidebar-title">
-      <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}" style=" width:160px;margin-left: -10px;"/>
-    </div>
-    <div class="jp-container">
-    <div class="sidebar-content">
-      <ul class="sidebar-list">
-        <li>
-          <a href="#" style="height:30px; line-height:30px;">企业信息</a>
-          <ul class="sub-menu">
-            <li><a href="wanted.html" th:href="@{/backend/loadWanted}">招聘信息</a></li>
-            <li><a href="enterprises.html" th:href=" @{/backend/loadEnterprises}">发布企业</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" style="height:30px; line-height:30px;">banner图</a>
-          <ul class="sub-menu">
-            <li><a href="banners.html" th:href="@{/backend/load/banners}">banner图</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" style="height:30px; line-height:30px;">考试指南</a>
-          <ul class="sub-menu">
-            <li><a href="examguide.html" th:href="@{/backend/loadExamGuide}">考试指南</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" style="height:30px; line-height:30px;">友情链接</a>
-          <ul class="sub-menu">
-            <li><a href="link.html" th:href="@{/backend/loadLink}">友情链接</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" style="height:30px; line-height:30px;">常见问题</a>
-          <ul class="sub-menu" style="display:block;">
-            <li class="on"><a href="qa.html" th:href="@{/backend/loadQa}">常见问题</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" style="height:30px; line-height:30px;">资讯动态</a>
-          <ul class="sub-menu">
-            <li><a href="messagecontent.html" th:href="@{/backend/loadMessagecontent}">资讯动态</a></li>
-          </ul>
-        </li>
-
-        <li>
-          <a href="#" style="height:30px; line-height:30px;">公司简介</a>
-          <ul class="sub-menu">
-            <li><a href="editenterprise.html" th:href="@{/backend/loadEditenterprise}">公司简介编辑</a></li>
-          </ul>
-        </li>
-
-        <li>
-          <a href="#" style="height:30px; line-height:30px;">视频</a>
-          <ul class="sub-menu">
-            <li><a href="video.html" th:href="@{/backend/load/video}">教学视频</a></li>
-            <li><a href="精彩录制.html">精彩录制</a></li>
-            <li><a href="经验分享.html">经验分享</a></li>
-            <li><a href="其他视频.html">其他视频</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" style="height:30px; line-height:30px;">师资力量</a>
-          <ul class="sub-menu">
-            <li><a href="tutor.html" th:href="@{/backend/loadTutor}">师资力量</a></li>
-          </ul>
-        </li>
-      </ul>
-      </div>
-    </div>
-  </div>
-  <!--/sidebar-->
-  <div class="main-wrap">
-    <div class="crumb-wrap">
-      <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html"
-                                                           th:href="@{/backend/loadWanted}">网站维护</a><span
-              class="crumb-step">&gt;</span><a href="qa.html"><span
-              class="crumb-name">常见问题</span></a><span
-              class="crumb-step">&gt;</span><span
-              class="crumb-name">新建</span></div>
-    </div>
-    <div class="result-wrap">
-      <form action="#"  th:action="@{/backend/addSaveQa}" method="post" id="myform" name="myform">
-        <div class="config-items">
-          <div class="result-content">
-            <table width="100%" class="insert-tab">
-              <tbody>
-              <tr>
-                <th><i class="require-red">*</i>标题：</th>
-                <td><input type="text" id="" value="" size="70" name="title" class="common-text"/></td>
-              </tr>
-              <tr>
-                <th><i class="require-red">*</i>描述：</th>
-                <td><textarea name="content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
-              </tr>
-              <tr>
-                <th>置顶</th>
-                <td><input type="radio" checked="checked" name="top" value="1"/>&nbsp;是&nbsp;&nbsp;<input type="radio" name="top" value="0"/>&nbsp;否&nbsp;&nbsp;</td>
-              </tr>
-              <tr>
-                <th></th>
-                <td><input type="submit" value="保存" class="btn btn-primary btn6 mr10"/><input type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
+    <div class="sidebar-wrap">
+        <div class="sidebar-title">
+            <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}"
+                 style=" width:160px;margin-left: -10px;"/>
         </div>
-      </form>
+        <div class="jp-container">
+            <div class="sidebar-content">
+                <ul class="sidebar-list">
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">企业信息</a>
+                        <ul class="sub-menu">
+                            <li><a href="wanted.html" th:href="@{/backend/loadWanted}">招聘信息</a></li>
+                            <li><a href="enterprises.html" th:href=" @{/backend/loadEnterprises}">发布企业</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">banner图</a>
+                        <ul class="sub-menu">
+                            <li><a href="banners.html" th:href="@{/backend/load/banners}">banner图</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">考试指南</a>
+                        <ul class="sub-menu">
+                            <li><a href="examguide.html" th:href="@{/backend/loadExamGuide}">考试指南</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">友情链接</a>
+                        <ul class="sub-menu">
+                            <li><a href="link.html" th:href="@{/backend/loadLink}">友情链接</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">常见问题</a>
+                        <ul class="sub-menu" style="display:block;">
+                            <li class="on"><a href="qa.html" th:href="@{/backend/loadQa}">常见问题</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">资讯动态</a>
+                        <ul class="sub-menu">
+                            <li><a href="messagecontent.html" th:href="@{/backend/loadMessagecontent}">资讯动态</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">公司简介</a>
+                        <ul class="sub-menu">
+                            <li><a href="editenterprise.html" th:href="@{/backend/loadEditenterprise}">公司简介编辑</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">视频</a>
+                        <ul class="sub-menu">
+                            <li><a href="video.html" th:href="@{/backend/load/video}">教学视频</a></li>
+                            <li><a href="精彩录制.html">精彩录制</a></li>
+                            <li><a href="经验分享.html">经验分享</a></li>
+                            <li><a href="其他视频.html">其他视频</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">师资力量</a>
+                        <ul class="sub-menu">
+                            <li><a href="tutor.html" th:href="@{/backend/loadTutor}">师资力量</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
-  <!--/main-->
+    <!--/sidebar-->
+    <div class="main-wrap">
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html"
+                                                                 th:href="@{/backend/loadWanted}">网站维护</a><span
+                    class="crumb-step">&gt;</span><a href="qa.html"><span
+                    class="crumb-name">常见问题</span></a><span
+                    class="crumb-step">&gt;</span><span
+                    class="crumb-name">新建</span></div>
+        </div>
+        <div class="result-wrap">
+            <form action="#" th:action="@{/backend/addSaveQa}" method="post" id="myform" name="myform">
+                <div class="config-items">
+                    <div class="result-content">
+                        <table width="100%" class="insert-tab">
+                            <tbody>
+                            <tr>
+                                <th><i class="require-red">*</i>标题：</th>
+                                <td><input type="text" id="" value="" size="70" name="title" class="common-text"/></td>
+                            </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>描述：</th>
+                                <td><textarea name="content" class="common-textarea" id="content" cols="30"
+                                              style="width: 98%;" rows="10"></textarea></td>
+                            </tr>
+                            <tr>
+                                <th>置顶</th>
+                                <td><input type="radio" checked="checked" name="top"
+                                           value="1"/>&nbsp;是&nbsp;&nbsp;<input type="radio" name="top" value="0"/>&nbsp;否&nbsp;&nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td><input type="button" value="保存" class="btn btn-primary btn6 mr10" onclick="check_save(this)"/><input
+                                        type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--/main-->
 </div>
 </body>
 </html>

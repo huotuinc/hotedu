@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
@@ -7,12 +6,19 @@
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
     <script type="text/javascript" src="js/libs/jquery.min.js" th:src="@{/backend/js/libs/jquery.min.js}"></script>
-    <script type="text/javascript" src="js/libs/modernizr.min.js" th:src="@{/backend/js/libs/modernizr.min.js}"></script>
+    <script type="text/javascript" src="js/libs/modernizr.min.js"
+            th:src="@{/backend/js/libs/modernizr.min.js}"></script>
+    <!--警告框控件-->
+    <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
+    <script type="text/javascript" src="js/jquery.confirm.js" th:src="@{/backend/js/jquery.confirm.js}"></script>
     <!--滚动条-->
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
-    <script type="text/javascript" src="js/scroll/jquery.mousewheel.js" th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
-    <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js" th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
-    <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js" th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
+    <script type="text/javascript" src="js/scroll/jquery.mousewheel.js"
+            th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
+    <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js"
+            th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
+    <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
+            th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -22,7 +28,8 @@
             <ul class="navbar-list clearfix">
                 <li><a href="index.html" th:href="@{/}">首页</a></li>
                 <li><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a></li>
-                <li><a class="on" href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a></li>
+                <li><a class="on" href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a>
+                </li>
             </ul>
         </div>
         <div class="top-info-wrap">
@@ -37,26 +44,30 @@
 <div class="container clearfix">
     <div class="sidebar-wrap">
         <div class="sidebar-title">
-            <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}" style=" width:160px;margin-left: -10px;"/>
+            <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}"
+                 style=" width:160px;margin-left: -10px;"/>
         </div>
         <div class="jp-container">
-        <div class="sidebar-content">
-            <ul class="sidebar-list">
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">管理代理商</a>
-                    <ul class="sub-menu" style="display:block;">
-                        <li><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">申请领证列表</a></li>
-                        <li class="on"><a href="agents.html" th:href="@{/backend/loadAgents}">代理商列表</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <div class="sidebar-content">
+                <ul class="sidebar-list">
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">管理代理商</a>
+                        <ul class="sub-menu" style="display:block;">
+                            <li><a href="certificateapplications.html"
+                                   th:href="@{/backend/loadCertificateapplications}">申请领证列表</a></li>
+                            <li class="on"><a href="agents.html" th:href="@{/backend/loadAgents}">代理商列表</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
     <!--/sidebar-->
     <div class="main-wrap">
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="certificateapplications.html">管理代理商</a><span class="crumb-step">&gt;</span><a href="batch.html"><span class="crumb-name">班级详情</span></a><span class="crumb-step">&gt;</span><span class="crumb-name">发证</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="certificateapplications.html">管理代理商</a><span
+                    class="crumb-step">&gt;</span><a href="batch.html"><span class="crumb-name">班级详情</span></a><span
+                    class="crumb-step">&gt;</span><span class="crumb-name">发证</span></div>
         </div>
         <div class="result-wrap">
             <div class="imessage">
@@ -81,13 +92,16 @@
                             <tbody>
                             <tr>
                                 <th><i class="require-red">*</i>证书编号：</th>
-                                <td><input type="text" id="" value="" size="70" name="description" class="common-text"/></td>
+                                <td><input type="text" id="" value="" size="70" name="description" class="common-text"/>
+                                </td>
                             </tr>
                             <tr>
                                 <th></th>
-                                <td><input type="submit" value="提交" class="btn btn-primary btn6 mr10"/><input type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
+                                <td><input type="button" value="提交" class="btn btn-primary btn6 mr10" onclick="check_save(this)"/><input
+                                        type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
                             </tr>
-                            </tbody></table>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </form>

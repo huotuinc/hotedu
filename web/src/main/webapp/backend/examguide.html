@@ -6,15 +6,19 @@
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
     <script type="text/javascript" src="js/libs/jquery.min.js" th:src="@{/backend/js/libs/jquery.min.js}"></script>
-    <script type="text/javascript" src="js/libs/modernizr.min.js" th:src="@{/backend/js/libs/modernizr.min.js}"></script>
+    <script type="text/javascript" src="js/libs/modernizr.min.js"
+            th:src="@{/backend/js/libs/modernizr.min.js}"></script>
     <!--警告框控件-->
     <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
     <script type="text/javascript" src="js/jquery.confirm.js" th:src="@{/backend/js/jquery.confirm.js}"></script>
     <!--滚动条-->
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
-    <script type="text/javascript" src="js/scroll/jquery.mousewheel.js" th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
-    <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js" th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
-    <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js" th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
+    <script type="text/javascript" src="js/scroll/jquery.mousewheel.js"
+            th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
+    <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js"
+            th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
+    <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
+            th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -24,7 +28,8 @@
             <ul class="navbar-list clearfix">
                 <li><a href="index.html" th:href="@{/}">首页</a></li>
                 <li><a class="on" href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a></li>
-                <li><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a></li>
+                <li><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a>
+                </li>
             </ul>
         </div>
         <div class="top-info-wrap">
@@ -39,72 +44,73 @@
 <div class="container clearfix">
     <div class="sidebar-wrap">
         <div class="sidebar-title">
-            <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}" style=" width:160px;margin-left: -10px;"/>
+            <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}"
+                 style=" width:160px;margin-left: -10px;"/>
         </div>
         <div class="jp-container">
-        <div class="sidebar-content">
-            <ul class="sidebar-list">
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">企业信息</a>
-                    <ul class="sub-menu">
-                        <li><a href="wanted.html" th:href="@{/backend/loadWanted}">招聘信息</a></li>
-                        <li><a href="enterprises.html" th:href=" @{/backend/loadEnterprises}">发布企业</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">banner图</a>
-                    <ul class="sub-menu">
-                        <li><a href="banners.html" th:href="@{/backend/load/banners}">banner图</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">考试指南</a>
-                    <ul class="sub-menu" style="display:block;">
-                        <li class="on"><a href="examguide.html" th:href="@{/backend/loadExamGuide}">考试指南</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">友情链接</a>
-                    <ul class="sub-menu">
-                        <li><a href="link.html" th:href="@{/backend/loadLink}">友情链接</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">常见问题</a>
-                    <ul class="sub-menu">
-                        <li><a href="qa.html" th:href="@{/backend/loadQa}">常见问题</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">资讯动态</a>
-                    <ul class="sub-menu">
-                        <li><a href="messagecontent.html" th:href="@{/backend/loadMessagecontent}">资讯动态</a></li>
-                    </ul>
-                </li>
+            <div class="sidebar-content">
+                <ul class="sidebar-list">
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">企业信息</a>
+                        <ul class="sub-menu">
+                            <li><a href="wanted.html" th:href="@{/backend/loadWanted}">招聘信息</a></li>
+                            <li><a href="enterprises.html" th:href=" @{/backend/loadEnterprises}">发布企业</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">banner图</a>
+                        <ul class="sub-menu">
+                            <li><a href="banners.html" th:href="@{/backend/load/banners}">banner图</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">考试指南</a>
+                        <ul class="sub-menu" style="display:block;">
+                            <li class="on"><a href="examguide.html" th:href="@{/backend/loadExamGuide}">考试指南</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">友情链接</a>
+                        <ul class="sub-menu">
+                            <li><a href="link.html" th:href="@{/backend/loadLink}">友情链接</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">常见问题</a>
+                        <ul class="sub-menu">
+                            <li><a href="qa.html" th:href="@{/backend/loadQa}">常见问题</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">资讯动态</a>
+                        <ul class="sub-menu">
+                            <li><a href="messagecontent.html" th:href="@{/backend/loadMessagecontent}">资讯动态</a></li>
+                        </ul>
+                    </li>
 
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">公司简介</a>
-                    <ul class="sub-menu">
-                        <li><a href="editenterprise.html" th:href="@{/backend/loadEditenterprise}">公司简介编辑</a></li>
-                    </ul>
-                </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">公司简介</a>
+                        <ul class="sub-menu">
+                            <li><a href="editenterprise.html" th:href="@{/backend/loadEditenterprise}">公司简介编辑</a></li>
+                        </ul>
+                    </li>
 
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">视频</a>
-                    <ul class="sub-menu">
-                        <li><a href="video.html" th:href="@{/backend/load/video}">教学视频</a></li>
-                        <li><a href="精彩录制.html">精彩录制</a></li>
-                        <li><a href="经验分享.html">经验分享</a></li>
-                        <li><a href="其他视频.html">其他视频</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">师资力量</a>
-                    <ul class="sub-menu">
-                        <li><a href="tutor.html" th:href="@{/backend/loadTutor}">师资力量</a></li>
-                    </ul>
-                </li>
-            </ul>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">视频</a>
+                        <ul class="sub-menu">
+                            <li><a href="video.html" th:href="@{/backend/load/video}">教学视频</a></li>
+                            <li><a href="精彩录制.html">精彩录制</a></li>
+                            <li><a href="经验分享.html">经验分享</a></li>
+                            <li><a href="其他视频.html">其他视频</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">师资力量</a>
+                        <ul class="sub-menu">
+                            <li><a href="tutor.html" th:href="@{/backend/loadTutor}">师资力量</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -112,7 +118,8 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">考试指南</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span
+                    class="crumb-step">&gt;</span><span class="crumb-name">考试指南</span></div>
         </div>
         <div class="search-wrap">
             <div class="search-content">
@@ -120,7 +127,8 @@
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
-                            <td><input class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}" id="keywords" type="text"/></td>
+                            <td><input class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}"
+                                       id="keywords" type="text"/></td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
@@ -136,7 +144,6 @@
                 </div>
                 <div class="result-content">
                     <table id="examguideTable" class="result-tab" width="100%">
-                        <thead>
                         <tr>
                             <th style="width:80px">序号</th>
                             <th style="width:80px;">标题</th>
@@ -144,59 +151,27 @@
                             <th style="width:100px">置顶</th>
                             <th style="width:80px">操作</th>
                         </tr>
-                        </thead>
-                        <tbody>
                         <tr th:each="g:${allGuideList}">
                             <td th:text="${g.id}">01</td>
                             <td title="" th:text="${g.title}">mou某mou某mou某mou某</td>
                             <td th:text="${g.lastUploadDate}">2015.01.01/13.00.00</td>
                             <td th:text="${g.top}" title="">置顶</td>
-                            <td><a class="link-update" href="newguide.html" th:href="@{/backend/modifyExamGuide(id=${g.id})}">修改</a><br/>
+                            <td><a class="link-update" href="newguide.html"
+                                   th:href="@{/backend/modifyExamGuide(id=${g.id})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a>
-                                <a class="real-delete" href="#" th:href="@{/backend/delExamGuide(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
+                                <a class="real-delete" href="#"
+                                   th:href="@{/backend/delExamGuide(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}"></a>
                             </td>
                         </tr>
-                        </tbody>
-                        </table>
-                    <script>
-                        var arr = [{"title": "aaaaaaa", "date": "2015.01.01/13.00.00", "istop": "no"},{"title": "bbbbbbb", "date": "2015.01.02/14.00.00", "istop": "no"},{"title": "ccccccc", "date": "2015.01.01/13.00.00", "istop": "no"},{"title": "ddddddd", "date": "2015.01.02/14.00.00", "istop": "no"},{"title": "eeeeeee", "date": "2015.01.01/13.00.00", "istop": "no"},{"title": "fffffff", "date": "2015.01.02/14.00.00", "istop": "no"},{"title": "ggggggg", "date": "2015.01.01/13.00.00", "istop": "yes"},{"title": "hhhhhhh", "date": "2015.01.02/14.00.00", "istop": "no"}];
-
-                        var tpl = "<tr th:remove='all'><td>{{indexNum}}</td> <td>{{title}}</td> <td>{{date}}</td><td>{{istop}}</td><td><a class='link-update' href='newguide.html'>修改</a><br/><a class='delete' href='#' onClick='check_del(this)'>删除</a><a class='delete123'></a></td></tr>";
-
-                        $('table').on('click', '.delete123', function() {
-                            var $par = $(this).parent().parent(),
-                                    indexNum = $par.children().eq(0).text();
-                            if(arr.length > indexNum - 1) {
-                                arr.splice(indexNum - 1, 1);
-                                drawHTML();
-                            }else {
-                                alert('delete failed');
-                            }
-                        });
-
-                        function drawHTML(res) {
-                            var dArr = arr;
-                            if(res) {
-                                dArr = res;
-                            }
-                            var strArr = [],
-                                    i = 0,
-                                    len = dArr.length;
-                            for(; i < len; i++) {
-                                var a = dArr[i];
-                                strArr[strArr.length] = tpl.replace("{{indexNum}}", i+1)
-                                        .replace("{{title}}", a.title)
-                                        .replace("{{date}}", a.date)
-                                        .replace("{{istop}}", a.istop);
-                            }
-                            $('#examguideTable > tbody').html(strArr.join(''));
-                        }
-                        drawHTML();
-                    </script>
+                    </table>
                     <div class="list-page">
-                        <a href="#" th:href="@{/backend/pageExamGuide(n=${n}-1,keywords=${keywords},sumpage=${sumpage})}">上一页</a>
-                        <a href="#" th:href="@{/backend/pageExamGuide(n=${n}+1,keywords=${keywords},sumpage=${sumpage})}">下一页</a>
-                        <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span th:text="${sumpage}">1</span> 页</div>
+                        <a href="#"
+                           th:href="@{/backend/pageExamGuide(n=${n}-1,keywords=${keywords},sumpage=${sumpage})}">上一页</a>
+                        <a href="#"
+                           th:href="@{/backend/pageExamGuide(n=${n}+1,keywords=${keywords},sumpage=${sumpage})}">下一页</a>
+                        <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span
+                            th:text="${sumpage}">1</span> 页
+                    </div>
                 </div>
             </form>
         </div>

@@ -6,15 +6,19 @@
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
     <script type="text/javascript" src="js/libs/jquery.min.js" th:src="@{/backend/js/libs/jquery.min.js}"></script>
-    <script type="text/javascript" src="js/libs/modernizr.min.js" th:src="@{/backend/js/libs/modernizr.min.js}"></script>
+    <script type="text/javascript" src="js/libs/modernizr.min.js"
+            th:src="@{/backend/js/libs/modernizr.min.js}"></script>
     <!--警告框控件-->
     <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
     <script type="text/javascript" src="js/jquery.confirm.js" th:src="@{/backend/js/jquery.confirm.js}"></script>
     <!--滚动条-->
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
-    <script type="text/javascript" src="js/scroll/jquery.mousewheel.js" th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
-    <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js" th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
-    <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js" th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
+    <script type="text/javascript" src="js/scroll/jquery.mousewheel.js"
+            th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
+    <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js"
+            th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
+    <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
+            th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -24,7 +28,8 @@
             <ul class="navbar-list clearfix">
                 <li><a href="index.html" th:href="@{/}">首页</a></li>
                 <li><a class="on" href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a></li>
-                <li><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a></li>
+                <li><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a>
+                </li>
             </ul>
         </div>
         <div class="top-info-wrap">
@@ -39,7 +44,8 @@
 <div class="container clearfix">
     <div class="sidebar-wrap">
         <div class="sidebar-title">
-            <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}" style=" width:160px;margin-left: -10px;"/>
+            <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}"
+                 style=" width:160px;margin-left: -10px;"/>
         </div>
         <div class="jp-container">
             <div class="sidebar-content">
@@ -112,7 +118,8 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">常见问题</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span
+                    class="crumb-step">&gt;</span><span class="crumb-name">常见问题</span></div>
         </div>
         <div class="search-wrap">
             <div class="search-content">
@@ -120,7 +127,8 @@
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
-                            <td><input class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}" id="keywords" type="text"/></td>
+                            <td><input class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}"
+                                       id="keywords" type="text"/></td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
@@ -143,24 +151,51 @@
                             <th style="width:100px">置顶</th>
                             <th style="width:80px">操作</th>
                         </tr>
-                        <tr th:remove="all"><td>01</td><td title="">mou某mou某mou某mou某</td><td>2015.01.01/13.00.00</td><td title=""></td><td><a class="link-update" href="newqa.html">修改</a><br/><a class="link-delete" href="#">删除</a></td></tr>
-                        <tr th:remove="all"><td>01</td><td title="">mou某mou某mou某mou某</td><td>2015.01.01/13.00.00</td><td title=""></td><td><a class="link-update" href="newqa.html">修改</a><br/><a class="link-delete" href="#">删除</a></td></tr>
-                        <tr th:remove="all"><td>01</td><td title="">mou某mou某mou某mou某</td><td>2015.01.01/13.00.00</td><td title=""></td><td><a class="link-update" href="newqa.html">修改</a><br/><a class="link-delete" href="#">删除</a></td></tr>
+                        <tr th:remove="all">
+                            <td>01</td>
+                            <td title="">mou某mou某mou某mou某</td>
+                            <td>2015.01.01/13.00.00</td>
+                            <td title=""></td>
+                            <td><a class="link-update" href="newqa.html">修改</a><br/><a class="link-delete"
+                                                                                       href="#">删除</a></td>
+                        </tr>
+                        <tr th:remove="all">
+                            <td>01</td>
+                            <td title="">mou某mou某mou某mou某</td>
+                            <td>2015.01.01/13.00.00</td>
+                            <td title=""></td>
+                            <td><a class="link-update" href="newqa.html">修改</a><br/><a class="link-delete"
+                                                                                       href="#">删除</a></td>
+                        </tr>
+                        <tr th:remove="all">
+                            <td>01</td>
+                            <td title="">mou某mou某mou某mou某</td>
+                            <td>2015.01.01/13.00.00</td>
+                            <td title=""></td>
+                            <td><a class="link-update" href="newqa.html">修改</a><br/><a class="link-delete"
+                                                                                       href="#">删除</a></td>
+                        </tr>
                         <tr th:each="g:${allQaList}">
                             <td th:text="${g.id}">01</td>
                             <td title="" th:text="${g.title}">mou某mou某mou某mou某</td>
                             <td th:text="${g.lastUploadDate}">2015.01.01/13.00.00</td>
                             <td th:text="${g.top}" title="">置顶</td>
-                            <td><a class="link-update" href="newqa.html" th:href="@{/backend/modifyQa(id=${g.id})}">修改</a><br/>
+                            <td><a class="link-update" href="newqa.html"
+                                   th:href="@{/backend/modifyQa(id=${g.id})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a>
-                                <a class="real-delete" href="#" th:href="@{/backend/delQa(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
+                                <a class="real-delete" href="#"
+                                   th:href="@{/backend/delQa(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}"></a>
                             </td>
                         </tr>
                     </table>
                     <div class="list-page">
-                        <a href="#" th:href="@{/backend/pageQa(n=${n}-1,keywords=${keywords},sumpage=${sumpage})}">上一页</a>
-                        <a href="#" th:href="@{/backend/pageQa(n=${n}+1,keywords=${keywords},sumpage=${sumpage})}">下一页</a>
-                        <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span th:text="${sumpage}">1</span> 页</div>
+                        <a href="#"
+                           th:href="@{/backend/pageQa(n=${n}-1,keywords=${keywords},sumpage=${sumpage})}">上一页</a>
+                        <a href="#"
+                           th:href="@{/backend/pageQa(n=${n}+1,keywords=${keywords},sumpage=${sumpage})}">下一页</a>
+                        <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span
+                            th:text="${sumpage}">1</span> 页
+                    </div>
                 </div>
             </form>
         </div>

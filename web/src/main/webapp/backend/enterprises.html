@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
@@ -7,19 +6,20 @@
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
     <script type="text/javascript" src="js/libs/jquery.min.js" th:src="@{/backend/js/libs/jquery.min.js}"></script>
-    <script type="text/javascript" src="js/libs/modernizr.min.js" th:src="@{/backend/js/libs/modernizr.min.js}"></script>
+    <script type="text/javascript" src="js/libs/modernizr.min.js"
+            th:src="@{/backend/js/libs/modernizr.min.js}"></script>
     <!--日期控件-->
     <script type="text/javascript" src="js/date/jquery_ui.js" th:src="@{/backend/js/date/jquery_ui.js}"></script>
     <script type="text/javascript" src="js/date/mydate.js" th:src="@{/backend/js/date/mydate.js}"></script>
     <link rel="stylesheet" type="text/css" href="css/jquery_ui.css" th:href="@{/backend/css/jquery_ui.css}"/>
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#searchSort").bind("change",function(){
-                if($(this).val()==3){
+            $("#searchSort").bind("change", function () {
+                if ($(this).val() == 3) {
                     $("#vedio_nodate").hide();
                     $("#vedio_date").show();
                 }
-                else{
+                else {
                     $("#vedio_nodate").show();
                     $("#vedio_date").hide();
                 }
@@ -28,9 +28,12 @@
     </script>
     <!--滚动条-->
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
-    <script type="text/javascript" src="js/scroll/jquery.mousewheel.js" th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
-    <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js" th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
-    <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js" th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
+    <script type="text/javascript" src="js/scroll/jquery.mousewheel.js"
+            th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
+    <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js"
+            th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
+    <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
+            th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -40,7 +43,8 @@
             <ul class="navbar-list clearfix">
                 <li><a href="index.html" th:href="@{/}">首页</a></li>
                 <li><a class="on" href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a></li>
-                <li><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a></li>
+                <li><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a>
+                </li>
             </ul>
         </div>
         <div class="top-info-wrap">
@@ -55,72 +59,74 @@
 <div class="container clearfix">
     <div class="sidebar-wrap">
         <div class="sidebar-title">
-            <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}" style=" width:160px;margin-left: -10px;"/>
+            <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}"
+                 style=" width:160px;margin-left: -10px;"/>
         </div>
         <div class="jp-container">
-        <div class="sidebar-content">
-            <ul class="sidebar-list">
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">企业信息</a>
-                    <ul class="sub-menu" style="display:block;">
-                        <li><a href="wanted.html" th:href="@{/backend/loadWanted}">招聘信息</a></li>
-                        <li class="on"><a href="enterprises.html" th:href=" @{/backend/loadEnterprises}">发布企业</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">banner图</a>
-                    <ul class="sub-menu">
-                        <li><a href="banners.html" th:href="@{/backend/load/banners}">banner图</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">考试指南</a>
-                    <ul class="sub-menu">
-                        <li><a href="examguide.html" th:href="@{/backend/loadExamGuide}">考试指南</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">友情链接</a>
-                    <ul class="sub-menu">
-                        <li><a href="link.html" th:href="@{/backend/loadLink}">友情链接</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">常见问题</a>
-                    <ul class="sub-menu">
-                        <li><a href="qa.html" th:href="@{/backend/loadQa}">常见问题</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">资讯动态</a>
-                    <ul class="sub-menu">
-                        <li><a href="messagecontent.html" th:href="@{/backend/loadMessagecontent}">资讯动态</a></li>
-                    </ul>
-                </li>
+            <div class="sidebar-content">
+                <ul class="sidebar-list">
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">企业信息</a>
+                        <ul class="sub-menu" style="display:block;">
+                            <li><a href="wanted.html" th:href="@{/backend/loadWanted}">招聘信息</a></li>
+                            <li class="on"><a href="enterprises.html" th:href=" @{/backend/loadEnterprises}">发布企业</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">banner图</a>
+                        <ul class="sub-menu">
+                            <li><a href="banners.html" th:href="@{/backend/load/banners}">banner图</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">考试指南</a>
+                        <ul class="sub-menu">
+                            <li><a href="examguide.html" th:href="@{/backend/loadExamGuide}">考试指南</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">友情链接</a>
+                        <ul class="sub-menu">
+                            <li><a href="link.html" th:href="@{/backend/loadLink}">友情链接</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">常见问题</a>
+                        <ul class="sub-menu">
+                            <li><a href="qa.html" th:href="@{/backend/loadQa}">常见问题</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">资讯动态</a>
+                        <ul class="sub-menu">
+                            <li><a href="messagecontent.html" th:href="@{/backend/loadMessagecontent}">资讯动态</a></li>
+                        </ul>
+                    </li>
 
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">公司简介</a>
-                    <ul class="sub-menu">
-                        <li><a href="editenterprise.html" th:href="@{/backend/loadEditenterprise}">公司简介编辑</a></li>
-                    </ul>
-                </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">公司简介</a>
+                        <ul class="sub-menu">
+                            <li><a href="editenterprise.html" th:href="@{/backend/loadEditenterprise}">公司简介编辑</a></li>
+                        </ul>
+                    </li>
 
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">视频</a>
-                    <ul class="sub-menu">
-                        <li><a href="video.html" th:href="@{/backend/load/video}">教学视频</a></li>
-                        <li><a href="精彩录制.html">精彩录制</a></li>
-                        <li><a href="经验分享.html">经验分享</a></li>
-                        <li><a href="其他视频.html">其他视频</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">师资力量</a>
-                    <ul class="sub-menu">
-                        <li><a href="tutor.html" th:href="@{/backend/loadTutor}">师资力量</a></li>
-                    </ul>
-                </li>
-            </ul>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">视频</a>
+                        <ul class="sub-menu">
+                            <li><a href="video.html" th:href="@{/backend/load/video}">教学视频</a></li>
+                            <li><a href="精彩录制.html">精彩录制</a></li>
+                            <li><a href="经验分享.html">经验分享</a></li>
+                            <li><a href="其他视频.html">其他视频</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">师资力量</a>
+                        <ul class="sub-menu">
+                            <li><a href="tutor.html" th:href="@{/backend/loadTutor}">师资力量</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -128,7 +134,8 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">发布企业</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span
+                    class="crumb-step">&gt;</span><span class="crumb-name">发布企业</span></div>
         </div>
         <div class="search-wrap">
             <div class="search-content">
@@ -137,7 +144,8 @@
                         <tr>
                             <th width="10"></th>
                             <td>
-                                <select name="search-sort" id="searchSort" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
+                                <select name="search-sort" id="searchSort"
+                                        style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
                                     <option value="0">全部</option>
                                     <option value="1">用户名</option>
                                     <option value="2">企业</option>
@@ -146,7 +154,8 @@
                             </td>
                             <td>
                                 <div id="vedio_nodate"><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"/></div>
-                                <div id="vedio_date" style="display:none;"><input id="dateStart" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input id="dateEnd" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/></div>
+                                <div id="vedio_date" style="display:none;"><input id="dateStart" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input id="dateEnd" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/>
+                                </div>
                             </td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
                         </tr>
@@ -158,7 +167,7 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="newenterprise.html"><i class="icon-font"></i>新建企业</a>
+                        <a href="newenterprise.html"><i class="icon-font">+</i>新建企业</a>
                     </div>
                 </div>
                 <div class="result-content">
@@ -173,30 +182,34 @@
                         <tr>
                             <td>01</td>
                             <td title="">小薇</td>
-                            <td >粉猫</td>
+                            <td>粉猫</td>
                             <td>2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="newenterprise.html">修改</a><br/><a class="link-update" >删除</a></td>
+                            <td><a class="link-update" href="newenterprise.html">修改</a><br/><a
+                                    class="link-update">删除</a></td>
                         </tr>
                         <tr>
                             <td>01</td>
                             <td title="">小薇</td>
-                            <td >粉猫</td>
+                            <td>粉猫</td>
                             <td>2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="newenterprise.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
+                            <td><a class="link-update" href="newenterprise.html">修改</a><br/><a class="link-update"
+                                                                                               href="#">删除</a></td>
                         </tr>
                         <tr>
                             <td>01</td>
                             <td title="">小薇</td>
-                            <td >粉猫</td>
+                            <td>粉猫</td>
                             <td>2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="newenterprise.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
+                            <td><a class="link-update" href="newenterprise.html">修改</a><br/><a class="link-update"
+                                                                                               href="#">删除</a></td>
                         </tr>
                         <tr>
                             <td>01</td>
                             <td title="">小薇</td>
-                            <td >粉猫</td>
+                            <td>粉猫</td>
                             <td>2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="newenterprise.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
+                            <td><a class="link-update" href="newenterprise.html">修改</a><br/><a class="link-update"
+                                                                                               href="#">删除</a></td>
                         </tr>
                     </table>
                     <div class="list-page"> 2 条 1/1 页</div>

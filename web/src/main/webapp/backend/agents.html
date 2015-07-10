@@ -6,12 +6,16 @@
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
     <script type="text/javascript" src="js/libs/jquery.min.js" th:src="@{/backend/js/libs/jquery.min.js}"></script>
-    <script type="text/javascript" src="js/libs/modernizr.min.js" th:src="@{/backend/js/libs/modernizr.min.js}"></script>
+    <script type="text/javascript" src="js/libs/modernizr.min.js"
+            th:src="@{/backend/js/libs/modernizr.min.js}"></script>
     <!--滚动条-->
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
-    <script type="text/javascript" src="js/scroll/jquery.mousewheel.js" th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
-    <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js" th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
-    <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js" th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
+    <script type="text/javascript" src="js/scroll/jquery.mousewheel.js"
+            th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
+    <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js"
+            th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
+    <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
+            th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -21,7 +25,8 @@
             <ul class="navbar-list clearfix">
                 <li><a href="index.html" th:href="@{/}">首页</a></li>
                 <li><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a></li>
-                <li><a class="on" href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a></li>
+                <li><a class="on" href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a>
+                </li>
             </ul>
         </div>
         <div class="top-info-wrap">
@@ -36,20 +41,22 @@
 <div class="container clearfix">
     <div class="sidebar-wrap">
         <div class="sidebar-title">
-            <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}" style=" width:160px;margin-left: -10px;"/>
+            <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}"
+                 style=" width:160px;margin-left: -10px;"/>
         </div>
         <div class="jp-container">
-        <div class="sidebar-content">
-            <!---->
-            <ul class="sidebar-list">
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">管理代理商</a>
-                    <ul class="sub-menu" style="display:block;">
-                        <li><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">申请领证列表</a></li>
-                        <li class="on"><a href="agents.html" th:href="@{/backend/loadAgents}">代理商列表</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <div class="sidebar-content">
+                <!---->
+                <ul class="sidebar-list">
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">管理代理商</a>
+                        <ul class="sub-menu" style="display:block;">
+                            <li><a href="certificateapplications.html"
+                                   th:href="@{/backend/loadCertificateapplications}">申请领证列表</a></li>
+                            <li class="on"><a href="agents.html" th:href="@{/backend/loadAgents}">代理商列表</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
             <!---->
         </div>
@@ -57,7 +64,8 @@
     <!--/sidebar-->
     <div class="main-wrap">
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="certificateapplications.html">管理代理商</a><span class="crumb-step">&gt;</span><span class="crumb-name">代理商列表</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="certificateapplications.html">管理代理商</a><span
+                    class="crumb-step">&gt;</span><span class="crumb-name">代理商列表</span></div>
         </div>
         <div class="search-wrap">
             <div class="search-content">
@@ -65,8 +73,12 @@
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
-                            <td><select name="search-sort" id="" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle"><option value="">区域</option></select></td>
-                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"/></td>
+                            <td><select name="search-sort" id=""
+                                        style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
+                                <option value="">区域</option>
+                            </select></td>
+                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" id=""
+                                       type="text"/></td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
@@ -98,22 +110,24 @@
                             <td title="">某某</td>
                             <td title="">asfdafds</td>
                             <td title="">总级代理</td>
-                            <td >杭州</td>
+                            <td>杭州</td>
                             <td>15068564912</td>
-                            <td>160本 </td>
+                            <td>160本</td>
                             <td>1600本</td>
-                            <td><a class="link-update" href="agent.html">查看</a><br/><a class="link-update" href="#">修改</a></td>
+                            <td><a class="link-update" href="agent.html">查看</a><br/><a class="link-update"
+                                                                                       href="#">修改</a></td>
                         </tr>
                         <tr>
                             <td>01</td>
                             <td title="">某某</td>
                             <td title="">asfdafds</td>
                             <td title="">总级代理</td>
-                            <td >杭州</td>
+                            <td>杭州</td>
                             <td>15068564912</td>
-                            <td>160本 </td>
+                            <td>160本</td>
                             <td>1600本</td>
-                            <td><a class="link-update" href="agent.html">查看</a><br/><a class="link-update" href="#">修改</a></td>
+                            <td><a class="link-update" href="agent.html">查看</a><br/><a class="link-update"
+                                                                                       href="#">修改</a></td>
                         </tr>
                     </table>
                     <div class="list-page"> 2 条 1/1 页</div>

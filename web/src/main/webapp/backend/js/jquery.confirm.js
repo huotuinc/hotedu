@@ -87,15 +87,6 @@
 })(jQuery);
 
 $(document).ready(function () {
-    //静态页面弹出添加时后应有
-    //$("#link-add").bind("click", function () {
-    //    $.MsgBox.Alert("消息", "添加成功！");
-    //});
-//              回调函数可以直接写方法function(){}
-    $(".link-delete").bind("click", function () {
-        $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
-            alert("你居然真的删除了..."); });
-    });
             //静态页面弹出添加时后应有
             //$("#link-add").bind("click", function () {
             //    $.MsgBox.Alert("消息", "添加成功！");
@@ -103,7 +94,7 @@ $(document).ready(function () {
 //              回调函数可以直接写方法function(){}
             $(".link-delete").bind("click", function () {
                 $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
-                    alert("你居然真的删除了..."); });
+                    /*alert("你居然真的删除了...");*/ });
             });
 //            function test() {
 //                alert("你点击了确定,进行了修改");
@@ -124,7 +115,8 @@ function check_del(h){
 }
 
 function check_save(h){
-    $.MsgBox.Confirm("温馨提示", "即将保存内容，确定继续吗？", function () { $(h).parent().parent().parent().parent().parent().parent().parent().submit();});
+    //$.MsgBox.Confirm("温馨提示", "即将保存内容，确定继续吗？", function () { $(h).parent().parent().parent().parent().parent().parent().parent().submit();});
+    $.MsgBox.Confirm("温馨提示", "即将保存内容，确定继续吗？", function () { $(h).parents('#myform').sumbit()});
 }
 
 function check_add(){
