@@ -176,7 +176,7 @@
                         <tr th:each="g:${allQaList}">
                             <td th:text="${g.id}">01</td>
                             <td title="" th:text="${g.title}">mou某mou某mou某mou某</td>
-                            <td th:text="${g.lastUploadDate}">2015.01.01/13.00.00</td>
+                            <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/hh.mm.ss')}">2015.01.01/13.00.00</td>
                             <td th:text="${g.top}" title="">置顶</td>
                             <td><a class="link-update" href="newqa.html"
                                    th:href="@{/backend/modifyQa(id=${g.id})}">修改</a><br/>
