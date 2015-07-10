@@ -23,8 +23,8 @@ public class BannersService {
     @Autowired
     private BannersRepository bannersRepository;
 
-    //返回所有考试指南
-    public Page<Banners> loadExamGuide(int n,int pagesize){
+    //返回所有banners
+    public Page<Banners> loadBanners(int n,int pagesize){
         return bannersRepository.findAll(new PageRequest(n,pagesize));
     }
 

@@ -2,7 +2,6 @@ package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.Banners;
 import com.huotu.hotedu.service.BannersService;
-import com.huotu.hotedu.service.ExamGuideService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -17,24 +16,38 @@ import java.util.Date;
  * @author shiliting shiliting at gmail.com
  */
 @Controller
-public class BannersController {
+ public class BannersController {
     @Autowired
     private BannersService BannersService;
     public static final int PAGE_SIZE=10;//每张页面的记录数
-    //后台显示所有Banner图
+
+//    //后台显示所有Banner图
+//    @RequestMapping("/backend/loadBanners")
+//    public String loadBannersController() {
+//        return "/backend/banners";
+//    }
+//
+//    //后台显示检索过之后的Banners图
+//    @RequestMapping("/backend/searchBanners")
+//    public String searchBannersController() {
+//        return "/backend/banners";
+//    }
+
+    //后台单击banners链接显示的消息
     @RequestMapping("/backend/loadBanners")
-    public String loadBannersController() {
+    public String loadBanners(Model model){
+        Page<Banners> pages=BannersService.loadBanners(0, PAGE_SIZE);
+        long sumElement=pages.getTotalElements();
+        model.addAttribute("allbannersList",pages);
+        model.addAttribute("sumpage",sumElement/pages.getSize()+(sumElement%pages.getSize()>0? 1:0));
+        model.addAttribute("n",0);
+        model.addAttribute("keywords","");
+        model.addAttribute("sumElement",sumElement);
         return "/backend/banners";
     }
 
-    //后台显示检索过之后的Banners图
+    //后台单机搜索按钮显示的banners消息
     @RequestMapping("/backend/searchBanners")
-    public String searchBannersController() {
-        return "/backend/banners";
-    }
-
-    //后台单机搜索按钮显示的Banners消息
-    @RequestMapping("/backend/searchBanners1")
     public String searchBanners(String keywords,Model model){
         Page<Banners> pages=BannersService.searchBanners(0, PAGE_SIZE, keywords);
         long sumElement=pages.getTotalElements();
@@ -43,10 +56,10 @@ public class BannersController {
         model.addAttribute("n",0);
         model.addAttribute("keywords",keywords);
         model.addAttribute("sumElement",sumElement);
-        return "/backend/banners";
+        return "/backend/loadbanners";
     }
 
-    //后台单击Banners的分页
+    //后台单击banners的分页
     @RequestMapping("/backend/pageBanners")
     public String pageBanners(int n,int sumpage,String keywords,Model model){
         //如果已经到分页的第一页了，将页数设置为0
@@ -74,7 +87,7 @@ public class BannersController {
 
         }
         sumElement--;
-        Page<Banners> pages = BannersService.searchBanners(n, PAGE_SIZE, keywords);
+        Page<Banners> pages =BannersService.searchBanners(n, PAGE_SIZE, keywords);
         model.addAttribute("sumpage",sumpage);
         model.addAttribute("allbannersList",pages);
         model.addAttribute("n",n);
@@ -84,8 +97,10 @@ public class BannersController {
     }
 
 
+
+
     //后台单击新建按钮
-    @RequestMapping("/backend/addbanners")
+    @RequestMapping("/backend/addBanners")
     public String addBanners(Model model){
         return "/backend/newbanners";
     }
@@ -124,5 +139,4 @@ public class BannersController {
         return "redirect:/backend/loadBanners";
     }
 }
-
 
