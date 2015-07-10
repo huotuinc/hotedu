@@ -4,6 +4,7 @@ import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.repository.ExamGuideRepository;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.test.TestWebConfig;
+import com.huotu.hotedu.web.DispatcherServletInitializer;
 import libspringtest.SpringWebTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
  */
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestWebConfig.class)
+@ContextConfiguration(classes = DispatcherServletInitializer.DispatcherServletInitializerConfig.class)
 @WebAppConfiguration
 public class LoginTest extends SpringWebTest {
 

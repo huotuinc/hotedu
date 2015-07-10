@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * Created by shiliting on 2015/6/25.
  *
@@ -17,7 +15,7 @@ import java.util.List;
 public interface ExamGuideRepository extends JpaRepository<ExamGuide,Long>,ClassicsRepository<ExamGuide>,JpaSpecificationExecutor<ExamGuide>{
 
 //
-//    List<ExamGuide> findBy
+//    List<Banners> findBy
 
 
 }

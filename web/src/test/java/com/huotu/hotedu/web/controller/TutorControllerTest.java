@@ -8,6 +8,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.util.StreamUtils;
+
+import java.io.ByteArrayOutputStream;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.fileUpload;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -23,9 +26,12 @@ public class TutorControllerTest extends SpringWebTest{
 
     @Test
     public void testAddSaveTutor() throws Exception {
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        StreamUtils.copy(getClass().getResourceAsStream("test.jpg"),buffer);
+
         mockMvc.perform(
                 fileUpload("/backend/addSaveTutor")
-                .file("smallimg",new byte[]{1,2,3})
+                .file("smallimg",buffer.toByteArray())
         );
     }
     @Test

@@ -20,6 +20,7 @@ public class ExamGuideController {
     @Autowired
     private ExamGuideService examGuideService;
     public static final int PAGE_SIZE=10;//每张页面的记录数
+
     //后台单击考试指南链接显示的消息
     @RequestMapping("/backend/loadExamGuide")
     public String loadExamGuide(Model model){
