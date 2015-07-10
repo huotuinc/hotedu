@@ -28,13 +28,13 @@ public class BannersController {
     }
 
     //后台显示检索过之后的Banners图
-    @RequestMapping("/backend/searchBanners1")
+    @RequestMapping("/backend/searchBanners")
     public String searchBannersController() {
         return "/backend/banners";
     }
 
     //后台单机搜索按钮显示的Banners消息
-    @RequestMapping("/backend/searchBanners2")
+    @RequestMapping("/backend/searchBanners1")
     public String searchBanners(String keywords,Model model){
         Page<Banners> pages=BannersService.searchBanners(0, PAGE_SIZE, keywords);
         long sumElement=pages.getTotalElements();
