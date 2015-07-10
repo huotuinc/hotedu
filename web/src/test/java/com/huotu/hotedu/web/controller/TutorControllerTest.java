@@ -38,4 +38,8 @@ public class TutorControllerTest extends SpringWebTest{
     public  void testDelTutor() throws Exception{
         mockMvc.perform(get("/backend/delTutor?n=0&id=2&sumpage=1&searchSort='all'&keywords=''&dateStart=''&dateEnd=''&sumElement=4"));
     }
+    @Test
+    public  void testSaveTutorByTime() throws Exception{
+        mockMvc.perform(get("/backend/searchTutor?searchSort='all'&keywords=''&dateStart=''&dateEnd=''"));
+    }
 }

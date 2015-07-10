@@ -48,9 +48,14 @@ public class TutorController {
     //后台单机搜索按钮显示的师资力量消息
     @RequestMapping("/backend/searchTutor")
     public String searchTutor(String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
+        System.out.println(dateEnd.equals(null));
+        System.out.println(dateStart.equals(null));
         Page<Tutor> pages=null;
         if("date".equals(searchSort)){
-
+            if(dateStart==null&&dateEnd==null){
+                System.out.println("时间没有");
+              return "redirect:/backend/loadTutor";
+            }
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
             try {
                 Date DStart=sdf.parse(dateStart);
@@ -63,6 +68,7 @@ public class TutorController {
         }else if("all".equals(searchSort)){
             System.out.println("进入all");
             pages=tutorService.searchTutorAll(0,PAGE_SIZE,keywords);
+            System.out.println("进出all");
 
         }else{
             pages=tutorService.searchTutorType(0,PAGE_SIZE,keywords,searchSort);
@@ -78,40 +84,54 @@ public class TutorController {
         model.addAttribute("keywords",keywords);
         model.addAttribute("dateStart",dateStart);
         model.addAttribute("dateEnd",dateEnd);
+        model.addAttribute("searchSort",searchSort);
         model.addAttribute("sumElement",sumElement);
         return "/backend/tutor";
     }
 
     //后台单击师资力量的分页
     @RequestMapping("/backend/pageTutor")
-    public String pageTutor(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Model model){
+    public String pageTutor(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
         //如果已经到分页的第一页了，将页数设置为0
+      System.out.println("检索类型："+searchSort);
         if (n < 0){
             n++;
         }else if(n + 1 > sumpage){//如果超过分页的最后一页了，将页数设置为最后一页
             n--;
         }
         Page<Tutor> pages=null;
+        System.out.println("进入pageTutor ,获取n");
         if("date".equals(searchSort)){
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
             try {
                 Date DStart=sdf.parse(dateStart);
                 Date DEnd=sdf.parse(dateEnd);
+                System.out.println("进入pageTutor ,进入date搜索");
                 pages=tutorService.searchTutorDate(n,PAGE_SIZE,DStart,DEnd);
+                System.out.println("进入pageTutor ,date搜索完毕");
             } catch (ParseException e) {
                 e.printStackTrace();
                 //日期格式不正确
             }
         }else if("all".equals(searchSort)){
+            System.out.println("进入pageTutor ,all搜索开始");
             pages=tutorService.searchTutorAll(n,PAGE_SIZE,keywords);
+            System.out.println("进入pageTutor ,all搜索结束");
 
         }else{
+            System.out.println("进入pageTutor ,分类搜索开始:"+searchSort);
             pages=tutorService.searchTutorType(n,PAGE_SIZE,keywords,searchSort);
+            System.out.println("进入pageTutor ,分类搜索结束:"+searchSort);
         }
+        if(pages==null){
+            throw new Exception("没有数据！");
+        }
+        System.out.println("进入pageTutor ,pages");
         model.addAttribute("allTutorList",pages);
         model.addAttribute("sumpage",sumpage);
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
+        model.addAttribute("searchSort",searchSort);
         model.addAttribute("dateStart",dateStart);
         model.addAttribute("dateEnd",dateEnd);
         model.addAttribute("sumElement",pages.getTotalElements());
@@ -121,7 +141,6 @@ public class TutorController {
     //后台单击删除按钮返回的信息
     @RequestMapping("/backend/delTutor")
     public String delTutor(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Long id,Long sumElement,Model model){
-        System.out.println("第几页:"+n+"类型："+searchSort+"关键字："+keywords+"开始时间："+dateStart+"结束时间："+dateEnd+"总记录数："+sumElement+"总页数："+sumpage);
         File file=new File(tutorService.findOneById(id).getPictureUri());//创建要删除的文件
         tutorService.delTutor(id);//删除记录
         if(file.exists()){
@@ -136,7 +155,7 @@ public class TutorController {
 
         Page<Tutor> pages=null;
         if("date".equals(searchSort)){
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
             try {
                 Date DStart=sdf.parse(dateStart);
                 Date DEnd=sdf.parse(dateEnd);
@@ -216,16 +235,37 @@ public class TutorController {
     }
 
 
-//    //后台单击修改保存按钮
-//    @RequestMapping("/backend/modifysave/tutor")
-//    public String ModifySaveTutor(Long id,String title,String content,Boolean top,Model model){
-////        Tutor tutor=tutorService.findOneById(id);
-////        tutor.setTitle(title);
-////        tutor.setContent(content);
-////        tutor.setTop(top);
-////        tutor.setLastUploadDate(new Date());
-////        tutorService.modify(tutor);
-//        return "redirect:/backend/loadTutor";
-//    }
+    //后台单击修改保存按钮
+    @RequestMapping("/backend/modifySaveTutor")
+    public String ModifySaveTutor(Long id,String name,String introduction,String qualification,String area,@RequestParam("smallimg") MultipartFile file,Model model) throws Exception{
+        if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+        System.out.println("文件大小：" + file.getSize());
+        if(file.getSize()==0){throw new Exception("文件为空！");}
+        if(file.getSize()>1024*1024*5){throw new Exception("文件太大");}
+        File delfile=new File(tutorService.findOneById(id).getPictureUri());//创建要删除的文件
+        if(delfile.exists()){
+            delfile.delete();//删除文件
+        }
+        String filePath=new Date().getTime()+String.valueOf(file.getOriginalFilename());
+        File tempFile = new File(FILE_PATH, filePath);
+        if (!tempFile.getParentFile().exists()) {
+            tempFile.getParentFile().mkdir();
+        }
+        if (!tempFile.exists()) {
+            tempFile.createNewFile();
+        }
+        file.transferTo(tempFile);//保存图片
+
+
+        Tutor tutor=tutorService.findOneById(id);
+        tutor.setPictureUri(FILE_PATH+filePath);
+        tutor.setQualification(qualification);
+        tutor.setArea(area);
+        tutor.setIntroduction(introduction);
+        tutor.setName(name);
+        tutor.setLastUploadDate(new Date());
+        tutorService.modify(tutor);
+        return "redirect:/backend/loadTutor";
+    }
 
 }
