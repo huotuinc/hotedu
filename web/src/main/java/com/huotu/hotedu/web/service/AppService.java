@@ -130,18 +130,19 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 }
             }
 
-//            if (tutorRepository.count()==0){
-//                Tutor tutor;
-//                for(int i=0;i<7;i++){
-//                    tutor=new Tutor();
-//                    tutor.setName("tutor"+i);
-//                    tutor.setIntroduction("i am a tutor my name is"+i);
-//                    tutor.setArea("杭州");
-//                    tutor.setQualification("教授");
-//                    tutor.setPicture("slt.jpg");
-//                    tutorRepository.save(tutor);
-//                }
-//            }
+            if (tutorRepository.count()==0){
+                Tutor tutor;
+                for(int i=0;i<27;i++){
+                    tutor=new Tutor();
+                    tutor.setName("tutor"+i);
+                    tutor.setIntroduction("i am a tutor my name is"+i);
+                    tutor.setArea("杭州");
+                    tutor.setQualification("教授");
+                    tutor.setLastUploadDate(new Date(System.currentTimeMillis()+i*60*60*1000));
+                    tutor.setPictureUri("slt.jpg");
+                    tutorRepository.save(tutor);
+                }
+            }
 
 
             if (qaRepository.count()==0){

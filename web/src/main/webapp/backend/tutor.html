@@ -144,8 +144,8 @@
                                 </select>
                             </td>
                             <td>
-                                <div id="vedio_nodate"><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"/></div>
-                                <div id="vedio_date" style="display:none;"><input id="dateStart" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input id="dateEnd" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/></div>
+                                <div id="vedio_nodate"><input class="common-text" placeholder="关键字" name="keywords" value="" th:value="${keywords}" id="" type="text"/></div>
+                                <div id="vedio_date" style="display:none;"><input id="dateStart" th:value="${dateStart}" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input id="dateEnd" th:value="${dateEnd}" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/></div>
                             </td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
                         </tr>
@@ -179,6 +179,7 @@
                             <td><a class="link-update" href="newtutor.html">修改</a><br/><a class="link-delete" href="#">删除</a></td>
                         </tr>
                         <tr th:each="g:${allTutorList}">
+                            <td style="display: none" th:text="${searchSort}">01</td>
                             <td th:text="${g.id}">01</td>
                             <td th:text="${g.name}"></td>
                             <td th:text="${g.qualification}"></td>

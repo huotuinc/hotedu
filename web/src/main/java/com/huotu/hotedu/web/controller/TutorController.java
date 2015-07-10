@@ -50,7 +50,8 @@ public class TutorController {
     public String searchTutor(String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
         Page<Tutor> pages=null;
         if("date".equals(searchSort)){
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
             try {
                 Date DStart=sdf.parse(dateStart);
                 Date DEnd=sdf.parse(dateEnd);
@@ -60,6 +61,7 @@ public class TutorController {
                 //日期格式不正确
             }
         }else if("all".equals(searchSort)){
+            System.out.println("进入all");
             pages=tutorService.searchTutorAll(0,PAGE_SIZE,keywords);
 
         }else{
@@ -119,9 +121,12 @@ public class TutorController {
     //后台单击删除按钮返回的信息
     @RequestMapping("/backend/delTutor")
     public String delTutor(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Long id,Long sumElement,Model model){
-        tutorService.delTutor(id);
-
-
+        System.out.println("第几页:"+n+"类型："+searchSort+"关键字："+keywords+"开始时间："+dateStart+"结束时间："+dateEnd+"总记录数："+sumElement+"总页数："+sumpage);
+        File file=new File(tutorService.findOneById(id).getPictureUri());//创建要删除的文件
+        tutorService.delTutor(id);//删除记录
+        if(file.exists()){
+            file.delete();//删除文件
+        }
         //如果删除一条记录后总记录数为10的倍数，则修改总页数
         if((sumElement-1)%PAGE_SIZE==0){
             if(n>0&&n+1==sumpage){n--;}
@@ -135,22 +140,23 @@ public class TutorController {
             try {
                 Date DStart=sdf.parse(dateStart);
                 Date DEnd=sdf.parse(dateEnd);
-                pages=tutorService.searchTutorDate(0,PAGE_SIZE,DStart,DEnd);
+                pages=tutorService.searchTutorDate(n,PAGE_SIZE,DStart,DEnd);
             } catch (ParseException e) {
                 e.printStackTrace();
                 //日期格式不正确
             }
         }else if("all".equals(searchSort)){
-            pages=tutorService.searchTutorAll(0,PAGE_SIZE,keywords);
+            pages=tutorService.searchTutorAll(n,PAGE_SIZE,keywords);
 
         }else{
-            pages=tutorService.searchTutorType(0,PAGE_SIZE,keywords,searchSort);
+            pages=tutorService.searchTutorType(n,PAGE_SIZE,keywords,searchSort);
 
         }
         model.addAttribute("sumpage",sumpage);
         model.addAttribute("allTutorList",pages);
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
+        model.addAttribute("searchSort",searchSort);
         model.addAttribute("dateStart",dateStart);
         model.addAttribute("dateEnd",dateEnd);
         model.addAttribute("sumElement",sumElement);
