@@ -48,12 +48,13 @@ public class TutorController {
     //后台单机搜索按钮显示的师资力量消息
     @RequestMapping("/backend/searchTutor")
     public String searchTutor(String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
-        System.out.println(dateEnd.equals(null));
-        System.out.println(dateStart.equals(null));
+        System.out.println(dateEnd);
+        System.out.println(dateStart);
+        System.out.println(searchSort);
         Page<Tutor> pages=null;
         if("date".equals(searchSort)){
-            if(dateStart==null&&dateEnd==null){
-                System.out.println("时间没有");
+            System.out.println("进入date");
+            if("".equals(dateStart)||"".equals(dateEnd)){
               return "redirect:/backend/loadTutor";
             }
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
@@ -64,6 +65,7 @@ public class TutorController {
             } catch (ParseException e) {
                 e.printStackTrace();
                 //日期格式不正确
+                throw new Exception("日期格式错误！");
             }
         }else if("all".equals(searchSort)){
             System.out.println("进入all");
@@ -93,35 +95,27 @@ public class TutorController {
     @RequestMapping("/backend/pageTutor")
     public String pageTutor(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
         //如果已经到分页的第一页了，将页数设置为0
-      System.out.println("检索类型："+searchSort);
         if (n < 0){
             n++;
         }else if(n + 1 > sumpage){//如果超过分页的最后一页了，将页数设置为最后一页
             n--;
         }
         Page<Tutor> pages=null;
-        System.out.println("进入pageTutor ,获取n");
         if("date".equals(searchSort)){
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
             try {
                 Date DStart=sdf.parse(dateStart);
                 Date DEnd=sdf.parse(dateEnd);
-                System.out.println("进入pageTutor ,进入date搜索");
                 pages=tutorService.searchTutorDate(n,PAGE_SIZE,DStart,DEnd);
-                System.out.println("进入pageTutor ,date搜索完毕");
             } catch (ParseException e) {
                 e.printStackTrace();
                 //日期格式不正确
             }
         }else if("all".equals(searchSort)){
-            System.out.println("进入pageTutor ,all搜索开始");
             pages=tutorService.searchTutorAll(n,PAGE_SIZE,keywords);
-            System.out.println("进入pageTutor ,all搜索结束");
 
         }else{
-            System.out.println("进入pageTutor ,分类搜索开始:"+searchSort);
             pages=tutorService.searchTutorType(n,PAGE_SIZE,keywords,searchSort);
-            System.out.println("进入pageTutor ,分类搜索结束:"+searchSort);
         }
         if(pages==null){
             throw new Exception("没有数据！");

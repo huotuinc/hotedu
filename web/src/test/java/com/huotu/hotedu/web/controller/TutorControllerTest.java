@@ -40,6 +40,8 @@ public class TutorControllerTest extends SpringWebTest{
     }
     @Test
     public  void testSaveTutorByTime() throws Exception{
-        mockMvc.perform(get("/backend/searchTutor?searchSort='all'&keywords=''&dateStart=''&dateEnd=''"));
+        mockMvc.perform(
+                get("/backend/searchTutor?searchSort='date'&keywords=''&dateStart='2014.4.5'&dateEnd='2015.9.8'")
+        );
     }
 }

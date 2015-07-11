@@ -1,12 +1,12 @@
 package com.huotu.hotedu.service;
 
-import com.huotu.hotedu.entity.Qa;
 import com.huotu.hotedu.entity.Video;
 import com.huotu.hotedu.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -16,6 +16,7 @@ import javax.persistence.criteria.Root;
 /**
  * Created by cwb on 2015/7/10.
  */
+@Service
 public class VideoService {
 
     @Autowired
