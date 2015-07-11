@@ -11,8 +11,6 @@ import java.util.Collection;
  */
 @Entity
 public class Agent extends Login{
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

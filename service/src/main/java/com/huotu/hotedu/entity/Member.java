@@ -16,10 +16,8 @@ import java.util.Date;
  */
 @Entity
 public class Member extends Login{
-
     @ManyToOne
-    private Agent agent;
-
+    private Agent agent;           //代理商
     @Column
     private String pictureUri;
     private String name;
@@ -35,9 +33,109 @@ public class Member extends Login{
     private Date paymentDate;  //确认缴费时间
     private Date examDate;     //考试时间
 
+    public Agent getAgent() {
+        return agent;
+    }
 
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
 
+    public String getPictureUri() {
+        return pictureUri;
+    }
 
+    public void setPictureUri(String pictureUri) {
+        this.pictureUri = pictureUri;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getConfirmPerson() {
+        return ConfirmPerson;
+    }
+
+    public void setConfirmPerson(String confirmPerson) {
+        ConfirmPerson = confirmPerson;
+    }
+
+    public String getTheClass() {
+        return theClass;
+    }
+
+    public void setTheClass(String theClass) {
+        this.theClass = theClass;
+    }
+
+    public String getExamAddress() {
+        return examAddress;
+    }
+
+    public void setExamAddress(String examAddress) {
+        this.examAddress = examAddress;
+    }
+
+    public boolean isPass() {
+        return isPass;
+    }
+
+    public void setIsPass(boolean isPass) {
+        this.isPass = isPass;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getApplyDate() {
+        return applyDate;
+    }
+
+    public void setApplyDate(Date applyDate) {
+        this.applyDate = applyDate;
+    }
+
+    public Date getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public Date getExamDate() {
+        return examDate;
+    }
+
+    public void setExamDate(Date examDate) {
+        this.examDate = examDate;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
