@@ -109,14 +109,17 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
               Link link=new Link();
               link.setTitle("spring");
               link.setUrl("spring.io");
+              link.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 2000));
               linkRepository.save(link);
               link=new Link();
               link.setTitle("百度");
+              link.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60));
               link.setUrl("www.baidu.com");
               linkRepository.save(link);
               link=new Link();
               link.setTitle("粉猫");
               link.setUrl("www.fanmore.cn");
+              link.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 6000));
               linkRepository.save(link);
           }
             if(messageContentRepository.count()==0){

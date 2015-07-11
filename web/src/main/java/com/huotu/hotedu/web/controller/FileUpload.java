@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Date;
 
 /**
- * Created by Administrator on 2015/7/8.
+ * Created by shiliting on 2015/7/8.
  */
 public class FileUpload {
     public static final String FILE_PATH = "/upload/";

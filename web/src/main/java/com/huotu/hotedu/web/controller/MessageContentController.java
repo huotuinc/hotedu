@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Date;
 
 /**
- * Created by luffy on 2015/6/10.
+ * Created by shiliting on 2015/6/25.
  * 资讯动态有关的Controller
- * @author luffy luffy.ja at gmail.com
+ * @author shiliting741@163.com
  */
 @Controller
 public class MessageContentController {

@@ -7,15 +7,14 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
- * Created by luffy on 2015/6/10.
- * Modify by shiliting on 2015/7/11
+ * Created by shiliting on 2015/7/11.
  *
- * 会员 可以参加考试，如果是付费用户可以观看付费视频。
  *
- * @author luffy luffy.ja at gmail.com
+ *
+ * @author shiliting741@163.com
  */
 @Entity
-public class Member extends Login{
+public class recruitment extends Login{
 
     @ManyToOne
     private Agent agent;

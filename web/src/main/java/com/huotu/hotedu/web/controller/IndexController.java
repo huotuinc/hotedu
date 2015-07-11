@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Created by luffy on 2015/6/10.
+ * Created by shiliting on 2015/6/10.
  * 进入后台首页的Controller
- * @author luffy luffy.ja at gmail.com
+ * @author shiliting741@163.com
  */
 @Controller
 public class IndexController {

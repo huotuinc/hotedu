@@ -1,15 +1,17 @@
 package com.huotu.hotedu.entity;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 
 /**
  * Created by shiliting on 2015/6/25.
- * 导师
+ * 导师实体
  * @author shiliting
  */
 @Entity
@@ -21,13 +23,9 @@ public  class Tutor extends Login implements Serializable {
 //    private Long id;
     @Column
     private String name;
-    @Column
     private String introduction;
-    @Column
     private String pictureUri;
-    @Column
     private String qualification;
-    @Column
     private String area;
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUploadDate;
@@ -90,6 +88,8 @@ public  class Tutor extends Login implements Serializable {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Arrays.asList(
+                new SimpleGrantedAuthority("ROLE_GUIDE")
+        );
     }
 }

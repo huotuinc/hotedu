@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * Created by shiliting on 2015/6/25.
- *
+ * 资讯实体
  * @author shiliting
  */
 @Entity
