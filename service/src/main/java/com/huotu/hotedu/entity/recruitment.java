@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by shiliting on 2015/7/11.
@@ -15,6 +16,12 @@ import java.util.Date;
  */
 @Entity
 public class recruitment extends Login{
+
+    /**
+     * 应聘过的会员
+     */
+    @ManyToMany
+    private Set<Member> applicants;
 
     @ManyToOne
     private Agent agent;
