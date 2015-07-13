@@ -11,16 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -202,26 +199,16 @@ public class TutorController {
 
     //后台单击添加保存按钮
     @RequestMapping(value = "/backend/addSaveTutor",method = RequestMethod.POST)
-    public String addSaveTutor(String name,String introduction,String qualification,String area,HttpServletRequest request,Model model) throws Exception{
+    public String addSaveTutor(String name,String introduction,String qualification,String area,@RequestParam("smallimg") MultipartFile file,Model model) throws Exception{
         try {
-            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-            Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-            Tutor tutor=new Tutor();
-            for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
-
-                MultipartFile file = entity.getValue();
-                String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
-                staticResourceService.uploadResource(fileName, file.getInputStream());
-                tutor.setPictureUri(fileName);
-            }
-            /*if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+            if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
             System.out.println("文件大小：" + file.getSize());
             if(file.getSize()==0){throw new Exception("文件为空！");}
             if(file.getSize()>1024*1024*5){throw new Exception("文件太大");}
             String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
-            staticResourceService.uploadResource(fileName,file.getInputStream());*/
-
-
+            staticResourceService.uploadResource(fileName,file.getInputStream());
+            Tutor tutor=new Tutor();
+            tutor.setPictureUri(fileName);
             tutor.setQualification(qualification);
             tutor.setArea(area);
             tutor.setIntroduction(introduction);

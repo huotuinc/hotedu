@@ -1,9 +1,7 @@
 package com.huotu.hotedu.test.web;
 
 import com.huotu.hotedu.entity.Member;
-import com.huotu.hotedu.entity.MessageContent;
-import com.huotu.hotedu.entity.Qa;
-import com.huotu.hotedu.repository.*;
+import com.huotu.hotedu.repository.MessageContentRepository;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.test.TestWebConfig;
 import libspringtest.SpringWebTest;
@@ -17,13 +15,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import javax.management.Query;
-import java.util.Date;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -54,13 +48,13 @@ public class MessageContentControllerTest extends SpringWebTest {
     private MessageContentRepository messageContentRepository;
 
 
-    @Test
-    public void index() throws Exception {
-        mockMvc.perform(
-                get("/")
-        )
-                .andDo(print());
-    }
+//    @Test
+//    public void index() throws Exception {
+//        mockMvc.perform(
+//                get("/")
+//        )
+//                .andDo(print());
+//    }
     @Test
     public void login() throws  Exception{
 //        MessageContent messageContent=new MessageContent();

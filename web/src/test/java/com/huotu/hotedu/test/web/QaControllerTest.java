@@ -1,7 +1,6 @@
 package com.huotu.hotedu.test.web;
 
 import com.huotu.hotedu.entity.Member;
-import com.huotu.hotedu.entity.Qa;
 import com.huotu.hotedu.repository.LoginRepository;
 import com.huotu.hotedu.repository.MemberRepository;
 import com.huotu.hotedu.repository.QaRepository;
@@ -18,12 +17,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import java.util.Date;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -58,13 +54,7 @@ public class QaControllerTest extends SpringWebTest {
     @Autowired
     private QaRepository qaRepository;
 
-    @Test
-    public void index() throws Exception {
-        mockMvc.perform(
-                get("/")
-        )
-                .andDo(print());
-    }
+
     @Test
     public void login() throws  Exception{
 
