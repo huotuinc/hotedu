@@ -176,8 +176,7 @@
                             <td></td>
                             <td></td>
                             <td>2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="newtutor.html">修改</a><br/>
-                                <a class="link-delete" href="#">删除</a></td>
+                            <td><a class="link-update" href="newtutor.html">修改</a><br/><a class="link-delete" href="#">删除</a></td>
                         </tr>
                         <tr th:each="g:${allTutorList}">
                             <td style="display: none" th:text="${searchSort}">01</td>
@@ -188,16 +187,13 @@
                             <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/hh.mm.ss')}"></td>
                             <td><a class="link-update" href="newtutor.html" th:href="@{/backend/modifyTutor(id=${g.id})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a>
-                                <a class="real-delete" href="#"
-                                   th:href="@{/backend/delTutor(id=${g.id},n=${n},searchSort=${searchSort},keywords=${keywords},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
+                                <a class="real-delete" href="#" th:href="@{/backend/delTutor(id=${g.id},n=${n},searchSort=${searchSort},keywords=${keywords},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
                             </td>
                         </tr>
                     </table>
                     <div class="list-page">
-                        <a href="#"
-                           th:href="@{/backend/pageTutor(n=${n}-1,keywords=${keywords},searchSort=${searchSort},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage})}">上一页</a>
-                        <a href="#"
-                           th:href="@{/backend/pageTutor(n=${n}+1,keywords=${keywords},searchSort=${searchSort},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage})}">下一页</a>
+                        <a href="#" th:href="@{/backend/pageTutor(n=${n}-1,keywords=${keywords},searchSort=${searchSort},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage})}">上一页</a>
+                        <a href="#" th:href="@{/backend/pageTutor(n=${n}+1,keywords=${keywords},searchSort=${searchSort},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage})}">下一页</a>
                         <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span th:text="${sumpage}">1</span> 页
                     </div>
                 </div>

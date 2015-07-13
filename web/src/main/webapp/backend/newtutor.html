@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
@@ -47,8 +47,8 @@
             <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}"
                  style=" width:160px;margin-left: -10px;"/>
         </div>
-        <div class="jp-container">
-            <div class="sidebar-content">
+        <div class="sidebar-content">
+            <div class="jp-container">
                 <ul class="sidebar-list">
                     <li><p style="height:30px; line-height:30px; margin-left: 20px;">企业信息</p>
                         <ul class="sub-menu">
@@ -97,9 +97,9 @@
                         <p style="height:30px; line-height:30px; margin-left: 20px;">视频</p>
                         <ul class="sub-menu">
                             <li><a href="video.html" th:href="@{/backend/load/video}">教学视频</a></li>
-                            <li><a href="精彩录制.html">精彩录制</a></li>
-                            <li><a href="经验分享.html">经验分享</a></li>
-                            <li><a href="其他视频.html">其他视频</a></li>
+                            <li><a href="http://www.baidu.com" target="_blank">精彩录制</a></li>
+                            <li><a href="http://www.baidu.com" target="_blank">经验分享</a></li>
+                            <li><a href="http://www.baidu.com" target="_blank">其他视频</a></li>
                         </ul>
                     </li>
                     <li>
@@ -128,23 +128,23 @@
                             <tbody>
                             <tr>
                                 <th><i class="require-red">*</i>上传照片：</th>
-                                <td><img src="images/logo.png" width="100px" height="auto"/><input name="smallimg" id=""
+                                <td><img src="images/logo.png" width="100px" height="auto"/><input name="smallimg"
                                                                                                    type="file"/>
                                     <!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>-->
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>教师名字：</th>
-                                <td><input type="text" id="" value="" size="70" name="name" class="common-text"/></td>
+                                <td><input type="text" value="" size="70" name="name" class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>职称：</th>
-                                <td><input type="text" id="" value="" size="70" name="qualification"
+                                <td><input type="text" value="" size="70" name="qualification"
                                            class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>地区：</th>
-                                <td><input type="text" id="" value="" size="70" name="area" class="common-text"/></td>
+                                <td><input type="text" value="" size="70" name="area" class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>描述：</th>

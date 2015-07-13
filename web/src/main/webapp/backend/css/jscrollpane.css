@@ -8,7 +8,7 @@
 .jspCap{display:none;}
 .jspHorizontalBar .jspCap{float:left;}
 .jspTrack{background:#F2F4F8;position:relative;}
-.jspDrag{background:#79a1b5;position:relative;top:0;left:0;cursor:pointer;border:0px;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
+.jspDrag{background:#79a1b5;position:relative;top:0;left:0;cursor:pointer;border:0;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
 .jspHorizontalBar .jspTrack,.jspHorizontalBar .jspDrag{float:left;height:100%;}
 .jspArrow{background:#50506d;text-indent:-20000px;display:block;cursor:pointer;}
 .jspArrow.jspDisabled{cursor:default;background:#80808d;}
@@ -17,7 +17,7 @@
 .jspVerticalBar .jspArrow:focus{outline:none;}
 .jspCorner{background:#eeeef4;float:left;height:100%;}
 /*height决定了是否会出现滚动条*/
-.jp-container{width:189px;max-height:650px;position:relative;border:0px;float:left;
-.jp-container:hover,.jp-container:active{border: 0px}
+.jp-container{width:189px;max-height:650px;position:relative;float:left;border: 0;}
+.jp-container:hover,.jp-container:active{border: 0;}
 /* Yuk! CSS Hack for IE6 3 pixel bug :( */
 * html .jspCorner{margin:0 -3px 0 0;}
