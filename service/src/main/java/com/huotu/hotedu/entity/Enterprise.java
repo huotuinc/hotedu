@@ -3,19 +3,28 @@ package com.huotu.hotedu.entity;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * 企业，可以进行招聘
- * Created by Administrator on 2015/7/1.
+ * Created by shiliting on 2015/7/1.
  */
-public class Enterprise extends Login{
+@Entity
+public class Enterprise extends Login implements Serializable {
+    private static final long serialVersionUID = -349012453592429794L;
     @Column
     private String name;
     private String information;
     private String tel;
     private String logoUri;
-
+    private boolean isPutaway;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastUploadDate;
     public String getName() {
         return name;
     }
@@ -46,6 +55,22 @@ public class Enterprise extends Login{
 
     public void setLogoUri(String logoUri) {
         this.logoUri = logoUri;
+    }
+
+    public boolean isPutaway() {
+        return isPutaway;
+    }
+
+    public void setIsPutaway(boolean isPutaway) {
+        this.isPutaway = isPutaway;
+    }
+
+    public Date getLastUploadDate() {
+        return lastUploadDate;
+    }
+
+    public void setLastUploadDate(Date lastUploadDate) {
+        this.lastUploadDate = lastUploadDate;
     }
 
     @Override
