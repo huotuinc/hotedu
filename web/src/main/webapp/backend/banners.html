@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
@@ -44,8 +44,8 @@
             <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}"
                  style=" width:160px;margin-left: -10px;"/>
         </div>
-        <div class="sidebar-content">
-            <div class="jp-container">
+        <div class="jp-container">
+            <div class="sidebar-content">
                 <ul class="sidebar-list">
                     <li>
                         <a href="#" style="height:30px; line-height:30px;">企业信息</a>
@@ -94,9 +94,9 @@
                         <a href="#" style="height:30px; line-height:30px;">视频</a>
                         <ul class="sub-menu">
                             <li><a href="video.html" th:href="@{/backend/load/video}">教学视频</a></li>
-                            <li><a href="http://www.baidu.com" target="_blank">精彩录制</a></li>
-                            <li><a href="http://www.baidu.com" target="_blank">经验分享</a></li>
-                            <li><a href="http://www.baidu.com" target="_blank">其他视频</a></li>
+                            <li><a href="精彩录制.html">精彩录制</a></li>
+                            <li><a href="经验分享.html">经验分享</a></li>
+                            <li><a href="其他视频.html">其他视频</a></li>
                         </ul>
                     </li>
                     <li>

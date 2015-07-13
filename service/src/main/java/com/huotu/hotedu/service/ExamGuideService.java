@@ -50,9 +50,7 @@ public class ExamGuideService {
     }
 
     //删除一条考试指南消息
-    public void delExamGuide(Long id){
-        examGuideRepository.delete(id);
-    }
+    public void delExamGuide(Long id){examGuideRepository.delete(id);}
 
     //增加一条考试信息
     public void addExamGuide(ExamGuide examGuide){

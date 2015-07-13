@@ -55,10 +55,9 @@ public class LinkService {
     }
 
     //修改一条友情链接信息
-    public void modify(Link link){
-        linkRepository.save(link);
-
+    public void modify(Link link){linkRepository.save(link);
     }
+
     //查找一条友情链接消息
     public Link findOneById(Long id){
         return linkRepository.findOne(id);

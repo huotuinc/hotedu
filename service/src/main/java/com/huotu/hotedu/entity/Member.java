@@ -18,6 +18,8 @@ import java.util.List;
  */
 @Entity
 public class Member extends Login{
+
+
     @ManyToOne
     private Agent agent;           //代理商
     @Column
