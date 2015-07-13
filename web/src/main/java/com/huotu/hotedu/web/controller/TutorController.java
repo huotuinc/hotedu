@@ -3,6 +3,8 @@ package com.huotu.hotedu.web.controller;
 import com.huotu.hotedu.entity.Tutor;
 import com.huotu.hotedu.service.TutorService;
 import com.huotu.hotedu.web.service.StaticResourceService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
-import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,7 +33,7 @@ public class TutorController {
     @Autowired
     StaticResourceService staticResourceService;
     public static final int PAGE_SIZE=10;//每张页面的记录数
-    public static final String FILE_PATH="C:/Users/Administrator/IdeaProjects/hotedu/web/src/main/webapp/image/company/";
+    private static final Log log = LogFactory.getLog(TutorController.class);
     //后台单击师资力量显示的消息
     @RequestMapping("/backend/loadTutor")
     public String loadTutor(Model model){
@@ -139,11 +140,12 @@ public class TutorController {
     //后台单击删除按钮返回的信息
     @RequestMapping("/backend/delTutor")
     public String delTutor(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Long id,Long sumElement,Model model){
-        File file=new File(tutorService.findOneById(id).getPictureUri());//创建要删除的文件
-        tutorService.delTutor(id);//删除记录
-        if(file.exists()){
-            file.delete();//删除文件
+        try {
+            staticResourceService.deleteResource(tutorService.findOneById(id).getPictureUri());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        tutorService.delTutor(id);//删除记录
         //如果删除一条记录后总记录数为10的倍数，则修改总页数
         if((sumElement-1)%PAGE_SIZE==0){
             if(n>0&&n+1==sumpage){n--;}
@@ -201,12 +203,23 @@ public class TutorController {
     @RequestMapping(value = "/backend/addSaveTutor",method = RequestMethod.POST)
     public String addSaveTutor(String name,String introduction,String qualification,String area,@RequestParam("smallimg") MultipartFile file,Model model) throws Exception{
         try {
+
+
+            //文件格式判断
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
             System.out.println("文件大小：" + file.getSize());
             if(file.getSize()==0){throw new Exception("文件为空！");}
             if(file.getSize()>1024*1024*5){throw new Exception("文件太大");}
+
+
+
+
+
+            //保存图片
             String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
             staticResourceService.uploadResource(fileName,file.getInputStream());
+
+
             Tutor tutor=new Tutor();
             tutor.setPictureUri(fileName);
             tutor.setQualification(qualification);
@@ -215,6 +228,7 @@ public class TutorController {
             tutor.setName(name);
             tutor.setLastUploadDate(new Date());
             tutorService.addTutor(tutor);
+
             return "redirect:/backend/loadTutor";
 
         } catch (IOException e) {
@@ -228,27 +242,25 @@ public class TutorController {
     //后台单击修改保存按钮
     @RequestMapping("/backend/modifySaveTutor")
     public String ModifySaveTutor(Long id,String name,String introduction,String qualification,String area,@RequestParam("smallimg") MultipartFile file,Model model) throws Exception{
+
+
+
         if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
         System.out.println("文件大小：" + file.getSize());
         if(file.getSize()==0){throw new Exception("文件为空！");}
         if(file.getSize()>1024*1024*5){throw new Exception("文件太大");}
-        File delfile=new File(tutorService.findOneById(id).getPictureUri());//创建要删除的文件
-        if(delfile.exists()){
-            delfile.delete();//删除文件
-        }
-        String filePath=new Date().getTime()+String.valueOf(file.getOriginalFilename());
-        File tempFile = new File(FILE_PATH, filePath);
-        if (!tempFile.getParentFile().exists()) {
-            tempFile.getParentFile().mkdir();
-        }
-        if (!tempFile.exists()) {
-            tempFile.createNewFile();
-        }
-        file.transferTo(tempFile);//保存图片
+
+
+        //获取需要修改的图片路径，并删除
+        staticResourceService.deleteResource(staticResourceService.getResource(tutorService.findOneById(id).getPictureUri()));
+        //保存图片
+        String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+        staticResourceService.uploadResource(fileName,file.getInputStream());
+
 
 
         Tutor tutor=tutorService.findOneById(id);
-        tutor.setPictureUri(FILE_PATH+filePath);
+        tutor.setPictureUri(fileName);
         tutor.setQualification(qualification);
         tutor.setArea(area);
         tutor.setIntroduction(introduction);
