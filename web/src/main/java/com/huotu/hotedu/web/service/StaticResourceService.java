@@ -25,15 +25,15 @@ public interface StaticResourceService {
     /**
      * 企业的LOGO
      */
-    public  String COMPANY_LOGO="/image/company";
+    public  String COMPANY_LOGO="image/company";
     /**
      * 导师的头像
      */
-    public  String TUTOR_ICON="/image/tutor";
+    public  String TUTOR_ICON="image/tutor";
     /**
      * 会员的头像
      */
-    public  String MEMBER_ICON="/image/member";
+    public  String MEMBER_ICON="image/member";
 
     /**
      * 上传资源

@@ -175,9 +175,9 @@
                             <td th:remove="all">2：30：00</td>
                             <td th:remove="all">2015.01.01/13.00.00</td>
                             <td th:remove="all">免费</td>
-                            <td><a class="link-update" href="newvideo.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
+                            <td><a class="link-update" href="newvideo.html" >修改</a><br/><a class="link-update" href="#" >删除</a></td>
                         </tr>
-                        <tr>
+                        <tr th:remove="all">
                             <td>01</td>
                             <td title="">第一章第一节</td>
                             <td title="">2：30：00</td>
@@ -185,8 +185,27 @@
                             <td title="">免费</td>
                             <td><a class="link-update" href="newvideo.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
                         </tr>
+                        <tr th:each="g:${videoList}">
+                            <td th:text="${g.id}"></td>
+                            <td title="" th:text="${g.videoName}">mou某mou某mou某mou某</td>
+                            <td th:text="${#calendars.format(g.uploadTime,'yyyy-MM-dd hh:mm:ss')}">2014-07-13 15:15:50</td>
+                            <td th:text="${g.free}">免费</td>
+                            <td><a class="link-update" href="newqa.html"
+                                   th:href="@{/backend/modifyQa(id=${g.id})}">修改</a><br/>
+                                <a class="link-update" href="#" onclick="check_del(this)">删除</a>
+                                <a class="real-delete" href="#"
+                                   th:href="@{/backend/delVideo(id=${g.id},n=${n},keywords=${keywords},totalPages=${totalPages},totalRecords=${totalRecords})}"></a>
+                            </td>
+                        </tr>
                     </table>
-                    <div class="list-page"> 2 条 1/1 页</div>
+                    <div class="list-page">
+                        <a href="#"
+                           th:href="@{/backend/pageVideo(n=${n}-1,keywords=${keywords},totalPages=${totalPages})}">上一页</a>
+                        <a href="#"
+                           th:href="@{/backend/pageVideo(n=${n}+1,keywords=${keywords},totalPages=${totalPages})}">下一页</a>
+                        <span th:text="${totalRecords}">2</span> 条 <span th:text="${n}+1">1</span>/<span
+                            th:text="${totalPages}">1</span> 页
+                    </div>
                 </div>
             </form>
         </div>

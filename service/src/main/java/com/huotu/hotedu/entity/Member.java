@@ -3,8 +3,10 @@ package com.huotu.hotedu.entity;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by luffy on 2015/6/10.

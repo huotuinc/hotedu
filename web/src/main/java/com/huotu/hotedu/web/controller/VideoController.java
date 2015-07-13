@@ -87,6 +87,7 @@ public class VideoController {
     public String addQa(Model model){
         return "/backend/newvideo";
     }
+
     //后台单机修改按钮
     @RequestMapping("/backend/modifyVideo")
     public String modifyVideo(Long id, Model model){
