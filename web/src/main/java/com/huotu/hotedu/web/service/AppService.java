@@ -41,6 +41,7 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+
         if (event.getApplicationContext().getParent() == null) {
             log.info("user.dir="+System.getProperty("user.dir"));
             if (managerRepository.count()==0){
@@ -133,19 +134,19 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 }
             }
 
-            if (tutorRepository.count()==0){
-                Tutor tutor;
-                for(int i=0;i<27;i++){
-                    tutor=new Tutor();
-                    tutor.setName("tutor"+i);
-                    tutor.setIntroduction("i am a tutor my name is"+i);
-                    tutor.setArea("杭州");
-                    tutor.setQualification("教授");
-                    tutor.setLastUploadDate(new Date(System.currentTimeMillis()+i*60*60*1000));
-                    tutor.setPictureUri("slt.jpg");
-                    tutorRepository.save(tutor);
-                }
-            }
+//            if (tutorRepository.count()==0){
+//                Tutor tutor;
+//                for(int i=0;i<27;i++){
+//                    tutor=new Tutor();
+//                    tutor.setName("tutor"+i);
+//                    tutor.setIntroduction("i am a tutor my name is"+i);
+//                    tutor.setArea("杭州");
+//                    tutor.setQualification("教授");
+//                    tutor.setLastUploadDate(new Date(System.currentTimeMillis()+i*60*60*1000));
+//                    tutor.setPictureUri("slt.jpg");
+//                    tutorRepository.save(tutor);
+//                }
+//            }
 
 
             if (qaRepository.count()==0){

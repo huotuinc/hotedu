@@ -30,7 +30,9 @@ public class Member extends Login{
     private String status;          //状态
     @Temporal(TemporalType.TIMESTAMP)
     private Date applyDate;    //报名时间
+    @Temporal(TemporalType.TIMESTAMP)
     private Date paymentDate;  //确认缴费时间
+    @Temporal(TemporalType.TIMESTAMP)
     private Date examDate;     //考试时间
 
     public Agent getAgent() {

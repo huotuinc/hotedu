@@ -30,8 +30,8 @@ public class Manager extends Login{
         return Arrays.asList(
                 new SimpleGrantedAuthority("ROLE_USER"),
                 new SimpleGrantedAuthority("ROLE_ADMIN"),
-                new SimpleGrantedAuthority("ROLE_GRANT"),
-                new SimpleGrantedAuthority("ROLE_All")
+                new SimpleGrantedAuthority("ROLE_GRANT")
+
         );
     }
 }
