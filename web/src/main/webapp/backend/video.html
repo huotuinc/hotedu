@@ -190,11 +190,12 @@
                             <td title="" th:text="${g.videoName}">mou某mou某mou某mou某</td>
                             <td title="" th:text="${g.videoName}">mou某mou某mou某mou某</td>
                             <td th:text="${#calendars.format(g.uploadTime,'yyyy-MM-dd hh:mm:ss')}">2014-07-13 15:15:50</td>
-                            <td th:text="${g.free}">免费</td>
+                            <td th:if="${g.free}">免费</td>
+                            <td th:unless="${g.free}">会员</td>
                             <td><a class="link-update" href="#"
-                                   th:href="@{/backend/modifyQa(id=${g.id})}">修改</a><br/>
+                                   th:href="@{/backend/modifyVideo(id=${g.id})}">修改</a><br/>
                                 <a class="real-delete" href="#"
-                                   th:href="@{/backend/delVideo(id=${g.id})}">删除</a>
+                                   th:href="@{/backend/delVideo(id=${g.id},n=${n},keywords=${keywords},totalPages=${totalPages},totalRecords=${totalRecords})}">删除</a>
                             </td>
                         </tr>
                     </table>

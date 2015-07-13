@@ -32,11 +32,24 @@ public class VideoService {
         return videoRepository.findAll(new Specification<Video>() {
             @Override
             public Predicate toPredicate(Root<Video> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if (keyword.length()==0)
+                if (keyword.length()==0) {
                     return null;
-                return cb.like(root.get("videoName").as(String.class),"%"+keyword+"%");
+                }
+                return cb.or(cb.like(root.get("videoName").as(String.class), "%" + keyword + "%"));
             }
         },new PageRequest(n, pagesize));
+    }
+
+    public Page<Video> searchVideoById(int n,int pageSize,long id) {
+        return videoRepository.findAll(new Specification<Video>() {
+            @Override
+            public Predicate toPredicate(Root<Video> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                if (id==0) {
+                    return null;
+                }
+                return cb.or(cb.equal(root.get("videoName").as(Long.class), id));
+            }
+        },new PageRequest(n, pageSize));
     }
 
     public void delVideo(Long id){
