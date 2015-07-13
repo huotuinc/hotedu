@@ -1,5 +1,6 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
@@ -8,6 +9,9 @@
     <script type="text/javascript" src="js/libs/jquery.min.js" th:src="@{/backend/js/libs/jquery.min.js}"></script>
     <script type="text/javascript" src="js/libs/modernizr.min.js"
             th:src="@{/backend/js/libs/modernizr.min.js}"></script>
+    <!--警告框控件-->
+    <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
+    <script type="text/javascript" src="js/jquery.confirm.js" th:src="@{/backend/js/jquery.confirm.js}"></script>
     <!--滚动条-->
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
     <script type="text/javascript" src="js/scroll/jquery.mousewheel.js"
@@ -47,8 +51,7 @@
         <div class="jp-container">
             <div class="sidebar-content">
                 <ul class="sidebar-list">
-                    <li>
-                        <a href="#" style="height:30px; line-height:30px;">企业信息</a>
+                    <li><p style="height:30px; line-height:30px; margin-left: 20px;">企业信息</p>
                         <ul class="sub-menu">
                             <li><a href="wanted.html" th:href="@{/backend/loadWanted}">招聘信息</a></li>
                             <li><a href="enterprises.html" th:href=" @{/backend/loadEnterprises}">发布企业</a></li>
@@ -57,7 +60,7 @@
                     <li>
                         <a href="#" style="height:30px; line-height:30px;">banner图</a>
                         <ul class="sub-menu" style="display:block;">
-                            <li class="on"><a href="banners.html" th:href="@{/backend/loadBanners}">banner图</a></li>
+                            <li class="on"><a href="load/banners.html" th:href="@{/backend/loadBanners}">banner图</a></li>
                         </ul>
                     </li>
                     <li>
@@ -134,7 +137,7 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="newbanner.html"><i class="icon-font">+</i>新建</a>
+                        <a href="newbanner.html" th:href="@{/backend/addbanners}" ><i class="icon-font">+</i>新建</a>
                     </div>
                 </div>
                 <div class="result-content">
@@ -145,37 +148,56 @@
                             <th style="width:100px">上传时间</th>
                             <th style="width:80px">操作</th>
                         </tr>
-                        <tr>
+                        <tr >
                             <td>01</td>
                             <td title="">8888.jpg</td>
                             <td>2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="newbanner.html">修改</a><br/><a class="link-update" href="#">删除</a>
+                            <td><a class="link-update" href="newbanner.html">修改</a><br/>
+                                <a class="link-update" href="#" >删除</a></td>
+                            </tr>
+                        <tr >
+                             <td>01</td>
+                             <td title="">8888.jpg</td>
+                             <td>2015.01.01/13.00.00</td>
+                             <td><a class="link-update" href="newbanner.html">修改</a><br/>
+                             <a class="link-update" href="#" >删除</a></td>
+                             </tr>
+                        <tr >
+                             <td>01</td>
+                             <td title="">8888.jpg</td>
+                             <td>2015.01.01/13.00.00</td>
+                             <td><a class="link-update" href="newbanner.html">修改</a><br/>
+                             <a class="link-update" href="#" >删除</a></td>
+                             </tr>
+                        <tr th:remove="all">
+                             <td>01</td>
+                             <td title="">8888.jpg</td>
+                             <td>2015.01.01/13.00.00</td>
+                             <td><a class="link-update" href="newbanner.html">修改</a><br/>
+                             <a class="link-update" href="#" >删除</a></td>
+                             </tr>
+
+                        <tr th:each="g:${allbannersList}">
+                            <td style="display: none" th:text="${searchSort}">01</td>
+                            <td th:text="${g.id}">01</td>
+                            <td th:text="${g.title}">88888</td>
+                            <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/hh.mm.ss')}">2015.01.01/13.00.00</td>
+                            <td><a class="link-update" href="newbanner.html" th:href="@{/backend/modify/banners(id=${g.id})}">修改</a><br/>
+                                <a class="link-update" href="#" onclick="check_del(this)">删除</a>
+                                <a class="real-delete" href="#"
+                                   th:href="@{/backend/delbanners(id=${g.id},n=${n},searchSort=${searchSort},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}"></a>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>02</td>
-                            <td title="">8888.jpg</td>
-                            <td>2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="newbanner.html">修改</a><br/><a class="link-update" href="#">删除</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01</td>
-                            <td title="">8888.jpg</td>
-                            <td>2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="newbanner.html">修改</a><br/><a class="link-update" href="#">删除</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01</td>
-                            <td title="">8888.jpg</td>
-                            <td>2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="newbanner.html">修改</a><br/><a class="link-update" href="#">删除</a>
-                            </td>
-                        </tr>
+                       </tr>
                     </table>
-                    <div class="list-page"> 2 条 1/1 页</div>
-                </div>
+                    <div class="list-page">
+                        <a href="#"
+                           th:href="@{/backend/pageBanners(n=${n}-1,keywords=${keywords},sumpage=${sumpage})}">上一页</a>
+                        <a href="#"
+                           th:href="@{/backend/pageBanners(n=${n}+1,keywords=${keywords},sumpage=${sumpage})}">下一页</a>
+                        <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span
+                            th:text="${sumpage}">1</span> 页
+                    </div>
+               </div>
             </form>
         </div>
     </div>

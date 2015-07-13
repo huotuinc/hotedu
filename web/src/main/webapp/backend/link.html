@@ -59,7 +59,7 @@
                     <li>
                         <p style="height:30px; line-height:30px; margin-left: 20px;">banner图</p>
                         <ul class="sub-menu">
-                            <li><a href="banners.html" th:href="@{/backend/load/banners}">banner图</a></li>
+                            <li><a href="banners.html" th:href="@{/backend/loadBanners}">banner图</a></li>
                         </ul>
                     </li>
                     <li>
@@ -153,16 +153,16 @@
                             <td title="">粉猫</td>
                             <td title="">www.fanmore.com</td>
                             <td>2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="newlink.html">修改</a><br/><a class="link-delete"
-                                                                                         href="#">删除</a></td>
+                            <td><a class="link-update" href="newlink.html">修改</a><br/>
+                                <a class="link-delete" href="#">删除</a></td>
                         </tr>
                         <tr th:remove="all">
                             <td>01</td>
                             <td title="">商务通</td>
                             <td title="">www.fanmore.com</td>
                             <td>2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="newlink.html">修改</a><br/><a class="link-delete"
-                                                                                         href="#">删除</a></td>
+                            <td><a class="link-update" href="newlink.html">修改</a><br/>
+                                <a class="link-delete" href="#">删除</a></td>
                         </tr>
                         <tr th:each="g:${allLinkList}">
                             <td th:text="${g.id}">01</td>

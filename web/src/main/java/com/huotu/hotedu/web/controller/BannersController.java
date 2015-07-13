@@ -21,17 +21,6 @@ import java.util.Date;
     private BannersService BannersService;
     public static final int PAGE_SIZE=10;//每张页面的记录数
 
-//    //后台显示所有Banner图
-//    @RequestMapping("/backend/loadBanners")
-//    public String loadBannersController() {
-//        return "/backend/banners";
-//    }
-//
-//    //后台显示检索过之后的Banners图
-//    @RequestMapping("/backend/searchBanners")
-//    public String searchBannersController() {
-//        return "/backend/banners";
-//    }
 
     //后台单击banners链接显示的消息
     @RequestMapping("/backend/loadBanners")
@@ -84,7 +73,6 @@ import java.util.Date;
         if((sumElement-1)%PAGE_SIZE==0){
             if(n>0&&n+1==sumpage){n--;}
             sumpage--;
-
         }
         sumElement--;
         Page<Banners> pages =BannersService.searchBanners(n, PAGE_SIZE, keywords);
@@ -100,7 +88,7 @@ import java.util.Date;
 
 
     //后台单击新建按钮
-    @RequestMapping("/backend/addBanners")
+    @RequestMapping("/backend/addbanners")
     public String addBanners(Model model){
         return "/backend/newbanners";
     }
