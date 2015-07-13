@@ -72,7 +72,6 @@ public class ExamGuideController {
         if((sumElement-1)%PAGE_SIZE==0){
             if(n>0&&n+1==sumpage){n--;}
             sumpage--;
-
         }
         sumElement--;
         Page<ExamGuide> pages = examGuideService.searchExamGuide(n, PAGE_SIZE, keywords);
@@ -92,6 +91,7 @@ public class ExamGuideController {
     public String addExamGuide(Model model){
         return "/backend/newguide";
     }
+
     //后台单机修改按钮
     @RequestMapping("/backend/modifyExamGuide")
     public String ModifyExamGuide(Long id, Model model){

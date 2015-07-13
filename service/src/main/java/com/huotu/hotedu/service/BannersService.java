@@ -27,7 +27,9 @@ public class BannersService {
     private BannersRepository bannersRepository;
 
     //返回所有banners
-    public Page<Banners> loadBanners(int n,int pagesize){return bannersRepository.findAll(new PageRequest(n,pagesize));}
+    public Page<Banners> loadBanners(int n,int pagesize)
+    {  return bannersRepository.findAll(new PageRequest(n,pagesize));
+    }
 
     //分页
     public Page<Banners> searchBanners(int n,int pagesize,String keyword){
@@ -44,29 +46,8 @@ public class BannersService {
         },new PageRequest(n, pagesize));
     }
 
-
-    //分页依据时间
-    public Page<Banners> searchBanners(int n,int pagesize,Date start,Date end){
-        return  bannersRepository.findAll(new Specification<Banners>() {
-            @Override
-            public Predicate toPredicate(Root<Banners> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if (start==null&&end==null)
-                    return null;
-                return cb.between(root.get("lastUploadDate").as(Date.class), start, end);
-            }
-        },new PageRequest(n, pagesize));
-
-    }
-
-    //删除一个banners
-    public void delBanners(Long id){
-        try {URI uri=new URI(findOneById(id).getContent());
-            bannersRepository.delete(id);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();}
-    }
-
-
+    //删除一条banner消息
+    public void delBanners(Long id){bannersRepository.delete(id);}
 
     //增加一条banners信息
     public void addBanners(Banners banners){bannersRepository.save(banners);}
@@ -76,5 +57,6 @@ public class BannersService {
 
     //查找一条banners消息
     public Banners findOneById(Long id){return bannersRepository.findOne(id);}
+
 
 }

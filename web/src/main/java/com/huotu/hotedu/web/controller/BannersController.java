@@ -75,7 +75,7 @@ import java.util.Date;
             sumpage--;
         }
         sumElement--;
-        Page<Banners> pages =BannersService.searchBanners(n, PAGE_SIZE, keywords);
+        Page<Banners> pages = BannersService.searchBanners(n, PAGE_SIZE, keywords);
         model.addAttribute("sumpage",sumpage);
         model.addAttribute("allbannersList",pages);
         model.addAttribute("n",n);
@@ -90,7 +90,7 @@ import java.util.Date;
     //后台单击新建按钮
     @RequestMapping("/backend/addbanners")
     public String addBanners(Model model){
-        return "/backend/newbanners";
+        return "/backend/newbanner";
     }
 
     //后台单机修改按钮
