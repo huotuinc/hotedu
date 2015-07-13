@@ -11,8 +11,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Date;
 
 /**
@@ -52,9 +50,8 @@ public class EnterpriseService {
             public Predicate toPredicate(Root<Enterprise> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 if (keyword.length()==0)
                     return null;
-                return cb.or(cb.like(root.get("name").as(String.class), "%" + keyword + "%"),
-                             cb.like(root.get("qualification").as(String.class),"%"+keyword+"%"),
-                             cb.like(root.get("area").as(String.class),"%"+keyword+"%")
+                return cb.or(cb.like(root.get("loginName").as(String.class), "%" + keyword + "%"),
+                             cb.like(root.get("enterprise").as(String.class),"%"+keyword+"%")
                 );
             }
         },new PageRequest(n, pagesize));
@@ -62,7 +59,7 @@ public class EnterpriseService {
     }
 
     //分页依据时间
-    public Page<Enterprise> searchTutorDate(int n,int pagesize,Date start,Date end){
+    public Page<Enterprise> searchEnterpriseDate(int n,int pagesize,Date start,Date end){
         return  enterpriseRepository.findAll(new Specification<Enterprise>() {
             @Override
             public Predicate toPredicate(Root<Enterprise> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -76,27 +73,21 @@ public class EnterpriseService {
 
 
 
-    //删除一个企业(包括他的照片)
-    public void delTutor(Long id){
-        try {
-            URI uri=new URI(findOneById(id).getLogoUri());
+    //删除一个企业
+    public void delEnterprise(Long id){
             enterpriseRepository.delete(id);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-
     }
 
-    //增加一位导师
-    public void addTutor(Enterprise enterprise){
+    //增加一个企业
+    public void addEnterprise(Enterprise enterprise){
         enterpriseRepository.save(enterprise);
     }
-    //修改一位导师信息
+    //修改一个企业信息
     public void modify(Enterprise enterprise){
         enterpriseRepository.save(enterprise);
 
     }
-    //查找一条考试消息
+    //查找一个企业信息
     public Enterprise findOneById(Long id){
         return enterpriseRepository.findOne(id);
     }
