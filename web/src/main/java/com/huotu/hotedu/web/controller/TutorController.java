@@ -2,6 +2,7 @@ package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.Tutor;
 import com.huotu.hotedu.service.TutorService;
+import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by shiliting on 2015/6/10.
@@ -27,6 +29,8 @@ import java.util.Date;
 public class TutorController {
     @Autowired
     TutorService tutorService;
+    @Autowired
+    StaticResourceService staticResourceService;
     public static final int PAGE_SIZE=10;//每张页面的记录数
     public static final String FILE_PATH="C:/Users/Administrator/IdeaProjects/hotedu/web/src/main/webapp/image/company/";
     //后台单击师资力量显示的消息
@@ -185,7 +189,7 @@ public class TutorController {
         return "/backend/newtutor";
     }
     //后台单机修改按钮
-    @RequestMapping("/backend/modify/tutor")
+    @RequestMapping("/backend/modifyTutor")
     public String ModifyTutor(Long id, Model model){
         Tutor tutor=tutorService.findOneById(id);
         model.addAttribute("tutor",tutor);
@@ -201,18 +205,19 @@ public class TutorController {
             System.out.println("文件大小：" + file.getSize());
             if(file.getSize()==0){throw new Exception("文件为空！");}
             if(file.getSize()>1024*1024*5){throw new Exception("文件太大");}
-
-            String filePath=new Date().getTime()+String.valueOf(file.getOriginalFilename());
-            File tempFile = new File(FILE_PATH, filePath);
-            if (!tempFile.getParentFile().exists()) {
-                tempFile.getParentFile().mkdir();
-            }
-            if (!tempFile.exists()) {
-                tempFile.createNewFile();
-            }
-            file.transferTo(tempFile);//保存图片
+//            String fileName=new Date().getTime()+String.valueOf(file.getOriginalFilename());
+            String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+            staticResourceService.uploadResource(fileName,file.getInputStream());
+//            File tempFile = new File(FILE_PATH, filePath);
+//            if (!tempFile.getParentFile().exists()) {
+//                tempFile.getParentFile().mkdir();
+//            }
+//            if (!tempFile.exists()) {
+//                tempFile.createNewFile();
+//            }
+//            file.transferTo(tempFile);//保存图片
             Tutor tutor=new Tutor();
-            tutor.setPictureUri(FILE_PATH+filePath);
+            tutor.setPictureUri(fileName);
             tutor.setQualification(qualification);
             tutor.setArea(area);
             tutor.setIntroduction(introduction);
