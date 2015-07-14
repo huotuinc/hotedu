@@ -50,9 +50,9 @@ public class TutorController {
 
     //后台单机搜索按钮显示的师资力量消息
     @RequestMapping("/backend/searchTutor")
-    public String searchTutor(@RequestParam("searchSort")String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
+    public String searchTutor(@RequestParam("searchSort")String searchSortValue,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
         Page<Tutor> pages=null;
-        if("date".equals(searchSort)){
+        if("date".equals(searchSortValue)){
             System.out.println("进入date");
             if("".equals(dateStart)||"".equals(dateEnd)){
               return "redirect:/backend/loadTutor";
@@ -67,13 +67,13 @@ public class TutorController {
                 //日期格式不正确
                 throw new Exception("日期格式错误！");
             }
-        }else if("all".equals(searchSort)){
+        }else if("all".equals(searchSortValue)){
             System.out.println("进入all");
             pages=tutorService.searchTutorAll(0,PAGE_SIZE,keywords);
             System.out.println("进出all");
 
         }else{
-            pages=tutorService.searchTutorType(0,PAGE_SIZE,keywords,searchSort);
+            pages=tutorService.searchTutorType(0,PAGE_SIZE,keywords,searchSortValue);
 
         }
         if(pages==null){
@@ -86,14 +86,14 @@ public class TutorController {
         model.addAttribute("keywords",keywords);
         model.addAttribute("dateStart",dateStart);
         model.addAttribute("dateEnd",dateEnd);
-        model.addAttribute("searchSortValue",searchSort);
+        model.addAttribute("searchSortValue",searchSortValue);
         model.addAttribute("sumElement",sumElement);
         return "/backend/tutor";
     }
 
     //后台单击师资力量的分页
     @RequestMapping("/backend/pageTutor")
-    public String pageTutor(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
+    public String pageTutor(int n,int sumpage,@RequestParam("searchSort")String searchSortValue,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
         //如果已经到分页的第一页了，将页数设置为0
         if (n < 0){
             n++;
@@ -101,7 +101,7 @@ public class TutorController {
             n--;
         }
         Page<Tutor> pages=null;
-        if("date".equals(searchSort)){
+        if("date".equals(searchSortValue)){
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
             try {
                 Date DStart=sdf.parse(dateStart);
@@ -111,11 +111,11 @@ public class TutorController {
                 e.printStackTrace();
                 //日期格式不正确
             }
-        }else if("all".equals(searchSort)){
+        }else if("all".equals(searchSortValue)){
             pages=tutorService.searchTutorAll(n,PAGE_SIZE,keywords);
 
         }else{
-            pages=tutorService.searchTutorType(n,PAGE_SIZE,keywords,searchSort);
+            pages=tutorService.searchTutorType(n,PAGE_SIZE,keywords,searchSortValue);
         }
         if(pages==null){
             throw new Exception("没有数据！");
@@ -124,17 +124,16 @@ public class TutorController {
         model.addAttribute("sumpage",sumpage);
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
-        model.addAttribute("searchSortValue",searchSort);
+        model.addAttribute("searchSortValue",searchSortValue);
         model.addAttribute("dateStart",dateStart);
         model.addAttribute("dateEnd",dateEnd);
         model.addAttribute("sumElement",pages.getTotalElements());
-        System.out.println("前台输出："+searchSort);
         return "/backend/tutor";
     }
 
     //后台单击删除按钮返回的信息
     @RequestMapping("/backend/delTutor")
-    public String delTutor(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Long id,Long sumElement,Model model){
+    public String delTutor(int n,int sumpage,@RequestParam("searchSort")String searchSortValue,String keywords,String dateStart,String dateEnd,Long id,Long sumElement,Model model){
         try {
             staticResourceService.deleteResource(tutorService.findOneById(id).getPictureUri());
         } catch (IOException e) {
@@ -149,7 +148,7 @@ public class TutorController {
         sumElement--;
 
         Page<Tutor> pages=null;
-        if("date".equals(searchSort)){
+        if("date".equals(searchSortValue)){
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
             try {
                 Date DStart=sdf.parse(dateStart);
@@ -159,18 +158,18 @@ public class TutorController {
                 e.printStackTrace();
                 //日期格式不正确
             }
-        }else if("all".equals(searchSort)){
+        }else if("all".equals(searchSortValue)){
             pages=tutorService.searchTutorAll(n,PAGE_SIZE,keywords);
 
         }else{
-            pages=tutorService.searchTutorType(n,PAGE_SIZE,keywords,searchSort);
+            pages=tutorService.searchTutorType(n,PAGE_SIZE,keywords,searchSortValue);
 
         }
         model.addAttribute("sumpage",sumpage);
         model.addAttribute("allTutorList",pages);
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
-        model.addAttribute("searchSortValue",searchSort);
+        model.addAttribute("searchSortValue",searchSortValue);
         model.addAttribute("dateStart",dateStart);
         model.addAttribute("dateEnd",dateEnd);
         model.addAttribute("sumElement",sumElement);
