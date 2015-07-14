@@ -13,7 +13,6 @@ import java.util.Date;
 //@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"title"}))
 //@Inheritance(strategy=InheritanceType.JOINED)  //有待解答 已在邮件中答复 :D
 public  class Banners implements Serializable {
-
     private static final long serialVersionUID = -349012453592429794L;//有待解答...Serializable标准而已
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +21,6 @@ public  class Banners implements Serializable {
     private String title;
     @Column(length = 1000)
     private String content;
-    @Column
-    private boolean top=true;
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUploadDate;
 
@@ -43,17 +40,10 @@ public  class Banners implements Serializable {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
-    }
+    public String getContent() {return content;}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+    public void setContent(String content) {this.content = content;}
 
-    public boolean isTop() {return top;}
-
-    public void setTop(boolean top) {this.top = top;}
 
     public Date getLastUploadDate() {
         return lastUploadDate;
@@ -69,7 +59,6 @@ public  class Banners implements Serializable {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", top=" + top +
                 ", lastUploadDate=" + lastUploadDate +
                 '}';
     }

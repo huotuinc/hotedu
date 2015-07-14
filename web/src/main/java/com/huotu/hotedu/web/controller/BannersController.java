@@ -107,7 +107,6 @@ import java.util.Date;
         banners.setTitle(title);
         banners.setContent(content);
         banners.setLastUploadDate(new Date());
-        banners.setTop("1".equals(top) ? true : false);
         BannersService.addBanners(banners);
         return "redirect:/backend/loadBanners";
     }
@@ -119,7 +118,6 @@ import java.util.Date;
         Banners banners=BannersService.findOneById(id);
         banners.setTitle(title);
         banners.setContent(content);
-        banners.setTop(top);
         banners.setLastUploadDate(new Date());
         BannersService.modify(banners);
         return "redirect:/backend/loadBanners";
