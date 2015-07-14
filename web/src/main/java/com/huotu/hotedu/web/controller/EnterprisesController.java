@@ -257,6 +257,7 @@ public class EnterprisesController {
     public String ModifySaveEnterprise(Long id,String name,String introduction,String tel,boolean isPutaway,@RequestParam("smallimg") MultipartFile file,Model model) throws Exception{
 
 
+
         if(file.getSize()!=0){
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
         }
@@ -271,6 +272,7 @@ public class EnterprisesController {
 
         Enterprise enterprise=enterpriseService.findOneById(id);
         enterprise.setTel(tel);
+        enterprise.setName(name);
         enterprise.setIsPutaway(isPutaway);
         enterprise.setInformation(introduction);
         if(file.getSize()!=0){
