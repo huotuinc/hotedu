@@ -23,7 +23,7 @@ public class Enterprise extends Login implements Serializable {
     private String tel;
     private String logoUri;
     private boolean isPutaway;
-    private String status;            //0:表示不禁用，1：表示禁用  以后可能还有其他状态
+    private int status;            //0:表示不禁用，1：表示禁用  以后可能还有其他状态
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUploadDate;
     public String getName() {
@@ -74,11 +74,11 @@ public class Enterprise extends Login implements Serializable {
         this.lastUploadDate = lastUploadDate;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

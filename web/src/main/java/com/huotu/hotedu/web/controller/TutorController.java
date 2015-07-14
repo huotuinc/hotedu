@@ -3,11 +3,8 @@ package com.huotu.hotedu.web.controller;
 import com.huotu.hotedu.entity.Tutor;
 import com.huotu.hotedu.service.TutorService;
 import com.huotu.hotedu.web.service.StaticResourceService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +32,6 @@ public class TutorController {
     @Autowired
     StaticResourceService staticResourceService;
     public static final int PAGE_SIZE=10;//每张页面的记录数
-    private static final Log log = LogFactory.getLog(TutorController.class);
     //后台单击师资力量显示的消息
     @RequestMapping("/backend/loadTutor")
     public String loadTutor(Model model){
@@ -47,17 +43,14 @@ public class TutorController {
         model.addAttribute("keywords","");
         model.addAttribute("dateStart","");
         model.addAttribute("dateEnd","");
-        model.addAttribute("searchSort","all");
+        model.addAttribute("searchSortValue","all");
         model.addAttribute("sumElement",sumElement);
         return "/backend/tutor";
     }
 
     //后台单机搜索按钮显示的师资力量消息
     @RequestMapping("/backend/searchTutor")
-    public String searchTutor(String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
-        System.out.println(dateEnd);
-        System.out.println(dateStart);
-        System.out.println(searchSort);
+    public String searchTutor(@RequestParam("searchSort")String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
         Page<Tutor> pages=null;
         if("date".equals(searchSort)){
             System.out.println("进入date");
@@ -93,7 +86,7 @@ public class TutorController {
         model.addAttribute("keywords",keywords);
         model.addAttribute("dateStart",dateStart);
         model.addAttribute("dateEnd",dateEnd);
-        model.addAttribute("searchSort",searchSort);
+        model.addAttribute("searchSortValue",searchSort);
         model.addAttribute("sumElement",sumElement);
         return "/backend/tutor";
     }
@@ -127,15 +120,15 @@ public class TutorController {
         if(pages==null){
             throw new Exception("没有数据！");
         }
-        System.out.println("进入pageTutor ,pages");
         model.addAttribute("allTutorList",pages);
         model.addAttribute("sumpage",sumpage);
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
-        model.addAttribute("searchSort",searchSort);
+        model.addAttribute("searchSortValue",searchSort);
         model.addAttribute("dateStart",dateStart);
         model.addAttribute("dateEnd",dateEnd);
         model.addAttribute("sumElement",pages.getTotalElements());
+        System.out.println("前台输出："+searchSort);
         return "/backend/tutor";
     }
 
@@ -177,7 +170,7 @@ public class TutorController {
         model.addAttribute("allTutorList",pages);
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
-        model.addAttribute("searchSort",searchSort);
+        model.addAttribute("searchSortValue",searchSort);
         model.addAttribute("dateStart",dateStart);
         model.addAttribute("dateEnd",dateEnd);
         model.addAttribute("sumElement",sumElement);
@@ -244,9 +237,9 @@ public class TutorController {
 
 
 
-        if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
-        System.out.println("文件大小：" + file.getSize());
-        if(file.getSize()==0){throw new Exception("文件为空！");}
+        if(file.getSize()!=0){
+            if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+        }
         if(file.getSize()>1024*1024*5){throw new Exception("文件太大");}
 
 
@@ -259,7 +252,9 @@ public class TutorController {
 
 
         Tutor tutor=tutorService.findOneById(id);
-        tutor.setPictureUri(fileName);
+        if(file.getSize()!=0){
+            tutor.setPictureUri(fileName);
+        }
         tutor.setQualification(qualification);
         tutor.setArea(area);
         tutor.setIntroduction(introduction);
