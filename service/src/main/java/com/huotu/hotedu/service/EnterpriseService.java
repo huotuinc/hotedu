@@ -30,7 +30,7 @@ public class EnterpriseService {
     }
 
     //分页依据类型和关键字搜索
-    public Page<Enterprise> searchEnterprise(int n,int pagesize,String keyword,String type){
+    public Page<Enterprise> searchEnterpriseType(int n,int pagesize,String keyword,String type){
         return  enterpriseRepository.findAll(new Specification<Enterprise>() {
             @Override
             public Predicate toPredicate(Root<Enterprise> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -85,7 +85,6 @@ public class EnterpriseService {
     //修改一个企业信息
     public void modify(Enterprise enterprise){
         enterpriseRepository.save(enterprise);
-
     }
     //查找一个企业信息
     public Enterprise findOneById(Long id){
