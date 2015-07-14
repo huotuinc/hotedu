@@ -211,10 +211,6 @@ public class TutorController {
             if(file.getSize()==0){throw new Exception("文件为空！");}
             if(file.getSize()>1024*1024*5){throw new Exception("文件太大");}
 
-
-
-
-
             //保存图片
             String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
             staticResourceService.uploadResource(fileName,file.getInputStream());
