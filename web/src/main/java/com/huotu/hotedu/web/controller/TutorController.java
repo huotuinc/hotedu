@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -192,9 +194,10 @@ public class TutorController {
     }
     //后台单机修改按钮
     @RequestMapping("/backend/modifyTutor")
-    public String ModifyTutor(Long id, Model model){
+    public String ModifyTutor(Long id, Model model,HttpServletRequest request){
         Tutor tutor=tutorService.findOneById(id);
-        model.addAttribute("tutor",tutor);
+        tutor.setPictureUri(request.getContextPath() + "/uploadResources"+tutor.getPictureUri());
+                model.addAttribute("tutor",tutor);
         return "/backend/modifytutor";
     }
 
