@@ -90,24 +90,4 @@ public class EnterprisesController {
         return "/backend/enterprises";
     }
 
-
-
-
-
-
-
-
-
-
-
-    //后台显示检索之后的招聘信息
-    @RequestMapping("/backend/searchWantedes")
-    public String searchWantedesController() {
-        return "";
-    }
-    //后台显示检索之后的发布企业信息
-    @RequestMapping("/backend/searchEnterprises")
-    public String searchEnterprisesController() {
-        return "";
-    }
 }
