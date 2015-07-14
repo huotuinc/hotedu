@@ -6,8 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
     <script type="text/javascript" src="js/libs/jquery.min.js" th:src="@{/backend/js/libs/jquery.min.js}"></script>
-    <script type="text/javascript" src="js/libs/modernizr.min.js"
-            th:src="@{/backend/js/libs/modernizr.min.js}"></script>
+    <script type="text/javascript" src="js/libs/modernizr.min.js" th:src="@{/backend/js/libs/modernizr.min.js}"></script>
     <!--警告框控件-->
     <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
     <script type="text/javascript" src="js/jquery.confirm.js" th:src="@{/backend/js/jquery.confirm.js}"></script>
@@ -21,12 +20,6 @@
             th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
 </head>
 <body>
-<!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
-<!--@thymesVar id="keywords" type="java.lang.String"-->
-<!--@thymesVar id="sumElement" type="java.lang.Long"-->
-<!--@thymesVar id="sumpage" type="java.lang.Integer"-->
-<!--@thymesVar id="n" type="java.lang.Integer"-->
-<!--@thymesVar id="allMessageContentList" type="org.springframework.data.domain.Page<com.huotu.hotedu.entity.MessageContent>"-->
 <div class="topbar-wrap white">
     <div class="topbar-inner clearfix">
         <div class="topbar-logo-wrap clearfix">
@@ -57,9 +50,10 @@
             <div class="jp-container">
                 <ul class="sidebar-list">
                     <li><p style="height:30px; line-height:30px; margin-left: 20px;">企业信息</p>
-                        <ul class="sub-menu">
+                        <ul class="sub-menu" style="display:block;">
                             <li><a href="wanted.html" th:href="@{/backend/loadWanted}">招聘信息</a></li>
-                            <li><a href="enterprises.html" th:href=" @{/backend/loadEnterprises}">发布企业</a></li>
+                            <li class="on"><a href="enterprises.html" th:href=" @{/backend/loadEnterprises}">发布企业</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -70,7 +64,7 @@
                     </li>
                     <li>
                         <p style="height:30px; line-height:30px; margin-left: 20px;">考试指南</p>
-                        <ul class="sub-menu" style="display:block;">
+                        <ul class="sub-menu">
                             <li><a href="examguide.html" th:href="@{/backend/loadExamGuide}">考试指南</a></li>
                         </ul>
                     </li>
@@ -88,18 +82,15 @@
                     </li>
                     <li><p style="height:30px; line-height:30px; margin-left: 20px;">资讯动态</p>
                         <ul class="sub-menu">
-                            <li class="on"><a href="messagecontent.html"
-                                              th:href="@{/backend/loadMessagecontent}">资讯动态</a></li>
+                            <li><a href="messagecontent.html" th:href="@{/backend/loadMessagecontent}">资讯动态</a></li>
                         </ul>
                     </li>
-
                     <li>
                         <p style="height:30px; line-height:30px; margin-left: 20px;">公司简介</p>
                         <ul class="sub-menu">
                             <li><a href="editenterprise.html" th:href="@{/backend/loadEditenterprise}">公司简介编辑</a></li>
                         </ul>
                     </li>
-
                     <li>
                         <p style="height:30px; line-height:30px; margin-left: 20px;">视频</p>
                         <ul class="sub-menu">
@@ -121,90 +112,46 @@
     </div>
     <!--/sidebar-->
     <div class="main-wrap">
-
         <div class="crumb-wrap">
             <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span
-                    class="crumb-step">&gt;</span><span class="crumb-name">资讯动态</span></div>
-        </div>
-        <div class="search-wrap">
-            <div class="search-content">
-                <form action="#" th:action="@{/backend/searchMessagecontent}" method="get">
-                    <table class="search-tab">
-                        <tr>
-                            <th width="10"></th>
-                            <td>
-                                <input class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}"
-                                       id="keywords" type="text"/></td>
-                            <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
+                    class="crumb-step">&gt;</span><a href="enterprises.html" th:href="@{/backend/loadEditenterprise}"><span
+                    class="crumb-name">发布企业</span></a><span class="crumb-step">&gt;</span><span
+                    class="crumb-name">新建</span></div>
         </div>
         <div class="result-wrap">
-            <form name="myform" id="myform" method="post">
-                <div class="result-title">
-                    <div class="result-list">
-                        <a href="newmessagecontent.html" th:href="@{/backend/addMessagecontent}"><i
-                                class="icon-font">+</i>新建</a>
-                    </div>
-                </div>
-                <div class="result-content">
-                    <table class="result-tab" width="100%">
-                        <tr>
-                            <th style="width:80px">序号</th>
-                            <th style="width:80px;">标题</th>
-                            <th style="width:100px">上传时间</th>
-                            <th style="width:100px">置顶</th>
-                            <th style="width:80px">操作</th>
-                        </tr>
-                        <tr th:remove="all">
-                            <td>01</td>
-                            <td title="">mou某mou某mou某mou某</td>
-                            <td>2015.01.01/13.00.00</td>
-                            <td title=""></td>
-                            <td>
-                                <a class="link-update" href="newmessagecontent.html">修改</a><br/>
-                                <a class="link-delete" href="#">删除</a>
-                            </td>
-                        </tr>
-                        <tr th:remove="all">
-                            <td>01</td>
-                            <td title="">mou某mou某mou某mou某</td>
-                            <td>2015.01.01/13.00.00</td>
-                            <td title=""></td>
-                            <td>
-                                <a class="link-update" href="newmessagecontent.html">修改</a><br/>
-                                <a class="link-delete" href="#">删除</a>
-                            </td>
-                        </tr>
-                        <tr th:remove="all">
-                            <td>01</td>
-                            <td title="">mou某mou某mou某mou某</td>
-                            <td>2015.01.01/13.00.00</td>
-                            <td title=""></td>
-                            <td>
-                                <a class="link-update" href="newmessagecontent.html">修改</a><br/>
-                                <a class="link-delete" href="#">删除</a>
-                            </td>
-                        </tr>
-                        <tr th:each="g:${allMessageContentList}">
-                            <td th:text="${g.id}">01</td>
-                            <td title="" th:text="${g.title}">mou某mou某mou某mou某</td>
-                            <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/hh.mm.ss')}">2015.01.01/13.00.00</td>
-                            <td th:text="${g.top}" title="">置顶</td>
-                            <td><a class="link-update" href="newguide.html"
-                                   th:href="@{/backend/modify/messagecontent(id=${g.id})}">修改</a><br/>
-                                <a class="link-update" href="#" onclick="check_del(this)">删除</a><br/>
-                                <a class="real-delete" href="#"
-                                   th:href="@{/backend/delMessagecontent(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}"></a>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="list-page">
-                        <a href="#" th:href="@{/backend/pageMessagecontent(n=${n}-1,keywords=${keywords},sumpage=${sumpage})}">上一页</a>
-                        <a href="#" th:href="@{/backend/pageMessagecontent(n=${n}+1,keywords=${keywords},sumpage=${sumpage})}">下一页</a>
-                        <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span th:text="${sumpage}">1</span> 页
+            <form action="#" method="post" id="myform" name="myform">
+                <div class="config-items">
+                    <div class="result-content">
+                        <table width="100%" class="insert-tab">
+                            <tbody>
+                            <tr>
+                                <th><i class="require-red">*</i>上传LOGO：</th>
+                                <td><img src="images/logo.png" width="100px" height="auto"/><input name="smallimg" type="file"/><
+                                    !--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>电话：</th>
+                                <td><input type="text" value="" size="70" name="description" class="common-text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>企业名称：</th>
+                                <td><input type="text" value="" size="70" name="description" class="common-text"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>招聘描述：</th>
+                                <td><textarea name="content" class="common-textarea" id="content" cols="30"
+                                              style="width: 98%;" rows="10"></textarea></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td><input type="button" value="保存" class="btn btn-primary btn6 mr10" onclick="check_save(this)"/><input
+                                        type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </form>

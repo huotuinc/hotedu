@@ -72,7 +72,7 @@
                 <li>
                     <p style="height:30px; line-height:30px; margin-left: 20px;">banner图</p>
                     <ul class="sub-menu">
-                        <li><a href="banners.html" th:href="@{/backend/load/banners}">banner图</a></li>
+                        <li><a href="banners.html" th:href="@{/backend/loadBanners}">banner图</a></li>
                     </ul>
                 </li>
                 <li>
@@ -184,9 +184,9 @@
                             <td th:text="${g.name}"></td>
                             <td th:text="${g.qualification}"></td>
                             <td th:text="${g.area}"></td>
-                            <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/hh.mm.ss')}"></td>
-                            <td><a class="link-update" href="newtutor.html" th:href="@{/backend/modifyTutor(id=${g.id})}">修改</a><br/>
-                                <a class="link-update" href="#" onclick="check_del(this)">删除</a>
+                            <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/hh.mm.ss')}">2015.01.01/13.00.00</td>
+                            <td><a class="link-update" href="modifytutor.html" th:href="@{/backend/modifyTutor(id=${g.id})}">修改</a><br/>
+                                <a class="link-update" href="#" onclick="check_del(this)">删除</a><br/>
                                 <a class="real-delete" href="#" th:href="@{/backend/delTutor(id=${g.id},n=${n},searchSort=${searchSort},keywords=${keywords},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
                             </td>
                         </tr>

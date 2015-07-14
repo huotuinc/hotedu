@@ -8,6 +8,9 @@
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
     <script type="text/javascript" src="js/libs/jquery.min.js" th:src="@{/backend/js/libs/jquery.min.js}"></script>
     <script type="text/javascript" src="js/libs/modernizr.min.js" th:src="@{/backend/js/libs/modernizr.min.js}"></script>
+    <!--警告框控件-->
+    <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
+    <script type="text/javascript" src="js/jquery.confirm.js" th:src="@{/backend/js/jquery.confirm.js}"></script>
     <!--日期控件-->
     <script type="text/javascript" src="js/date/jquery_ui.js" th:src="@{/backend/js/date/jquery_ui.js}"></script>
     <script type="text/javascript" src="js/date/mydate.js" th:src="@{/backend/js/date/mydate.js}"></script>
@@ -15,7 +18,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#searchSort").bind("change",function(){
-                if($(this).val()==3){
+                if($(this).val()=="date"){
                     $("#vedio_nodate").hide();
                     $("#vedio_date").show();
                 }
@@ -169,13 +172,13 @@
                             <th style="width:100px">权限</th>
                             <th style="width:80px">操作</th>
                         </tr>
-                        <tr>
+                        <tr th:remove="all">
                             <td th:remove="all">01</td>
                             <td th:remove="all">第一章第一节</td>
                             <td th:remove="all">2：30：00</td>
                             <td th:remove="all">2015.01.01/13.00.00</td>
                             <td th:remove="all">免费</td>
-                            <td th:remove="all"><a class="link-update" href="newvideo.html" >修改</a><br/><a class="link-update" href="#" >删除</a></td>
+                            <td th:remove="all"><a class="link-update" href="newvideo.html" >修改</a><br/><a class="link-delete" href="#" >删除</a></td>
                         </tr>
                         <tr th:remove="all">
                             <td>01</td>
@@ -183,19 +186,18 @@
                             <td title="">2：30：00</td>
                             <td>2015.01.01/13.00.00</td>
                             <td title="">免费</td>
-                            <td><a class="link-update" href="newvideo.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
+                            <td><a class="link-update" href="newvideo.html">修改</a><br/><a class="link-delete" href="#">删除</a></td>
                         </tr>
                         <tr th:each="g:${videoList}">
                             <td th:text="${g.id}"></td>
                             <td title="" th:text="${g.videoName}">mou某mou某mou某mou某</td>
-                            <td title="" th:text="${g.videoName}">mou某mou某mou某mou某</td>
                             <td th:text="${#calendars.format(g.uploadTime,'yyyy-MM-dd hh:mm:ss')}">2014-07-13 15:15:50</td>
                             <td th:if="${g.free}">免费</td>
                             <td th:unless="${g.free}">会员</td>
-                            <td><a class="link-update" href="#"
-                                   th:href="@{/backend/modifyVideo(id=${g.id})}">修改</a><br/>
-                                <a class="real-delete" href="#"
-                                   th:href="@{/backend/delVideo(id=${g.id},n=${n},keywords=${keywords},totalPages=${totalPages},totalRecords=${totalRecords})}">删除</a>
+                            <td>
+                                <a class="link-update" href="modifyvideo.html" th:href="@{/backend/modifyVideo(id=${g.id})}">修改</a><br/>
+                                <a class="link-update" href="#" onclick="check_del(this)">删除</a><br/>
+                                <a class="real-delete" href="#" th:href="@{/backend/delVideo(id=${g.id},n=${n},keywords=${keywords},totalPages=${totalPages},totalRecords=${totalRecords})}"></a>
                             </td>
                         </tr>
                     </table>

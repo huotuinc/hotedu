@@ -178,21 +178,16 @@
                             <td th:text="${g.id}">01</td>
                             <td title="" th:text="${g.title}">66666.jpg</td>
                             <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/hh.mm.ss')}">2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="modifybanners.html"
-                                   th:href="@{/backend/modifyBanners(id=${g.id})}">修改</a><br/>
+                            <td><a class="link-update" href="modifybanners.html" th:href="@{/backend/modifyBanners(id=${g.id})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a><br/>
-                                <a class="real-delete" href="#"
-                                   th:href="@{/backend/delBanners(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}"></a>
+                                <a class="real-delete" href="#" th:href="@{/backend/delBanners(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}"></a>
                             </td>
                         </tr>
                     </table>
                     <div class="list-page">
-                        <a href="#"
-                           th:href="@{/backend/pageBanners(n=${n}-1,keywords=${keywords},sumpage=${sumpage})}">上一页</a>
-                        <a href="#"
-                           th:href="@{/backend/pageBanners(n=${n}+1,keywords=${keywords},sumpage=${sumpage})}">下一页</a>
-                        <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span
-                            th:text="${sumpage}">1</span> 页
+                        <a href="#" th:href="@{/backend/pageBanners(n=${n}-1,keywords=${keywords},sumpage=${sumpage})}">上一页</a>
+                        <a href="#" th:href="@{/backend/pageBanners(n=${n}+1,keywords=${keywords},sumpage=${sumpage})}">下一页</a>
+                        <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span th:text="${sumpage}">1</span> 页
                     </div>
 
 

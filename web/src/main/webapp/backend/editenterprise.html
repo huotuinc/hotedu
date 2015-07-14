@@ -59,7 +59,7 @@
                     <li>
                         <p style="height:30px; line-height:30px; margin-left: 20px;">banner图</p>
                         <ul class="sub-menu">
-                            <li><a href="banners.html" th:href="@{/backend/load/banners}">banner图</a></li>
+                            <li><a href="banners.html" th:href="@{/backend/loadBanners}">banner图</a></li>
                         </ul>
                     </li>
                     <li>
@@ -128,19 +128,18 @@
                             <tbody>
                             <tr>
                                 <th><i class="require-red">*</i>标题：</th>
-                                <td><input th:value="${Huotu[0].title}" type="text" id="" value="" size="70"
-                                           name="title" class="common-text"/></td>
+                                <td><input th:value="${Huotu[0].title}" type="text" id="" value="" size="70" name="title" class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>描述：</th>
-                                <td><textarea th:text="${Huotu[0].introduction}" name="introduction"
-                                              class="common-textarea" id="content" cols="30" style="width: 98%;"
-                                              rows="10"></textarea></td>
+                                <td>
+                                    <textarea th:text="${Huotu[0].introduction}" name="introduction" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10">
+                                    </textarea>
+                                </td>
                             </tr>
                             <tr>
                                 <th></th>
-                                <td><input type="button" value="保存" class="btn btn-primary btn6 mr10"
-                                           onclick="check_save(this)"/>
+                                <td><input type="button" value="保存" class="btn btn-primary btn6 mr10" onclick="check_save(this)"/>
                                     <input type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
                             </tr>
                             </tbody>
