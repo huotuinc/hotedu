@@ -177,7 +177,7 @@
                             <td th:text="${g.top}" title="">置顶</td>
                             <td>
                                 <a class="link-update" href="newqa.html" th:href="@{/backend/modifyQa(id=${g.id})}">修改</a><br/>
-                                <a class="link-update" href="#" onclick="check_del(this)">删除</a><br/>
+                                <a class="link-update" href="#" onclick="check_del(this)">删除</a>
                                 <a class="real-delete" href="#" th:href="@{/backend/delQa(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}"></a>
                             </td>
                         </tr>
