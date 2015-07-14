@@ -133,10 +133,16 @@
                                 <th><i class="require-red">*</i>上传图片：</th>
                                 <td><input
                                         name="smallimg" type="file"/><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>-->
+                                    <img name="showimg" id="showimg" src="" style="display:none;" alt="预览图片" />
                                 </td>
                             </tr>
                             <tr>
-                                <th><i class="require-red">*</i>url：</th>
+                                <th><i class="require-red">*</i>标题：</th>
+                                <td><input type="text" value="" size="70" name="description"
+                                           class="common-text" /></td>
+                            </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>简介：</th>
                                 <td><input type="text" value="" size="70" name="description"
                                            class="common-text" /></td>
                             </tr>
