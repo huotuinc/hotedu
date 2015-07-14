@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
@@ -61,8 +62,8 @@
         </div>
         <div class="sidebar-content">
             <div class="jp-container">
-               <ul class="sidebar-list">
-                  <li><p style="height:30px; line-height:30px; margin-left: 20px;">企业信息</p>
+            <ul class="sidebar-list">
+                <li><p style="height:30px; line-height:30px; margin-left: 20px;">企业信息</p>
                     <ul class="sub-menu">
                         <li><a href="wanted.html" th:href="@{/backend/loadWanted}">招聘信息</a></li>
                         <li><a href="enterprises.html" th:href=" @{/backend/loadEnterprises}">发布企业</a></li>
@@ -125,9 +126,7 @@
     <!--/sidebar-->
     <div class="main-wrap">
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a>
-                <span class="crumb-step">&gt;</span>
-                <span class="crumb-name">师资力量</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">师资力量</span></div>
         </div>
         <div class="search-wrap">
             <div class="search-content">
@@ -187,7 +186,8 @@
                             <td th:text="${g.area}"></td>
                             <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/hh.mm.ss')}">2015.01.01/13.00.00</td>
                             <td><a class="link-update" href="modifytutor.html" th:href="@{/backend/modifyTutor(id=${g.id})}">修改</a><br/>
-                                <a class="link-update" href="#" th:href="@{/backend/delTutor(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}">删除</a>
+                                <a class="link-update" href="#" onclick="check_del(this)">删除</a><br/>
+                                <a class="real-delete" href="#" th:href="@{/backend/delTutor(id=${g.id},n=${n},searchSort=${searchSort},keywords=${keywords},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
                             </td>
                         </tr>
                     </table>

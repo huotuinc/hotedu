@@ -128,7 +128,7 @@
                             <tbody>
                             <tr>
                                 <th><i class="require-red">*</i>上传照片：</th>
-                                <td><img src="images/logo.png" th:src="tutor.pictureUri" width="100px" height="auto"/><input name="smallimg"
+                                <td><img src="images/logo.png" th:src="${tutor.pictureUri}" width="100px" height="auto"/><input name="smallimg"
                                                                                                    type="file"/>
                                     <!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>-->
                                 </td>
