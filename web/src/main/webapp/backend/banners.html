@@ -134,7 +134,7 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="newbanner.html"><i class="icon-font">+</i>新建</a>
+                        <a href="newbanner.html" ><i class="icon-font">+</i>新建</a>
                     </div>
                 </div>
                 <div class="result-content">
@@ -167,7 +167,7 @@
                             <td>01</td>
                             <td>8888.jpg</td>
                             <td>2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="modifybanners.html.html">修改</a><br/>
+                            <td><a class="link-update" href="modifybanners.html">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a><br/>
                                 <a class="real-delete" href="#" ></a>
                             </td>
@@ -176,7 +176,7 @@
                             <td th:text="${g.id}">01</td>
                             <td title="" th:text="${g.title}">66666.jpg</td>
                             <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/hh.mm.ss')}">2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="newbanner.html"
+                            <td><a class="link-update" href="modifybanners.html"
                                    th:href="@{/backend/modifyBanners(id=${g.id})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a><br/>
                                 <a class="real-delete" href="#"

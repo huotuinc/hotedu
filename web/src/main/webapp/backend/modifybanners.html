@@ -34,13 +34,14 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li><span th:text="${#authentication.name}"></span></li>
+                <!--<li><span th:text="${#authentication.name}"></span></li>-->
                 <li><a href="changethepassword.html" th:href="@{/backend/loadChangethepassword}">修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
         </div>
     </div>
 </div>
+
 <div class="container clearfix">
     <div class="sidebar-wrap">
         <div class="sidebar-title">
@@ -58,14 +59,14 @@
                     </li>
                     <li>
                         <p style="height:30px; line-height:30px; margin-left: 20px;">banner图</p>
-                        <ul class="sub-menu">
-                            <li><a href="banners.html" th:href="@{/backend/loadBanners}">banner图</a></li>
-                        </ul>
+                        <ul class="sub-menu" style="display:block;">
+                            <li class="on" ><a href="banners.html" th:href="@{/backend/load/banners}">banner图</a></li>
+                            </ul>
                     </li>
                     <li>
                         <p style="height:30px; line-height:30px; margin-left: 20px;">考试指南</p>
-                        <ul class="sub-menu" style="display:block;">
-                            <li class="on"><a href="examguide.html" th:href="@{/backend/loadExamGuide}">考试指南</a></li>
+                        <ul class="sub-menu">
+                            <li><a href="examguide.html" th:href="@{/backend/loadExamGuide}">考试指南</a></li>
                         </ul>
                     </li>
                     <li>
@@ -96,7 +97,7 @@
                     <li>
                         <p style="height:30px; line-height:30px; margin-left: 20px;">视频</p>
                         <ul class="sub-menu">
-                            <li><a href="video.html" th:href="@{/backend/loadVideo}">教学视频</a></li>
+                            <li><a href="video.html" th:href="@{/backend/load/video}">教学视频</a></li>
                             <li><a href="http://www.baidu.com" target="_blank">精彩录制</a></li>
                             <li><a href="http://www.baidu.com" target="_blank">经验分享</a></li>
                             <li><a href="http://www.baidu.com" target="_blank">其他视频</a></li>
@@ -114,81 +115,36 @@
     </div>
     <!--/sidebar-->
     <div class="main-wrap">
-
         <div class="crumb-wrap">
             <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span
-                    class="crumb-step">&gt;</span><span class="crumb-name">考试指南</span></div>
-        </div>
-        <div class="search-wrap">
-            <div class="search-content">
-                <form action="#" th:action="@{/backend/searchExamGuide}" method="get">
-                    <table class="search-tab">
-                        <tr>
-                            <th width="10"></th>
-                            <td><input class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}"
-                                       id="keywords" type="text"/></td>
-                            <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
+                    class="crumb-step">&gt;</span><a href="banners.html"><span class="crumb-name">Banner图</span></a><span
+                    class="crumb-step">&gt;</span><span class="crumb-name">修改</span></div>
         </div>
         <div class="result-wrap">
-            <form name="myform" id="myform" method="post">
-                <div class="result-title">
-                    <div class="result-list">
-                            <a href="newguide.html" th:href="@{/backend/addExamGuide}"><i class="icon-font">+</i>新建</a>
-                    </div>
-                </div>
-                <div class="result-content">
-                    <table id="examguideTable" class="result-tab" width="100%">
-                        <tr>
-                            <th style="width:80px">序号</th>
-                            <th style="width:80px;">标题</th>
-                            <th style="width:100px">上传时间</th>
-                            <th style="width:100px">置顶</th>
-                            <th style="width:80px">操作</th>
-                        </tr>
-                        <tr th:remove="all">
-                            <td>01</td>
-                            <td>mou某mou某mou某mou某1</td>
-                            <td>2015.01.01/13.00.00</td>
-                            <td>置顶</td>
-                            <td><a class="link-update" href="newguide.html">修改</a><br/>
-                                <a class="link-update" href="#" onclick="check_del(this)">删除</a><br/>
-                                <a class="real-delete" href="#"></a>
-                            </td>
-                        </tr>
-                        <tr th:remove="all">
-                            <td>01</td>
-                            <td>mou某mou某mou某mou某2</td>
-                            <td>2015.01.01/13.00.00</td>
-                            <td>置顶</td>
-                            <td><a class="link-update" href="newguide.html">修改</a><br/>
-                                <a class="link-update" href="#" onclick="check_del(this)">删除</a><br/>
-                                <a class="real-delete" href="#"></a>
-                            </td>
-                        </tr>
-                        <tr th:each="g:${allGuideList}">
-                            <td th:text="${g.id}">01</td>
-                            <td title="" th:text="${g.title}">mou某mou某mou某mou某3</td>
-                            <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/hh.mm.ss')}">2015.01.01/13.00.00</td>
-                            <td th:text="${g.top}" title="">置顶</td>
-                            <td><a class="link-update" href="newguide.html"
-                                   th:href="@{/backend/modifyExamGuide(id=${g.id})}">修改</a><br/>
-                                <a class="link-update" href="#" onclick="check_del(this)">删除</a><br/>
-                                <a class="real-delete" href="#"
-                                   th:href="@{/backend/delExamGuide(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}"></a>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="list-page">
-                        <a href="#"
-                           th:href="@{/backend/pageExamGuide(n=${n}-1,keywords=${keywords},sumpage=${sumpage})}">上一页</a>
-                        <a href="#"
-                           th:href="@{/backend/pageExamGuide(n=${n}+1,keywords=${keywords},sumpage=${sumpage})}">下一页</a>
-                        <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span
-                            th:text="${sumpage}">1</span> 页
+            <form action="#" method="post" id="myform" name="myform">
+                <div class="config-items">
+                    <div class="result-content">
+                        <table width="100%" class="insert-tab">
+                            <tbody>
+                            <tr>
+                                <th><i class="require-red">*</i>上传图片：</th>
+                                <td><input
+                                        name="smallimg" type="file"/><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>url：</th>
+                                <td><input type="text" value="" size="70" name="description"
+                                           class="common-text" /></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td><input type="button" value="保存" class="btn btn-primary btn6 mr10" onclick="check_save()"/><input
+                                        type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </form>

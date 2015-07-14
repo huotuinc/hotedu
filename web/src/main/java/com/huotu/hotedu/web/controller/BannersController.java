@@ -85,8 +85,6 @@ import java.util.Date;
     }
 
 
-
-
     //后台单击新建按钮
     @RequestMapping("/backend/addbanners")
     public String addBanners(Model model){
