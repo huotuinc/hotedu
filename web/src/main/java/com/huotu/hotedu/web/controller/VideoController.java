@@ -22,7 +22,7 @@ public class VideoController {
     VideoService videoService;
     public static final int PAGE_SIZE=10;//每张页面的记录数
     //后台显示所有视频信息
-    @RequestMapping("/backend/loadVideos")
+    @RequestMapping("/backend/loadVideo")
     public String loadWantedes(Model model) {
         Page<Video> pages = videoService.loadVideo(0,PAGE_SIZE);
         long totalRecords = pages.getTotalElements();
@@ -119,7 +119,7 @@ public class VideoController {
         video.setUploadTime(new Date());
         video.setFree("1".equals(free)?true:false);
         videoService.modifyVideo(video);
-        return "redirect:/backend/loadVideos";
+        return "redirect:/backend/loadVideo";
     }
 
 }

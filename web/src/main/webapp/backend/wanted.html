@@ -22,18 +22,18 @@
             $searchSort.val(searchSortValue);
             if ($searchSort.val() == "date") {
                 $searchSort.val("date");
-                $("#vedio_nodate").hide();
-                $("#vedio_date").show();
+                $("#wanted_nodate").hide();
+                $("#wanted_date").show();
             }
             $searchSort.bind("change", function () {
                 if ($(this).val() == "date") {
                     $searchSort.val("date");
-                    $("#vedio_nodate").hide();
-                    $("#vedio_date").show();
+                    $("#wanted_nodate").hide();
+                    $("#wanted_date").show();
                 }
                 else {
-                    $("#vedio_nodate").show();
-                    $("#vedio_date").hide();
+                    $("#wanted_nodate").show();
+                    $("#wanted_date").hide();
                 }
             });
         })
@@ -158,8 +158,8 @@
                                 </select>
                             </td>
                             <td>
-                                <div id="vedio_nodate"><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"/></div>
-                                <div id="vedio_date" style="display:none;"><input readonly="true" id="dateStart" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input readonly="true" id="dateEnd" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/></div>
+                                <div id="wanted_nodate"><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"/></div>
+                                <div id="wanted_date" style="display:none;"><input readonly="true" id="dateStart" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input readonly="true" id="dateEnd" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/></div>
                             </td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
                         </tr>
