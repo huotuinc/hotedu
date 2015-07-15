@@ -21,25 +21,51 @@ import java.util.UUID;
 
 /**
  * Created by shiliting on 2015/6/10.
- * 企业有关的Controller
- * @author shiliting shiliting at gmail.com
+ * 企业有关的Controller,主要负责处理企业有关的请求
+ * @Time 2015-6-10
+ * @author shiliting shiliting741@163.com
  */
 @Controller
 public class EnterprisesController {
+
+    /**企业的Service层*/
     @Autowired
     EnterpriseService enterpriseService;
+
+    /**  用来储存处理静态资源的接口 */
     @Autowired
     StaticResourceService staticResourceService;
-    public static final int PAGE_SIZE=10;//每张页面的记录数
 
-    //后台显示所有招聘信息
+
+    /**  PAGE_SIZE用来储存分页中每页的记录数    */
+    public static final int PAGE_SIZE=10;
+
+    /**
+     * 接收一个显示多条招聘信息的请求，返回给客户端一个HTML页面
+     * @return wantedes.html
+     */
     @RequestMapping("/backend/loadWantedes")
     public String loadWantedesController() {
         return "/backend/wantedes";
     }
 
 
-    //后台显示所有发布企业的信息
+    /**
+     * 接收一个显示多条发布企业信息的请求，根据分页控制显示企业信息的条数，
+     * 请求完成之后model层会添加
+     * 1.多条企业信息的集合
+     * 2.分页的总页数
+     * 3.默认检索时使用的关键字(默认为空)
+     * 4.默认显示第几页(默认为0：第一页)
+     * 5.默认起始时间(以时间检索的时候有效)
+     * 6.默认结束时间(以时间检索的时候有效)
+     * 7.默认的检索类型
+     * 8.企业的总记录数
+     *
+     * 返回给客户端一个HTML页面，并且在页面上添加model
+     * @param model 准备向客户端发送的参数集合
+     * @return enterprises.html
+     */
     @RequestMapping("/backend/loadEnterprises")
     public String loadEnterprisesController(Model model) {
         Page<Enterprise> pages=enterpriseService.loadEnterprise(0, PAGE_SIZE);
@@ -56,10 +82,27 @@ public class EnterprisesController {
     }
 
 
-    //后台单机搜索按钮显示的发布企业消息
+    /**
+     * 接收一个检索请求，返回检索之后包含企业信息的一个HTML页面，并在model添加
+     * 1.多条企业信息的集合
+     * 2.分页的总页数
+     * 3.默认检索时使用的关键字(默认为空)
+     * 4.默认显示第几页(默认为0：第一页)
+     * 5.默认起始时间(以时间检索的时候有效)
+     * 6.默认结束时间(以时间检索的时候有效)
+     * 7.默认的检索类型
+     * 8.企业的总记录数
+     *
+     * @param searchSort 从客户端返回的检索类型
+     * @param keywords   从客户端返回的检索关键字
+     * @param dateStart  从客户端返回的检索起始时间(以时间检索的时候有效)
+     * @param dateEnd    从客户端返回的检索结束时间(以时间检索的时候有效)
+     * @param model      准备向客户端发送的参数集合
+     * @return           enterprises.html
+     * @throws Exception
+     */
     @RequestMapping("/backend/searchEnterprises")
     public String searchEnterprises(String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
-        System.out.println("类型："+searchSort);
         Page<Enterprise> pages=null;
         if("date".equals(searchSort)){
             if("".equals(dateStart)||"".equals(dateEnd)){
@@ -99,12 +142,33 @@ public class EnterprisesController {
 
 
     //后台单击发布企业的分页
+
+    /**
+     * 接收一个分页请求，返回一个分页之后的HTML页面，并在model添加
+     * 1.多条企业信息的集合
+     * 2.分页的总页数
+     * 3.默认检索时使用的关键字(默认为空)
+     * 4.默认显示第几页(默认为0：第一页)
+     * 5.默认起始时间(以时间检索的时候有效)
+     * 6.默认结束时间(以时间检索的时候有效)
+     * 7.默认的检索类型
+     * 8.企业的总记录数
+     * @param n           显示第几页
+     * @param sumpage     分页总页数
+     * @param searchSort  检索类型(使用检索功能后有效)
+     * @param keywords    检索关键字(使用检索功能后有效)
+     * @param dateStart   检索起始时间(使用检索功能后有效)
+     * @param dateEnd     检索结束时间(使用检索功能后有效)
+     * @param model       准备向客户端发送的参数集合
+     * @return            enterprises.html
+     * @throws Exception
+     */
     @RequestMapping("/backend/pageEnterprise")
     public String pageEnterprise(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
-        //如果已经到分页的第一页了，将页数设置为0
-        if (n < 0){
+
+        if (n < 0){                     //如果已经到分页的第一页了，将页数设置为0
             n++;
-        }else if(n + 1 > sumpage){//如果超过分页的最后一页了，将页数设置为最后一页
+        }else if(n + 1 > sumpage){      //如果超过分页的最后一页了，将页数设置为最后一页
             n--;
         }
         Page<Enterprise> pages=null;
@@ -140,7 +204,29 @@ public class EnterprisesController {
 
 
 
-    //后台单击删除按钮返回的信息
+
+    /**
+     * 接收一个删除发布企业信息的请求，根据id删除对应的记录，返回一个HTML页面，并在model层添加
+     * 1.多条企业信息的集合
+     * 2.分页的总页数
+     * 3.默认检索时使用的关键字(默认为空)
+     * 4.默认显示第几页(默认为0：第一页)
+     * 5.默认起始时间(以时间检索的时候有效)
+     * 6.默认结束时间(以时间检索的时候有效)
+     * 7.默认的检索类型
+     * 8.企业的总记录数
+     *
+     * @param keywords    检索关键字(使用检索功能后有效)
+     * @param dateStart   检索起始时间(使用检索功能后有效)
+     * @param dateEnd     检索结束时间(使用检索功能后有效)
+     * @param model       准备向客户端发送的参数集合
+     * @param n           显示第几页
+     * @param sumpage     分页总页数
+     * @param searchSort  检索类型(使用检索功能后有效)
+     * @param id          需要被删除的记录id
+     * @param sumElement  总记录数
+     * @return            enterprises.html
+     */
     @RequestMapping("/backend/delEnterprise")
     public String delEnterprise(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Long id,Long sumElement,Model model){
         try {
@@ -187,28 +273,22 @@ public class EnterprisesController {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //后台单击新建按钮
+    /**
+     * 接收跳转新建页面请求，返回一个HTML页面
+     * @return   newenterprise.html
+     */
     @RequestMapping("/backend/addEnterprise")
-    public String AddEnterprise(Model model){
+    public String AddEnterprise(){
         return "/backend/newenterprise";
     }
     //后台单机修改按钮
+
+    /**
+     * 接收跳转修改企业页面的请求，返回一个HTML页面
+     * @param id     需要修改记录的id
+     * @param model  准备向客户端发送的参数集合
+     * @return       modifyenterprise.html
+     */
     @RequestMapping("/backend/modifyEnterprise")
     public String ModifyEnterprise(Long id, Model model){
         Enterprise enterprise=enterpriseService.findOneById(id);
@@ -218,6 +298,17 @@ public class EnterprisesController {
 
 
     //后台单击添加保存按钮
+
+    /**
+     * 接收一个添加发布企业信息的请求，返回一个HTML页面
+     * @param name         企业的名称
+     * @param information  企业的招聘信息
+     * @param tel          企业的电话
+     * @param file         企业的LOGO
+     * @param model        准备向客户端发送的参数集合
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/backend/addSaveEnterprise",method = RequestMethod.POST)
     public String addSaveEnterprise(String name,String information,String tel,@RequestParam("smallimg") MultipartFile file,Model model) throws Exception{
         try {
