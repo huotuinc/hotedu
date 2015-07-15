@@ -4,6 +4,7 @@ import com.huotu.hotedu.web.service.StaticResourceService;
 import com.huotu.hotedu.web.service.VFSHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StreamUtils;
@@ -35,7 +36,7 @@ public abstract class AbstractStaticResourceService implements StaticResourceSer
             stringBuilder.append("/");
         stringBuilder.append(path);
 
-        vfsHelper.handle(stringBuilder.toString(), file -> file.delete());
+        vfsHelper.handle(stringBuilder.toString(), FileObject::delete);
     }
 
     @Override
