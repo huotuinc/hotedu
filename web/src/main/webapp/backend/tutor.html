@@ -18,20 +18,19 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var $searchSort = $("#searchSort");
-//            console.log(searchSortValue);
             var sortValue = $("#searchSortValue");
-            $searchSort.val("name");
-            var searchSortValue = $("#12345678").val();
-//            alert("fadsfsad " +searchSortValue);
-            sortValue.val($searchSort.val());
+            var searchSortValue = $("#hidden_text").val();
+            $searchSort.val(searchSortValue);
+            sortValue.val(searchSortValue);
             if ($searchSort.val() == "date") {
+                $searchSort.val("date");
                 $("#vedio_nodate").hide();
                 $("#vedio_date").show();
             }
             $searchSort.bind("change", function () {
-//                console.log(searchSortValue);
-                sortValue.val($searchSort.val());
+                sortValue.val(searchSortValue);
                 if ($(this).val() == "date") {
+                    $searchSort.val("date");
                     $("#vedio_nodate").hide();
                     $("#vedio_date").show();
                 }
@@ -193,8 +192,7 @@
                             <td><a class="link-update" href="newtutor.html">修改</a><br/><a class="link-delete" href="#">删除</a></td>
                         </tr>
                         <tr th:each="g:${allTutorList}">
-                            <td style="display: none;" id="12345678" th:text="${searchSortValue}"></td>
-                            <!--<td th:text="${searchSortValue}">01</td>-->
+                            <input style="display: none;" type="text" id="hidden_text" value="all" th:value="${searchSortValue}" />
                             <td th:text="${g.id}">01</td>
                             <td th:text="${g.name}"></td>
                             <td th:text="${g.qualification}"></td>
