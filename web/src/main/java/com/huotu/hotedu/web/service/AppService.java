@@ -2,6 +2,7 @@ package com.huotu.hotedu.web.service;
 
 import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.repository.*;
+import com.huotu.hotedu.service.EnterpriseService;
 import com.huotu.hotedu.service.LoginService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -38,6 +39,8 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     private QaRepository qaRepository;
     @Autowired
+    EnterpriseService enterpriseService;
+    @Autowired
     private MessageContentRepository messageContentRepository;
 
 
@@ -47,10 +50,30 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
         if (event.getApplicationContext().getParent() == null) {
             log.info("user.dir="+System.getProperty("user.dir"));
             if (managerRepository.count()==0){
+
                 Manager manager = new Manager();
                 manager.setLoginName("admin");
                 loginService.newLogin(manager,"admin");
                 System.out.println("测试用户以添加！");
+
+
+
+
+
+
+                Enterprise enterprise;
+               // for(int i=0;i<12;i++){
+                    enterprise=new Enterprise();
+                    enterprise.setName("sltwy");
+                    enterprise.setInformation("it is enterprise");
+                    enterprise.setLogoUri("/images/");
+                    enterprise.setIsPutaway(false);
+                    enterprise.setStatus(0);
+                    enterprise.setTel("18065478954");
+                    enterprise.setLastUploadDate(new Date(System.currentTimeMillis()));
+                    enterpriseService.addEnterprise(enterprise);
+
+             //   }
             }
 
         }

@@ -88,6 +88,7 @@ public class TutorController {
         model.addAttribute("dateEnd",dateEnd);
         model.addAttribute("searchSortValue",searchSortValue);
         model.addAttribute("sumElement",sumElement);
+        System.out.println("返回的类型"+searchSortValue);
         return "/backend/tutor";
     }
 

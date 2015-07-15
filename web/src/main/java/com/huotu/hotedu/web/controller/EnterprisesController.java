@@ -59,6 +59,7 @@ public class EnterprisesController {
     //后台单机搜索按钮显示的发布企业消息
     @RequestMapping("/backend/searchEnterprises")
     public String searchEnterprises(String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
+        System.out.println("类型："+searchSort);
         Page<Enterprise> pages=null;
         if("date".equals(searchSort)){
             if("".equals(dateStart)||"".equals(dateEnd)){

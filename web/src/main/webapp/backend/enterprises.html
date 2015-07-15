@@ -14,6 +14,7 @@
     <script type="text/javascript" src="js/date/jquery_ui.js" th:src="@{/backend/js/date/jquery_ui.js}"></script>
     <script type="text/javascript" src="js/date/mydate.js" th:src="@{/backend/js/date/mydate.js}"></script>
     <link rel="stylesheet" type="text/css" href="css/jquery_ui.css" th:href="@{/backend/css/jquery_ui.css}"/>
+    <!--需要修改-->
     <script type="text/javascript">
         $(document).ready(function () {
             var $searchSort = $("#searchSort");
@@ -157,6 +158,7 @@
                                     <option value="date">发布时间</option>
                                 </select>
                             </td>
+                            <!--需要修改-->
                             <script>
                                 function ff(){
                                 var vs = $("#searchSort option:selected").val();
@@ -165,9 +167,9 @@
                                 }
                             </script>
                             <td>
-                                <div style="display: none;"><input name="selectText" value="$('#searchSort option:selected').val()"/></div>
-                                <div id="vedio_nodate"><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"/></div>
-                                <div id="vedio_date" style="display:none;"><input id="dateStart" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input id="dateEnd" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/>
+                                <div style="display: none;"><input name="selectText" value="$('#searchSort option:selected').val()"/></div><!--需要修改-->
+                                <div id="vedio_nodate"><input class="common-text" placeholder="关键字" name="keywords" value="" th:value="${keywords}" id="" type="text"/></div>
+                                <div id="vedio_date" style="display:none;"><input id="dateStart"  th:value="${dateStart}" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input id="dateEnd" th:value="${dateEnd}" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/>
                                 </div>
                             </td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
@@ -180,7 +182,7 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="newenterprise.html"><i class="icon-font">+</i>新建企业</a>
+                        <a href="newenterprise.html" th:href="@{/backend/addEnterprise}"><i class="icon-font">+</i>新建企业</a>
                     </div>
                 </div>
                 <div class="result-content">
@@ -221,15 +223,15 @@
                             <td>2015.01.01/13.00.00</td>
                             <td><a class="link-update" href="newenterprise.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
                         </tr>
-                        <tr th:each="g:${allEnterpriseList}">
+                        <tr th:each="g:${allEnterprisesList}">
                             <td style="display: none" th:text="${searchSort}"></td>
                             <td th:text="${g.id}">01</td>
-                            <td th:text="${g.name}">小薇</td>
-                            <td th:text="${g.information}">粉猫</td>
+                            <td th:text="${g.loginName}">小薇</td>
+                            <td th:text="${g.name}">粉猫</td>
                             <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/hh.mm.ss')}">2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="modifyenterprise.html" th:href="@{/backend/modifyEnterprises(id=${g.id})}">修改</a><br/>
+                            <td><a class="link-update" href="modifyenterprise.html" th:href="@{/backend/modifyEnterprise(id=${g.id})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a>
-                                <a class="real-delete" href="#" th:href="@{/backend/delEnterprises(id=${g.id},n=${n},searchSort=${searchSort},keywords=${keywords},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
+                                <a class="real-delete" href="#" th:href="@{/backend/delEnterprise(id=${g.id},n=${n},searchSort=${searchSort},keywords=${keywords},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
                             </td>
                         </tr>
                     </table>
