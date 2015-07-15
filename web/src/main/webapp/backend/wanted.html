@@ -18,16 +18,16 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var $searchSort = $("#searchSort");
-            var searchSortValue = $("#searchSortValue");
-            $searchSort.val("all");
-            searchSortValue.val($searchSort.val());
+            var searchSortValue = $("#hidden_text").val();
+            $searchSort.val(searchSortValue);
             if ($searchSort.val() == "date") {
+                $searchSort.val("date");
                 $("#vedio_nodate").hide();
                 $("#vedio_date").show();
             }
             $searchSort.bind("change", function () {
-                searchSortValue.val($searchSort.val());
                 if ($(this).val() == "date") {
+                    $searchSort.val("date");
                     $("#vedio_nodate").hide();
                     $("#vedio_date").show();
                 }
@@ -41,7 +41,6 @@
     <!--滚动条-->
     <script type="text/javascript" src="js/scroll/scroll_height.js" th:src="@{/backend/js/scroll/scroll_height.js}"></script>
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
-
     <script type="text/javascript" src="js/scroll/jquery.mousewheel.js" th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
     <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js" th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
     <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js" th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
@@ -149,19 +148,18 @@
                         <tr>
                             <th width="10"></th>
                             <td>
-                                <select name="search-sort" id="searchSort" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
-                                    <option value="0">全部</option>
-                                    <option value="1">企业</option>
-                                    <option value="2">名称</option>
-                                    <option value="3">联系方式</option>
-                                    <option value="4">区域</option>
-                                    <option value="5">发布时间</option>
+                                <select title="searchSort" name="search-sort" id="searchSort" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
+                                    <option value="all">全部</option>
+                                    <option value="enterprise">企业</option>
+                                    <option value="name">名称</option>
+                                    <option value="tel">联系方式</option>
+                                    <option value="area">区域</option>
+                                    <option value="date">发布时间</option>
                                 </select>
                             </td>
                             <td>
-                                <div style="display: none;"><input type="text" id="searchSortValue"/></div>
                                 <div id="vedio_nodate"><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"/></div>
-                                <div id="vedio_date" style="display:none;"><input id="dateStart" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input id="dateEnd" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/></div>
+                                <div id="vedio_date" style="display:none;"><input readonly="true" id="dateStart" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input readonly="true" id="dateEnd" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/></div>
                             </td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
                         </tr>
@@ -239,10 +237,13 @@
                                 <a class="real-delete" href="#" th:href="@{/backend/delWanted(id=${g.id},n=${n},searchSort=${searchSort},keywords=${keywords},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
                             </td>
                         </tr>
+                        <tr style="display: none;">
+                            <td><input title="hidden_text" type="text" id="hidden_text" value="all" th:value="${searchSort}"/></td>
+                        </tr>
                     </table>
                     <div class="list-page">
-                        <a href="#" th:href="@{/backend/pageTutor(n=${n}-1,keywords=${keywords},searchSort=${searchSort},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage})}">上一页</a>
-                        <a href="#" th:href="@{/backend/pageTutor(n=${n}+1,keywords=${keywords},searchSort=${searchSort},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage})}">下一页</a>
+                        <a href="#" th:href="@{/backend/pageWanted(n=${n}-1,keywords=${keywords},searchSort=${searchSort},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage})}">上一页</a>
+                        <a href="#" th:href="@{/backend/pageWanted(n=${n}+1,keywords=${keywords},searchSort=${searchSort},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage})}">下一页</a>
                         <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span th:text="${sumpage}">1</span> 页
                     </div>
                 </div>
