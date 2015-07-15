@@ -190,9 +190,9 @@
                             <td></td>
                             <td>2015.01.01/13.00.00</td>
                             <td><a class="link-update" href="newtutor.html">修改</a><br/><a class="link-delete" href="#">删除</a></td>
+
                         </tr>
                         <tr th:each="g:${allTutorList}">
-                            <td style="display: none;"><input title="hidden_text" type="text" id="hidden_text" value="all" th:value="${searchSortValue}"/></td>
                             <td th:text="${g.id}">01</td>
                             <td th:text="${g.name}"></td>
                             <td th:text="${g.qualification}"></td>
@@ -202,6 +202,9 @@
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a><br/>
                                 <a class="real-delete" href="#" th:href="@{/backend/delTutor(id=${g.id},n=${n},searchSort=${searchSortValue},keywords=${keywords},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
                             </td>
+                        </tr>
+                        <tr style="display: none;">
+                            <td><input title="hidden_text" type="text" id="hidden_text" value="all" th:value="${searchSortValue}"/></td>
                         </tr>
                     </table>
                     <div class="list-page">
