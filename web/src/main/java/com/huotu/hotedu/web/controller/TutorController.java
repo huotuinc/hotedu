@@ -81,7 +81,7 @@ public class TutorController {
         }
         long sumElement=pages.getTotalElements();
         model.addAttribute("allTutorList",pages);
-        model.addAttribute("sumpage",sumElement/pages.getSize()+(sumElement%pages.getSize()>0? 1:0));
+        model.addAttribute("sumpage",sumElement/pages.getSize()+1);
         model.addAttribute("n",0);
         model.addAttribute("keywords",keywords);
         model.addAttribute("dateStart",dateStart);
