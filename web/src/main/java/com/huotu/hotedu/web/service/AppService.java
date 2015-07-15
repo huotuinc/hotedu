@@ -55,26 +55,11 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 manager.setLoginName("admin");
                 loginService.newLogin(manager,"admin");
                 System.out.println("测试用户以添加！");
-
-
-
-
-
-
-                Enterprise enterprise;
-               // for(int i=0;i<12;i++){
-                    enterprise=new Enterprise();
-                    enterprise.setName("sltwy");
-                    enterprise.setInformation("it is enterprise");
-                    enterprise.setLogoUri("/images/");
-                    enterprise.setIsPutaway(false);
-                    enterprise.setStatus(0);
-                    enterprise.setTel("18065478954");
-                    enterprise.setLastUploadDate(new Date(System.currentTimeMillis()));
-                    enterpriseService.addEnterprise(enterprise);
-
-             //   }
             }
+
+
+
+
 
         }
 
@@ -185,27 +170,6 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                     qaRepository.save(qa);
                 }
             }
-
-//            if (enterpriseRepository.count()==0){
-//                Enterprise enterprise;
-//              //  for(int i=0;i<12;i++){
-//                    enterprise=new Enterprise();
-//                    enterprise.setName("sltwy");
-//                    enterprise.setInformation("it is enterprise");
-//                    enterprise.setLogoUri("/images/");
-//                    enterprise.setIsPutaway(false);
-//                    enterprise.setStatus(0);
-//                    enterprise.setTel("18065478954");
-//                    enterprise.setLastUploadDate(new Date(System.currentTimeMillis()));
-//                    enterpriseRepository.save(enterprise);
-//
-//              //  }
-//            }
-
-
-
-
-
 
         }
 

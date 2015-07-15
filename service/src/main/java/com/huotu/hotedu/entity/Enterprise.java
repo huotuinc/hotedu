@@ -22,7 +22,7 @@ public class Enterprise extends Login implements Serializable {
     private String information;
     private String tel;
     private String logoUri;
-    private boolean isPutaway;
+    private boolean isPutaway=true;
     private int status;            //0:表示不禁用，1：表示禁用  以后可能还有其他状态
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUploadDate;

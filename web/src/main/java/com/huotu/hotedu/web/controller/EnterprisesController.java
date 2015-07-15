@@ -219,10 +219,10 @@ public class EnterprisesController {
 
     //后台单击添加保存按钮
     @RequestMapping(value = "/backend/addSaveEnterprise",method = RequestMethod.POST)
-    public String addSaveEnterprise(String name,String introduction,String tel,boolean isPutaway,@RequestParam("smallimg") MultipartFile file,Model model) throws Exception{
+    public String addSaveEnterprise(String name,String information,String tel,@RequestParam("smallimg") MultipartFile file,Model model) throws Exception{
         try {
 
-
+            System.out.println("进入add");
             //文件格式判断
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
             if(file.getSize()==0){throw new Exception("文件为空！");}
@@ -238,15 +238,18 @@ public class EnterprisesController {
             enterprise.setName(name);
             enterprise.setTel(tel);
             enterprise.setStatus(0);
-            enterprise.setIsPutaway(isPutaway);
-            enterprise.setInformation(introduction);
+            enterprise.setIsPutaway(false);
+            enterprise.setInformation(information);
             enterprise.setLogoUri(fileName);
             enterprise.setLastUploadDate(new Date());
+            System.out.println("准备添加");
             enterpriseService.addEnterprise(enterprise);
+            System.out.println("添加完毕");
             return "redirect:/backend/loadEnterprises";
 
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("出错了");
         }
         return "redirect:/backend/error";
 

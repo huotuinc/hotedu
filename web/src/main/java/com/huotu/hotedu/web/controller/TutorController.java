@@ -201,6 +201,7 @@ public class TutorController {
         try {
 
 
+
             //文件格式判断
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
             System.out.println("文件大小：" + file.getSize());
