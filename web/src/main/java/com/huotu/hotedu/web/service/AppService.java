@@ -32,6 +32,8 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     private TutorRepository tutorRepository;
     @Autowired
+    private EnterpriseRepository enterpriseRepository;
+    @Autowired
     private HuotuRepository huotuRepository;
     @Autowired
     private QaRepository qaRepository;
@@ -134,19 +136,19 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 }
             }
 
-//            if (tutorRepository.count()==0){
-//                Tutor tutor;
-//                for(int i=0;i<27;i++){
-//                    tutor=new Tutor();
-//                    tutor.setName("tutor"+i);
-//                    tutor.setIntroduction("i am a tutor my name is"+i);
-//                    tutor.setArea("杭州");
-//                    tutor.setQualification("教授");
-//                    tutor.setLastUploadDate(new Date(System.currentTimeMillis()+i*60*60*1000));
-//                    tutor.setPictureUri("slt.jpg");
-//                    tutorRepository.save(tutor);
-//                }
-//            }
+            if (tutorRepository.count()==0){
+                Tutor tutor;
+                for(int i=0;i<27;i++){
+                    tutor=new Tutor();
+                    tutor.setName("tutor"+i);
+                    tutor.setIntroduction("i am a tutor my name is"+i);
+                    tutor.setArea("杭州");
+                    tutor.setQualification("教授");
+                    tutor.setLastUploadDate(new Date(System.currentTimeMillis()+i*60*60*1000));
+                    tutor.setPictureUri("slt.jpg");
+                    tutorRepository.save(tutor);
+                }
+            }
 
 
             if (qaRepository.count()==0){
@@ -157,8 +159,30 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                     qa.setContent("问题"+(i+1));
                     qa.setLastUploadDate(new Date(System.currentTimeMillis()+24*60*60*1000*(i+1)));
                     qa.setTop(true);
+                    qaRepository.save(qa);
                 }
             }
+
+//            if (enterpriseRepository.count()==0){
+//                Enterprise enterprise;
+//              //  for(int i=0;i<12;i++){
+//                    enterprise=new Enterprise();
+//                    enterprise.setName("sltwy");
+//                    enterprise.setInformation("it is enterprise");
+//                    enterprise.setLogoUri("/images/");
+//                    enterprise.setIsPutaway(false);
+//                    enterprise.setStatus(0);
+//                    enterprise.setTel("18065478954");
+//                    enterprise.setLastUploadDate(new Date(System.currentTimeMillis()));
+//                    enterpriseRepository.save(enterprise);
+//
+//              //  }
+//            }
+
+
+
+
+
 
         }
 
