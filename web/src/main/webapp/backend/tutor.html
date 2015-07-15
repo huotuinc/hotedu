@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
@@ -147,7 +147,7 @@
                         <tr>
                             <th width="10"></th>
                             <td>
-                                <select name="searchSort" id="searchSort" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
+                                <select title="searchSort" name="searchSort" id="searchSort" style=" height:29px;border-radius: 4px;padding: 0 4px; border:1px solid #ccc; vertical-align:middle">
                                     <option value="all">全部</option>
                                     <option value="name">教师</option>
                                     <option value="qualification">职称</option>
@@ -156,7 +156,7 @@
                                 </select>
                             </td>
                             <td>
-                                <div style="display: none;"><input type="text" id="searchSortValue" /></div>
+                                <div style="display: none;"><input title="searchSortValue" type="text" id="searchSortValue" /></div>
                                 <div id="vedio_nodate"><input class="common-text" placeholder="关键字" name="keywords" value="" th:value="${keywords}" id="" type="text"/></div>
                                 <div id="vedio_date" style="display:none;"><input id="dateStart" th:value="${dateStart}" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input id="dateEnd" th:value="${dateEnd}" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/></div>
                             </td>
@@ -192,7 +192,7 @@
                             <td><a class="link-update" href="newtutor.html">修改</a><br/><a class="link-delete" href="#">删除</a></td>
                         </tr>
                         <tr th:each="g:${allTutorList}">
-                            <input style="display: none;" type="text" id="hidden_text" value="all" th:value="${searchSortValue}" />
+                            <td style="display: none;"><input title="hidden_text" type="text" id="hidden_text" value="all" th:value="${searchSortValue}"/></td>
                             <td th:text="${g.id}">01</td>
                             <td th:text="${g.name}"></td>
                             <td th:text="${g.qualification}"></td>
