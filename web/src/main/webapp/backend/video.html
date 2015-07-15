@@ -30,6 +30,7 @@
         })
     </script>
     <!--滚动条-->
+    <script type="text/javascript" src="js/scroll/scroll_height.js" th:src="@{/backend/js/scroll/scroll_height.js}"></script>
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
     <script type="text/javascript" src="js/scroll/jquery.mousewheel.js" th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
     <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js" th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
@@ -194,7 +195,6 @@
                             <td >3</td>
                             <td th:text="${#calendars.format(g.uploadTime,'yyyy-MM-dd hh:mm:ss')}">2014-07-13 15:15:50</td>
                             <td th:if="${g.free}">免费</td>
-                            <td th:unless="${g.free}">会员</td>
                             <td>
                                 <a class="link-update" href="modifyvideo.html" th:href="@{/backend/modifyVideo(id=${g.id})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a>

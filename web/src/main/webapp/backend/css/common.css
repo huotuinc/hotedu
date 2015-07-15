@@ -1,5 +1,5 @@
-html{height:100%;}
-body{font:14px/1.5 '微软雅黑';word-wrap:break-word;word-break:break-all;-webkit-text-size-adjust:none;background:#fff;color:#333;}
+html{height:100%;overflow:hidden;}
+body{font:14px/1.5 '微软雅黑';word-wrap:break-word;word-break:break-all;-webkit-text-size-adjust:none;background:#fff;color:#333;height:100%;overflow:hidden;}
 body,dl,dd,h1,h2,h3,h4,h5,h6,p,form,ul,ol,blockquote{margin:0}
 img{border:0 none;vertical-align:middle}
 input,select,textarea{font-size:14px;color:#333}
