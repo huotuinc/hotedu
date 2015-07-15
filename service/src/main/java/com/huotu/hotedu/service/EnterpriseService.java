@@ -39,7 +39,6 @@ public class EnterpriseService {
                 return cb.like(root.get(type).as(String.class),"%"+keyword+"%");
             }
         },new PageRequest(n, pagesize));
-
     }
 
 

@@ -1,7 +1,6 @@
 package com.huotu.hotedu.test.web;
 
 import com.huotu.hotedu.entity.Member;
-import com.huotu.hotedu.entity.Qa;
 import com.huotu.hotedu.repository.LoginRepository;
 import com.huotu.hotedu.repository.MemberRepository;
 import com.huotu.hotedu.repository.QaRepository;
@@ -18,12 +17,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import java.util.Date;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -43,7 +39,6 @@ public class ExamGuideControllerTest extends SpringWebTest {
                 .param("username", userName).param("password", password))
                 .andDo(print())
                 .andReturn().getRequest().getSession();
-
         saveAuthedSession(session);
         return session;
     }

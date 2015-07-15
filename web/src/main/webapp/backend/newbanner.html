@@ -116,12 +116,12 @@
     <!--/sidebar-->
     <div class="main-wrap">
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html"
-                                                                 th:href="@{/backend/loadWanted}">网站维护</a><span
-                    class="crumb-step">&gt;</span><a href="banners.html" th:href="@{/backend/loadBanners}"><span
-                    class="crumb-name">banner图</span></a><span
-                    class="crumb-step">&gt;</span><span
-                    class="crumb-name">新建</span></div>
+            <div class="crumb-list"><i class="icon-font"></i>
+                <a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a>
+                <span class="crumb-step">&gt;</span><a href="banners.html" th:href="@{/backend/loadBanners}">
+                <span class="crumb-name">banner图</span></a>
+                <span class="crumb-step">&gt;</span>
+                <span class="crumb-name">新建</span></div>
         </div>
         <div class="result-wrap">
             <form action="#" method="post" id="myform" name="myform">
@@ -133,7 +133,6 @@
                                 <th><i class="require-red">*</i>上传图片：</th>
                                 <td><input
                                         name="smallimg" type="file"/><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>-->
-                                    <img name="showimg" id="showimg" src="" style="display:none;" alt="预览图片" />
                                 </td>
                             </tr>
                             <tr>

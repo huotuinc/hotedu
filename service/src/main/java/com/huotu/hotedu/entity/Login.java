@@ -67,9 +67,7 @@ public abstract class Login  implements UserDetails,Serializable {
         return lastLoginDate;
     }
 
-    public void setLastLoginDate(Date lastLoginDate) {
-        this.lastLoginDate = lastLoginDate;
-    }
+    public void setLastLoginDate(Date lastLoginDate) {this.lastLoginDate = lastLoginDate;}
 
     public String getLastLoginIP() {
         return lastLoginIP;

@@ -31,11 +31,8 @@ public class BannersService {
     {  return bannersRepository.findAll(new PageRequest(n,pagesize));
     }
 
-    //分页
+    //分页依据类型和关键字搜索
     public Page<Banners> searchBanners(int n,int pagesize,String keyword){
-        // SQL
-        // 面向对象的SQL
-        // select Banners from Banners where title like ?
        return  bannersRepository.findAll(new Specification<Banners>() {
             @Override
             public Predicate toPredicate(Root<Banners> root, CriteriaQuery<?> query, CriteriaBuilder cb) {

@@ -42,7 +42,6 @@ public class LoginService implements UserDetailsService {
     public <T extends Login> T newLogin(T login, CharSequence password) {
         login.setPassword(passwordEncoder.encode(password));
         login.setEnabled(true);
-
         return loginRepository.save(login);
     }
 }
