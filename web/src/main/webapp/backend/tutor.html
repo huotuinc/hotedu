@@ -18,17 +18,14 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var $searchSort = $("#searchSort");
-            var sortValue = $("#searchSortValue");
             var searchSortValue = $("#hidden_text").val();
             $searchSort.val(searchSortValue);
-            sortValue.val(searchSortValue);
             if ($searchSort.val() == "date") {
                 $searchSort.val("date");
                 $("#vedio_nodate").hide();
                 $("#vedio_date").show();
             }
             $searchSort.bind("change", function () {
-                sortValue.val(searchSortValue);
                 if ($(this).val() == "date") {
                     $searchSort.val("date");
                     $("#vedio_nodate").hide();
@@ -156,8 +153,7 @@
                                 </select>
                             </td>
                             <td>
-                                <div style="display: none;"><input title="searchSortValue" type="text" id="searchSortValue" /></div>
-                                        <div id="vedio_nodate"><input class="common-text" placeholder="关键字" name="keywords" value="" th:value="${keywords}" id="" type="text"/></div>
+                                <div id="vedio_nodate"><input class="common-text" placeholder="关键字" name="keywords" value="" th:value="${keywords}" id="" type="text"/></div>
                                 <div id="vedio_date" style="display:none;"><input id="dateStart" th:value="${dateStart}" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input id="dateEnd" th:value="${dateEnd}" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/></div>
                             </td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
@@ -204,12 +200,12 @@
                             </td>
                         </tr>
                         <tr style="display: none;">
-                            <td><input title="hidden_text" type="text" id="hidden_text" value="all" th:value="${searchSortValue}"/></td>
+                            <td><input title="hidden_text" type="text" id="hidden_text" value="all" th:value="${searchSort}"/></td>
                         </tr>
                     </table>
                     <div class="list-page">
-                        <a href="#" th:href="@{/backend/pageTutor(n=${n}-1,keywords=${keywords},searchSort=${searchSortValue},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage})}">上一页</a>
-                        <a href="#" th:href="@{/backend/pageTutor(n=${n}+1,keywords=${keywords},searchSort=${searchSortValue},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage})}">下一页</a>
+                        <a href="#" th:href="@{/backend/pageTutor(n=${n}-1,keywords=${keywords},searchSort=${searchSort},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage})}">上一页</a>
+                        <a href="#" th:href="@{/backend/pageTutor(n=${n}+1,keywords=${keywords},searchSort=${searchSort},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage})}">下一页</a>
                         <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span th:text="${sumpage}">1</span> 页
                     </div>
                 </div>

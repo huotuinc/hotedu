@@ -18,13 +18,16 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var $searchSort = $("#searchSort");
-            $searchSort.val("date");
+            var searchSortValue = $("#hidden_text").val();
+            $searchSort.val(searchSortValue);
             if ($searchSort.val() == "date") {
+                $searchSort.val("date");
                 $("#vedio_nodate").hide();
                 $("#vedio_date").show();
             }
             $searchSort.bind("change", function () {
                 if ($(this).val() == "date") {
+                    $searchSort.val("date");
                     $("#vedio_nodate").hide();
                     $("#vedio_date").show();
                 }
@@ -151,23 +154,14 @@
                         <tr>
                             <th width="10"></th>
                             <td>
-                                <select onchange="ff()" name="searchSort" id="searchSort" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
+                                <select title="searchSort" name="searchSort" id="searchSort" style=" height:29px;border-radius: 4px;padding: 0 4px; border:1px solid #ccc; vertical-align:middle">
                                     <option value="all">全部</option>
                                     <option value="loginName">用户名</option>
                                     <option value="name">企业</option>
                                     <option value="date">发布时间</option>
                                 </select>
                             </td>
-                            <!--需要修改-->
-                            <script>
-                                function ff(){
-                                var vs = $("#searchSort option:selected").val();
-                              //var vs=$("#searchSort").value;
-                                alert("123456" + vs);
-                                }
-                            </script>
                             <td>
-                                <div style="display: none;"><input name="selectText" value="$('#searchSort option:selected').val()"/></div><!--需要修改-->
                                 <div id="vedio_nodate"><input class="common-text" placeholder="关键字" name="keywords" value="" th:value="${keywords}" id="" type="text"/></div>
                                 <div id="vedio_date" style="display:none;"><input id="dateStart"  th:value="${dateStart}" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input id="dateEnd" th:value="${dateEnd}" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/>
                                 </div>
@@ -233,6 +227,9 @@
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a>
                                 <a class="real-delete" href="#" th:href="@{/backend/delEnterprise(id=${g.id},n=${n},searchSort=${searchSort},keywords=${keywords},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
                             </td>
+                        </tr>
+                        <tr style="display: none;">
+                            <td><input title="hidden_text" type="text" id="hidden_text" value="all" th:value="${searchSort}"/></td>
                         </tr>
                     </table>
                     <div class="list-page">
