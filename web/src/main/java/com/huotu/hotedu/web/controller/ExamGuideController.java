@@ -27,7 +27,7 @@ public class ExamGuideController {
         Page<ExamGuide> pages=examGuideService.loadExamGuide(0,PAGE_SIZE);
         long sumElement=pages.getTotalElements();
         model.addAttribute("allGuideList",pages);
-        model.addAttribute("sumpage",sumElement/pages.getSize()+(sumElement%pages.getSize()>0? 1:0));
+        model.addAttribute("sumpage",(sumElement+pages.getSize()-1)/pages.getSize());
         model.addAttribute("n",0);
         model.addAttribute("keywords","");
         model.addAttribute("sumElement",sumElement);
@@ -40,7 +40,7 @@ public class ExamGuideController {
         Page<ExamGuide> pages=examGuideService.searchExamGuide(0,PAGE_SIZE,keywords);
         long sumElement=pages.getTotalElements();
         model.addAttribute("allGuideList",pages);
-        model.addAttribute("sumpage",sumElement/pages.getSize()+(sumElement%pages.getSize()>0? 1:0));
+        model.addAttribute("sumpage",(sumElement+pages.getSize()-1)/pages.getSize());
         model.addAttribute("n",0);
         model.addAttribute("keywords",keywords);
         model.addAttribute("sumElement",sumElement);

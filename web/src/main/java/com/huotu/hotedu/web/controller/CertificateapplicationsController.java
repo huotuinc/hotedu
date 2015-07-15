@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by shiliting on 2015/6/10.
+ * @Time
  * 代理商有关的Controller
  * @author shiliting shiliting at gmail.com
  */
@@ -16,7 +17,10 @@ public class CertificateapplicationsController {
         return "/backend/certificateapplications";
     }
 
-    //后台显示所有代理商信息
+    /**
+     *
+     * @return
+     */
     @RequestMapping("/backend/loadAgents")
     public String loaDagentsController() {
         return "/backend/agents";

@@ -34,7 +34,7 @@ public class HuotuController {
 
     //后台单击添加保存按钮
     @RequestMapping("/backend/saveEditenterprise")
-    //TODO 方法名应该以小写开头 by CJ
+    //TODO 方法名应该以小写开头 by CJ(已经解决)
     public String saveHuotu(String title,String introduction,Model model){
         Huotu huotu=null;
         List<Huotu> list=huotuService.findHuotu();

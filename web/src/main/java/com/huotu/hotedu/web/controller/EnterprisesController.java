@@ -86,7 +86,7 @@ public class EnterprisesController {
             throw new Exception("没有数据！");
         }
         long sumElement=pages.getTotalElements();
-        model.addAttribute("allEnterpriseList",pages);
+        model.addAttribute("allEnterprisesList",pages);
         model.addAttribute("sumpage",sumElement/pages.getSize()+(sumElement%pages.getSize()>0? 1:0));
         model.addAttribute("n",0);
         model.addAttribute("keywords",keywords);
@@ -127,7 +127,7 @@ public class EnterprisesController {
         if(pages==null){
             throw new Exception("没有数据！");
         }
-        model.addAttribute("allEnterpriseList",pages);
+        model.addAttribute("allEnterprisesList",pages);
         model.addAttribute("sumpage",sumpage);
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
@@ -144,7 +144,7 @@ public class EnterprisesController {
     @RequestMapping("/backend/delEnterprise")
     public String delEnterprise(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Long id,Long sumElement,Model model){
         try {
-            staticResourceService.deleteResource(enterpriseService.findOneById(id).getLogoUri());
+            staticResourceService.deleteResource(enterpriseService.findOneById(id).getLogoUri());//删除静态资源
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -175,7 +175,7 @@ public class EnterprisesController {
 
         }
         model.addAttribute("sumpage",sumpage);
-        model.addAttribute("allEnterpriseList",pages);
+        model.addAttribute("allEnterprisesList",pages);
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
         model.addAttribute("searchSort",searchSort);
