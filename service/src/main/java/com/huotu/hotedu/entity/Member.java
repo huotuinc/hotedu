@@ -10,34 +10,118 @@ import java.util.List;
 
 /**
  * Created by luffy on 2015/6/10.
- * Modify by shiliting on 2015/7/11
- *
+ * Modify by cwb on 2015/7/15
+ * <p/>
  * 会员 可以参加考试，如果是付费用户可以观看付费视频。
  *
  * @author luffy luffy.ja at gmail.com
  */
 @Entity
-public class Member extends Login{
+public class Member extends Login {
 
-
+    /**
+     * 所属代理商
+     */
     @ManyToOne
-    private Agent agent;           //代理商
+    private Agent agent;
+    /**
+     * 会员头像图片uri
+     */
     @Column
     private String pictureUri;
+    /**
+     * 真实姓名
+     */
     private String name;
-    private String tel;
+    /**
+     * 手机号
+     */
+    private String phone;
+    /**
+     * 报考区域
+     */
     private String area;
-    private String ConfirmPerson;   //确认人
-    private String theClass;        //班级
-    private String examAddress;     //考试地点
-    private boolean isPass;         //是否通过
-    private String status;          //状态
+    /**
+     * 报名信息确认者
+     */
+    private String ConfirmPerson;
+    /**
+     * 所属班级
+     */
+    private String theClass;
+    /**
+     * 是否已缴费，默认：否
+     */
+    private boolean isPayed = false;
+    /**
+     * 考试地点
+     */
+    private String examAddress;
+    /**
+     * 是否通过考试
+     */
+    private boolean isPassed = false;
+    /**
+     * 报名时间
+     */
     @Temporal(TemporalType.TIMESTAMP)
-    private Date applyDate;    //报名时间
+    private Date applyDate;
+    /**
+     * 缴费时间
+     */
     @Temporal(TemporalType.TIMESTAMP)
-    private Date paymentDate;  //确认缴费时间
+    private Date payDate;
+    /**
+     * 考试时间
+     */
     @Temporal(TemporalType.TIMESTAMP)
-    private Date examDate;     //考试时间
+    private Date examDate;
+
+    /**
+     * 注册时间
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date registerDate;
+
+    public boolean isPassed() {
+        return isPassed;
+    }
+
+    public void setIsPassed(boolean isPassed) {
+        this.isPassed = isPassed;
+    }
+
+    public boolean isPayed() {
+        return isPayed;
+    }
+
+    public void setIsPayed(boolean isPayed) {
+        this.isPayed = isPayed;
+    }
+
+    public Date getPayDate() {
+        return payDate;
+    }
+
+    public void setPayDate(Date payDate) {
+        this.payDate = payDate;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Date getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
+    }
 
     public Agent getAgent() {
         return agent;
@@ -63,13 +147,6 @@ public class Member extends Login{
         this.name = name;
     }
 
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
 
     public String getArea() {
         return area;
@@ -103,21 +180,6 @@ public class Member extends Login{
         this.examAddress = examAddress;
     }
 
-    public boolean isPass() {
-        return isPass;
-    }
-
-    public void setIsPass(boolean isPass) {
-        this.isPass = isPass;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public Date getApplyDate() {
         return applyDate;
@@ -125,14 +187,6 @@ public class Member extends Login{
 
     public void setApplyDate(Date applyDate) {
         this.applyDate = applyDate;
-    }
-
-    public Date getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(Date paymentDate) {
-        this.paymentDate = paymentDate;
     }
 
     public Date getExamDate() {

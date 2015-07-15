@@ -3,32 +3,45 @@ package com.huotu.hotedu.entity;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by luffy on 2015/6/10.
+ * Modify by cwb on 2015/7/15
  * 可登录角色
  *
  * @author luffy luffy.ja at gmail.com
  */
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"loginName"}))
-@Inheritance(strategy=InheritanceType.JOINED)
-public abstract class Login  implements UserDetails,Serializable {
-
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Login implements UserDetails {
     private static final long serialVersionUID = -349012453592429794L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    /**
+     * 账号名称
+     */
     @Column
     private String loginName;
+    /**
+     * 账号密码
+     */
     private String password;
-    private boolean enabled=true;
+    /**
+     * 是否可用
+     */
+    private boolean enabled = true;
 
+    /**
+     * 上次登录时间
+     */
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastLoginDate;
+    /**
+     * 上次登录IP
+     */
     private String lastLoginIP;
 
     public Long getId() {
@@ -55,6 +68,7 @@ public abstract class Login  implements UserDetails,Serializable {
         this.password = password;
     }
 
+    @Override
     public boolean isEnabled() {
         return enabled;
     }
@@ -67,7 +81,9 @@ public abstract class Login  implements UserDetails,Serializable {
         return lastLoginDate;
     }
 
-    public void setLastLoginDate(Date lastLoginDate) {this.lastLoginDate = lastLoginDate;}
+    public void setLastLoginDate(Date lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
 
     public String getLastLoginIP() {
         return lastLoginIP;
@@ -76,22 +92,18 @@ public abstract class Login  implements UserDetails,Serializable {
     public void setLastLoginIP(String lastLoginIP) {
         this.lastLoginIP = lastLoginIP;
     }
-
     @Override
     public String getUsername() {
         return loginName;
     }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
-
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
-
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
