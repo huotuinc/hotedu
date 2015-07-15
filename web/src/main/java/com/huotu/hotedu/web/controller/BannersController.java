@@ -27,6 +27,7 @@ import java.util.Date;
     public String loadBanners(Model model){
         Page<Banners> pages=BannersService.loadBanners(0, PAGE_SIZE);
         long sumElement=pages.getTotalElements();
+        System.out.println(sumElement);
         model.addAttribute("allbannersList",pages);
         model.addAttribute("sumpage",sumElement/pages.getSize()+(sumElement%pages.getSize()>0? 1:0));
         model.addAttribute("n",0);
