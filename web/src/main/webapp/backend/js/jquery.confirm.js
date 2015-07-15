@@ -10,11 +10,6 @@
             GenerateHtml("confirm", title, msg);
             btnOk(callback);
             btnNo();
-        },
-        Save: function (title, msg) {
-            GenerateHtml("confirm", title, msg);
-            btnOk();
-            btnNo();
         }
     };
     //生成Html
@@ -122,7 +117,13 @@ $(document).ready(function () {
 //.click() 就是点击当前链接的效果
 function check_del(h) {
     $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
-        $(h).parents().children().eq(3)[0].click();
+       // console.log($(h).parents().children().find(".real-delete")[0]);
+      //  $(h).parents().children().find(".real-delete")[0].click();
+       // alert("删除前");
+        //$(h).parents().children().eq(3)[0].click();
+        $(h).siblings(".real-delete")[0].click();
+        console.log($(h).siblings(".real-delete")[0]);
+       // alert("删除后");
     });
 }
 

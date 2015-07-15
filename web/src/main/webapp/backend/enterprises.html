@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
@@ -16,7 +16,13 @@
     <link rel="stylesheet" type="text/css" href="css/jquery_ui.css" th:href="@{/backend/css/jquery_ui.css}"/>
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#searchSort").bind("change", function () {
+            var $searchSort = $("#searchSort");
+            $searchSort.val("date");
+            if ($searchSort.val() == "date") {
+                $("#vedio_nodate").hide();
+                $("#vedio_date").show();
+            }
+            $searchSort.bind("change", function () {
                 if ($(this).val() == "date") {
                     $("#vedio_nodate").hide();
                     $("#vedio_date").show();
@@ -144,15 +150,22 @@
                         <tr>
                             <th width="10"></th>
                             <td>
-                                <select name="search-sort" id="searchSort"
-                                        style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
+                                <select onchange="ff()" name="search-sort" id="searchSort" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
                                     <option value="all">全部</option>
                                     <option value="loginName">用户名</option>
                                     <option value="name">企业</option>
                                     <option value="date">发布时间</option>
                                 </select>
                             </td>
+                            <script>
+                                function ff(){
+                                var vs = $("#searchSort option:selected").val();
+                              //var vs=$("#searchSort").value;
+                                alert("123456" + vs);
+                                }
+                            </script>
                             <td>
+                                <div style="display: none;"><input name="selectText" value="$('#searchSort option:selected').val()"/></div>
                                 <div id="vedio_nodate"><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"/></div>
                                 <div id="vedio_date" style="display:none;"><input id="dateStart" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input id="dateEnd" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/>
                                 </div>
@@ -215,7 +228,7 @@
                             <td th:text="${g.information}">粉猫</td>
                             <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/hh.mm.ss')}">2015.01.01/13.00.00</td>
                             <td><a class="link-update" href="modifyenterprise.html" th:href="@{/backend/modifyEnterprises(id=${g.id})}">修改</a><br/>
-                                <a class="link-update" href="#" onclick="check_del(this)">删除</a><br/>
+                                <a class="link-update" href="#" onclick="check_del(this)">删除</a>
                                 <a class="real-delete" href="#" th:href="@{/backend/delEnterprises(id=${g.id},n=${n},searchSort=${searchSort},keywords=${keywords},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
                             </td>
                         </tr>

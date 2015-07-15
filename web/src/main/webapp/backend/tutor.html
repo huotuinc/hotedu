@@ -17,12 +17,25 @@
     <link rel="stylesheet" type="text/css" href="css/jquery_ui.css" th:href="@{/backend/css/jquery_ui.css}"/>
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#searchSort").bind("change",function(){
-                if($(this).val()=="date"){
+            var $searchSort = $("#searchSort");
+//            console.log(searchSortValue);
+            var sortValue = $("#searchSortValue");
+            $searchSort.val("name");
+            var searchSortValue = $("#12345678").val();
+//            alert("fadsfsad " +searchSortValue);
+            sortValue.val($searchSort.val());
+            if ($searchSort.val() == "date") {
+                $("#vedio_nodate").hide();
+                $("#vedio_date").show();
+            }
+            $searchSort.bind("change", function () {
+//                console.log(searchSortValue);
+                sortValue.val($searchSort.val());
+                if ($(this).val() == "date") {
                     $("#vedio_nodate").hide();
                     $("#vedio_date").show();
                 }
-                else{
+                else {
                     $("#vedio_nodate").show();
                     $("#vedio_date").hide();
                 }
@@ -136,7 +149,7 @@
                             <th width="10"></th>
                             <td>
                                 <select name="searchSort" id="searchSort" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
-                                    <option selected="selected" value="all">全部</option>
+                                    <option value="all">全部</option>
                                     <option value="name">教师</option>
                                     <option value="qualification">职称</option>
                                     <option value="area">区域</option>
@@ -144,6 +157,7 @@
                                 </select>
                             </td>
                             <td>
+                                <div style="display: none;"><input type="text" id="searchSortValue" /></div>
                                 <div id="vedio_nodate"><input class="common-text" placeholder="关键字" name="keywords" value="" th:value="${keywords}" id="" type="text"/></div>
                                 <div id="vedio_date" style="display:none;"><input id="dateStart" th:value="${dateStart}" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input id="dateEnd" th:value="${dateEnd}" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/></div>
                             </td>
@@ -179,14 +193,15 @@
                             <td><a class="link-update" href="newtutor.html">修改</a><br/><a class="link-delete" href="#">删除</a></td>
                         </tr>
                         <tr th:each="g:${allTutorList}">
-                            <td style="display: none" th:text="${searchSort}">01</td>
+                            <td style="display: none;" id="12345678" th:text="${searchSortValue}"></td>
+                            <!--<td th:text="${searchSortValue}">01</td>-->
                             <td th:text="${g.id}">01</td>
                             <td th:text="${g.name}"></td>
                             <td th:text="${g.qualification}"></td>
                             <td th:text="${g.area}"></td>
                             <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/hh.mm.ss')}">2015.01.01/13.00.00</td>
                             <td><a class="link-update" href="modifytutor.html" th:href="@{/backend/modifyTutor(id=${g.id})}">修改</a><br/>
-                                <a class="link-update" href="#" onclick="check_del(this)">删除</a>
+                                <a class="link-update" href="#" onclick="check_del(this)">删除</a><br/>
                                 <a class="real-delete" href="#" th:href="@{/backend/delTutor(id=${g.id},n=${n},searchSort=${searchSortValue},keywords=${keywords},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage},sumElement=${sumElement})}" ></a>
                             </td>
                         </tr>

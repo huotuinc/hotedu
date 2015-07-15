@@ -196,7 +196,7 @@
                             <td th:unless="${g.free}">会员</td>
                             <td>
                                 <a class="link-update" href="modifyvideo.html" th:href="@{/backend/modifyVideo(id=${g.id})}">修改</a><br/>
-                                <a class="link-update" href="#" onclick="check_del(this)">删除</a><br/>
+                                <a class="link-update" href="#" onclick="check_del(this)">删除</a>
                                 <a class="real-delete" href="#" th:href="@{/backend/delVideo(id=${g.id},n=${n},keywords=${keywords},totalPages=${totalPages},totalRecords=${totalRecords})}"></a>
                             </td>
                         </tr>
