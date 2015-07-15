@@ -13,6 +13,11 @@
         <div class="admin_input">
             <form action="/backend/login" th:action="@{/backend/login}" method="post">
                 <ul class="admin_items">
+                    <select>
+                        <option th:value="1"> 管理员</option>
+                        <option th:value="2"> 代理商</option>
+                        <option th:value="3"> 用户</option>
+                        </select>
                     <li>
                         <label for="user">用户名：</label>
                         <input type="text" name="username" value="admin" id="user" size="40" class="admin_input_style"/>
