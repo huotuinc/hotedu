@@ -5,7 +5,7 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://120.24.243.104:3307/fanmore?useUnicode=true&amp;characterEncoding=UTF8"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://120.24.243.104:3307/hotedu?useUnicode=true&amp;characterEncoding=UTF8"/>
             <property name="javax.persistence.jdbc.user" value="dbuser"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.password" value="ddbbuusseerr"/>
