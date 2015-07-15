@@ -32,11 +32,11 @@ public class Member extends Login {
     /**
      * 真实姓名
      */
-    private String name;
+    private String realName;
     /**
      * 手机号
      */
-    private String phone;
+    private String phoneNo;
     /**
      * 报考区域
      */
@@ -107,12 +107,20 @@ public class Member extends Login {
         this.payDate = payDate;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNo() {
+        return phoneNo;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     public Date getRegisterDate() {
@@ -139,13 +147,6 @@ public class Member extends Login {
         this.pictureUri = pictureUri;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
 
     public String getArea() {
