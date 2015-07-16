@@ -50,7 +50,9 @@ public class ExamGuideService {
     }
 
     //删除一条考试指南消息
-    public void delExamGuide(Long id){examGuideRepository.delete(id);}
+    public void delExamGuide(Long id){
+        examGuideRepository.delete(id);
+    }
 
     //增加一条考试信息
     public void addExamGuide(ExamGuide examGuide){
@@ -58,9 +60,13 @@ public class ExamGuideService {
     }
 
     //修改一条考试信息
-    public void modify(ExamGuide examGuide){examGuideRepository.save(examGuide);}
+    public void modify(ExamGuide examGuide){
+        examGuideRepository.save(examGuide);
 
+    }
     //查找一条考试消息
-    public ExamGuide findOneById(Long id){return examGuideRepository.findOne(id);}
+    public ExamGuide findOneById(Long id){
+        return examGuideRepository.findOne(id);
+    }
 
 }
