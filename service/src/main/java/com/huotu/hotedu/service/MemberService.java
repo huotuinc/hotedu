@@ -1,5 +1,6 @@
 package com.huotu.hotedu.service;
 
+import com.huotu.hotedu.entity.Agent;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,21 +35,30 @@ public class MemberService {
      * 该方法用来返回某个代理商名下的所有学员信息，并且以分页的形式返回
      * @param n               第几页
      * @param pagesize        每页记录条数
-     * @param agentLoginName  代理商帐户名
+     * @param agent           代理商帐户名
      * @return                学员集合
      */
-    public Page<Member>  loadMembers(String agentLoginName,Integer n,Integer pagesize){
+    public Page<Member>  loadMembersByAgent(Agent agent,Integer n,Integer pagesize){
 
         return  memberRepository.findAll(new Specification<Member>() {
             @Override
             public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if (agentLoginName==null||n==null||pagesize==null) {
+                if (agent==null||n==null||pagesize==null) {
                     return null;
                 }
-                return cb.equal(root.get("loginName").as(String.class),agentLoginName);
-
+                return cb.and(cb.equal(root.get("agent").as(Agent.class), agent), cb.isTrue(root.get("enabled").as(boolean.class)));
             }
         },new PageRequest(n, pagesize));
+    }
+
+    /**
+     * 显示所有学员 每页10条
+     * @param n         第几页
+     * @param pagesize  每页几条
+     * @return          学员集合
+     */
+    public Page<Member> loadMembers(Integer n,Integer pagesize){
+        return memberRepository.findAll(new PageRequest(n,pagesize));
     }
 
     public Member findOneById(Long id){
