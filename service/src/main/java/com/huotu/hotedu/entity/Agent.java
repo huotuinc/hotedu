@@ -7,7 +7,7 @@ import java.util.Collection;
 
 /**
  * 代理商
- * Created by Administrator on 2015/7/1.
+ * Created by cwb on 2015/7/1.
  */
 @Entity
 public class Agent extends Login{
