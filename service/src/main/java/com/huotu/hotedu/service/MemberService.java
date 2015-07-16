@@ -60,8 +60,9 @@ public class MemberService {
      * @param id
      */
     public void delMember(Long id){
-            Member mb= findOneById(id);
-            mb.setEnabled(false);
+        Member mb= findOneById(id);
+        mb.setEnabled(false);
+        //TODO 未持久化
     }
 
     /**
@@ -71,5 +72,6 @@ public class MemberService {
     public void checkPay(Long id){
         Member mb= findOneById(id);
         mb.setIsPayed(true);
+        //TODO 未持久化
     }
 }

@@ -14,4 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MemberRepository  extends JpaRepository<Member,Long>,ClassicsRepository<Member>,JpaSpecificationExecutor<Member> {
 
+   int countByPhoneNo(String phoneNo);
+
+    Member findByPhoneNo(String phoneNo);
 }
