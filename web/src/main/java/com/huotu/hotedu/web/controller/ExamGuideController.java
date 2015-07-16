@@ -19,7 +19,8 @@ import java.util.Date;
 public class ExamGuideController {
     @Autowired
     private ExamGuideService examGuideService;
-    public static final int PAGE_SIZE=10;//每张页面的记录数
+    /**PAGE_SIZE用来储存分页中每页的记录数*/
+    public static final int PAGE_SIZE=10;
 
     //后台单击考试指南链接显示的消息
     @RequestMapping("/backend/loadExamGuide")

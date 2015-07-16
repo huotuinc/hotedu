@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * Created by shiliting on 2015/6/25.
- *
+ * 考试指南实体
  * @author shiliting
  */
 @Entity
@@ -19,13 +19,13 @@ public  class ExamGuide implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
-    private String title;
+    private String title;                          //考试指南标题
     @Column(length = 5000)
-    private String content;
+    private String content;                       //考试指南内容
     @Column
-    private boolean top=true;
+    private boolean top=true;                    //是否置顶
     @Temporal(TemporalType.TIMESTAMP)
-    private Date lastUploadDate;
+    private Date lastUploadDate;                 //考试指南最后修改时间
 
     public Long getId() {
         return id;

@@ -2,11 +2,10 @@ package com.huotu.hotedu.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by shiliting on 2015/6/25.
- *
+ * 火图科技公司实体
  * @author shiliting
  */
 @Entity
