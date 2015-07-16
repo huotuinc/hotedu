@@ -31,6 +31,18 @@ public class MemberService {
     }
 
     /**
+     * 检测手机号是否被注册
+     */
+    public boolean isPhoneNoExist(String phoneNo) {
+        boolean exist = false;
+        Member mb = memberRepository.findByPhoneNo(phoneNo);
+        if(mb!=null) {
+            exist = true;
+        }
+        return exist;
+    }
+
+    /**
      * 该方法用来返回某个代理商名下的所有学员信息，并且以分页的形式返回
      * @param n               第几页
      * @param pagesize        每页记录条数

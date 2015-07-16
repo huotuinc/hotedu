@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.io.UnsupportedEncodingException;
 
 /**
  * Created by cwb on 2015/7/15.
@@ -36,16 +35,21 @@ public class MemberController {
         }else if("".equals(area)||area==null) {
             errInfo = "请选择报名地点";
         }else {
-            Member mb = new Member();
-            mb.setRealName(realName);
-            mb.setSex(sex);
-            mb.setPhoneNo(phoneNo);
-            mb.setArea(area);
-            mb.setLoginName(phoneNo);
-            mb.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes("UTF-8")).toLowerCase());
-            mb.setEnabled(false);
-            memberService.addMember(mb);
-            msgInfo = "报名成功";
+            boolean exist = memberService.isPhoneNoExist(phoneNo);
+            if(exist) {
+                errInfo = "该手机号已被注册";
+            }else {
+                Member mb = new Member();
+                mb.setRealName(realName);
+                mb.setSex(sex);
+                mb.setPhoneNo(phoneNo);
+                mb.setArea(area);
+                mb.setLoginName(phoneNo);
+                mb.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes("UTF-8")).toLowerCase());
+                mb.setEnabled(false);
+                memberService.addMember(mb);
+                msgInfo = "报名成功";
+            }
         }
         model.addAttribute("msgInfo",msgInfo);
         model.addAttribute("errInfo",errInfo);
