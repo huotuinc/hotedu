@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
- * 企业，可以进行招聘
+ * 企业有关的实体类
  * Created by shiliting on 2015/7/1.
  */
 @Entity

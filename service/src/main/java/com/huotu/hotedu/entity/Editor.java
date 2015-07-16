@@ -6,7 +6,7 @@ import java.util.Collection;
 
 /**
  * 文案处理员
- * Created by Administrator on 2015/7/1.
+ * Created by shiliting on 2015/7/1.
  */
 public class Editor extends Login{
     @Override
