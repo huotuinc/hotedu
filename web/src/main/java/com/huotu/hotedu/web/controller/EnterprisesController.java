@@ -36,7 +36,6 @@ public class EnterprisesController {
     @Autowired
     StaticResourceService staticResourceService;
 
-
     /**  PAGE_SIZE用来储存分页中每页的记录数    */
     public static final int PAGE_SIZE=10;
 
@@ -278,7 +277,7 @@ public class EnterprisesController {
      * @return   newenterprise.html
      */
     @RequestMapping("/backend/addEnterprise")
-    public String AddEnterprise(){
+    public String addEnterprise(){
         return "/backend/newenterprise";
     }
 
@@ -289,12 +288,11 @@ public class EnterprisesController {
      * @return       modifyenterprise.html
      */
     @RequestMapping("/backend/modifyEnterprise")
-    public String ModifyEnterprise(Long id, Model model){
+    public String modifyEnterprise(Long id, Model model){
         Enterprise enterprise=enterpriseService.findOneById(id);
         model.addAttribute("enterprise",enterprise);
         return "/backend/modifyenterprise";
     }
-
 
 
     /**
@@ -303,12 +301,11 @@ public class EnterprisesController {
      * @param information  企业的招聘信息
      * @param tel          企业的电话
      * @param file         企业的LOGO
-     * @param model        准备向客户端发送的参数集合
      * @return             不出异常重定向：/backend/loadEnterprises 抛出异常重定向：/backend/error
      * @throws Exception
      */
     @RequestMapping(value = "/backend/addSaveEnterprise",method = RequestMethod.POST)
-    public String addSaveEnterprise(String name,String information,String tel,@RequestParam("smallimg") MultipartFile file,Model model) throws Exception{
+    public String addSaveEnterprise(String name,String information,String tel,@RequestParam("smallimg") MultipartFile file) throws Exception{
         try {
             //文件格式判断
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
@@ -349,14 +346,11 @@ public class EnterprisesController {
      * @param tel           企业电话
      * @param isPutaway     是否下架
      * @param file          企业LOGO
-     * @param model         准备向客户端发送的参数集合
      * @return              重定向到：/backend/loadEnterprises
      * @throws Exception
      */
     @RequestMapping("/backend/modifySaveEnterprise")
-    public String ModifySaveEnterprise(Long id,String name,String introduction,String tel,boolean isPutaway,@RequestParam("smallimg") MultipartFile file,Model model) throws Exception{
-
-
+    public String ModifySaveEnterprise(Long id,String name,String introduction,String tel,boolean isPutaway,@RequestParam("smallimg") MultipartFile file) throws Exception{
 
         if(file.getSize()!=0){
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}

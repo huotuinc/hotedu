@@ -17,12 +17,23 @@ import java.util.Date;
  */
 @Controller
 public class QaController {
+
+    /**
+     * 常见问题的service层
+     */
     @Autowired
     private QaService qaService;
-   // @PostAuthorize("hasRole('EDITOR')")
 
-    public static final int PAGE_SIZE=10;//每张页面的记录数
-    //后台单击常见问题链接显示的消息
+    /**
+     * 用来储存分页中每页的记录数
+     */
+    public static final int PAGE_SIZE=10;
+
+    /**
+     * 显示常见问题信息
+     * @param model 返回客户端集
+     * @return  qa.html
+     */
     @RequestMapping("/backend/loadQa")
     public String loadQa(Model model){
         Page<Qa> pages=qaService.loadQa(0,PAGE_SIZE);
@@ -35,7 +46,12 @@ public class QaController {
         return "/backend/qa";
     }
 
-    //后台单机搜索按钮显示的常见问题消息
+    /**
+     * 搜索符合条件的常见问题信息
+     * @param keywords  搜索关键字
+     * @param model     返回客户端参数集
+     * @return      qa.html
+     */
     @RequestMapping("/backend/searchQa")
     public String searchQa(String keywords,Model model){
         Page<Qa> pages=qaService.searchQa(0,PAGE_SIZE,keywords);
@@ -48,7 +64,14 @@ public class QaController {
         return "/backend/qa";
     }
 
-    //后台单击常见问题的分页
+    /**
+     * 分页显示
+     * @param n             显示第几页
+     * @param sumpage    分页总页数
+     * @param keywords      检索关键字(使用检索功能后有效)
+     * @param model         返回客户端集合
+     * @return          qa.html
+     */
     @RequestMapping("/backend/pageQa")
     public String pageQa(int n,int sumpage,String keywords,Model model){
         //如果已经到分页的第一页了，将页数设置为0
@@ -66,14 +89,22 @@ public class QaController {
         return "/backend/qa";
     }
 
-    //后台单击删除按钮返回的信息
+    /**
+     * 删除视频信息
+     * @param n             显示第几页
+     * @param sumpage       分页总页数
+     * @param keywords      检索关键字(使用检索功能后有效)
+     * @param id            需要被删除的记录id
+     * @param sumElement    总记录数
+     * @param model         返回客户端集合
+     * @return      video.html
+     */
     @RequestMapping("/backend/delQa")
     public String delQa(int n,int sumpage,String keywords,Long id,Long sumElement,Model model){
         qaService.delQa(id);
         if((sumElement-1)%PAGE_SIZE==0){
             if(n>0&&n+1==sumpage){n--;}
             sumpage--;
-
         }
         sumElement--;
         Page<Qa> pages = qaService.searchQa(n, PAGE_SIZE, keywords);
@@ -85,15 +116,21 @@ public class QaController {
         return "/backend/qa";
     }
 
-
-
-
-    //后台单击新建按钮
+    /**
+     * qa.html页面单击新建跳转
+     * @return newqa.html
+     */
     @RequestMapping("/backend/addQa")
     public String addQa(Model model){
         return "/backend/newqa";
     }
-    //后台单机修改按钮
+
+    /**
+     * qa.html页面点击修改后跳转
+     * @param id        需要修改的id
+     * @param model     返回客户端集
+     * @return      modifyqa.html
+     */
     @RequestMapping("/backend/modifyQa")
     public String modifyQa(Long id, Model model){
         Qa qa=qaService.findOneById(id);
@@ -101,10 +138,15 @@ public class QaController {
         return "/backend/modifyqa";
     }
 
-
-    //后台单击添加保存按钮
+    /**
+     * addqa.html页面点击保存添加后跳转
+     * @param title     标题
+     * @param content   描述
+     * @return      不出异常重定向：/backend/loadQa
+     */
+    //TODO 是否搞抛出异常
     @RequestMapping("/backend/addSaveQa")
-    public String addSaveQa(String title,String content,String top,Model model){
+    public String addSaveQa(String title,String content,String top){
         Qa qa=new Qa();
         qa.setTitle(title);
         qa.setContent(content);
@@ -114,8 +156,14 @@ public class QaController {
         return "redirect:/backend/loadQa";
     }
 
-
-    //后台单击修改保存按钮
+    /**
+     * modifyqa.html页面点击保存修改后跳转
+     * @param id    修改后的id
+     * @param title     标题
+     * @param content     描述
+     * @param top    是否置顶
+     * @return      重定向到：/backend/loadQa
+     */
     @RequestMapping("/backend/modifySaveQa")
     public String modifySaveQa(Long id,String title,String content,Boolean top,Model model){
         Qa qa=qaService.findOneById(id);

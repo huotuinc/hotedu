@@ -11,8 +11,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Date;
 
 /**
@@ -78,13 +76,7 @@ public class TutorService {
 
     //删除一个导师(包括他的照片)
     public void delTutor(Long id){
-        try {
-            URI uri=new URI(findOneById(id).getPictureUri());
             tutorRepository.delete(id);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-
     }
 
     //增加一位导师
