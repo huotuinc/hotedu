@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by jiashubing on 2015/7/16.
  *
- * @author jiashubing luffy.ja at gmail.com
+ * @author jiashubing at gmail.com
  */
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -44,7 +44,6 @@ public class MemberServiceTest {
         memberService.addMember(mb);
         assertEquals(mb.getLoginName(),memberRepository.findByPhoneNo(phoneNo).getLoginName());
     }
-
 
     /**
      * 返回一个不存在的手机号码

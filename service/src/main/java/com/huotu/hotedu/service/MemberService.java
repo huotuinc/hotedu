@@ -57,7 +57,7 @@ public class MemberService {
 
     /**
      * 删除学员，设为不可用
-     * @param id
+     * @param id 学员id
      */
     public void delMember(Long id){
             Member mb= findOneById(id);
@@ -67,7 +67,7 @@ public class MemberService {
 
     /**
      * 确认交费
-     * @param id
+     * @param id 学员id
      */
     public void checkPay(Long id){
         Member mb= findOneById(id);

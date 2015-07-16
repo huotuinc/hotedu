@@ -16,11 +16,22 @@ import java.util.Date;
  */
 @Controller
 public class LinkController {
+    /**
+     * 友情链接的service层
+     */
     @Autowired
     private LinkService linkService;
+
+    /**
+     * 用来储存分页中每页的记录数
+     */
     public static final int PAGE_SIZE=10;
 
-    //后台单击友情链接链接显示的消息
+    /**
+     * 显示友情链接信息
+     * @param model 返回客户端集
+     * @return  link.html
+     */
     @RequestMapping("/backend/loadLink")
     public String loadExamGuide(Model model){
         Page<Link> pages=linkService.loadLink(0,PAGE_SIZE);
@@ -33,7 +44,12 @@ public class LinkController {
         return "/backend/link";
     }
 
-    //后台显示检索之后的友情链接
+    /**
+     * 搜索符合条件的友情链接信息
+     * @param keywords  搜索关键字
+     * @param model     返回客户端参数集
+     * @return      link.html
+     */
     @RequestMapping("/backend/searchLink")
     public String searchLinkController(String keywords,Model model) {
 
@@ -48,7 +64,14 @@ public class LinkController {
 
     }
 
-    //后台单击友情链接的分页
+    /**
+     * 分页显示
+     * @param n             显示第几页
+     * @param sumpage    分页总页数
+     * @param keywords      检索关键字(使用检索功能后有效)
+     * @param model         返回客户端集合
+     * @return          link.html
+     */
     @RequestMapping("/backend/pageLink")
     public String pageLink(int n,int sumpage,String keywords,Model model){
         //如果已经到分页的第一页了，将页数设置为0
@@ -66,7 +89,16 @@ public class LinkController {
         return "/backend/link";
     }
 
-    //后台单击删除按钮返回的信息
+     /**
+     * 删除友情链接信息
+     * @param n             显示第几页
+     * @param sumpage       分页总页数
+     * @param keywords      检索关键字(使用检索功能后有效)
+     * @param id            需要被删除的记录id
+     * @param sumElement    总记录数
+     * @param model         返回客户端集合
+     * @return      link.html
+     */
     @RequestMapping("/backend/delLink")
     public String delLink(int n,int sumpage,String keywords,Long id,Long sumElement,Model model){
         linkService.delLink(id);
@@ -84,13 +116,21 @@ public class LinkController {
         return "/backend/link";
     }
 
-    //后台单击新建按钮
+    /**
+     * link.html页面单击新建跳转
+     * @return newlink.html
+     */
     @RequestMapping("/backend/addLink")
-    public String AddLink(Model model){
+    public String AddLink(){
         return "/backend/newlink";
     }
 
-    //后台单击修改按钮
+    /**
+     * link.html页面点击修改后跳转
+     * @param id        需要修改的id
+     * @param model     返回客户端集
+     * @return      modifylink.html
+     */
     @RequestMapping("/backend/modify/link")
     public String ModifyLink(Long id, Model model){
         Link link=linkService.findOneById(id);
@@ -98,9 +138,15 @@ public class LinkController {
         return "/backend/modifylink";
     }
 
-    //后台单击添加保存按钮
+    /**
+     * newlink.html页面点击保存添加后跳转
+     * @param title     标题
+     * @param url   url
+     * @return      不出异常重定向：/backend/loadLink
+     */
+    //TODO 是否搞抛出异常
     @RequestMapping("/backend/addSaveLink")
-    public String AddSaveLink(String title,String url,Model model){
+    public String AddSaveLink(String title,String url){
         Link link=new Link();
         link.setTitle(title);
         link.setUrl(url);
@@ -109,10 +155,15 @@ public class LinkController {
         return "redirect:/backend/loadLink";
     }
 
-
-    //后台单击修改保存按钮
+    /**
+     * modifylink.html页面点击保存修改后跳转
+     * @param id    修改后的id
+     * @param title     标题
+     * @param url     url
+     * @return      重定向到：/backend/loadLink
+     */
     @RequestMapping("/backend/modifySaveLink")
-    public String ModifySaveLink(Long id,String title,String url,Model model){
+    public String ModifySaveLink(Long id,String title,String url){
         Link link=linkService.findOneById(id);
         link.setTitle(title);
         link.setUrl(url);

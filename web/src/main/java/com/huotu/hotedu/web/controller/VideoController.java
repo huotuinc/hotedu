@@ -140,7 +140,7 @@ public class VideoController {
     }
 
     /**
-     * addvideo.html页面点击保存添加后跳转
+     * newvideo.html页面点击保存添加后跳转
      * @param videoName     新建后视频的名字
      * @param videoAddr     新建后视频的地址
      * @param free          视频是否免费

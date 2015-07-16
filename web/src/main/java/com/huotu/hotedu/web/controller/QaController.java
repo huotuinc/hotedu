@@ -139,7 +139,7 @@ public class QaController {
     }
 
     /**
-     * addqa.html页面点击保存添加后跳转
+     * newqa.html页面点击保存添加后跳转
      * @param title     标题
      * @param content   描述
      * @return      不出异常重定向：/backend/loadQa
@@ -165,7 +165,7 @@ public class QaController {
      * @return      重定向到：/backend/loadQa
      */
     @RequestMapping("/backend/modifySaveQa")
-    public String modifySaveQa(Long id,String title,String content,Boolean top,Model model){
+    public String modifySaveQa(Long id,String title,String content,Boolean top){
         Qa qa=qaService.findOneById(id);
         qa.setTitle(title);
         qa.setContent(content);
@@ -174,7 +174,5 @@ public class QaController {
         qaService.modify(qa);
         return "redirect:/backend/loadQa";
     }
-
-
 
 }
