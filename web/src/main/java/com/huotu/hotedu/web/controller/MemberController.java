@@ -39,7 +39,8 @@ public class MemberController {
             mb.setPhoneNo(phoneNo);
             mb.setArea(area);
             mb.setLoginName(phoneNo);
-            mb.setEnabled(true);
+            mb.setPassword("123456");
+            mb.setEnabled(false);
             memberService.addMember(mb);
             msgInfo = "报名成功";
         }

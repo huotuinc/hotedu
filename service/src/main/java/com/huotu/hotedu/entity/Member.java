@@ -53,15 +53,12 @@ public class Member extends Login {
     /**
      * 所属班级
      */
-    private String theClass;
+    private ClassTeam theClass;
     /**
      * 是否已缴费，默认：否
      */
     private boolean isPayed = false;
-    /**
-     * 考试地点
-     */
-    private String examAddress;
+
     /**
      * 是否通过考试
      */
@@ -76,11 +73,6 @@ public class Member extends Login {
      */
     @Temporal(TemporalType.TIMESTAMP)
     private Date payDate;
-    /**
-     * 考试时间
-     */
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date examDate;
 
     /**
      * 注册时间
@@ -161,7 +153,6 @@ public class Member extends Login {
     }
 
 
-
     public String getArea() {
         return area;
     }
@@ -178,22 +169,13 @@ public class Member extends Login {
         ConfirmPerson = confirmPerson;
     }
 
-    public String getTheClass() {
+    public ClassTeam getTheClass() {
         return theClass;
     }
 
-    public void setTheClass(String theClass) {
+    public void setTheClass(ClassTeam theClass) {
         this.theClass = theClass;
     }
-
-    public String getExamAddress() {
-        return examAddress;
-    }
-
-    public void setExamAddress(String examAddress) {
-        this.examAddress = examAddress;
-    }
-
 
     public Date getApplyDate() {
         return applyDate;
@@ -201,14 +183,6 @@ public class Member extends Login {
 
     public void setApplyDate(Date applyDate) {
         this.applyDate = applyDate;
-    }
-
-    public Date getExamDate() {
-        return examDate;
-    }
-
-    public void setExamDate(Date examDate) {
-        this.examDate = examDate;
     }
 
     @Override
