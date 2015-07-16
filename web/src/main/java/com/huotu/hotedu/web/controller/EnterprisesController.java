@@ -281,7 +281,6 @@ public class EnterprisesController {
     public String AddEnterprise(){
         return "/backend/newenterprise";
     }
-    //后台单机修改按钮
 
     /**
      * 接收跳转修改企业页面的请求，返回一个HTML页面
@@ -297,7 +296,6 @@ public class EnterprisesController {
     }
 
 
-    //后台单击添加保存按钮
 
     /**
      * 接收一个添加发布企业信息的请求，返回一个HTML页面
@@ -306,14 +304,12 @@ public class EnterprisesController {
      * @param tel          企业的电话
      * @param file         企业的LOGO
      * @param model        准备向客户端发送的参数集合
-     * @return
+     * @return             不出异常重定向：/backend/loadEnterprises 抛出异常重定向：/backend/error
      * @throws Exception
      */
     @RequestMapping(value = "/backend/addSaveEnterprise",method = RequestMethod.POST)
     public String addSaveEnterprise(String name,String information,String tel,@RequestParam("smallimg") MultipartFile file,Model model) throws Exception{
         try {
-
-            System.out.println("进入add");
             //文件格式判断
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
             if(file.getSize()==0){throw new Exception("文件为空！");}
@@ -322,9 +318,6 @@ public class EnterprisesController {
             //保存图片
             String fileName = StaticResourceService.COMPANY_LOGO + UUID.randomUUID().toString() + ".png";
             staticResourceService.uploadResource(fileName,file.getInputStream());
-
-
-
             Enterprise enterprise=new Enterprise();
             enterprise.setName(name);
             enterprise.setTel(tel);
@@ -341,13 +334,25 @@ public class EnterprisesController {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("出错了");
-        }
-        return "redirect:/backend/error";
+            return"redirect:/backend/error";
 
+        }
     }
 
 
-    //后台单击修改保存按钮
+
+    /**
+     * 接收一个修改发布企业的请求，返回一个HTML页面
+     * @param id            需要修改的记录id
+     * @param name          企业名称
+     * @param introduction  企业招聘简介
+     * @param tel           企业电话
+     * @param isPutaway     是否下架
+     * @param file          企业LOGO
+     * @param model         准备向客户端发送的参数集合
+     * @return              重定向到：/backend/loadEnterprises
+     * @throws Exception
+     */
     @RequestMapping("/backend/modifySaveEnterprise")
     public String ModifySaveEnterprise(Long id,String name,String introduction,String tel,boolean isPutaway,@RequestParam("smallimg") MultipartFile file,Model model) throws Exception{
 
@@ -359,12 +364,9 @@ public class EnterprisesController {
         if(file.getSize()>1024*1024*5){throw new Exception("文件太大");}
 
 
-        //获取需要修改的图片路径，并删除
-        staticResourceService.deleteResource(staticResourceService.getResource(enterpriseService.findOneById(id).getLogoUri()));
-        //保存图片
-        String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
-        staticResourceService.uploadResource(fileName,file.getInputStream());
-
+        staticResourceService.deleteResource(staticResourceService.getResource(enterpriseService.findOneById(id).getLogoUri()));    //获取需要修改的图片路径，并删除
+        String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";                                 //保存图片
+        staticResourceService.uploadResource(fileName,file.getInputStream());                                                       //添加静态图片资源
         Enterprise enterprise=enterpriseService.findOneById(id);
         enterprise.setTel(tel);
         enterprise.setName(name);
