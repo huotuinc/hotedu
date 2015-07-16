@@ -1,0 +1,43 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>火炬教育考证报名</title>
+    <link href="../backend/css/admin_login.css" th:href="@{/backend/css/admin_login.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="admin_login_wrap">
+    <h1>火炬教育考证报名</h1>
+    <div class="adming_login_border">
+        <div class="admin_input">
+            <form action="/pc/register" th:action="@{/pc/register}" method="post">
+                <ul class="admin_items">
+                    <li>
+                        <label for="realName">真实姓名：</label>
+                        <input type="text" name="realName" value="cwb" id="realName" size="40" class="admin_input_style"/>
+                    </li>
+                    <li>
+                        <label for="male">男生</label><input type="radio" checked="checked" name="sex" id="male" value="1"/>
+                        <label for="female">女生</label><input type="radio" name="sex" id="female" value="0" />
+                    </li>
+                    <li>
+                        <label for="phoneNo">真实手机号：</label>
+                        <input type="text" name="phoneNo"  id="phoneNo" size="40" class="admin_input_style"/>
+                    </li>
+                    <li>
+                        <label for="area">区域：</label>
+                        <input type="text" name="area" value="杭州" id="area" size="40"
+                               class="admin_input_style"/>
+                    </li>
+                    <li>
+                        <input type="submit" tabindex="3" value="报名" class="btn btn-primary"/>
+                    </li>
+                </ul>
+                <span th:text="${msgInfo}"/>
+                <span th:text="${errInfo}"/>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -33,6 +33,11 @@ public class Member extends Login {
      * 真实姓名
      */
     private String realName;
+
+    /**
+     * 性别：0代表女生，1代表男生
+     */
+    private int sex;
     /**
      * 手机号
      */
@@ -82,6 +87,14 @@ public class Member extends Login {
      */
     @Temporal(TemporalType.TIMESTAMP)
     private Date registerDate;
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
 
     public boolean isPassed() {
         return isPassed;
