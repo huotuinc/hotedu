@@ -23,16 +23,33 @@ import java.util.UUID;
 /**
  * Created by shiliting on 2015/6/10.
  * 师资力量有关的Controller
+ * @Time 2015/6/10
  * @author shiliting shiliting at gmail.com
  */
 @Controller
 public class TutorController {
+    /**
+     * 师资力量的Service层
+     */
     @Autowired
     TutorService tutorService;
+
+    /**
+     * 用来储存处理静态资源的接口
+     */
     @Autowired
     StaticResourceService staticResourceService;
-    public static final int PAGE_SIZE=10;//每张页面的记录数
-    //后台单击师资力量显示的消息
+
+    /**
+     * 用来储存分页中每页的记录数
+     */
+    public static final int PAGE_SIZE=10;
+
+    /**
+     *
+     * @param model
+     * @return tutor.html
+     */
     @RequestMapping("/backend/loadTutor")
     public String loadTutor(Model model){
         Page<Tutor> pages=tutorService.loadTutor(0, PAGE_SIZE);

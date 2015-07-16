@@ -58,7 +58,6 @@ public class Member extends Login {
      * 是否已缴费，默认：否
      */
     private boolean isPayed = false;
-
     /**
      * 是否通过考试
      */

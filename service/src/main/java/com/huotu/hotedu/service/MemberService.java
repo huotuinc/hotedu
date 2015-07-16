@@ -16,4 +16,26 @@ public class MemberService {
     public void addMember(Member mb) {
         memberRepository.save(mb);
     }
+
+    public Member findOneById(Long id){
+        return memberRepository.findOne(id);
+    }
+
+    /**
+     * 删除学员，设为不可用
+     * @param id
+     */
+    public void delMember(Long id){
+            Member mb= findOneById(id);
+            mb.setEnabled(false);
+    }
+
+    /**
+     * 确认交费
+     * @param id
+     */
+    public void checkPay(Long id){
+        Member mb= findOneById(id);
+        mb.setIsPayed(true);
+    }
 }
