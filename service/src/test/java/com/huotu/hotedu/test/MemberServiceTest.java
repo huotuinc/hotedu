@@ -23,8 +23,9 @@ import java.util.UUID;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by luffy on 2015/6/10.
+ * Created by jiashubing on 2015/7/16.
  *
+ * @author jiashubing at gmail.com
  * @author luffy luffy.ja at gmail.com
  */
 @ActiveProfiles("test")

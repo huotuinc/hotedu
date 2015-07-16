@@ -18,10 +18,23 @@ import java.util.Date;
 @Controller
 public class VideoController {
 
+    /**
+     * 教学视频的service层
+     */
     @Autowired
     VideoService videoService;
+
+    /**
+     * 用来储存分页中每页的记录数
+     */
     public static final int PAGE_SIZE=10;//每张页面的记录数
     //后台显示所有视频信息
+
+    /**
+     * 显示教学视频信息
+     * @param model   返回页面集
+     * @return  video.html
+     */
     @RequestMapping("/backend/loadVideo")
     public String loadWantedes(Model model) {
         Page<Video> pages = videoService.loadVideo(0,PAGE_SIZE);
@@ -34,7 +47,12 @@ public class VideoController {
         return "/backend/video";
     }
 
-    //后台显示检索之后的视频信息
+    /**
+     * 搜索符合条件的视频信息
+     * @param keywords  搜索关键字
+     * @param model     返回客户端参数集
+     * @return      video.html
+     */
     @RequestMapping("/backend/searchVideo")
     public String searchVideos(String keywords,Model model) {
         Page<Video> pages=videoService.searchVideo(0, PAGE_SIZE, keywords);
@@ -47,6 +65,14 @@ public class VideoController {
         return "/backend/video";
     }
 
+    /**
+     * 分页显示
+     * @param n             显示第几页
+     * @param totalPages    分页总页数
+     * @param keywords      检索关键字(使用检索功能后有效)
+     * @param model         返回客户端集合
+     * @return          video.html
+     */
     @RequestMapping("/backend/pageVideo")
     public String pageVideo(int n,int totalPages,String keywords,Model model) {
         //如果已经到分页的第一页了，将页数设置为0
@@ -64,13 +90,22 @@ public class VideoController {
         return "/backend/video";
     }
 
+    /**
+     * 删除视频信息
+     * @param n             显示第几页
+     * @param totalPages    分页总页数
+     * @param keywords      检索关键字(使用检索功能后有效)
+     * @param id            需要被删除的记录id
+     * @param totalRecords  总记录数
+     * @param model         返回客户端集合
+     * @return      video.html
+     */
     @RequestMapping("/backend/delVideo")
     public String delVideo(int n,int totalPages,String keywords,Long id,Long totalRecords,Model model){
         videoService.delVideo(id);
         if((totalRecords-1)%PAGE_SIZE==0){
             if(n>0&&n+1==totalPages){n--;}
             totalPages--;
-
         }
         totalRecords--;
         Page<Video> pages = videoService.searchVideo(n, PAGE_SIZE, keywords);
@@ -82,13 +117,21 @@ public class VideoController {
         return "/backend/video";
     }
 
-    //后台单击新建按钮
+    /**
+     * video.html页面单击新建跳转
+     * @return newvideo.html
+     */
     @RequestMapping("/backend/addVideo")
-    public String addQa(Model model){
+    public String addQa(){
         return "/backend/newvideo";
     }
 
-    //后台单机修改按钮
+    /**
+     * video.html页面点击修改后跳转
+     * @param id        需要修改视频的id
+     * @param model     返回客户端集
+     * @return      modifyvideo.html
+     */
     @RequestMapping("/backend/modifyVideo")
     public String modifyVideo(Long id, Model model){
         Video video=videoService.findOneById(id);
@@ -96,8 +139,14 @@ public class VideoController {
         return "/backend/modifyvideo";
     }
 
-
-    //后台单击添加保存按钮
+    /**
+     * newvideo.html页面点击保存添加后跳转
+     * @param videoName     新建后视频的名字
+     * @param videoAddr     新建后视频的地址
+     * @param free          视频是否免费
+     * @return      不出异常重定向：/backend/loadVideo
+     */
+    //TODO 是否搞抛出异常
     @RequestMapping("/backend/addSaveVideo")
     public String addSaveVideo(String videoName,String videoAddr,String free){
         Video video=new Video();
@@ -106,11 +155,17 @@ public class VideoController {
         video.setUploadTime(new Date());
         video.setFree("1".equals(free)?true:false);
         videoService.addVideo(video);
-        return "redirect:/backend/loadVideos";
+        return "redirect:/backend/loadVideo";
     }
 
-
-    //后台单击修改保存按钮
+    /**
+     * modifyvideo.html页面点击保存修改后跳转
+     * @param id    修改后的视频id
+     * @param videoName     修改后的视频名字
+     * @param videoAddr     修改后的视频地址
+     * @param free      是否免费
+     * @return      重定向到：/backend/loadVideo
+     */
     @RequestMapping("/backend/modifySaveVideo")
     public String modifySaveQa(Long id,String videoName,String videoAddr,String free){
         Video video=videoService.findOneById(id);

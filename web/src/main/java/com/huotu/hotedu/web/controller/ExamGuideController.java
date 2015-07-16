@@ -17,12 +17,22 @@ import java.util.Date;
  */
 @Controller
 public class ExamGuideController {
+    /**
+     * 考试指南的service层
+     */
     @Autowired
     private ExamGuideService examGuideService;
-    /**PAGE_SIZE用来储存分页中每页的记录数*/
+
+    /**
+     * 用来储存分页中每页的记录数
+     */
     public static final int PAGE_SIZE=10;
 
-    //后台单击考试指南链接显示的消息
+    /**
+     * 显示考试指南信息
+     * @param model 返回客户端集
+     * @return  examguide.html
+     */
     @RequestMapping("/backend/loadExamGuide")
     public String loadExamGuide(Model model){
         Page<ExamGuide> pages=examGuideService.loadExamGuide(0,PAGE_SIZE);
@@ -35,7 +45,12 @@ public class ExamGuideController {
         return "/backend/examguide";
     }
 
-    //后台单机搜索按钮显示的考试指南消息
+    /**
+     * 搜索符合条件的考试指南信息
+     * @param keywords  搜索关键字
+     * @param model     返回客户端参数集
+     * @return      examguide.html
+     */
     @RequestMapping("/backend/searchExamGuide")
     public String searchExamGuide(String keywords,Model model){
         Page<ExamGuide> pages=examGuideService.searchExamGuide(0,PAGE_SIZE,keywords);
@@ -48,7 +63,14 @@ public class ExamGuideController {
         return "/backend/examguide";
     }
 
-    //后台单击考试指南的分页
+    /**
+     * 分页显示
+     * @param n             显示第几页
+     * @param sumpage    分页总页数
+     * @param keywords      检索关键字(使用检索功能后有效)
+     * @param model         返回客户端集合
+     * @return          examguide.html
+     */
     @RequestMapping("/backend/pageExamGuide")
     public String pageExamGuide(int n,int sumpage,String keywords,Model model){
         //如果已经到分页的第一页了，将页数设置为0
@@ -66,7 +88,16 @@ public class ExamGuideController {
         return "/backend/examguide";
     }
 
-    //后台单击删除按钮返回的信息
+    /**
+     * 删除考试指南信息
+     * @param n             显示第几页
+     * @param sumpage       分页总页数
+     * @param keywords      检索关键字(使用检索功能后有效)
+     * @param id            需要被删除的记录id
+     * @param sumElement    总记录数
+     * @param model         返回客户端集合
+     * @return      examguide.html
+     */
     @RequestMapping("/backend/delExamGuide")
     public String delExamGuide(int n,int sumpage,String keywords,Long id,Long sumElement,Model model){
         examGuideService.delExamGuide(id);
@@ -84,16 +115,21 @@ public class ExamGuideController {
         return "/backend/examguide";
     }
 
-
-
-
-    //后台单击新建按钮
+    /**
+     * examguide.html页面单击新建跳转
+     * @return newguide.html
+     */
     @RequestMapping("/backend/addExamGuide")
-    public String addExamGuide(Model model){
+    public String addExamGuide(){
         return "/backend/newguide";
     }
 
-    //后台单机修改按钮
+    /**
+     * examguide.html页面点击修改后跳转
+     * @param id        需要修改的id
+     * @param model     返回客户端集
+     * @return      modifyguide.html
+     */
     @RequestMapping("/backend/modifyExamGuide")
     public String ModifyExamGuide(Long id, Model model){
         ExamGuide examGuide=examGuideService.findOneById(id);
@@ -101,10 +137,16 @@ public class ExamGuideController {
         return "/backend/modifyguide";
     }
 
-
-    //后台单击添加保存按钮
+    /**
+     * newguide.html页面点击保存添加后跳转
+     * @param title     标题
+     * @param content   描述
+     * @param top   是否置顶
+     * @return      不出异常重定向：/backend/loadExamGuide
+     */
+    //TODO 是否搞抛出异常
     @RequestMapping("/backend/addSaveExamGuide")
-    public String addSaveExamGuide(String title,String content,String top,Model model){
+    public String addSaveExamGuide(String title,String content,String top){
         ExamGuide examGuide=new ExamGuide();
         examGuide.setTitle(title);
         examGuide.setContent(content);
@@ -114,10 +156,16 @@ public class ExamGuideController {
         return "redirect:/backend/loadExamGuide";
     }
 
-
-    //后台单击修改保存按钮
+    /**
+     * modifyguide.html页面点击保存修改后跳转
+     * @param id    修改后的id
+     * @param title     标题
+     * @param content   描述
+     * @param top   是否置顶
+     * @return      重定向到：/backend/loadExamGuide
+     */
     @RequestMapping("/backend/modifySaveExamGuide")
-    public String modifySaveExamGuide(Long id,String title,String content,Boolean top,Model model){
+    public String modifySaveExamGuide(Long id,String title,String content,Boolean top){
         ExamGuide examGuide=examGuideService.findOneById(id);
         examGuide.setTitle(title);
         examGuide.setContent(content);

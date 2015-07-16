@@ -67,21 +67,21 @@ public class MemberService {
 
     /**
      * 删除学员，设为不可用
-     * @param id
+     * @param id 学员id
      */
     public void delMember(Long id){
-        Member mb= findOneById(id);
-        mb.setEnabled(false);
-        //TODO 未持久化
+            Member mb= findOneById(id);
+            mb.setEnabled(false);
+            memberRepository.save(mb);
     }
 
     /**
      * 确认交费
-     * @param id
+     * @param id 学员id
      */
     public void checkPay(Long id){
         Member mb= findOneById(id);
         mb.setIsPayed(true);
-        //TODO 未持久化
+        memberRepository.save(mb);
     }
 }

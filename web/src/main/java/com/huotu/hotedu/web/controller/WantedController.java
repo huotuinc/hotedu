@@ -9,12 +9,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class WantedController {
     //后台显示所有招聘信息
+
+    /**
+     * 显示招聘信息
+     * @return  wanted.html
+     */
     @RequestMapping("/backend/loadWanted")
     public String loadWantedesController() {
         return "/backend/wanted";
     }
 
-    //后台显示检索之后的招聘信息
+    /**
+     * 搜索符合条件的招聘信息
+     * @return  wanted.html
+     */
     @RequestMapping("/backend/searchWanted")
     public String searchWantedesController() {
         return "";

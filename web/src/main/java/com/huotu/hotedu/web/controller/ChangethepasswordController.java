@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class ChangethepasswordController {
-    //后台显示所有修改密码信息
+
+    /**
+     * 显示所有修改密码信息
+     * @return changethepassword.html
+     */
     @RequestMapping("/backend/loadChangethepassword")
     public String loadWantedesController() {
         return "/backend/changethepassword";
