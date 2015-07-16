@@ -69,4 +69,5 @@ public class ClassTeam implements Serializable {
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
+
 }

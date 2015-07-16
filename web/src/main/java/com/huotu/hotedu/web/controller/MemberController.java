@@ -5,7 +5,10 @@ import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * Created by cwb on 2015/7/15.
@@ -22,7 +25,7 @@ public class MemberController {
     }
 
     @RequestMapping("/pc/register")
-    public String register(String realName,int sex,String phoneNo,String area,Model model) {
+    public String register(String realName,int sex,String phoneNo,String area,Model model) throws Exception {
         String errInfo = "";
         String msgInfo = "";
         String turnPage = "/pc/registerTest";
@@ -39,7 +42,7 @@ public class MemberController {
             mb.setPhoneNo(phoneNo);
             mb.setArea(area);
             mb.setLoginName(phoneNo);
-            mb.setPassword("123456");
+            mb.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes("UTF-8")).toLowerCase());
             mb.setEnabled(false);
             memberService.addMember(mb);
             msgInfo = "报名成功";

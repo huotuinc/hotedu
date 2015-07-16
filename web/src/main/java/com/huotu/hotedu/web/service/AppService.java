@@ -144,7 +144,7 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 }
             }
 
-            if (tutorRepository.count()==0){
+            /*if (tutorRepository.count()==0){
                 Tutor tutor;
                 for(int i=0;i<27;i++){
                     tutor=new Tutor();
@@ -156,7 +156,7 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                     tutor.setPictureUri("slt.jpg");
                     tutorRepository.save(tutor);
                 }
-            }
+            }*/
 
 
             if (qaRepository.count()==0){
