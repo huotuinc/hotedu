@@ -12,6 +12,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Random;
+import java.util.UUID;
+
+import static org.junit.Assert.assertEquals;
+
 /**
  * Created by jiashubing on 2015/7/16.
  *
@@ -29,25 +34,37 @@ public class MemberServiceTest {
 
     @Test
     @Rollback
-    public void member(){
-        Long id = (long)50;
-        Member member = new Member();
-        member.setEnabled(true);
-        member.setId(id);
-        member.setIsPayed(false);
-        memberService.addMember(member);
-        System.out.println("添加学员");
-
-        member= memberService.findOneById(id);
-        System.out.println("学员姓名：" + member.getLoginName() + "  学员是否可用: " + member.isEnabled());
-
-        memberService.delMember(id);
-        System.out.println("删除后学员是否可用: " + member.isEnabled());
-
-        memberService.checkPay(id);
-        System.out.println("确认缴费: " + member.isPayed());
-
+    public void addMember() {
+        Member mb = new Member();
+        mb.setRealName(UUID.randomUUID().toString());
+        String phoneNo = generateInexistentMobile(memberRepository);
+        mb.setPhoneNo(phoneNo);
+        mb.setSex(new Random().nextInt(1));
+        mb.setArea("杭州");
+        memberService.addMember(mb);
+        assertEquals(mb.getLoginName(),memberRepository.findByPhoneNo(phoneNo).getLoginName());
     }
 
+
+    /**
+     * 返回一个不存在的手机号码
+     *
+     * @param memberRepository
+     * @return 手机号码
+     */
+    public static String generateInexistentMobile(MemberRepository memberRepository) {
+        while (true) {
+            String number = "" + System.currentTimeMillis();
+            number = number.substring(number.length() - 11);
+            char[] data = number.toCharArray();
+            data[0] = '1';
+            number = new String(data);
+            if (memberRepository.count()==0)
+                return number;
+            if (memberRepository.countByPhoneNo(number) == 0) {
+                return number;
+            }
+        }
+    }
 
 }
