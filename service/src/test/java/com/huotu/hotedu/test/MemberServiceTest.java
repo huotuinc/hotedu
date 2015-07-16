@@ -6,6 +6,7 @@ import com.huotu.hotedu.service.MemberService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -13,9 +14,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Created by jiashubing on 2015/7/16.
+ * Created by luffy on 2015/6/10.
  *
- * @author jiashubing luffy.ja at gmail.com
+ * @author luffy luffy.ja at gmail.com
  */
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -26,6 +27,7 @@ public class MemberServiceTest {
     MemberRepository memberRepository;
     @Autowired
     MemberService memberService;
+    public static final int PAGE_SIZE=10;   //分页，每页假设10条数据
 
     @Test
     @Rollback
@@ -46,6 +48,18 @@ public class MemberServiceTest {
 
         memberService.checkPay(id);
         System.out.println("确认缴费: " + member.isPayed());
+
+    }
+
+    @Test
+    public void loadMembers(){
+        Page<Member> pages= memberService.loadMembers("agent", 0, PAGE_SIZE);
+        System.out.println("pages:"+pages.toString());
+        System.out.println("分页后学员总数："+pages.getSize());
+        System.out.println("总记录数："+pages.getTotalElements());
+        for(Member m:pages){
+            System.out.println("学员信息："+m.toString());
+        }
 
     }
 
