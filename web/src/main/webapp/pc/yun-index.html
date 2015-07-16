@@ -1,15 +1,18 @@
 <!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"/>
     <title>云商学院</title>
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link rel="stylesheet" type="text/css" href="css/indexnew.css">
-    <script type="text/javascript" src="js/jquery1.42.min.js"></script><script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/pc/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/pc/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/pc/css/indexnew.css}"/>
+    <script type="text/javascript" src="js/jquery1.42.min.js" th:src="@{/pc/js/jquery1.42.min.js}"></script>
+        <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" th:src="@{/pc/js/jquery.SuperSlide.2.1.1.js}"></script>
+    <script type="text/javascript">
+    </script>
     </head>
     <body>
-<div class="header"> <img src="images/logo.png" class="logoimg">
+<div class="header"> <img src="images/logo.png" th:src="@{/pc/images/logo.png}" class="logoimg"/>
       <ul class="nav">
     <li class="active"><a href="index.html">首页</a></li>
     <li><a href="index2.html">公司简介</a></li>
@@ -19,8 +22,8 @@
     <li><a href="about.html">考试指南</a></li>
     <li><a href="about.html">招|应聘</a></li>
     <li style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)" onclick = "document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a></li>
-    <li style="padding:0px;display:none"> <a href="#"><img class="lodingimg" src="images/toux.png" width="100%"></a>
-          <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"></p>
+    <li style="padding:0px;display:none"> <a href="#"><img class="lodingimg" src="images/toux.png" width="100%"/><!--会员图片--></a>
+          <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
           <p class="lbpo"> <a href="#">HHSHIJIJ</a> <a href="#">个人中心</a> <a href="#">修改密码</a> <a href="#">退出</a> </p>
         </li>
   </ul>
@@ -42,7 +45,7 @@
     </div>
 <p style="clear:both"></p>
 <p style="height:20px"></p>
-<img src="images/wzwz.png" width="100%">
+<img src="images/wzwz.png" th:src="@{/pc/images/wzwz.png}" width="100%"/>
 <div class="hx">
       <p style="clear:both; height:50px"></p>
       <div class="hximg">
@@ -78,14 +81,14 @@
         </ul>
   </div>
     </div>
-<img src="images/topone.png" width="100%">
+<img src="images/topone.png" width="100%" th:src="@{/pc/images/topone.png}"/>
 <div class="listone listhx">
       <div style="width: 960px; margin: 0 auto;">
     <ul>
           <li style=" float:left;">
-        <a href="#"><p class="tit"> <span class="titspan">动态资讯</span> <span><img src="images/play.png" width="18px" height="18px"></span> </p></a>
+        <a href="#"><p class="tit"> <span class="titspan">动态资讯</span> <span><img src="images/play.png" width="18px" height="18px"/></span> </p></a>
         <p class="titen"> <span>Dynamic information</span> </p>
-        <a href="#"><img class="imgleft" src="images/listone.png" width="126px" height="108px"></a>
+        <a href="#"><img class="imgleft" src="images/listone.png" width="126px" height="108px"/></a>
         <a href="#"><p class="titfont">微商走进校园</p></a>
         <a href="#"><p class="titlb">考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p></a>
         <p class="titxian"></p>
@@ -96,9 +99,9 @@
         <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span> </p></a>
       </li>
           <li style=" float:left;">
-        <a href="#"><p class="tit"> <span class="titspan">动态资讯</span> <span><img src="images/play.png" width="18px" height="18px"></span> </p></a>
+        <a href="#"><p class="tit"> <span class="titspan">动态资讯</span> <span><img src="images/play.png" width="18px" height="18px"/></span> </p></a>
         <p class="titen"> <span>Dynamic information</span> </p>
-        <a href="#"><img class="imgleft" src="images/listone.png" width="126px" height="108px"></a>
+        <a href="#"><img class="imgleft" src="images/listone.png" width="126px" height="108px"/></a>
         <a href="#"><p class="titfont">微商走进校园</p></a>
         <a href="#"><p class="titlb">考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p></a>
         <p class="titxian"></p>
@@ -109,9 +112,9 @@
         <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span> </p></a>
       </li>
            <li style=" float:left;">
-        <a href="#"><p class="tit"> <span class="titspan">动态资讯</span> <span><img src="images/play.png" width="18px" height="18px"></span> </p></a>
+        <a href="#"><p class="tit"> <span class="titspan">动态资讯</span> <span><img src="images/play.png" width="18px" height="18px"/></span> </p></a>
         <p class="titen"> <span>Dynamic information</span> </p>
-        <a href="#"><img class="imgleft" src="images/listone.png" width="126px" height="108px"></a>
+        <a href="#"><img class="imgleft" src="images/listone.png" width="126px" height="108px"/></a>
         <a href="#"><p class="titfont">微商走进校园</p></a>
         <a href="#"><p class="titlb">考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p></a>
         <p class="titxian"></p>
@@ -122,9 +125,9 @@
         <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span> </p></a>
       </li>
            <li style=" float:left;">
-        <a href="#"><p class="tit"> <span class="titspan">动态资讯</span> <span><img src="images/play.png" width="18px" height="18px"></span> </p></a>
+        <a href="#"><p class="tit"> <span class="titspan">动态资讯</span> <span><img src="images/play.png" width="18px" height="18px"/></span> </p></a>
         <p class="titen"> <span>Dynamic information</span> </p>
-        <a href="#"><img class="imgleft" src="images/listone.png" width="126px" height="108px"></a>
+        <a href="#"><img class="imgleft" src="images/listone.png" width="126px" height="108px"/></a>
         <a href="#"><p class="titfont">微商走进校园</p></a>
         <a href="#"><p class="titlb">考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p></a>
         <p class="titxian"></p>
@@ -137,21 +140,21 @@
         </ul>
   </div>
     </div>
-<img src="images/bottonone.png" width="100%">
-<div class="kf"><img src="images/wzwzwz.png" width="100%">
+<img src="images/bottonone.png" width="100%" th:src="@{/pc/images/bottonone.png}"/>
+<div class="kf"><img src="images/wzwzwz.png" width="100%" th:src="@{/pc/images/wzwzwz.png}"/>
       <p style="clear:both; height:30px"></p>
       <div class="kfimg" >
     <ul>
-          <li><img src="images/k121.jpg"></li>
-          <li><img src="images/k143.jpg"></li>
-          <li><img src="images/k3.jpg"></li>
-          <li><img src="images/k4.jpg"></li>
-          <li><img src="images/k5.jpg"></li>
-          <li><img src="images/k8.jpg"></li>
-          <li><img src="images/k7.jpg"></li>
-          <li><img src="images/k1.jpg"></li>
-          <li><img src="images/k11.jpg"></li>
-          <li><img src="images/k131.jpg"></li>
+          <li><img src="images/k121.jpg"/></li>
+          <li><img src="images/k143.jpg"/></li>
+          <li><img src="images/k3.jpg"/></li>
+          <li><img src="images/k4.jpg"/></li>
+          <li><img src="images/k5.jpg"/></li>
+          <li><img src="images/k8.jpg"/></li>
+          <li><img src="images/k7.jpg"/></li>
+          <li><img src="images/k1.jpg"/></li>
+          <li><img src="images/k11.jpg"/></li>
+          <li><img src="images/k131.jpg"/></li>
         </ul>
   </div>
       <div style="display:none">
@@ -173,9 +176,9 @@
     
     
 <div style="width: 126px; height: 189px; position: fixed; top:220px; right: 20px; display: block; z-index: 100;">
-      <div style="display: block; width: 126px; height: 126px;"> <img src="images/weixin.png" style="width: 126px; height: 126px;"> </div>
+      <div style="display: block; width: 126px; height: 126px;"> <img src="images/weixin.png" th:src="@{/pc/images/weixin.png}" style="width: 126px; height: 126px;"/> </div>
       <div style="background-color: #f1f1f1; text-align: center; font-size: 16px; font-family: '微软雅黑'; color: #666; height: 30px; line-height: 30px; display: block;"><a href="http://www.fanmore.cn/d.html" style="color: #333; font-size: 14px;">点击下载</a></div>
-      <img src="images/call.jpg" style="width:126px; height:65px;"> </div>
+      <img src="images/call.jpg" th:src="@{/pc/images/call.jpg}" style="width:126px; height:65px;"/> </div>
 
 <div>
 <div id="asaimsg" class="AsaiDivShow">
@@ -189,11 +192,11 @@
        
         <div class="user-form__fieldset">
           <label class="user-form__label" for="session_login" style="color:#111">用户名：</label>
-          <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field" id="session_login" name="session[login]" placeholder="ID" type="text">
+          <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field" id="session_login" name="session[login]" placeholder="ID" type="text"/>
         </div>
         <div class="user-form__fieldset">
           <label class="user-form__label" for="session_password" style="color:#111">密码：</label>
-          <input class="sign-in__field user-form__field" id="session_password" name="session[password]" placeholder="password" type="password">
+          <input class="sign-in__field user-form__field" id="session_password" name="session[password]" placeholder="password" type="password"/>
           
         </div>
         <button class="sign-in__button user-form__button" name="button" type="submit">登录<i class="icon-arrow-right user-form__button-icon"></i></button> 
@@ -206,7 +209,7 @@
 <div id="asaimsgbg" class="AsaiDivBG"></div>
 </div>
 </body>
-    </html>
+</html>
 <script type="text/javascript">
 		jQuery(".fullSlide").slide({ titCell:".hd ul", mainCell:".bd ul", effect:"fold",  autoPlay:true, autoPage:true, trigger:"click" });
 	</script>
