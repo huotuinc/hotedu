@@ -3,6 +3,7 @@ package com.huotu.hotedu.web.controller;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
@@ -17,6 +18,8 @@ public class MemberController {
 
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @RequestMapping("/pc/load")
     public String load() {
@@ -45,7 +48,7 @@ public class MemberController {
                 mb.setPhoneNo(phoneNo);
                 mb.setArea(area);
                 mb.setLoginName(phoneNo);
-                mb.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes("UTF-8")).toLowerCase());
+                mb.setPassword(passwordEncoder.encode("123456"));
                 mb.setEnabled(false);
                 memberService.addMember(mb);
                 msgInfo = "报名成功";

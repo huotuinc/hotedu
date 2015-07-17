@@ -58,7 +58,8 @@ public class SecurityConfig {
                             "/backend/css/**",
                             "/backend/images/**",
                             "/backend/js/**",
-                            "/backend/fonts/**"
+                            "/backend/fonts/**",
+                            "/pc/**"
                     );
         }
         //设置拦截规则
@@ -73,7 +74,7 @@ public class SecurityConfig {
                             //开启默认登录页面,允许用户进行身份验证和基于表单的登录
                     .csrf().disable()
                     .formLogin()
-                    .loginPage("/pc/load")
+                    .loginPage("/pc/yun-index.html")
                     .permitAll();
 //                    .and()
                     //允许用户进行HTTP基本身份验证
