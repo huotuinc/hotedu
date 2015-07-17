@@ -19,5 +19,7 @@
 /*height决定了是否会出现滚动条*/
 .jp-container{width:189px;max-height:650px;position:relative;float:left;border: 0;}
 .jp-container:hover,.jp-container:active{border: 0;}
+.jp-container2{ max-height:650px;position:relative;float:left;border: 0;}
+.jp-container2:hover,.jp-container2:active{border: 0;}
 /* Yuk! CSS Hack for IE6 3 pixel bug :( */
 * html .jspCorner{margin:0 -3px 0 0;}
