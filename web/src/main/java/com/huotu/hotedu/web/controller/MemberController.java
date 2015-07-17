@@ -21,7 +21,7 @@ public class MemberController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @RequestMapping("/pc/load")
+    @RequestMapping("/pc/loadMemberRegister")
     public String load() {
         return "pc/registerTest";
     }
@@ -48,7 +48,7 @@ public class MemberController {
                 mb.setPhoneNo(phoneNo);
                 mb.setArea(area);
                 mb.setLoginName(phoneNo);
-                mb.setPassword(passwordEncoder.encode("123456"));
+                mb.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes("UTF-8")).toLowerCase());
                 mb.setEnabled(false);
                 memberService.addMember(mb);
                 msgInfo = "报名成功";

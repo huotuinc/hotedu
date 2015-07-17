@@ -96,4 +96,9 @@ public class MemberService {
         mb.setIsPayed(true);
         memberRepository.save(mb);
     }
+
+    public Member findOneByLoginName(String loginName) {
+        Member mb = memberRepository.findByLoginName(loginName);
+        return mb;
+    }
 }
