@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/libs/modernizr.min.js" th:src="@{/backend/js/libs/modernizr.min.js}"></script>
     <!--警告框控件-->
     <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
-    <script type="text/javascript" src="js/jquery.confirm.js" th:src="@{/backend/js/jquery.confirm.js}"></script>
+    <script type="text/javascript" src="js/confirm.js" th:src="@{/backend/js/confirm.js}"></script>
     <!--日期控件-->
     <script type="text/javascript" src="js/date/jquery_ui.js" th:src="@{/backend/js/date/jquery_ui.js}"></script>
     <script type="text/javascript" src="js/date/mydate.js" th:src="@{/backend/js/date/mydate.js}"></script>
@@ -39,7 +39,7 @@
         })
     </script>
     <!--滚动条-->
-    <script type="text/javascript" src="js/scroll/scroll_height.js" th:src="@{/backend/js/scroll/scroll_height.js}"></script>
+    <script type="text/javascript" src="js/scroll/scroll_height_width.js" th:src="@{/backend/js/scroll/scroll_height_width.js}"></script>
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
     <script type="text/javascript" src="js/scroll/jquery.mousewheel.js" th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
     <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js" th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
@@ -141,6 +141,7 @@
         <div class="crumb-wrap">
             <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">招聘信息</span></div>
         </div>
+        <div class="jp-container2">
         <div class="search-wrap">
             <div class="search-content">
                 <form action="#" method="post">
@@ -248,6 +249,7 @@
                     </div>
                 </div>
             </form>
+            </div>
         </div>
     </div>
     <!--/main-->

@@ -6,7 +6,6 @@
 	border-right: 1px solid #ccc;/*cursor:e-resize;*/
 }
 .main-wrap {
-	margin-left: 190px;
 	min-height: 100%;
 }
 .sidebar-title {
@@ -65,6 +64,7 @@
 }
 /* main */
 .crumb-wrap {
+	margin-left:190px;
 	height: 40px;
 	line-height: 39px;
 	border-bottom: 1px solid #e5e5e5;

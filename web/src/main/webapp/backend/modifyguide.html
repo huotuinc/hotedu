@@ -10,9 +10,9 @@
             th:src="@{/backend/js/libs/modernizr.min.js}"></script>
     <!--警告框控件-->
     <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
-    <script type="text/javascript" src="js/jquery.confirm.js" th:src="@{/backend/js/jquery.confirm.js}"></script>
+    <script type="text/javascript" src="js/confirm.js" th:src="@{/backend/js/confirm.js}"></script>
     <!--滚动条-->
-    <script type="text/javascript" src="js/scroll/scroll_height.js" th:src="@{/backend/js/scroll/scroll_height.js}"></script>
+    <script type="text/javascript" src="js/scroll/scroll_height_width.js" th:src="@{/backend/js/scroll/scroll_height_width.js}"></script>
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
     <script type="text/javascript" src="js/scroll/jquery.mousewheel.js"
             th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
@@ -121,6 +121,7 @@
                     class="crumb-step">&gt;</span><a href="examguide.html" th:href="@{/backend/loadExamGuide}"><span class="crumb-name">考试指南</span></a><span
                     class="crumb-step">&gt;</span><span class="crumb-name">修改</span></div>
         </div>
+        <div class="jp-container2">
         <div class="result-wrap">
             <form action="#" th:action="@{/backend/modifySaveExamGuide(id=${examGuide.id})}" method="post" id="myform" name="myform">
                 <div class="config-items">
@@ -154,6 +155,7 @@
                     </div>
                 </div>
             </form>
+            </div>
         </div>
     </div>
     <!--/main-->
