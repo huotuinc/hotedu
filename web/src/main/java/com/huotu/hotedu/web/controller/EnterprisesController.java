@@ -40,16 +40,6 @@ public class EnterprisesController {
     public static final int PAGE_SIZE=10;
 
     /**
-     * 接收一个显示多条招聘信息的请求，返回给客户端一个HTML页面
-     * @return wantedes.html
-     */
-    @RequestMapping("/backend/loadWantedes")
-    public String loadWantedesController() {
-        return "/backend/wantedes";
-    }
-
-
-    /**
      * 接收一个显示多条发布企业信息的请求，根据分页控制显示企业信息的条数，
      * 请求完成之后model层会添加
      * 1.多条企业信息的集合

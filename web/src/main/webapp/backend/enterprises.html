@@ -220,7 +220,6 @@
                             <td><a class="link-update" href="newenterprise.html">修改</a><br/><a class="link-update" href="#">删除</a></td>
                         </tr>
                         <tr th:each="g:${allEnterprisesList}">
-                            <td style="display: none" th:text="${searchSort}"></td>
                             <td th:text="${g.id}">01</td>
                             <td th:text="${g.loginName}">小薇</td>
                             <td th:text="${g.name}">粉猫</td>

@@ -73,6 +73,11 @@ public class MemberService {
         return memberRepository.findAll(new PageRequest(n,pagesize));
     }
 
+    /**
+     * 查找学员
+     * @param id 学员id
+     * @return  member.html
+     */
     public Member findOneById(Long id){
         return memberRepository.findOne(id);
     }

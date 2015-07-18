@@ -13,7 +13,7 @@ import java.util.Set;
  * @author shiliting741@163.com
  */
 @Entity
-public class Recruitment implements Serializable {
+public class Wanted implements Serializable {
     private static final long serialVersionUID = -349012453592429794L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

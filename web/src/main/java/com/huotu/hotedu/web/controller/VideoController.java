@@ -36,7 +36,7 @@ public class VideoController {
      * @return  video.html
      */
     @RequestMapping("/backend/loadVideo")
-    public String loadWantedes(Model model) {
+    public String loadVideo(Model model) {
         Page<Video> pages = videoService.loadVideo(0,PAGE_SIZE);
         long totalRecords = pages.getTotalElements();
         model.addAttribute("videoList",pages);
@@ -54,7 +54,7 @@ public class VideoController {
      * @return      video.html
      */
     @RequestMapping("/backend/searchVideo")
-    public String searchVideos(String keywords,Model model) {
+    public String searchVideo(String keywords,Model model) {
         Page<Video> pages=videoService.searchVideo(0, PAGE_SIZE, keywords);
         long totalRecords=pages.getTotalElements();
         model.addAttribute("videoList",pages);

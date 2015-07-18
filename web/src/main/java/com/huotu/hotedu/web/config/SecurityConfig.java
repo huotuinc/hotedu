@@ -74,7 +74,7 @@ public class SecurityConfig {
                             //开启默认登录页面,允许用户进行身份验证和基于表单的登录
                     .csrf().disable()
                     .formLogin()
-                    .loginPage("/pc/yun-index.html")
+                    .loginPage("/backend/login")
                     .permitAll();
 //                    .and()
                     //允许用户进行HTTP基本身份验证
