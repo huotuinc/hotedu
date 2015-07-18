@@ -1,6 +1,7 @@
 package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.Member;
+import com.huotu.hotedu.entity.Result;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 /**
@@ -141,4 +143,24 @@ public class MemberController {
         model.addAttribute("errInfo",errInfo);
         return turnPage;
     }
+
+    /**
+     * 用来测试向页面返回会员之后页面是否正常显示会员信息
+     * @param MemberId    会员的sessionId
+     * @return            结果集，包含会员信息，json字符串格式返回
+     */
+    @RequestMapping("pc/checkMemberLogin")
+    @ResponseBody
+    public Result checkMemberLogin(String MemberId){
+        System.out.println("session值："+MemberId);
+        Result result=new Result();
+        Member member=new Member();
+        member.setPictureUri("/pc/images/600x20005326c6dcd9c7f.jpg");
+        member.setLoginName("wangyong11111");
+        result.setBody(member);
+        result.setStatus(1);
+        return result;
+    }
+
+
 }

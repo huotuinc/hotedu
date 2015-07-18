@@ -7,10 +7,17 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/pc/css/index.css}"/>
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/pc/css/indexnew.css}"/>
     <script type="text/javascript" src="js/jquery1.42.min.js" th:src="@{/pc/js/jquery1.42.min.js}"></script>
+    <script type="text/javascript" src="js/jquery.min.js" th:src="@{/pc/js/jquery.min.js}"></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" th:src="@{/pc/js/jquery.SuperSlide.2.1.1.js}"></script>
+    <script rel="stylesheet" type="text/javascript" src="js/cookie_util.js" th:src="@{/pc/js/cookie_util.js}"></script>
+    <script rel="stylesheet" type="text/javascript" src="js/baseValue.js" th:src="@{/pc/js/baseValue.js}"></script>
     <script rel="stylesheet" type="text/javascript" src="js/indexuser.js" th:src="@{/pc/js/indexuser.js}"></script>
-        <script rel="stylesheet" type="text/javascript">
-        </script>
+
+    <script rel="stylesheet" type="text/javascript">
+        isShowMember();
+        showMemberBody();
+
+    </script>
 
     </head>
     <body>
@@ -23,10 +30,20 @@
     <li><a href="about.html">教学视频</a></li>
     <li><a href="about.html">考试指南</a></li>
     <li><a href="about.html">招|应聘</a></li>
-    <li style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)" id="sign_in" th:text="${msgInfo}" onclick = "document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a></li>
-    <li id="userLi" style="padding:0px;display: none" th:style="${style}"> <a href="#"><img class="lodingimg" src="images/toux.png" width="100%"/><!--会员图片--></a>
-          <p class="zhizhen"><img id="zhizhenImg" src="images/lodingj.png" width="18px" height="7px"/></p>
-          <p class="lbpo"><a href="#" th:text="${realName}">个人中心</a> <a href="#">修改密码</a> <a href="#">退出</a> </p>
+    <li id="loginLi" style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)" onclick = "document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a></li>
+    <li th:remove="all" id="memberLi" style="padding:0px;">
+          <a href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员图片-->
+          <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+          <p class="lbpo"> <a href="#" th:href="@{/pc/person}">HHSHIJIJ</a>
+                           <a href="#">个人中心</a> <a href="#">修改密码</a>
+                           <a href="#">退出</a>
+          </p>
+    <li id="userLi" style="padding:0px;display: none" th:style="${style}">
+          <a href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员图片-->
+          <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+          <p class="lbpo"><a href="#" th:text="${realName}">个人中心</a>
+                          <a href="#">修改密码</a>
+                          <a href="#">退出</a></p>
     </li>
   </ul>
     </div>
