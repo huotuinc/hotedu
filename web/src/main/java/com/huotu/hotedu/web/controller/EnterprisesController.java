@@ -5,6 +5,7 @@ import com.huotu.hotedu.service.EnterpriseService;
 import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -91,22 +93,15 @@ public class EnterprisesController {
      * @throws Exception
      */
     @RequestMapping("/backend/searchEnterprises")
-    public String searchEnterprises(String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
+    public String searchEnterprises(String searchSort,String keywords,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateStart,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateEnd,Model model) throws Exception{
         Page<Enterprise> pages=null;
+        DateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
         if("date".equals(searchSort)){
             if("".equals(dateStart)||"".equals(dateEnd)){
                 return "redirect:/backend/loadTutor";
             }
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-            try {
-                Date DStart=sdf.parse(dateStart);
-                Date DEnd=sdf.parse(dateEnd);
-                pages=enterpriseService.searchEnterpriseDate(0, PAGE_SIZE, DStart, DEnd);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                //日期格式不正确
-                throw new Exception("日期格式错误！");
-            }
+            pages=enterpriseService.searchEnterpriseDate(0, PAGE_SIZE, dateStart, dateEnd);
+
         }else if("all".equals(searchSort)){
             pages=enterpriseService.searchEnterpriseAll(0, PAGE_SIZE, keywords);
 
@@ -122,8 +117,8 @@ public class EnterprisesController {
         model.addAttribute("sumpage",sumElement/pages.getSize()+(sumElement%pages.getSize()>0? 1:0));
         model.addAttribute("n",0);
         model.addAttribute("keywords",keywords);
-        model.addAttribute("dateStart",dateStart);
-        model.addAttribute("dateEnd",dateEnd);
+        model.addAttribute("dateStart",format1.format(dateStart));
+        model.addAttribute("dateEnd",format1.format(dateEnd));
         model.addAttribute("searchSort",searchSort);
         model.addAttribute("sumElement",sumElement);
         return "/backend/enterprises";
@@ -153,7 +148,7 @@ public class EnterprisesController {
      * @throws Exception
      */
     @RequestMapping("/backend/pageEnterprise")
-    public String pageEnterprise(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
+    public String pageEnterprise(int n,int sumpage,String searchSort,String keywords,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateStart,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateEnd,Model model) throws Exception{
 
         if (n < 0){                     //如果已经到分页的第一页了，将页数设置为0
             n++;
@@ -161,16 +156,9 @@ public class EnterprisesController {
             n--;
         }
         Page<Enterprise> pages=null;
+        DateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
         if("date".equals(searchSort)){
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-            try {
-                Date DStart=sdf.parse(dateStart);
-                Date DEnd=sdf.parse(dateEnd);
-                pages=enterpriseService.searchEnterpriseDate(n, PAGE_SIZE, DStart, DEnd);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                //日期格式不正确
-            }
+            pages=enterpriseService.searchEnterpriseDate(n, PAGE_SIZE, dateStart, dateEnd);
         }else if("all".equals(searchSort)){
             pages=enterpriseService.searchEnterpriseAll(n, PAGE_SIZE, keywords);
 
@@ -185,8 +173,8 @@ public class EnterprisesController {
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
         model.addAttribute("searchSort",searchSort);
-        model.addAttribute("dateStart",dateStart);
-        model.addAttribute("dateEnd",dateEnd);
+        model.addAttribute("dateStart",format1.format(dateStart));
+        model.addAttribute("dateEnd",format1.format(dateEnd));
         model.addAttribute("sumElement",pages.getTotalElements());
         return "/backend/enterprises";
     }
@@ -217,7 +205,7 @@ public class EnterprisesController {
      * @return            enterprises.html
      */
     @RequestMapping("/backend/delEnterprise")
-    public String delEnterprise(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Long id,Long sumElement,Model model){
+    public String delEnterprise(int n,int sumpage,String searchSort,String keywords,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateStart,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateEnd,Long id,Long sumElement,Model model){
         try {
             staticResourceService.deleteResource(enterpriseService.findOneById(id).getLogoUri());//删除静态资源
         } catch (IOException e) {
@@ -232,16 +220,9 @@ public class EnterprisesController {
         sumElement--;
 
         Page<Enterprise> pages=null;
+        DateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
         if("date".equals(searchSort)){
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-            try {
-                Date DStart=sdf.parse(dateStart);
-                Date DEnd=sdf.parse(dateEnd);
-                pages=enterpriseService.searchEnterpriseDate(n, PAGE_SIZE, DStart, DEnd);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                //日期格式不正确
-            }
+            pages=enterpriseService.searchEnterpriseDate(n, PAGE_SIZE, dateStart, dateEnd);
         }else if("all".equals(searchSort)){
             pages=enterpriseService.searchEnterpriseAll(n, PAGE_SIZE, keywords);
 
@@ -254,8 +235,8 @@ public class EnterprisesController {
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
         model.addAttribute("searchSort",searchSort);
-        model.addAttribute("dateStart",dateStart);
-        model.addAttribute("dateEnd",dateEnd);
+        model.addAttribute("dateStart",format1.format(dateStart));
+        model.addAttribute("dateEnd",format1.format(dateEnd));
         model.addAttribute("sumElement",sumElement);
         return "/backend/enterprises";
     }

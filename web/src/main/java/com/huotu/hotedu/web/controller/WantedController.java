@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.expression.ParseException;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -83,23 +85,16 @@ public class WantedController {
      * @throws Exception
      */
     @RequestMapping("backend/pageWanted")
-    public String pageWantedController(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
+    public String pageWantedController(int n,int sumpage,String searchSort,String keywords,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateStart,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateEnd,Model model) throws Exception{
         if (n < 0){                     //如果已经到分页的第一页了，将页数设置为0
             n++;
         }else if(n + 1 > sumpage){      //如果超过分页的最后一页了，将页数设置为最后一页
             n--;
         }
         Page<Wanted> pages = wantedService.searchWanted(n,PAGE_SIZE,keywords);
+        DateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
         if("date".equals(searchSort)){
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-            try {
-                Date DStart=sdf.parse(dateStart);
-                Date DEnd=sdf.parse(dateEnd);
-                pages=wantedService.searchWantedDate(n, PAGE_SIZE, DStart, DEnd);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                //日期格式不正确
-            }
+                pages=wantedService.searchWantedDate(n, PAGE_SIZE, dateStart, dateEnd);
         }else if("all".equals(searchSort)){
             pages=wantedService.searchWantedAll(n, PAGE_SIZE, keywords);
 
@@ -114,8 +109,8 @@ public class WantedController {
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
         model.addAttribute("searchSort",searchSort);
-        model.addAttribute("dateStart",dateStart);
-        model.addAttribute("dateEnd",dateEnd);
+        model.addAttribute("dateStart",format1.format(dateStart));
+        model.addAttribute("dateEnd",format1.format(dateEnd));
         model.addAttribute("sumElement",pages.getTotalElements());
         return "/backend/enterprises";
     }

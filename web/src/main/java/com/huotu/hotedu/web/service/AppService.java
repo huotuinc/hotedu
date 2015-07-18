@@ -58,9 +58,6 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
             }
 
 
-
-
-
         }
 
         if (event.getApplicationContext().getParent() == null) {
@@ -133,6 +130,25 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
               link.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 6000));
               linkRepository.save(link);
           }
+
+            if(tutorRepository.count()==0){
+                Tutor tutor=new Tutor();
+                tutor.setName("诸葛亮");
+                tutor.setIntroduction("军师");
+                tutor.setArea("杭州");
+                tutor.setQualification("博士");
+                tutor.setPictureUri("D://");
+                tutor.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 2000));
+                tutorRepository.save(tutor);
+                tutor.setName("刘备");
+                tutor.setIntroduction("主公");
+                tutor.setArea("杭州");
+                tutor.setQualification("硕士");
+                tutor.setPictureUri("D://");
+                tutor.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 2000));
+                tutorRepository.save(tutor);
+            }
+
             if(messageContentRepository.count()==0){
                 MessageContent messageContent;
                 for(int i=0;i<5;i++){
