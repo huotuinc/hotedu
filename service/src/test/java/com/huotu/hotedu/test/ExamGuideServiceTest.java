@@ -3,7 +3,6 @@ package com.huotu.hotedu.test;
 import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.entity.Qa;
 import com.huotu.hotedu.repository.ExamGuideRepository;
-import com.huotu.hotedu.repository.MessageContentRepository;
 import com.huotu.hotedu.repository.QaRepository;
 import com.huotu.hotedu.service.ExamGuideService;
 import com.huotu.hotedu.service.QaService;
@@ -39,6 +38,8 @@ public class ExamGuideServiceTest {
     QaRepository qaRepository;
     @Autowired
     private QaService qaService;
+    @Autowired
+    private ExamGuideService examGuideService;
 
 
     @Test
@@ -101,21 +102,6 @@ public class ExamGuideServiceTest {
         for(Qa q:pages){
             System.out.println(q);
         }
-
-    }
-
-
-
-    @Test
-    public void loadMessageContent(){
-//        MessageContent messageContent=new MessageContent();
-//        messageContent.setContent("mmmmmmmm");
-//        messageContent.setTitle("我的第三次测试");
-//        messageContent.setTop(true);
-//        messageContent.setLastUploadDate(new Date());
-//        messageContentRepository.save(messageContent);
-//        List<MessageContent> list=messageContentsService.loadMessageContent();
-//        System.out.println(list);
 
     }
 

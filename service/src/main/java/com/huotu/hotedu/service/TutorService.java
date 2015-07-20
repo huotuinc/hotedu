@@ -36,7 +36,8 @@ public class TutorService {
             public Predicate toPredicate(Root<Tutor> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 if (keyword.length()==0)
                     return null;
-                return cb.like(root.get(type).as(String.class),"%"+keyword+"%");
+//                return cb.like(root.get(type).as(String.class),"%"+keyword+"%");
+                return cb.and(cb.equal(root.get("enabled").as(Boolean.class),true),cb.like(root.get(type).as(String.class),"%"+keyword+"%"));
             }
         },new PageRequest(n, pagesize));
 
@@ -50,10 +51,14 @@ public class TutorService {
             public Predicate toPredicate(Root<Tutor> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 if (keyword.length()==0)
                     return null;
-                return cb.or(cb.like(root.get("name").as(String.class), "%" + keyword + "%"),
-                             cb.like(root.get("qualification").as(String.class),"%"+keyword+"%"),
-                             cb.like(root.get("area").as(String.class),"%"+keyword+"%")
-                );
+//                return cb.or(cb.like(root.get("name").as(String.class), "%" + keyword + "%"),
+//                             cb.like(root.get("qualification").as(String.class),"%"+keyword+"%"),
+//                             cb.like(root.get("area").as(String.class),"%"+keyword+"%")
+//                );
+                return cb.and(cb.equal(root.get("enabled").as(Boolean.class),true),cb.or(cb.like(root.get("name").as(String.class), "%" + keyword + "%"),
+                        cb.like(root.get("qualification").as(String.class),"%"+keyword+"%"),
+                        cb.like(root.get("area").as(String.class),"%"+keyword+"%")
+                ));
             }
         },new PageRequest(n, pagesize));
 
@@ -66,17 +71,22 @@ public class TutorService {
             public Predicate toPredicate(Root<Tutor> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 if (start==null&&end==null)
                     return null;
-                return cb.between(root.get("lastUploadDate").as(Date.class),start,end);
+//                return cb.between(root.get("lastUploadDate").as(Date.class),start,end);
+                return cb.and(cb.equal(root.get("enabled").as(Boolean.class),true),cb.between(root.get("lastUploadDate").as(Date.class),start,end));
             }
         },new PageRequest(n, pagesize));
 
     }
 
 
-
-    //删除一个导师(包括他的照片)
+    /**
+     * 禁用一个导师
+     * @param id
+     */
     public void delTutor(Long id){
-            tutorRepository.delete(id);
+        Tutor tutor=findOneById(id);
+        tutor.setEnabled(false);
+        modify(tutor);
     }
 
     //增加一位导师

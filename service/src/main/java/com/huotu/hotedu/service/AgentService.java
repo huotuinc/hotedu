@@ -36,6 +36,7 @@ public class AgentService {
     }
 
 
+
     /**
      * 返回按照类型和关键字搜索过之后的代理商
      * @param n         第几页
@@ -57,10 +58,14 @@ public class AgentService {
 
 
     /**
-     * 通过id删除一个代理商
+     * 禁用代理商
      * @param id 代理商id
      */
-    public void delAgent(Long id){agentRepository.delete(id);}
+    public void delAgent(Long id){
+        Agent agent=findOneById(id);
+        agent.setEnabled(false);
+        modify(agent);
+    }
 
     /**
      * 增加一个代理商

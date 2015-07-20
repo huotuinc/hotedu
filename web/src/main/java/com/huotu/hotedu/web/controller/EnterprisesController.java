@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -117,8 +116,8 @@ public class EnterprisesController {
         model.addAttribute("sumpage",sumElement/pages.getSize()+(sumElement%pages.getSize()>0? 1:0));
         model.addAttribute("n",0);
         model.addAttribute("keywords",keywords);
-        model.addAttribute("dateStart",format1.format(dateStart));
-        model.addAttribute("dateEnd",format1.format(dateEnd));
+        model.addAttribute("dateStart",dateStart==null?"":format1.format(dateStart));
+        model.addAttribute("dateEnd",dateEnd==null?"":format1.format(dateEnd));
         model.addAttribute("searchSort",searchSort);
         model.addAttribute("sumElement",sumElement);
         return "/backend/enterprises";
@@ -173,8 +172,8 @@ public class EnterprisesController {
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
         model.addAttribute("searchSort",searchSort);
-        model.addAttribute("dateStart",format1.format(dateStart));
-        model.addAttribute("dateEnd",format1.format(dateEnd));
+        model.addAttribute("dateStart",dateStart==null?"":format1.format(dateStart));
+        model.addAttribute("dateEnd",dateEnd==null?"":format1.format(dateEnd));
         model.addAttribute("sumElement",pages.getTotalElements());
         return "/backend/enterprises";
     }
@@ -235,8 +234,8 @@ public class EnterprisesController {
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
         model.addAttribute("searchSort",searchSort);
-        model.addAttribute("dateStart",format1.format(dateStart));
-        model.addAttribute("dateEnd",format1.format(dateEnd));
+        model.addAttribute("dateStart",dateStart==null?"":format1.format(dateStart));
+        model.addAttribute("dateEnd",dateEnd==null?"":format1.format(dateEnd));
         model.addAttribute("sumElement",sumElement);
         return "/backend/enterprises";
     }

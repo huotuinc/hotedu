@@ -1,22 +1,14 @@
 package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.Wanted;
-import com.huotu.hotedu.repository.WantedRepository;
 import com.huotu.hotedu.service.WantedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.expression.ParseException;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -109,8 +101,8 @@ public class WantedController {
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
         model.addAttribute("searchSort",searchSort);
-        model.addAttribute("dateStart",format1.format(dateStart));
-        model.addAttribute("dateEnd",format1.format(dateEnd));
+        model.addAttribute("dateStart",dateStart==null?"":format1.format(dateStart));
+        model.addAttribute("dateEnd",dateEnd==null?"":format1.format(dateEnd));
         model.addAttribute("sumElement",pages.getTotalElements());
         return "/backend/enterprises";
     }

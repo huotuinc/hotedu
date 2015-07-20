@@ -17,7 +17,6 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -88,16 +87,14 @@ public class TutorController {
      * @throws Exception
      */
     @RequestMapping("/backend/searchTutor")
-    public String searchTutor(@RequestParam("searchSort")String searchSort,String keywords,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateStart,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateEnd,Model model) throws Exception{
+    public String searchTutor(@RequestParam("searchSort")String searchSort,String keywords,
+                              @DateTimeFormat(pattern = "yyyy.MM.dd")Date dateStart,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateEnd,Model model) throws Exception{
         Page<Tutor> pages=null;
         DateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
         if("date".equals(searchSort)){
             pages=tutorService.searchTutorDate(0,PAGE_SIZE,dateStart,dateEnd);
         }else if("all".equals(searchSort)){
-            System.out.println("进入all");
             pages=tutorService.searchTutorAll(0,PAGE_SIZE,keywords);
-            System.out.println("进出all");
-
         }else{
             pages=tutorService.searchTutorType(0,PAGE_SIZE,keywords,searchSort);
 
@@ -110,11 +107,11 @@ public class TutorController {
         model.addAttribute("sumpage",sumElement/pages.getSize()+1);
         model.addAttribute("n",0);
         model.addAttribute("keywords",keywords);
-        model.addAttribute("dateStart",format1.format(dateStart));
-        model.addAttribute("dateEnd",format1.format(dateEnd));
+
+        model.addAttribute("dateStart",dateStart==null?"":format1.format(dateStart));
+        model.addAttribute("dateEnd",dateEnd==null?"":format1.format(dateEnd));
         model.addAttribute("searchSort",searchSort);
         model.addAttribute("sumElement",sumElement);
-        System.out.println("返回的类型" + searchSort);
         return "/backend/tutor";
     }
 
@@ -145,7 +142,6 @@ public class TutorController {
 
         }else if("all".equals(searchSort)){
             pages=tutorService.searchTutorAll(n,PAGE_SIZE,keywords);
-
         }else{
             pages=tutorService.searchTutorType(n,PAGE_SIZE,keywords,searchSort);
         }
@@ -157,8 +153,8 @@ public class TutorController {
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
         model.addAttribute("searchSort",searchSort);
-        model.addAttribute("dateStart",format1.format(dateStart));
-        model.addAttribute("dateEnd",format1.format(dateEnd));
+        model.addAttribute("dateStart",dateStart==null?"":format1.format(dateStart));
+        model.addAttribute("dateEnd",dateEnd==null?"":format1.format(dateEnd));
         model.addAttribute("sumElement",pages.getTotalElements());
         return "/backend/tutor";
     }
@@ -208,8 +204,8 @@ public class TutorController {
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
         model.addAttribute("searchSort",searchSort);
-        model.addAttribute("dateStart",format1.format(dateStart));
-        model.addAttribute("dateEnd",format1.format(dateEnd));
+        model.addAttribute("dateStart",dateStart==null?"":format1.format(dateStart));
+        model.addAttribute("dateEnd",dateEnd==null?"":format1.format(dateEnd));
         model.addAttribute("sumElement",sumElement);
         return "/backend/tutor";
     }
