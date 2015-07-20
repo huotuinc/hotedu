@@ -31,6 +31,10 @@ public interface StaticResourceService {
      */
     public  String TUTOR_ICON="/image/tutor/";
     /**
+     * 咨询动态的图片
+     */
+    public  String MESSAGECONTENT_ICON="/image/messagecontent/";
+    /**
      * 会员的头像
      */
     public  String MEMBER_ICON="/image/member/";

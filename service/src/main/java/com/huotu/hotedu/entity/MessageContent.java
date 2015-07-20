@@ -18,12 +18,29 @@ public  class MessageContent implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    /**
+     * 标题
+     */
     @Column
     private String title;
+    /**
+     * 描述
+     */
     @Column(length = 5000)
     private String content;
+    /**
+     * 是否置顶
+     */
     @Column
     private boolean top=true;
+    /**
+     * 图片地址
+     */
+    @Column
+    private String pictureUri;
+    /**
+     * 更新日期
+     */
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUploadDate;
 
@@ -69,6 +86,14 @@ public  class MessageContent implements Serializable {
 
     public void setLastUploadDate(Date lastUploadDate) {
         this.lastUploadDate = lastUploadDate;
+    }
+
+    public String getPictureUri() {
+        return pictureUri;
+    }
+
+    public void setPictureUri(String pictureUri) {
+        this.pictureUri = pictureUri;
     }
 
     @Override

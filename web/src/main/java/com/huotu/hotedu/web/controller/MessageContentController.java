@@ -2,13 +2,20 @@ package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.MessageContent;
 import com.huotu.hotedu.service.MessageContentService;
+import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.io.IOException;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by shiliting on 2015/6/25.
@@ -27,6 +34,12 @@ public class MessageContentController {
      * 用来储存分页中每页的记录数
      */
     public static final int PAGE_SIZE=10;
+
+    /**
+     * 用来储存处理静态资源的接口
+     */
+    @Autowired
+    StaticResourceService staticResourceService;
 
     /**
      * 显示咨询动态信息
@@ -145,15 +158,33 @@ public class MessageContentController {
      * @return      不出异常重定向：/backend/loadMessagecontent
      */
     //TODO 是否搞抛出异常
-    @RequestMapping("/backend/addSaveMessagecontent")
-    public String addSaveMessageContent(String title,String content,String top){
-        MessageContent messageContent=new MessageContent();
-        messageContent.setTitle(title);
-        messageContent.setContent(content);
-        messageContent.setLastUploadDate(new Date());
-        messageContent.setTop("1".equals(top)? true:false);
-        messageContentService.addMessageContent(messageContent);
-        return "redirect:/backend/loadMessagecontent";
+    @RequestMapping(value="/backend/addSaveMessagecontent",method = RequestMethod.POST)
+    public String addSaveMessageContent(String title,String content,String top,@RequestParam("smallimg") MultipartFile file) throws Exception{
+        try {
+            //文件格式判断
+            if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+            System.out.println("文件大小：" + file.getSize());
+            if(file.getSize()==0){throw new Exception("文件为空！");}
+            if(file.getSize()>1024*1024*5){throw new Exception("文件太大");}
+
+            //保存图片
+            String fileName = StaticResourceService.MESSAGECONTENT_ICON + UUID.randomUUID().toString() + ".png";
+            staticResourceService.uploadResource(fileName, file.getInputStream());
+
+            MessageContent messageContent=new MessageContent();
+            messageContent.setTitle(title);
+            messageContent.setPictureUri(fileName);
+            messageContent.setContent(content);
+            messageContent.setLastUploadDate(new Date());
+            messageContent.setTop("1".equals(top)? true:false);
+            messageContentService.addMessageContent(messageContent);
+            return "redirect:/backend/loadMessagecontent";
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/backend/error";
+
     }
 
     /**
@@ -165,13 +196,27 @@ public class MessageContentController {
      * @return      重定向到：/backend/loadMessagecontent
      */
     @RequestMapping("/backend/modifySaveMessagecontent")
-    public String modifySaveMessageContent(Long id,String title,String content,Boolean top){
-        MessageContent messageContent=messageContentService.findOneById(id);
-        messageContent.setTitle(title);
-        messageContent.setContent(content);
-        messageContent.setTop(top);
-        messageContent.setLastUploadDate(new Date());
-        messageContentService.modify(messageContent);
-        return "redirect:/backend/loadMessagecontent";
+    public String modifySaveMessageContent(Long id,String title,String content,Boolean top,@RequestParam("smallimg") MultipartFile file) throws Exception{
+        try {
+            //文件格式判断
+            if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+            System.out.println("文件大小：" + file.getSize());
+            if(file.getSize()==0){throw new Exception("文件为空！");}
+            if(file.getSize()>1024*1024*5){throw new Exception("文件太大");}
+
+            //保存图片
+            String fileName = StaticResourceService.MESSAGECONTENT_ICON + UUID.randomUUID().toString() + ".png";
+            staticResourceService.uploadResource(fileName, file.getInputStream());
+            MessageContent messageContent=messageContentService.findOneById(id);
+            messageContent.setTitle(title);
+            messageContent.setContent(content);
+            messageContent.setTop(top);
+            messageContent.setLastUploadDate(new Date());
+            messageContentService.modify(messageContent);
+            return "redirect:/backend/loadMessagecontent";
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/backend/error";
     }
 }
