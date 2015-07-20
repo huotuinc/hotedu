@@ -25,26 +25,26 @@ public class TutorService {
     private TutorRepository tutorRepository;
 
     //返回所有导师信息
-    public Page<Tutor> loadTutor(int n,int pagesize) {
+    public Page<Tutor> loadTutor(int n,int pageSize) {
         return tutorRepository.findAll(new Specification<Tutor>() {
             @Override
             public Predicate toPredicate(Root<Tutor> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 return cb.isTrue(root.get("enabled").as(Boolean.class));
             }
-        }, new PageRequest(n, pagesize));
+        }, new PageRequest(n, pageSize));
     }
 
     //分页依据类型和关键字搜索
-    public Page<Tutor> searchTutorType(int n,int pagesize,String keyword,String type){
+    public Page<Tutor> searchTutorType(int n,int pageSize,String keyword,String type){
         return  tutorRepository.findAll(new Specification<Tutor>() {
             @Override
             public Predicate toPredicate(Root<Tutor> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 if (keyword.length()==0)
-                    return null;
+                    return cb.isTrue(root.get("enabled").as(Boolean.class));
 //                return cb.like(root.get(type).as(String.class),"%"+keyword+"%");
                 return  cb.or(cb.like(root.get(type).as(String.class),"%"+keyword+"%"),cb.isTrue(root.get("enabled").as(Boolean.class)));
             }
-        },new PageRequest(n, pagesize));
+        },new PageRequest(n, pageSize));
 
     }
 

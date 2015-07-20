@@ -30,7 +30,14 @@ public class TutorServiceTest {
     TutorService tutorService;
 
 
-
+    /**
+     * 测试搜索功能是否可用
+     * 1,能搜索到要的数据
+     * 2,必须搜不到不要的数据
+     *
+     * 准备工作
+     * 准备批量数据，
+     */
     @Test
     public void searchTutorTypeTest(){
         Page<Tutor> pages=tutorService.searchTutorType(0, 10, "", "name");
