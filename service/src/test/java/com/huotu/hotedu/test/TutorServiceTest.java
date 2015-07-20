@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -39,6 +40,7 @@ public class TutorServiceTest {
      * 准备批量数据，
      */
     @Test
+    @Rollback
     public void searchTutorTypeTest(){
         Page<Tutor> pages=tutorService.searchTutorType(0, 10, "", "name");
         for(Tutor t:pages){
