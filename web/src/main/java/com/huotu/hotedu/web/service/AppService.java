@@ -2,6 +2,7 @@ package com.huotu.hotedu.web.service;
 
 import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.repository.*;
+import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.EnterpriseService;
 import com.huotu.hotedu.service.LoginService;
 import org.apache.commons.logging.Log;
@@ -42,6 +43,10 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
     EnterpriseService enterpriseService;
     @Autowired
     private MessageContentRepository messageContentRepository;
+    @Autowired
+    private AgentRepository agentRepository;
+    @Autowired
+    private AgentService agentService;
 
 
     @Override
@@ -186,6 +191,17 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                     qaRepository.save(qa);
                 }
             }
+
+//            if(agentRepository.count()==0){
+//                Agent agent=new Agent();
+//                agent.setName("火图科技");
+//                agent.setLoginName("hoteddu");
+//                agent.setArea("杭州市");
+//                agent.setCertificateNumber(600);
+//                agent.setSendCertificateNumber(0);
+//                agent.setLevel("一级");
+//                loginService.newLogin(agent,"hotedu");
+//            }
 
         }
 

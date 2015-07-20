@@ -52,6 +52,32 @@ public class ExamGuideControllerTest extends SpringWebTest {
     @Autowired
     private QaRepository qaRepository;
 
+    // /backend/loadExamGuide 非登录状态无法访问
+    // /backend/loadExamGuide 最多展示 n 个数据 n 自定义
+    // /backend/delExamGuide  删除&查询
+    // ?id=1 要删的记录的id
+    // &n=0 删除完成以后显示的页索引   （3）
+    // &keywords= 删除以后 显示指定关键字搜索页面
+    // &sumpage=4 总共能分的页数    4页 31条数据   30
+    // &sumElement=39
+
+    // 删除
+    // id 要删除的ID
+    // 查询
+    // &keywords= 删除以后 显示指定关键字搜索页面
+    // &n=0 删除完成以后显示的页索引
+    // &paging=10 每页10条
+
+    @Test
+    public void examGuideTest() throws Exception {
+        mockMvc.perform(
+                get("/backend/loadExamGuide")
+        )
+                .andDo(print())
+//                .andExpect(status().isForbidden())
+        ;
+    }
+
     @Test
     public void index() throws Exception {
         mockMvc.perform(

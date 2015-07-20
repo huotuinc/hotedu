@@ -1,3 +1,13 @@
+$(function(){
+	$("#memberLi").mouseenter(function(){
+		$(this).children("p").fadeIn("fast");
+		$(".zhizhen").fadeIn("fast");
+	});
+	$(".lbpo").mouseleave(function(){
+		$(this).fadeOut("fast");
+		$(".zhizhen").fadeOut("fast");
+	});
+})
 function isShowMember(){
 	addCookie("memberId","123456dd",300); //测试，向服务器发送数据
 	var sessionId=getCookie("memberId");  //测试，从本地获取cookie值
@@ -34,13 +44,17 @@ function isShowMember(){
 		});
 	}
 }
-function showMemberBody(){
-	$(document).on("mouseenter","#memberLi",function(){
-		$(this).children("p").fadeIn("fast");
-		$(".zhizhen").fadeIn("fast");
-	});
-	$(document).on("mouseleave",".lbpo",function(){
-		$(this).fadeOut("fast");
-		$(".zhizhen").fadeOut("fast");
-	});
-}
+//function showMemberBody(){
+//	$(document).on("mouseenter","#memberLi",function(){
+//		$(this).children("p").fadeIn("fast");
+//		$(".zhizhen").fadeIn("fast");
+//	});
+//	$(document).on("mouseleave",".lbpo",function(){
+//		$(this).fadeOut("fast");
+//		$(".zhizhen").fadeOut("fast");
+//	});
+//}
+
+
+
+

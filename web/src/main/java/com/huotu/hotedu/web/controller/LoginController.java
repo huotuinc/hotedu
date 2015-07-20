@@ -1,16 +1,13 @@
 package com.huotu.hotedu.web.controller;
 
-import com.huotu.hotedu.entity.Login;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -41,22 +38,29 @@ public class LoginController {
 
     @RequestMapping("/pc/login")
     public String login(String loginName,String password,Model model) throws Exception {
+        System.out.println("进入登录界面");
+        System.out.println("用户名："+loginName+"密码："+password);
         String turnPage = "/pc/yun-index";
         String style = "padding:0px;display: none";
         String msgInfo = "";
         String errInfo = "";
         if(loginName==null||"".equals(loginName)) {
             errInfo = "用户名不能为空";
+            System.out.println(1);
         }else if("".equals(password)||password==null) {
             errInfo = "密码不能为空";
+            System.out.println(2);
         }else {
             Member mb = memberService.findOneByLoginName(loginName);
             String pwd = DigestUtils.md5DigestAsHex(password.getBytes("UTF-8")).toLowerCase();
             if(mb==null) {
                 errInfo = "不存在该用户";
+                System.out.println(3);
             }else if(!pwd.equals(mb.getPassword())) {
                 errInfo = "密码不正确";
+                System.out.println(4);
             }else {
+                System.out.println(5);
                 model.addAttribute("realName",mb.getRealName());
                 msgInfo = "";
                 style = "padding:0px;";

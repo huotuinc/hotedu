@@ -15,6 +15,7 @@ import java.util.Date;
  * 考试指南的Controller
  * @author shiliting741@163.com
  */
+//@PreAuthorize("hasRole('ROLE_EDITOR')")
 @Controller
 public class ExamGuideController {
     /**
@@ -30,18 +31,20 @@ public class ExamGuideController {
 
     /**
      * 显示考试指南信息
+     *
      * @param model 返回客户端集
-     * @return  examguide.html
+     * @return examguide.html
      */
     @RequestMapping("/backend/loadExamGuide")
-    public String loadExamGuide(Model model){
-        Page<ExamGuide> pages=examGuideService.loadExamGuide(0,PAGE_SIZE);
-        long sumElement=pages.getTotalElements();
-        model.addAttribute("allGuideList",pages);
-        model.addAttribute("sumpage",(sumElement+pages.getSize()-1)/pages.getSize());
-        model.addAttribute("n",0);
-        model.addAttribute("keywords","");
-        model.addAttribute("sumElement",sumElement);
+    public String loadExamGuide(Model model) {
+
+        Page<ExamGuide> pages = examGuideService.loadExamGuide(0, PAGE_SIZE);
+        long sumElement = pages.getTotalElements();
+        model.addAttribute("allGuideList", pages);
+        model.addAttribute("sumpage", (sumElement + pages.getSize() - 1) / pages.getSize());
+        model.addAttribute("n", 0);
+        model.addAttribute("keywords", "");
+        model.addAttribute("sumElement", sumElement);
         return "/backend/examguide";
     }
 
