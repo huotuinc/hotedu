@@ -11,6 +11,9 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 
 /**
  * Created by cwb on 2015/7/15.
@@ -151,14 +154,14 @@ public class MemberController {
      */
     @RequestMapping("pc/checkMemberLogin")
     @ResponseBody
-    public Result checkMemberLogin(String MemberId){
-        System.out.println("session值："+MemberId);
+    public Result checkMemberLogin(String MemberId,HttpServletRequest request){
+        HttpSession session=request.getSession();
         Result result=new Result();
         Member member=new Member();
         member.setPictureUri("/pc/images/600x20005326c6dcd9c7f.jpg");
         member.setLoginName("wangyong11111");
         result.setBody(member);
-        result.setStatus(1);
+        result.setStatus(0);
         return result;
     }
 

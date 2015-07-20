@@ -31,16 +31,16 @@
     <li><a href="about.html">考试指南</a></li>
     <li><a href="about.html">招|应聘</a></li>
     <li id="loginLi" style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)" onclick = "document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a></li>
-    <li th:remove="all" id="memberLi" style="padding:0px;">
-          <a href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员图片-->
-          <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
-          <p class="lbpo"> <a href="#" th:href="@{/pc/person}">HHSHIJIJ</a>
-                           <a href="#">个人中心</a> <a href="#">修改密码</a>
-                           <a href="#">退出</a>
-          </p>
-    </li>
-    <li th:remove="all" id="userLi" style="padding:0px;display: none" th:style="${style}">
-          <a href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员图片-->
+    <!--<li th:remove="all" id="memberLi" style="padding:0px;">-->
+          <!--<a href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a>&lt;!&ndash;会员图片&ndash;&gt;-->
+          <!--<p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>-->
+          <!--<p class="lbpo"> <a href="#" th:href="@{/pc/person}">HHSHIJIJ</a>-->
+                           <!--<a href="#">个人中心</a> <a href="#">修改密码</a>-->
+                           <!--<a href="#">退出</a>-->
+          <!--</p>-->
+    <!--</li>-->
+    <li id="userLi" style="padding:0px;display: none" th:style="${style}">
+          <a href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
           <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
           <p class="lbpo"><a href="#" th:text="${realName}">个人中心</a>
                           <a href="#">修改密码</a>
