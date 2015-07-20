@@ -25,8 +25,13 @@ public class TutorService {
     private TutorRepository tutorRepository;
 
     //返回所有导师信息
-    public Page<Tutor> loadTutor(int n,int pagesize){
-        return tutorRepository.findAll(new PageRequest(n,pagesize));
+    public Page<Tutor> loadTutor(int n,int pagesize) {
+        return tutorRepository.findAll(new Specification<Tutor>() {
+            @Override
+            public Predicate toPredicate(Root<Tutor> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                return cb.isTrue(root.get("enabled").as(Boolean.class));
+            }
+        }, new PageRequest(n, pagesize));
     }
 
     //分页依据类型和关键字搜索
@@ -37,7 +42,7 @@ public class TutorService {
                 if (keyword.length()==0)
                     return null;
 //                return cb.like(root.get(type).as(String.class),"%"+keyword+"%");
-                return cb.and(cb.equal(root.get("enabled").as(Boolean.class),true),cb.like(root.get(type).as(String.class),"%"+keyword+"%"));
+                return  cb.or(cb.like(root.get(type).as(String.class),"%"+keyword+"%"),cb.isTrue(root.get("enabled").as(Boolean.class)));
             }
         },new PageRequest(n, pagesize));
 
@@ -51,11 +56,7 @@ public class TutorService {
             public Predicate toPredicate(Root<Tutor> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 if (keyword.length()==0)
                     return null;
-//                return cb.or(cb.like(root.get("name").as(String.class), "%" + keyword + "%"),
-//                             cb.like(root.get("qualification").as(String.class),"%"+keyword+"%"),
-//                             cb.like(root.get("area").as(String.class),"%"+keyword+"%")
-//                );
-                return cb.and(cb.equal(root.get("enabled").as(Boolean.class),true),cb.or(cb.like(root.get("name").as(String.class), "%" + keyword + "%"),
+                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)),cb.or(cb.like(root.get("name").as(String.class), "%" + keyword + "%"),
                         cb.like(root.get("qualification").as(String.class),"%"+keyword+"%"),
                         cb.like(root.get("area").as(String.class),"%"+keyword+"%")
                 ));
@@ -72,7 +73,7 @@ public class TutorService {
                 if (start==null&&end==null)
                     return null;
 //                return cb.between(root.get("lastUploadDate").as(Date.class),start,end);
-                return cb.and(cb.equal(root.get("enabled").as(Boolean.class),true),cb.between(root.get("lastUploadDate").as(Date.class),start,end));
+                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)),cb.between(root.get("lastUploadDate").as(Date.class),start,end));
             }
         },new PageRequest(n, pagesize));
 
@@ -94,8 +95,8 @@ public class TutorService {
         tutorRepository.save(tutor);
     }
     //修改一位导师信息
-    public void modify(Tutor Tutor){
-        tutorRepository.save(Tutor);
+    public void modify(Tutor tutor){
+        tutorRepository.save(tutor);
 
     }
     //查找一条考试消息
