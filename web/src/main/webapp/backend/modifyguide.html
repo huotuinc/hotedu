@@ -123,34 +123,33 @@
         </div>
         <div class="jp-container2">
         <div class="result-wrap">
-            <form action="#" th:action="@{/backend/modifySaveExamGuide(id=${examGuide.id})}" method="post" id="myform" name="myform">
+            <form action="#" th:action="@{/backend/modifySaveExamGuide(id=${examGuide.id})}" method="post" class="myform" name="myform">
                 <div class="config-items">
                     <div class="result-content">
                         <table width="100%" class="insert-tab">
-                            <body>
+                            <tbody>
                             <tr>
                                 <th><i class="require-red">*</i>标题：</th>
-                                <td><input type="text" id="" value="" th:value="${examGuide.title}" size="70"
+                                <td><input title="" type="text" id="" value="" th:value="${examGuide.title}" size="70"
                                            name="title" class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>描述：</th>
-                                <td><textarea name="content" th:text="${examGuide.content}" class="common-textarea"
+                                <td><textarea title="" name="content" th:text="${examGuide.content}" class="common-textarea"
                                               id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
                             </tr>
                             <tr>
                                 <th>置顶</th>
-                                <td><input type="radio" name="top" value="1" th:checked="${examGuide.top}"/>&nbsp;是&nbsp;&nbsp;<input
-                                        type="radio" name="top" value="0" th:checked="!${examGuide.top}"/>&nbsp;否&nbsp;&nbsp;
+                                <td><input title="" type="radio" name="top" value="1" th:checked="${examGuide.top}"/>&nbsp;是&nbsp;&nbsp;
+                                    <input title="" type="radio" name="top" value="0" th:checked="!${examGuide.top}"/>&nbsp;否&nbsp;&nbsp;
                                 </td>
                             </tr>
                             <tr>
                                 <th></th>
-                                <td><input type="button" value="修改" class="btn btn-primary btn6 mr10"
-                                           onclick="check_save(this)"/>
+                                <td><input type="button" value="修改" class="btn btn-primary btn6 mr10" onclick="check_save(this)"/>
                                     <input type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
                             </tr>
-                            </body>
+                            </tbody>
                         </table>
                     </div>
                 </div>

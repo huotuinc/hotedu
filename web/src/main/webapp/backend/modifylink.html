@@ -123,7 +123,7 @@
         </div>
         <div class="jp-container2">
         <div class="result-wrap">
-            <form action="#" th:action="@{/backend/modifySaveLink(id=${link.id})}" method="post" id="myform"
+            <form action="#" th:action="@{/backend/modifySaveLink(id=${link.id})}" method="post" class="myform"
                   name="myform">
                 <div class="config-items">
                     <div class="result-content">
@@ -131,12 +131,12 @@
                             <tbody>
                             <tr>
                                 <th><i class="require-red">*</i>标题：</th>
-                                <td><input type="text" id="" value="" th:value="${link.title}" size="70" name="title"
+                                <td><input title="" type="text" id="" value="" th:value="${link.title}" size="70" name="title"
                                            class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>URL：</th>
-                                <td><textarea name="url" th:text="${link.url}" class="common-textarea" id="content"
+                                <td><textarea title="" name="url" th:text="${link.url}" class="common-textarea" id="content"
                                               cols="30" style="width: 98%;" rows="10"></textarea></td>
                             </tr>
                             <tr>
