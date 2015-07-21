@@ -4,6 +4,7 @@ import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.service.ExamGuideService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,6 @@ import java.util.Date;
  *
  * @author shiliting741@163.com
  */
-//@PreAuthorize("hasRole('ROLE_EDITOR')")
 @Controller
 public class ExamGuideController {
     /**
@@ -110,6 +110,7 @@ public class ExamGuideController {
      * @param model      返回客户端集合
      * @return examguide.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/delExamGuide")
     public String delExamGuide(int n, int sumpage, String keywords, Long id, Long sumElement, Model model) {
         examGuideService.delExamGuide(id);
@@ -134,6 +135,7 @@ public class ExamGuideController {
      *
      * @return newguide.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/addExamGuide")
     public String addExamGuide() {
         return "/backend/newguide";
@@ -146,6 +148,7 @@ public class ExamGuideController {
      * @param model 返回客户端集
      * @return modifyguide.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifyExamGuide")
     public String modifyExamGuide(Long id, Model model) {
         ExamGuide examGuide = examGuideService.findOneById(id);
@@ -162,6 +165,7 @@ public class ExamGuideController {
      * @return 不出异常重定向：/backend/loadExamGuide
      */
     //TODO 是否搞抛出异常
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/addSaveExamGuide")
     public String addSaveExamGuide(String title, String content, String top) {
         ExamGuide examGuide = new ExamGuide();
@@ -182,6 +186,7 @@ public class ExamGuideController {
      * @param top     是否置顶
      * @return 重定向到：/backend/loadExamGuide
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveExamGuide")
     public String modifySaveExamGuide(Long id, String title, String content, String top) {
         ExamGuide examGuide = examGuideService.findOneById(id);
