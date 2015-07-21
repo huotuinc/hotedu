@@ -2,6 +2,7 @@ package com.huotu.hotedu.web.service;
 
 import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.repository.*;
+import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.EnterpriseService;
 import com.huotu.hotedu.service.LoginService;
 import org.apache.commons.logging.Log;
@@ -42,6 +43,10 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
     EnterpriseService enterpriseService;
     @Autowired
     private MessageContentRepository messageContentRepository;
+    @Autowired
+    private AgentRepository agentRepository;
+    @Autowired
+    private AgentService agentService;
 
 
     @Override
@@ -56,9 +61,6 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 loginService.newLogin(manager,"admin");
                 System.out.println("测试用户以添加！");
             }
-
-
-
 
 
         }
@@ -133,6 +135,25 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
               link.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 6000));
               linkRepository.save(link);
           }
+
+            if(tutorRepository.count()==0){
+                Tutor tutor=new Tutor();
+                tutor.setName("诸葛亮");
+                tutor.setIntroduction("军师");
+                tutor.setArea("杭州");
+                tutor.setQualification("博士");
+                tutor.setPictureUri("D://");
+                tutor.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 2000));
+                tutorRepository.save(tutor);
+                tutor.setName("刘备");
+                tutor.setIntroduction("主公");
+                tutor.setArea("杭州");
+                tutor.setQualification("硕士");
+                tutor.setPictureUri("D://");
+                tutor.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 2000));
+                tutorRepository.save(tutor);
+            }
+
             if(messageContentRepository.count()==0){
                 MessageContent messageContent;
                 for(int i=0;i<5;i++){
@@ -144,7 +165,7 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 }
             }
 
-            if (tutorRepository.count()==0){
+            /*if (tutorRepository.count()==0){
                 Tutor tutor;
                 for(int i=0;i<27;i++){
                     tutor=new Tutor();
@@ -156,7 +177,7 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                     tutor.setPictureUri("slt.jpg");
                     tutorRepository.save(tutor);
                 }
-            }
+            }*/
 
 
             if (qaRepository.count()==0){
@@ -170,6 +191,17 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                     qaRepository.save(qa);
                 }
             }
+
+//            if(agentRepository.count()==0){
+//                Agent agent=new Agent();
+//                agent.setName("火图科技");
+//                agent.setLoginName("hoteddu");
+//                agent.setArea("杭州市");
+//                agent.setCertificateNumber(600);
+//                agent.setSendCertificateNumber(0);
+//                agent.setLevel("一级");
+//                loginService.newLogin(agent,"hotedu");
+//            }
 
         }
 

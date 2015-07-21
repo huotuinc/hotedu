@@ -10,9 +10,9 @@
             th:src="@{/backend/js/libs/modernizr.min.js}"></script>
     <!--警告框控件-->
     <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
-    <script type="text/javascript" src="js/jquery.confirm.js" th:src="@{/backend/js/jquery.confirm.js}"></script>
+    <script type="text/javascript" src="js/confirm.js" th:src="@{/backend/js/confirm.js}"></script>
     <!--滚动条-->
-    <script type="text/javascript" src="js/scroll/scroll_height.js" th:src="@{/backend/js/scroll/scroll_height.js}"></script>
+    <script type="text/javascript" src="js/scroll/scroll_height_width.js" th:src="@{/backend/js/scroll/scroll_height_width.js}"></script>
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
     <script type="text/javascript" src="js/scroll/jquery.mousewheel.js"
             th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
@@ -122,11 +122,11 @@
     </div>
     <!--/sidebar-->
     <div class="main-wrap">
-
         <div class="crumb-wrap">
             <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span
                     class="crumb-step">&gt;</span><span class="crumb-name">资讯动态</span></div>
         </div>
+        <div class="jp-container2">
         <div class="search-wrap">
             <div class="search-content">
                 <form action="#" th:action="@{/backend/searchMessagecontent}" method="get">
@@ -209,6 +209,7 @@
                     </div>
                 </div>
             </form>
+            </div>
         </div>
     </div>
     <!--/main-->

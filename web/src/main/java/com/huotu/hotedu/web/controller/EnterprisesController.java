@@ -5,6 +5,7 @@ import com.huotu.hotedu.service.EnterpriseService;
 import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
-import java.text.ParseException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -36,19 +37,8 @@ public class EnterprisesController {
     @Autowired
     StaticResourceService staticResourceService;
 
-
     /**  PAGE_SIZE用来储存分页中每页的记录数    */
     public static final int PAGE_SIZE=10;
-
-    /**
-     * 接收一个显示多条招聘信息的请求，返回给客户端一个HTML页面
-     * @return wantedes.html
-     */
-    @RequestMapping("/backend/loadWantedes")
-    public String loadWantedesController() {
-        return "/backend/wantedes";
-    }
-
 
     /**
      * 接收一个显示多条发布企业信息的请求，根据分页控制显示企业信息的条数，
@@ -102,22 +92,15 @@ public class EnterprisesController {
      * @throws Exception
      */
     @RequestMapping("/backend/searchEnterprises")
-    public String searchEnterprises(String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
+    public String searchEnterprises(String searchSort,String keywords,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateStart,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateEnd,Model model) throws Exception{
         Page<Enterprise> pages=null;
+        DateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
         if("date".equals(searchSort)){
             if("".equals(dateStart)||"".equals(dateEnd)){
                 return "redirect:/backend/loadTutor";
             }
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-            try {
-                Date DStart=sdf.parse(dateStart);
-                Date DEnd=sdf.parse(dateEnd);
-                pages=enterpriseService.searchEnterpriseDate(0, PAGE_SIZE, DStart, DEnd);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                //日期格式不正确
-                throw new Exception("日期格式错误！");
-            }
+            pages=enterpriseService.searchEnterpriseDate(0, PAGE_SIZE, dateStart, dateEnd);
+
         }else if("all".equals(searchSort)){
             pages=enterpriseService.searchEnterpriseAll(0, PAGE_SIZE, keywords);
 
@@ -133,8 +116,8 @@ public class EnterprisesController {
         model.addAttribute("sumpage",sumElement/pages.getSize()+(sumElement%pages.getSize()>0? 1:0));
         model.addAttribute("n",0);
         model.addAttribute("keywords",keywords);
-        model.addAttribute("dateStart",dateStart);
-        model.addAttribute("dateEnd",dateEnd);
+        model.addAttribute("dateStart",dateStart==null?"":format1.format(dateStart));
+        model.addAttribute("dateEnd",dateEnd==null?"":format1.format(dateEnd));
         model.addAttribute("searchSort",searchSort);
         model.addAttribute("sumElement",sumElement);
         return "/backend/enterprises";
@@ -164,7 +147,7 @@ public class EnterprisesController {
      * @throws Exception
      */
     @RequestMapping("/backend/pageEnterprise")
-    public String pageEnterprise(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Model model) throws Exception{
+    public String pageEnterprise(int n,int sumpage,String searchSort,String keywords,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateStart,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateEnd,Model model) throws Exception{
 
         if (n < 0){                     //如果已经到分页的第一页了，将页数设置为0
             n++;
@@ -172,16 +155,9 @@ public class EnterprisesController {
             n--;
         }
         Page<Enterprise> pages=null;
+        DateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
         if("date".equals(searchSort)){
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-            try {
-                Date DStart=sdf.parse(dateStart);
-                Date DEnd=sdf.parse(dateEnd);
-                pages=enterpriseService.searchEnterpriseDate(n, PAGE_SIZE, DStart, DEnd);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                //日期格式不正确
-            }
+            pages=enterpriseService.searchEnterpriseDate(n, PAGE_SIZE, dateStart, dateEnd);
         }else if("all".equals(searchSort)){
             pages=enterpriseService.searchEnterpriseAll(n, PAGE_SIZE, keywords);
 
@@ -196,8 +172,8 @@ public class EnterprisesController {
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
         model.addAttribute("searchSort",searchSort);
-        model.addAttribute("dateStart",dateStart);
-        model.addAttribute("dateEnd",dateEnd);
+        model.addAttribute("dateStart",dateStart==null?"":format1.format(dateStart));
+        model.addAttribute("dateEnd",dateEnd==null?"":format1.format(dateEnd));
         model.addAttribute("sumElement",pages.getTotalElements());
         return "/backend/enterprises";
     }
@@ -228,7 +204,7 @@ public class EnterprisesController {
      * @return            enterprises.html
      */
     @RequestMapping("/backend/delEnterprise")
-    public String delEnterprise(int n,int sumpage,String searchSort,String keywords,String dateStart,String dateEnd,Long id,Long sumElement,Model model){
+    public String delEnterprise(int n,int sumpage,String searchSort,String keywords,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateStart,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateEnd,Long id,Long sumElement,Model model){
         try {
             staticResourceService.deleteResource(enterpriseService.findOneById(id).getLogoUri());//删除静态资源
         } catch (IOException e) {
@@ -243,16 +219,9 @@ public class EnterprisesController {
         sumElement--;
 
         Page<Enterprise> pages=null;
+        DateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
         if("date".equals(searchSort)){
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-            try {
-                Date DStart=sdf.parse(dateStart);
-                Date DEnd=sdf.parse(dateEnd);
-                pages=enterpriseService.searchEnterpriseDate(n, PAGE_SIZE, DStart, DEnd);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                //日期格式不正确
-            }
+            pages=enterpriseService.searchEnterpriseDate(n, PAGE_SIZE, dateStart, dateEnd);
         }else if("all".equals(searchSort)){
             pages=enterpriseService.searchEnterpriseAll(n, PAGE_SIZE, keywords);
 
@@ -265,8 +234,8 @@ public class EnterprisesController {
         model.addAttribute("n",n);
         model.addAttribute("keywords",keywords);
         model.addAttribute("searchSort",searchSort);
-        model.addAttribute("dateStart",dateStart);
-        model.addAttribute("dateEnd",dateEnd);
+        model.addAttribute("dateStart",dateStart==null?"":format1.format(dateStart));
+        model.addAttribute("dateEnd",dateEnd==null?"":format1.format(dateEnd));
         model.addAttribute("sumElement",sumElement);
         return "/backend/enterprises";
     }
@@ -278,7 +247,7 @@ public class EnterprisesController {
      * @return   newenterprise.html
      */
     @RequestMapping("/backend/addEnterprise")
-    public String AddEnterprise(){
+    public String addEnterprise(){
         return "/backend/newenterprise";
     }
 
@@ -289,12 +258,11 @@ public class EnterprisesController {
      * @return       modifyenterprise.html
      */
     @RequestMapping("/backend/modifyEnterprise")
-    public String ModifyEnterprise(Long id, Model model){
+    public String modifyEnterprise(Long id, Model model){
         Enterprise enterprise=enterpriseService.findOneById(id);
         model.addAttribute("enterprise",enterprise);
         return "/backend/modifyenterprise";
     }
-
 
 
     /**
@@ -303,12 +271,11 @@ public class EnterprisesController {
      * @param information  企业的招聘信息
      * @param tel          企业的电话
      * @param file         企业的LOGO
-     * @param model        准备向客户端发送的参数集合
      * @return             不出异常重定向：/backend/loadEnterprises 抛出异常重定向：/backend/error
      * @throws Exception
      */
     @RequestMapping(value = "/backend/addSaveEnterprise",method = RequestMethod.POST)
-    public String addSaveEnterprise(String name,String information,String tel,@RequestParam("smallimg") MultipartFile file,Model model) throws Exception{
+    public String addSaveEnterprise(String name,String information,String tel,@RequestParam("smallimg") MultipartFile file) throws Exception{
         try {
             //文件格式判断
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
@@ -349,14 +316,11 @@ public class EnterprisesController {
      * @param tel           企业电话
      * @param isPutaway     是否下架
      * @param file          企业LOGO
-     * @param model         准备向客户端发送的参数集合
      * @return              重定向到：/backend/loadEnterprises
      * @throws Exception
      */
     @RequestMapping("/backend/modifySaveEnterprise")
-    public String ModifySaveEnterprise(Long id,String name,String introduction,String tel,boolean isPutaway,@RequestParam("smallimg") MultipartFile file,Model model) throws Exception{
-
-
+    public String ModifySaveEnterprise(Long id,String name,String introduction,String tel,boolean isPutaway,@RequestParam("smallimg") MultipartFile file) throws Exception{
 
         if(file.getSize()!=0){
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}

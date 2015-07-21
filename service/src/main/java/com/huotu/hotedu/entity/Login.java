@@ -18,7 +18,7 @@ import java.util.Date;
 public abstract class Login implements UserDetails {
     private static final long serialVersionUID = -349012453592429794L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     /**
      * 账号名称

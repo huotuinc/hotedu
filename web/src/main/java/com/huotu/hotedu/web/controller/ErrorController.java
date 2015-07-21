@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class ErrorController {
+
+    /**
+     * 出错时跳转
+     * @return error.html
+     */
     @RequestMapping("/backend/error")
     public String loadBannersController() {
         return "/backend/error";

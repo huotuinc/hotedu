@@ -10,9 +10,9 @@
             th:src="@{/backend/js/libs/modernizr.min.js}"></script>
     <!--警告框控件-->
     <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
-    <script type="text/javascript" src="js/jquery.confirm.js" th:src="@{/backend/js/jquery.confirm.js}"></script>
+    <script type="text/javascript" src="js/confirm.js" th:src="@{/backend/js/confirm.js}"></script>
     <!--滚动条-->
-    <script type="text/javascript" src="js/scroll/scroll_height.js" th:src="@{/backend/js/scroll/scroll_height.js}"></script>
+    <script type="text/javascript" src="js/scroll/scroll_height_width.js" th:src="@{/backend/js/scroll/scroll_height_width.js}"></script>
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
     <script type="text/javascript" src="js/scroll/jquery.mousewheel.js"
             th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
@@ -120,36 +120,33 @@
                     class="crumb-step">&gt;</span><a href="tutor.html" th:href="@{/backend/loadTutor}"><span class="crumb-name">师资力量</span></a><span
                     class="crumb-step">&gt;</span><span class="crumb-name">新增</span></div>
         </div>
+        <div class="jp-container2">
         <div class="result-wrap">
-            <form action="#" th:action="@{/backend/addSaveTutor}" method="post" id="myform" name="myform"
-                  enctype="multipart/form-data">
+            <form action="#" th:action="@{/backend/addSaveTutor}" method="post" class="myform" name="myform" enctype="multipart/form-data">
                 <div class="config-items">
                     <div class="result-content">
                         <table width="100%" class="insert-tab">
                             <tbody>
                             <tr>
                                 <th><i class="require-red">*</i>上传照片：</th>
-                                <td><img src="images/logo.png" width="100px" height="auto"/><input name="smallimg"
-                                                                                                   type="file"/>
-                                    <!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>-->
-                                </td>
+                                <td><img src="images/logo.png" style="width: 100px; height: auto;"/><input name="smallimg" type="file"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>教师名字：</th>
-                                <td><input type="text" value="" size="70" name="name" class="common-text"/></td>
+                                <td><input title="" type="text" value="" size="70" name="name" class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>职称：</th>
-                                <td><input type="text" value="" size="70" name="qualification"
+                                <td><input title="" type="text" value="" size="70" name="qualification"
                                            class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>地区：</th>
-                                <td><input type="text" value="" size="70" name="area" class="common-text"/></td>
+                                <td><input title="" type="text" value="" size="70" name="area" class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>描述：</th>
-                                <td><textarea name="introduction" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
+                                <td><textarea title="" name="introduction" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
                             </tr>
                             <tr>
                                 <th></th>
@@ -160,8 +157,8 @@
                         </table>
                     </div>
                 </div>
-
             </form>
+            </div>
         </div>
     </div>
     <!--/main-->

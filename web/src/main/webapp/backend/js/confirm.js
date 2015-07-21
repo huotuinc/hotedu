@@ -129,7 +129,8 @@ function check_del(h) {
 
 function check_save(h) {
     $.MsgBox.Confirm("温馨提示", "即将保存内容，确定继续吗？", function () {
-        $(h).parent().parent().parent().parent().parent().parent().parent().submit();
+       // $(h).parent().parent().parent().parent().parent().parent().parent().submit();
+        $(h).parents('.myform').submit();
     });
     // $.MsgBox.Confirm("温馨提示", "即将保存内容，确定继续吗？", function () { $(h).parents('#myform').sumbit()});
 }

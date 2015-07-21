@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/libs/modernizr.min.js"
             th:src="@{/backend/js/libs/modernizr.min.js}"></script>
     <!--滚动条-->
-    <script type="text/javascript" src="js/scroll/scroll_height.js" th:src="@{/backend/js/scroll/scroll_height.js}"></script>
+    <script type="text/javascript" src="js/scroll/scroll_height_width.js" th:src="@{/backend/js/scroll/scroll_height_width.js}"></script>
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
     <script type="text/javascript" src="js/scroll/jquery.mousewheel.js"
             th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
@@ -63,13 +63,12 @@
     </div>
     <!--/sidebar-->
     <div class="main-wrap">
-
         <div class="crumb-wrap">
             <div class="crumb-list"><i class="icon-font"></i><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">管理代理商表</a><span
                     class="crumb-step">&gt;</span><span class="crumb-name">班级详情</span></div>
         </div>
+        <div class="jp-container2">
         <div class="result-wrap">
-
             <div class="result-content">
                 <ul class="sys-info-list">
                     <li><label class="res-lab">班级：</label><span class="res-info">201504第一期</span></li>
@@ -85,8 +84,7 @@
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
-                            <td><select name="search-sort" id=""
-                                        style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
+                            <td><select name="search-sort" id="" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
                                 <option value="">全部</option>
                             </select></td>
                             <td><input class="common-text" placeholder="关键字" name="keywords" value="" type="text"/></td>
@@ -157,6 +155,7 @@
                     <div class="list-page"> 2 条 1/1 页</div>
                 </div>
             </form>
+            </div>
         </div>
     </div>
     <!--/main-->

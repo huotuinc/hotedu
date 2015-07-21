@@ -10,11 +10,16 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.util.StreamUtils;
 
+import java.io.ByteArrayOutputStream;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.fileUpload;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -81,5 +86,18 @@ public class MessageContentControllerTest extends SpringWebTest {
             member.setLoginName(name);
             loginService.newLogin(member, name);
         }
+    }
+
+    @Test
+    public void newMessageCheck() throws Exception{
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        StreamUtils.copy(getClass().getResourceAsStream("testUpload.jpg"), buffer);
+        mockMvc.perform(
+                fileUpload("/backend/addSaveMessagecontent")
+                .file("smallimg", buffer.toByteArray())
+                .param("title", "1234567890")
+                .param("content", "asdfghjkll")
+                .param("top", "false")
+        ).andDo(print());
     }
 }

@@ -3,10 +3,8 @@ package com.huotu.hotedu.entity;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -58,7 +56,6 @@ public class Member extends Login {
      * 是否已缴费，默认：否
      */
     private boolean isPayed = false;
-
     /**
      * 是否通过考试
      */
@@ -185,6 +182,24 @@ public class Member extends Login {
         this.applyDate = applyDate;
     }
 
+    @Override
+    public String toString() {
+        return "Member{" +
+                "agent=" + agent +
+                ", pictureUri='" + pictureUri + '\'' +
+                ", realName='" + realName + '\'' +
+                ", sex=" + sex +
+                ", phoneNo='" + phoneNo + '\'' +
+                ", area='" + area + '\'' +
+                ", ConfirmPerson='" + ConfirmPerson + '\'' +
+                ", theClass=" + theClass +
+                ", isPayed=" + isPayed +
+                ", isPassed=" + isPassed +
+                ", applyDate=" + applyDate +
+                ", payDate=" + payDate +
+                ", registerDate=" + registerDate +
+                '}';
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

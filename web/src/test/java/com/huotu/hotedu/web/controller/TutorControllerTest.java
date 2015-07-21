@@ -27,7 +27,7 @@ public class TutorControllerTest extends SpringWebTest{
     @Test
     public void testAddSaveTutor() throws Exception {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        StreamUtils.copy(getClass().getResourceAsStream("test.jpg"),buffer);
+        StreamUtils.copy(getClass().getResourceAsStream("testUpload.jpg"),buffer);
 
         mockMvc.perform(
                 fileUpload("/backend/addSaveTutor")

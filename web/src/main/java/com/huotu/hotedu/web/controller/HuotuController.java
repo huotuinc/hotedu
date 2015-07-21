@@ -15,9 +15,17 @@ import java.util.List;
  */
 @Controller
 public class HuotuController {
+    /**
+     * 公司简介的service层
+     */
     @Autowired
     private HuotuService huotuService;
-    //后台单击公司简介的消息
+
+    /**
+     * 显示公司简介信息
+     * @param model 返回客户端集
+     * @return  editenterprise.html
+     */
     @RequestMapping("/backend/loadEditenterprise")
     public String loadHuotu(Model model){
         List<Huotu> list=huotuService.findHuotu();
@@ -31,8 +39,13 @@ public class HuotuController {
         return "/backend/editenterprise";
     }
 
-
-    //后台单击添加保存按钮
+    /**
+     * 添加保存公司信息
+     * @param title 公司标题
+     * @param introduction  公司描述
+     * @param model 返回客户端集
+     * @return  重定向到：/backend/loadEditenterprise
+     */
     @RequestMapping("/backend/saveEditenterprise")
     //TODO 方法名应该以小写开头 by CJ(已经解决)
     public String saveHuotu(String title,String introduction,Model model){

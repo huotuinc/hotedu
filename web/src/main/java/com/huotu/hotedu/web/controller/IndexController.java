@@ -33,21 +33,30 @@ public class IndexController {
      *     <li>model中包含otherInformations 类型为List&lt;Information&gt; 定义为其他需要展示的动态资讯</li>
      *
      * </ul>
-     * @param model model层
      * @return 首页视图
      */
-    public String index(Model model){
+    public String index(){
         throw new NoSuchMethodError("尚未实现");
     }
 
+    /**
+     * 测试用例
+     * @param who 登录用户
+     * @return  用户名
+     */
     @RequestMapping("/sayMyname")
     @ResponseBody
     public String sayMyname(@AuthenticationPrincipal Login who){
         return who.getLoginName();
     }
 
+    /**
+     * 显示主页信息
+     * @return
+     */
     @RequestMapping("/")
     public String loadIndex(){
         return "/backend/index";
     }
+
 }

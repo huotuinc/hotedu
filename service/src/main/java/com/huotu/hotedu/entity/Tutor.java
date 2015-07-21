@@ -18,10 +18,25 @@ import java.util.Date;
 public  class Tutor extends Login implements Serializable {
     private static final long serialVersionUID = -349012453592429794L;
     @Column
+    /**
+     * 教师姓名
+     */
     private String name;
+    /**
+     * 教师描述
+     */
     private String introduction;
+    /**
+     * 图片地址
+     */
     private String pictureUri;
+    /**
+     * 教师职称
+     */
     private String qualification;
+    /**
+     * 教师地区
+     */
     private String area;
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUploadDate;

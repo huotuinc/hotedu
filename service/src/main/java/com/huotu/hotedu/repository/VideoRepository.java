@@ -1,6 +1,5 @@
 package com.huotu.hotedu.repository;
 
-import com.huotu.hotedu.entity.Qa;
 import com.huotu.hotedu.entity.Video;
 import org.luffy.lib.libspring.data.ClassicsRepository;
 import org.springframework.data.jpa.repository.JpaRepository;

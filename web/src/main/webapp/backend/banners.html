@@ -9,9 +9,9 @@
     <script type="text/javascript" src="js/libs/modernizr.min.js" th:src="@{/backend/js/libs/modernizr.min.js}"></script>
     <!--警告框控件-->
     <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
-    <script type="text/javascript" src="js/jquery.confirm.js" th:src="@{/backend/js/jquery.confirm.js}"></script>
+    <script type="text/javascript" src="js/confirm.js" th:src="@{/backend/js/confirm.js}"></script>
     <!--滚动条-->
-    <script type="text/javascript" src="js/scroll/scroll_height.js" th:src="@{/backend/js/scroll/scroll_height.js}"></script>
+    <script type="text/javascript" src="js/scroll/scroll_height_width.js" th:src="@{/backend/js/scroll/scroll_height_width.js}"></script>
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
     <script type="text/javascript" src="js/scroll/jquery.mousewheel.js"
             th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
@@ -97,9 +97,9 @@
                         <p style="height:30px; line-height:30px; margin-left: 20px;">视频</p>
                         <ul class="sub-menu">
                             <li><a href="video.html" th:href="@{/backend/loadVideo}">教学视频</a></li>
-                            <li><a href="精彩录制.html">精彩录制</a></li>
-                            <li><a href="经验分享.html">经验分享</a></li>
-                            <li><a href="其他视频.html">其他视频</a></li>
+                            <li><a href="http://www.baidu.com">精彩录制</a></li>
+                            <li><a href="http://www.baidu.com">经验分享</a></li>
+                            <li><a href="http://www.baidu.com">其他视频</a></li>
                         </ul>
                     </li>
                     <li>
@@ -119,16 +119,16 @@
                 <span class="crumb-step">&gt;</span>
                 <span class="crumb-name">banner图</span></div>
         </div>
+        <div class="jp-container2">
         <div class="search-wrap">
             <div class="search-content">
-                <form action="#" th:action="@{/backend/searchBanners}"  method="post">
+                <form action="#" th:action="@{/backend/searchBanners}" method="post">
                     <table class="search-tab">
-                        <td>
+                        <tr>
                             <th width="10"></th>
-                            <td>
-                                <input class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}"
-                                       id="keywords" type="text"/></td></td>
+                            <td><input class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}" id="keywords" type="text"/></td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
+                        </tr>
                     </table>
                 </form>
             </div>
@@ -197,6 +197,7 @@
                     </div>
                 </div>
             </form>
+            </div>
         </div>
     </div>
     <!--/main-->

@@ -1,18 +1,14 @@
 package com.huotu.hotedu.web.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
@@ -23,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 //@DependsOn("LoginService")
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)//, securedEnabled = true, jsr250Enabled = true
 public class SecurityConfig {
 
     @Autowired
@@ -58,7 +54,8 @@ public class SecurityConfig {
                             "/backend/css/**",
                             "/backend/images/**",
                             "/backend/js/**",
-                            "/backend/fonts/**"
+                            "/backend/fonts/**",
+                            "/pc/**"
                     );
         }
         //设置拦截规则
@@ -73,7 +70,7 @@ public class SecurityConfig {
                             //开启默认登录页面,允许用户进行身份验证和基于表单的登录
                     .csrf().disable()
                     .formLogin()
-                    .loginPage("/pc/load")
+                    .loginPage("/backend/login")
                     .permitAll();
 //                    .and()
                     //允许用户进行HTTP基本身份验证
