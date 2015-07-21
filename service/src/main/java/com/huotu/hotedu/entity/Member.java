@@ -41,10 +41,6 @@ public class Member extends Login {
      */
     private String phoneNo;
     /**
-     * 报考区域
-     */
-    private String area;
-    /**
      * 报名信息确认者
      */
     private String ConfirmPerson;
@@ -60,6 +56,10 @@ public class Member extends Login {
      * 是否通过考试
      */
     private boolean isPassed = false;
+    /**
+     * 是否领证
+     */
+    private boolean isHaveLicense=false;
     /**
      * 报名时间
      */
@@ -150,14 +150,6 @@ public class Member extends Login {
     }
 
 
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
-
     public String getConfirmPerson() {
         return ConfirmPerson;
     }
@@ -182,24 +174,15 @@ public class Member extends Login {
         this.applyDate = applyDate;
     }
 
-    @Override
-    public String toString() {
-        return "Member{" +
-                "agent=" + agent +
-                ", pictureUri='" + pictureUri + '\'' +
-                ", realName='" + realName + '\'' +
-                ", sex=" + sex +
-                ", phoneNo='" + phoneNo + '\'' +
-                ", area='" + area + '\'' +
-                ", ConfirmPerson='" + ConfirmPerson + '\'' +
-                ", theClass=" + theClass +
-                ", isPayed=" + isPayed +
-                ", isPassed=" + isPassed +
-                ", applyDate=" + applyDate +
-                ", payDate=" + payDate +
-                ", registerDate=" + registerDate +
-                '}';
+    public boolean isHaveLicense() {
+        return isHaveLicense;
     }
+
+    public void setIsHaveLicense(boolean isHaveLicense) {
+        this.isHaveLicense = isHaveLicense;
+    }
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

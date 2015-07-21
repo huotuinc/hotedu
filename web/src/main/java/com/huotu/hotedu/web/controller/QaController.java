@@ -76,9 +76,9 @@ public class QaController {
     public String pageQa(int n,int sumpage,String keywords,Model model){
         //如果已经到分页的第一页了，将页数设置为0
         if (n < 0){
-            n++;
-        }else if(n + 1 > sumpage){//如果超过分页的最后一页了，将页数设置为最后一页
-            n--;
+            n = 0;
+        }else if(n  > sumpage - 1){//如果超过分页的最后一页了，将页数设置为最后一页
+            n = sumpage - 1;
         }
         Page<Qa> pages = qaService.searchQa(n, PAGE_SIZE, keywords);
         model.addAttribute("allQaList",pages);

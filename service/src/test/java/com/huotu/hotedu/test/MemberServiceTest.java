@@ -45,12 +45,14 @@ public class MemberServiceTest {
     @Test
     @Rollback
     public void addMember() {
+        Agent agent = new Agent();
+        agent.setArea("杭州");
         Member mb = new Member();
         mb.setRealName(UUID.randomUUID().toString());
         String phoneNo = generateInexistentMobile(memberRepository);
         mb.setPhoneNo(phoneNo);
         mb.setSex(new Random().nextInt(1));
-        mb.setArea("杭州");
+        mb.setAgent(agent);
         memberService.addMember(mb);
         assertEquals(mb.getLoginName(), memberRepository.findByPhoneNo(phoneNo).getLoginName());
     }
@@ -97,7 +99,8 @@ public class MemberServiceTest {
     @Test
     @Rollback
     public void addOneMember(){
-
+        Agent agent = new Agent();
+        agent.setArea("杭州");
         Member member=new Member();
         member.setPayDate(new Date());
         member.setTheClass(new ClassTeam());
@@ -116,7 +119,7 @@ public class MemberServiceTest {
         member.setLoginName("asdfedsa");
         member.setRealName("test1");
         member.setLoginName("slttt");
-        member.setArea("杭州");
+        member.setAgent(agent);
         memberService.addMember(member);
 
 

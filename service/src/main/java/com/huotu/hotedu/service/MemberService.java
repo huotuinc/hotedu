@@ -46,21 +46,21 @@ public class MemberService {
     /**
      * 该方法用来返回某个代理商名下的所有学员信息，并且以分页的形式返回
      * @param n               第几页
-     * @param pagesize        每页记录条数
+     * @param pageSize        每页记录条数
      * @param agent           代理商帐户名
      * @return                学员集合
      */
-    public Page<Member>  loadMembersByAgent(Agent agent,Integer n,Integer pagesize){
+    public Page<Member>  loadMembersByAgent(Agent agent,Integer n,Integer pageSize){
 
         return  memberRepository.findAll(new Specification<Member>() {
             @Override
             public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if (agent==null||n==null||pagesize==null) {
+                if (agent==null||n==null||pageSize==null) {
                     return null;
                 }
                 return cb.and(cb.equal(root.get("agent").as(Agent.class), agent), cb.isTrue(root.get("enabled").as(boolean.class)));
             }
-        },new PageRequest(n, pagesize));
+        },new PageRequest(n, pageSize));
     }
 
     /**

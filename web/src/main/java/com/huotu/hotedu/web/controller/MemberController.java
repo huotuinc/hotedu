@@ -1,7 +1,9 @@
 package com.huotu.hotedu.web.controller;
 
+import com.huotu.hotedu.entity.Agent;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.entity.Result;
+import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,20 +11,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 /**
  * Created by cwb on 2015/7/15.
+ * Modify by shiliting on 20157/21
  */
 @Controller
 public class MemberController {
 
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private AgentService agentService;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -32,7 +33,7 @@ public class MemberController {
     }
 
     @RequestMapping("/pc/register")
-    public String register(String realName,int sex,String phoneNo,String area,Model model) throws Exception {
+    public String register(String realName,int sex,String phoneNo,long areaId,Model model) throws Exception {
         String errInfo = "";
         String msgInfo = "";
         String turnPage = "/pc/registerTest";
@@ -40,18 +41,19 @@ public class MemberController {
             errInfo = "姓名不能为空";
         }else if("".equals(phoneNo)||phoneNo==null) {
             errInfo = "手机号不能为空";
-        }else if("".equals(area)||area==null) {
+        }else if(areaId == 0) {
             errInfo = "请选择报名地点";
         }else {
             boolean exist = memberService.isPhoneNoExist(phoneNo);
             if(exist) {
                 errInfo = "该手机号已被注册";
             }else {
+                Agent agent = agentService.findOneById(areaId);
                 Member mb = new Member();
+                mb.setAgent(agent);
                 mb.setRealName(realName);
                 mb.setSex(sex);
                 mb.setPhoneNo(phoneNo);
-                mb.setArea(area);
                 mb.setLoginName(phoneNo);
                 mb.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes("UTF-8")).toLowerCase());
                 mb.setEnabled(false);
@@ -82,7 +84,7 @@ public class MemberController {
             Member mb = memberService.findOneById(id);
             model.addAttribute("realName",mb.getRealName());
             model.addAttribute("phoneNo",mb.getPhoneNo());
-            model.addAttribute("area",mb.getArea());
+            model.addAttribute("area",mb.getAgent().getArea());
             model.addAttribute("applyDate",mb.getApplyDate());
 
             model.addAttribute("payDate",mb.getPayDate());
@@ -147,23 +149,26 @@ public class MemberController {
         return turnPage;
     }
 
-    /**
-     * 用来测试向页面返回会员之后页面是否正常显示会员信息
-     * @param MemberId    会员的sessionId
-     * @return            结果集，包含会员信息，json字符串格式返回
-     */
-    @RequestMapping("pc/checkMemberLogin")
-    @ResponseBody
-    public Result checkMemberLogin(String MemberId,HttpServletRequest request){
-        HttpSession session=request.getSession();
-        Result result=new Result();
-        Member member=new Member();
-        member.setPictureUri("/pc/images/600x20005326c6dcd9c7f.jpg");
-        member.setLoginName("wangyong11111");
-        result.setBody(member);
-        result.setStatus(0);
-        return result;
-    }
+//    /**
+//     * 用来测试向页面返回会员之后页面是否正常显示会员信息
+//     * @param MemberId    会员的sessionId
+//     * @return            结果集，包含会员信息，json字符串格式返回
+//     */
+//    @RequestMapping("pc/checkMemberLogin")
+//    @ResponseBody
+//    public Result checkMemberLogin(String MemberId,HttpServletRequest request){
+//        HttpSession session=request.getSession();
+//        Result result=new Result();
+//        Member member=new Member();
+//        member.setPictureUri("/pc/images/600x20005326c6dcd9c7f.jpg");
+//        member.setLoginName("wangyong11111");
+//        result.setBody(member);
+//        result.setStatus(0);
+//        return result;
+//    }
+
+
+
 
 
 }

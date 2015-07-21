@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,8 +20,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 //@DependsOn("LoginService")
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)//, securedEnabled = true, jsr250Enabled = true
+@EnableGlobalMethodSecurity(prePostEnabled = true)//, securedEnabled = true, jsr250Enabled = true
 public class SecurityConfig {
+
+    /**
+     * 登录请求的URI
+     */
+    public static final String LoginURI = "/backend/login";
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -48,7 +54,7 @@ public class SecurityConfig {
 
         public void configure(WebSecurity web) throws Exception {
             web
-                    .debug(!env.acceptsProfiles("prod"))
+//                    .debug(!env.acceptsProfiles("prod"))
                     .ignoring()
                     .antMatchers(
                             "/backend/css/**",
@@ -70,7 +76,7 @@ public class SecurityConfig {
                             //开启默认登录页面,允许用户进行身份验证和基于表单的登录
                     .csrf().disable()
                     .formLogin()
-                    .loginPage("/backend/login")
+                    .loginPage(LoginURI)
                     .permitAll();
 //                    .and()
                     //允许用户进行HTTP基本身份验证

@@ -153,7 +153,7 @@ public class ExamGuideController {
         examGuide.setTitle(title);
         examGuide.setContent(content);
         examGuide.setLastUploadDate(new Date());
-        examGuide.setTop("1".equals(top)? true:false);
+        examGuide.setIsTop("1".equals(top));
         examGuideService.addExamGuide(examGuide);
         return "redirect:/backend/loadExamGuide";
     }
@@ -167,11 +167,11 @@ public class ExamGuideController {
      * @return      重定向到：/backend/loadExamGuide
      */
     @RequestMapping("/backend/modifySaveExamGuide")
-    public String modifySaveExamGuide(Long id,String title,String content,Boolean top){
+    public String modifySaveExamGuide(Long id,String title,String content,String top){
         ExamGuide examGuide=examGuideService.findOneById(id);
         examGuide.setTitle(title);
         examGuide.setContent(content);
-        examGuide.setTop(top);
+        examGuide.setIsTop("1".equals(top));
         examGuide.setLastUploadDate(new Date());
         examGuideService.modify(examGuide);
         return "redirect:/backend/loadExamGuide";

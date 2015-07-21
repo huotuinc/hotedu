@@ -38,29 +38,22 @@ public class LoginController {
 
     @RequestMapping("/pc/login")
     public String login(String loginName,String password,Model model) throws Exception {
-        System.out.println("进入登录界面");
-        System.out.println("用户名："+loginName+"密码："+password);
         String turnPage = "/pc/yun-index";
         String style = "padding:0px;display: none";
         String msgInfo = "";
         String errInfo = "";
         if(loginName==null||"".equals(loginName)) {
             errInfo = "用户名不能为空";
-            System.out.println(1);
         }else if("".equals(password)||password==null) {
             errInfo = "密码不能为空";
-            System.out.println(2);
         }else {
             Member mb = memberService.findOneByLoginName(loginName);
             String pwd = DigestUtils.md5DigestAsHex(password.getBytes("UTF-8")).toLowerCase();
             if(mb==null) {
                 errInfo = "不存在该用户";
-                System.out.println(3);
             }else if(!pwd.equals(mb.getPassword())) {
                 errInfo = "密码不正确";
-                System.out.println(4);
             }else {
-                System.out.println(5);
                 model.addAttribute("realName",mb.getRealName());
                 msgInfo = "";
                 style = "padding:0px;";

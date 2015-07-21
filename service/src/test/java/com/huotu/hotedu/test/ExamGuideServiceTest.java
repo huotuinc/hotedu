@@ -49,35 +49,35 @@ public class ExamGuideServiceTest {
         examGuide.setContent("examguide");
         examGuide.setTitle("title examguide1");
         examGuide.setLastUploadDate(new Date());
-        examGuide.setTop(true);
+        examGuide.setIsTop(true);
         examGuideRepository.save(examGuide);
 
         examGuide =new ExamGuide();
         examGuide.setContent("examguide");
         examGuide.setTitle("title examguide2");
         examGuide.setLastUploadDate(new Date());
-        examGuide.setTop(true);
+        examGuide.setIsTop(true);
         examGuideRepository.save(examGuide);
 
         examGuide =new ExamGuide();
         examGuide.setContent("examguide");
         examGuide.setTitle("title examguide3");
         examGuide.setLastUploadDate(new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000));
-        examGuide.setTop(true);
+        examGuide.setIsTop(true);
         examGuideRepository.save(examGuide);
 
         examGuide =new ExamGuide();
         examGuide.setContent("examguide");
         examGuide.setTitle("title examguide4");
         examGuide.setLastUploadDate(new Date(System.currentTimeMillis() - 5 * 60 * 60 * 1000));
-        examGuide.setTop(true);
+        examGuide.setIsTop(true);
         examGuideRepository.save(examGuide);
 
         examGuide =new ExamGuide();
         examGuide.setContent("examguide");
         examGuide.setTitle("title examguide5");
         examGuide.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000));
-        examGuide.setTop(true);
+        examGuide.setIsTop(true);
         examGuideRepository.save(examGuide);
 
         List<ExamGuide> allList = examGuideRepository.findAll();
