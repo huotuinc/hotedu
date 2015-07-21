@@ -30,25 +30,6 @@ public class ExamGuideController {
      */
     public static final int PAGE_SIZE = 10;
 
-//    /**
-//     * 显示考试指南信息
-//     *
-//     * @param model 返回客户端集
-//     * @return examguide.html
-//     */
-//    @RequestMapping("/backend/loadExamGuide")
-//    public String loadExamGuide(Model model) {
-//
-//        Page<ExamGuide> pages = examGuideService.loadExamGuide(0, PAGE_SIZE);
-//        long sumElement = pages.getTotalElements();
-//        model.addAttribute("allGuideList", pages);
-//        model.addAttribute("sumpage", (sumElement + pages.getSize() - 1) / pages.getSize());
-//        model.addAttribute("n", 0);
-//        model.addAttribute("keywords", "");
-//        model.addAttribute("sumElement", sumElement);
-//        return "/backend/examguide";
-//    }
-
     /**
      * 搜索符合条件的考试指南信息
      *
@@ -60,83 +41,47 @@ public class ExamGuideController {
     public String searchExamGuide(@RequestParam(required = false)Integer pageNo,
                                   @RequestParam(required = false)Integer pageSize,
                                   @RequestParam(required = false) String keywords, Model model) {
-        if(pageNo==null){
+        if(pageNo==null||pageNo<0){
             pageNo=0;
         }
         if(pageSize==null) {
             pageSize = PAGE_SIZE;
         }
-        Page<ExamGuide> pages;
-        if (keywords == null) {
-            pages = examGuideService.loadExamGuide(pageNo, pageSize);
-        }
-        else {
+        Page<ExamGuide> pages = examGuideService.searchExamGuide(pageNo, pageSize, keywords);
+        long totalRecords = pages.getTotalElements();
+        int numEl =  pages.getNumberOfElements();
+        if(numEl==0) {
+            pageNo--;
+            if(pageNo<0) {
+                pageNo = 0;
+            }
             pages = examGuideService.searchExamGuide(pageNo, pageSize, keywords);
+            totalRecords = pages.getTotalElements();
         }
-        long sumElement = pages.getTotalElements();
         model.addAttribute("allGuideList", pages);
-        model.addAttribute("sumpage", (sumElement + pages.getSize() - 1) / pages.getSize());
+        model.addAttribute("totalPages",pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("keywords", keywords);
-        model.addAttribute("sumElement", sumElement);
+        model.addAttribute("totalRecords", totalRecords);
         return "/backend/examguide";
     }
-
-//    /**
-//     * 分页显示
-//     * @param n             显示第几页
-//     * @param sumpage    分页总页数
-//     * @param keywords      检索关键字(使用检索功能后有效)
-//     * @param model         返回客户端集合
-//     * @return          examguide.html
-//     * @deprecated 移除
-//     */
-//    @RequestMapping("/backend/pageExamGuide")
-//    public String pageExamGuide(int n,int sumpage,String keywords,Model model){
-//        //如果已经到分页的第一页了，将页数设置为0
-//        if (n < 0){
-//            n++;
-//        }else if(n + 1 > sumpage){//如果超过分页的最后一页了，将页数设置为最后一页
-//            n--;
-//        }
-//        Page<ExamGuide> pages = examGuideService.searchExamGuide(n, PAGE_SIZE, keywords);
-//        model.addAttribute("allGuideList",pages);
-//        model.addAttribute("sumpage",sumpage);
-//        model.addAttribute("n",n);
-//        model.addAttribute("keywords",keywords);
-//        model.addAttribute("sumElement",pages.getTotalElements());
-//        return "/backend/examguide";
-//    }
 
     /**
      * 删除考试指南信息以及查询
      *
-     * @param n          显示第几页
-     * @param sumpage    分页总页数
+     * @param pageNo     显示第几页
      * @param keywords   检索关键字(使用检索功能后有效)
      * @param id         需要被删除的记录id
-     * @param sumElement 总记录数
      * @param model      返回客户端集合
      * @return examguide.html
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/delExamGuide")
-    public String delExamGuide(int n, int sumpage, String keywords, Long id, Long sumElement, Model model) {
+    public String delExamGuide(@RequestParam(required = false)Integer pageNo,String keywords, Long id, Model model) {
         examGuideService.delExamGuide(id);
-        if ((sumElement - 1) % PAGE_SIZE == 0) {
-            if (n > 0 && n + 1 == sumpage) {
-                n--;
-            }
-            sumpage--;
-        }
-        sumElement--;
-        Page<ExamGuide> pages = examGuideService.searchExamGuide(n, PAGE_SIZE, keywords);
-        model.addAttribute("sumpage", sumpage);
-        model.addAttribute("allGuideList", pages);
-        model.addAttribute("n", n);
+        model.addAttribute("pageNo", pageNo);
         model.addAttribute("keywords", keywords);
-        model.addAttribute("sumElement", sumElement);
-        return "/backend/examguide";
+        return "redirect:/backend/searchExamGuide";
     }
 
     /**
@@ -171,7 +116,7 @@ public class ExamGuideController {
      * @param title   标题
      * @param content 描述
      * @param top     是否置顶
-     * @return 不出异常重定向：/backend/loadExamGuide
+     * @return 不出异常重定向：/backend/searchExamGuide
      */
     //TODO 是否搞抛出异常
     @PreAuthorize("hasRole('EDITOR')")
@@ -183,7 +128,7 @@ public class ExamGuideController {
         examGuide.setLastUploadDate(new Date());
         examGuide.setIsTop("1".equals(top));
         examGuideService.addExamGuide(examGuide);
-        return "redirect:/backend/loadExamGuide";
+        return "redirect:/backend/searchExamGuide";
     }
 
     /**
@@ -193,7 +138,7 @@ public class ExamGuideController {
      * @param title   标题
      * @param content 描述
      * @param top     是否置顶
-     * @return 重定向到：/backend/loadExamGuide
+     * @return 重定向到：/backend/searchExamGuide
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveExamGuide")
@@ -204,6 +149,6 @@ public class ExamGuideController {
         examGuide.setIsTop("1".equals(top));
         examGuide.setLastUploadDate(new Date());
         examGuideService.modify(examGuide);
-        return "redirect:/backend/loadExamGuide";
+        return "redirect:/backend/searchExamGuide";
     }
 }

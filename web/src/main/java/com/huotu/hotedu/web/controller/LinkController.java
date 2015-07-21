@@ -33,7 +33,7 @@ public class LinkController {
      * @return  link.html
      */
     @RequestMapping("/backend/loadLink")
-    public String loadExamGuide(Model model){
+    public String searchExamGuide(Model model){
         Page<Link> pages=linkService.loadLink(0,PAGE_SIZE);
         long sumElement=pages.getTotalElements();
         model.addAttribute("allLinkList",pages);

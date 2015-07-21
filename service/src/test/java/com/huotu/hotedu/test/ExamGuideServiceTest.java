@@ -20,6 +20,8 @@ import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Created by luffy on 2015/6/10.
  *
@@ -44,7 +46,7 @@ public class ExamGuideServiceTest {
 
     @Test
     @Rollback
-    public void loadExamGuide(){
+    public void searchExamGuide(){
         ExamGuide examGuide =new ExamGuide();
         examGuide.setContent("examguide");
         examGuide.setTitle("title examguide1");
@@ -79,6 +81,7 @@ public class ExamGuideServiceTest {
         examGuide.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000));
         examGuide.setIsTop(true);
         examGuideRepository.save(examGuide);
+
 
         List<ExamGuide> allList = examGuideRepository.findAll();
 

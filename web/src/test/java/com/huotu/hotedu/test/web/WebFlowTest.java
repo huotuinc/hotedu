@@ -50,7 +50,7 @@ public class WebFlowTest extends WebTestBase {
 
         mockMvc.perform(
 //                get("/backend/test/open")
-                get("/backend/loadExamGuide")
+                get("/backend/searchExamGuide")
         )
                 .andExpect(status().isFound());//尚未登录是302 已登录则是403
 
@@ -59,7 +59,7 @@ public class WebFlowTest extends WebTestBase {
 
 
         mockMvc.perform(
-                get("/backend/loadExamGuide")
+                get("/backend/searchExamGuide")
                 .session(session)
         )
                 .andExpect(status().isOk());

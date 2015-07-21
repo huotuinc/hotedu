@@ -35,7 +35,7 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li><span th:if="${#authentication.name}!=null" th:text="${#authentication.name}"></span></li>
+                <li><span th:text="${#authentication.name}"></span></li>
                 <li><a href="changethepassword.html" th:href="@{/backend/loadChangethepassword}">修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
@@ -66,7 +66,7 @@
                     <li>
                         <p style="height:30px; line-height:30px; margin-left: 20px;">考试指南</p>
                         <ul class="sub-menu">
-                            <li><a href="examguide.html" th:href="@{/backend/loadExamGuide}">考试指南</a></li>
+                            <li><a href="examguide.html" th:href="@{/backend/searchExamGuide}">考试指南</a></li>
                         </ul>
                     </li>
                     <li>

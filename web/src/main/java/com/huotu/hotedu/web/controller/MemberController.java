@@ -6,6 +6,7 @@ import com.huotu.hotedu.entity.Result;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -166,9 +167,6 @@ public class MemberController {
 //        result.setStatus(0);
 //        return result;
 //    }
-
-
-
 
 
 }

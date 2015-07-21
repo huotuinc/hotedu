@@ -37,9 +37,9 @@ public class ExamGuideControllerTest extends WebTestBase {
     @Autowired
     private ExamGuideRepository examGuideRepository;
 
-    // /backend/loadExamGuide 非登录状态无法访问
+    // /backend/searchExamGuide 非登录状态无法访问
     //
-    // /backend/loadExamGuide 最多展示 n 个数据 n 自定义
+    // /backend/searchExamGuide 最多展示 n 个数据 n 自定义
     //
     // /backend/delExamGuide  删除&查询
     // 删除
@@ -113,10 +113,9 @@ public class ExamGuideControllerTest extends WebTestBase {
         )
                 .andExpect(status().isFound());
 
-        long totalCount =  examGuideRepository.count();
+        int totalCount =  (int)examGuideRepository.count();
         int defaultPageSize = ExamGuideController.PAGE_SIZE;
-//        long pages = totalCount/defaultPageSize+ (totalCount%defaultPageSize==0?0:1);
-        long pages = (totalCount+defaultPageSize-1)/defaultPageSize;
+        int pages = (totalCount+defaultPageSize-1)/defaultPageSize;
         mockMvc.perform(
                 get("/backend/searchExamGuide")
                         .session(loginAs(memberUsername, password))
@@ -139,7 +138,7 @@ public class ExamGuideControllerTest extends WebTestBase {
 
                     }
                 }))
-                .andExpect(model().attribute("sumpage",pages))
+                .andExpect(model().attribute("totalPages",pages))
         ;
 
         ArrayList<ExamGuide> found = new ArrayList<>();
