@@ -87,7 +87,7 @@ public class MemberController {
             Member mb = memberService.findOneById(id);
             model.addAttribute("realName",mb.getRealName());
             model.addAttribute("phoneNo",mb.getPhoneNo());
-            model.addAttribute("area",mb.getArea());
+            model.addAttribute("area",mb.getAgent().getArea());
             model.addAttribute("applyDate",mb.getApplyDate());
 
             model.addAttribute("payDate",mb.getPayDate());
