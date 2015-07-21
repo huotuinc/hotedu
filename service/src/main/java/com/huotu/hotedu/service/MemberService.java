@@ -1,6 +1,7 @@
 package com.huotu.hotedu.service;
 
 import com.huotu.hotedu.entity.Agent;
+import com.huotu.hotedu.entity.ClassTeam;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,7 @@ public class MemberService {
      * @return          学员集合
      */
     public Page<Member> loadMembers(Integer n,Integer pagesize){
-        return memberRepository.findAll(new PageRequest(n,pagesize));
+        return memberRepository.findAll(new PageRequest(n, pagesize));
     }
 
     /**
@@ -83,7 +84,7 @@ public class MemberService {
     }
 
     /**
-     * 删除学员，设为不可用
+     * 禁用学员
      * @param id 学员id
      */
     public void delMember(Long id){
@@ -102,8 +103,15 @@ public class MemberService {
         memberRepository.save(mb);
     }
 
+    /**
+     * 通过用户名查找学员
+     * @param loginName 用户名
+     * @return          学员
+     */
     public Member findOneByLoginName(String loginName) {
         Member mb = memberRepository.findByLoginName(loginName);
         return mb;
     }
+
+
 }

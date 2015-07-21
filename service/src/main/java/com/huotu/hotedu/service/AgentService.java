@@ -2,9 +2,10 @@ package com.huotu.hotedu.service;
 
 import com.huotu.hotedu.entity.Agent;
 import com.huotu.hotedu.entity.ClassTeam;
+import com.huotu.hotedu.entity.Exam;
 import com.huotu.hotedu.entity.Member;
-import com.huotu.hotedu.entity.Tutor;
 import com.huotu.hotedu.repository.AgentRepository;
+import com.huotu.hotedu.repository.ClassTeamRepository;
 import com.huotu.hotedu.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by shiliting 2015/7/20.
@@ -30,6 +33,12 @@ public class AgentService {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    private MemberService memberService;
+
+    @Autowired
+    private ClassTeamRepository classTeamRepository;
 
     /**
      * 返回所有代理商
@@ -64,7 +73,7 @@ public class AgentService {
             public Predicate toPredicate(Root<Agent> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 if (keyword.length()==0)
                     return null;
-                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)),cb.like(root.get(type).as(String.class), "%" + keyword + "%"));
+                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)), cb.like(root.get(type).as(String.class), "%" + keyword + "%"));
             }
         },new PageRequest(n, pageSize));
     }
@@ -151,8 +160,59 @@ public class AgentService {
                 return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)), cb.isNotNull(root.get("theClass").as(ClassTeam.class)));
             }
         }, new PageRequest(n, pagesize));
-
     }
 
+    /**
+     * 安排分班
+     * @param allNoClassMemberList  需要分班的成员
+     * @param classTeam             分配的班级
+     */
+    public void arrangeClass(ArrayList<Integer> allNoClassMemberList,ClassTeam classTeam){
+//TODO 这里应不应该判断
+//        if(null == allNoClassMemberList || allNoClassMemberList.size() == 0) {
+//           return;
+//        }
+        Member mb = null;
+        for (Integer x : allNoClassMemberList) {
+            mb = memberService.findOneById((long)allNoClassMemberList.get(x));
+            mb.setTheClass(classTeam);
+        }
+    }
 
+    /**
+     * 查询该代理商已有班级
+     * @param pageNum   第几页
+     * @param pageSize  每页几条
+     * @param agent     所属代理商
+     * @return          课堂集合
+     */
+    public Page<ClassTeam> findExistClassAll(Integer pageNum,Integer pageSize,Agent agent){
+        return  classTeamRepository.findAll(new Specification<ClassTeam>() {
+            @Override
+            public Predicate toPredicate(Root<ClassTeam> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                return  cb.isNotNull(root.get("exam").as(Exam.class));
+//                return cb.equal(root.get("agent").as(Agent.class),agent);
+//                return cb.and(cb.equal(root.get("agent").as(Agent.class),agent), cb.isNotNull(root.get("exam").as(Exam.class)));
+
+            }
+        }, new PageRequest(pageNum, pageSize));
+    }
+
+    /**
+     * 注册增加班级
+     * @param classTeam  注册的班级
+     */
+    public void addClassTeam(ClassTeam classTeam){
+        classTeamRepository.save(classTeam);
+    }
+
+    /**
+     * 代理商添加班级
+     * @param agent         代理商
+     * @param classTeam     添加的班级
+     */
+    public void agentAddClassTeam(Agent agent,ClassTeam classTeam){
+        classTeam.setAgent(agent);
+        classTeamRepository.save(classTeam);
+    }
 }

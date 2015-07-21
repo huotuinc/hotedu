@@ -25,7 +25,6 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by jiashubing on 2015/7/16.
  *
- * @author jiashubing at gmail.com
  * @author luffy luffy.ja at gmail.com
  */
 @ActiveProfiles("test")
