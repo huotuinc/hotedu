@@ -3,39 +3,25 @@ package com.huotu.hotedu.test.web;
 import com.huotu.hotedu.WebTestBase;
 import com.huotu.hotedu.entity.Editor;
 import com.huotu.hotedu.entity.ExamGuide;
-import com.huotu.hotedu.entity.Manager;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.repository.ExamGuideRepository;
-import com.huotu.hotedu.repository.LoginRepository;
-import com.huotu.hotedu.repository.MemberRepository;
-import com.huotu.hotedu.repository.QaRepository;
 import com.huotu.hotedu.service.LoginService;
-import com.huotu.hotedu.test.TestWebConfig;
 import com.huotu.hotedu.web.controller.ExamGuideController;
 import junit.framework.Assert;
-import libspringtest.SpringWebTest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.mock.web.MockHttpSession;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.*;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -101,7 +87,7 @@ public class ExamGuideControllerTest extends WebTestBase {
 
         int count = 20 + random.nextInt(20);
 
-        ArrayList<ExamGuide> containsExamGuides = new ArrayList<>();
+        ArrayList<ExamGuide> containsExamGuides = new ArrayList<>();//拿到包含关键字的examGuide记录
 
         while (count-- > 0) {
             ExamGuide examGuide = new ExamGuide();
@@ -156,7 +142,6 @@ public class ExamGuideControllerTest extends WebTestBase {
                 .andExpect(model().attribute("sumpage",pages))
         ;
 
-        //
         ArrayList<ExamGuide> found = new ArrayList<>();
         int currentIndex = 0;
 
@@ -166,17 +151,20 @@ public class ExamGuideControllerTest extends WebTestBase {
                     get("/backend/searchExamGuide")
                     .param("keywords",complexKeyword)
                     .param("n",""+currentIndex)
-                    .param("paging","1")
+                    .param("paging","1") //每页显示多少
             )
                     .andExpect(status().isOk())
                     .andReturn().getModelAndView().getModel();
 
             Page<ExamGuide> allGuideList = (Page<ExamGuide>) model.get("allGuideList");
-            Assert.assertFalse("",allGuideList.getContent().isEmpty());
-            Assert.assertTrue("",containsExamGuides.contains(allGuideList.getContent().get(0)));
-            //
 
-            currentIndex = ((Number)(model.get("n"))).intValue()+1;
+            Assert.assertEquals("查询出来的记录必须是之前设定的长度",1,allGuideList.getContent().size());
+
+            ExamGuide foundGuid = allGuideList.getContent().get(0);
+
+            Assert.assertTrue("查询出来的考试指南记录是否包含在之前预期的记录里",containsExamGuides.contains(foundGuid));
+
+            currentIndex = ((Number)(model.get("n"))).intValue()+1;//当前显示第几页，+1
 
             found.add(allGuideList.getContent().get(0));
         }

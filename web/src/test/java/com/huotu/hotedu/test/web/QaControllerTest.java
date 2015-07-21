@@ -58,7 +58,7 @@ public class QaControllerTest extends SpringWebTest {
     @Test
     public void login() throws  Exception{
 
-        mockMvc.perform(get("/backend/load/examGuide")).andDo(print());
+        mockMvc.perform(get("/backend/loadExamGuide")).andDo(print());
     }
     private void checkMemeber(String name) {
         try {

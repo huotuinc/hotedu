@@ -169,7 +169,7 @@
                             <td th:text="${g.title}">粉猫</td>
                             <td th:text="${g.url}">www.fanmore.com</td>
                             <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/hh.mm.ss')}">2015.01.01/13.00.00</td>
-                            <td><a class="link-update" href="newlink.html" th:href="@{/backend/modify/link(id=${g.id})}">修改</a><br/>
+                            <td><a class="link-update" href="newlink.html" th:href="@{/backend/modifyLink(id=${g.id})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a>
                                 <a class="real-delete" href="#" th:href="@{/backend/delLink(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}"></a>
                             </td>

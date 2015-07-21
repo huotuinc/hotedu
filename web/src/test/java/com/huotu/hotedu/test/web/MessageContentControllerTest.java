@@ -10,7 +10,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -19,9 +18,7 @@ import org.springframework.util.StreamUtils;
 
 import java.io.ByteArrayOutputStream;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.fileUpload;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 /**
@@ -53,31 +50,8 @@ public class MessageContentControllerTest extends SpringWebTest {
     private MessageContentRepository messageContentRepository;
 
 
-//    @Test
-//    public void index() throws Exception {
-//        mockMvc.perform(
-//                get("/")
-//        )
-//                .andDo(print());
-//    }
-    @Test
-    public void login() throws  Exception{
-//        MessageContent messageContent=new MessageContent();
-//        messageContent.setLastUploadDate(new Date());
-//        messageContent.setTop(true);
-//        messageContent.setTitle("slt");
-//        messageContent.setContent("asdfasdfasdfasdfasfeadsf");
-//        messageContentRepository.save(messageContent);
-//        messageContentRepository.findAll();
-//
-//
-//
-//
-//        mockMvc.perform(
-//                get("/load/messageContent")
-//        ).andDo(print()).andExpect(model().attributeExists("list"))
-//        ;
-    }
+
+
     private void checkMemeber(String name) {
         try {
             loginService.loadUserByUsername(name);
