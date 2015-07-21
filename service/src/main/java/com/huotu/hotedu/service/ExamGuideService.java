@@ -24,7 +24,7 @@ public class ExamGuideService {
     private ExamGuideRepository examGuideRepository;
 
     //返回所有考试指南
-    public Page<ExamGuide> loadExamGuide(int n,int pagesize){
+    public Page<ExamGuide> searchExamGuide(int n,int pagesize){
         return examGuideRepository.findAll(new PageRequest(n,pagesize));
     }
 

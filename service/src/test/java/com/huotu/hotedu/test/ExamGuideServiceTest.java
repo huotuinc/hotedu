@@ -44,7 +44,7 @@ public class ExamGuideServiceTest {
 
     @Test
     @Rollback
-    public void loadExamGuide(){
+    public void searchExamGuide(){
         ExamGuide examGuide =new ExamGuide();
         examGuide.setContent("examguide");
         examGuide.setTitle("title examguide1");

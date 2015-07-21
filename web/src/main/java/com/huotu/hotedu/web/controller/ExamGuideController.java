@@ -37,10 +37,10 @@ public class ExamGuideController {
 //     * @param model 返回客户端集
 //     * @return examguide.html
 //     */
-//    @RequestMapping("/backend/loadExamGuide")
-//    public String loadExamGuide(Model model) {
+//    @RequestMapping("/backend/searchExamGuide")
+//    public String searchExamGuide(Model model) {
 //
-//        Page<ExamGuide> pages = examGuideService.loadExamGuide(0, PAGE_SIZE);
+//        Page<ExamGuide> pages = examGuideService.searchExamGuide(0, PAGE_SIZE);
 //        long sumElement = pages.getTotalElements();
 //        model.addAttribute("allGuideList", pages);
 //        model.addAttribute("sumpage", (sumElement + pages.getSize() - 1) / pages.getSize());
@@ -86,8 +86,8 @@ public class ExamGuideController {
 //     * @return          examguide.html
 //     * @deprecated 移除
 //     */
-//    @RequestMapping("/backend/pageExamGuide")
-//    public String pageExamGuide(int n,int sumpage,String keywords,Model model){
+//    @RequestMapping("/backend/searchExamGuide")
+//    public String searchExamGuide(int n,int sumpage,String keywords,Model model){
 //        //如果已经到分页的第一页了，将页数设置为0
 //        if (n < 0){
 //            n++;
@@ -166,7 +166,7 @@ public class ExamGuideController {
      * @param title   标题
      * @param content 描述
      * @param top     是否置顶
-     * @return 不出异常重定向：/backend/loadExamGuide
+     * @return 不出异常重定向：/backend/searchExamGuide
      */
     //TODO 是否搞抛出异常
     @PreAuthorize("hasRole('EDITOR')")
@@ -178,7 +178,7 @@ public class ExamGuideController {
         examGuide.setLastUploadDate(new Date());
         examGuide.setIsTop("1".equals(top));
         examGuideService.addExamGuide(examGuide);
-        return "redirect:/backend/loadExamGuide";
+        return "redirect:/backend/searchExamGuide";
     }
 
     /**
@@ -188,7 +188,7 @@ public class ExamGuideController {
      * @param title   标题
      * @param content 描述
      * @param top     是否置顶
-     * @return 重定向到：/backend/loadExamGuide
+     * @return 重定向到：/backend/searchExamGuide
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveExamGuide")
@@ -199,6 +199,6 @@ public class ExamGuideController {
         examGuide.setIsTop("1".equals(top));
         examGuide.setLastUploadDate(new Date());
         examGuideService.modify(examGuide);
-        return "redirect:/backend/loadExamGuide";
+        return "redirect:/backend/searchExamGuide";
     }
 }
