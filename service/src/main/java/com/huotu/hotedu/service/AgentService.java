@@ -1,6 +1,7 @@
 package com.huotu.hotedu.service;
 
 import com.huotu.hotedu.entity.Agent;
+import com.huotu.hotedu.entity.Tutor;
 import com.huotu.hotedu.repository.AgentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,7 +33,14 @@ public class AgentService {
      * @return          代理商集合
      */
     public Page<Agent> loadagents(int n,int pagesize){
-        return agentRepository.findAll(new PageRequest(n,pagesize));
+
+        return agentRepository.findAll(new Specification<Agent>() {
+            @Override
+            public Predicate toPredicate(Root<Agent> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                return cb.isTrue(root.get("enabled").as(Boolean.class));
+            }
+        },
+        new PageRequest(n,pagesize));
     }
 
 
@@ -45,16 +53,39 @@ public class AgentService {
      * @param type      搜索类型
      * @return          代理商集合
      */
-    public Page<Agent> searchAgent(int n,int pagesize,String keyword,String type){
+    public Page<Agent> searchAgentType(int n,int pageSize,String keyword,String type){
        return  agentRepository.findAll(new Specification<Agent>() {
             @Override
             public Predicate toPredicate(Root<Agent> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 if (keyword.length()==0)
                     return null;
-                return cb.like(root.get(type).as(String.class), "%" + keyword + "%");
+                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)),cb.like(root.get(type).as(String.class), "%" + keyword + "%"));
+            }
+        },new PageRequest(n, pageSize));
+    }
+
+
+
+    //分页依据全部搜索
+    public Page<Agent> searchAgentAll(int n,int pagesize,String keyword){
+        return  agentRepository.findAll(new Specification<Agent>() {
+            @Override
+            public Predicate toPredicate(Root<Agent> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                if (keyword==null)
+                    return null;
+                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)),cb.or(
+                        cb.like(root.get("name").as(String.class), "%" + keyword + "%"),
+                        cb.like(root.get("area").as(String.class),"%"+keyword+"%"),
+                        cb.like(root.get("LoginName").as(String.class), "%" + keyword + "%")
+                ));
             }
         },new PageRequest(n, pagesize));
+
     }
+
+
+
+
 
 
     /**

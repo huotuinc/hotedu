@@ -39,10 +39,10 @@ public class TutorService {
         return  tutorRepository.findAll(new Specification<Tutor>() {
             @Override
             public Predicate toPredicate(Root<Tutor> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if (keyword.length()==0)
+                if (keyword==null)
                     return cb.isTrue(root.get("enabled").as(Boolean.class));
 //                return cb.like(root.get(type).as(String.class),"%"+keyword+"%");
-                return  cb.or(cb.like(root.get(type).as(String.class),"%"+keyword+"%"),cb.isTrue(root.get("enabled").as(Boolean.class)));
+                return  cb.and(cb.like(root.get(type).as(String.class),"%"+keyword+"%"),cb.isTrue(root.get("enabled").as(Boolean.class)));
             }
         },new PageRequest(n, pageSize));
 
@@ -54,9 +54,10 @@ public class TutorService {
         return  tutorRepository.findAll(new Specification<Tutor>() {
             @Override
             public Predicate toPredicate(Root<Tutor> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if (keyword.length()==0)
+                if (keyword==null)
                     return null;
-                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)),cb.or(cb.like(root.get("name").as(String.class), "%" + keyword + "%"),
+                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)),cb.or(
+                        cb.like(root.get("name").as(String.class), "%" + keyword + "%"),
                         cb.like(root.get("qualification").as(String.class),"%"+keyword+"%"),
                         cb.like(root.get("area").as(String.class),"%"+keyword+"%")
                 ));
@@ -72,7 +73,6 @@ public class TutorService {
             public Predicate toPredicate(Root<Tutor> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 if (start==null&&end==null)
                     return null;
-//                return cb.between(root.get("lastUploadDate").as(Date.class),start,end);
                 return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)),cb.between(root.get("lastUploadDate").as(Date.class),start,end));
             }
         },new PageRequest(n, pagesize));
