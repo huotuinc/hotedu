@@ -182,25 +182,6 @@ public class Member extends Login {
         this.isHaveLicense = isHaveLicense;
     }
 
-    @Override
-    public String toString() {
-        return "Member{" +
-                "agent=" + agent +
-                ", pictureUri='" + pictureUri + '\'' +
-                ", realName='" + realName + '\'' +
-                ", sex=" + sex +
-                ", phoneNo='" + phoneNo + '\'' +
-                ", area='" + area + '\'' +
-                ", ConfirmPerson='" + ConfirmPerson + '\'' +
-                ", theClass=" + theClass +
-                ", isPayed=" + isPayed +
-                ", isPassed=" + isPassed +
-                ", isHaveLicense=" + isHaveLicense +
-                ", applyDate=" + applyDate +
-                ", payDate=" + payDate +
-                ", registerDate=" + registerDate +
-                '}';
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

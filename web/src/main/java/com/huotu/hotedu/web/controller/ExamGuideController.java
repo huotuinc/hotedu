@@ -4,7 +4,6 @@ import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.service.ExamGuideService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +15,7 @@ import java.util.Date;
  * 考试指南的Controller
  * @author shiliting741@163.com
  */
-//@PreAuthorize("isAuthenticated()")//已登录的任何角色
-//@PreAuthorize("hasRole('ROLE_EDITOR')")//拥有编辑权限
+//@PreAuthorize("hasRole('ROLE_EDITOR')")
 @Controller
 public class ExamGuideController {
     /**
@@ -103,7 +101,6 @@ public class ExamGuideController {
      * @param model         返回客户端集合
      * @return      examguide.html
      */
-    @PreAuthorize("hasRole('ROLE_EDITOR')")//拥有编辑权限
     @RequestMapping("/backend/delExamGuide")
     public String delExamGuide(int n,int sumpage,String keywords,Long id,Long sumElement,Model model){
         examGuideService.delExamGuide(id);
@@ -125,7 +122,6 @@ public class ExamGuideController {
      * examguide.html页面单击新建跳转
      * @return newguide.html
      */
-    @PreAuthorize("hasRole('ROLE_EDITOR')")//拥有编辑权限
     @RequestMapping("/backend/addExamGuide")
     public String addExamGuide(){
         return "/backend/newguide";
@@ -137,7 +133,6 @@ public class ExamGuideController {
      * @param model     返回客户端集
      * @return      modifyguide.html
      */
-    @PreAuthorize("hasRole('ROLE_EDITOR')")//拥有编辑权限
     @RequestMapping("/backend/modifyExamGuide")
     public String ModifyExamGuide(Long id, Model model){
         ExamGuide examGuide=examGuideService.findOneById(id);
@@ -149,18 +144,17 @@ public class ExamGuideController {
      * newguide.html页面点击保存添加后跳转
      * @param title     标题
      * @param content   描述
-     * @param isTop   是否置顶
+     * @param top   是否置顶
      * @return      不出异常重定向：/backend/loadExamGuide
      */
     //TODO 是否搞抛出异常
-    @PreAuthorize("hasRole('ROLE_EDITOR')")//拥有编辑权限
     @RequestMapping("/backend/addSaveExamGuide")
-    public String addSaveExamGuide(String title,String content,Boolean isTop){
+    public String addSaveExamGuide(String title,String content,String top){
         ExamGuide examGuide=new ExamGuide();
         examGuide.setTitle(title);
         examGuide.setContent(content);
         examGuide.setLastUploadDate(new Date());
-        examGuide.setIsTop(isTop);
+        examGuide.setIsTop("1".equals(top));
         examGuideService.addExamGuide(examGuide);
         return "redirect:/backend/loadExamGuide";
     }
@@ -170,16 +164,15 @@ public class ExamGuideController {
      * @param id    修改后的id
      * @param title     标题
      * @param content   描述
-     * @param isTop   是否置顶
+     * @param top   是否置顶
      * @return      重定向到：/backend/loadExamGuide
      */
-    @PreAuthorize("hasRole('ROLE_EDITOR')")//拥有编辑权限
     @RequestMapping("/backend/modifySaveExamGuide")
-    public String modifySaveExamGuide(Long id,String title,String content,Boolean isTop){
+    public String modifySaveExamGuide(Long id,String title,String content,String top){
         ExamGuide examGuide=examGuideService.findOneById(id);
         examGuide.setTitle(title);
         examGuide.setContent(content);
-        examGuide.setIsTop(isTop);
+        examGuide.setIsTop("1".equals(top));
         examGuide.setLastUploadDate(new Date());
         examGuideService.modify(examGuide);
         return "redirect:/backend/loadExamGuide";

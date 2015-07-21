@@ -81,25 +81,25 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 examGuide.setContent("examguide");
                 examGuide.setTitle("title examguide1");
                 examGuide.setLastUploadDate(new Date());
-                examGuide.setTop(true);
+                examGuide.setIsTop(true);
                 examGuideRepository.save(examGuide);
                 examGuide =new ExamGuide();
                 examGuide.setContent("examguide");
                 examGuide.setTitle("title examguide2");
                 examGuide.setLastUploadDate(new Date());
-                examGuide.setTop(true);
+                examGuide.setIsTop(true);
                 examGuideRepository.save(examGuide);
                 examGuide =new ExamGuide();
                 examGuide.setContent("examguide");
                 examGuide.setTitle("title examguide3");
                 examGuide.setLastUploadDate(new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000));
-                examGuide.setTop(true);
+                examGuide.setIsTop(true);
                 examGuideRepository.save(examGuide);
                 examGuide =new ExamGuide();
                 examGuide.setContent("examguide");
                 examGuide.setTitle("title examguide4");
                 examGuide.setLastUploadDate(new Date(System.currentTimeMillis() - 5 * 60 * 60 * 1000));
-                examGuide.setTop(true);
+                examGuide.setIsTop(true);
                 examGuideRepository.save(examGuide);
                 Random r=new Random();
                 for(int i=0;i<34;i++){
@@ -107,14 +107,14 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                     examGuide.setTitle(String.valueOf(r.nextInt()*20));
                     examGuide.setContent(String.valueOf(r.nextDouble()));
                     examGuide.setLastUploadDate(new Date(System.currentTimeMillis()+i*100000));
-                    examGuide.setTop(i%3==0? true:false);
+                    examGuide.setIsTop(i % 3 == 0 ? true : false);
                     examGuideRepository.save(examGuide);
                 }
                 examGuide =new ExamGuide();
                 examGuide.setContent("中文测试标题");
                 examGuide.setTitle("中文测试内容");
                 examGuide.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 2000));
-                examGuide.setTop(true);
+                examGuide.setIsTop(true);
                 examGuideRepository.save(examGuide);
                 /// do something
             }
