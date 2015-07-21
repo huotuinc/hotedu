@@ -58,16 +58,26 @@ public class ExamGuideController {
      * @return examguide.html
      */
     @RequestMapping("/backend/searchExamGuide")
-    public String searchExamGuide(@RequestParam(required = false) String keywords, Model model) {
+    public String searchExamGuide(@RequestParam(required = false)Integer pageNo,
+                                  @RequestParam(required = false)Integer pageSize,
+                                  @RequestParam(required = false) String keywords, Model model) {
+        if(pageNo==null){
+            pageNo=0;
+        }
+        if(pageSize==null) {
+            pageSize = PAGE_SIZE;
+        }
         Page<ExamGuide> pages;
-        if (keywords == null)
-            pages = examGuideService.loadExamGuide(0, PAGE_SIZE);
-        else
-            pages = examGuideService.searchExamGuide(0, PAGE_SIZE, keywords);
+        if (keywords == null) {
+            pages = examGuideService.loadExamGuide(pageNo, pageSize);
+        }
+        else {
+            pages = examGuideService.searchExamGuide(pageNo, pageSize, keywords);
+        }
         long sumElement = pages.getTotalElements();
         model.addAttribute("allGuideList", pages);
         model.addAttribute("sumpage", (sumElement + pages.getSize() - 1) / pages.getSize());
-        model.addAttribute("n", 0);
+        model.addAttribute("pageNo", pageNo);
         model.addAttribute("keywords", keywords);
         model.addAttribute("sumElement", sumElement);
         return "/backend/examguide";

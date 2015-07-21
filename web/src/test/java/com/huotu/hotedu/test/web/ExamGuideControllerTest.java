@@ -113,10 +113,10 @@ public class ExamGuideControllerTest extends WebTestBase {
         )
                 .andExpect(status().isFound());
 
-        int totalCount = (int) examGuideRepository.count();
+        long totalCount =  examGuideRepository.count();
         int defaultPageSize = ExamGuideController.PAGE_SIZE;
-        int pages = totalCount/defaultPageSize+ (totalCount%defaultPageSize==0?0:1);
-
+//        long pages = totalCount/defaultPageSize+ (totalCount%defaultPageSize==0?0:1);
+        long pages = (totalCount+defaultPageSize-1)/defaultPageSize;
         mockMvc.perform(
                 get("/backend/searchExamGuide")
                         .session(loginAs(memberUsername, password))
@@ -149,9 +149,10 @@ public class ExamGuideControllerTest extends WebTestBase {
 
             Map<String,Object> model = mockMvc.perform(
                     get("/backend/searchExamGuide")
-                    .param("keywords",complexKeyword)
-                    .param("n",""+currentIndex)
-                    .param("paging","1") //每页显示多少
+                            .session(loginAs(memberUsername, password))
+                            .param("keywords", complexKeyword)
+                            .param("pageNo",""+currentIndex)
+                            .param("pageSize","1") //每页显示多少
             )
                     .andExpect(status().isOk())
                     .andReturn().getModelAndView().getModel();
@@ -164,7 +165,7 @@ public class ExamGuideControllerTest extends WebTestBase {
 
             Assert.assertTrue("查询出来的考试指南记录是否包含在之前预期的记录里",containsExamGuides.contains(foundGuid));
 
-            currentIndex = ((Number)(model.get("n"))).intValue()+1;//当前显示第几页，+1
+            currentIndex = ((Number)(model.get("pageNo"))).intValue()+1;//当前显示第几页，+1
 
             found.add(allGuideList.getContent().get(0));
         }
