@@ -31,25 +31,6 @@ public class ExamGuideController {
      */
     public static final int PAGE_SIZE = 10;
 
-//    /**
-//     * 显示考试指南信息
-//     *
-//     * @param model 返回客户端集
-//     * @return examguide.html
-//     */
-//    @RequestMapping("/backend/searchExamGuide")
-//    public String searchExamGuide(Model model) {
-//
-//        Page<ExamGuide> pages = examGuideService.searchExamGuide(0, PAGE_SIZE);
-//        long totalElements = pages.getTotalElements();
-//        model.addAttribute("allGuideList", pages);
-//        model.addAttribute("sumpage", (totalElements + pages.getSize() - 1) / pages.getSize());
-//        model.addAttribute("n", 0);
-//        model.addAttribute("keywords", "");
-//        model.addAttribute("totalElements", totalElements);
-//        return "/backend/examguide";
-//    }
-
     /**
      * 搜索符合条件的考试指南信息
      *
@@ -86,61 +67,22 @@ public class ExamGuideController {
         return "/backend/examguide";
     }
 
-//    /**
-//     * 分页显示
-//     * @param n             显示第几页
-//     * @param sumpage    分页总页数
-//     * @param keywords      检索关键字(使用检索功能后有效)
-//     * @param model         返回客户端集合
-//     * @return          examguide.html
-//     * @deprecated 移除
-//     */
-//    @RequestMapping("/backend/searchExamGuide")
-//    public String searchExamGuide(int n,int sumpage,String keywords,Model model){
-//        //如果已经到分页的第一页了，将页数设置为0
-//        if (n < 0){
-//            n++;
-//        }else if(n + 1 > sumpage){//如果超过分页的最后一页了，将页数设置为最后一页
-//            n--;
-//        }
-//        Page<ExamGuide> pages = examGuideService.searchExamGuide(n, PAGE_SIZE, keywords);
-//        model.addAttribute("allGuideList",pages);
-//        model.addAttribute("sumpage",sumpage);
-//        model.addAttribute("n",n);
-//        model.addAttribute("keywords",keywords);
-//        model.addAttribute("totalElements",pages.getTotalElements());
-//        return "/backend/examguide";
-//    }
-
     /**
      * 删除考试指南信息以及查询
      *
-     * @param n          显示第几页
-     * @param sumpage    分页总页数
+     * @param pageNo     显示第几页
      * @param keywords   检索关键字(使用检索功能后有效)
      * @param id         需要被删除的记录id
-     * @param totalElements 总记录数
      * @param model      返回客户端集合
      * @return examguide.html
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/delExamGuide")
-    public String delExamGuide(int n, int sumpage, String keywords, Long id, Long totalElements, Model model) {
+    public String delExamGuide(@RequestParam(required = false)Integer pageNo,String keywords, Long id, Model model) {
         examGuideService.delExamGuide(id);
-        if ((totalElements - 1) % PAGE_SIZE == 0) {
-            if (n > 0 && n + 1 == sumpage) {
-                n--;
-            }
-            sumpage--;
-        }
-        totalElements--;
-        Page<ExamGuide> pages = examGuideService.searchExamGuide(n, PAGE_SIZE, keywords);
-        model.addAttribute("sumpage", sumpage);
-        model.addAttribute("allGuideList", pages);
-        model.addAttribute("n", n);
+        model.addAttribute("pageNo", pageNo);
         model.addAttribute("keywords", keywords);
-        model.addAttribute("totalElements", totalElements);
-        return "/backend/examguide";
+        return "redirect:/backend/searchExamGuide";
     }
 
     /**

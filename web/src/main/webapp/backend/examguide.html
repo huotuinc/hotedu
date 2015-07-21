@@ -178,7 +178,7 @@
                             <td th:text="${g.top}" title="">置顶</td>
                             <td><a class="link-update" href="modifyguide.html" th:href="@{/backend/modifyExamGuide(id=${g.id})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a>
-                                <a class="real-delete" th:class="real-delete" href="#" th:href="@{/backend/delExamGuide(id=${g.id},pageNo=${pageNo},keywords=${keywords},totalPages=${totalPages},totalElements=${totalElements})}"></a>
+                                <a class="real-delete" th:class="real-delete" href="#" th:href="@{/backend/delExamGuide(id=${g.id},pageNo=${pageNo},keywords=${keywords})}"></a>
                             </td>
                         </tr>
                     </table>
