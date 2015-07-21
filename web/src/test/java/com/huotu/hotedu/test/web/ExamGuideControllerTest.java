@@ -113,10 +113,10 @@ public class ExamGuideControllerTest extends WebTestBase {
         )
                 .andExpect(status().isFound());
 
-        long totalCount =  examGuideRepository.count();
+        int totalCount =  (int)examGuideRepository.count();
         int defaultPageSize = ExamGuideController.PAGE_SIZE;
 //        long pages = totalCount/defaultPageSize+ (totalCount%defaultPageSize==0?0:1);
-        long pages = (totalCount+defaultPageSize-1)/defaultPageSize;
+        int pages = (totalCount+defaultPageSize-1)/defaultPageSize;
         mockMvc.perform(
                 get("/backend/searchExamGuide")
                         .session(loginAs(memberUsername, password))

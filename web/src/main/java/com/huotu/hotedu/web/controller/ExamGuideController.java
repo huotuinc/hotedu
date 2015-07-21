@@ -41,12 +41,12 @@ public class ExamGuideController {
 //    public String searchExamGuide(Model model) {
 //
 //        Page<ExamGuide> pages = examGuideService.searchExamGuide(0, PAGE_SIZE);
-//        long sumElement = pages.getTotalElements();
+//        long totalElements = pages.getTotalElements();
 //        model.addAttribute("allGuideList", pages);
-//        model.addAttribute("sumpage", (sumElement + pages.getSize() - 1) / pages.getSize());
+//        model.addAttribute("sumpage", (totalElements + pages.getSize() - 1) / pages.getSize());
 //        model.addAttribute("n", 0);
 //        model.addAttribute("keywords", "");
-//        model.addAttribute("sumElement", sumElement);
+//        model.addAttribute("totalElements", totalElements);
 //        return "/backend/examguide";
 //    }
 
@@ -68,12 +68,12 @@ public class ExamGuideController {
             pageSize = PAGE_SIZE;
         }
         Page<ExamGuide> pages = examGuideService.searchExamGuide(pageNo, pageSize, keywords);
-        long sumElement = pages.getTotalElements();
+        long totalElements = pages.getTotalElements();
         model.addAttribute("allGuideList", pages);
-        model.addAttribute("totalPages", (sumElement + pages.getSize() - 1) / pages.getSize());
+        model.addAttribute("totalPages",pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("keywords", keywords);
-        model.addAttribute("totalElements", sumElement);
+        model.addAttribute("totalElements", totalElements);
         return "/backend/examguide";
     }
 
@@ -99,7 +99,7 @@ public class ExamGuideController {
 //        model.addAttribute("sumpage",sumpage);
 //        model.addAttribute("n",n);
 //        model.addAttribute("keywords",keywords);
-//        model.addAttribute("sumElement",pages.getTotalElements());
+//        model.addAttribute("totalElements",pages.getTotalElements());
 //        return "/backend/examguide";
 //    }
 
@@ -110,27 +110,27 @@ public class ExamGuideController {
      * @param sumpage    分页总页数
      * @param keywords   检索关键字(使用检索功能后有效)
      * @param id         需要被删除的记录id
-     * @param sumElement 总记录数
+     * @param totalElements 总记录数
      * @param model      返回客户端集合
      * @return examguide.html
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/delExamGuide")
-    public String delExamGuide(int n, int sumpage, String keywords, Long id, Long sumElement, Model model) {
+    public String delExamGuide(int n, int sumpage, String keywords, Long id, Long totalElements, Model model) {
         examGuideService.delExamGuide(id);
-        if ((sumElement - 1) % PAGE_SIZE == 0) {
+        if ((totalElements - 1) % PAGE_SIZE == 0) {
             if (n > 0 && n + 1 == sumpage) {
                 n--;
             }
             sumpage--;
         }
-        sumElement--;
+        totalElements--;
         Page<ExamGuide> pages = examGuideService.searchExamGuide(n, PAGE_SIZE, keywords);
         model.addAttribute("sumpage", sumpage);
         model.addAttribute("allGuideList", pages);
         model.addAttribute("n", n);
         model.addAttribute("keywords", keywords);
-        model.addAttribute("sumElement", sumElement);
+        model.addAttribute("totalElements", totalElements);
         return "/backend/examguide";
     }
 

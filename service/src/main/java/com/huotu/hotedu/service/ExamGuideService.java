@@ -23,10 +23,10 @@ public class ExamGuideService {
     @Autowired
     private ExamGuideRepository examGuideRepository;
 
-    //返回所有考试指南
-    public Page<ExamGuide> searchExamGuide(int n,int pagesize){
-        return examGuideRepository.findAll(new PageRequest(n,pagesize));
-    }
+//    //返回所有考试指南
+//    public Page<ExamGuide> searchExamGuide(int n,int pagesize){
+//        return examGuideRepository.findAll(new PageRequest(n,pagesize));
+//    }
 
     //分页
     public Page<ExamGuide> searchExamGuide(int n,int pagesize,String keyword){
