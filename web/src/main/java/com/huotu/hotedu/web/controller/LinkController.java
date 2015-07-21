@@ -131,7 +131,7 @@ public class LinkController {
      * @param model     返回客户端集
      * @return      modifylink.html
      */
-    @RequestMapping("/backend/modify/link")
+    @RequestMapping("/backend/modifyLink")
     public String ModifyLink(Long id, Model model){
         Link link=linkService.findOneById(id);
         model.addAttribute("link",link);

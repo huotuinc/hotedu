@@ -1,14 +1,11 @@
 package com.huotu.hotedu.web.controller;
 
-import com.huotu.hotedu.entity.Agent;
-import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -27,13 +24,18 @@ public class AgentController {
      */
     public static final int PAGE_SIZE=10;
 
+    @RequestMapping("/pc/loadAgents")
     public String showMemberByAgent(Model model){
         String turnPage = "/pc/agentCenter";//TODO 返回路径暂定
-        Agent agent = (Agent) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Page<Member> pages=memberService.loadMembersByAgent(agent,0,PAGE_SIZE);
-        model.addAttribute("allMemberList",pages);
-        model.addAttribute("agent",agent);
-        return turnPage;
+        return null;
+//        Agent agent = (Agent) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        if(agent==null){
+//            return null;
+//        }
+//        Page<Member> pages=memberService.loadMembersByAgent(agent,0,PAGE_SIZE);
+//        model.addAttribute("allMemberList",pages);
+//        model.addAttribute("agent",agent);
+//        return turnPage;
 
     }
 }
