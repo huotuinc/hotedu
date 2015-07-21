@@ -116,9 +116,16 @@ public class ExamGuideControllerTest extends WebTestBase {
         int totalCount =  (int)examGuideRepository.count();
         int defaultPageSize = ExamGuideController.PAGE_SIZE;
         int pages = (totalCount+defaultPageSize-1)/defaultPageSize;
+
         mockMvc.perform(
                 get("/backend/searchExamGuide")
                         .session(loginAs(memberUsername, password))
+        )
+                .andExpect(status().isForbidden());
+
+        mockMvc.perform(
+                get("/backend/searchExamGuide")
+                        .session(loginAs(editorUsername, password))
         )
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("allGuideList", new BaseMatcher<Object>() {
@@ -148,7 +155,7 @@ public class ExamGuideControllerTest extends WebTestBase {
 
             Map<String,Object> model = mockMvc.perform(
                     get("/backend/searchExamGuide")
-                            .session(loginAs(memberUsername, password))
+                            .session(loginAs(editorUsername, password))
                             .param("keywords", complexKeyword)
                             .param("pageNo",""+currentIndex)
                             .param("pageSize","1") //每页显示多少

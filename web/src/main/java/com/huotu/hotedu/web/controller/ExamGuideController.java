@@ -38,6 +38,7 @@ public class ExamGuideController {
      * @param model    返回客户端参数集
      * @return examguide.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/searchExamGuide")
     public String searchExamGuide(@RequestParam(required = false)Integer pageNo,
                                   @RequestParam(required = false)Integer pageSize,
