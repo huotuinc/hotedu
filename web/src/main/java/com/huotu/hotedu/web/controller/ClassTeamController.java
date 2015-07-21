@@ -51,7 +51,7 @@ public class ClassTeamController {
         return "/backend/classteam";
     }
     /**
-     * 搜索符合条件的考试指南信息
+     * 搜索符合条件的classteam信息
      *
      * @param keywords 搜索关键字 可以为空
      * @param model    返回客户端参数集
@@ -112,8 +112,8 @@ public class ClassTeamController {
         ClassTeam classteam = classTeamService.findOneById(id);
         classteam.setExam(exam);
         classTeamService.modify(classteam);
-        return "redirect:/backend/loadClassTeam";
+        return "redirect:/backend/searchClassTeam";
     }
 
-    }
+}
 

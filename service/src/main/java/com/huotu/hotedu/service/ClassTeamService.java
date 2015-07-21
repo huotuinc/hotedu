@@ -53,7 +53,6 @@ public class ClassTeamService  {
     }
 
 
-
     //删除一个classteam
     public void delClassTeam(Long id){classTeamRepository.delete(id);}
 
