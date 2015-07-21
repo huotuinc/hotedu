@@ -139,7 +139,7 @@ public class ExamGuideControllerTest extends WebTestBase {
 
                     }
                 }))
-                .andExpect(model().attribute("sumpage",pages))
+                .andExpect(model().attribute("totalPages",pages))
         ;
 
         ArrayList<ExamGuide> found = new ArrayList<>();

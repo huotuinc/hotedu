@@ -11,11 +11,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.awt.print.PageFormat;
-import java.awt.print.Pageable;
-import java.awt.print.Printable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by shiliting 2015/6/25.
@@ -35,14 +30,12 @@ public class ExamGuideService {
 
     //分页
     public Page<ExamGuide> searchExamGuide(int n,int pagesize,String keyword){
-        // SQL
-        // 面向对象的SQL
-        // select ExamGuide from ExamGuide where title like ?
        return  examGuideRepository.findAll(new Specification<ExamGuide>() {
             @Override
             public Predicate toPredicate(Root<ExamGuide> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if (keyword.length()==0)
+                if ("".equals(keyword)||keyword==null) {
                     return null;
+                }
                 return cb.like(root.get("title").as(String.class),"%"+keyword+"%");
             }
         },new PageRequest(n, pagesize));
