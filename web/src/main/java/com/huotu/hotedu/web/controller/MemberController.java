@@ -1,7 +1,9 @@
 package com.huotu.hotedu.web.controller;
 
+import com.huotu.hotedu.entity.Agent;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.entity.Result;
+import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,6 +26,8 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
     @Autowired
+    private AgentService agentService;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @RequestMapping("/pc/loadMemberRegister")
@@ -32,7 +36,7 @@ public class MemberController {
     }
 
     @RequestMapping("/pc/register")
-    public String register(String realName,int sex,String phoneNo,String area,Model model) throws Exception {
+    public String register(String realName,int sex,String phoneNo,long areaId,Model model) throws Exception {
         String errInfo = "";
         String msgInfo = "";
         String turnPage = "/pc/registerTest";
@@ -40,18 +44,19 @@ public class MemberController {
             errInfo = "姓名不能为空";
         }else if("".equals(phoneNo)||phoneNo==null) {
             errInfo = "手机号不能为空";
-        }else if("".equals(area)||area==null) {
+        }else if(areaId == 0) {
             errInfo = "请选择报名地点";
         }else {
             boolean exist = memberService.isPhoneNoExist(phoneNo);
             if(exist) {
                 errInfo = "该手机号已被注册";
             }else {
+                Agent agent = agentService.findOneById(areaId);
                 Member mb = new Member();
+                mb.setAgent(agent);
                 mb.setRealName(realName);
                 mb.setSex(sex);
                 mb.setPhoneNo(phoneNo);
-                mb.setArea(area);
                 mb.setLoginName(phoneNo);
                 mb.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes("UTF-8")).toLowerCase());
                 mb.setEnabled(false);

@@ -3,6 +3,7 @@ package com.huotu.hotedu.entity;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Date;
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"loginName"}))
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Login implements UserDetails {
+public abstract class Login implements UserDetails,Serializable {
     private static final long serialVersionUID = -349012453592429794L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
