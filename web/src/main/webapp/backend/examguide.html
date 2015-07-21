@@ -183,9 +183,9 @@
                         </tr>
                     </table>
                     <div class="list-page">
-                        <a href="#" th:href="@{/backend/searchExamGuide(pageNo=${pageNo}-1,keywords=${keywords},totalPages=${totalPages})}">上一页</a>
-                        <a href="#" th:href="@{/backend/searchExamGuide(pageNo=${pageNo}+1,keywords=${keywords},totalPages=${totalPages})}">下一页</a>
-                        <span th:text="${totalElements}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
+                        <a href="#" th:href="@{/backend/searchExamGuide(pageNo=${pageNo}-1,keywords=${keywords})}">上一页</a>
+                        <a href="#" th:href="@{/backend/searchExamGuide(pageNo=${pageNo}+1,keywords=${keywords})}">下一页</a>
+                        <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
                     </div>
                 </div>
             </form>

@@ -68,12 +68,21 @@ public class ExamGuideController {
             pageSize = PAGE_SIZE;
         }
         Page<ExamGuide> pages = examGuideService.searchExamGuide(pageNo, pageSize, keywords);
-        long totalElements = pages.getTotalElements();
+        long totalRecords = pages.getTotalElements();
+        int numEl =  pages.getNumberOfElements();
+        if(numEl==0) {
+            pageNo--;
+            if(pageNo<0) {
+                pageNo = 0;
+            }
+            pages = examGuideService.searchExamGuide(pageNo, pageSize, keywords);
+            totalRecords = pages.getTotalElements();
+        }
         model.addAttribute("allGuideList", pages);
         model.addAttribute("totalPages",pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("keywords", keywords);
-        model.addAttribute("totalElements", totalElements);
+        model.addAttribute("totalRecords", totalRecords);
         return "/backend/examguide";
     }
 
