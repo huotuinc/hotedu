@@ -34,37 +34,21 @@ public class ClassTeam implements Serializable {
      */
     private Exam exam;
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() {return id;}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) {this.id = id;}
 
-    public Agent getAgent() {
-        return agent;
-    }
+    public Agent getAgent() {return agent;}
 
-    public void setAgent(Agent agent) {
-        this.agent = agent;
-    }
+    public void setAgent(Agent agent) {this.agent = agent;}
 
-    public String getClassName() {
-        return className;
-    }
+    public String getClassName() {return className;}
 
-    public void setClassName(String className) {
-        this.className = className;
-    }
+    public void setClassName(String className) {this.className = className;}
 
-    public Exam getExam() {
-        return exam;
-    }
+    public Exam getExam() {return exam;}
 
-    public void setExam(Exam exam) {
-        this.exam = exam;
-    }
+    public void setExam(Exam exam) {this.exam = exam;}
 
     public int getMemberNum() {
         return memberNum;
