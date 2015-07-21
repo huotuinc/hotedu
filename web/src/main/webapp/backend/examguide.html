@@ -175,7 +175,7 @@
                             <td th:text="${g.id}">01</td>
                             <td title="" th:text="${g.title}">mou某mou某mou某mou某3</td>
                             <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/hh.mm.ss')}">2015.01.01/13.00.00</td>
-                            <td th:text="${g.top}" title="">置顶</td>
+                            <td th:text="${g.top}?'是':'否'" >置顶</td>
                             <td><a class="link-update" href="modifyguide.html" th:href="@{/backend/modifyExamGuide(id=${g.id})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a>
                                 <a class="real-delete" th:class="real-delete" href="#" th:href="@{/backend/delExamGuide(id=${g.id},pageNo=${pageNo},keywords=${keywords})}"></a>

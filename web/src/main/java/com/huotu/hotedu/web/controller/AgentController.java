@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * Created by luffy on 2015/6/10.
  * 登录有关的Controller
@@ -36,6 +39,15 @@ public class AgentController {
 //        model.addAttribute("allMemberList",pages);
 //        model.addAttribute("agent",agent);
 //        return turnPage;
+    }
 
+
+    @RequestMapping("pc/arrangeClass")
+    public String arrangeClassController(ArrayList<Object> arrayList,Model model){
+        String errInfo = "";
+        String msgInfo = "";
+        String turnPage = "/pc/agentCenter";
+
+        return "/pc/1234";
     }
 }

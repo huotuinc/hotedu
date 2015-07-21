@@ -59,6 +59,7 @@ public class ExamGuideControllerTest extends WebTestBase {
     // Editor 是可以修改的
     // 但是Member 是不可以的
 
+
     @Test
     @Rollback
     public void examGuideTest() throws Exception {
@@ -108,17 +109,30 @@ public class ExamGuideControllerTest extends WebTestBase {
         }
         //准备测试环境END
 
+        /**
+         * 测试在没有登录的情况下不能访问查询操作
+         */
         mockMvc.perform(
                 get("/backend/searchExamGuide")
         )
                 .andExpect(status().isFound());
-
-        int totalCount =  (int)examGuideRepository.count();
+        /**
+         * 1.测试用户登录之后，是否能正常访问
+         * 2.测试返回model中的"allGuideList"属性是否是Page类型，长度是否为设置的长度10
+         * 3.测试分页总数是否正确
+         */
+        int totalCount = (int) examGuideRepository.count();
         int defaultPageSize = ExamGuideController.PAGE_SIZE;
-        int pages = (totalCount+defaultPageSize-1)/defaultPageSize;
+        int pages = (totalCount + defaultPageSize - 1) / defaultPageSize;
         mockMvc.perform(
                 get("/backend/searchExamGuide")
                         .session(loginAs(memberUsername, password))
+        )
+                .andExpect(status().isForbidden());
+
+        mockMvc.perform(
+                get("/backend/searchExamGuide")
+                        .session(loginAs(editorUsername, password))
         )
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("allGuideList", new BaseMatcher<Object>() {
@@ -138,37 +152,51 @@ public class ExamGuideControllerTest extends WebTestBase {
 
                     }
                 }))
-                .andExpect(model().attribute("totalPages",pages))
+                .andExpect(model().attribute("totalPages", pages))
         ;
 
+        /**
+         * 1.测试登录之后能否根据所传参数找全所有的包含关键字的记录
+         */
         ArrayList<ExamGuide> found = new ArrayList<>();
         int currentIndex = 0;
 
-        while(found.size()<containsExamGuides.size()){
+        while (found.size() < containsExamGuides.size()) {
 
-            Map<String,Object> model = mockMvc.perform(
+            Map<String, Object> model = mockMvc.perform(
                     get("/backend/searchExamGuide")
-                            .session(loginAs(memberUsername, password))
+                            .session(loginAs(editorUsername, password))
                             .param("keywords", complexKeyword)
-                            .param("pageNo",""+currentIndex)
-                            .param("pageSize","1") //每页显示多少
+                            .param("pageNo", "" + currentIndex)
+                            .param("pageSize", "1") //每页显示多少
             )
                     .andExpect(status().isOk())
                     .andReturn().getModelAndView().getModel();
 
             Page<ExamGuide> allGuideList = (Page<ExamGuide>) model.get("allGuideList");
 
-            Assert.assertEquals("查询出来的记录必须是之前设定的长度",1,allGuideList.getContent().size());
+            Assert.assertEquals("查询出来的记录必须是之前设定的长度", 1, allGuideList.getContent().size());
 
             ExamGuide foundGuid = allGuideList.getContent().get(0);
 
-            Assert.assertTrue("查询出来的考试指南记录是否包含在之前预期的记录里",containsExamGuides.contains(foundGuid));
+            Assert.assertTrue("查询出来的考试指南记录是否包含在之前预期的记录里", containsExamGuides.contains(foundGuid));
 
-            currentIndex = ((Number)(model.get("pageNo"))).intValue()+1;//当前显示第几页，+1
+            currentIndex = ((Number) (model.get("pageNo"))).intValue() + 1;//当前显示第几页，+1
 
             found.add(allGuideList.getContent().get(0));
         }
+        /**
+         * 删除测试
+         */
+        mockMvc.perform(
+                get("/backend/delExamGuide")
+        )
+                .andExpect(status().isFound());
 
-
+        mockMvc.perform(
+                get("/backend/searchExamGuide")
+                        .session(loginAs(editorUsername, password))
+        ).andExpect(status().isOk());
     }
+
 }

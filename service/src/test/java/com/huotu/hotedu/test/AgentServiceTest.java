@@ -53,7 +53,6 @@ public class AgentServiceTest {
         Member mb = new Member();
         mb.setLoginName("12345");
         mb.setEnabled(true);
-        mb.setId((long) 100);
         memberService.addMember(mb);
 
         ClassTeam classTeam = new ClassTeam();
@@ -63,7 +62,6 @@ public class AgentServiceTest {
         Member mb2 = new Member();
         mb2.setLoginName("12348");
         mb2.setEnabled(true);
-        mb2.setId((long) 101);
         mb2.setTheClass(classTeam);
         memberService.addMember(mb2);
 
@@ -83,18 +81,15 @@ public class AgentServiceTest {
         Member mb = new Member();
         mb.setLoginName("1111");
         mb.setEnabled(true);
-        mb.setId((long) 100);
         memberService.addMember(mb);
-        mb.setLoginName("2222");
-        mb.setEnabled(true);
-        mb.setId((long) 101);
-        memberService.addMember(mb);
+        Member mb2 = new Member();
+        mb2.setLoginName("2222");
+        mb2.setEnabled(true);
+        memberService.addMember(mb2);
         ClassTeam classTeam = new ClassTeam();
-        classTeam.setId((long) 111);
         classTeam.setClassName("nihao");
-        ArrayList<Integer>list = new ArrayList<Integer>(13);
+        ArrayList<Object> list = new ArrayList<Object>(13);
         agentService.arrangeClass(list, classTeam);
-//        assertEquals("分班后第2个成员的班级","nihao",mb.getTheClass().getClassName());
     }
 
     /**
@@ -105,21 +100,18 @@ public class AgentServiceTest {
     @Test
     @Rollback
     public void checkFindExistClassAll(){
-        Agent agent = new Agent();
-        agent.setId((long) 50);
-        agent.setEnabled(true);
-        agentService.addAgent(agent);
+        Agent agen = new Agent();
+        agen.setEnabled(true);
+        Agent agent = agentService.addAgent(agen);
 
         Exam exam = new Exam();
 
         ClassTeam classTeam = new ClassTeam();
-        classTeam.setId((long) 12);
         classTeam.setAgent(agent);
         classTeam.setExam(exam);
         agentService.agentAddClassTeam(agent, classTeam);
 
         ClassTeam classTeam2 = new ClassTeam();
-        classTeam2.setId((long) 13);
         classTeam2.setAgent(agent);
         classTeam2.setExam(exam);
         agentService.agentAddClassTeam(agent,classTeam2);
