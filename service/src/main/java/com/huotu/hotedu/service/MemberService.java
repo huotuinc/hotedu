@@ -27,9 +27,10 @@ public class MemberService {
     /**
      * 增加学员
      * @param mb 学员对象
+     * @return 持久化学员对象
      */
-    public void addMember(Member mb) {
-        memberRepository.save(mb);
+    public Member addMember(Member mb) {
+        return memberRepository.save(mb);
     }
 
     /**

@@ -18,7 +18,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by shiliting 2015/7/20.
@@ -114,8 +113,9 @@ public class AgentService {
     /**
      * 增加一个代理商
      * @param agent 代理商对象
+     * @return 返回代理商实体
      */
-    public void addAgent(Agent agent){agentRepository.save(agent);}
+    public Agent addAgent(Agent agent){return agentRepository.save(agent);}
 
     /**
      * 修改一位代理商
@@ -167,14 +167,14 @@ public class AgentService {
      * @param allNoClassMemberList  需要分班的成员
      * @param classTeam             分配的班级
      */
-    public void arrangeClass(ArrayList<Integer> allNoClassMemberList,ClassTeam classTeam){
+    public void arrangeClass(ArrayList<Object> allNoClassMemberList,ClassTeam classTeam){
 //TODO 这里应不应该判断
 //        if(null == allNoClassMemberList || allNoClassMemberList.size() == 0) {
 //           return;
 //        }
         Member mb = null;
-        for (Integer x : allNoClassMemberList) {
-            mb = memberService.findOneById((long)allNoClassMemberList.get(x));
+        for (Object x : allNoClassMemberList) {
+            mb = memberService.findOneById((long)allNoClassMemberList.get((Integer) x));
             mb.setTheClass(classTeam);
         }
     }
@@ -190,10 +190,7 @@ public class AgentService {
         return  classTeamRepository.findAll(new Specification<ClassTeam>() {
             @Override
             public Predicate toPredicate(Root<ClassTeam> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return  cb.isNotNull(root.get("exam").as(Exam.class));
-//                return cb.equal(root.get("agent").as(Agent.class),agent);
-//                return cb.and(cb.equal(root.get("agent").as(Agent.class),agent), cb.isNotNull(root.get("exam").as(Exam.class)));
-
+                return cb.and(cb.equal(root.get("agent").as(Agent.class),agent), cb.isNull(root.get("exam").as(Exam.class)));
             }
         }, new PageRequest(pageNum, pageSize));
     }
