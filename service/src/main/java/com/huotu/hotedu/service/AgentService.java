@@ -1,7 +1,6 @@
 package com.huotu.hotedu.service;
 
 import com.huotu.hotedu.entity.Agent;
-import com.huotu.hotedu.entity.Tutor;
 import com.huotu.hotedu.repository.AgentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,10 +28,10 @@ public class AgentService {
     /**
      * 返回所有代理商
      * @param n         第几页
-     * @param pagesize  每页几条记录
+     * @param pageSize  每页几条记录
      * @return          代理商集合
      */
-    public Page<Agent> loadagents(int n,int pagesize){
+    public Page<Agent> loadagents(int n,int pageSize){
 
         return agentRepository.findAll(new Specification<Agent>() {
             @Override
@@ -40,7 +39,7 @@ public class AgentService {
                 return cb.isTrue(root.get("enabled").as(Boolean.class));
             }
         },
-        new PageRequest(n,pagesize));
+        new PageRequest(n,pageSize));
     }
 
 
@@ -48,7 +47,7 @@ public class AgentService {
     /**
      * 返回按照类型和关键字搜索过之后的代理商
      * @param n         第几页
-     * @param pagesize  每页几条记录
+     * @param pageSize  每页几条记录
      * @param keyword   搜索关键字
      * @param type      搜索类型
      * @return          代理商集合
@@ -66,8 +65,14 @@ public class AgentService {
 
 
 
-    //分页依据全部搜索
-    public Page<Agent> searchAgentAll(int n,int pagesize,String keyword){
+    /**
+     * 返回根据关键字模糊查询搜索过之后的代理商信息
+     * @param n         第几页
+     * @param pageSize  每页几条记录
+     * @param keyword   搜索关键字
+     * @return          代理商集合
+     */
+    public Page<Agent> searchAgentAll(int n,int pageSize,String keyword){
         return  agentRepository.findAll(new Specification<Agent>() {
             @Override
             public Predicate toPredicate(Root<Agent> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -79,7 +84,7 @@ public class AgentService {
                         cb.like(root.get("LoginName").as(String.class), "%" + keyword + "%")
                 ));
             }
-        },new PageRequest(n, pagesize));
+        },new PageRequest(n, pageSize));
 
     }
 

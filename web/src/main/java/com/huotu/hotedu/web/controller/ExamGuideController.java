@@ -149,18 +149,18 @@ public class ExamGuideController {
      * newguide.html页面点击保存添加后跳转
      * @param title     标题
      * @param content   描述
-     * @param top   是否置顶
+     * @param isTop   是否置顶
      * @return      不出异常重定向：/backend/loadExamGuide
      */
     //TODO 是否搞抛出异常
     @PreAuthorize("hasRole('ROLE_EDITOR')")//拥有编辑权限
     @RequestMapping("/backend/addSaveExamGuide")
-    public String addSaveExamGuide(String title,String content,String top){
+    public String addSaveExamGuide(String title,String content,Boolean isTop){
         ExamGuide examGuide=new ExamGuide();
         examGuide.setTitle(title);
         examGuide.setContent(content);
         examGuide.setLastUploadDate(new Date());
-        examGuide.setTop("1".equals(top)? true:false);
+        examGuide.setIsTop(isTop);
         examGuideService.addExamGuide(examGuide);
         return "redirect:/backend/loadExamGuide";
     }
@@ -170,16 +170,16 @@ public class ExamGuideController {
      * @param id    修改后的id
      * @param title     标题
      * @param content   描述
-     * @param top   是否置顶
+     * @param isTop   是否置顶
      * @return      重定向到：/backend/loadExamGuide
      */
     @PreAuthorize("hasRole('ROLE_EDITOR')")//拥有编辑权限
     @RequestMapping("/backend/modifySaveExamGuide")
-    public String modifySaveExamGuide(Long id,String title,String content,Boolean top){
+    public String modifySaveExamGuide(Long id,String title,String content,Boolean isTop){
         ExamGuide examGuide=examGuideService.findOneById(id);
         examGuide.setTitle(title);
         examGuide.setContent(content);
-        examGuide.setTop(top);
+        examGuide.setIsTop(isTop);
         examGuide.setLastUploadDate(new Date());
         examGuideService.modify(examGuide);
         return "redirect:/backend/loadExamGuide";

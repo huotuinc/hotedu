@@ -24,7 +24,13 @@ public class TutorService {
     @Autowired
     private TutorRepository tutorRepository;
 
-    //返回所有导师信息
+
+    /**
+     * 返回未被禁用的导师信息
+     * @param n          显示的页数
+     * @param pageSize   每页显示记录的条数
+     * @return           导师的集合
+     */
     public Page<Tutor> loadTutor(int n,int pageSize) {
         return tutorRepository.findAll(new Specification<Tutor>() {
             @Override
@@ -34,14 +40,21 @@ public class TutorService {
         }, new PageRequest(n, pageSize));
     }
 
-    //分页依据类型和关键字搜索
+
+    /**
+     * 返回根据类型和关键字搜索之后的导师信息
+     * @param n         显示的页数
+     * @param pageSize  每页显示记录的条数
+     * @param keyword   检索的关键字
+     * @param type      检索的类型
+     * @return          返回的导师集合
+     */
     public Page<Tutor> searchTutorType(int n,int pageSize,String keyword,String type){
         return  tutorRepository.findAll(new Specification<Tutor>() {
             @Override
             public Predicate toPredicate(Root<Tutor> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 if (keyword==null)
                     return cb.isTrue(root.get("enabled").as(Boolean.class));
-//                return cb.like(root.get(type).as(String.class),"%"+keyword+"%");
                 return  cb.and(cb.like(root.get(type).as(String.class),"%"+keyword+"%"),cb.isTrue(root.get("enabled").as(Boolean.class)));
             }
         },new PageRequest(n, pageSize));
@@ -49,7 +62,13 @@ public class TutorService {
     }
 
 
-    //分页依据全部搜索
+    /**
+     * 根据导师姓名，导师职称，导师区域进行模糊查询，然后返回导师信息
+     * @param n        显示的页数
+     * @param pagesize 每页显示记录的条数
+     * @param keyword  检索的关键字
+     * @return         导师集合
+     */
     public Page<Tutor> searchTutorAll(int n,int pagesize,String keyword){
         return  tutorRepository.findAll(new Specification<Tutor>() {
             @Override
@@ -66,7 +85,14 @@ public class TutorService {
 
     }
 
-    //分页依据时间
+    /**
+     * 根据导师任职时间查询，然后返回导师信息
+     * @param n        显示的页数
+     * @param pagesize 每页显示记录的条数
+     * @param start    起始时间
+     * @param end      结束时间
+     * @return         导师集合
+     */
     public Page<Tutor> searchTutorDate(int n,int pagesize,Date start,Date end){
         return  tutorRepository.findAll(new Specification<Tutor>() {
             @Override

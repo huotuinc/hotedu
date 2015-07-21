@@ -57,6 +57,10 @@ public class Member extends Login {
      */
     private boolean isPassed = false;
     /**
+     * 是否领证
+     */
+    private boolean isHaveLicense=false;
+    /**
      * 报名时间
      */
     @Temporal(TemporalType.TIMESTAMP)
@@ -168,6 +172,34 @@ public class Member extends Login {
 
     public void setApplyDate(Date applyDate) {
         this.applyDate = applyDate;
+    }
+
+    public boolean isHaveLicense() {
+        return isHaveLicense;
+    }
+
+    public void setIsHaveLicense(boolean isHaveLicense) {
+        this.isHaveLicense = isHaveLicense;
+    }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "agent=" + agent +
+                ", pictureUri='" + pictureUri + '\'' +
+                ", realName='" + realName + '\'' +
+                ", sex=" + sex +
+                ", phoneNo='" + phoneNo + '\'' +
+                ", area='" + area + '\'' +
+                ", ConfirmPerson='" + ConfirmPerson + '\'' +
+                ", theClass=" + theClass +
+                ", isPayed=" + isPayed +
+                ", isPassed=" + isPassed +
+                ", isHaveLicense=" + isHaveLicense +
+                ", applyDate=" + applyDate +
+                ", payDate=" + payDate +
+                ", registerDate=" + registerDate +
+                '}';
     }
 
     @Override

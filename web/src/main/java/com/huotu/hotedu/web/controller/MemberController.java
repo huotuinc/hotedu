@@ -11,14 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 /**
  * Created by cwb on 2015/7/15.
+ * Modify by shiliting on 20157/21
  */
 @Controller
 public class MemberController {
@@ -152,23 +149,26 @@ public class MemberController {
         return turnPage;
     }
 
-    /**
-     * 用来测试向页面返回会员之后页面是否正常显示会员信息
-     * @param MemberId    会员的sessionId
-     * @return            结果集，包含会员信息，json字符串格式返回
-     */
-    @RequestMapping("pc/checkMemberLogin")
-    @ResponseBody
-    public Result checkMemberLogin(String MemberId,HttpServletRequest request){
-        HttpSession session=request.getSession();
-        Result result=new Result();
-        Member member=new Member();
-        member.setPictureUri("/pc/images/600x20005326c6dcd9c7f.jpg");
-        member.setLoginName("wangyong11111");
-        result.setBody(member);
-        result.setStatus(0);
-        return result;
-    }
+//    /**
+//     * 用来测试向页面返回会员之后页面是否正常显示会员信息
+//     * @param MemberId    会员的sessionId
+//     * @return            结果集，包含会员信息，json字符串格式返回
+//     */
+//    @RequestMapping("pc/checkMemberLogin")
+//    @ResponseBody
+//    public Result checkMemberLogin(String MemberId,HttpServletRequest request){
+//        HttpSession session=request.getSession();
+//        Result result=new Result();
+//        Member member=new Member();
+//        member.setPictureUri("/pc/images/600x20005326c6dcd9c7f.jpg");
+//        member.setLoginName("wangyong11111");
+//        result.setBody(member);
+//        result.setStatus(0);
+//        return result;
+//    }
+
+
+
 
 
 }
