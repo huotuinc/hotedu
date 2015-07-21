@@ -72,11 +72,11 @@ public class AgentService {
     /**
      * 分页依据全部搜索 搜索的代理商
      * @param n             第几页
-     * @param pagesize      每页显示几条
+     * @param pageSize      每页显示几条
      * @param keyword       关键词
      * @return              代理商集合
      */
-    public Page<Agent> searchAgentAll(int n,int pagesize,String keyword){
+    public Page<Agent> searchAgentAll(int n,int pageSize,String keyword){
         return  agentRepository.findAll(new Specification<Agent>() {
             @Override
             public Predicate toPredicate(Root<Agent> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -112,7 +112,8 @@ public class AgentService {
      * 修改一位代理商
      * @param agent 代理商对象
      */
-    public void modify(Agent agent){agentRepository.save(agent);}
+    public void modify(Agent agent){agentRepository.save(agent);
+    }
 
 
     /**
@@ -147,9 +148,9 @@ public class AgentService {
         return  memberRepository.findAll(new Specification<Member>() {
             @Override
             public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)),cb.isNotNull(root.get("theClass").as(ClassTeam.class)));
+                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)), cb.isNotNull(root.get("theClass").as(ClassTeam.class)));
             }
-        },new PageRequest(n, pagesize));
+        }, new PageRequest(n, pagesize));
 
     }
 
