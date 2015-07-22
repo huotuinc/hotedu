@@ -198,13 +198,13 @@ public class ExamGuideControllerTest extends WebTestBase {
                 get("/backend/searchExamGuide")
                         .session(loginAs(editorUsername, password))
                         .param("keywords", complexKeyword)
-                        .param("pageNo", "" + pages +1)
-                        .param("pageSize", "10") //每页显示多少
+                        .param("pageNo", "" +pages+1)
+                        .param("pageSize",ExamGuideController.PAGE_SIZE+"") //每页显示多少
         )
                 .andDo(print())
                 .andReturn().getModelAndView().getModel();
-        int actualpages=(int)model.get("pageNo");
-        Assert.assertEquals("如果输入的pageNo超过最后一页，应该定位到最后一页",pages-1,actualpages);
+        int actualpages=(int)model.get("totalRecords");
+        Assert.assertEquals("输入当前页检查",45,actualpages);
 
 
 
