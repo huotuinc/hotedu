@@ -203,8 +203,8 @@ public class ExamGuideControllerTest extends WebTestBase {
         )
                 .andDo(print())
                 .andReturn().getModelAndView().getModel();
-        int actualpages=(int)model.get("totalRecords");
-        Assert.assertEquals("输入当前页检查",45,actualpages);
+        int actualpages=(int)model.get("pageNo");
+        Assert.assertEquals("输入当前页检查",pages-1,actualpages);
 
 
 
