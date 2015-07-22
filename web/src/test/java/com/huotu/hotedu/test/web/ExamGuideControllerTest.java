@@ -198,7 +198,7 @@ public class ExamGuideControllerTest extends WebTestBase {
                 get("/backend/searchExamGuide")
                         .session(loginAs(editorUsername, password))
                         .param("keywords", complexKeyword)
-                        .param("pageNo", "" +pages+1)
+                        .param("pageNo", "" +pages)
                         .param("pageSize",ExamGuideController.PAGE_SIZE+"") //每页显示多少
         )
                 .andDo(print())
