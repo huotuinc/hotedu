@@ -27,6 +27,7 @@ public class SecurityConfig {
      * 登录请求的URI
      */
     public static final String LoginURI = "/backend/login";
+    public static final String HOTEDU_URI = "http://localhost";
 
     @Autowired
     private PasswordEncoder passwordEncoder;

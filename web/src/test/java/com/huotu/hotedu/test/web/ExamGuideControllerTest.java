@@ -7,6 +7,7 @@ import com.huotu.hotedu.entity.Manager;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.repository.ExamGuideRepository;
 import com.huotu.hotedu.service.LoginService;
+import com.huotu.hotedu.web.config.SecurityConfig;
 import com.huotu.hotedu.web.controller.ExamGuideController;
 import junit.framework.Assert;
 import org.apache.commons.logging.Log;
@@ -21,8 +22,8 @@ import org.springframework.test.annotation.Rollback;
 import java.util.*;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -121,7 +122,9 @@ public class ExamGuideControllerTest extends WebTestBase {
         mockMvc.perform(
                 get("/backend/searchExamGuide")
         )
-                .andExpect(status().isFound());
+                .andExpect(status().isFound())
+                .andDo(print())
+                .andExpect(redirectedUrlPattern("**/" + SecurityConfig.LoginURI));
         /**
          * 1.测试用户登录之后，是否能正常访问
          * 2.测试返回model中的"allGuideList"属性是否是Page类型，长度是否为设置的长度10
@@ -168,7 +171,6 @@ public class ExamGuideControllerTest extends WebTestBase {
         int currentIndex = 0;
 
         while (found.size() < containsExamGuides.size()) {
-
             Map<String, Object> model = mockMvc.perform(
                     get("/backend/searchExamGuide")
                             .session(loginAs(editorUsername, password))
@@ -191,6 +193,28 @@ public class ExamGuideControllerTest extends WebTestBase {
 
             found.add(allGuideList.getContent().get(0));
         }
+
+        Map<String, Object> model=mockMvc.perform(
+                get("/backend/searchExamGuide")
+                        .session(loginAs(editorUsername, password))
+                        .param("keywords", complexKeyword)
+                        .param("pageNo", "" + pages +1)
+                        .param("pageSize", "10") //每页显示多少
+        )
+                .andDo(print())
+                .andReturn().getModelAndView().getModel();
+        int actualpages=(int)model.get("pageNo");
+        Assert.assertEquals("如果输入的pageNo超过最后一页，应该定位到最后一页",pages-1,actualpages);
+
+
+
+
+
+
+
+
+
+
         /**
          * 删除测试
          */
@@ -214,7 +238,7 @@ public class ExamGuideControllerTest extends WebTestBase {
         examGuide.setContent("5555");
         ExamGuide examGuidenew=examGuideRepository.save(examGuide);//保存新增的对象，为了之后删除做比较
 
-        Map<String, Object> model =mockMvc.perform(
+         model =mockMvc.perform(
                 get("/backend/searchExamGuide")
                         .session(loginAs(editorUsername, password))
                         .param("keywords","删除测试")
@@ -224,16 +248,20 @@ public class ExamGuideControllerTest extends WebTestBase {
 
 
         Page<ExamGuide> allGuideList = (Page<ExamGuide>) model.get("allGuideList");
-        Assert.assertEquals("删除之前应该有数据1条：",1,allGuideList.getTotalElements());//删除之前能找到
+        Assert.assertEquals("删除之前应该有数据1条：", 1, allGuideList.getTotalElements());//删除之前能找到
 
 
+        //
         mockMvc.perform(
                 get("/backend/delExamGuide")
                         .session(loginAs(editorUsername, password))
-                        .param("id",""+examGuidenew.getId())
+                        .param("id", "" + examGuidenew.getId())
                         .param("keywords",examGuidenew.getTitle())
 
-        ).andExpect(status().isFound());//有问题
+        )
+                .andExpect(status().isFound())
+                .andDo(print());
+//        .andExpect(redirectedUrlPattern("redirect:/backend/searchExamGuide"));//有问题
 
 
         model = mockMvc.perform(
@@ -242,7 +270,7 @@ public class ExamGuideControllerTest extends WebTestBase {
                         .param("keywords","删除测试")
         ).andReturn().getModelAndView().getModel();
         allGuideList = (Page<ExamGuide>) model.get("allGuideList");
-        Assert.assertEquals("删除之后应该没有数据：",0,allGuideList.getTotalElements());//删除之前能找到
+        Assert.assertEquals("删除之后应该没有数据：",0,allGuideList.getTotalElements());//删除之后应该找不到数据
     }
     @Test
     public void addExamGuideTest() throws Exception{
@@ -274,11 +302,14 @@ public class ExamGuideControllerTest extends WebTestBase {
         )
                 .andExpect(status().isFound());
 
-        mockMvc.perform(
-                get("/backend/searchExamGuide")
-                .session(loginAs(editorUsername, password))
+       String ViewName=mockMvc.perform(
+                get("/backend/addExamGuide")
+                        .session(loginAs(editorUsername, password))
         )
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andReturn().getModelAndView().getViewName();
+        Assert.assertEquals("返回的视图名字是否相等","/backend/newguide",ViewName);
+
     }
 
 

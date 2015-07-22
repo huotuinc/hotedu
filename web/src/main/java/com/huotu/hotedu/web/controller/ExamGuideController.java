@@ -29,6 +29,7 @@ public class ExamGuideController {
      * 用来储存分页中每页的记录数
      */
     public static final int PAGE_SIZE = 10;
+    //public static final String SEARCH_URL="/backend/searchExamGuide";
 
     /**
      * 搜索符合条件的考试指南信息
@@ -42,6 +43,7 @@ public class ExamGuideController {
     public String searchExamGuide(@RequestParam(required = false)Integer pageNo,
                                   @RequestParam(required = false)Integer pageSize,
                                   @RequestParam(required = false) String keywords, Model model) {
+        String turnPage="/backend/examguide";
         if(pageNo==null||pageNo<0){
             pageNo=0;
         }
@@ -64,7 +66,7 @@ public class ExamGuideController {
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("keywords", keywords);
         model.addAttribute("totalRecords", totalRecords);
-        return "/backend/examguide";
+        return turnPage;
     }
 
     /**
@@ -79,10 +81,11 @@ public class ExamGuideController {
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/delExamGuide")
     public String delExamGuide(@RequestParam(required = false)Integer pageNo,@RequestParam(required = false)String keywords, Long id, Model model) {
+        String returnPage="redirect:/backend/searchExamGuide";
         examGuideService.delExamGuide(id);
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("keywords", keywords);
-        return "redirect:/backend/searchExamGuide";
+        return returnPage;
     }
 
     /**
