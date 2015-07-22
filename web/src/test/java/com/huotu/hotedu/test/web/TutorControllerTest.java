@@ -5,6 +5,7 @@ import libspringtest.SpringWebTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.mock.web.MockHttpSession;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -63,16 +64,17 @@ public class TutorControllerTest extends SpringWebTest {
     }
 
     @Test
+    @Rollback
     public void newTutorCheck() throws Exception{
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         StreamUtils.copy(getClass().getResourceAsStream("testUpload.jpg"), buffer);
         mockMvc.perform(
                 fileUpload("/backend/addSaveTutor")
-                .file("smallimg", buffer.toByteArray())
-                .param("name", "张飞4")
-                .param("qualification","本科")
-                .param("area","杭州")
-                .param("introduction","武将")
+                        .file("smallimg", buffer.toByteArray())
+                        .param("name", "张飞4")
+                        .param("qualification","本科")
+                        .param("area","杭州")
+                        .param("introduction","武将")
         ).andDo(print());
     }
 
