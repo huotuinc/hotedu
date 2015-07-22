@@ -1,5 +1,4 @@
 package com.huotu.hotedu.web.controller;
-import com.huotu.hotedu.entity.ClassTeam;
 import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.service.ExamGuideService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +78,7 @@ public class ExamGuideController {
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/delExamGuide")
-    public String delExamGuide(@RequestParam(required = false)Integer pageNo,String keywords, Long id, Model model) {
+    public String delExamGuide(@RequestParam(required = false)Integer pageNo,@RequestParam(required = false)String keywords, Long id, Model model) {
         examGuideService.delExamGuide(id);
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("keywords", keywords);

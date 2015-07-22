@@ -3,6 +3,7 @@ package com.huotu.hotedu.test.web;
 import com.huotu.hotedu.WebTestBase;
 import com.huotu.hotedu.entity.Editor;
 import com.huotu.hotedu.entity.ExamGuide;
+import com.huotu.hotedu.entity.Manager;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.repository.ExamGuideRepository;
 import com.huotu.hotedu.service.LoginService;
@@ -69,6 +70,7 @@ public class ExamGuideControllerTest extends WebTestBase {
 
         String memberUsername = UUID.randomUUID().toString();
         String editorUsername = UUID.randomUUID().toString();
+        String ManagerUsername = UUID.randomUUID().toString();
 
         Member member = new Member();
         member.setLoginName(memberUsername);
@@ -76,8 +78,12 @@ public class ExamGuideControllerTest extends WebTestBase {
         Editor editor = new Editor();
         editor.setLoginName(editorUsername);
 
+        Manager manager = new Manager();
+        manager.setLoginName(ManagerUsername);
+
         loginService.newLogin(member, password);
         loginService.newLogin(editor, password);
+        loginService.newLogin(manager, password);
 
         //准备需要测试的ExamGuide
         // 10+随机10
@@ -197,6 +203,93 @@ public class ExamGuideControllerTest extends WebTestBase {
                 get("/backend/searchExamGuide")
                         .session(loginAs(editorUsername, password))
         ).andExpect(status().isOk());
+
+
+
+
+        ExamGuide examGuide=new ExamGuide();
+        examGuide.setTitle("删除测试"+System.currentTimeMillis());
+        examGuide.setIsTop(random.nextBoolean());
+        examGuide.setLastUploadDate(new Date());
+        examGuide.setContent("5555");
+        ExamGuide examGuidenew=examGuideRepository.save(examGuide);//保存新增的对象，为了之后删除做比较
+
+        Map<String, Object> model =mockMvc.perform(
+                get("/backend/searchExamGuide")
+                        .session(loginAs(editorUsername, password))
+                        .param("keywords","删除测试")
+
+        ).andExpect(status().isOk())
+         .andReturn().getModelAndView().getModel();
+
+
+        Page<ExamGuide> allGuideList = (Page<ExamGuide>) model.get("allGuideList");
+        Assert.assertEquals("删除之前应该有数据1条：",1,allGuideList.getTotalElements());//删除之前能找到
+
+
+        mockMvc.perform(
+                get("/backend/delExamGuide")
+                        .session(loginAs(editorUsername, password))
+                        .param("id",""+examGuidenew.getId())
+                        .param("keywords",examGuidenew.getTitle())
+
+        ).andExpect(status().isFound());//有问题
+
+
+        model = mockMvc.perform(
+                get("/backend/searchExamGuide")
+                        .session(loginAs(editorUsername, password))
+                        .param("keywords","删除测试")
+        ).andReturn().getModelAndView().getModel();
+        allGuideList = (Page<ExamGuide>) model.get("allGuideList");
+        Assert.assertEquals("删除之后应该没有数据：",0,allGuideList.getTotalElements());//删除之前能找到
     }
+    @Test
+    public void addExamGuideTest() throws Exception{
+
+        //准备测试环境
+        String password = UUID.randomUUID().toString();
+
+        String memberUsername = UUID.randomUUID().toString();
+        String editorUsername = UUID.randomUUID().toString();
+        String ManagerUsername = UUID.randomUUID().toString();
+
+        Member member = new Member();
+        member.setLoginName(memberUsername);
+
+        Editor editor = new Editor();
+        editor.setLoginName(editorUsername);
+
+        Manager manager = new Manager();
+        manager.setLoginName(ManagerUsername);
+
+        loginService.newLogin(member, password);
+        loginService.newLogin(editor, password);
+        loginService.newLogin(manager, password);
+        //准备测试环境END
+
+
+        mockMvc.perform(
+                get("/backend/addExamGuide")
+        )
+                .andExpect(status().isFound());
+
+        mockMvc.perform(
+                get("/backend/searchExamGuide")
+                .session(loginAs(editorUsername, password))
+        )
+                .andExpect(status().isOk());
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 }
