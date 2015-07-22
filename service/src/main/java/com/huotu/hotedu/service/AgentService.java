@@ -200,15 +200,11 @@ public class AgentService {
      */
     public List<ClassTeam> findExistClassAll(Agent agent){
         return classTeamRepository.findAll(new Specification<ClassTeam>() {
-                    @Override
-                    public Predicate toPredicate(Root<ClassTeam> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//TODO  不知道什么情况，测试突然通不过了
-//                return cb.and(cb.equal(root.get("agent").as(Agent.class),agent), cb.isNull(root.get("exam").as(Exam.class)));
-//                return cb.isNotNull(root.get("exam").as(Exam.class));
-                        return cb.equal(root.get("className").as(String.class),"123");
-
-                    }
-                });
+            @Override
+            public Predicate toPredicate(Root<ClassTeam> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                return cb.and(cb.equal(root.get("agent").as(Agent.class),agent), cb.isNotNull(root.get("exam").as(Exam.class)));
+            }
+        });
     }
 
     /**

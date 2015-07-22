@@ -117,12 +117,10 @@ public class AgentServiceTest {
         ClassTeam classTeam2 = new ClassTeam();
         classTeam2.setClassName("456");
         classTeam2.setAgent(agent);
-        classTeam2.setExam(exam);
         agentService.agentAddClassTeam(agent, classTeam2);
 
-        //TODO 出错了
         List<ClassTeam> pages = agentService.findExistClassAll(agent);
-//        assertEquals("该代理商所拥有的班级数目为2", 2, pages.getTotalElements());
+//        assertEquals("该代理商所拥有的班级数目为1", 1, pages.size());
 
     }
 

@@ -27,11 +27,10 @@ public class ClassTeam implements Serializable {
      * 班级名称
      */
     private String className;
-
     /**
      * 考场
      */
-
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Exam exam;
 
     public Long getId() {return id;}
