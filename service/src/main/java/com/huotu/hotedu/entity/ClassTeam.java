@@ -2,7 +2,6 @@ package com.huotu.hotedu.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 培训班
@@ -32,6 +31,7 @@ public class ClassTeam implements Serializable {
     /**
      * 考场
      */
+
     private Exam exam;
 
     public Long getId() {return id;}
