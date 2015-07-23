@@ -22,7 +22,6 @@ import org.springframework.test.annotation.Rollback;
 import java.util.*;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
@@ -94,6 +93,7 @@ public class ExamGuideControllerTest extends WebTestBase {
         Random random = new Random();
 
         int count = 20 + random.nextInt(20);
+        int countHaveKeywords=0;
 
         ArrayList<ExamGuide> containsExamGuides = new ArrayList<>();//拿到包含关键字的examGuide记录
 
@@ -105,6 +105,7 @@ public class ExamGuideControllerTest extends WebTestBase {
             boolean containKeyword = random.nextBoolean();
             if (containKeyword) {
                 examGuide.setTitle("测试t" + complexKeyword + System.currentTimeMillis());
+                countHaveKeywords++;
             } else {
                 examGuide.setTitle("测试t" + System.currentTimeMillis());
             }
@@ -123,7 +124,7 @@ public class ExamGuideControllerTest extends WebTestBase {
                 get("/backend/searchExamGuide")
         )
                 .andExpect(status().isFound())
-                .andDo(print())
+//                .andDo(print())
                 .andExpect(redirectedUrlPattern("**/" + SecurityConfig.LoginURI));
         /**
          * 1.测试用户登录之后，是否能正常访问
@@ -133,6 +134,7 @@ public class ExamGuideControllerTest extends WebTestBase {
         int totalCount = (int) examGuideRepository.count();
         int defaultPageSize = ExamGuideController.PAGE_SIZE;
         int pages = (totalCount + defaultPageSize - 1) / defaultPageSize;
+        int haveKeywordPages=(countHaveKeywords+defaultPageSize - 1)/defaultPageSize;
         mockMvc.perform(
                 get("/backend/searchExamGuide")
                         .session(loginAs(memberUsername, password))
@@ -194,17 +196,39 @@ public class ExamGuideControllerTest extends WebTestBase {
             found.add(allGuideList.getContent().get(0));
         }
 
-        Map<String, Object> model=mockMvc.perform(
-                get("/backend/searchExamGuide")
-                        .session(loginAs(editorUsername, password))
-                        .param("keywords", complexKeyword)
-                        .param("pageNo", "" +pages)
-                        .param("pageSize",ExamGuideController.PAGE_SIZE+"") //每页显示多少
-        )
-                .andDo(print())
-                .andReturn().getModelAndView().getModel();
-        int actualpages=(int)model.get("pageNo");
-        Assert.assertEquals("输入当前页检查",pages-1,actualpages);
+        for(int i=-2;i<pages+2;i++){
+            Map<String, Object> model=mockMvc.perform(
+                    get("/backend/searchExamGuide")
+                            .session(loginAs(editorUsername, password))
+                            .param("keywords", "")
+                            .param("pageNo", "" +(i))
+                            .param("pageSize",ExamGuideController.PAGE_SIZE+"") //每页显示多少
+            )
+                    .andReturn().getModelAndView().getModel();
+            int actualpages=(int)model.get("pageNo");
+            int expectpages=i;
+            if(i<=0){expectpages=0;}
+            if(i>=pages){expectpages=pages-1;}
+            Assert.assertEquals("输入当前页检查",expectpages,actualpages);
+        }
+
+
+
+        for(int i=-2;i<haveKeywordPages+2;i++){
+            Map<String, Object> model=mockMvc.perform(
+                    get("/backend/searchExamGuide")
+                            .session(loginAs(editorUsername, password))
+                            .param("keywords", complexKeyword)
+                            .param("pageNo", "" +(i))
+                            .param("pageSize",ExamGuideController.PAGE_SIZE+"") //每页显示多少
+            )
+                    .andReturn().getModelAndView().getModel();
+            int actualpages=(int)model.get("pageNo");
+            int expectpages=i;
+            if(i<=0){expectpages=0;}
+            if(i>=haveKeywordPages){expectpages=haveKeywordPages-1;}
+            Assert.assertEquals("输入当前页检查",expectpages,actualpages);
+        }
 
 
 
@@ -236,9 +260,9 @@ public class ExamGuideControllerTest extends WebTestBase {
         examGuide.setIsTop(random.nextBoolean());
         examGuide.setLastUploadDate(new Date());
         examGuide.setContent("5555");
-        ExamGuide examGuidenew=examGuideRepository.save(examGuide);//保存新增的对象，为了之后删除做比较
+        ExamGuide examGuidenew = examGuideRepository.save(examGuide);//保存新增的对象，为了之后删除做比较
 
-         model =mockMvc.perform(
+        Map<String, Object> model = mockMvc.perform(
                 get("/backend/searchExamGuide")
                         .session(loginAs(editorUsername, password))
                         .param("keywords","删除测试")
@@ -259,8 +283,8 @@ public class ExamGuideControllerTest extends WebTestBase {
                         .param("keywords",examGuidenew.getTitle())
 
         )
-                .andExpect(status().isFound())
-                .andDo(print());
+                .andExpect(status().isFound());
+//                .andDo(print());
 //        .andExpect(redirectedUrlPattern("redirect:/backend/searchExamGuide"));//有问题
 
 
@@ -310,6 +334,74 @@ public class ExamGuideControllerTest extends WebTestBase {
                 .andReturn().getModelAndView().getViewName();
         Assert.assertEquals("返回的视图名字是否相等","/backend/newguide",ViewName);
 
+
+
+
+    }
+
+
+
+
+    @Test
+    public void modifyExamGuideTest() throws Exception{
+        Random random = new Random();
+        //准备测试环境
+        String password = UUID.randomUUID().toString();
+
+        String memberUsername = UUID.randomUUID().toString();
+        String editorUsername = UUID.randomUUID().toString();
+        String ManagerUsername = UUID.randomUUID().toString();
+
+        Member member = new Member();
+        member.setLoginName(memberUsername);
+
+        Editor editor = new Editor();
+        editor.setLoginName(editorUsername);
+
+        Manager manager = new Manager();
+        manager.setLoginName(ManagerUsername);
+
+        loginService.newLogin(member, password);
+        loginService.newLogin(editor, password);
+        loginService.newLogin(manager, password);
+
+
+
+        ExamGuide examGuide=new ExamGuide();
+        examGuide.setTitle("修改测试"+System.currentTimeMillis());
+        examGuide.setIsTop(random.nextBoolean());
+        examGuide.setLastUploadDate(new Date());
+        examGuide.setContent("6666");
+        ExamGuide examGuidenew = examGuideRepository.save(examGuide);//修改的examguide
+        //准备测试环境END
+
+
+        mockMvc.perform(
+                get("/backend/modifyExamGuide")
+        )
+                .andExpect(status().isFound());
+
+        String ViewName=mockMvc.perform(
+                get("/backend/modifyExamGuide")
+                        .session(loginAs(editorUsername, password))
+                        .param("id", "" + examGuidenew.getId())
+        )
+                .andExpect(status().isOk())
+                .andReturn().getModelAndView().getViewName();
+        Assert.assertEquals("返回的视图名字是否相等","/backend/modifyguide",ViewName);
+
+
+        Map<String, Object> model = mockMvc.perform(
+                get("/backend/modifyExamGuide")
+                        .session(loginAs(editorUsername, password))
+                        .param("id",""+examGuidenew.getId())
+
+        ).andExpect(status().isOk())
+                .andReturn().getModelAndView().getModel();
+
+
+        ExamGuide examGuide1 = (ExamGuide) model.get("examGuide");
+        Assert.assertEquals("判断获取的对象是否是修改的对象：", examGuidenew, examGuide1);
     }
 
 
