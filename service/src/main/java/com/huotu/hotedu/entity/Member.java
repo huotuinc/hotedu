@@ -1,8 +1,10 @@
 package com.huotu.hotedu.entity;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 
@@ -47,6 +49,7 @@ public class Member extends Login {
     /**
      * 所属班级
      */
+    @ManyToOne
     private ClassTeam theClass;
     /**
      * 是否已缴费，默认：否
@@ -182,9 +185,15 @@ public class Member extends Login {
         this.isHaveLicense = isHaveLicense;
     }
 
+    @Override
+    public String getUsername() {
+        return realName;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Arrays.asList(
+                new SimpleGrantedAuthority("MEMBER_CENTER")//进入学员个人中心的权限
+        );
     }
 }

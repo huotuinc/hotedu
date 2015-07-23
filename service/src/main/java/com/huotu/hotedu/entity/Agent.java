@@ -1,9 +1,11 @@
 package com.huotu.hotedu.entity;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -15,7 +17,7 @@ public class Agent extends Login{
     private static final long serialVersionUID = -349012453592429794L;
     @Column
     /**
-     * 代理商负责人姓名
+     * 代理商名字
      */
     private String name;
 
@@ -115,7 +117,14 @@ public class Agent extends Login{
     }
 
     @Override
+    public String getUsername() {
+        return name;
+    }
+
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Arrays.asList(
+                new SimpleGrantedAuthority("AGENT_CENTER")//进入代理商中心的权限
+        );
     }
 }

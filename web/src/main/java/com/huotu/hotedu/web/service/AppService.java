@@ -48,6 +48,8 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     private AgentService agentService;
 
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -61,7 +63,13 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 loginService.newLogin(manager,"admin");
                 System.out.println("测试用户以添加！");
             }
-
+            if(memberRepository.count()==0) {
+                Member mb = new Member();
+                mb.setLoginName("15958045616");
+                mb.setPhoneNo("15958045616");
+                mb.setRealName("陈文彬");
+                loginService.newLogin(mb,"123456");
+            }
 
         }
 
@@ -192,16 +200,17 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 }
             }
 
-//            if(agentRepository.count()==0){
-//                Agent agent=new Agent();
-//                agent.setName("火图科技");
-//                agent.setLoginName("hoteddu");
-//                agent.setArea("杭州市");
-//                agent.setCertificateNumber(600);
-//                agent.setSendCertificateNumber(0);
-//                agent.setLevel("一级");
-//                loginService.newLogin(agent,"hotedu");
-//            }
+            if(agentRepository.count()==0){
+                Agent agent=new Agent();
+                agent.setName("火图科技");
+                agent.setLoginName("hotedu");
+                agent.setArea("杭州");
+                agent.setAreaId("001");
+                agent.setCertificateNumber(600);
+                agent.setSendCertificateNumber(0);
+                agent.setLevel("一级");
+                loginService.newLogin(agent,"123456");
+            }
 
         }
 

@@ -108,8 +108,7 @@ public class AgentService {
 
     /**
      * 增加一个代理商
-     * @param agent 代理商对象
-     * @return 返回代理商实体
+     * @param agent 代理商对象faks
      */
     public Agent addAgent(Agent agent){return agentRepository.save(agent);}
 

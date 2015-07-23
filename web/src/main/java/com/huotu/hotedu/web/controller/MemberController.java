@@ -73,6 +73,11 @@ public class MemberController {
         return turnPage;
     }
 
+    @RequestMapping("/pc/loadMemberCenter")
+    public String loadMemberCenter(Model model) {
+        return "";
+    }
+
     /**
      * 查看学员信息详情
      * @param id 学员id

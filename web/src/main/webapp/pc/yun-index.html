@@ -38,7 +38,8 @@
             <a id="memberLi" href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
             <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
 
-            <p class="lbpo"><a href="#" th:text="${#authentication.name}">个人中心</a>
+            <p class="lbpo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
+            <a href="#" th:text="${#authentication.name}">个人中心</a>
                 <a href="#">修改密码</a>
                 <a href="#" th:href="@{/pc/login}">退出</a></p>
         </li>
@@ -276,8 +277,11 @@
 
                 <form accept-charset="UTF-8" action="yun-geren.html" th:action="@{/pc/login}"
                       class="sign-in__form user-form__form" method="post">
-
-
+                    <div class="user-form__fieldset">
+                        <select>
+                            <option
+                        </select>
+                    </div>
                     <div class="user-form__fieldset">
                         <label class="user-form__label" for="username" style="color:#111">用户名：</label>
                         <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
@@ -292,7 +296,7 @@
                     <button class="sign-in__button user-form__button" name="button" type="submit">登录<i
                             class="icon-arrow-right user-form__button-icon"></i></button>
                 </form>
-                <span th:text="${errInfo}"></span>
+                <span style="color:red" th:text="${errInfo}"></span>
 
 
             </div>

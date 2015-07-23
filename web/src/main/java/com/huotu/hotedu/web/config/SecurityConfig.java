@@ -81,6 +81,8 @@ public class SecurityConfig {
 
                     //确保任何请求应用程序的用户需要通过身份验证
                     .authorizeRequests()
+                    /*.antMatchers("").authenticated()
+                    .anyRequest().permitAll()*/
                     .antMatchers(
                             "/backend/css/**",
                             "/backend/images/**",
@@ -102,11 +104,11 @@ public class SecurityConfig {
                     .csrf().disable()
                     .formLogin()
                     .loginPage(pcLoginURI)
-                    .defaultSuccessUrl(pcLoginSuccessURI,true)
+                    .defaultSuccessUrl(pcLoginSuccessURI, true)
                     .failureUrl(pcLoginFailedURI)
                     .permitAll();
 //                    .and()
-                    //允许用户进行HTTP基本身份验证
+            //允许用户进行HTTP基本身份验证
 //                    .httpBasic();
 //            http
 //                    .authorizeRequests()
