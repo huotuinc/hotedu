@@ -37,31 +37,6 @@ public class AgentService {
     @Autowired
     private ClassTeamRepository classTeamRepository;
 
-//    /**
-//     * 返回所有代理商
-//     * @param n         第几页
-//     * @param pageSize  每页几条记录
-//     * @return          代理商集合
-//     */
-//    public Page<Agent> loadagents(int n,int pageSize){
-//
-//        return agentRepository.findAll(new Specification<Agent>() {
-//                                           @Override
-//                                           public Predicate toPredicate(Root<Agent> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//                                               return cb.isTrue(root.get("enabled").as(Boolean.class));
-//                                           }
-//                                       },
-//                new PageRequest(n,pageSize));
-//    }
-
-        return agentRepository.findAll(new Specification<Agent>() {
-                                           @Override
-                                           public Predicate toPredicate(Root<Agent> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                                               return cb.isTrue(root.get("enabled").as(Boolean.class));
-                                           }
-                                       },
-                new PageRequest(n,pageSize));
-    }
 
     /**
      * 返回按照类型和关键字搜索过之后的代理商

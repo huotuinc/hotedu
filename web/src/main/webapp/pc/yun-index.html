@@ -39,14 +39,7 @@
             <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
 
             <p class="lbpo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
-<<<<<<< Updated upstream
-            <a href="#" th:text="${#authentication.name}">admin</a>
-                <a href="#" th:href="@{/pc/loadAgents}">个人中心</a>
-            <p class="lbpo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
-            <a href="#" th:text="${#authentication.name}">个人中心</a>
-=======
             <a href="#" th:href="@{/pc/loadMemberCenter}" th:text="${#authentication.name}">个人中心</a>
->>>>>>> Stashed changes
                 <a href="#">修改密码</a>
                 <a href="#" th:href="@{/pc/login}">退出</a></p>
         </li>
@@ -284,13 +277,7 @@
 
                 <form accept-charset="UTF-8" action="yun-geren.html" th:action="@{/pc/login}"
                       class="sign-in__form user-form__form" method="post">
-<<<<<<< Updated upstream
 
-
-=======
-                    <div class="user-form__fieldset">
-                    </div>
->>>>>>> Stashed changes
                     <div class="user-form__fieldset">
                         <label class="user-form__label" for="username" style="color:#111">用户名：</label>
                         <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"

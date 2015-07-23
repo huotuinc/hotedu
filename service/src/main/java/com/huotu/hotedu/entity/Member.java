@@ -63,18 +63,8 @@ public class Member extends Login {
     /**
      * 是否领证
      */
-<<<<<<< Updated upstream
     private boolean haveLicense=false;
 
-    /**
-     * 所属班级
-     */
-    @ManyToOne
-    private ClassTeam theClass;
-
-=======
-    private boolean haveLicense =false;
->>>>>>> Stashed changes
     /**
      * 报名时间
      */
@@ -100,17 +90,9 @@ public class Member extends Login {
         this.sex = sex;
     }
 
-<<<<<<< Updated upstream
-
-=======
-    public boolean isPassed() {
-        return passed;
+    public void setPassed(boolean passed) {
+        this.passed = passed;
     }
-
-    public void setPassed(boolean isPassed) {
-        this.passed = isPassed;
-    }
->>>>>>> Stashed changes
 
     public boolean isPayed() {
         return payed;
@@ -197,21 +179,12 @@ public class Member extends Login {
         return passed;
     }
 
-    public void setPassed(boolean passed) {
-        this.passed = passed;
-    }
-
     public boolean isHaveLicense() {
         return haveLicense;
     }
 
-<<<<<<< Updated upstream
     public void setHaveLicense(boolean haveLicense) {
         this.haveLicense = haveLicense;
-=======
-    public void setHaveLicense(boolean isHaveLicense) {
-        this.haveLicense = isHaveLicense;
->>>>>>> Stashed changes
     }
 
     @Override
