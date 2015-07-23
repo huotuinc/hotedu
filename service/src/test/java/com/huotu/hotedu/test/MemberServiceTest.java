@@ -107,10 +107,10 @@ public class MemberServiceTest {
         member.setPhoneNo("18069875423");
         member.setApplyDate(new Date(System.currentTimeMillis()));
         member.setConfirmPerson("slt");
-        member.setIsPassed(false);
+        member.setPassed(false);
         member.setAgent(new Agent());
         member.setPictureUri("/images/");
-        member.setIsPayed(true);
+        member.setPayed(true);
         member.setSex(1);
         member.setPassword("4a5sd4faw5ea3s2d");
         member.setLastLoginDate(new Date());
