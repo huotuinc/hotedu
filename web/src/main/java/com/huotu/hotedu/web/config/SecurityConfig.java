@@ -67,7 +67,8 @@ public class SecurityConfig {
                             "/pc/css/**",
                             "/pc/images/**",
                             "/pc/js/**",
-                            "/pc/fonts/**"
+                            "/pc/fonts/**",
+                            "/pc/**.html"
                     );
         }
         //设置拦截规则
@@ -76,7 +77,7 @@ public class SecurityConfig {
 
                     //确保任何请求应用程序的用户需要通过身份验证
                     .authorizeRequests()
-                    .antMatchers("/backend/css/**", "/backend/images/**", "/backend/fonts/**", "/backend/js/**", "/pc/css/**", "/pc/images/**", "/pc/fonts/**", "/pc/js/**").permitAll()   // 允许未登录用户访问静态资源
+                    .antMatchers("/backend/css/**", "/backend/images/**", "/backend/fonts/**", "/backend/js/**", "/pc/css/**", "/pc/images/**", "/pc/fonts/**", "/pc/js/**","/pc/**.html").permitAll()   // 允许未登录用户访问静态资源
                     .anyRequest().authenticated()
                     .and()
                             //开启默认登录页面,允许用户进行身份验证和基于表单的登录
