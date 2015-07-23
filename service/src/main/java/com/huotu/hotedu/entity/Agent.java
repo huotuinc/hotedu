@@ -124,8 +124,12 @@ public class Agent extends Login{
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(
+<<<<<<< Updated upstream
                 new SimpleGrantedAuthority("ROLE_AGENT")
 
+=======
+                new SimpleGrantedAuthority("ROLE_AGENT_CENTER")//进入代理商中心的权限
+>>>>>>> Stashed changes
         );
     }
 }

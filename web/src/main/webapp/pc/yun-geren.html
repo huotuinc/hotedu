@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8"/>
     <title>个人中心</title>
@@ -22,10 +22,10 @@
                 <li><a href="#">教学视频</a></li>
                 <li><a href="#">考试指南</a></li>
                 <li><a href="#">招|应聘</a></li>
-                <li id="loginLi" style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)"
+                <li id="loginLi" style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)" th:text="${loginButton}"
                                                                       onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
                 </li>
-                <li id="userLi" style="padding:0px;display: none" >
+                <li id="userLi" style="padding:0px;display: none" th:style="${style}">
                     <a id="memberLi" href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
                     <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
 
@@ -44,7 +44,7 @@
         <img class="toux" src="images/toux.png" width="110px" height="110px"/>
         <ul style="margin-left:149px;margin-top:-50px;">
             <li style="float:left;">
-                <p style="font-size:16px"><b>姓名：啦啦啦</b></p>
+                <p style="font-size:16px"><b>姓名：<span th:text="${mb.realName}">啦啦啦</span></b></p>
             </li>
             <li style="float:right; margin-top:-20px">
                 <p style="font-size:14px">
@@ -58,15 +58,15 @@
         <p style="clear:both"></p>
         <ul class="boboxs">
             <li class="lileft">
-                <p>号码：15063568971</p>
+                <p>号码：<span th:text="${mb.phoneNo}">15063568971</span></p>
 
-                <p>注册时间：2105.01.01</p>
+                <p>注册时间：<span th:text="${#dates.format(mb.registerDate, 'yyyy-MM-dd hh:ss:mm')}">2105.01.01</span></p>
 
-                <p>班级：201204第一期</p>
+                <p>班级：<span th:text="mb.theClass">201204第一期</span></p>
 
-                <p>报名考试：2015.01.01提交报名</p>
+                <p>报名考试：<span th:text="${#dates.format(mb.applyDate, 'yyyy-MM-dd hh:ss:mm')}">2105.01.01</span>提交报名</p>
 
-                <p><span>考试通过：<b>未知</b></span>&nbsp;&nbsp;&nbsp;<span>考试时间：<b>未知</b></span>&nbsp;&nbsp;&nbsp;<span>考试地点：<b>未知</b></span>
+                <p><span>考试通过：<b><span>未知</span></b></span>&nbsp;&nbsp;&nbsp;<span>考试时间：<b><span>未知</span></b></span>&nbsp;&nbsp;&nbsp;<span>考试地点：<b><span>未知</span></b></span>
                 </p>
             </li>
 

@@ -63,6 +63,7 @@ public class Member extends Login {
     /**
      * 是否领证
      */
+<<<<<<< Updated upstream
     private boolean haveLicense=false;
 
     /**
@@ -71,6 +72,9 @@ public class Member extends Login {
     @ManyToOne
     private ClassTeam theClass;
 
+=======
+    private boolean haveLicense =false;
+>>>>>>> Stashed changes
     /**
      * 报名时间
      */
@@ -96,7 +100,17 @@ public class Member extends Login {
         this.sex = sex;
     }
 
+<<<<<<< Updated upstream
 
+=======
+    public boolean isPassed() {
+        return passed;
+    }
+
+    public void setPassed(boolean isPassed) {
+        this.passed = isPassed;
+    }
+>>>>>>> Stashed changes
 
     public boolean isPayed() {
         return payed;
@@ -191,8 +205,13 @@ public class Member extends Login {
         return haveLicense;
     }
 
+<<<<<<< Updated upstream
     public void setHaveLicense(boolean haveLicense) {
         this.haveLicense = haveLicense;
+=======
+    public void setHaveLicense(boolean isHaveLicense) {
+        this.haveLicense = isHaveLicense;
+>>>>>>> Stashed changes
     }
 
     @Override
@@ -203,7 +222,7 @@ public class Member extends Login {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(
-                new SimpleGrantedAuthority("MEMBER_CENTER")//进入学员个人中心的权限
+                new SimpleGrantedAuthority("ROLE_MEMBER_CENTER")//进入学员个人中心的权限
         );
     }
 }

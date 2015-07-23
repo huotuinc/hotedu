@@ -1,14 +1,26 @@
 package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.Agent;
+import com.huotu.hotedu.entity.Login;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< Updated upstream
+=======
+import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+>>>>>>> Stashed changes
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Date;
 
 
 /**
@@ -53,12 +65,15 @@ public class MemberController {
                     turnPage = "/pc/yun-baomin";
                 }else {
                     Member mb = new Member();
+                    Date d = new Date();
                     mb.setAgent(agent);
                     mb.setRealName(realName);
                     mb.setSex(sex);
                     mb.setPhoneNo(phoneNo);
                     mb.setLoginName(phoneNo);
                     mb.setEnabled(false);
+                    mb.setRegisterDate(d);
+                    mb.setApplyDate(d);
                     loginService.newLogin(mb,"123456");
                     msgInfo = "报名成功";
                 }
@@ -69,9 +84,24 @@ public class MemberController {
         return turnPage;
     }
 
+    @PreAuthorize("hasRole('ROLE_MEMBER_CENTER')")
     @RequestMapping("/pc/loadMemberCenter")
-    public String loadMemberCenter(Model model) {
-        return "";
+    public String loadMemberCenter(@AuthenticationPrincipal Login user, Model model) {
+        String errInfo = "";
+        String turnPage = "/pc/yun-geren";
+        String style = "padding:0px;";
+        String loginButton = "";
+        Member mb = memberService.findOneByLoginName(user.getLoginName());
+        if(mb==null) {
+            errInfo = "加载信息失败";
+            turnPage = "/pc/yun-index";
+        }else {
+            model.addAttribute("mb",mb);
+        }
+        model.addAttribute("errInfo",errInfo);
+        model.addAttribute("style",style);
+        model.addAttribute("loginButton",loginButton);
+        return turnPage;
     }
 
     /**
