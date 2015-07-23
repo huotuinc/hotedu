@@ -1,6 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
+<head>
     <meta charset="utf-8"/>
     <title>云商学院</title>
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/pc/css/common.css}"/>
@@ -8,225 +8,296 @@
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/pc/css/indexnew.css}"/>
     <script type="text/javascript" src="js/jquery1.42.min.js" th:src="@{/pc/js/jquery1.42.min.js}"></script>
     <script type="text/javascript" src="js/jquery.min.js" th:src="@{/pc/js/jquery.min.js}"></script>
-    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" th:src="@{/pc/js/jquery.SuperSlide.2.1.1.js}"></script>
+    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"
+            th:src="@{/pc/js/jquery.SuperSlide.2.1.1.js}"></script>
     <script rel="stylesheet" type="text/javascript" src="js/cookie_util.js" th:src="@{/pc/js/cookie_util.js}"></script>
     <script rel="stylesheet" type="text/javascript" src="js/baseValue.js" th:src="@{/pc/js/baseValue.js}"></script>
     <script rel="stylesheet" type="text/javascript" src="js/indexuser.js" th:src="@{/pc/js/indexuser.js}"></script>
 
     <script rel="stylesheet" type="text/javascript">
-       // isShowMember();
-       // showMemberBody();
+        // isShowMember();
+        // showMemberBody();
 
     </script>
 
-    </head>
-    <body>
-<div class="header"> <img src="images/logo.png" th:src="@{/pc/images/logo.png}" class="logoimg"/>
-      <ul class="nav">
-    <li class="active"><a href="index.html">首页</a></li>
-    <li><a href="index2.html">公司简介</a></li>
-    <li><a href="index3.html">考证报名</a></li>
-    <li><a href="about.html">师资力量</a></li>
-    <li><a href="about.html">教学视频</a></li>
-    <li><a href="about.html">考试指南</a></li>
-    <li><a href="about.html">招|应聘</a></li>
-    <li id="loginLi" style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)" th:text="${msgInfo}" onclick = "document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a></li>
-    <!--<li th:remove="all" id="memberLi" style="padding:0px;">-->
-          <!--<a href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a>&lt;!&ndash;会员图片&ndash;&gt;-->
-          <!--<p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>-->
-          <!--<p class="lbpo"> <a href="#" th:href="@{/pc/person}">HHSHIJIJ</a>-->
-                           <!--<a href="#">个人中心</a> <a href="#">修改密码</a>-->
-                           <!--<a href="#">退出</a>-->
-          <!--</p>-->
-    <!--</li>-->
-    <li id="userLi" style="padding:0px;display: none" th:style="${style}">
-          <a id="memberLi" href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
-          <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
-          <p class="lbpo"><a href="#" th:text="${#authentication.name}">个人中心</a>
-                          <a href="#">修改密码</a>
-                          <a href="#">退出</a></p>
-    </li>
-  </ul>
-    </div>
-   
+</head>
+<body>
+<div class="header"><img src="images/logo.png" th:src="@{/pc/images/logo.png}" class="logoimg"/>
+    <ul class="nav">
+        <li class="active"><a href="yun-index.html">首页</a></li>
+        <li><a href="#">公司简介</a></li>
+        <li><a href="yun-baomin.html">考证报名</a></li>
+        <li><a href="#">师资力量</a></li>
+        <li><a href="#">教学视频</a></li>
+        <li><a href="#">考试指南</a></li>
+        <li><a href="#">招|应聘</a></li>
+        <li id="loginLi" style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)" th:text="${msgInfo}"
+                                                              onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
+        </li>
+        <li id="userLi" style="padding:0px;display: none" th:style="${style}">
+            <a id="memberLi" href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
+            <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+
+            <p class="lbpo"><a href="#" th:text="${#authentication.name}">个人中心</a>
+                <a href="#">修改密码</a>
+                <a href="#">退出</a></p>
+        </li>
+    </ul>
+</div>
+
 <p style="clear:both"></p>
+
 <div class="fullSlide">
-      <div class="bd">
-    <ul>
-          <li style="background:url(images/banner1.jpg) center 0 no-repeat;"><a href="" title="1"></a></li>
-          <li style="background:url(images/banner1.jpg) center 0 no-repeat;"><a href="" title="2"></a></li>
-          <li style="background:url(images/banner1.jpg) center 0 no-repeat;"><a href="" title="3"></a></li>
+    <div class="bd">
+        <ul>
+            <li style="background:url(images/banner1.jpg) center 0 no-repeat;"><a href="" title="1"></a></li>
+            <li style="background:url(images/banner1.jpg) center 0 no-repeat;"><a href="" title="2"></a></li>
+            <li style="background:url(images/banner1.jpg) center 0 no-repeat;"><a href="" title="3"></a></li>
         </ul>
-  </div>
-      <div class="hd">
+    </div>
+    <div class="hd">
         <ul>
         </ul>
-  </div>
     </div>
+</div>
 <p style="clear:both"></p>
+
 <p style="height:20px"></p>
 <img src="images/wzwz.png" th:src="@{/pc/images/wzwz.png}" width="100%"/>
+
 <div class="hx">
-      <p style="clear:both; height:50px"></p>
-      <div class="hximg">
-    <ul>
-          <li class="pone"> <a href="">
-            <p class="  ystitle">微商基础化课程</p>
-            <p class="poneimg"></p>
+    <p style="clear:both; height:50px"></p>
+
+    <div class="hximg">
+        <ul>
+            <li class="pone"><a href="">
+                <p class="  ystitle">微商基础化课程</p>
+
+                <p class="poneimg"></p>
             </a>
-        <p class=" ysmf">免费教程</p>
-        <p class=" yssz">75,673人已学习</p>
-      </li>
-          <li class="ptwo"> <a href="">
-            <p class="ystitle">微商强化课程</p>
-            <p class="ptwoimg"></p>
+
+                <p class=" ysmf">免费教程</p>
+
+                <p class=" yssz">75,673人已学习</p>
+            </li>
+            <li class="ptwo"><a href="">
+                <p class="ystitle">微商强化课程</p>
+
+                <p class="ptwoimg"></p>
             </a>
-        <p class="ysmf">会员制 2680元／年</p>
-        <p class="yssz">16,128人已学习</p>
-      </li>
-          <li class="pthree"> <a href="">
-            <p class="pthree ystitle">活动直播</p>
-            <p class="pthreeimg"></p>
+
+                <p class="ysmf">会员制 2680元／年</p>
+
+                <p class="yssz">16,128人已学习</p>
+            </li>
+            <li class="pthree"><a href="">
+                <p class="pthree ystitle">活动直播</p>
+
+                <p class="pthreeimg"></p>
             </a>
-        <p class="ysmf">活动记录直播</p>
-        <p class="yssz">16,128条信息</p>
-      </li>
-          <li class="pfour"> <a href="">
-            <p class="pfour ystitle">微商基础化课程</p>
-            <p class="pfourimg"></p>
+
+                <p class="ysmf">活动记录直播</p>
+
+                <p class="yssz">16,128条信息</p>
+            </li>
+            <li class="pfour"><a href="">
+                <p class="pfour ystitle">微商基础化课程</p>
+
+                <p class="pfourimg"></p>
             </a>
-        <p class="ysmf">免费教程</p>
-        <p class="yssz">75,673人已学习</p>
-      </li>
+
+                <p class="ysmf">免费教程</p>
+
+                <p class="yssz">75,673人已学习</p>
+            </li>
         </ul>
-  </div>
     </div>
+</div>
 <img src="images/topone.png" width="100%" th:src="@{/pc/images/topone.png}"/>
+
 <div class="listone listhx">
-      <div style="width: 960px; margin: 0 auto;">
-    <ul>
-          <li style=" float:left;">
-        <a href="#"><p class="tit"> <span class="titspan">动态资讯</span> <span><img src="images/play.png" width="18px" height="18px"/></span> </p></a>
-        <p class="titen"> <span>Dynamic information</span> </p>
-        <a href="#"><img class="imgleft" src="images/listone.png" width="126px" height="108px"/></a>
-        <a href="#"><p class="titfont">微商走进校园</p></a>
-        <a href="#"><p class="titlb">考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p></a>
-        <p class="titxian"></p>
-        <a href="#"><p class="tittit"> <span class="titfive">5月杭州微商大会进行中</span> <span class="tittime">2015/05/10</span> </p></a>
-        <p style="clear:both"></p>
-        <a href="#"><p class="tittit"> <span class="titfive">5月杭州微商大会进行中</span> <span class="tittime">2015/05/10</span> </p></a>
-        <p style="clear:both"></p>
-        <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span> </p></a>
-      </li>
-          <li style=" float:left;">
-        <a href="#"><p class="tit"> <span class="titspan">动态资讯</span> <span><img src="images/play.png" width="18px" height="18px"/></span> </p></a>
-        <p class="titen"> <span>Dynamic information</span> </p>
-        <a href="#"><img class="imgleft" src="images/listone.png" width="126px" height="108px"/></a>
-        <a href="#"><p class="titfont">微商走进校园</p></a>
-        <a href="#"><p class="titlb">考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p></a>
-        <p class="titxian"></p>
-        <a href="#"><p class="tittit"> <span class="titfive">5月杭州微商大会进行中</span> <span class="tittime">2015/05/10</span> </p></a>
-        <p style="clear:both"></p>
-        <a href="#"><p class="tittit"> <span class="titfive">5月杭州微商大会进行中</span> <span class="tittime">2015/05/10</span> </p></a>
-        <p style="clear:both"></p>
-        <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span> </p></a>
-      </li>
-           <li style=" float:left;">
-        <a href="#"><p class="tit"> <span class="titspan">动态资讯</span> <span><img src="images/play.png" width="18px" height="18px"/></span> </p></a>
-        <p class="titen"> <span>Dynamic information</span> </p>
-        <a href="#"><img class="imgleft" src="images/listone.png" width="126px" height="108px"/></a>
-        <a href="#"><p class="titfont">微商走进校园</p></a>
-        <a href="#"><p class="titlb">考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p></a>
-        <p class="titxian"></p>
-        <a href="#"><p class="tittit"> <span class="titfive">5月杭州微商大会进行中</span> <span class="tittime">2015/05/10</span> </p></a>
-        <p style="clear:both"></p>
-        <a href="#"><p class="tittit"> <span class="titfive">5月杭州微商大会进行中</span> <span class="tittime">2015/05/10</span> </p></a>
-        <p style="clear:both"></p>
-        <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span> </p></a>
-      </li>
-           <li style=" float:left;">
-        <a href="#"><p class="tit"> <span class="titspan">动态资讯</span> <span><img src="images/play.png" width="18px" height="18px"/></span> </p></a>
-        <p class="titen"> <span>Dynamic information</span> </p>
-        <a href="#"><img class="imgleft" src="images/listone.png" width="126px" height="108px"/></a>
-        <a href="#"><p class="titfont">微商走进校园</p></a>
-        <a href="#"><p class="titlb">考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p></a>
-        <p class="titxian"></p>
-        <a href="#"><p class="tittit"> <span class="titfive">5月杭州微商大会进行中</span> <span class="tittime">2015/05/10</span> </p></a>
-        <p style="clear:both"></p>
-        <a href="#"><p class="tittit"> <span class="titfive">5月杭州微商大会进行中</span> <span class="tittime">2015/05/10</span> </p></a>
-        <p style="clear:both"></p>
-        <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span> </p></a>
-      </li>
+    <div style="width: 960px; margin: 0 auto;">
+        <ul>
+            <li style=" float:left;">
+                <a href="#"><p class="tit"><span class="titspan">动态资讯</span> <span><img src="images/play.png"
+                                                                                        width="18px"
+                                                                                        height="18px"/></span></p></a>
+
+                <p class="titen"><span>Dynamic information</span></p>
+                <a href="#"><img class="imgleft" src="images/listone.png" width="126px" height="108px"/></a>
+                <a href="#"><p class="titfont">微商走进校园</p></a>
+                <a href="#"><p class="titlb">
+                    考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
+                </a>
+
+                <p class="titxian"></p>
+                <a href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span> <span
+                        class="tittime">2015/05/10</span></p></a>
+
+                <p style="clear:both"></p>
+                <a href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span> <span
+                        class="tittime">2015/05/10</span></p></a>
+
+                <p style="clear:both"></p>
+                <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span>
+                </p></a>
+            </li>
+            <li style=" float:left;">
+                <a href="#"><p class="tit"><span class="titspan">动态资讯</span> <span><img src="images/play.png"
+                                                                                        width="18px"
+                                                                                        height="18px"/></span></p></a>
+
+                <p class="titen"><span>Dynamic information</span></p>
+                <a href="#"><img class="imgleft" src="images/listone.png" width="126px" height="108px"/></a>
+                <a href="#"><p class="titfont">微商走进校园</p></a>
+                <a href="#"><p class="titlb">
+                    考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
+                </a>
+
+                <p class="titxian"></p>
+                <a href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span> <span
+                        class="tittime">2015/05/10</span></p></a>
+
+                <p style="clear:both"></p>
+                <a href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span> <span
+                        class="tittime">2015/05/10</span></p></a>
+
+                <p style="clear:both"></p>
+                <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span>
+                </p></a>
+            </li>
+            <li style=" float:left;">
+                <a href="#"><p class="tit"><span class="titspan">动态资讯</span> <span><img src="images/play.png"
+                                                                                        width="18px"
+                                                                                        height="18px"/></span></p></a>
+
+                <p class="titen"><span>Dynamic information</span></p>
+                <a href="#"><img class="imgleft" src="images/listone.png" width="126px" height="108px"/></a>
+                <a href="#"><p class="titfont">微商走进校园</p></a>
+                <a href="#"><p class="titlb">
+                    考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
+                </a>
+
+                <p class="titxian"></p>
+                <a href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span> <span
+                        class="tittime">2015/05/10</span></p></a>
+
+                <p style="clear:both"></p>
+                <a href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span> <span
+                        class="tittime">2015/05/10</span></p></a>
+
+                <p style="clear:both"></p>
+                <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span>
+                </p></a>
+            </li>
+            <li style=" float:left;">
+                <a href="#"><p class="tit"><span class="titspan">动态资讯</span> <span><img src="images/play.png"
+                                                                                        width="18px"
+                                                                                        height="18px"/></span></p></a>
+
+                <p class="titen"><span>Dynamic information</span></p>
+                <a href="#"><img class="imgleft" src="images/listone.png" width="126px" height="108px"/></a>
+                <a href="#"><p class="titfont">微商走进校园</p></a>
+                <a href="#"><p class="titlb">
+                    考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
+                </a>
+
+                <p class="titxian"></p>
+                <a href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span> <span
+                        class="tittime">2015/05/10</span></p></a>
+
+                <p style="clear:both"></p>
+                <a href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span> <span
+                        class="tittime">2015/05/10</span></p></a>
+
+                <p style="clear:both"></p>
+                <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span>
+                </p></a>
+            </li>
         </ul>
-  </div>
     </div>
+</div>
 <img src="images/bottonone.png" width="100%" th:src="@{/pc/images/bottonone.png}"/>
+
 <div class="kf"><img src="images/wzwzwz.png" width="100%" th:src="@{/pc/images/wzwzwz.png}"/>
-      <p style="clear:both; height:30px"></p>
-      <div class="kfimg" >
-    <ul>
-          <li><img src="images/k121.jpg"/></li>
-          <li><img src="images/k143.jpg"/></li>
-          <li><img src="images/k3.jpg"/></li>
-          <li><img src="images/k4.jpg"/></li>
-          <li><img src="images/k5.jpg"/></li>
-          <li><img src="images/k8.jpg"/></li>
-          <li><img src="images/k7.jpg"/></li>
-          <li><img src="images/k1.jpg"/></li>
-          <li><img src="images/k11.jpg"/></li>
-          <li><img src="images/k131.jpg"/></li>
-        </ul>
-  </div>
-      <div style="display:none">
-    <p style="clear:both; height:80px"></p>
-    <a href="">
-        <div class="morebtn">更多</div>
-        </a>
+
     <p style="clear:both; height:30px"></p>
-  </div>
+
+    <div class="kfimg">
+        <ul>
+            <li><img src="images/k121.jpg"/></li>
+            <li><img src="images/k143.jpg"/></li>
+            <li><img src="images/k3.jpg"/></li>
+            <li><img src="images/k4.jpg"/></li>
+            <li><img src="images/k5.jpg"/></li>
+            <li><img src="images/k8.jpg"/></li>
+            <li><img src="images/k7.jpg"/></li>
+            <li><img src="images/k1.jpg"/></li>
+            <li><img src="images/k11.jpg"/></li>
+            <li><img src="images/k131.jpg"/></li>
+        </ul>
     </div>
-<div class="lhx" style=" background-color:#0195ff; color:#fff"> <a href="#">友情链接</a>| <a href="#">公共证书查询入口</a> </div>
-       
+    <div style="display:none">
+        <p style="clear:both; height:80px"></p>
+        <a href="">
+            <div class="morebtn">更多</div>
+        </a>
+
+        <p style="clear:both; height:30px"></p>
+    </div>
+</div>
+<div class="lhx" style=" background-color:#0195ff; color:#fff"><a href="#">友情链接</a>| <a href="#">公共证书查询入口</a></div>
+
 
 <div class="footer">
-      <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
-      <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
-    </div>
-    
-    
-    
+    <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
+
+    <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
+</div>
+
+
 <div style="width: 126px; height: 189px; position: fixed; top:220px; right: 20px; display: block; z-index: 100;">
-      <div style="display: block; width: 126px; height: 126px;"> <img src="images/weixin.png" th:src="@{/pc/images/weixin.png}" style="width: 126px; height: 126px;"/> </div>
-      <div style="background-color: #f1f1f1; text-align: center; font-size: 16px; font-family: '微软雅黑'; color: #666; height: 30px; line-height: 30px; display: block;"><a href="http://www.fanmore.cn/d.html" style="color: #333; font-size: 14px;">点击下载</a></div>
-      <img src="images/call.jpg" th:src="@{/pc/images/call.jpg}" style="width:126px; height:65px;"/> </div>
+    <div style="display: block; width: 126px; height: 126px;"><img src="images/weixin.png"
+                                                                   th:src="@{/pc/images/weixin.png}"
+                                                                   style="width: 126px; height: 126px;"/></div>
+    <div style="background-color: #f1f1f1; text-align: center; font-size: 16px; font-family: '微软雅黑'; color: #666; height: 30px; line-height: 30px; display: block;">
+        <a href="http://www.fanmore.cn/d.html" style="color: #333; font-size: 14px;">点击下载</a></div>
+    <img src="images/call.jpg" th:src="@{/pc/images/call.jpg}" style="width:126px; height:65px;"/></div>
 
 <div>
-<div id="asaimsg" class="AsaiDivShow">
-  <P align="right" style="margin:0px; padding:0px;"> <a href="javascript:void(0)" onclick = "document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'"> <FONT style="color:#111; font-size:20px;">×</FONT></a> </P>
-  <div class="sign-in">
-    <div class="user-form">
-     
-      
-      <form accept-charset="UTF-8" action="/pc/login" th:action="@{/pc/login}" class="sign-in__form user-form__form" method="post">
-        
-       
-        <div class="user-form__fieldset">
-          <label class="user-form__label" for="username" style="color:#111">用户名：</label>
-          <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field" id="username" name="username" placeholder="ID" type="text"/>
+    <div id="asaimsg" class="AsaiDivShow">
+        <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
+                                                             onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
+            <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+
+        <div class="sign-in">
+            <div class="user-form">
+
+
+                <form accept-charset="UTF-8" action="/pc/login" th:action="@{/pc/login}"
+                      class="sign-in__form user-form__form" method="post">
+
+
+                    <div class="user-form__fieldset">
+                        <label class="user-form__label" for="username" style="color:#111">用户名：</label>
+                        <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
+                               id="username" name="username" placeholder="ID" type="text"/>
+                    </div>
+                    <div class="user-form__fieldset">
+                        <label class="user-form__label" for="password" style="color:#111">密码：</label>
+                        <input class="sign-in__field user-form__field" id="password" name="password"
+                               placeholder="password" type="password"/>
+
+                    </div>
+                    <button class="sign-in__button user-form__button" name="button" type="submit">登录<i
+                            class="icon-arrow-right user-form__button-icon"></i></button>
+                </form>
+
+
+            </div>
         </div>
-        <div class="user-form__fieldset">
-          <label class="user-form__label" for="password" style="color:#111">密码：</label>
-          <input class="sign-in__field user-form__field" id="password" name="password" placeholder="password" type="password"/>
-          
-        </div>
-        <button class="sign-in__button user-form__button" name="button" type="submit">登录<i class="icon-arrow-right user-form__button-icon"></i></button> 
-      </form>
-     
-       
     </div>
-  </div>
-</div>
-<div id="asaimsgbg" class="AsaiDivBG"></div>
+    <div id="asaimsgbg" class="AsaiDivBG"></div>
 </div>
 </body>
 </html>
