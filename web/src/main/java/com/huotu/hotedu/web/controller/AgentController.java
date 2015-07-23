@@ -1,9 +1,14 @@
 package com.huotu.hotedu.web.controller;
 
+import com.huotu.hotedu.entity.Agent;
 import com.huotu.hotedu.entity.ClassTeam;
+import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,19 +33,17 @@ public class AgentController {
      * 用来储存分页中每页的记录数
      */
     public static final int PAGE_SIZE=10;
-
+    @PreAuthorize("hasRole('AGENT')")
     @RequestMapping("/pc/loadAgents")
-    public String showMemberByAgent(Model model){
-        String turnPage = "/pc/agentCenter";//TODO 返回路径暂定
-        return null;
-//        Agent agent = (Agent) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        if(agent==null){
-//            return null;
-//        }
-//        Page<Member> pages=memberService.loadMembersByAgent(agent,0,PAGE_SIZE);
-//        model.addAttribute("allMemberList",pages);
-//        model.addAttribute("agent",agent);
-//        return turnPage;
+    public String showMemberByAgent(@AuthenticationPrincipal Agent currentAgent,Model model){
+        String turnPage = "/pc/yun-daili";
+        if(currentAgent==null){
+            throw new IllegalStateException("尚未登录");
+        }
+        Page<Member> pages=memberService.loadMembersByAgent(currentAgent,0,PAGE_SIZE);
+        model.addAttribute("allMemberList",pages);
+        model.addAttribute("agent",currentAgent);
+        return turnPage;
     }
 
     /**

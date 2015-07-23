@@ -1,7 +1,6 @@
 package com.huotu.hotedu.service;
 
 import com.huotu.hotedu.entity.Agent;
-import com.huotu.hotedu.entity.ClassTeam;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,7 +99,7 @@ public class MemberService {
      */
     public void checkPay(Long id){
         Member mb= findOneById(id);
-        mb.setIsPayed(true);
+        mb.setPayed(true);
         memberRepository.save(mb);
     }
 

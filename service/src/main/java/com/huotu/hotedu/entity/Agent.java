@@ -124,7 +124,8 @@ public class Agent extends Login{
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(
-                new SimpleGrantedAuthority("AGENT_CENTER")//进入代理商中心的权限
+                new SimpleGrantedAuthority("ROLE_AGENT")
+
         );
     }
 }

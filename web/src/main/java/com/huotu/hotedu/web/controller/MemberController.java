@@ -2,16 +2,12 @@ package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.Agent;
 import com.huotu.hotedu.entity.Member;
-import com.huotu.hotedu.entity.Result;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 

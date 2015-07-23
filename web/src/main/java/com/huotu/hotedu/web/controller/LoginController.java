@@ -27,7 +27,7 @@ public class LoginController {
      * @return login.html
      */
     @RequestMapping("/backend/login")
-    public String index(){
+    public String index(Model model){
         return "backend/login";
     }
 

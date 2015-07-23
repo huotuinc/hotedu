@@ -46,6 +46,7 @@ public class Member extends Login {
      * 报名信息确认者
      */
     private String ConfirmPerson;
+
     /**
      * 所属班级
      */
@@ -54,15 +55,22 @@ public class Member extends Login {
     /**
      * 是否已缴费，默认：否
      */
-    private boolean isPayed = false;
+    private boolean payed = false;
     /**
      * 是否通过考试
      */
-    private boolean isPassed = false;
+    private boolean passed = false;
     /**
      * 是否领证
      */
-    private boolean isHaveLicense=false;
+    private boolean haveLicense=false;
+
+    /**
+     * 所属班级
+     */
+    @ManyToOne
+    private ClassTeam theClass;
+
     /**
      * 报名时间
      */
@@ -88,20 +96,14 @@ public class Member extends Login {
         this.sex = sex;
     }
 
-    public boolean isPassed() {
-        return isPassed;
-    }
 
-    public void setIsPassed(boolean isPassed) {
-        this.isPassed = isPassed;
-    }
 
     public boolean isPayed() {
-        return isPayed;
+        return payed;
     }
 
-    public void setIsPayed(boolean isPayed) {
-        this.isPayed = isPayed;
+    public void setPayed(boolean payed) {
+        this.payed = payed;
     }
 
     public Date getPayDate() {
@@ -177,12 +179,20 @@ public class Member extends Login {
         this.applyDate = applyDate;
     }
 
-    public boolean isHaveLicense() {
-        return isHaveLicense;
+    public boolean isPassed() {
+        return passed;
     }
 
-    public void setIsHaveLicense(boolean isHaveLicense) {
-        this.isHaveLicense = isHaveLicense;
+    public void setPassed(boolean passed) {
+        this.passed = passed;
+    }
+
+    public boolean isHaveLicense() {
+        return haveLicense;
+    }
+
+    public void setHaveLicense(boolean haveLicense) {
+        this.haveLicense = haveLicense;
     }
 
     @Override
