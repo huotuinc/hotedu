@@ -31,12 +31,39 @@ public class LoginController {
         return "backend/login";
     }
 
-    @RequestMapping("/pc/load")
-    public String loadPcIndex() {
-        return "pc/yun-index";
-    }
 
     @RequestMapping("/pc/login")
+    public String check(Model model) {
+        String turnPage = "pc/yun-index";
+        String msgInfo = "登录";
+        String style = "padding:0px;display:none";
+        model.addAttribute("style",style);
+        model.addAttribute("msgInfo",msgInfo);
+        return turnPage;
+    }
+
+    @RequestMapping("/pc/loginSuccess")
+    public String loginSuccess(Model model) {
+        String turnPage = "pc/yun-index";
+        String msgInfo = "";
+        String style = "padding:0px;";
+        model.addAttribute("style",style);
+        model.addAttribute("msgInfo",msgInfo);
+        return turnPage;
+    }
+
+    @RequestMapping("/pc/loginFailed")
+    public String loginFailed(Model model) {
+        String turnPage = "pc/yun-index";
+        String msgInfo = "登录";
+        String style = "padding:0px;display:none";
+        model.addAttribute("style",style);
+        model.addAttribute("msgInfo",msgInfo);
+        return turnPage;
+    }
+
+
+    /*@RequestMapping("/pc/login")
     public String login(String loginName,String password,Model model) throws Exception {
         String turnPage = "/pc/yun-index";
         String style = "padding:0px;display: none";
@@ -63,5 +90,5 @@ public class LoginController {
         model.addAttribute("msgInfo",msgInfo);
         model.addAttribute("style",style);
         return turnPage;
-    }
+    }*/
 }

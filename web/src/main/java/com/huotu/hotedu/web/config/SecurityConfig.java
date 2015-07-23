@@ -27,7 +27,9 @@ public class SecurityConfig {
      * 登录请求的URI
      */
     public static final String LoginURI = "/backend/login";
-    public static final String HOTEDU_URI = "http://localhost";
+    public static final String pcLoginURI = "/pc/login";
+    public static final String pcLoginSuccessURI = "/pc/loginSuccess";
+    public static final String pcLoginFailedURI = "/pc/loginFailed";
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -62,7 +64,10 @@ public class SecurityConfig {
                             "/backend/images/**",
                             "/backend/js/**",
                             "/backend/fonts/**",
-                            "/pc/**"
+                            "/pc/css/**",
+                            "/pc/images/**",
+                            "/pc/js/**",
+                            "/pc/fonts/**"
                     );
         }
         //设置拦截规则
@@ -71,13 +76,15 @@ public class SecurityConfig {
 
                     //确保任何请求应用程序的用户需要通过身份验证
                     .authorizeRequests()
-                    .antMatchers("/backend/css/**","/backend/images/**","/backend/fonts/**","/backend/js/**","/pc/**").permitAll()   // 允许未登录用户访问静态资源
+                    .antMatchers("/backend/css/**", "/backend/images/**", "/backend/fonts/**", "/backend/js/**", "/pc/css/**", "/pc/images/**", "/pc/fonts/**", "/pc/js/**").permitAll()   // 允许未登录用户访问静态资源
                     .anyRequest().authenticated()
                     .and()
                             //开启默认登录页面,允许用户进行身份验证和基于表单的登录
                     .csrf().disable()
                     .formLogin()
-                    .loginPage(LoginURI)
+                    .loginPage(pcLoginURI)
+                    .defaultSuccessUrl(pcLoginSuccessURI,true)
+                    .failureUrl(pcLoginFailedURI)
                     .permitAll();
 //                    .and()
                     //允许用户进行HTTP基本身份验证

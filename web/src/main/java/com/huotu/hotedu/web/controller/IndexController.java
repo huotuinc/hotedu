@@ -54,7 +54,7 @@ public class IndexController {
      * 显示主页信息
      * @return
      */
-    @RequestMapping("/")
+    @RequestMapping("/backend/index")
     public String loadIndex(){
         return "/backend/index";
     }

@@ -1,6 +1,6 @@
 $(function(){
 	$("#memberLi").mouseenter(function(){
-		$(this).children("p").fadeIn("fast");
+		$(".lbpo").fadeIn("fast");
 		$(".zhizhen").fadeIn("fast");
 	});
 	$(".lbpo").mouseleave(function(){

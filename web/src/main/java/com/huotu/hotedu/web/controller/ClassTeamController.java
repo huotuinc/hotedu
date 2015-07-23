@@ -1,26 +1,16 @@
 package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.ClassTeam;
-import com.huotu.hotedu.entity.Enterprise;
 import com.huotu.hotedu.entity.Exam;
-import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.service.ClassTeamService;
-import com.sun.jndi.cosnaming.IiopUrl;
-import com.sun.xml.internal.ws.developer.MemberSubmissionEndpointReference;
-import com.sun.xml.internal.ws.wsdl.writer.document.http.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import sun.util.calendar.LocalGregorianCalendar;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by luffy on 2015/6/10.
