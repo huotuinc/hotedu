@@ -15,9 +15,15 @@ public class Agent extends Login{
     private static final long serialVersionUID = -349012453592429794L;
     @Column
     /**
-     * 代理商姓名
+     * 代理商负责人姓名
      */
     private String name;
+
+    /**
+     * 代理商编号
+     */
+    private String areaId;
+
     /**
      * 代理商电话
      */
@@ -98,6 +104,14 @@ public class Agent extends Login{
 
     public void setLevel(String level) {
         this.level = level;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
     }
 
     @Override

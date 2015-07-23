@@ -1,19 +1,19 @@
 <!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"/>
     <title>考证报名</title>
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link rel="stylesheet" type="text/css" href="css/indexnew.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <script type="text/javascript" src="js/jquery1.42.min.js"></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
 </head>
 <body style="background-color:#f0f0f0">
 <div style="min-height:800px">
     <div style=" background-color:#fff;">
-        <div style=" background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" class="logoimg">
+        <div style=" background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" class="logoimg"/>
             <ul class="nav">
                 <li><a href="yun-index.html">首页</a></li>
                 <li><a href="#">公司简介</a></li>
@@ -45,21 +45,22 @@
 
     <div class="ysfour">
         <div class="ys500 ystx">
-            <p><input title="" class="ysw500 sign-in__field ys-form__field" id="" name="真实姓名" placeholder="真实姓名"
-                      type="text"/></p>
+            <form action="yun-geren.html" th:action="@{/pc/register}" method="post">
+                <p><input title="" class="ysw500 sign-in__field ys-form__field" id="realName" name="realName" placeholder="真实姓名"
+                          type="text"/></p>
+                <p class="ysdx">&nbsp;&nbsp;&nbsp;&nbsp;性别：<input name="sex" checked="checked" value="1" title="" type="radio"/> &nbsp;男&nbsp;&nbsp;
+                    <input name="sex" value="0" title="" type="radio"/> &nbsp;女&nbsp;&nbsp;</p>
 
-            <p class="ysdx">&nbsp;&nbsp;&nbsp;&nbsp;性别：<input title="" type="radio"/> &nbsp;男&nbsp;&nbsp;
-                <input title="" type="radio"/> &nbsp;女&nbsp;&nbsp;</p>
+                <p><input title="" class="ysw500 sign-in__field ys-form__field" id="phoneNo" name="phoneNo" placeholder="真实手机号"
+                          type="text"/></p>
 
-            <p><input title="" class="ysw500 sign-in__field ys-form__field" id="" name="真实手机号" placeholder="真实手机号"
-                      type="text"/></p>
-
-            <p><select title="" name="search-sort" id="" class="ysxlk">
-                <option value="">杭州市</option>
-            </select></p>
-            <p style="text-align:center;">
-                <button class="ysw500 sign-in__button ys-form__button" name="button" type="submit"/>
-                提交</button></p>
+                <p><select title="" name="areaId" id="areaId" class="ysxlk">
+                    <option value="001" selected="selected">杭州市</option>
+                </select></p>
+                <p style="text-align:center;"><button class="ysw500 sign-in__button ys-form__button" name="button" type="submit">提交</button></p>
+            </form>
+            <span style="color:red" th:text="${errInfo}"/>
+            <span style="color:blue" th:text="${msgInfo}"/>
         </div>
         <p class="yszhuyi">
             <i style="color:#FFBE00">*</i>提交报名后，我们会通知你，并线下交费。安排班次和考试等事项。<br/>

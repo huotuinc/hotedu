@@ -27,7 +27,7 @@ public class LoginController {
      * @return login.html
      */
     @RequestMapping("/backend/login")
-    public String index(){
+    public String index(Model model){
         return "backend/login";
     }
 
@@ -55,10 +55,14 @@ public class LoginController {
     @RequestMapping("/pc/loginFailed")
     public String loginFailed(Model model) {
         String turnPage = "pc/yun-index";
+        String loginForm = "display:block";
         String msgInfo = "登录";
+        String errInfo = "用户或密码错误";
         String style = "padding:0px;display:none";
         model.addAttribute("style",style);
         model.addAttribute("msgInfo",msgInfo);
+        model.addAttribute("errInfo",errInfo);
+        model.addAttribute("loginForm",loginForm);
         return turnPage;
     }
 

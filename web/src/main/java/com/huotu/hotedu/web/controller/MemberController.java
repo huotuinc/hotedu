@@ -4,6 +4,7 @@ import com.huotu.hotedu.entity.Agent;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.entity.Result;
 import com.huotu.hotedu.service.AgentService;
+import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,40 +27,45 @@ public class MemberController {
     @Autowired
     private AgentService agentService;
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private LoginService loginService;
 
     @RequestMapping("/pc/loadMemberRegister")
     public String load() {
-        return "pc/registerTest";
+        return "pc/yun-baomin";
     }
 
+
     @RequestMapping("/pc/register")
-    public String register(String realName,int sex,String phoneNo,long areaId,Model model) throws Exception {
+    public String register(String realName,int sex,String phoneNo,String areaId,Model model) throws Exception {
         String errInfo = "";
         String msgInfo = "";
-        String turnPage = "/pc/registerTest";
+        String turnPage = "/pc/yun-baomin";
         if("".equals(realName)||realName==null) {
             errInfo = "姓名不能为空";
         }else if("".equals(phoneNo)||phoneNo==null) {
             errInfo = "手机号不能为空";
-        }else if(areaId == 0) {
+        }else if("".equals(areaId)||areaId==null) {
             errInfo = "请选择报名地点";
         }else {
             boolean exist = memberService.isPhoneNoExist(phoneNo);
             if(exist) {
                 errInfo = "该手机号已被注册";
             }else {
-                Agent agent = agentService.findOneById(areaId);
-                Member mb = new Member();
-                mb.setAgent(agent);
-                mb.setRealName(realName);
-                mb.setSex(sex);
-                mb.setPhoneNo(phoneNo);
-                mb.setLoginName(phoneNo);
-                mb.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes("UTF-8")).toLowerCase());
-                mb.setEnabled(false);
-                memberService.addMember(mb);
-                msgInfo = "报名成功";
+                Agent agent = agentService.findByAreaId(areaId);
+                if(agent==null) {
+                    errInfo = "该地区报名点临时取消";
+                    turnPage = "/pc/yun-baomin";
+                }else {
+                    Member mb = new Member();
+                    mb.setAgent(agent);
+                    mb.setRealName(realName);
+                    mb.setSex(sex);
+                    mb.setPhoneNo(phoneNo);
+                    mb.setLoginName(phoneNo);
+                    mb.setEnabled(false);
+                    loginService.newLogin(mb,"123456");
+                    msgInfo = "报名成功";
+                }
             }
         }
         model.addAttribute("msgInfo",msgInfo);

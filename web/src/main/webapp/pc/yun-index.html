@@ -26,7 +26,7 @@
     <ul class="nav">
         <li class="active"><a href="yun-index.html">首页</a></li>
         <li><a href="#">公司简介</a></li>
-        <li><a href="yun-baomin.html">考证报名</a></li>
+        <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
         <li><a href="#">师资力量</a></li>
         <li><a href="#">教学视频</a></li>
         <li><a href="#">考试指南</a></li>
@@ -40,7 +40,7 @@
 
             <p class="lbpo"><a href="#" th:text="${#authentication.name}">个人中心</a>
                 <a href="#">修改密码</a>
-                <a href="#">退出</a></p>
+                <a href="#" th:href="@{/pc/login}">退出</a></p>
         </li>
     </ul>
 </div>
@@ -265,7 +265,7 @@
     <img src="images/call.jpg" th:src="@{/pc/images/call.jpg}" style="width:126px; height:65px;"/></div>
 
 <div>
-    <div id="asaimsg" class="AsaiDivShow">
+    <div id="asaimsg" class="AsaiDivShow" th:style="${loginForm}">
         <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
                                                              onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
             <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
@@ -274,7 +274,7 @@
             <div class="user-form">
 
 
-                <form accept-charset="UTF-8" action="/pc/login" th:action="@{/pc/login}"
+                <form accept-charset="UTF-8" action="yun-geren.html" th:action="@{/pc/login}"
                       class="sign-in__form user-form__form" method="post">
 
 
@@ -292,12 +292,13 @@
                     <button class="sign-in__button user-form__button" name="button" type="submit">登录<i
                             class="icon-arrow-right user-form__button-icon"></i></button>
                 </form>
+                <span th:text="${errInfo}"></span>
 
 
             </div>
         </div>
     </div>
-    <div id="asaimsgbg" class="AsaiDivBG"></div>
+    <div id="asaimsgbg" class="AsaiDivBG" th:style="${loginForm}"></div>
 </div>
 </body>
 </html>

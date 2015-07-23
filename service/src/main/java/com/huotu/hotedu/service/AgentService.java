@@ -120,6 +120,12 @@ public class AgentService {
     public void modify(Agent agent){agentRepository.save(agent);
     }
 
+    /**
+     * 查找一位代理商
+     * @param areaId 代理商id
+     * @return 代理商对象
+     */
+    public Agent findByAreaId(String areaId){return agentRepository.findByAreaId(areaId);}
 
     /**
      * 查找一位代理商
