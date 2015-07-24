@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/indexnew.css"/>
     <script type="text/javascript" src="js/jquery1.42.min.js"></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+    <script rel="stylesheet" type="text/javascript" src="js/indexuser.js"></script>
 </head>
 
 <body style=" background-color:#f0f0f0;">
@@ -28,7 +29,6 @@
                 <li id="userLi" style="padding:0px;display: none" th:style="${style}">
                     <a id="memberLi" href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
                     <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
-
                     <p class="lbpo"><a href="#">个人中心</a>
                         <a href="#">修改密码</a>
                         <a href="#">退出</a></p>
@@ -62,20 +62,22 @@
 
                 <p>注册时间：<span th:text="${#dates.format(mb.registerDate, 'yyyy-MM-dd hh:ss:mm')}">2105.01.01</span></p>
 
-                <p>班级：<span th:text="mb.theClass">201204第一期</span></p>
+                <p>班级：<span th:text="${mb.theClass==null}?'未安排':${mb.theClass.className}">201204第一期</span></p>
 
                 <p>报名考试：<span th:text="${#dates.format(mb.applyDate, 'yyyy-MM-dd hh:ss:mm')}">2105.01.01</span>提交报名</p>
 
-                <p><span>考试通过：<b><span>未知</span></b></span>&nbsp;&nbsp;&nbsp;<span>考试时间：<b><span>未知</span></b></span>&nbsp;&nbsp;&nbsp;<span>考试地点：<b><span>未知</span></b></span>
+                <p><span>考试通过：<b><span th:text="${mb.passed}?'已通过':'未通过'">未知</span></b></span>&nbsp;&nbsp;&nbsp;<span>考试时间：<b><span
+                        th:text="${mb.theClass==null}?'未安排':(${mb.theClass.exam==null}?'未安排':${#dates.format(mb.theClass.exam.examDate, 'yyyy-MM-dd hh:ss:mm')})">未知</span></b></span>&nbsp;&nbsp;&nbsp;<span>考试地点：<b><span
+                        th:text="${mb.theClass==null}?'未安排':(${mb.theClass.exam==null}?'未安排':${mb.theClass.exam.examAddress})">未知</span></b></span>
                 </p>
             </li>
 
             <li class="liright">
-                <p>交费状态：成功</p>
+                <p>交费状态：<span th:text="${mb.payed}?'已交费':'未交费'">成功</span></p>
 
-                <p>区域负责人：啦啦啦</p>
+                <p>区域负责人：<span th:text="${mb.agent.name}">啦啦啦</span></p>
 
-                <p>联系方式：15062356895</p>
+                <p>联系方式：<span th:text="${mb.agent.phoneNo}">15062356895</span></p>
 
                 <p>考试通过后，即可申请实物证</p>
             </li>
