@@ -114,7 +114,8 @@ public class MemberController {
             Page<Member> pages=memberService.searchMembers((Agent)user,0,PAGE_SIZE,null,null);
             model.addAttribute("allMemberList",pages);
             model.addAttribute("agent",user);
-            model.addAttribute("totalMembers",pages.getTotalElements());
+            model.addAttribute("totalRecords",pages.getTotalElements());
+            model.addAttribute("navigation","bmxx");
         }
         model.addAttribute("errInfo",errInfo);
         model.addAttribute("style",style);
@@ -128,9 +129,33 @@ public class MemberController {
                                 @RequestParam(required = false)Integer pageNo,
                                 @RequestParam(required = false)Integer pageSize,
                                 @RequestParam(required = false) String keywords,
-                                @RequestParam(required = false) String type,
+                                @RequestParam(required = false,value = "search-sort") String type,
                                 Model model) {
         String turnPage = "/pc/yun-daili";
+        if(pageNo==null||pageNo<0){
+            pageNo=0;
+        }
+        if(pageSize==null) {
+            pageSize = PAGE_SIZE;
+        }
+        Page<Member> pages = memberService.searchMembers(agent,pageNo,pageSize,keywords,type);
+        long totalRecords = pages.getTotalElements();  //总记录数
+        int numEl =  pages.getNumberOfElements();      //当前分页记录数
+        if(numEl==0) {
+            pageNo=pages.getTotalPages()-1;
+            if(pageNo<0) {
+                pageNo = 0;
+            }
+            pages = memberService.searchMembers(agent, pageNo, pageSize, keywords, type);
+            totalRecords = pages.getTotalElements();  //总记录数
+        }
+        model.addAttribute("agent",agent);
+        model.addAttribute("allMemberList", pages);
+        model.addAttribute("totalPages",pages.getTotalPages());
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("keywords", keywords);
+        model.addAttribute("totalRecords", totalRecords);
+        model.addAttribute("navigation","bmxx");
         return turnPage;
     }
 
