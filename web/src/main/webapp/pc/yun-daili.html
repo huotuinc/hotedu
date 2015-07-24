@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <title>代理商中心</title>
@@ -49,16 +49,16 @@
         <p style="clear:both"></p>
         <ul class="bobox">
             <li class="lileft">
-                <p>号码：15063568971</p>
+                <p th:text="'号码：'+  (${agent.phoneNo}==null? '暂无':${agent.phoneNo})">号码：15063568971</p>
 
-                <p>注册时间：2105.01.01</p>
+                <p th:text="'注册时间：'+${#calendars.format(agent.registerDate,'yyyy.MM.dd')}">注册时间：2105.01.01</p>
             </li>
             <li class="newr liright">
-                <p>总人数：<b>900</b></p>
+                <p>总人数：<b th:text="${totalMembers}">900</b></p>
 
-                <p>已发证：<b>400</b></p>
+                <p>已发证：<b th:text="${agent.sendCertificateNumber}">400</b></p>
 
-                <p>剩余证：<b>200</b></p>
+                <p>剩余证：<b th:text="${agent.certificateNumber}-${agent.sendCertificateNumber}">200</b></p>
             </li>
         </ul>
     </div>
@@ -115,7 +115,7 @@
                                 <th style="width:200px">班级</th>
                                 <th style="width:80px;">操作</th>
                             </tr>
-                            <tr>
+                            <tr th:remove="all">
                                 <td><input title="" id="u109_input" type="checkbox" value="checkbox"/></td>
                                 <td>01</td>
                                 <td title="">女女女</td>
@@ -129,7 +129,7 @@
                                 <td><a class="link-update" href="#">查看<br/>
                                 </a> <a class="link-update" href="#">删除</a></td>
                             </tr>
-                            <tr>
+                            <tr th:remove="all">
                                 <td><input title="" id="u109_input" type="checkbox" value="checkbox"/></td>
                                 <td>01</td>
                                 <td title="">女女女</td>
@@ -143,7 +143,7 @@
                                 <td><a class="link-update" href="#">查看<br/>
                                 </a> <a class="link-update" href="#">删除</a></td>
                             </tr>
-                            <tr>
+                            <tr th:remove="all">
                                 <td><input title="" id="u109_input" type="checkbox" value="checkbox"/></td>
                                 <td>01</td>
                                 <td title="">女女女</td>
@@ -157,6 +157,35 @@
                                 <td><a class="link-update" href="#">查看<br/>
                                 </a> <a class="link-update" href="#">删除</a></td>
                             </tr>
+
+                            <tr th:each="g:${allMemberList}">
+                                <td><input title="" id="u109_input" type="checkbox" value="checkbox"/></td>
+                                <td th:text="${g.id}">01</td>
+                                <td th:text="${g.realName}" title="">女女女</td>
+                                <td th:text="${g.agent.area}" title="">杭州</td>
+                                <td th:text="${g.phoneNo}" title="">125656256356</td>
+                                <td th:text="${g.payed}?'是':'否'" title="">是</td>
+                                <td th:text="${#calendars.format(g.applyDate,'yyyy.MM.dd')}" title="">2015.04.01</td>
+                                <td th:text="${g.passed}?'是':'否'" title="">--</td>
+                                <td th:text="${g.haveLicense}?'是':'否'" title="">--</td>
+                                <td th:text="${g.theClass}==null? '未分配':${g.theClass.className}" title="">201504第一期</td>
+                                <td><a class="link-update" href="#">查看</a><br/><a class="link-update" href="#">删除</a></td>
+                            </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         </table>
                         <div style="text-align:center; margin-top:10px;"> 2 条 1/1 页</div>
                     </div>
