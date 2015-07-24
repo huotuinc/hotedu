@@ -162,17 +162,12 @@ public class MemberController {
         return turnPage;
     }
 
-
-
-
-
-
-
     /**
+     * Created by jiashubing on 2015/7/24.
      * 查看学员信息详情
-     * @param id 学员id
+     * @param id    学员id
      * @param model 返回值
-     * @return     查看学员个人详细信息页面
+     * @return      查看学员个人详细信息页面
      */
     @RequestMapping("pc/detailMember")
     public String detailMember(Long id,Model model)
@@ -184,19 +179,20 @@ public class MemberController {
             errInfo = "请重新登录";
         }else {
             Member mb = memberService.findOneById(id);
-            model.addAttribute("pictureUri",mb.getPictureUri());
-            model.addAttribute("realName",mb.getRealName());
-            model.addAttribute("phoneNo",mb.getPhoneNo());
-            model.addAttribute("area",mb.getAgent().getArea());
-            model.addAttribute("applyDate",mb.getApplyDate());
-
-            model.addAttribute("payDate",mb.getPayDate());
-            model.addAttribute("agent",mb.getAgent().getName());
-
-            model.addAttribute("examDate",mb.getTheClass().getExam().getExamDate());
-            model.addAttribute("examAddress",mb.getTheClass().getExam().getExamAddress());
-            model.addAttribute("theClass",mb.getTheClass().getClassName());
-            model.addAttribute("isPassed",mb.isPassed());
+            model.addAttribute("mb",mb);
+//            model.addAttribute("pictureUri",mb.getPictureUri());
+//            model.addAttribute("realName",mb.getRealName());
+//            model.addAttribute("phoneNo",mb.getPhoneNo());
+//            model.addAttribute("area",mb.getAgent().getArea());
+//            model.addAttribute("applyDate",mb.getApplyDate());
+//
+//            model.addAttribute("payDate",mb.getPayDate());
+//            model.addAttribute("agent",mb.getAgent().getName());
+//
+//            model.addAttribute("examDate",mb.getTheClass().getExam().getExamDate());
+//            model.addAttribute("examAddress",mb.getTheClass().getExam().getExamAddress());
+//            model.addAttribute("theClass",mb.getTheClass().getClassName());
+//            model.addAttribute("isPassed",mb.isPassed());
 
             msgInfo = "查看详情";
         }
@@ -207,6 +203,7 @@ public class MemberController {
     }
 
     /**
+     * Created by jiashubing on 2015/7/24.
      * 删除学员，设为不可用
      * @param id 学员id
      * @param model 返回值
@@ -230,8 +227,9 @@ public class MemberController {
     }
 
     /**
+     * Created by jiashubing on 2015/7/24.
      * 确认交费
-     * @param id 学员id
+     * @param id    学员id
      * @param model 返回值
      * @return
      */
@@ -240,7 +238,7 @@ public class MemberController {
     {
         String errInfo = "";
         String msgInfo = "";
-        String turnPage = "/pc/checkPay";
+        String turnPage = "/pc/daili";
         if(id==null) {
             errInfo = "请重新登录";
         }else {

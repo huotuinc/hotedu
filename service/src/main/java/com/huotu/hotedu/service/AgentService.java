@@ -119,6 +119,7 @@ public class AgentService {
     public Agent findOneById(Long id){return agentRepository.findOne(id);}
 
     /**
+     *
      * 查找一个已有班级
      * @param id 班级id
      * @return 班级对象
@@ -126,6 +127,7 @@ public class AgentService {
     public ClassTeam findOneClassTeamById(Long id){return classTeamRepository.findOne(id);}
 
     /**
+     * Created by jiashubing on 2015/7/24.
      * 检查该班级名称是否已经使用
      * @param className     班级名称
      * @return              若没有使用，返回true；若使用过，则返回false
@@ -141,6 +143,7 @@ public class AgentService {
     }
 
     /**
+     * Created by jiashubing on 2015/7/24.
      * 显示所有未分班学员 每页10条
      * @param n         第几页
      * @param pagesize  每页几条
@@ -156,6 +159,7 @@ public class AgentService {
     }
 
     /**
+     * Created by jiashubing on 2015/7/24.
      * 显示所有已分班学员 每页10条
      * @param n         第几页
      * @param pagesize  每页几条
@@ -171,6 +175,7 @@ public class AgentService {
     }
 
     /**
+     * Created by jiashubing on 2015/7/24.
      * 安排分班
      * @param allNoClassMemberList  需要分班的成员
      * @param classTeam             分配的班级
@@ -184,6 +189,7 @@ public class AgentService {
     }
 
     /**
+     * Created by jiashubing on 2015/7/24.
      * 查询该代理商已有班级
      * @param agent     所属代理商
      * @return          班级集合
@@ -198,6 +204,7 @@ public class AgentService {
     }
 
     /**
+     * Created by jiashubing on 2015/7/24.
      * 注册增加班级
      * @param classTeam  注册的班级
      */
@@ -206,6 +213,7 @@ public class AgentService {
     }
 
     /**
+     * Created by jiashubing on 2015/7/24.
      * 代理商添加班级
      * @param agent         代理商
      * @param classTeam     添加的班级

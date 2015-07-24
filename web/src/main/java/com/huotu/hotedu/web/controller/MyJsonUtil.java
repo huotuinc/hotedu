@@ -12,7 +12,7 @@ public class MyJsonUtil {
      * @param arrayList 需要转换的list
      * @return          String类型数据
      */
-    public static String convertObjectToJsonBytes(ArrayList<Object> arrayList){
+    public String convertObjectToJsonBytes(ArrayList<Object> arrayList){
         String json = "";
         json += arrayList.get(0).toString();
         for(int i=1; i<arrayList.size(); i++){
@@ -26,7 +26,7 @@ public class MyJsonUtil {
      * @param json      需要转换的String
      * @return          ArrayList类型数据
      */
-    public static ArrayList<Object> convertJsonBytesToArrayList(String json){
+    public ArrayList<Object> convertJsonBytesToArrayList(String json){
         ArrayList<Object> arrayList = new ArrayList<>(20);
         String[] stringArr= json.split(",");
         for(int i=0;i<stringArr.length;i++){

@@ -1,9 +1,13 @@
 package com.huotu.hotedu.web.controller;
 
+import com.huotu.hotedu.entity.Agent;
 import com.huotu.hotedu.entity.ClassTeam;
+import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +34,7 @@ public class AgentController {
     public static final int PAGE_SIZE=10;
 
     /**
+     * Created by jiashubing on 2015/7/24.
      * 将学员保存到新建班级中
      * @param className     新建班级的名字
      * @param arrayLis      复选框选中成员的id集合,Strring类型
@@ -61,6 +66,7 @@ public class AgentController {
     }
 
     /**
+     * Created by jiashubing on 2015/7/24.
      * 将学员保存到已有班级中
      * @param classId       已有班级的名字
      * @param arrayLis      复选框选中成员的id集合,Strring类型
@@ -83,5 +89,27 @@ public class AgentController {
         model.addAttribute("errInfo",errInfo);
         model.addAttribute("msgInfo",msgInfo);
         return turnPage;
+    }
+
+    /**
+     * Created by jiashubing on 2015/7/24.
+     * 加载未分班的学员信息
+     * @param agent     当前代理商
+     * @param model     返回客户端集
+     * @return          yun-daili.html  班级管理选项卡
+     */
+    @RequestMapping("pc/loadNoClassMembers")
+    public String loadNoClassMembers(@AuthenticationPrincipal Agent agent,Model model){
+        Page<Member> pages= agentService.findNoClassMembers(0, 10);
+        long sumElement=pages.getTotalElements();
+
+        model.addAttribute("agent",agent);
+        model.addAttribute("allNoClassMembersList",pages);
+        model.addAttribute("keywords","");
+        model.addAttribute("navigation","bjgl");
+        model.addAttribute("n",0);
+        model.addAttribute("sumElement", sumElement);
+        model.addAttribute("sumpage",sumElement/pages.getSize()+(sumElement%pages.getSize()>0? 1:0));
+        return "/pc/yun-daili";
     }
 }

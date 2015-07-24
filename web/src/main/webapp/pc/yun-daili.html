@@ -66,7 +66,7 @@
          class="ystwo">
         <div class="ysykone bg on" th:class="${navigation}=='bmxx'? 'ysykone bg on':'ysykone bg'"><a href="#"><span>报名信息</span> </a></div>
         <div class="ysyktwo bg" th:class="${navigation}=='xxtz'? 'ysyktwo bg on':'ysyktwo bg'"><a href="#"><span>消息通知</span> </a></div>
-        <div class="ysykthree bg" th:class="${navigation}=='bjgl'? 'ysykthree bg on':'ysykthree bg'"><a href="#"><span>班级管理</span> </a></div>
+        <div class="ysykthree bg" th:class="${navigation}=='bjgl'? 'ysykthree bg on':'ysykthree bg'"><a href="#" th:href="@{/pc/loadNoClassMembers}"><span>班级管理</span> </a></div>
         <div class="ysykfour bg" th:class="${navigation}=='bygl'? 'ysykfour bg on':'ysykfour bg'"><a href="#"><span>毕业管理</span> </a></div>
     </div>
 
@@ -225,7 +225,7 @@
 
         <!--班级管理-->
 
-        <div style="display:none" class="ysthree">
+        <div style="display:none;" th:style="${navigation}=='bjgl'? 'display:block;':'display:none;'" class="ysthree">
             <div class="main-wrapi">
                 <div style=" float: right; margin-right: 14px;margin-bottom: 6px;" class="search-content">
                     <div style=" text-align:center;display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex;"
@@ -242,29 +242,27 @@
                         <table style="float: left;margin-right:520px;" class="search-tab">
                             <tr>
                                 <th width="10"></th>
-                                <td><input title="" id="u109_input" type="checkbox" value="checkbox"/></td>
+                                <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
                                 <td><input title="" class="ysss" name="sub" value="安排班级" type="submit"/></td>
                             </tr>
                         </table>
                         <table class="search-tab">
                             <tr>
                                 <th width="10"></th>
-                                <td><select title="" name="search-sort" id=""
-                                            style=" height:29px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
+                                <td><select title="" name="search-sort" style=" height:29px;padding: 0 4px; border:1px solid #ccc; vertical-align:middle">
                                     <option value="">全部</option>
                                 </select></td>
-                                <td><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字"
-                                           name="keywords" value="" id="" type="text"/></td>
+                                <td><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" value="" type="text"/></td>
                                 <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
                             </tr>
                         </table>
                     </form>
                 </div>
                 <div class="result-wrap">
-                    <form name="myform" id="myform" method="post">
+                    <form name="myform" class="myform" method="post">
                         <div class="result-content">
                             <table class="result-tab" width="100%">
-                                <tr>
+                                <tr th:remove="all">
                                     <th style="width:80px">选择</th>
                                     <th style="width:100px">序号</th>
                                     <th style="width:80px">姓名</th>
@@ -272,64 +270,73 @@
                                     <th style="width:300px">电话</th>
                                     <th style="width:80px;">操作</th>
                                 </tr>
-                                <tr>
-                                    <td><input title="" id="u109_input" type="checkbox" value="checkbox"/></td>
+                                <tr th:remove="all">
+                                    <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
                                     <td>01</td>
                                     <td>小米</td>
-                                    <td title="">湖深度山东省都是都是很好</td>
+                                    <td title="">杭州</td>
                                     <td>15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
-                                <tr>
-                                    <td><input title="" id="u109_input" type="checkbox" value="checkbox"/></td>
+                                <tr th:remove="all">
+                                    <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
                                     <td>01</td>
                                     <td>小米</td>
-                                    <td title="">湖深度山东省都是都是很好</td>
+                                    <td title="">杭州</td>
                                     <td>15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
-                                <tr>
-                                    <td><input title="" id="u109_input" type="checkbox" value="checkbox"/></td>
+                                <tr th:remove="all">
+                                    <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
                                     <td>01</td>
                                     <td>小米</td>
-                                    <td title="">湖深度山东省都是都是很好</td>
+                                    <td title="">杭州</td>
                                     <td>15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
-                                <tr>
-                                    <td><input title="" id="u109_input" type="checkbox" value="checkbox"/></td>
+                                <tr th:remove="all">
+                                    <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
                                     <td>01</td>
                                     <td>小米</td>
-                                    <td title="">湖深度山东省都是都是很好</td>
+                                    <td title="">杭州</td>
                                     <td>15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
-                                <tr>
-                                    <td><input title="" id="u109_input" type="checkbox" value="checkbox"/></td>
+                                <tr th:remove="all">
+                                    <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
                                     <td>01</td>
                                     <td>小米</td>
-                                    <td title="">湖深度山东省都是都是很好</td>
+                                    <td title="">杭州</td>
                                     <td>15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
-                                <tr>
-                                    <td><input title="" id="u109_input" type="checkbox" value="checkbox"/></td>
+                                <tr th:remove="all">
+                                    <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
                                     <td>01</td>
                                     <td>小米</td>
-                                    <td title="">湖深度山东省都是都是很好</td>
+                                    <td title="">杭州</td>
                                     <td>15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
-                                <tr>
-                                    <td><input title="" id="u109_input" type="checkbox" value="checkbox"/></td>
-                                    <td>01</td>
+                                <tr th:remove="all">
+                                    <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
+                                    <td>0123456789</td>
                                     <td>小米</td>
-                                    <td title="">湖深度山东省都是都是很好</td>
+                                    <td title="">杭州</td>
                                     <td>15236699696</td>
+                                    <td><a class="link-update" href="#">查看</a></td>
+                                </tr>
+                                <tr th:each="g:${allNoClassMembersList}">
+                                    <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
+                                    <td th:text="${g.id}">01</td>
+                                    <td th:text="${g.realName}">小米</td>
+                                    <td th:text="${g.agent.area}">杭州</td>
+                                    <td th:text="${g.phoneNo}">15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
                             </table>
-                            <div style="text-align:center; margin-top:10px;"> 2 条 1/1 页</div>
+                            <div style="text-align:center; margin-top:10px;"> <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span th:text="${sumpage}">1</span> 页</div>
+
                         </div>
                     </form>
                 </div>
