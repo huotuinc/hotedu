@@ -8,10 +8,12 @@ import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
 
@@ -120,8 +122,17 @@ public class MemberController {
         return turnPage;
     }
 
-
-
+    @PreAuthorize("hasRole('AGENT')")
+    @RequestMapping("/pc/searchMembers")
+    public String searchMembers(@AuthenticationPrincipal Agent agent,
+                                @RequestParam(required = false)Integer pageNo,
+                                @RequestParam(required = false)Integer pageSize,
+                                @RequestParam(required = false) String keywords,
+                                @RequestParam(required = false) String type,
+                                Model model) {
+        String turnPage = "/pc/yun-daili";
+        return turnPage;
+    }
 
 
 
@@ -213,23 +224,6 @@ public class MemberController {
         return turnPage;
     }
 
-//    /**
-//     * 用来测试向页面返回会员之后页面是否正常显示会员信息
-//     * @param MemberId    会员的sessionId
-//     * @return            结果集，包含会员信息，json字符串格式返回
-//     */
-//    @RequestMapping("pc/checkMemberLogin")
-//    @ResponseBody
-//    public Result checkMemberLogin(String MemberId,HttpServletRequest request){
-//        HttpSession session=request.getSession();
-//        Result result=new Result();
-//        Member member=new Member();
-//        member.setPictureUri("/pc/images/600x20005326c6dcd9c7f.jpg");
-//        member.setLoginName("wangyong11111");
-//        result.setBody(member);
-//        result.setStatus(0);
-//        return result;
-//    }
 
 
 }

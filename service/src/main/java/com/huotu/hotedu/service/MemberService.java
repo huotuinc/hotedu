@@ -45,31 +45,26 @@ public class MemberService {
         return exist;
     }
 
-//    /**
-//     * 该方法用来返回某个代理商名下的所有学员信息，并且以分页的形式返回
-//     * @param n               第几页
-//     * @param pageSize        每页记录条数
-//     * @param agent           代理商帐户名
-//     * @return                学员集合
-//     */
-//    public Page<Member>  loadMembersByAgent(Agent agent,Integer n,Integer pageSize){
-//
-//        return  memberRepository.findAll(new Specification<Member>() {
-//            @Override
-//            public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//                if (n==null||pageSize==null) {
-//                    return null;
-//                }
-//                return cb.and(cb.equal(root.get("agent").as(Agent.class), agent), cb.isTrue(root.get("enabled").as(boolean.class)));
-//            }
-//        },new PageRequest(n, pageSize));
-//    }
-
-
-
+    /**
+     * 跳转到学院搜索的重载方法主要用于查询非搜索的会员
+     * @param agent      会员属于的代理商
+     * @param pageNo     显示第几页(0是第一页)
+     * @param pageSize   每页显示的记录条数(默认10条)
+     * @return           会员集合
+     */
     public Page<Member> searchMembers(Agent agent,Integer pageNo,Integer pageSize){
         return searchMembers(agent,pageNo,pageSize,null,null);
     }
+
+    /**
+     * 搜索会员
+     * @param agent      会员属于的代理商
+     * @param pageNo     显示第几页(0是第一页)
+     * @param pageSize   每页显示的记录条数(默认10条)
+     * @param keyword    搜索会员的关键字
+     * @param type       搜索会员的类型
+     * @return           会员集合
+     */
     public Page<Member> searchMembers(Agent agent,Integer pageNo,Integer pageSize,String keyword,String type){
         return memberRepository.findAll(new Specification<Member>() {
             @Override
@@ -96,43 +91,10 @@ public class MemberService {
                     );
 
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
             }
         },new PageRequest(pageNo,pageSize));
     }
 
-
-
-
-
-
-
-
-
-
-
-
-//    /**
-//     * 显示所有学员 每页10条
-//     * @param n         第几页
-//     * @param pagesize  每页几条
-//     * @return          学员集合
-//     */
-//    public Page<Member> loadMembers(Integer n,Integer pagesize){
-//        return memberRepository.findAll(new PageRequest(n, pagesize));
-//    }
 
     /**
      * 查找学员
