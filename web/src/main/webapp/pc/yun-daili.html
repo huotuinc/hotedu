@@ -54,7 +54,7 @@
                 <p th:text="'注册时间：'+${#calendars.format(agent.registerDate,'yyyy.MM.dd')}">注册时间：2105.01.01</p>
             </li>
             <li class="newr liright">
-                <p>总人数：<b th:text="${totalMembers}">900</b></p>
+                <p>总人数：<b th:text="${totalRecords}">900</b></p>
 
                 <p>已发证：<b th:text="${agent.sendCertificateNumber}">400</b></p>
 
@@ -72,7 +72,7 @@
 
     <!--报名信息-->
     <div class="ysthree">
-        <div style="display:block;" class="main-wrapi">
+        <div style="display:none;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
             <div style=" float: right; margin-right: 14px;margin-bottom: 6px;margin-top:5px;" class="search-content">
                 <form action="#" th:action="@{/pc/searchMembers}" method="post">
                     <p style="height:5px;"></p>
@@ -185,7 +185,7 @@
 
         <!--消息通知-->
 
-        <div style="display:none" th:style="${ysthreeStyle}" class="ysthree">
+        <div style="display:none" class="ysthree">
             <div class="main-wrapi">
                 <div class="ystwolist ysys">
                     <p><span style="float:left;">5月杭州微商大会进行中</span> <span style="float:right;">2015/05/10</span></p>

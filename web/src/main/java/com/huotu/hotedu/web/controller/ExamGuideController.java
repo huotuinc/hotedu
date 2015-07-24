@@ -54,7 +54,7 @@ public class ExamGuideController {
         long totalRecords = pages.getTotalElements();
         int numEl =  pages.getNumberOfElements();
         if(numEl==0) {
-            pageNo--;
+            pageNo=pages.getTotalPages()-1;
             if(pageNo<0) {
                 pageNo = 0;
             }
