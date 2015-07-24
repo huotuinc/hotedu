@@ -101,6 +101,13 @@
 	position: absolute;
 	top: 17px;
 }
+.lodingimgi {
+	border-radius: 50px;
+	width:30px;
+	height:30px;
+	position: absolute;
+	top:7px;
+}
 .zhizhen {
 	position: absolute;
 	z-index: 1;
@@ -228,11 +235,11 @@ h1 {
 	margin-top: -8px;
 }
 .ysoo {
-	background-color: #fff;
-	width: 1000px;
-	margin: 0 auto;
-	height: auto;
-	padding: 80px 0px 30px 0px;
+	  background-color: #fff;
+  width: 1000px;
+  margin: 0 auto;
+  height: auto;
+  padding: 65px 0px 0px 0px;
 }
 .ysooo {
 	background-color: #fff;
@@ -268,15 +275,16 @@ h1 {
 	padding: 5px 0px;
 }
 .ystwolist {
-	width: 1000px;
-	margin: 0 auto;
-	height: auto;
-	padding: 5px 0px;
+  margin: 0 auto;
+  height: auto;
+  padding: 5px 0px;
+  margin-top: 4px;
+    border-bottom: 1px solid #ddd;
 }
 .toux {
 	position: absolute;
 	margin-left: 14px;
-	margin-top: -120px;
+	margin-top: -110px;
 	border: solid 6px #fff;
 }
 .ysan {
@@ -309,34 +317,43 @@ font-size:14px； float: left;
 }
 .newr {
 	margin-right: 6px;
-	margin-top: -58px;
+	margin-top: -28px;
 }
 .newr b {
 	color: #FF7E00;
 }
 .liright {
-	float: right;
-font-size:14px； float: left;
-	font-size: 13px;
-	line-height: 23px;
-	color: #5e6e7f;
-	text-align: right;
+  float: right;
+  font-size: 14px;
+  font-size: 13px;
+  line-height: 23px;
+  color: #5e6e7f;
+  text-align: right;
+}
+.lirighti {
+  float: right;
+  font-size: 14px;
+  font-size: 13px;
+  line-height: 23px;
+  color: #5e6e7f;
+  text-align: right;
+  margin-top: 36px;
+  margin-right: -98px;
 }
 .bobox {
 	height: 63px;
 	width: 96%;
 	margin: 0 auto;
-	margin-top: 55px;
+	margin-top:31px;
 }
 .boboxs {
 	height: 133px;
 	width: 95%;
 	margin: 0 auto;
-	margin-top: 10px;
+	margin-top:-35px;
 }
 .ysys {
-	background-color: #fff;
-	margin-top: 4px;
+
 }
 .ysys p {
 	padding: 10px 0px 20px 0px;
@@ -348,6 +365,7 @@ font-size:14px； float: left;
 	padding: 3px 10px;
 	color: #fff;
 }
+.si{  border-radius: 5px;}
 .zpzp {
 	width: 1000px;
 	background-color: #E8E8E8;
@@ -403,6 +421,14 @@ font-size:14px； float: left;
 	height: 100%;
 	background-color: rgba(0,0,0,0.9);
 }
+.ystci {
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.9);
+}
 .ystc p {
 	text-align: center;
 }
@@ -449,6 +475,20 @@ font-size:14px； float: left;
 	z-index: 1008;
 	overflow: auto;
 	box-shadow: 0px 2px 10px #111;
+}
+.box-ysi {
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  top: 8px;
+  width: 800px;
+  height: 450px;
+  margin: 120px 0 0 -417px;
+  padding: 8px;
+  background-color: #f1f1f1;
+  z-index: 1008;
+  overflow: auto;
+  box-shadow: 0px 2px 10px #111;
 }
 .ys-form__field {
 	display: block;
@@ -540,15 +580,15 @@ font-size:14px； float: left;
 	zoom: 1;
 }
 .qiye-logo2 {
-	width: 160px;
-	height: 160px;
-	overflow: hidden;
-	float: left;
+  width: 110px;
+  height: 110px;
+  overflow: hidden;
+  float: left;
 }
 .qiye-logo2 img {
 	display: block;
-	width: 160px;
-	height: 160px;
+	width: 110px;
+	height: 110px;
 }
 .f-24 {
 	font-size: 24px;
@@ -653,22 +693,23 @@ b, strong {
 	color: #282828;
 }
 .btn {
-	display: inline-block;
-	box-sizing: border-box;
-	padding: 0px 20px;
-	height: 40px;
-	line-height: 40px;
-	cursor: pointer;
-	font-size: 16px;
-	text-align: center;
-	white-space: nowrap;
-	vertical-align: middle;
-	border: 1px solid #d0d0d0;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-o-user-select: none;
-	user-select: none;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0px 20px;
+  height: 35px;
+  line-height: 33px;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  border: 1px solid #d0d0d0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  margin-top: 10px;
 }
 .box-title {
 	font-size: 18px;
@@ -818,7 +859,7 @@ button.btn, input.btn {
 .search-submit {
 	position: absolute;
 	display: block;
-	top: -1px;
+	top: -11px;
 	right: -1px;
 	width: 100px;
 	height: 40px;
@@ -1025,10 +1066,12 @@ button.btn, input.btn {
 .ystwo .bg:hover a {
 	color: #fff
 }
+
 .main-wrapi {
 	min-height: 100%;
 	border: 1px solid #56abe4;
-	margin-top: -6px;
+	margin-top: -15px;
+	border-top: 0px;
 }
 .yssp {
 	margin-right: -10px;
@@ -1040,8 +1083,14 @@ button.btn, input.btn {
   width: 500px;}
   .ys500{  width: 500px;
   margin: 0 auto;}
+   .ys761{  width:761px;
+  margin: 0 auto;}
   .ysxlk{height: 45px;
   padding: 10px 4px;
   border: 1px solid #FFF;
   vertical-align: middle;
   width: 500px;}
+.newfb{  margin-left: 24px;
+  background-color: #A5A5A5;
+  border: 1px solid #A5A5A5;
+  width: 117px;}

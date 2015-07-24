@@ -35,7 +35,9 @@ public class MemberController {
     public static final int PAGE_SIZE=10;
 
     @RequestMapping("/pc/loadMemberRegister")
-    public String load() {
+    public String load(Model model) {
+        String style = "padding:0px;display:none";
+        model.addAttribute("style",style);
         return "pc/yun-baomin";
     }
 
@@ -45,6 +47,7 @@ public class MemberController {
         String errInfo = "";
         String msgInfo = "";
         String turnPage = "/pc/yun-baomin";
+        String style = "padding:0px;display:none";
         if("".equals(realName)||realName==null) {
             errInfo = "姓名不能为空";
         }else if("".equals(phoneNo)||phoneNo==null) {
@@ -76,11 +79,18 @@ public class MemberController {
                 }
             }
         }
+        model.addAttribute("style",style);
         model.addAttribute("msgInfo",msgInfo);
         model.addAttribute("errInfo",errInfo);
         return turnPage;
     }
 
+    /**
+     * Created by cwb on 2015/7/23.
+     * @param user
+     * @param model
+     * @return
+     */
     @RequestMapping("/pc/loadPersonalCenter")
     public String loadMemberCenter(@AuthenticationPrincipal Login user, Model model) {
         String errInfo = "";

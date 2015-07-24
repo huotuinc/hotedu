@@ -11,33 +11,31 @@
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
 </head>
 <body style="background-color:#f0f0f0">
-<div style="min-height:800px">
+<div style="min-height:834px">
     <div style=" background-color:#fff;">
         <div style=" background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" class="logoimg"/>
-            <ul class="nav">
-                <li><a href="yun-index.html">首页</a></li>
-                <li><a href="#">公司简介</a></li>
-                <li class="active"><a href="yun-baomin.html">考证报名</a></li>
-                <li><a href="#">师资力量</a></li>
-                <li><a href="#">教学视频</a></li>
-                <li><a href="#">考试指南</a></li>
-                <li><a href="#">招|应聘</a></li>
-                <li id="loginLi" style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)"
-                                                                      onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
-                </li>
-                <li id="userLi" style="padding:0px;display: none" >
-                    <a id="memberLi" href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
-                    <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
-
-                    <p class="lbpo"><a href="#">个人中心</a>
-                        <a href="#">修改密码</a>
-                        <a href="#">退出</a></p>
+            <ul class="navi">
+                <li class="active"><a href="yun-index.html">首页</a></li>
+                <li><a href="javascript:void(0)">公司简介</a></li>
+                <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
+                <li><a href="javascript:void(0)">师资力量</a></li>
+                <li><a href="javascript:void(0)">教学视频</a></li>
+                <li><a href="javascript:void(0)">考试指南</a></li>
+                <li><a href="javascript:void(0)">招|应聘</a></li>
+                <li ><a href="javascript:void(0)" th:href="@{/pc/baominLogin}">登录&nbsp;&nbsp;|</a>
                 </li>
             </ul>
         </div>
     </div>
+    <div class="fullSlide">
 
-    <img src="images/baomin.jpg" width="100%"/>
+        <div class="bd">
+            <ul style="position: relative; width: 1903px; height: 648px;">
+                <li style="position: absolute; width: 1903px; left: 0px; top: 0px; display: list-item; opacity: 0.975664; background: url(images/baomin.jpg) 50% 0px no-repeat;"></li>
+            </ul>
+        </div>
+    </div>
+
 
     <p style="clear:both"></p>
 
@@ -45,28 +43,41 @@
 
     <div class="ysfour">
         <div class="ys500 ystx">
-            <form action="yun-geren.html" th:action="@{/pc/register}" method="post">
-                <p><input title="" class="ysw500 sign-in__field ys-form__field" id="realName" name="realName" placeholder="真实姓名"
-                          type="text"/></p>
-                <p class="ysdx">&nbsp;&nbsp;&nbsp;&nbsp;性别：<input name="sex" checked="checked" value="1" title="" type="radio"/> &nbsp;男&nbsp;&nbsp;
-                    <input name="sex" value="0" title="" type="radio"/> &nbsp;女&nbsp;&nbsp;</p>
+            <form action="yun-baomin.html" th:action="@{/pc/register}">
+                <p>
+                    <input title="" class="ysw500 sign-in__field ys-form__field" id="realName" name="realName"
+                           placeholder="真实姓名" type="text"/>
+                </p>
 
-                <p><input title="" class="ysw500 sign-in__field ys-form__field" id="phoneNo" name="phoneNo" placeholder="真实手机号"
-                          type="text"/></p>
+                <p class="ysdx">&nbsp;&nbsp;&nbsp;&nbsp;性别：
+                    <input title="" name="sex" checked="checked" value="1" type="radio"/>
+                    &nbsp;男&nbsp;&nbsp;
+                    <input title="" name="sex" value="0" type="radio"/>
+                    &nbsp;女&nbsp;&nbsp;</p>
 
-                <p><select title="" name="areaId" id="areaId" class="ysxlk">
-                    <option value="001" selected="selected">杭州市</option>
-                </select></p>
-                <p style="text-align:center;"><button class="ysw500 sign-in__button ys-form__button" name="button" type="submit">提交</button></p>
+                <p>
+                    <input title="" class="ysw500 sign-in__field ys-form__field" id="phoneNo" name="phoneNo"
+                           placeholder="真实手机号" type="text"/>
+                </p>
+
+                <p>
+                    <select title="" name="areaId" id="areaId" class="ysxlk">
+                        <option value="001">杭州市</option>
+                    </select>
+                </p>
+                <p style="text-align:center;">
+                    <button class="ysw500 sign-in__button ys-form__button" name="button" type="submit">
+                        提交
+                    </button>
+                </p>
             </form>
-            <span style="color:red" th:text="${errInfo}"/>
-            <span style="color:blue" th:text="${msgInfo}"/>
+            <span th:text="${errInfo}" style="color: red"/>
+            <span th:text="${msgInfo}" style="color: blue"/>
         </div>
-        <p class="yszhuyi">
-            <i style="color:#FFBE00">*</i>提交报名后，我们会通知你，并线下交费。安排班次和考试等事项。<br/>
-            <i style="color:#FFBE00">*</i>姓名是你的登录账号，手机号是你的登录密码。<br/>
-            <i style="color:#FFBE00">*</i>目前考点只设在北上广深，请就近选择报名地点。<br/>
-        </p>
+                <p class="yszhuyi"><i style="color:#FFBE00">*</i>提交报名后，我们会通知你，并线下交费。安排班次和考试等事项。<br/>
+                    <i style="color:#FFBE00">*</i>姓名是你的登录账号，手机号是你的登录密码。<br/>
+                    <i style="color:#FFBE00">*</i>目前考点只设在北上广深，请就近选择报名地点。<br/>
+                </p>
     </div>
 </div>
 <p style="clear:both"></p>
@@ -77,33 +88,6 @@
     <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
 
     <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
-</div>
-<div>
-    <div id="asaimsg" class="AsaiDivShow">
-        <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
-                                                             onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
-            <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
-
-        <div class="sign-in">
-            <div class="user-form">
-                <form accept-charset="UTF-8" action="" class="sign-in__form user-form__form" method="post">
-                    <div class="user-form__fieldset">
-                        <label class="user-form__label" for="session_login" style="color:#111">用户名：</label>
-                        <input title="" autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
-                               id="session_login" name="session[login]" placeholder="ID" type="text"/>
-                    </div>
-                    <div class="user-form__fieldset">
-                        <label class="user-form__label" for="session_password" style="color:#111">密码：</label>
-                        <input title="" class="sign-in__field user-form__field" id="session_password"
-                               name="session[password]" placeholder="password" type="password"/>
-                    </div>
-                    <button class="sign-in__button user-form__button" name="button" type="submit">登录<i
-                            class="icon-arrow-right user-form__button-icon"></i></button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div id="asaimsgbg" class="AsaiDivBG"></div>
 </div>
 </body>
 </html>

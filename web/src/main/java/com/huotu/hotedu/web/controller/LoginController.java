@@ -32,6 +32,18 @@ public class LoginController {
     }
 
 
+    @RequestMapping("/pc/baominLogin")
+    public String baominLogin(Model model) {
+        String turnPage = "pc/yun-index";
+        String loginForm = "display:block";
+        String msgInfo = "登录";
+        String style = "padding:0px;display:none";
+        model.addAttribute("style",style);
+        model.addAttribute("msgInfo",msgInfo);
+        model.addAttribute("loginForm",loginForm);
+        return turnPage;
+    }
+
     @RequestMapping("/pc/login")
     public String check(Model model) {
         String turnPage = "pc/yun-index";
