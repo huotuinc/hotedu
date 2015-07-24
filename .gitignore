@@ -1,6 +1,5 @@
-/target/
-/.idea/
-web/target
-service/target
+
+.idea/
+target/
 *.iml
 *.log
