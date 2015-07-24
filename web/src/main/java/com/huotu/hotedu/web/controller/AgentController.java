@@ -28,18 +28,6 @@ public class AgentController {
      * 用来储存分页中每页的记录数
      */
     public static final int PAGE_SIZE=10;
-//    @PreAuthorize("hasRole('AGENT')")
-//    @RequestMapping("/pc/loadAgents")
-//    public String showMemberByAgent(@AuthenticationPrincipal Agent currentAgent,Model model){
-//        String turnPage = "/pc/yun-daili";
-//        if(currentAgent==null){
-//            throw new IllegalStateException("尚未登录");
-//        }
-//        Page<Member> pages=memberService.loadMembersByAgent(currentAgent,0,PAGE_SIZE);
-//        model.addAttribute("allMemberList",pages);
-//        model.addAttribute("agent",currentAgent);
-//        return turnPage;
-//    }
 
     /**
      * 将学员保存到新建班级中

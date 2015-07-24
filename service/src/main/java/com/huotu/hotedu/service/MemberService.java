@@ -45,38 +45,72 @@ public class MemberService {
         return exist;
     }
 
-    /**
-     * 该方法用来返回某个代理商名下的所有学员信息，并且以分页的形式返回
-     * @param n               第几页
-     * @param pageSize        每页记录条数
-     * @param agent           代理商帐户名
-     * @return                学员集合
-     */
-    public Page<Member>  loadMembersByAgent(Agent agent,Integer n,Integer pageSize,String keyword,String type){
+//    /**
+//     * 该方法用来返回某个代理商名下的所有学员信息，并且以分页的形式返回
+//     * @param n               第几页
+//     * @param pageSize        每页记录条数
+//     * @param agent           代理商帐户名
+//     * @return                学员集合
+//     */
+//    public Page<Member>  loadMembersByAgent(Agent agent,Integer n,Integer pageSize){
+//
+//        return  memberRepository.findAll(new Specification<Member>() {
+//            @Override
+//            public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+//                if (n==null||pageSize==null) {
+//                    return null;
+//                }
+//                return cb.and(cb.equal(root.get("agent").as(Agent.class), agent), cb.isTrue(root.get("enabled").as(boolean.class)));
+//            }
+//        },new PageRequest(n, pageSize));
+//    }
 
-        return  memberRepository.findAll(new Specification<Member>() {
-            @Override
-            public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if (n==null||pageSize==null) {
-                    return null;
-                }
-                return cb.and(cb.equal(root.get("agent").as(Agent.class), agent), cb.isTrue(root.get("enabled").as(boolean.class)));
-            }
-        },new PageRequest(n, pageSize));
+
+
+    public Page<Member> searchMembers(Agent agent,Integer pageNo,Integer pageSize){
+        return searchMembers(agent,pageNo,pageSize,null,null);
     }
-
-
-
-
-
-
-    public Page<Member> searchMembers(Agent agent,Integer n,Integer pageSize){
+    public Page<Member> searchMembers(Agent agent,Integer pageNo,Integer pageSize,String keyword,String type){
         return memberRepository.findAll(new Specification<Member>() {
             @Override
             public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return null;
+                if ("".equals(keyword)||keyword==null) {
+                    return cb.and(cb.equal(root.get("agent").as(Agent.class), agent),
+                            cb.isTrue(root.get("enabled").as(boolean.class))
+                    );
+                }else if("all".equals(type)){
+                    return cb.and(
+                            cb.equal(root.get("agent").as(Agent.class), agent),
+                            cb.isTrue(root.get("enabled").as(boolean.class)),
+                            cb.or(
+                                    cb.like(root.get("realName").as(String.class),"%"+keyword+"%"),
+                                    cb.like(root.get("phoneNo").as(String.class),"%"+keyword+"%")
+                                    //cb.like(root.get("theClass.").as(String.class),"%"+keyword+"%")
+                            )
+                    );
+                }else{
+                    return cb.and(
+                            cb.equal(root.get("agent").as(Agent.class), agent),
+                            cb.isTrue(root.get("enabled").as(boolean.class)),
+                            cb.equal(root.get(type).as(boolean.class),"1".equals(keyword)? true:false)
+                    );
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
             }
-        },new PageRequest(n,pageSize));
+        },new PageRequest(pageNo,pageSize));
     }
 
 
@@ -90,15 +124,15 @@ public class MemberService {
 
 
 
-    /**
-     * 显示所有学员 每页10条
-     * @param n         第几页
-     * @param pagesize  每页几条
-     * @return          学员集合
-     */
-    public Page<Member> loadMembers(Integer n,Integer pagesize){
-        return memberRepository.findAll(new PageRequest(n, pagesize));
-    }
+//    /**
+//     * 显示所有学员 每页10条
+//     * @param n         第几页
+//     * @param pagesize  每页几条
+//     * @return          学员集合
+//     */
+//    public Page<Member> loadMembers(Integer n,Integer pagesize){
+//        return memberRepository.findAll(new PageRequest(n, pagesize));
+//    }
 
     /**
      * 查找学员

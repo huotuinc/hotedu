@@ -109,7 +109,7 @@ public class MemberController {
             }
         }else if(user instanceof Agent) {
             turnPage = "/pc/yun-daili";
-            Page<Member> pages=memberService.loadMembersByAgent((Agent)user,0,PAGE_SIZE);
+            Page<Member> pages=memberService.searchMembers((Agent)user,0,PAGE_SIZE,null,null);
             model.addAttribute("allMemberList",pages);
             model.addAttribute("agent",user);
             model.addAttribute("totalMembers",pages.getTotalElements());

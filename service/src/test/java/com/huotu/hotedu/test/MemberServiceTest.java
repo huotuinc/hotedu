@@ -62,11 +62,20 @@ public class MemberServiceTest {
     @Test
     @Rollback
     public void loadMembersByAgent(){
+        //搭建测试环境
+
+        //搭建测试环境END
         Member member=new Member();
         member.setLoginName("kkk");
-        Agent agent=agentRepository.getOne((long)3);
-        Page<Member> pages= memberService.loadMembersByAgent(agent, 0, PAGE_SIZE);
-        assertEquals(1,pages.getTotalElements());
+        Agent agent=agentRepository.getOne((long)2);
+        Page<Member> pages= memberService.searchMembers(agent, 0, PAGE_SIZE);
+        assertEquals(4,pages.getTotalElements());
+
+        pages= memberService.searchMembers(agent, 0, PAGE_SIZE,"d","all");
+        assertEquals(3,pages.getTotalElements());
+
+        pages= memberService.searchMembers(agent, 0, PAGE_SIZE,"0","payed");
+        assertEquals(4,pages.getTotalElements());
 
     }
 
