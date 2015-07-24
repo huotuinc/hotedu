@@ -16,7 +16,7 @@
     <div style="background-color:#fff;">
         <div style="background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" class="logoimg"/>
             <ul class="navi">
-                <li class="active"><a href="index.html">首页</a></li>
+                <li><a href="index.html">首页</a></li>
                 <li><a href="index2.html">公司简介</a></li>
                 <li><a href="index3.html">考证报名</a></li>
                 <li><a href="about.html">师资力量</a></li>
@@ -51,7 +51,7 @@
             <li class="lileft">
                 <p th:text="'号码：'+  (${agent.phoneNo}==null? '暂无':${agent.phoneNo})">号码：15063568971</p>
 
-                <p th:text="'注册时间：'+${#calendars.format(agent.registerDate,'yyyy.MM.dd')}">注册时间：2105.01.01</p>
+                <p th:text="'注册时间：'+${#calendars.format(agent.registerDate,'yyyy-MM-dd')}">注册时间：2105.01.01</p>
             </li>
             <li class="newr liright">
                 <p>总人数：<b th:text="${totalRecords}">900</b></p>
@@ -70,8 +70,8 @@
         <div class="ysykfour bg" th:class="${navigation}=='bygl'? 'ysykfour bg on':'ysykfour bg'"><a href="#"><span>毕业管理</span> </a></div>
     </div>
 
-    <!--报名信息-->
     <div class="ysthree">
+        <!--报名信息-->
         <div style="display:none;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
             <div style=" float: right; margin-right: 14px;margin-bottom: 6px;margin-top:5px;" class="search-content">
                 <form action="#" th:action="@{/pc/searchMembers}" method="post">
@@ -168,7 +168,7 @@
                                 <td th:text="${g.agent.area}" title="">杭州</td>
                                 <td th:text="${g.phoneNo}" title="">125656256356</td>
                                 <td th:text="${g.payed}?'是':'否'" title="">是</td>
-                                <td th:text="${#calendars.format(g.applyDate,'yyyy.MM.dd')}" title="">2015.04.01</td>
+                                <td th:text="${#calendars.format(g.applyDate,'yyyy-MM-dd')}" title="">2015.04.01</td>
                                 <td th:text="${g.passed}?'是':'否'" title="">--</td>
                                 <td th:text="${g.haveLicense}?'是':'否'" title="">--</td>
                                 <td th:text="${g.theClass}==null? '未分配':${g.theClass.className}" title="">201504第一期</td>
