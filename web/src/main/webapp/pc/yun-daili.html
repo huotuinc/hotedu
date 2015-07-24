@@ -52,9 +52,9 @@
         <p style="clear:both"></p>
         <ul class="bobox">
             <li class="lileft">
-                <p>号码：15063568971</p>
+                <p th:text="'号码：'+${agent.phoneNo}">号码：15063568971</p>
 
-                <p>注册时间：2105.01.01</p>
+                <p th:text="'注册时间：'+${#calendars.format(agent.registerDate,'yyyy.MM.dd')}">注册时间：2105.01.01</p>
 
             </li>
 
@@ -176,7 +176,7 @@
                                 <td th:text="${g.agent.area}" title="">杭州</td>
                                 <td th:text="${g.phoneNo}" title="">125656256356</td>
                                 <td th:text="${g.payed}?'是':'否'" title="">是</td>
-                                <td th:text="${#calendars.format(g.applyDate,'yyyy.MM.dd/hh.mm.ss')}" title="">2015.04.01</td>
+                                <td th:text="${#calendars.format(g.applyDate,'yyyy.MM.dd')}" title="">2015.04.01</td>
                                 <td th:text="${g.passed}?'是':'否'" title="">--</td>
                                 <td th:text="${g.haveLicense}?'是':'否'" title="">--</td>
                                 <td th:text="${g.theClass.className}" title="">201504第一期</td>

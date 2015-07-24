@@ -8,7 +8,6 @@ import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +32,7 @@ public class MemberController {
     /**
      * 用来储存分页中每页的记录数
      */
-    public static final int PAGE_SIZE=5;
+    public static final int PAGE_SIZE=10;
 
     @RequestMapping("/pc/loadMemberRegister")
     public String load() {

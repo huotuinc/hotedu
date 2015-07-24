@@ -1,6 +1,8 @@
 package com.huotu.hotedu.web.service;
 
-import com.huotu.hotedu.entity.*;
+import com.huotu.hotedu.entity.Agent;
+import com.huotu.hotedu.entity.Huotu;
+import com.huotu.hotedu.entity.Manager;
 import com.huotu.hotedu.repository.*;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.EnterpriseService;
@@ -11,9 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
-import java.util.Random;
 
 /**
  * @author CJ
@@ -63,13 +62,13 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 loginService.newLogin(manager,"admin");
                 System.out.println("测试用户以添加！");
             }
-            if(memberRepository.count()==0) {
-                Member mb = new Member();
-                mb.setLoginName("15958045616");
-                mb.setPhoneNo("15958045616");
-                mb.setRealName("陈文彬");
-                loginService.newLogin(mb,"123456");
-            }
+//            if(memberRepository.count()==0) {
+//                Member mb = new Member();
+//                mb.setLoginName("15958045616");
+//                mb.setPhoneNo("15958045616");
+//                mb.setRealName("陈文彬");
+//                loginService.newLogin(mb,"123456");
+//            }
 
         }
 
@@ -84,7 +83,7 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 huotuRepository.save(huotu);
             }
             // 做一些初始化工作 比如
-            if (examGuideRepository.count()==0){
+            /*if (examGuideRepository.count()==0){
                 ExamGuide examGuide =new ExamGuide();
                 examGuide.setContent("examguide");
                 examGuide.setTitle("title examguide1");
@@ -125,8 +124,8 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 examGuide.setIsTop(true);
                 examGuideRepository.save(examGuide);
                 /// do something
-            }
-          if(linkRepository.count()==0){
+            }*/
+          /*if(linkRepository.count()==0){
               Link link=new Link();
               link.setTitle("spring");
               link.setUrl("spring.io");
@@ -142,9 +141,9 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
               link.setUrl("www.fanmore.cn");
               link.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 6000));
               linkRepository.save(link);
-          }
+          }*/
 
-            if(tutorRepository.count()==0){
+            /*if(tutorRepository.count()==0){
                 Tutor tutor=new Tutor();
                 tutor.setName("诸葛亮");
                 tutor.setIntroduction("军师");
@@ -160,9 +159,9 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 tutor.setPictureUri("D://");
                 tutor.setLastUploadDate(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 2000));
                 tutorRepository.save(tutor);
-            }
+            }*/
 
-            if(messageContentRepository.count()==0){
+            /*if(messageContentRepository.count()==0){
                 MessageContent messageContent;
                 for(int i=0;i<5;i++){
                     messageContent=new MessageContent();
@@ -171,7 +170,7 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                     messageContent.setLastUploadDate(new Date(System.currentTimeMillis()+24*60*60*1000*(i+1)));
                     messageContentRepository.save(messageContent);
                 }
-            }
+            }*/
 
             /*if (tutorRepository.count()==0){
                 Tutor tutor;
@@ -188,7 +187,7 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
             }*/
 
 
-            if (qaRepository.count()==0){
+           /* if (qaRepository.count()==0){
                 Qa qa;
                 for(int i=0;i<4;i++){
                     qa=new Qa();
@@ -198,7 +197,7 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                     qa.setTop(true);
                     qaRepository.save(qa);
                 }
-            }
+            }*/
 
             if(agentRepository.count()==0){
                 Agent agent=new Agent();

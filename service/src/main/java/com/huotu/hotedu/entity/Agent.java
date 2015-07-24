@@ -5,8 +5,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * 代理商
@@ -20,6 +23,10 @@ public class Agent extends Login{
      * 代理商名字
      */
     private String name;
+    /**
+     * 法人代表
+     */
+    private String corporation;
 
     /**
      * 代理商编号
@@ -52,6 +59,11 @@ public class Agent extends Login{
      * 已发证书数量
      */
     private int sendCertificateNumber;
+    /**
+     * 注册时间
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date registerDate;
 
     public String getName() {
         return name;
@@ -114,6 +126,22 @@ public class Agent extends Login{
 
     public void setAreaId(String areaId) {
         this.areaId = areaId;
+    }
+
+    public Date getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
+    }
+
+    public String getCorporation() {
+        return corporation;
+    }
+
+    public void setCorporation(String corporation) {
+        this.corporation = corporation;
     }
 
     @Override
