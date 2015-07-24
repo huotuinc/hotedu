@@ -11,10 +11,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.util.StreamUtils;
+
+import java.io.ByteArrayOutputStream;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -43,15 +47,23 @@ public class MemberControllerTest extends SpringWebTest {
     }
 
     @Test
+    @Rollback
     public void detailMember() throws Exception {
-        //MockHttpSession session = loginAs("admin","admin");
-        // System.out.println("session = "+ session);
+//        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+//        StreamUtils.copy(getClass().getResourceAsStream("testUpload.jpg"), buffer);
+//        Member mb = new Member();
+//        mb.setIsPayed(true);
+//        mb.setPictureUri("com.huotu.hotedu.test.web.testUpload.jpg");
+//        mockMvc.perform(
+//                fileUpload("pc/detailMember")
+//        ).andDo(print());
         mockMvc.perform(
                 get("pc/detailMember")
         ).andDo(print());
     }
 
     @Test
+    @Rollback
     public void delMember() throws Exception{
         mockMvc.perform(
                 delete("pc/delMember?id=20")
