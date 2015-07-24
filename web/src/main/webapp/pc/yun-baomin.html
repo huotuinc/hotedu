@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/indexnew.css"/>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <script type="text/javascript" src="js/jquery1.42.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
 </head>
 <body style="background-color:#f0f0f0">
@@ -15,14 +16,14 @@
     <div style=" background-color:#fff;">
         <div style=" background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" class="logoimg"/>
             <ul class="navi">
-                <li class="active"><a href="yun-index.html">首页</a></li>
+                <li><a href="yun-index.html">首页</a></li>
                 <li><a href="javascript:void(0)">公司简介</a></li>
-                <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
+                <li class="active"><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
                 <li><a href="javascript:void(0)">师资力量</a></li>
                 <li><a href="javascript:void(0)">教学视频</a></li>
                 <li><a href="javascript:void(0)">考试指南</a></li>
                 <li><a href="javascript:void(0)">招|应聘</a></li>
-                <li ><a href="javascript:void(0)" th:href="@{/pc/baominLogin}">登录&nbsp;&nbsp;|</a>
+                <li ><a href="javascript:void(0)" th:href="@{/pc/baominLogin}">登录</a>
                 </li>
             </ul>
         </div>

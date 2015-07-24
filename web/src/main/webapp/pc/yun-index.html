@@ -15,28 +15,28 @@
     <script rel="stylesheet" type="text/javascript" src="js/indexuser.js" th:src="@{/pc/js/indexuser.js}"></script>
 </head>
 <body>
-<div class="header"><img src="images/logo.png" th:src="@{/pc/images/logo.png}" class="logoimg"/>
-    <ul class="nav">
-        <li class="active"><a href="yun-index.html">首页</a></li>
-        <li><a href="#">公司简介</a></li>
-        <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
-        <li><a href="#">师资力量</a></li>
-        <li><a href="#">教学视频</a></li>
-        <li><a href="#">考试指南</a></li>
-        <li><a href="#">招|应聘</a></li>
-        <li id="loginLi" style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)" th:text="${msgInfo}"
-                                                              onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
-        </li>
-        <li id="userLi" style="padding:0px;display: none" th:style="${style}">
-            <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
-            <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+<div style="background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" th:src="@{/pc/images/logo.png}" class="logoimg"/>
+        <ul class="nav">
+            <li class="active"><a href="yun-index.html">首页</a></li>
+            <li><a href="#">公司简介</a></li>
+            <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
+            <li><a href="#">师资力量</a></li>
+            <li><a href="#">教学视频</a></li>
+            <li><a href="#">考试指南</a></li>
+            <li><a href="#">招|应聘</a></li>
+            <li id="loginLi" style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)" th:text="${msgInfo}"
+                                                                  onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
+            </li>
+            <li id="userLi" style="padding:0px;display: none" th:style="${style}">
+                <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
+                <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
 
-            <p class="lbpo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
-            <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
-            <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
-                <a href="#" th:href="@{/pc/login}">退出</a></p>
-        </li>
-    </ul>
+                <p class="lbpo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
+                <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
+                <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
+                    <a href="#" th:href="@{/pc/login}">退出</a></p>
+            </li>
+        </ul>
 </div>
 
 <p style="clear:both"></p>
@@ -294,7 +294,8 @@
     <div id="asaimsgbg" class="AsaiDivBG" th:style="${loginForm}"></div>
 </div>
 </body>
-</html>
+<script type="text/javascript" th:remove="all">
+</script>
 <script type="text/javascript">
     jQuery(".fullSlide").slide({
         titCell: ".hd ul",
@@ -305,3 +306,4 @@
         trigger: "click"
     });
 </script>
+</html>
