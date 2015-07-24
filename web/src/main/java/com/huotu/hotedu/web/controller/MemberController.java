@@ -128,9 +128,23 @@ public class MemberController {
                                 @RequestParam(required = false)Integer pageNo,
                                 @RequestParam(required = false)Integer pageSize,
                                 @RequestParam(required = false) String keywords,
-                                @RequestParam(required = false) String type,
+                                @RequestParam(required = false,value = "search-sort") String type,
                                 Model model) {
         String turnPage = "/pc/yun-daili";
+        if(pageNo==null||pageNo<0){
+            pageNo=0;
+        }
+        if(pageSize==null) {
+            pageSize = PAGE_SIZE;
+        }
+        Page<Member> pages = memberService.searchMembers(agent,pageNo,pageSize,keywords,type);
+
+
+
+
+
+
+
         return turnPage;
     }
 

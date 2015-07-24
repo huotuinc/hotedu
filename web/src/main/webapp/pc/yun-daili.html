@@ -43,7 +43,7 @@
     <div class="ysoo"><img class="toux" src="images/toux.png" width="80px" height="80px"/>
         <ul style="margin-left:115px; margin-top: -46px;">
             <li style="float:left;">
-                <p style="font-size:16px"><b>姓名：杭州地区总代理</b></p>
+                <p style="font-size:16px"><b th:text="'姓名：'+${agent.name}">姓名：杭州地区总代理</b></p>
             </li>
         </ul>
         <p style="clear:both"></p>
@@ -64,17 +64,17 @@
     </div>
     <div style="display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex;"
          class="ystwo">
-        <div class="ysykone bg on"><a href="#"><span>报名信息</span> </a></div>
-        <div class="ysyktwo bg "><a href="#"><span>消息通知</span> </a></div>
-        <div class="ysykthree bg "><a href="#"><span>班级管理</span> </a></div>
-        <div class="ysykfour bg"><a href="#"><span>毕业管理</span> </a></div>
+        <div class="ysykone bg on" th:class="${navigation}=='bmxx'? 'ysykone bg on':'ysykone bg'"><a href="#"><span>报名信息</span> </a></div>
+        <div class="ysyktwo bg" th:class="${navigation}=='xxtz'? 'ysyktwo bg on':'ysyktwo bg'"><a href="#"><span>消息通知</span> </a></div>
+        <div class="ysykthree bg" th:class="${navigation}=='bjgl'? 'ysykthree bg on':'ysykthree bg'"><a href="#"><span>班级管理</span> </a></div>
+        <div class="ysykfour bg" th:class="${navigation}=='bygl'? 'ysykfour bg on':'ysykfour bg'"><a href="#"><span>毕业管理</span> </a></div>
     </div>
 
     <!--报名信息-->
     <div class="ysthree">
         <div style="display:block;" class="main-wrapi">
             <div style=" float: right; margin-right: 14px;margin-bottom: 6px;margin-top:5px;" class="search-content">
-                <form action="#" method="post">
+                <form action="#" th:action="@{/pc/searchMembers}" method="post">
                     <p style="height:5px;"></p>
                     <table style="float: left;margin-right: 425px;" class="search-tab">
                         <tr>
@@ -89,7 +89,10 @@
                             <th width="10"></th>
                             <td><select title="" name="search-sort" id=""
                                         style=" height:29px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
-                                <option value="">全部</option>
+                                <option value="all">全部</option>
+                                <option value="payed">交费状态</option>
+                                <option value="passed">考试状态</option>
+                                <option value="haveLicense">领证状态</option>
                             </select></td>
                             <td><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字"
                                        name="keywords" value="" id="" type="text"/></td>
@@ -171,21 +174,6 @@
                                 <td th:text="${g.theClass}==null? '未分配':${g.theClass.className}" title="">201504第一期</td>
                                 <td><a class="link-update" href="#">查看</a><br/><a class="link-update" href="#">删除</a></td>
                             </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         </table>
                         <div style="text-align:center; margin-top:10px;"> 2 条 1/1 页</div>
                     </div>
@@ -197,7 +185,7 @@
 
         <!--消息通知-->
 
-        <div style="display:none" class="ysthree">
+        <div style="display:none" th:style="${ysthreeStyle}" class="ysthree">
             <div class="main-wrapi">
                 <div class="ystwolist ysys">
                     <p><span style="float:left;">5月杭州微商大会进行中</span> <span style="float:right;">2015/05/10</span></p>
