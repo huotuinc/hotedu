@@ -1,13 +1,13 @@
 <!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>个人中心</title>
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link rel="stylesheet" type="text/css" href="css/indexnew.css">
-    <script type="text/javascript" src="js/jquery1.42.min.js"></script>
-    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css" th:href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="css/indexnew.css">
+    <script type="text/javascript" src="js/jquery1.42.min.js" th:src="js/jquery1.42.min.js"></script>
+    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" th:src="js/jquery.SuperSlide.2.1.1.js"></script>
 </head>
 
 <body style=" background-color:#f0f0f0;">
@@ -22,12 +22,12 @@
                 <li><a href="#">教学视频</a></li>
                 <li><a href="#">考试指南</a></li>
                 <li><a href="#">招|应聘</a></li>
-                <li id="loginLi" style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)"
-                                                                      onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
+                <li id="loginLi" style="padding:0 0 0 20px;"><a href="javascript:void(0)"
+                                                                onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
                 </li>
-                <li id="userLi" style="padding:0px;display: none" >
-                    <a id="memberLi" href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
-                    <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+                <li id="userLi" style="padding:0;display: none" >
+                    <a id="memberLi" href="#"><img class="lodingimg" src="images/toux.png" style="width:100%" /></a><!--会员头像-->
+                    <p class="zhizhen"><img src="images/lodingj.png" style="width: 18px; height: 7px;"/></p>
 
                     <p class="lbpo"><a href="#">个人中心</a>
                         <a href="#">修改密码</a>
@@ -41,7 +41,7 @@
     <p style="clear:both"></p>
 
     <div class="ysoo">
-        <img class="toux" src="images/toux.png" width="110px" height="110px">
+        <img class="toux" src="images/toux.png" th:src="${pictureUri}" style="width:110px; height: 110px;;">
         <ul style="margin-left:149px;margin-top:-50px;">
             <li style="float:left;">
                 <p style="font-size:16px"><b>姓名：啦啦啦</b></p>
@@ -53,27 +53,27 @@
 
         <div class=" yssize main-wrap">
             <div class="result-wrap">
-                <form action="#" method="post" id="myform" name="myform">
+                <form action="#" method="post" class="myform" name="myform">
                     <div class="config-items">
                         <div class="result-content">
                             <table width="100%" class="insert-tab">
                                 <tbody>
 
                                 <tr>
-                                    <th style="width:150px;"><i class="require-red">*</i>班级：</th>
-                                    <td>201504第一期</td>
+                                    <th style="width:150px;"><i class="require-red">*</i>姓名：</th>
+                                    <td th:text="${realName}">诸葛亮</td>
+                                </tr>
+                                <tr>
+                                    <th><i class="require-red">*</i>电话：</th>
+                                    <td th:text="${phoneNo}">12345678901</td>
                                 </tr>
                                 <tr>
                                     <th><i class="require-red">*</i>区域：</th>
-                                    <td>杭州</td>
+                                    <td th:text="${area}">杭州</td>
                                 </tr>
                                 <tr>
-                                    <th><i class="require-red">*</i>考试时间：</th>
-                                    <td>2015.04.01</td>
-                                </tr>
-                                <tr>
-                                    <th><i class="require-red">*</i>考试地点：</th>
-                                    <td>杭州杭州杭州</td>
+                                    <th><i class="require-red">*</i>报名时间：</th>
+                                    <td th:text="${applyDate}">2015.7.23</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -88,7 +88,7 @@
                 </form>
                 <p style="height:30px"></p>
 
-                <form action="#" method="post" id="myform" name="myform">
+                <form action="#" method="post" class="myform" name="myform">
                     <div class="config-items">
                         <div class="result-content">
                             <table width="100%" class="insert-tab">
@@ -100,23 +100,23 @@
                                 </tr>
                                 <tr>
                                     <th><i class="require-red">*</i>确认人：</th>
-                                    <td>丽丽</td>
+                                    <td th:text="${agent}">丽丽</td>
                                 </tr>
                                 <tr>
                                     <th><i class="require-red">*</i>考试时间：</th>
-                                    <td>2015.04.01</td>
+                                    <td th:text="${examDate}">2015.04.01</td>
                                 </tr>
                                 <tr>
                                     <th><i class="require-red">*</i>考试地点：</th>
-                                    <td>杭州杭州杭州</td>
+                                    <td th:text="${examAddress}">杭州杭州杭州</td>
                                 </tr>
                                 <tr>
                                     <th><i class="require-red">*</i>班级：</th>
-                                    <td>201204第一期</td>
+                                    <td th:text="${theClass}">201204第一期</td>
                                 </tr>
                                 <tr>
-                                    <th><i class="require-red">*</i>考试地点：</th>
-                                    <td>是否通过</td>
+                                    <th><i class="require-red">*</i>是否通过：</th>
+                                    <td th:text="${isPassed}?'已通过':'未通过'">未通过</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -146,8 +146,8 @@
 </div>
 <div>
     <div id="asaimsg" class="AsaiDivShow">
-        <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
-                                                             onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
+        <P align="right" style="margin:0; padding:0;"><a href="javascript:void(0)"
+                                                         onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
             <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
 
         <div class="sign-in">
