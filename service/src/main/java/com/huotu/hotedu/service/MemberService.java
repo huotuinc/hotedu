@@ -16,6 +16,7 @@ import javax.persistence.criteria.Root;
 
 /**
  * Created by cwb on 2015/7/15.
+ * Modify by shiliting on 2015/7/24
  */
 @Service
 public class MemberService {
@@ -51,18 +52,43 @@ public class MemberService {
      * @param agent           代理商帐户名
      * @return                学员集合
      */
-    public Page<Member>  loadMembersByAgent(Agent agent,Integer n,Integer pageSize){
+    public Page<Member>  loadMembersByAgent(Agent agent,Integer n,Integer pageSize,String keyword,String type){
 
         return  memberRepository.findAll(new Specification<Member>() {
             @Override
             public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if (agent==null||n==null||pageSize==null) {
+                if (n==null||pageSize==null) {
                     return null;
                 }
                 return cb.and(cb.equal(root.get("agent").as(Agent.class), agent), cb.isTrue(root.get("enabled").as(boolean.class)));
             }
         },new PageRequest(n, pageSize));
     }
+
+
+
+
+
+
+    public Page<Member> searchMembers(Agent agent,Integer n,Integer pageSize){
+        return memberRepository.findAll(new Specification<Member>() {
+            @Override
+            public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                return null;
+            }
+        },new PageRequest(n,pageSize));
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 显示所有学员 每页10条

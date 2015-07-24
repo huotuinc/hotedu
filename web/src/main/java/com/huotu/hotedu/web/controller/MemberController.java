@@ -92,7 +92,7 @@ public class MemberController {
      * @return
      */
     @RequestMapping("/pc/loadPersonalCenter")
-    public String loadMemberCenter(@AuthenticationPrincipal Login user, Model model) {
+    public String loadPersonalCenter(@AuthenticationPrincipal Login user, Model model) {
         String errInfo = "";
         String turnPage = "/pc/yun-geren";
         String style = "padding:0px;";
@@ -112,12 +112,22 @@ public class MemberController {
             Page<Member> pages=memberService.loadMembersByAgent((Agent)user,0,PAGE_SIZE);
             model.addAttribute("allMemberList",pages);
             model.addAttribute("agent",user);
+            model.addAttribute("totalMembers",pages.getTotalElements());
         }
         model.addAttribute("errInfo",errInfo);
         model.addAttribute("style",style);
         model.addAttribute("loginButton",loginButton);
         return turnPage;
     }
+
+
+
+
+
+
+
+
+
 
     /**
      * 查看学员信息详情
