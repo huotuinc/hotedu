@@ -175,7 +175,11 @@
                                 <td><a class="link-update" href="#">查看</a><br/><a class="link-update" href="#">删除</a></td>
                             </tr>
                         </table>
-                        <div style="text-align:center; margin-top:10px;"> 2 条 1/1 页</div>
+                        <div style="text-align:center; margin-top:10px;">
+                            <a href="#" th:href="@{/pc/searchMembers(pageNo=${pageNo}-1,keywords=${keywords},search-sort=${type})}">上一页</a>
+                            <a href="#" th:href="@{/pc/searchMembers(pageNo=${pageNo}+1,keywords=${keywords},search-sort=${type})}">下一页</a>
+                            <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
+                        </div>
                     </div>
                 </form>
             </div>

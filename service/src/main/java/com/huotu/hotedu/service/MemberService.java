@@ -87,7 +87,7 @@ public class MemberService {
                     return cb.and(
                             cb.equal(root.get("agent").as(Agent.class), agent),
                             cb.isTrue(root.get("enabled").as(boolean.class)),
-                            cb.equal(root.get(type).as(boolean.class),"1".equals(keyword)? true:false)
+                            cb.equal(root.get(type).as(boolean.class),"是".equals(keyword)? true:false)
                     );
 
                 }

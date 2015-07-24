@@ -110,12 +110,14 @@ public class MemberController {
                 model.addAttribute("mb",mb);
             }
         }else if(user instanceof Agent) {
-            turnPage = "/pc/yun-daili";
-            Page<Member> pages=memberService.searchMembers((Agent)user,0,PAGE_SIZE,null,null);
-            model.addAttribute("allMemberList",pages);
-            model.addAttribute("agent",user);
-            model.addAttribute("totalRecords",pages.getTotalElements());
-            model.addAttribute("navigation","bmxx");
+            return "redirect:/pc/searchMembers";
+//            turnPage = "/pc/yun-daili";
+//            Page<Member> pages=memberService.searchMembers((Agent)user,0,PAGE_SIZE,null,null);
+//            model.addAttribute("allMemberList",pages);
+//            model.addAttribute("agent",user);
+//            model.addAttribute("totalRecords",pages.getTotalElements());
+//            model.addAttribute("navigation","bmxx");
+
         }
         model.addAttribute("errInfo",errInfo);
         model.addAttribute("style",style);
@@ -147,13 +149,14 @@ public class MemberController {
                 pageNo = 0;
             }
             pages = memberService.searchMembers(agent, pageNo, pageSize, keywords, type);
-            totalRecords = pages.getTotalElements();  //总记录数
+           // totalRecords = pages.getTotalElements();  //总记录数
         }
         model.addAttribute("agent",agent);
         model.addAttribute("allMemberList", pages);
         model.addAttribute("totalPages",pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("keywords", keywords);
+        model.addAttribute("type",type);
         model.addAttribute("totalRecords", totalRecords);
         model.addAttribute("navigation","bmxx");
         return turnPage;
