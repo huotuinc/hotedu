@@ -7,6 +7,7 @@ import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,10 @@ public class MemberController {
     private AgentService agentService;
     @Autowired
     private LoginService loginService;
+    /**
+     * 用来储存分页中每页的记录数
+     */
+    public static final int PAGE_SIZE=5;
 
     @RequestMapping("/pc/loadMemberRegister")
     public String load() {
@@ -77,19 +82,27 @@ public class MemberController {
         return turnPage;
     }
 
-    @PreAuthorize("hasRole('ROLE_MEMBER_CENTER')")
-    @RequestMapping("/pc/loadMemberCenter")
+    @RequestMapping("/pc/loadPersonalCenter")
     public String loadMemberCenter(@AuthenticationPrincipal Login user, Model model) {
         String errInfo = "";
         String turnPage = "/pc/yun-geren";
         String style = "padding:0px;";
         String loginButton = "";
-        Member mb = memberService.findOneByLoginName(user.getLoginName());
-        if(mb==null) {
-            errInfo = "加载信息失败";
-            turnPage = "/pc/yun-index";
-        }else {
-            model.addAttribute("mb",mb);
+        if(user==null) {
+            throw new IllegalStateException("尚未登录");
+        }else if(user instanceof Member) {
+            Member mb = memberService.findOneByLoginName(user.getLoginName());
+            if(mb==null) {
+                errInfo = "加载信息失败";
+                turnPage = "/pc/yun-index";
+            }else {
+                model.addAttribute("mb",mb);
+            }
+        }else if(user instanceof Agent) {
+            turnPage = "/pc/yun-daili";
+            Page<Member> pages=memberService.loadMembersByAgent((Agent)user,0,PAGE_SIZE);
+            model.addAttribute("allMemberList",pages);
+            model.addAttribute("agent",user);
         }
         model.addAttribute("errInfo",errInfo);
         model.addAttribute("style",style);
