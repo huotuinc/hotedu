@@ -239,7 +239,7 @@
                             <input title="" class="newfb ysss" name="sub" value="已有班级" type="submit"/>
                         </div>
                     </div>
-                    <form action="#" method="post">
+                    <form action="#" method="post" th:action="@{/pc/loadNoClassMembers}">
                         <p style="height:5px;"></p>
                         <table style="float: left;margin-right:520px;" class="search-tab">
                             <tr>
@@ -251,7 +251,7 @@
                         <table class="search-tab">
                             <tr>
                                 <th width="10"></th>
-                                <td><select title="searchSort" name="searchSort" id="searchSort" style=" height:29px;padding: 0 4px; border:1px solid #ccc; vertical-align:middle">
+                                <td><select title="searchSort" name="searchSort" id="noClassMemberSearchSort" style=" height:29px;padding: 0 4px; border:1px solid #ccc; vertical-align:middle">
                                     <option value="all">全部</option>
                                     <option value="realName">姓名</option>
                                     <option value="area">区域</option>
@@ -339,13 +339,22 @@
                                     <td th:text="${g.phoneNo}">15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
+                                <tr style="display: none;">
+                                    <td><input title="noClassMember_hidden_text" type="text" id="noClassMember_hidden_text" value="all" th:value="${searchSort}"/></td>
+                                </tr>
+                                <script type="text/javascript">
+                                    $(document).ready(function () {
+                                        var $searchSort = $("#noClassMemberSearchSort");
+                                        var searchSortValue = $("#noClassMember_hidden_text").val();
+                                        $searchSort.val(searchSortValue);
+                                    })
+                                </script>
                             </table>
                             <div style="text-align:center; margin-top:10px;">
                                 <a href="#" th:href="@{/pc/loadNoClassMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
                                 <a href="#" th:href="@{/pc/loadNoClassMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
                                 <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
                             </div>
-
                         </div>
                     </form>
                 </div>

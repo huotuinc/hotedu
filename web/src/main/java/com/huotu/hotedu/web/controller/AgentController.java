@@ -28,11 +28,11 @@ public class AgentController {
     @Autowired
     private MemberService memberService;
 
-
     /**
      * 用来储存分页中每页的记录数
      */
     public static final int PAGE_SIZE=10;
+
 
     /**
      * Created by jiashubing on 2015/7/24.
@@ -112,24 +112,24 @@ public class AgentController {
         if(pageNo==null||pageNo<0){
             pageNo=0;
         }
-        Page<Member> pages= agentService.findNoClassMembers(agent,0, 10,keywords,searchSort);
+        Page<Member> pages= agentService.findNoClassMembers(agent,pageNo,PAGE_SIZE,keywords,searchSort);
         long totalRecords=pages.getTotalElements();
         if(pages.getNumberOfElements()==0) {
             pageNo=pages.getTotalPages()-1;
             if(pageNo<0) {
                 pageNo = 0;
             }
-            pages= agentService.findNoClassMembers(agent,0, 10,keywords,searchSort);
+            pages= agentService.findNoClassMembers(agent,pageNo, PAGE_SIZE,keywords,searchSort);
         }
         model.addAttribute("agent",agent);
         model.addAttribute("allNoClassMembersList",pages);
         model.addAttribute("totalMembers",memberService.searchMembers(agent,pageNo,PAGE_SIZE).getTotalElements());
         model.addAttribute("navigation","bjgl");
         model.addAttribute("searchSort",searchSort==null?"all":searchSort);
-        model.addAttribute("keywords", keywords==null?"":keywords);
+        model.addAttribute("keywords", keywords);
         model.addAttribute("pageNo",pageNo);
         model.addAttribute("totalRecords", totalRecords);
-        model.addAttribute("totalPages",totalRecords/pages.getSize()+(totalRecords%pages.getSize()>0? 1:0));
+        model.addAttribute("totalPages",pages.getTotalPages());
 
         return "/pc/yun-daili";
     }
