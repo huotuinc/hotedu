@@ -11,6 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
@@ -93,23 +94,43 @@ public class AgentController {
 
     /**
      * Created by jiashubing on 2015/7/24.
-     * 加载未分班的学员信息
-     * @param agent     当前代理商
-     * @param model     返回客户端集
-     * @return          yun-daili.html  班级管理选项卡
+     * 显示未分班的学员信息
+     * 加载、搜索、上一页、下一页
+     * @param agent         当前代理商
+     * @param keywords      关键词
+     * @param searchSort    搜索类型
+     * @param pageNo        第几页
+     * @param model         返回客户端集
+     * @return              yun-daili.html  班级管理选项卡
      */
     @RequestMapping("pc/loadNoClassMembers")
-    public String loadNoClassMembers(@AuthenticationPrincipal Agent agent,Model model){
-        Page<Member> pages= agentService.findNoClassMembers(0, 10);
-        long sumElement=pages.getTotalElements();
-
+    public String loadNoClassMembers(@AuthenticationPrincipal Agent agent,
+                                     @RequestParam(required = false)String keywords,
+                                     @RequestParam(required = false)String searchSort,
+                                     @RequestParam(required = false)Integer pageNo,
+                                     Model model){
+        if(pageNo==null||pageNo<0){
+            pageNo=0;
+        }
+        Page<Member> pages= agentService.findNoClassMembers(agent,0, 10,keywords,searchSort);
+        long totalRecords=pages.getTotalElements();
+        if(pages.getNumberOfElements()==0) {
+            pageNo=pages.getTotalPages()-1;
+            if(pageNo<0) {
+                pageNo = 0;
+            }
+            pages= agentService.findNoClassMembers(agent,0, 10,keywords,searchSort);
+        }
         model.addAttribute("agent",agent);
         model.addAttribute("allNoClassMembersList",pages);
-        model.addAttribute("keywords","");
+        model.addAttribute("totalMembers",memberService.searchMembers(agent,pageNo,PAGE_SIZE).getTotalElements());
         model.addAttribute("navigation","bjgl");
-        model.addAttribute("n",0);
-        model.addAttribute("sumElement", sumElement);
-        model.addAttribute("sumpage",sumElement/pages.getSize()+(sumElement%pages.getSize()>0? 1:0));
+        model.addAttribute("searchSort",searchSort==null?"all":searchSort);
+        model.addAttribute("keywords", keywords==null?"":keywords);
+        model.addAttribute("pageNo",pageNo);
+        model.addAttribute("totalRecords", totalRecords);
+        model.addAttribute("totalPages",totalRecords/pages.getSize()+(totalRecords%pages.getSize()>0? 1:0));
+
         return "/pc/yun-daili";
     }
 }

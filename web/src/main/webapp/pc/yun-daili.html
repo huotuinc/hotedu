@@ -227,7 +227,7 @@
 
         <!--班级管理-->
 
-        <div style="display:none;" th:style="${navigation}=='bjgl'? 'display:block;':'display:none;'" class="ysthree">
+        <div style="display:block;" th:style="${navigation}=='bjgl'? 'display:block;':'display:none;'" class="ysthree">
             <div class="main-wrapi">
                 <div style=" float: right; margin-right: 14px;margin-bottom: 6px;" class="search-content">
                     <div style=" text-align:center;display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex;"
@@ -251,10 +251,13 @@
                         <table class="search-tab">
                             <tr>
                                 <th width="10"></th>
-                                <td><select title="" name="search-sort" style=" height:29px;padding: 0 4px; border:1px solid #ccc; vertical-align:middle">
-                                    <option value="">全部</option>
+                                <td><select title="searchSort" name="searchSort" id="searchSort" style=" height:29px;padding: 0 4px; border:1px solid #ccc; vertical-align:middle">
+                                    <option value="all">全部</option>
+                                    <option value="realName">姓名</option>
+                                    <option value="area">区域</option>
+                                    <option value="phoneNo">电话</option>
                                 </select></td>
-                                <td><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" value="" type="text"/></td>
+                                <td><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" value="" th:value="${keywords}"  type="text"/></td>
                                 <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
                             </tr>
                         </table>
@@ -264,7 +267,7 @@
                     <form name="myform" class="myform" method="post">
                         <div class="result-content">
                             <table class="result-tab" width="100%">
-                                <tr th:remove="all">
+                                <tr>
                                     <th style="width:80px">选择</th>
                                     <th style="width:100px">序号</th>
                                     <th style="width:80px">姓名</th>
@@ -337,7 +340,11 @@
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
                             </table>
-                            <div style="text-align:center; margin-top:10px;"> <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span th:text="${sumpage}">1</span> 页</div>
+                            <div style="text-align:center; margin-top:10px;">
+                                <a href="#" th:href="@{/pc/loadNoClassMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
+                                <a href="#" th:href="@{/pc/loadNoClassMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
+                                <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
+                            </div>
 
                         </div>
                     </form>

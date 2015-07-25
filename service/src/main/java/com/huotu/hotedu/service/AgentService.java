@@ -145,18 +145,73 @@ public class AgentService {
     /**
      * Created by jiashubing on 2015/7/24.
      * 显示所有未分班学员 每页10条
-     * @param n         第几页
-     * @param pagesize  每页几条
-     * @return          学员集合
+     * 加载、搜索、上一页、下一页
+     * @param agent         当前代理商
+     * @param pageNo        第几页
+     * @param pageSize      每页几条
+     * @param keywords      关键词
+     * @param searchSort    搜索类型
+     * @return              学员集合
      */
-    public Page<Member> findNoClassMembers(Integer n,Integer pagesize){
+    public Page<Member> findNoClassMembers(Agent agent,Integer pageNo,Integer pageSize,String keywords,String searchSort){
         return  memberRepository.findAll(new Specification<Member>() {
             @Override
             public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)), cb.isNull(root.get("theClass").as(ClassTeam.class)));
+                if ("".equals(keywords)||keywords==null) {
+                    return cb.and(
+                            cb.equal(root.get("agent").as(Agent.class), agent),
+                            cb.isTrue(root.get("enabled").as(Boolean.class)),
+                            cb.isNull(root.get("theClass").as(ClassTeam.class))
+                    );
+                }else if("all".equals(searchSort)){
+                    return cb.and(
+                            cb.equal(root.get("agent").as(Agent.class), agent),
+                            cb.isTrue(root.get("enabled").as(boolean.class)),
+                            cb.isNull(root.get("theClass").as(ClassTeam.class)),
+                            cb.or(
+                                    cb.like(root.get("realName").as(String.class),"%"+keywords+"%"),
+                                    cb.like(root.get("phoneNo").as(String.class),"%"+keywords+"%"),
+                                    cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
+                            )
+                    );
+                }else{
+                    if("area".equals(searchSort)) {
+                        return cb.and(
+                                cb.equal(root.get("agent").as(Agent.class), agent),
+                                cb.isTrue(root.get("enabled").as(boolean.class)),
+                                cb.isNull(root.get("theClass").as(ClassTeam.class)),
+                                cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
+                        );
+                    }
+                    else{
+                        return cb.and(
+                                cb.equal(root.get("agent").as(Agent.class), agent),
+                                cb.isTrue(root.get("enabled").as(boolean.class)),
+                                cb.isNull(root.get("theClass").as(ClassTeam.class)),
+                                cb.like(root.get(searchSort).as(String.class), "%" + keywords + "%")
+                        );
+                    }
+                }
             }
-        }, new PageRequest(n, pagesize));
+        }, new PageRequest(pageNo, pageSize));
     }
+//
+//    /**
+//     * Created by jiashubing on 2015/7/24.
+//     * 显示所有未分班学员 每页10条
+//     * @param n         第几页
+//     * @param pagesize  每页几条
+//     * @return          学员集合
+//     */
+//    public Page<Member> findNoClassMembers(Integer n,Integer pagesize){
+//        return  memberRepository.findAll(new Specification<Member>() {
+//            @Override
+//            public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+//                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)), cb.isNull(root.get("theClass").as(ClassTeam.class)));
+//            }
+//        }, new PageRequest(n, pagesize));
+//    }
+
 
     /**
      * Created by jiashubing on 2015/7/24.
@@ -198,7 +253,7 @@ public class AgentService {
         return classTeamRepository.findAll(new Specification<ClassTeam>() {
             @Override
             public Predicate toPredicate(Root<ClassTeam> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return cb.and(cb.equal(root.get("agent").as(Agent.class),agent), cb.isNotNull(root.get("exam").as(Exam.class)));
+                return cb.and(cb.equal(root.get("agent").as(Agent.class), agent), cb.isNotNull(root.get("exam").as(Exam.class)));
             }
         });
     }
@@ -222,4 +277,5 @@ public class AgentService {
         classTeam.setAgent(agent);
         classTeamRepository.save(classTeam);
     }
+
 }
