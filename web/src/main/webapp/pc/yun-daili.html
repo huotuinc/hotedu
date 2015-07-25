@@ -191,7 +191,7 @@
 
         <!--消息通知-->
 
-        <div style="display:block" class="ysthree">
+        <div style="display:none" class="ysthree">
             <div class="main-wrapi">
                 <div class="ystwolist ysys">
                     <p><span style="float:left;">5月杭州微商大会进行中</span> <span style="float:right;">2015/05/10</span></p>
@@ -227,7 +227,7 @@
 
         <!--班级管理-->
 
-        <div style="display:block;" th:style="${navigation}=='bjgl'? 'display:block;':'display:none;'" class="ysthree">
+        <div id="noClassMemberDiv" style="display:block;" th:style="${navigation}=='bjgl'? 'display:block;':'display:none;'" class="ysthree">
             <div class="main-wrapi">
                 <div style=" float: right; margin-right: 14px;margin-bottom: 6px;" class="search-content">
                     <div style=" text-align:center;display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex;"
@@ -245,7 +245,13 @@
                             <tr>
                                 <th width="10"></th>
                                 <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
-                                <td><input title="" class="ysss" name="sub" value="安排班级" type="submit"/></td>
+                                <td><input title="" class="ysss" name="sub" value="安排班级" type="button" onclick="noClassMemberArrageClass()"/></td>
+                                <script>
+                                    function noClassMemberArrageClass(){
+                                        var $noClassMemberArrageClassDiv = $("#noClassMemberArrageClassDiv");
+                                        $noClassMemberArrageClassDiv.show();
+                                    }
+                                </script>
                             </tr>
                         </table>
                         <table class="search-tab">
@@ -365,7 +371,7 @@
 
         <!--毕业管理-->
 
-        <div style="display:block" class="main-wrapi">
+        <div style="display:none" class="main-wrapi">
             <div style="float: right;width:1000px;margin-bottom: 6px;" class="search-content">
                 <form action="#" method="post">
                     <p style="height:5px;"></p>
@@ -538,21 +544,19 @@
 <!--新增学员弹窗end-->
 <!--安排班级-->
 
-<div style="display:none" class="ystc">
+<div id="noClassMemberArrageClassDiv" style="display:none" class="ystc">
     <div class="box-ys">
         <P style="text-align:right;"><a href="#"> <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
-
         <p style="height:20px"></p>
-
-        <p>
-            <button class="sign-in__button ys-form__button" name="button" type="submit">
-            新建</button></p>
-        <p>
-            <button class="sign-in__button ys-form__button" name="button" type="submit">
-            选择已有</button></p>
-        <p>
-            <button class="sign-in__button ys-form__button" name="button" type="submit">
-            下一步</button></p>
+        <p><button class="sign-in__button ys-form__button" name="button" type="submit" onclick="noClassMemberArrageClassDiv()">新建</button></p>
+        <script>
+            function noClassMemberArrageClassDiv(){
+                $("#noClassMemberArrageClassDiv").hide();
+                $("#noClassMemberArrageClassDiv2").show();
+            }
+        </script>
+        <p><button class="sign-in__button ys-form__button" name="button" type="submit">选择已有</button></p>
+        <p><button class="sign-in__button ys-form__button" name="button" type="submit">下一步</button></p>
     </div>
 </div>
 
@@ -561,21 +565,20 @@
 
 <!--新建班级2-->
 
-<div style="display:none" class="ystc">
+<div id="noClassMemberArrageClassDiv2" style="display:none" class="ystc">
     <div class="box-ys">
-        <P style="text-align:right;"><a href="#"> <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
-
-        <p style="height:20px"></p>
-
-        <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" id="" name="考试时间"
-                  placeholder="考试时间" type="text"/></p>
-
-        <p>
-            <button class="sign-in__button ys-form__button" name="button" type="submit">
-            保存</button></p>
-        <p>
-            <button class="sign-in__button ys-form__button" name="button" type="submit">
-            安排考试时间</button></p>
+        <form action="#" method="post" th:action="@{/pc/isClassNameExist}">
+            <P style="text-align:right;"><a href="#"> <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+            <p style="height:20px"></p>
+            <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="className" placeholder="班级名称" type="text"/></p>
+            <p><button class="sign-in__button ys-form__button" name="button" type="submit" onclick="noClassMemberArrageClassDiv2()">保存</button></p>
+            <script>
+                function noClassMemberArrageClassDiv2(){
+                    $("#noClassMemberArrageClassDiv2").hide();
+                }
+            </script>
+            <p><button class="sign-in__button ys-form__button" name="button" type="submit">安排考试时间</button></p>
+        </form>
     </div>
 </div>
 

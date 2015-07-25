@@ -5,6 +5,7 @@ import com.huotu.hotedu.entity.ClassTeam;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.MemberService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -42,7 +43,7 @@ public class AgentController {
      * @param model         返回客户端集
      * @return              新建班级页面
      */
-    @RequestMapping("pc/addSaveNewClassTeam")
+    @RequestMapping("/pc/addSaveNewClassTeam")
     public String addSaveNewClassTeam(String className,String arrayLis,Model model){
         String errInfo = "";
         String msgInfo = "";
@@ -74,7 +75,7 @@ public class AgentController {
      * @param model         返回客户端集
      * @return              新建班级页面
      */
-    @RequestMapping("pc/addSaveOldClassTeam")
+    @RequestMapping("/pc/addSaveOldClassTeam")
     public String addSaveOldClassTeam(Long classId,String arrayLis,Model model){
         String errInfo = "";
         String msgInfo = "";
@@ -103,7 +104,7 @@ public class AgentController {
      * @param model         返回客户端集
      * @return              yun-daili.html  班级管理选项卡
      */
-    @RequestMapping("pc/loadNoClassMembers")
+    @RequestMapping("/pc/loadNoClassMembers")
     public String loadNoClassMembers(@AuthenticationPrincipal Agent agent,
                                      @RequestParam(required = false)String keywords,
                                      @RequestParam(required = false)String searchSort,
@@ -132,5 +133,22 @@ public class AgentController {
         model.addAttribute("totalPages",pages.getTotalPages());
 
         return "/pc/yun-daili";
+    }
+
+    @RequestMapping("/pc/isClassNameExist")
+    public String isClassNameExist(String className,Model model){
+        String errInfo = "";
+        String onload = "";
+        String turnPage = "";
+        boolean flag=agentService.checkClassTeamByName(className);
+        if(flag) turnPage = "redirect:/pc/addSaveNewClassTeam";
+        else{
+            errInfo = "该班级名字已经被注册,请使用其他的名字";
+            onload = "noClassMemberArrageClassDiv()";
+            turnPage = "redirect:/pc/loadNoClassMembers";
+        }
+        model.addAttribute("onload",onload);
+        model.addAttribute("errInfo",errInfo);
+        return  turnPage;
     }
 }
