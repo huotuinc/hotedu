@@ -3,7 +3,6 @@ package com.huotu.hotedu.web.service;
 import com.huotu.hotedu.entity.Agent;
 import com.huotu.hotedu.entity.Huotu;
 import com.huotu.hotedu.entity.Manager;
-import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.repository.*;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.EnterpriseService;
@@ -14,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 /**
  * @author CJ
@@ -192,6 +189,9 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                     qaRepository.save(qa);
                 }
             }*/
+
+
+
 
             if(agentRepository.count()==0){
                 Agent agent=new Agent();

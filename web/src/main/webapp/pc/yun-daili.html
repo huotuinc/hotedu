@@ -54,7 +54,7 @@
                 <p th:text="'注册时间：'+${#calendars.format(agent.registerDate,'yyyy-MM-dd')}">注册时间：2105.01.01</p>
             </li>
             <li class="newr liright">
-                <p>总人数：<b th:text="${totalRecords}">900</b></p>
+                <p>总人数：<b th:text="${totalMembers}">900</b></p>
 
                 <p>已发证：<b th:text="${agent.sendCertificateNumber}">400</b></p>
 
@@ -64,7 +64,7 @@
     </div>
     <div style="display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex;"
          class="ystwo">
-        <div class="ysykone bg on" th:class="${navigation}=='bmxx'? 'ysykone bg on':'ysykone bg'"><a href="#"><span>报名信息</span> </a></div>
+        <div class="ysykone bg on" th:class="${navigation}=='bmxx'? 'ysykone bg on':'ysykone bg'"><a href="#" th:href="@{/pc/searchMembers}"><span>报名信息</span> </a></div>
         <div class="ysyktwo bg" th:class="${navigation}=='xxtz'? 'ysyktwo bg on':'ysyktwo bg'"><a href="#"><span>消息通知</span> </a></div>
         <div class="ysykthree bg" th:class="${navigation}=='bjgl'? 'ysykthree bg on':'ysykthree bg'"><a href="#" th:href="@{/pc/loadNoClassMembers}"><span>班级管理</span> </a></div>
         <div class="ysykfour bg" th:class="${navigation}=='bygl'? 'ysykfour bg on':'ysykfour bg'"><a href="#"><span>毕业管理</span> </a></div>
@@ -87,7 +87,7 @@
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
-                            <td><select title="" name="search-sort" id=""
+                            <td><select title="" name="searchSortBmxx" id=""
                                         style=" height:29px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
                                 <option value="all">全部</option>
                                 <option value="payed">交费状态</option>
@@ -95,7 +95,7 @@
                                 <option value="haveLicense">领证状态</option>
                             </select></td>
                             <td><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字"
-                                       name="keywords" value="" id="" type="text"/></td>
+                                       name="keywordsBmxx" value="" id="" type="text"/></td>
                             <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
@@ -172,13 +172,15 @@
                                 <td th:text="${g.passed}?'是':'否'" title="">--</td>
                                 <td th:text="${g.haveLicense}?'是':'否'" title="">--</td>
                                 <td th:text="${g.theClass}==null? '未分配':${g.theClass.className}" title="">201504第一期</td>
-                                <td><a class="link-update" href="#">查看</a><br/><a class="link-update" href="#">删除</a></td>
+                                <td><a class="link-update" href="#">查看</a><br/>
+                                    <a class="link-update" href="#" th:href="@{/pc/delMember(id=${g.id},pageNoBmxx=${pageNoBmxx},keywordsBmxx=${keywordsBmxx},searchSortBmxx=${searchSortBmxx})}">删除</a>
+                                </td>
                             </tr>
                         </table>
                         <div style="text-align:center; margin-top:10px;">
-                            <a href="#" th:href="@{/pc/searchMembers(pageNo=${pageNo}-1,keywords=${keywords},search-sort=${type})}">上一页</a>
-                            <a href="#" th:href="@{/pc/searchMembers(pageNo=${pageNo}+1,keywords=${keywords},search-sort=${type})}">下一页</a>
-                            <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
+                            <a href="#" th:href="@{/pc/searchMembers(pageNoBmxx=${pageNoBmxx}-1,keywordsBmxx=${keywordsBmxx},searchSortBmxx=${searchSortBmxx})}">上一页</a>
+                            <a href="#" th:href="@{/pc/searchMembers(pageNoBmxx=${pageNoBmxx}+1,keywordsBmxx=${keywordsBmxx},searchSortBmxx=${searchSortBmxx})}">下一页</a>
+                            <span th:text="${totalRecordsBmxx}">2</span> 条 <span th:text="${pageNoBmxx}+1">1</span>/<span th:text="${totalPagesBmxx}">1</span> 页
                         </div>
                     </div>
                 </form>

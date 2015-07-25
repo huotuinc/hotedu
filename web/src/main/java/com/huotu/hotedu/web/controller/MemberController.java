@@ -125,13 +125,23 @@ public class MemberController {
         return turnPage;
     }
 
+    /**
+     * 查询学员
+     * @param agent      该学员属于的代理商
+     * @param pageNo     当前显示的页数
+     * @param pageSize   每页显示的记录数
+     * @param keywords   搜索的关键字
+     * @param type       搜索的类型
+     * @param model      准备发动到浏览器的数据
+     * @return           yun-daili.html
+     */
     @PreAuthorize("hasRole('AGENT')")
     @RequestMapping("/pc/searchMembers")
     public String searchMembers(@AuthenticationPrincipal Agent agent,
-                                @RequestParam(required = false)Integer pageNo,
+                                @RequestParam(required = false,value = "pageNoBmxx")Integer pageNo,
+                                @RequestParam(required = false,value = "keywordsBmxx")String keywords,
                                 @RequestParam(required = false)Integer pageSize,
-                                @RequestParam(required = false) String keywords,
-                                @RequestParam(required = false,value = "search-sort") String type,
+                                @RequestParam(required = false,value = "searchSortBmxx") String type,
                                 Model model) {
         String turnPage = "/pc/yun-daili";
         if(pageNo==null||pageNo<0){
@@ -153,14 +163,38 @@ public class MemberController {
         }
         model.addAttribute("agent",agent);
         model.addAttribute("allMemberList", pages);
-        model.addAttribute("totalPages",pages.getTotalPages());
-        model.addAttribute("pageNo", pageNo);
-        model.addAttribute("keywords", keywords);
-        model.addAttribute("type",type);
-        model.addAttribute("totalRecords", totalRecords);
+        model.addAttribute("totalPagesBmxx",pages.getTotalPages());
+        model.addAttribute("pageNoBmxx", pageNo);
+        model.addAttribute("keywordsBmxx", keywords);
+        model.addAttribute("searchSortBmxx",type);
+        model.addAttribute("totalRecordsBmxx", totalRecords);
         model.addAttribute("navigation","bmxx");
+        model.addAttribute("totalMembers",memberService.countByAgent(agent));
         return turnPage;
     }
+
+
+
+
+    @PreAuthorize("hasRole('AGENT')")
+    @RequestMapping("/pc/delMember")
+    public String delMember(@RequestParam(required = false,value = "pageNoBmxx")Integer pageNo,
+                            @RequestParam(required = false,value = "keywordsBmxx")String keywords,
+                            @RequestParam(required = false,value = "searchSortBmxx") String type,
+                            Long id, Model model) {
+        String returnPage="redirect:/pc/searchMembers";
+        memberService.delMember(id);
+        model.addAttribute("pageNoBmxx", pageNo);
+        model.addAttribute("keywordsBmxx", keywords);
+        model.addAttribute("searchSortBmxx",type);
+        return returnPage;
+    }
+
+
+
+
+
+
 
     /**
      * Created by jiashubing on 2015/7/24.
@@ -202,29 +236,28 @@ public class MemberController {
         return turnPage;
     }
 
-    /**
-     * Created by jiashubing on 2015/7/24.
-     * 删除学员，设为不可用
-     * @param id 学员id
-     * @param model 返回值
-     * @return
-     */
-    @RequestMapping("pc/delMember")
-    public String delMember(Long id,Model model)
-    {
-        String errInfo = "";
-        String msgInfo = "";
-        String turnPage = "/pc/delTest";
-        if(id==null) {
-            errInfo = "请重新登录";
-        }else {
-            memberService.delMember(id);
-            msgInfo = "删除成功";
-        }
-        model.addAttribute("msgInfo",msgInfo);
-        model.addAttribute("errInfo",errInfo);
-        return turnPage;
-    }
+//    /**
+//     * 删除学员，设为不可用
+//     * @param id 学员id
+//     * @param model 返回值
+//     * @return
+//     */
+//    @RequestMapping("pc/delMember")
+//    public String delMember(Long id,Model model)
+//    {
+//        String errInfo = "";
+//        String msgInfo = "";
+//        String turnPage = "/pc/delTest";
+//        if(id==null) {
+//            errInfo = "请重新登录";
+//        }else {
+//            memberService.delMember(id);
+//            msgInfo = "删除成功";
+//        }
+//        model.addAttribute("msgInfo",msgInfo);
+//        model.addAttribute("errInfo",errInfo);
+//        return turnPage;
+//    }
 
     /**
      * Created by jiashubing on 2015/7/24.
