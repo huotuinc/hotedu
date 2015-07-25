@@ -1,6 +1,7 @@
 package com.huotu.hotedu.service;
 
 import com.huotu.hotedu.entity.Agent;
+import com.huotu.hotedu.entity.ClassTeam;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 
 /**
  * Created by cwb on 2015/7/15.
@@ -76,13 +74,15 @@ public class MemberService {
                             cb.isTrue(root.get("enabled").as(boolean.class))
                     );
                 }else if("all".equals(type)){
+                    Join<Member, ClassTeam> join = root.join(root.getModel().getSingularAttribute("theClass", ClassTeam.class), JoinType.LEFT);//左连接
                     return cb.and(
                             cb.equal(root.get("agent").as(Agent.class), agent),
                             cb.isTrue(root.get("enabled").as(boolean.class)),
                             cb.or(
                                     cb.like(root.get("realName").as(String.class),"%"+keyword+"%"),
-                                    cb.like(root.get("phoneNo").as(String.class),"%"+keyword+"%")
-                                    //cb.like(root.get("theClass.").as(String.class),"%"+keyword+"%")
+                                    cb.like(root.get("phoneNo").as(String.class),"%"+keyword+"%"),
+                                    cb.like(root.get("agent").get("area").as(String.class),"%"+keyword+"%"),
+                                    cb.like(join.get("className").as(String.class),"%"+keyword+"%")
                             )
                     );
                 }else{
