@@ -87,7 +87,7 @@
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
-                            <td><select title="" name="searchSortBmxx" id=""
+                            <td><select title="" name="searchSort" id=""
                                         style=" height:29px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
                                 <option value="all">全部</option>
                                 <option value="payed">交费状态</option>
@@ -95,7 +95,7 @@
                                 <option value="haveLicense">领证状态</option>
                             </select></td>
                             <td><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字"
-                                       name="keywordsBmxx" value="" id="" type="text"/></td>
+                                       name="keywords" value="" id="" type="text"/></td>
                             <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
@@ -173,14 +173,14 @@
                                 <td th:text="${g.haveLicense}?'是':'否'" title="">--</td>
                                 <td th:text="${g.theClass}==null? '未分配':${g.theClass.className}" title="">201504第一期</td>
                                 <td><a class="link-update" href="#">查看</a><br/>
-                                    <a class="link-update" href="#" th:href="@{/pc/delMember(id=${g.id},pageNoBmxx=${pageNoBmxx},keywordsBmxx=${keywordsBmxx},searchSortBmxx=${searchSortBmxx})}">删除</a>
+                                    <a class="link-update" href="#" th:href="@{/pc/delMember(id=${g.id},pageNo=${pageNo},keywords=${keywords},searchSort=${searchSort})}">删除</a>
                                 </td>
                             </tr>
                         </table>
                         <div style="text-align:center; margin-top:10px;">
-                            <a href="#" th:href="@{/pc/searchMembers(pageNoBmxx=${pageNoBmxx}-1,keywordsBmxx=${keywordsBmxx},searchSortBmxx=${searchSortBmxx})}">上一页</a>
-                            <a href="#" th:href="@{/pc/searchMembers(pageNoBmxx=${pageNoBmxx}+1,keywordsBmxx=${keywordsBmxx},searchSortBmxx=${searchSortBmxx})}">下一页</a>
-                            <span th:text="${totalRecordsBmxx}">2</span> 条 <span th:text="${pageNoBmxx}+1">1</span>/<span th:text="${totalPagesBmxx}">1</span> 页
+                            <a href="#" th:href="@{/pc/searchMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
+                            <a href="#" th:href="@{/pc/searchMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
+                            <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
                         </div>
                     </div>
                 </form>

@@ -189,6 +189,24 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                     qaRepository.save(qa);
                 }
             }*/
+//            if(memberRepository.count()==4){
+//                Random random=new Random();
+//                int sum=(int)agentRepository.count();
+//                List<Agent> lists=agentRepository.findAll();
+//
+//                Member member;
+//                for(int i=0;i<sum*20;i++){
+//                    Agent agent=lists.get(0);
+//                    member=new Member();
+//                    member.setAgent(agent);
+//                    member.setRealName("ceshi"+i);
+//                    member.setPayed(random.nextBoolean());
+//                    member.setPassed(random.nextBoolean());
+//                    member.setRegisterDate(new Date());
+//                    memberRepository.save(member);
+//
+//                }
+//            }
 
 
 

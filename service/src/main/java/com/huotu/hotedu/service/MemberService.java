@@ -46,14 +46,6 @@ public class MemberService {
     }
 
 
-    /**
-     * 获取某个代理商下学员总人数
-     * @param agent 代理商
-     * @return      学员总人数
-     */
-    public int countByAgent(Agent agent){
-        return memberRepository.countByAgent(agent);
-    }
 
     /**
      * 跳转到学院搜索的重载方法主要用于查询非搜索的会员

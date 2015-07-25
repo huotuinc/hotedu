@@ -1,6 +1,5 @@
 package com.huotu.hotedu.repository;
 
-import com.huotu.hotedu.entity.Agent;
 import com.huotu.hotedu.entity.Member;
 import org.luffy.lib.libspring.data.ClassicsRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,6 +19,4 @@ public interface MemberRepository  extends JpaRepository<Member,Long>,ClassicsRe
     Member findByPhoneNo(String phoneNo);
 
     Member findByLoginName(String loginName);
-
-    int countByAgent(Agent agent);
 }
