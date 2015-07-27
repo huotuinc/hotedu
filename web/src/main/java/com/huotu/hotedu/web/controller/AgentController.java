@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -40,17 +41,18 @@ public class AgentController {
     /**
      * Created by jiashubing on 2015/7/24.
      * 将学员保存到新建班级中
-     * @param className     新建班级的名字
-     * @param noClassMemberArrayLis      复选框选中成员的id集合,Strring类型
-     * @param model         返回客户端集
-     * @return              新建班级页面
+     * @param className                     新建班级的名字
+     * @param noClassMemberArrayLis         复选框选中成员的id集合,Strring类型
+     * @param model                         返回客户端集
+     * @return                              新建班级页面
+     * @throws UnsupportedEncodingException
      */
     @RequestMapping("/pc/addSaveNewClassTeam")
-    public String addSaveNewClassTeam(String className,String noClassMemberArrayLis,Model model){
+    public String addSaveNewClassTeam(String className,String noClassMemberArrayLis,Model model) throws UnsupportedEncodingException {
         String errInfo = "";
         String msgInfo = "";
         String turnPage = "redirect:/pc/loadNoClassMembers";
-        noClassMemberArrayLis = URLDecoder.decode(noClassMemberArrayLis);
+        noClassMemberArrayLis = URLDecoder.decode(noClassMemberArrayLis,"UTF-8");
         System.out.println("noClassMemberArrayLis = "+noClassMemberArrayLis +"className = "+className);
 
         MyJsonUtil myJsonUtil = new MyJsonUtil();
@@ -114,7 +116,6 @@ public class AgentController {
                                      @RequestParam(required = false)String keywords,
                                      @RequestParam(required = false)String searchSort,
                                      @RequestParam(required = false)Integer pageNo,
-                                     @RequestParam(required = false)String arrayLis,
                                      @RequestParam(required = false)Boolean noClassMemberArrageClassDiv2Style,
                                      Model model){
         if(pageNo==null||pageNo<0){
@@ -137,15 +138,23 @@ public class AgentController {
         model.addAttribute("keywords", keywords);
         model.addAttribute("pageNo",pageNo);
         model.addAttribute("totalRecords", totalRecords);
-        model.addAttribute("arrayLis",arrayLis);
         model.addAttribute("totalPages",pages.getTotalPages());
         model.addAttribute("noClassMemberArrageClassDiv2Style",noClassMemberArrageClassDiv2Style);
 
         return "/pc/yun-daili";
     }
 
+    /**
+     * Created by jiashubing on 2015/7/24.
+     * 判断新建班级的名称是否已经存在
+     * @param className                     新建班级的名字
+     * @param noClassMemberArrayLis         复选框选中成员的id集合,Strring类型
+     * @param model                         返回客户端集
+     * @return          重定向到addSaveNewClassTeam 将成员添加保存到新建班级
+     * @throws UnsupportedEncodingException
+     */
     @RequestMapping("/pc/isClassNameExist")
-    public String isClassNameExist(String className,String noClassMemberArrayLis,Model model){
+    public String isClassNameExist(String className,String noClassMemberArrayLis,Model model) throws UnsupportedEncodingException {
         String errInfo = "";
         Boolean style= false;
         String turnPage = "";
@@ -159,7 +168,7 @@ public class AgentController {
         }
         model.addAttribute("noClassMemberArrageClassDiv2Style",style);
         model.addAttribute("className",className);
-        model.addAttribute("noClassMemberArrayLis", URLEncoder.encode(noClassMemberArrayLis));
+        model.addAttribute("noClassMemberArrayLis", URLEncoder.encode(noClassMemberArrayLis,"UTF-8"));
         model.addAttribute("errInfo",errInfo);
         return  turnPage;
     }
