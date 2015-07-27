@@ -139,7 +139,7 @@ public class AgentController {
         model.addAttribute("totalRecords", totalRecords);
         model.addAttribute("arrayLis",arrayLis);
         model.addAttribute("totalPages",pages.getTotalPages());
-        model.addAttribute("noClassMemberArrageClassDiv2Style",班级管理 安排分班到新建班级（可多选，如果没选成员警告);
+        model.addAttribute("noClassMemberArrageClassDiv2Style",noClassMemberArrageClassDiv2Style);
 
         return "/pc/yun-daili";
     }
