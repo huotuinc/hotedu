@@ -171,7 +171,7 @@ public class AgentController {
         }
         model.addAttribute("noClassMemberArrageClassDiv2Style", style);
         model.addAttribute("className", className);
-        model.addAttribute("noClassMemberArrayLis", URLEncoder.encode(noClassMemberArrayLis));
+        model.addAttribute("noClassMemberArrayLis", URLEncoder.encode(noClassMemberArrayLis,"UTF-8"));
         model.addAttribute("errInfo", errInfo);
         return turnPage;
     }
