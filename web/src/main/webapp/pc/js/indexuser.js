@@ -26,13 +26,11 @@ function addMember(){
 	var sex=$(":input[name='sex']:checked").val();
 	var phoneNo=$("#txt_memberphoneNo").val();
 	if(realName==""){
-		//alert("用户名不能为空");
 		$("#add_Memberinfo").text("用户名不能为空");
 		return false;
 	}
 	console.log(reg+" "+phoneNo);
 	if(!reg.test(phoneNo)){
-		//alert("手机号码格式不正确！");
 		$("#add_Memberinfo").text("手机号码格式不正确!");
 		return false;
 	}
@@ -47,7 +45,6 @@ function addMember(){
 				alert(result.message);
 				$("#addMember").hide();
 			}else if(result.status==1){
-				//alert(result.message);
 				$("#add_Memberinfo").text(result.message);
 			}
 		},
