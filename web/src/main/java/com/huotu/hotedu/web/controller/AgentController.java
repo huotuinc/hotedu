@@ -109,6 +109,7 @@ public class AgentController {
                                      @RequestParam(required = false)String keywords,
                                      @RequestParam(required = false)String searchSort,
                                      @RequestParam(required = false)Integer pageNo,
+                                     @RequestParam(required = false)Boolean noClassMemberArrageClassDiv2Style,
                                      Model model){
         if(pageNo==null||pageNo<0){
             pageNo=0;
@@ -131,6 +132,7 @@ public class AgentController {
         model.addAttribute("pageNo",pageNo);
         model.addAttribute("totalRecords", totalRecords);
         model.addAttribute("totalPages",pages.getTotalPages());
+        model.addAttribute("noClassMemberArrageClassDiv2Style",noClassMemberArrageClassDiv2Style);
 
         return "/pc/yun-daili";
     }
@@ -138,16 +140,16 @@ public class AgentController {
     @RequestMapping("/pc/isClassNameExist")
     public String isClassNameExist(String className,Model model){
         String errInfo = "";
-        String onload = "";
+        Boolean style= false;
         String turnPage = "";
         boolean flag=agentService.checkClassTeamByName(className);
         if(flag) turnPage = "redirect:/pc/addSaveNewClassTeam";
         else{
             errInfo = "该班级名字已经被注册,请使用其他的名字";
-            onload = "noClassMemberArrageClassDiv()";
-            turnPage = "redirect:/pc/loadNoClassMembers";
+            style=true;
+            turnPage = "redirect:/pc/loadNoClassMembers?";
         }
-        model.addAttribute("onload",onload);
+        model.addAttribute("noClassMemberArrageClassDiv2Style",style);
         model.addAttribute("errInfo",errInfo);
         return  turnPage;
     }

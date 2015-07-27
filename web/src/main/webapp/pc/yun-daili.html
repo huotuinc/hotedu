@@ -546,11 +546,11 @@
 
 <div id="noClassMemberArrageClassDiv" style="display:none" class="ystc">
     <div class="box-ys">
-        <P style="text-align:right;"><a href="#"> <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+        <P style="text-align:right;"><a href="#" onclick="$('#noClassMemberArrageClassDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
         <p style="height:20px"></p>
-        <p><button class="sign-in__button ys-form__button" name="button" type="submit" onclick="noClassMemberArrageClassDiv()">新建</button></p>
+        <p><button class="sign-in__button ys-form__button" name="button" type="submit" onclick="noClassMemberArrageClassNewForm()">新建</button></p>
         <script>
-            function noClassMemberArrageClassDiv(){
+            function noClassMemberArrageClassNewForm(){
                 $("#noClassMemberArrageClassDiv").hide();
                 $("#noClassMemberArrageClassDiv2").show();
             }
@@ -565,19 +565,21 @@
 
 <!--新建班级2-->
 
-<div id="noClassMemberArrageClassDiv2" style="display:none" class="ystc">
+<div id="noClassMemberArrageClassDiv2" style="display:none" th:style="${noClassMemberArrageClassDiv2Style}? 'display:block' : 'display:none'" class="ystc">
     <div class="box-ys">
         <form action="#" method="post" th:action="@{/pc/isClassNameExist}">
-            <P style="text-align:right;"><a href="#"> <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+            <P style="text-align:right;"><a href="#" onclick="$('#noClassMemberArrageClassDiv2').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
             <p style="height:20px"></p>
             <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="className" placeholder="班级名称" type="text"/></p>
-            <p><button class="sign-in__button ys-form__button" name="button" type="submit" onclick="noClassMemberArrageClassDiv2()">保存</button></p>
+            <p><button class="sign-in__button ys-form__button" name="button" type="submit" onclick="noClassMemberArrageClassDiv2Click()">保存</button></p>
             <script>
-                function noClassMemberArrageClassDiv2(){
+                function noClassMemberArrageClassDiv2Click(){
                     $("#noClassMemberArrageClassDiv2").hide();
                 }
             </script>
             <p><button class="sign-in__button ys-form__button" name="button" type="submit">安排考试时间</button></p>
+            <p>123456</p>
+            <p th:text="${errInfo}" align="center" style="color: red"></p>
         </form>
     </div>
 </div>
@@ -588,13 +590,13 @@
 
 <div style="display:none" class="ystci">
     <div class="box-ys">
-        <P align="right" style="margin:0px; padding:0px; float:right；"><a href="javascript:void(0)"
+        <P align="right" style="margin:0; padding:0; float:right;"><a href="javascript:void(0)"
                                                                           onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
             <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
 
         <div class="ys500 ystx">
             <p>
-                <input title="" class="ysw500 sign-in__field ys-form__field" id="" name="姓名" placeholder="姓名"
+                <input title="" class="ysw500 sign-in__field ys-form__field" name="姓名" placeholder="姓名"
                        type="text"/>
             </p>
 
