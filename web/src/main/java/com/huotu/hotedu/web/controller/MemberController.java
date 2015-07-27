@@ -205,17 +205,15 @@ public class MemberController {
     public String detailMember(Long id,Model model)
     {
         String errInfo = "";
-        String msgInfo = "";
         String turnPage = "/pc/yun-xyge";
         if(id==null) {
             errInfo = "请重新登录";
+            turnPage = "redirect:/pc/login";
         }else {
             Member mb = memberService.findOneById(id);
             model.addAttribute("mb",mb);
-            msgInfo = "查看详情";
         }
 
-        model.addAttribute("msgInfo",msgInfo);
         model.addAttribute("errInfo",errInfo);
         return turnPage;
     }
@@ -233,9 +231,10 @@ public class MemberController {
     {
         String errInfo = "";
         String msgInfo = "";
-        String turnPage = "/pc/daili";
+        String turnPage = "redirect:/pc/searchMembers";
         if(id==null) {
             errInfo = "请重新登录";
+            turnPage = "redirect:/pc/login";
         }else {
             memberService.checkPay(id);
             msgInfo = "交费成功";

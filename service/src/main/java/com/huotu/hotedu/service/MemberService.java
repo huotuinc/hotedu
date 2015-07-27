@@ -11,6 +11,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.*;
+import java.util.Date;
 
 /**
  * Created by cwb on 2015/7/15.
@@ -123,7 +124,9 @@ public class MemberService {
      */
     public void checkPay(Long id){
         Member mb= findOneById(id);
+        Date d = new Date();
         mb.setPayed(true);
+        mb.setPayDate(d);
         memberRepository.save(mb);
     }
 

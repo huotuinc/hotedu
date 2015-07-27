@@ -147,7 +147,7 @@ public class AgentController {
         else{
             errInfo = "该班级名字已经被注册,请使用其他的名字";
             style=true;
-            turnPage = "redirect:/pc/loadNoClassMembers?";
+            turnPage = "redirect:/pc/loadNoClassMembers";
         }
         model.addAttribute("noClassMemberArrageClassDiv2Style",style);
         model.addAttribute("errInfo",errInfo);

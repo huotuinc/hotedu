@@ -15,7 +15,7 @@
 <div style="min-height:834px">
     <div style=" background-color:#fff;">
         <div style=" background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" class="logoimg"/>
-            <ul class="nav">
+            <ul class="navi">
                 <li><a href="yun-index.html">首页</a></li>
                 <li><a href="#">公司简介</a></li>
                 <li class="active"><a href="yun-baomin.html">考证报名</a></li>
@@ -26,6 +26,7 @@
                 <li id="loginLi" style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)" th:text="${loginButton}"
                                                                       onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
                 </li>
+                <!--@thymesVar id="style" type="java.lang.String"-->
                 <li id="userLi" style="padding:0px;display: none" th:style="${style}">
                     <a id="memberLi" href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
                     <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>

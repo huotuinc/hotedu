@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <script type="text/javascript" src="js/jquery1.42.min.js"></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+    <script rel="stylesheet" type="text/javascript" src="js/indexuser.js"></script>
 </head>
 
 <body style=" background-color:#f0f0f0; background:url(images/banner2.jpg) no-repeat; background-size:cover;">
@@ -16,22 +17,24 @@
     <div style="background-color:#fff;">
         <div style="background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" class="logoimg"/>
             <ul class="navi">
-                <li><a href="index.html">首页</a></li>
-                <li><a href="index2.html">公司简介</a></li>
-                <li><a href="index3.html">考证报名</a></li>
-                <li><a href="about.html">师资力量</a></li>
-                <li><a href="about.html">教学视频</a></li>
-                <li><a href="about.html">考试指南</a></li>
-                <li><a href="about.html">招|应聘</a></li>
+                <li><a href="yun-index.html">首页</a></li>
+                <li><a href="javascript:void(0)">公司简介</a></li>
+                <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
+                <li><a href="javascript:void(0)">师资力量</a></li>
+                <li><a href="javascript:void(0)">教学视频</a></li>
+                <li><a href="javascript:void(0)">考试指南</a></li>
+                <li><a href="javascript:void(0)">招|应聘</a></li>
                 <li style="padding:0px 0px 0px 20px;display:none"><a href="javascript:void(0)"
-                                                                     onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">登录&nbsp;&nbsp;|</a>
+                                                                     onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">登录</a>
                 </li>
-                <li style="padding:0px;"><a href="#"><img class="lodingimgi" src="images/toux.png" width="100%"/></a>
+                <li id="userLi" style="padding:0px;display: none" th:style="${style}">
+                    <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
+                    <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
 
-                    <p style="display:none" class="zhizhen"><img src="images/ystoux.png" width="18px" height="7px"/></p>
-
-                    <p style="display:none" class="lbpo"><a href="#">HHSHIJIJ</a> <a href="#">个人中心</a> <a
-                            href="#">修改密码</a> <a href="#">退出</a></p>
+                    <p class="lbpo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
+                        <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
+                        <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
+                        <a href="#" th:href="@{/pc/login}">退出</a></p>
                 </li>
             </ul>
         </div>
@@ -43,22 +46,23 @@
     <div class="ysoo"><img class="toux" src="images/toux.png" width="80px" height="80px"/>
         <ul style="margin-left:115px; margin-top: -46px;">
             <li style="float:left;">
-                <p style="font-size:16px"><b th:text="'姓名：'+${agent.name}">姓名：杭州地区总代理</b></p>
+                <p style="font-size:16px"><b th:text="'姓名：'+${#authentication.name}">姓名：杭州地区总代理</b></p>
             </li>
         </ul>
         <p style="clear:both"></p>
         <ul class="bobox">
             <li class="lileft">
-                <p th:text="'号码：'+  (${agent.phoneNo}==null? '暂无':${agent.phoneNo})">号码：15063568971</p>
+                <!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
+                <p th:text="'号码：'+  (${#authentication.principal.phoneNo}==null?'暂无':${#authentication.principal.phoneNo})">号码：15063568971</p>
 
-                <p th:text="'注册时间：'+${#calendars.format(agent.registerDate,'yyyy-MM-dd')}">注册时间：2105.01.01</p>
+                <p th:text="'注册时间：'+${#calendars.format(#authentication.principal.registerDate,'yyyy-MM-dd')}">注册时间：2105.01.01</p>
             </li>
             <li class="newr liright">
                 <p>总人数：<b th:text="${totalMembers}">900</b></p>
 
-                <p>已发证：<b th:text="${agent.sendCertificateNumber}">400</b></p>
+                <p>已发证：<b th:text="${#authentication.principal.sendCertificateNumber}">400</b></p>
 
-                <p>剩余证：<b th:text="${agent.certificateNumber}-${agent.sendCertificateNumber}">200</b></p>
+                <p>剩余证：<b th:text="${#authentication.principal.certificateNumber}-${#authentication.principal.sendCertificateNumber}">200</b></p>
             </li>
         </ul>
     </div>
@@ -172,8 +176,10 @@
                                 <td th:text="${g.passed}?'是':'否'" title="">--</td>
                                 <td th:text="${g.haveLicense}?'是':'否'" title="">--</td>
                                 <td th:text="${g.theClass}==null? '未分配':${g.theClass.className}" title="">201504第一期</td>
-                                <td><a class="link-update" href="#">查看</a><br/>
-                                    <a class="link-update" href="#" th:href="@{/pc/delMember(id=${g.id},pageNo=${pageNo},keywords=${keywords},searchSort=${searchSort})}">删除</a>
+                                <td><a class="link-update" href="#"
+                                       th:href="@{/pc/detailMember(id=${g.id})}">查看</a><br/>
+                                    <a class="link-update" href="#"
+                                       th:href="@{/pc/delMember(id=${g.id},pageNo=${pageNo},keywords=${keywords},searchSort=${searchSort})}">删除</a>
                                 </td>
                             </tr>
                         </table>
@@ -182,6 +188,8 @@
                             <a href="#" th:href="@{/pc/searchMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
                             <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
                         </div>
+                        <span style="color:blue" th:text="${msgInfo}"/>
+                        <span style="color:red" th:text="${errInfo}"/>
                     </div>
                 </form>
             </div>
@@ -546,11 +554,11 @@
 
 <div id="noClassMemberArrageClassDiv" style="display:none" class="ystc">
     <div class="box-ys">
-        <P style="text-align:right;"><a href="#" onclick="$('#noClassMemberArrageClassDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+        <P style="text-align:right;"><a href="#"> <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
         <p style="height:20px"></p>
-        <p><button class="sign-in__button ys-form__button" name="button" type="submit" onclick="noClassMemberArrageClassNewForm()">新建</button></p>
+        <p><button class="sign-in__button ys-form__button" name="button" type="submit" onclick="noClassMemberArrageClassDiv()">新建</button></p>
         <script>
-            function noClassMemberArrageClassNewForm(){
+            function noClassMemberArrageClassDiv(){
                 $("#noClassMemberArrageClassDiv").hide();
                 $("#noClassMemberArrageClassDiv2").show();
             }
@@ -579,6 +587,7 @@
             </script>
             <p><button class="sign-in__button ys-form__button" name="button" type="submit">安排考试时间</button></p>
             <p>123456</p>
+            <span style="color:red;" th:text="${errInfo}"/>
             <p th:text="${errInfo}" align="center" style="color: red"></p>
         </form>
     </div>
