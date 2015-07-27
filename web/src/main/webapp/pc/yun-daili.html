@@ -81,7 +81,7 @@
                             <th width="10"></th>
                             <td><input title="" id="u109_input" type="checkbox" value="checkbox"/></td>
                             <td><input title="" class="ysss si" name="sub" value="确认收费" type="submit"/></td>
-                            <td><input title="" class="ysss si" name="sub" value="新增学员" type="submit"/></td>
+                            <td><input title="" class="ysss si" name="sub" value="新增学员" type="button" onclick="${#addMember}.style(display:block)"/></td>
                         </tr>
                     </table>
                     <table class="search-tab">
@@ -496,7 +496,7 @@
 
 
     <!--新增学员弹窗-->
-    <div style="display:none" class="ystci">
+    <div style="display:none" class="ystci" id="addMember">
         <div class="box-ys">
             <P align="right" style="margin:0px; padding:0px; float:right；"><a href="javascript:void(0)"
                                                                               onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
