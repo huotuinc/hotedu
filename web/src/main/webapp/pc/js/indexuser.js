@@ -16,7 +16,13 @@ $(function(){
 	$("#txt_memberName,#txt_memberphoneNo").focus(function(){
 		$("#add_Memberinfo").text("");
 	});
-	$("#u109_input").click(function(){
+	$("#u109_input").change(function(){
+		if(this.checked){
+			$(":input[name='memberInfo']").attr("checked",true);
+		}else{
+			$(":input[name='memberInfo']").attr("checked",false);
+		}
+
 	});
 
 })
