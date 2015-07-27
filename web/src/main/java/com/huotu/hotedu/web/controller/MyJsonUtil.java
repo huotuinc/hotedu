@@ -12,7 +12,7 @@ public class MyJsonUtil {
      * @param arrayList 需要转换的list
      * @return          String类型数据
      */
-    public String convertObjectToJsonBytes(ArrayList<Object> arrayList){
+    public String convertObjectToJsonBytes(ArrayList<Long> arrayList){
         String json = "";
         json += arrayList.get(0).toString();
         for(int i=1; i<arrayList.size(); i++){
@@ -26,11 +26,15 @@ public class MyJsonUtil {
      * @param json      需要转换的String
      * @return          ArrayList类型数据
      */
-    public ArrayList<Object> convertJsonBytesToArrayList(String json){
-        ArrayList<Object> arrayList = new ArrayList<>(20);
+    public ArrayList<Long> convertJsonBytesToArrayList(String json){
+        ArrayList<Long> arrayList = new ArrayList<Long>(20);
+        if(json.equals("")){
+            System.out.print("字符串为空");
+        }
         String[] stringArr= json.split(",");
         for(int i=0;i<stringArr.length;i++){
-            arrayList.add(stringArr[i]);
+            System.out.println("未分班学员的编号 " + Long.parseLong(stringArr[i]));
+            arrayList.add(Long.parseLong(stringArr[i]));
         }
         return arrayList;
     }
@@ -39,10 +43,7 @@ public class MyJsonUtil {
     public static void main(String[] args){
         MyJsonUtil m = new MyJsonUtil();
         String s = "5,4,3,2,1";
-        ArrayList<Object> arrayList =  m.convertJsonBytesToArrayList(s);
-        for(int i=0; i<arrayList.size(); i++){
-            System.out.println(arrayList.get(i));
-        }
+        ArrayList<Long> arrayList =  m.convertJsonBytesToArrayList(s);
         String json = m.convertObjectToJsonBytes(arrayList);
         System.out.println(json);
     }

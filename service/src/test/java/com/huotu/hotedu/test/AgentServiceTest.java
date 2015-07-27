@@ -89,7 +89,7 @@ public class AgentServiceTest {
         memberService.addMember(mb2);
         ClassTeam classTeam = new ClassTeam();
         classTeam.setClassName("nihao");
-        ArrayList<Object> list = new ArrayList<Object>(13);
+        ArrayList<Long> list = new ArrayList<Long>(13);
         agentService.arrangeClass(list, classTeam);
     }
 

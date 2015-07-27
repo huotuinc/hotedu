@@ -60,11 +60,11 @@ public class AgentControllerTest extends SpringWebTest{
         arrayList.add(1);
         arrayList.add(2);
         MyJsonUtil myJsonUtil = new MyJsonUtil();
-        String stringArrayList = myJsonUtil.convertObjectToJsonBytes(arrayList);
+//        String stringArrayList = myJsonUtil.convertObjectToJsonBytes(arrayList);
         mockMvc.perform(
                 post("pc/addSaveNewClassTeam")
                         .param("className", "1234")
-                        .param("arrayList", stringArrayList)
+//                        .param("arrayList", stringArrayList)
         ).andDo(print());
     }
 
@@ -82,11 +82,11 @@ public class AgentControllerTest extends SpringWebTest{
         classTeam.setClassName("nihao");;
         ClassTeam ct = agentService.addClassTeam(classTeam);
         MyJsonUtil myJsonUtil = new MyJsonUtil();
-        String stringArrayList = myJsonUtil.convertObjectToJsonBytes(arrayList);
+//        String stringArrayList = myJsonUtil.convertObjectToJsonBytes(arrayList);
         mockMvc.perform(
                 post("pc/addSaveOldClassTeam")
                         .param("classId", ct.getId().toString())
-                        .param("arrayList", stringArrayList)
+//                        .param("arrayList", stringArrayList)
         ).andDo(print());
     }
 

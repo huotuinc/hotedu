@@ -7,17 +7,17 @@
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
     <link rel="stylesheet" type="text/css" href="css/indexnew.css"/>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
-    <script type="text/javascript" src="js/jquery1.42.min.js"></script>
     <script type="text/javascript" src="js/jquery.min.js" th:src="@{/pc/js/jquery.min.js}"></script>
+    <script type="text/javascript" src="js/jquery1.42.min.js"></script>
     <script rel="stylesheet" type="text/javascript" src="js/baseValue.js" th:src="@{/pc/js/baseValue.js}"></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
     <script rel="stylesheet" type="text/javascript" src="js/indexuser.js" th:src="@{/pc/js/indexuser.js}"></script>
+    <script type="text/javascript" src="js/confirm.js"></script>
     <script rel="stylesheet" type="text/javascript">
         $(function(){
             $("#btn_addMember").click(addMember);
         });
     </script>
-
 </head>
 
 <body style=" background-color:#f0f0f0; background:url(images/banner2.jpg) no-repeat; background-size:cover;">
@@ -263,9 +263,31 @@
                                 <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
                                 <td><input title="" class="ysss" name="sub" value="安排班级" type="button" onclick="noClassMemberArrageClass()"/></td>
                                 <script>
-                                    function noClassMemberArrageClass(){
-                                        var $noClassMemberArrageClassDiv = $("#noClassMemberArrageClassDiv");
-                                        $noClassMemberArrageClassDiv.show();
+                                    function noClassMemberArrageClass() {
+                                        var str="";
+                                        var sum = 0;
+                                        $("input[name='checkboxNoClass']:checkbox").each(function(){
+                                            if($(this).attr("checked")){
+                                                if(sum==0)
+                                                    str += $(this).parent().parent().children().eq(1).text();
+                                                else
+                                                    str += ","+$(this).parent().parent().children().eq(1).text();
+                                                sum++;
+                                            }
+                                        });
+                                        if(sum==0){
+                                            check_noClassMember();
+                                        }
+                                        else{
+                                            var $arrayLis=$("#noClassMemberArrayLis");
+//                                            if($arrayLis.val()=="")
+                                                $arrayLis.val(str);
+                                            console.log(str);
+//                                            else
+//                                                $arrayLis.val($arrayLis.val()+","+str);
+                                            console.log($arrayLis.val());
+                                            $("#noClassMemberArrageClassDiv").show();
+                                        }
                                     }
                                 </script>
                             </tr>
@@ -298,71 +320,71 @@
                                     <th style="width:80px;">操作</th>
                                 </tr>
                                 <tr th:remove="all">
-                                    <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
-                                    <td>01</td>
+                                    <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">01</td>
                                     <td>小米</td>
                                     <td title="">杭州</td>
                                     <td>15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
                                 <tr th:remove="all">
-                                    <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
-                                    <td>01</td>
+                                    <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">01</td>
                                     <td>小米</td>
                                     <td title="">杭州</td>
                                     <td>15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
                                 <tr th:remove="all">
-                                    <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
-                                    <td>01</td>
+                                    <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">01</td>
                                     <td>小米</td>
                                     <td title="">杭州</td>
                                     <td>15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
                                 <tr th:remove="all">
-                                    <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
-                                    <td>01</td>
+                                    <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">01</td>
                                     <td>小米</td>
                                     <td title="">杭州</td>
                                     <td>15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
                                 <tr th:remove="all">
-                                    <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
-                                    <td>01</td>
+                                    <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">01</td>
                                     <td>小米</td>
                                     <td title="">杭州</td>
                                     <td>15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
                                 <tr th:remove="all">
-                                    <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
-                                    <td>01</td>
+                                    <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
+                                    <td> class="checkboxId"01</td>
                                     <td>小米</td>
                                     <td title="">杭州</td>
                                     <td>15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
                                 <tr th:remove="all">
-                                    <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
-                                    <td>0123456789</td>
+                                    <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">0123456789</td>
                                     <td>小米</td>
                                     <td title="">杭州</td>
                                     <td>15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
                                 <tr th:each="g:${allNoClassMembersList}">
-                                    <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
-                                    <td th:text="${g.id}">01</td>
+                                    <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId" th:text="${g.id}">01</td>
                                     <td th:text="${g.realName}">小米</td>
                                     <td th:text="${g.agent.area}">杭州</td>
                                     <td th:text="${g.phoneNo}">15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
                                 <tr style="display: none;">
-                                    <td><input title="noClassMember_hidden_text" type="text" id="noClassMember_hidden_text" value="all" th:value="${searchSort}"/></td>
+                                    <td><input title="" type="text" id="noClassMember_hidden_text" value="all" th:value="${searchSort}"/></td>
                                 </tr>
                                 <script type="text/javascript">
                                     $(document).ready(function () {
@@ -562,11 +584,11 @@
 
 <div id="noClassMemberArrageClassDiv" style="display:none" class="ystc">
     <div class="box-ys">
-        <P style="text-align:right;"><a href="#"> <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+        <P style="text-align:right;"><a href="#" onclick="$('#noClassMemberArrageClassDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
         <p style="height:20px"></p>
-        <p><button class="sign-in__button ys-form__button" name="button" type="submit" onclick="noClassMemberArrageClassDiv()">新建</button></p>
+        <p><button class="sign-in__button ys-form__button" name="button" type="submit" onclick="noClassMemberArrageClassNewForm()">新建</button></p>
         <script>
-            function noClassMemberArrageClassDiv(){
+            function noClassMemberArrageClassNewForm(){
                 $("#noClassMemberArrageClassDiv").hide();
                 $("#noClassMemberArrageClassDiv2").show();
             }
@@ -581,22 +603,21 @@
 
 <!--新建班级2-->
 
-<div id="noClassMemberArrageClassDiv2" style="display:none" class="ystc">
+<div id="noClassMemberArrageClassDiv2" style="display:none" th:style="${noClassMemberArrageClassDiv2Style}? 'display:block' : 'display:none'" class="ystc">
     <div class="box-ys">
         <form action="#" method="post" th:action="@{/pc/isClassNameExist}">
             <P style="text-align:right;"><a href="#"> <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
             <p style="height:20px"></p>
-            <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="className" placeholder="班级名称" type="text"/></p>
-            <p><button class="sign-in__button ys-form__button" name="button" type="submit" onclick="noClassMemberArrageClassDiv2()">保存</button></p>
+            <span style="display: none;"><input title="" type="text" value="" name="noClassMemberArrayLis" th:value="${noClassMemberArrayLis}" id="noClassMemberArrayLis" /></span>
+            <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="className" id="className" placeholder="班级名称" type="text"/></p>
+            <p><button class="sign-in__button ys-form__button" name="button" type="submit" onclick="noClassMemberArrageClassDiv2Click()">保存</button></p>
             <script>
                 function noClassMemberArrageClassDiv2(){
                     $("#noClassMemberArrageClassDiv2").hide();
                 }
             </script>
             <p><button class="sign-in__button ys-form__button" name="button" type="submit">安排考试时间</button></p>
-            <p>123456</p>
             <span style="color:red;" th:text="${errInfo}"/>
-            <p th:text="${errInfo}" align="center" style="color: red"></p>
         </form>
     </div>
 </div>

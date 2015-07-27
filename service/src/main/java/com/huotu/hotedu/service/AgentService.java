@@ -235,11 +235,12 @@ public class AgentService {
      * @param allNoClassMemberList  需要分班的成员
      * @param classTeam             分配的班级
      */
-    public void arrangeClass(ArrayList<Object> allNoClassMemberList,ClassTeam classTeam){
+    public void arrangeClass(ArrayList<Long> allNoClassMemberList,ClassTeam classTeam){
         Member mb = null;
-        for (Object x : allNoClassMemberList) {
-            mb = memberRepository.findOne((long)allNoClassMemberList.get((Integer) x));
+        for(int i=0; i<allNoClassMemberList.size();i++){
+            mb = memberRepository.findOne(allNoClassMemberList.get(i));
             mb.setTheClass(classTeam);
+            memberRepository.save(mb);
         }
     }
 

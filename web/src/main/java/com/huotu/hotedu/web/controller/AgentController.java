@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -39,17 +41,20 @@ public class AgentController {
      * Created by jiashubing on 2015/7/24.
      * 将学员保存到新建班级中
      * @param className     新建班级的名字
-     * @param arrayLis      复选框选中成员的id集合,Strring类型
+     * @param noClassMemberArrayLis      复选框选中成员的id集合,Strring类型
      * @param model         返回客户端集
      * @return              新建班级页面
      */
     @RequestMapping("/pc/addSaveNewClassTeam")
-    public String addSaveNewClassTeam(String className,String arrayLis,Model model){
+    public String addSaveNewClassTeam(String className,String noClassMemberArrayLis,Model model){
         String errInfo = "";
         String msgInfo = "";
-        String turnPage = "/pc/agentCenter";
+        String turnPage = "redirect:/pc/loadNoClassMembers";
+        noClassMemberArrayLis = URLDecoder.decode(noClassMemberArrayLis);
+        System.out.println("noClassMemberArrayLis = "+noClassMemberArrayLis +"className = "+className);
+
         MyJsonUtil myJsonUtil = new MyJsonUtil();
-        ArrayList<Object> arrayList = myJsonUtil.convertJsonBytesToArrayList(arrayLis);
+        ArrayList<Long> arrayList = myJsonUtil.convertJsonBytesToArrayList(noClassMemberArrayLis);
         if(arrayList==null || arrayList.isEmpty()){
             errInfo = "成员集合为空，没有需要安排分班的学员";
         } else if(className.equals("")){
@@ -79,9 +84,9 @@ public class AgentController {
     public String addSaveOldClassTeam(Long classId,String arrayLis,Model model){
         String errInfo = "";
         String msgInfo = "";
-        String turnPage = "/pc/agentCenter";
+        String turnPage = "redirect:/pc/loadNoClassMembers";
         MyJsonUtil myJsonUtil = new MyJsonUtil();
-        ArrayList<Object> arrayList = myJsonUtil.convertJsonBytesToArrayList(arrayLis);
+        ArrayList<Long> arrayList = myJsonUtil.convertJsonBytesToArrayList(arrayLis);
         if(arrayList==null || arrayList.isEmpty()){
             errInfo = "成员集合为空，没有需要安排分班的学员";
         } else {
@@ -109,6 +114,7 @@ public class AgentController {
                                      @RequestParam(required = false)String keywords,
                                      @RequestParam(required = false)String searchSort,
                                      @RequestParam(required = false)Integer pageNo,
+                                     @RequestParam(required = false)String arrayLis,
                                      @RequestParam(required = false)Boolean noClassMemberArrageClassDiv2Style,
                                      Model model){
         if(pageNo==null||pageNo<0){
@@ -131,17 +137,19 @@ public class AgentController {
         model.addAttribute("keywords", keywords);
         model.addAttribute("pageNo",pageNo);
         model.addAttribute("totalRecords", totalRecords);
+        model.addAttribute("arrayLis",arrayLis);
         model.addAttribute("totalPages",pages.getTotalPages());
-        model.addAttribute("noClassMemberArrageClassDiv2Style",noClassMemberArrageClassDiv2Style);
+        model.addAttribute("noClassMemberArrageClassDiv2Style",班级管理 安排分班到新建班级（可多选，如果没选成员警告);
 
         return "/pc/yun-daili";
     }
 
     @RequestMapping("/pc/isClassNameExist")
-    public String isClassNameExist(String className,Model model){
+    public String isClassNameExist(String className,String noClassMemberArrayLis,Model model){
         String errInfo = "";
         Boolean style= false;
         String turnPage = "";
+        System.out.println("noClassMemberArrayLis = "+noClassMemberArrayLis +"className = "+className);
         boolean flag=agentService.checkClassTeamByName(className);
         if(flag) turnPage = "redirect:/pc/addSaveNewClassTeam";
         else{
@@ -150,6 +158,8 @@ public class AgentController {
             turnPage = "redirect:/pc/loadNoClassMembers";
         }
         model.addAttribute("noClassMemberArrageClassDiv2Style",style);
+        model.addAttribute("className",className);
+        model.addAttribute("noClassMemberArrayLis", URLEncoder.encode(noClassMemberArrayLis));
         model.addAttribute("errInfo",errInfo);
         return  turnPage;
     }
