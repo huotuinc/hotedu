@@ -75,7 +75,7 @@ public class MemberController {
                     mb.setSex(sex);
                     mb.setPhoneNo(phoneNo);
                     mb.setLoginName(phoneNo);
-                    mb.setEnabled(false);
+                    mb.setEnabled(true);
                     mb.setRegisterDate(d);
                     mb.setApplyDate(d);
                     loginService.newLogin(mb,"123456");

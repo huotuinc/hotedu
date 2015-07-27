@@ -161,13 +161,15 @@ public class AgentService {
                     return cb.and(
                             cb.equal(root.get("agent").as(Agent.class), agent),
                             cb.isTrue(root.get("enabled").as(Boolean.class)),
-                            cb.isNull(root.get("theClass").as(ClassTeam.class))
+                            cb.isNull(root.get("theClass").as(ClassTeam.class)),
+                            cb.isTrue(root.get("payed").as(Boolean.class))
                     );
                 }else if("all".equals(searchSort)){
                     return cb.and(
                             cb.equal(root.get("agent").as(Agent.class), agent),
                             cb.isTrue(root.get("enabled").as(boolean.class)),
                             cb.isNull(root.get("theClass").as(ClassTeam.class)),
+                            cb.isTrue(root.get("payed").as(Boolean.class)),
                             cb.or(
                                     cb.like(root.get("realName").as(String.class),"%"+keywords+"%"),
                                     cb.like(root.get("phoneNo").as(String.class),"%"+keywords+"%"),
@@ -180,6 +182,7 @@ public class AgentService {
                                 cb.equal(root.get("agent").as(Agent.class), agent),
                                 cb.isTrue(root.get("enabled").as(boolean.class)),
                                 cb.isNull(root.get("theClass").as(ClassTeam.class)),
+                                cb.isTrue(root.get("payed").as(Boolean.class)),
                                 cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
                         );
                     }
@@ -188,6 +191,7 @@ public class AgentService {
                                 cb.equal(root.get("agent").as(Agent.class), agent),
                                 cb.isTrue(root.get("enabled").as(boolean.class)),
                                 cb.isNull(root.get("theClass").as(ClassTeam.class)),
+                                cb.isTrue(root.get("payed").as(Boolean.class)),
                                 cb.like(root.get(searchSort).as(String.class), "%" + keywords + "%")
                         );
                     }
@@ -237,11 +241,15 @@ public class AgentService {
      */
     public void arrangeClass(ArrayList<Long> allNoClassMemberList,ClassTeam classTeam){
         Member mb = null;
+        int memberNum = 0;
         for(int i=0; i<allNoClassMemberList.size();i++){
             mb = memberRepository.findOne(allNoClassMemberList.get(i));
             mb.setTheClass(classTeam);
+            memberNum ++;
             memberRepository.save(mb);
         }
+        classTeam.setMemberNum(memberNum);
+        classTeamRepository.save(classTeam);
     }
 
     /**
