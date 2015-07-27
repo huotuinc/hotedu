@@ -8,8 +8,16 @@
     <link rel="stylesheet" type="text/css" href="css/indexnew.css"/>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <script type="text/javascript" src="js/jquery1.42.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js" th:src="@{/pc/js/jquery.min.js}"></script>
+    <script rel="stylesheet" type="text/javascript" src="js/baseValue.js" th:src="@{/pc/js/baseValue.js}"></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
-    <script rel="stylesheet" type="text/javascript" src="js/indexuser.js"></script>
+    <script rel="stylesheet" type="text/javascript" src="js/indexuser.js" th:src="@{/pc/js/indexuser.js}"></script>
+    <script rel="stylesheet" type="text/javascript">
+        $(function(){
+            $("#btn_addMember").click(addMember);
+        });
+    </script>
+
 </head>
 
 <body style=" background-color:#f0f0f0; background:url(images/banner2.jpg) no-repeat; background-size:cover;">
@@ -71,12 +79,12 @@
         <div class="ysykone bg on" th:class="${navigation}=='bmxx'? 'ysykone bg on':'ysykone bg'"><a href="#" th:href="@{/pc/searchMembers}"><span>报名信息</span> </a></div>
         <div class="ysyktwo bg" th:class="${navigation}=='xxtz'? 'ysyktwo bg on':'ysyktwo bg'"><a href="#"><span>消息通知</span> </a></div>
         <div class="ysykthree bg" th:class="${navigation}=='bjgl'? 'ysykthree bg on':'ysykthree bg'"><a href="#" th:href="@{/pc/loadNoClassMembers}"><span>班级管理</span> </a></div>
-        <div class="ysykfour bg" th:class="${navigation}=='bygl'? 'ysykfour bg on':'ysykfour bg'"><a href="#"><span>毕业管理</span> </a></div>
+        <div class="ysykfour bg" th:class="${navigation}=='bygl'? 'ysykfour bg on':'ysykfour bg'"><a href="#" th:href="@{/pc/graduationMembers}"><span>毕业管理</span> </a></div>
     </div>
 
     <div class="ysthree">
         <!--报名信息-->
-        <div style="display:none;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
+        <div style="display:block;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
             <div style=" float: right; margin-right: 14px;margin-bottom: 6px;margin-top:5px;" class="search-content">
                 <form action="#" th:action="@{/pc/searchMembers}" method="post">
                     <p style="height:5px;"></p>
@@ -85,13 +93,13 @@
                             <th width="10"></th>
                             <td><input title="" id="u109_input" type="checkbox" value="checkbox"/></td>
                             <td><input title="" class="ysss si" name="sub" value="确认收费" type="submit"/></td>
-                            <td><input title="" class="ysss si" name="sub" value="新增学员" type="button" onclick="${#addMember}.style(display:block)"/></td>
+                            <td><input id="btn_newMember" title="" class="ysss si" name="sub" value="新增学员" type="button"/></td>
                         </tr>
                     </table>
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
-                            <td><select title="" name="searchSort" id=""
+                            <td><select title="" name="searchSort"
                                         style=" height:29px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
                                 <option value="all">全部</option>
                                 <option value="payed">交费状态</option>
@@ -503,8 +511,8 @@
 <div>
 
 
-    <!--新增学员弹窗-->
-    <div style="display:none" class="ystci" id="addMember">
+    <!--新增班级-->
+    <div style="display:none" class="ystci">
         <div class="box-ys">
             <P align="right" style="margin:0px; padding:0px; float:right；"><a href="javascript:void(0)"
                                                                               onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
@@ -549,7 +557,7 @@
         </div>
     </div>
 </div>
-<!--新增学员弹窗end-->
+<!--新增班级end-->
 <!--安排班级-->
 
 <div id="noClassMemberArrageClassDiv" style="display:none" class="ystc">
@@ -573,15 +581,15 @@
 
 <!--新建班级2-->
 
-<div id="noClassMemberArrageClassDiv2" style="display:none" th:style="${noClassMemberArrageClassDiv2Style}? 'display:block' : 'display:none'" class="ystc">
+<div id="noClassMemberArrageClassDiv2" style="display:none" class="ystc">
     <div class="box-ys">
         <form action="#" method="post" th:action="@{/pc/isClassNameExist}">
-            <P style="text-align:right;"><a href="#" onclick="$('#noClassMemberArrageClassDiv2').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+            <P style="text-align:right;"><a href="#"> <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
             <p style="height:20px"></p>
             <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="className" placeholder="班级名称" type="text"/></p>
-            <p><button class="sign-in__button ys-form__button" name="button" type="submit" onclick="noClassMemberArrageClassDiv2Click()">保存</button></p>
+            <p><button class="sign-in__button ys-form__button" name="button" type="submit" onclick="noClassMemberArrageClassDiv2()">保存</button></p>
             <script>
-                function noClassMemberArrageClassDiv2Click(){
+                function noClassMemberArrageClassDiv2(){
                     $("#noClassMemberArrageClassDiv2").hide();
                 }
             </script>
@@ -595,41 +603,41 @@
 
 <!--新建班级2end-->
 
-<!--弹窗1-->
+<!--新增学员弹窗-->
 
-<div style="display:none" class="ystci">
+<div style="display:none" class="ystci" id="addMember">
     <div class="box-ys">
         <P align="right" style="margin:0; padding:0; float:right;"><a href="javascript:void(0)"
                                                                           onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
-            <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+            <FONT id="closeAddMember" style="color:#111; font-size:20px;">×</FONT></a></P>
 
         <div class="ys500 ystx">
             <p>
-                <input title="" class="ysw500 sign-in__field ys-form__field" name="姓名" placeholder="姓名"
-                       type="text"/>
+                <input id="txt_memberName" title="" class="ysw500 sign-in__field ys-form__field" name="realName" placeholder="姓名" type="text"/>
             </p>
 
-            <p class="ysdx">&nbsp;&nbsp;&nbsp;&nbsp;性别：
-                <input title="" type="radio"/>
+            <p id="radio_memberSex" class="ysdx">&nbsp;&nbsp;&nbsp;&nbsp;性别：
+                <input title="" type="radio" name="sex" checked="checked" value="1"/>
                 &nbsp;男&nbsp;&nbsp;
-                <input title="" type="radio"/>
+                <input title="" type="radio" name="sex" value="0"/>
                 &nbsp;女&nbsp;&nbsp;</p>
 
             <p>
-                <input title="" class="ysw500 sign-in__field ys-form__field" id="" name="真实手机号" placeholder="真实手机号"
+                <input id="txt_memberphoneNo" title="" class="ysw500 sign-in__field ys-form__field" name="phoneNo" placeholder="真实手机号"
                        type="text"/>
             </p>
 
             <p style="text-align:center;">
-                <button class="ysw500 sign-in__button ys-form__button" name="button" type="submit">
+                <button id="btn_addMember" class="ysw500 sign-in__button ys-form__button" name="button" type="button">
                 提交
                 </button>
             </p>
+            <span id="add_Memberinfo" style="color:#FF3A00;padding-left:10px;">错误信息提示</span>
         </div>
     </div>
 </div>
 
-<!--弹窗1end-->
+<!--新增学员end-->
 
 <div id="asaimsg" class="AsaiDivShow">
     <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"

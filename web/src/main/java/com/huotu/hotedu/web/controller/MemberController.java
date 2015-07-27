@@ -3,6 +3,7 @@ package com.huotu.hotedu.web.controller;
 import com.huotu.hotedu.entity.Agent;
 import com.huotu.hotedu.entity.Login;
 import com.huotu.hotedu.entity.Member;
+import com.huotu.hotedu.entity.Result;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.service.MemberService;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 
@@ -111,13 +113,6 @@ public class MemberController {
             }
         }else if(user instanceof Agent) {
             return "redirect:/pc/searchMembers";
-//            turnPage = "/pc/yun-daili";
-//            Page<Member> pages=memberService.searchMembers((Agent)user,0,PAGE_SIZE,null,null);
-//            model.addAttribute("allMemberList",pages);
-//            model.addAttribute("agent",user);
-//            model.addAttribute("totalRecords",pages.getTotalElements());
-//            model.addAttribute("navigation","bmxx");
-
         }
         model.addAttribute("errInfo",errInfo);
         model.addAttribute("style",style);
@@ -193,6 +188,79 @@ public class MemberController {
         model.addAttribute("searchSort",type);
         return returnPage;
     }
+
+
+    /**
+     * Created by shiliting on 2015/7/27
+     * 毕业管理
+     * @param agent     当前代理商
+     * @param pageNo    当前页面
+     * @param keywords  搜索关键字
+     * @param type      搜索类型
+     * @param model     参数集合
+     * @return          yun-daili.html
+     */
+    @PreAuthorize("hasRole('AGENT')")
+    @RequestMapping("/pc/graduationMembers")
+    public String graduationMembers(@AuthenticationPrincipal Agent agent,
+                                    @RequestParam(required = false,value = "pageNo")Integer pageNo,
+                                    @RequestParam(required = false,value = "keywords")String keywords,
+                                    @RequestParam(required = false,value = "searchSort") String type,
+                                    Model model) {
+        String turnPage = "/pc/yun-daili";
+        if(pageNo==null||pageNo<0){
+            pageNo=0;
+        }
+        model.addAttribute("agent",agent);
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("keywords", keywords);
+        model.addAttribute("searchSort",type);
+        model.addAttribute("totalMembers",memberService.searchMembers(agent,pageNo,PAGE_SIZE).getTotalElements());
+        model.addAttribute("navigation","bygl");
+        return turnPage;
+    }
+
+
+
+
+
+    @PreAuthorize("hasRole('AGENT')")
+    @RequestMapping("/pc/addMembers")
+    @ResponseBody
+    public Result graduationMembers(@AuthenticationPrincipal Agent agent, String realName, int sex,String phoneNo, Model model) {
+        Result result=new Result();
+        if(memberService.isPhoneNoExist(phoneNo)){
+            result.setStatus(1);
+            result.setMessage("手机号已被注册！");
+            return result;
+        }
+        Member member=new Member();
+        member.setPhoneNo(phoneNo);
+        member.setRegisterDate(new Date());
+        member.setApplyDate(new Date());
+        member.setRealName(realName);
+        member.setAgent(agent);
+        member.setSex(sex);
+        memberService.addMember(member);
+        result.setStatus(0);
+        result.setMessage("注册成功");
+        return result;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Created by jiashubing on 2015/7/24.

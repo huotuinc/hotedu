@@ -19,4 +19,5 @@ public interface MemberRepository  extends JpaRepository<Member,Long>,ClassicsRe
     Member findByPhoneNo(String phoneNo);
 
     Member findByLoginName(String loginName);
+
 }

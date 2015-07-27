@@ -7,53 +7,55 @@ $(function(){
 		$(this).fadeOut("fast");
 		$(".zhizhen").fadeOut("fast");
 	});
-})
-function isShowMember(){
-	addCookie("memberId","123456dd",300); //测试，向服务器发送数据
-	var sessionId=getCookie("memberId");  //测试，从本地获取cookie值
-	console.log(sessionId);               //输出cookie值
-	if(sessionId!=null) {
-		$.ajax({
-			url: path + "/pc/checkMemberLogin",
-			type: "get",
-			data: {"MemberId": sessionId},
-			dataType: "json",
-			success: function (result) {
-				if(result.status==1) {
-					console.log(path + result.body.pictureUri);
-					console.log(result.body.realName);
-					console.log(result.body.loginName);
-					$li = '<li id="memberLi" style="padding:0px;">' +
-						'<a href="#"><img class="lodingimg" src=' + path + result.body.pictureUri + ' width="100%"/></a>' +
-						'<p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>' +
-						'<p class="lbpo"> <a href="#" th:href="@{/pc/person}">' + result.body.loginName + '</a>' +
-						'<a href="#">个人中心</a> <a href="#">修改密码</a>' +
-						'<a href="#">退出</a>' +
-						'</p>' +
-						'</li>';
-					$(".nav").append($li);//添加会员Li
-					$("#loginLi").hide();
-				}else{
-					console.log("没有用户！");
-				}
+	$("#btn_newMember").click(function(){
+		$("#addMember").show();
+	});
+	$("#closeAddMember").click(function(){
+		$("#addMember").hide();
+	});
+	$("#txt_memberName,#txt_memberphoneNo").focus(function(){
+		$("#add_Memberinfo").text("");
+	});
+	$("#u109_input").click(function(){
+	});
 
-			},
-			error: function () {
-				alert("系统异常,获取用户失败");
-			}
-		});
+})
+function addMember(){
+	var reg=/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+	var realName=$("#txt_memberName").val().trim();
+	var sex=$(":input[name='sex']:checked").val();
+	var phoneNo=$("#txt_memberphoneNo").val();
+	if(realName==""){
+		//alert("用户名不能为空");
+		$("#add_Memberinfo").text("用户名不能为空");
+		return false;
 	}
+	console.log(reg+" "+phoneNo);
+	if(!reg.test(phoneNo)){
+		//alert("手机号码格式不正确！");
+		$("#add_Memberinfo").text("手机号码格式不正确!");
+		return false;
+	}
+
+	$.ajax({
+		url:path+"/pc/addMembers",
+		type:"post",
+		data:{"realName":realName,"sex":sex,"phoneNo":phoneNo},
+		dataType:"json",
+		success:function(result){
+			if(result.status==0){
+				alert(result.message);
+				$("#addMember").hide();
+			}else if(result.status==1){
+				//alert(result.message);
+				$("#add_Memberinfo").text(result.message);
+			}
+		},
+		error:function(){
+			alert("系统异常,添加学员失败");
+		}
+	});
 }
-//function showMemberBody(){
-//	$(document).on("mouseenter","#memberLi",function(){
-//		$(this).children("p").fadeIn("fast");
-//		$(".zhizhen").fadeIn("fast");
-//	});
-//	$(document).on("mouseleave",".lbpo",function(){
-//		$(this).fadeOut("fast");
-//		$(".zhizhen").fadeOut("fast");
-//	});
-//}
 
 
 
