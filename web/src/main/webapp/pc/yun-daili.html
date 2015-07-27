@@ -84,7 +84,7 @@
 
     <div class="ysthree">
         <!--报名信息-->
-        <div style="display:block;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
+        <div style="display:none;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
             <div style=" float: right; margin-right: 14px;margin-bottom: 6px;margin-top:5px;" class="search-content">
                 <form action="#" th:action="@{/pc/searchMembers}" method="post">
                     <p style="height:5px;"></p>
@@ -260,13 +260,24 @@
                         <table style="float: left;margin-right:520px;" class="search-tab">
                             <tr>
                                 <th width="10"></th>
-                                <td><input title="" class="u109_input" type="checkbox" value="checkbox"/></td>
+                                <td><input title="" id="noClassCheckAll" type="checkbox" value="checkbox"/></td>
+                                <script>
+                                    $("#noClassCheckAll").click(
+                                            function(){
+                                                if(this.checked){
+                                                    $("input[name='checkboxNoClass']").each(function(){this.checked=true;});
+                                                }else{
+                                                    $("input[name='checkboxNoClass']").each(function(){this.checked=false;});
+                                                }
+                                            }
+                                    );
+                                </script>
                                 <td><input title="" class="ysss" name="sub" value="安排班级" type="button" onclick="noClassMemberArrageClass()"/></td>
                                 <script>
                                     function noClassMemberArrageClass() {
                                         var str="";
                                         var sum = 0;
-                                        $("input[name='checkboxNoClass']:checkbox").each(function(){
+                                        $("input[@name='checkboxNoClass']:checkbox").each(function(){
                                             if($(this).attr("checked")){
                                                 if(sum==0)
                                                     str += $(this).parent().parent().children().eq(1).text();
@@ -282,10 +293,10 @@
                                             var $arrayLis=$("#noClassMemberArrayLis");
 //                                            if($arrayLis.val()=="")
                                                 $arrayLis.val(str);
-//                                            console.log(str);
+                                            console.log(str);
 //                                            else
 //                                                $arrayLis.val($arrayLis.val()+","+str);
-//                                            console.log($arrayLis.val());
+                                            console.log($arrayLis.val());
                                             $("#noClassMemberArrageClassDiv").show();
                                         }
                                     }
@@ -361,7 +372,7 @@
                                 </tr>
                                 <tr th:remove="all">
                                     <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
-                                    <td> class="checkboxId"01</td>
+                                    <td class="checkboxId">01</td>
                                     <td>小米</td>
                                     <td title="">杭州</td>
                                     <td>15236699696</td>
