@@ -318,6 +318,13 @@ public class MemberController {
     }
 
 
+    /**
+     * Created by jiashubing on 2015/7/28.
+     * 查看个人详细信息时确认交费
+     * @param checkPayLis    学员id集合
+     * @param model          返回客户端集合
+     * @return
+     */
     @RequestMapping("/pc/checkPayList")
     public String checkPayList(String checkPayLis,Model model){
         String turnPage = "redirect:/pc/searchMembers";
