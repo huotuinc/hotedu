@@ -266,7 +266,7 @@ public class MemberController {
 
     /**
      * Created by jiashubing on 2015/7/24.
-     * 查看学员信息详情
+     * 查看学员信息详情（报名信息）
      * @param id    学员id
      * @param model 返回值
      * @return      查看学员个人详细信息页面
