@@ -115,26 +115,36 @@ $(document).ready(function () {
 //Confirm函数的在这个js里面定义，第三个功能为点击确定后的功能
 //$(h).parents().children().eq(3)[0]就是获取到了同td下的第三个孩子 .find()不能准确找到 .next()也选不中，这里用前台调试
 //.click() 就是点击当前链接的效果
-function check_del(h) {
-    $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
-       // console.log($(h).parents().children().find(".real-delete")[0]);
-      //  $(h).parents().children().find(".real-delete")[0].click();
-       // alert("删除前");
-        //$(h).parents().children().eq(3)[0].click();
-        $(h).siblings(".real-delete")[0].click();
-        console.log($(h).siblings(".real-delete")[0]);
-       // alert("删除后");
-    });
-}
-
-function check_save(h) {
-    $.MsgBox.Confirm("温馨提示", "请选择需要安排分班的的学员请选择", function () {
-       // $(h).parent().parent().parent().parent().parent().parent().parent().submit();
-        $(h).parents('.myform').submit();
-    });
-    // $.MsgBox.Confirm("温馨提示", "即将保存内容，确定继续吗？", function () { $(h).parents('#myform').sumbit()});
-}
+//function check_del(h) {
+//    $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
+//       // console.log($(h).parents().children().find(".real-delete")[0]);
+//      //  $(h).parents().children().find(".real-delete")[0].click();
+//       // alert("删除前");
+//        //$(h).parents().children().eq(3)[0].click();
+//        $(h).siblings(".real-delete")[0].click();
+//        console.log($(h).siblings(".real-delete")[0]);
+//       // alert("删除后");
+//    });
+//}
+//
+//function check_save(h) {
+//    $.MsgBox.Confirm("温馨提示", "请选择需要安排分班的的学员请选择", function () {
+//       // $(h).parent().parent().parent().parent().parent().parent().parent().submit();
+//        $(h).parents('.myform').submit();
+//    });
+//    // $.MsgBox.Confirm("温馨提示", "即将保存内容，确定继续吗？", function () { $(h).parents('#myform').sumbit()});
+//}
 
 function check_noClassMember() {
     $.MsgBox.Alert("温馨提示", "请选择需要安排分班的的学员！");
+}
+
+function check_payMember() {
+    $.MsgBox.Alert("温馨提示", "请选择需要确认缴费的的学员！");
+}
+
+function check_payEnter(h) {
+    $.MsgBox.Confirm("温馨提示", "确认要将选中学员的状态改为已交费吗？", function () {
+        $("#checkPayLisForm").submit();
+    });
 }
