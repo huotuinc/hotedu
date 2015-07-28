@@ -22,7 +22,6 @@ $(function(){
 		}else{
 			$(":input[name='memberInfo']").attr("checked",false);
 		}
-
 	});
 
 })
