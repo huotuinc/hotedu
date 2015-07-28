@@ -9,8 +9,8 @@
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
-    <script rel="stylesheet" type="text/javascript" src="js/baseValue.js" th:src="@{/pc/js/baseValue.js}"></script>
-    <script rel="stylesheet" type="text/javascript" src="js/indexuser.js" th:src="@{/pc/js/indexuser.js}"></script>
+    <script rel="stylesheet" type="text/javascript" src="js/baseValue.js"></script>
+    <script rel="stylesheet" type="text/javascript" src="js/indexuser.js"></script>
     <script type="text/javascript" src="js/confirm.js"></script>
     <script rel="stylesheet" type="text/javascript">
         $(function(){
@@ -453,7 +453,7 @@
 
         <!--毕业管理-->
 
-        <div style="display:none" class="main-wrapi">
+        <div style="display:none" th:style="${navigation}=='bygl'? 'display:block;':'display:none;'" class="main-wrapi">
             <div style="float: right;width:1000px;margin-bottom: 6px;" class="search-content">
                 <form action="#" method="post">
                     <p style="height:5px;"></p>

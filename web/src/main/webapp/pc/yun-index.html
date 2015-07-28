@@ -25,7 +25,7 @@
             <li id="loginLi" style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)" th:text="${msgInfo}"
                                                                   onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
             </li>
-            <li id="userLi" style="padding:0px;" th:style="${style}">
+            <li id="userLi" style="padding:0px;display:none" th:style="${style}">
                 <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
                 <p class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
 
