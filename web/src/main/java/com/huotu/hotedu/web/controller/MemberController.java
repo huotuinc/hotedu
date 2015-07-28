@@ -48,6 +48,17 @@ public class MemberController {
     }
 
 
+    /**
+     * Created by cwb on 2015/7/21.
+     * 学员报名、注册
+     * @param realName
+     * @param sex
+     * @param phoneNo
+     * @param areaId
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/pc/register")
     public String register(String realName,int sex,String phoneNo,String areaId,Model model) throws Exception {
         String errInfo = "";
@@ -223,27 +234,35 @@ public class MemberController {
     }
 
 
-
-
-
+    /**
+     * Created by shiliting on 2015/7/27
+     * 代理商新增学员
+     * @param agent
+     * @param realName
+     * @param sex
+     * @param phoneNo
+     * @return
+     */
     @PreAuthorize("hasRole('AGENT')")
     @RequestMapping("/pc/addMembers")
     @ResponseBody
-    public Result graduationMembers(@AuthenticationPrincipal Agent agent, String realName, int sex,String phoneNo, Model model) {
+    public Result graduationMembers(@AuthenticationPrincipal Agent agent, String realName, int sex,String phoneNo) {
         Result result=new Result();
         if(memberService.isPhoneNoExist(phoneNo)){
             result.setStatus(1);
             result.setMessage("手机号已被注册！");
             return result;
         }
-        Member member=new Member();
-        member.setPhoneNo(phoneNo);
-        member.setRegisterDate(new Date());
-        member.setApplyDate(new Date());
-        member.setRealName(realName);
-        member.setAgent(agent);
-        member.setSex(sex);
-        memberService.addMember(member);
+        Member mb = new Member();
+        Date d = new Date();
+        mb.setAgent(agent);
+        mb.setRealName(realName);
+        mb.setSex(sex);
+        mb.setPhoneNo(phoneNo);
+        mb.setLoginName(phoneNo);
+        mb.setRegisterDate(d);
+        mb.setApplyDate(d);
+        loginService.newLogin(mb,"123456");
         result.setStatus(0);
         result.setMessage("注册成功");
         return result;

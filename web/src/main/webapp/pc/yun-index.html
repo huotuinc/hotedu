@@ -3,17 +3,17 @@
 <head>
     <meta charset="utf-8"/>
     <title>云商学院</title>
-    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/pc/css/common.css}"/>
-    <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/pc/css/index.css}"/>
-    <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/pc/css/indexnew.css}"/>
-    <script type="text/javascript" src="js/jquery-1.7.2.min.js" th:src="@{/pc/js/jquery-1.7.2.min.js}"></script>
-    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" th:src="@{/pc/js/jquery.SuperSlide.2.1.1.js}"></script>
-    <script rel="stylesheet" type="text/javascript" src="js/cookie_util.js" th:src="@{/pc/js/cookie_util.js}"></script>
-    <script rel="stylesheet" type="text/javascript" src="js/baseValue.js" th:src="@{/pc/js/baseValue.js}"></script>
-    <script rel="stylesheet" type="text/javascript" src="js/indexuser.js" th:src="@{/pc/js/indexuser.js}"></script>
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css" />
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js" ></script>
+    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" ></script>
+    <script rel="stylesheet" type="text/javascript" src="js/cookie_util.js" ></script>
+    <script rel="stylesheet" type="text/javascript" src="js/baseValue.js" ></script>
+    <script rel="stylesheet" type="text/javascript" src="js/indexuser.js" ></script>
 </head>
 <body>
-<div style="background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" th:src="@{/pc/images/logo.png}" class="logoimg"/>
+<div style="background-color:#fff;" class="headeri"><img src="images/logo.png" class="logoimgi"/>
         <ul class="navi">
             <li class="active"><a href="yun-index.html">首页</a></li>
             <li><a href="#">公司简介</a></li>
@@ -27,7 +27,7 @@
             </li>
             <li id="userLi" style="padding:0px;display: none" th:style="${style}">
                 <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
-                <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+                <p class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
 
                 <p class="lbpo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
                 <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
