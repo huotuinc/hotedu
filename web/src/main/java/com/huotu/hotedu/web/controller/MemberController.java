@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -267,21 +266,6 @@ public class MemberController {
         result.setMessage("注册成功");
         return result;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * Created by jiashubing on 2015/7/24.

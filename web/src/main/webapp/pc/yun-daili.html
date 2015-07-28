@@ -203,7 +203,7 @@
                             </tr>
 
                             <tr th:each="g:${allMemberList}" >
-                                <td><input title="" type="checkbox" value="checkbox" name="memberInfo"/></td>
+                                <td><input title="" type="checkbox" value="checkbox" name="memberInfo" th:value="${g.id}"/></td>
                                 <td th:text="${g.id}">01</td>
                                 <td th:text="${g.realName}" title="">女女女</td>
                                 <td th:text="${g.agent.area}" title="">杭州</td>
