@@ -262,7 +262,7 @@ public class AgentService {
         return classTeamRepository.findAll(new Specification<ClassTeam>() {
             @Override
             public Predicate toPredicate(Root<ClassTeam> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return cb.and(cb.equal(root.get("agent").as(Agent.class), agent), cb.isNotNull(root.get("exam").as(Exam.class)));
+                return cb.and(cb.equal(root.get("agent").as(Agent.class), agent), cb.isNull(root.get("exam").as(Exam.class)));
             }
         });
     }
