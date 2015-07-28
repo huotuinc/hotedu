@@ -99,15 +99,17 @@
                     <table style="float: right;margin-top: -31px;" class="search-tab">
                         <tr>
                             <th width="10"></th>
-                            <td><select title="" name="searchSort"
+                            <td><select id="sel_searchMember" title="" name="searchSort"
                                         style=" height:29px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
                                 <option value="all">全部</option>
                                 <option value="payed">交费状态</option>
                                 <option value="passed">考试状态</option>
                                 <option value="haveLicense">领证状态</option>
                             </select></td>
-                            <td><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字"
-                                       name="keywords" value="" id="" type="text"/></td>
+                            <td>
+                                <input id="input_search1" style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字"
+                                       name="keywords" th:value="${keywords}" value="" type="text"/>
+                            </td>
                             <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
@@ -203,7 +205,7 @@
                             </tr>
 
                             <tr th:each="g:${allMemberList}" >
-                                <td><input title="" type="checkbox" value="checkbox" name="memberInfo" th:value="${g.id}"/></td>
+                                <td><input title="" type="checkbox" value="checkbox" name="memberInfo"/></td>
                                 <td th:text="${g.id}">01</td>
                                 <td th:text="${g.realName}" title="">女女女</td>
                                 <td th:text="${g.agent.area}" title="">杭州</td>
