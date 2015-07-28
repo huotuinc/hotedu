@@ -186,7 +186,7 @@
                                 <td><a class="link-update" href="#"
                                        th:href="@{/pc/detailMember(id=${g.id})}">查看</a><br/>
                                     <a class="link-update" href="#"
-                                       th:href="@{/pc/delMember(id=${g.id},pageNo=${pageNo},keywords=${keywords},searchSort=${searchSort})}">删除</a>
+                                       th:if="${!g.payed}" th:href="@{/pc/delMember(id=${g.id},pageNo=${pageNo},keywords=${keywords},searchSort=${searchSort})}">删除</a>
                                 </td>
                             </tr>
                         </table>
