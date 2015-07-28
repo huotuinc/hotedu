@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -269,7 +271,7 @@ public class MemberController {
      * @param model 返回值
      * @return      查看学员个人详细信息页面
      */
-    @RequestMapping("pc/detailMember")
+    @RequestMapping("/pc/detailMember")
     public String detailMember(Long id,Model model)
     {
         String errInfo = "";
@@ -282,19 +284,19 @@ public class MemberController {
             model.addAttribute("mb",mb);
         }
 
-        model.addAttribute("errInfo",errInfo);
+        model.addAttribute("errInfo", errInfo);
         return turnPage;
     }
 
 
     /**
      * Created by jiashubing on 2015/7/24.
-     * 确认交费
+     * 查看个人详细信息时确认交费
      * @param id    学员id
      * @param model 返回值
      * @return
      */
-    @RequestMapping("pc/checkPay")
+    @RequestMapping("/pc/checkPay")
     public String checkPay(Long id,Model model)
     {
         String errInfo = "";
@@ -312,6 +314,15 @@ public class MemberController {
         return turnPage;
     }
 
+
+    @RequestMapping("/pc/checkPayList")
+    public String checkPayList(String checkPayLis,Model model){
+        String turnPage = "redirect:/pc/searchMembers";
+        MyJsonUtil myJsonUtil = new MyJsonUtil();
+        ArrayList<Long> arrayList = myJsonUtil.convertJsonBytesToArrayList(checkPayLis);
+        memberService.checkPayList(arrayList);
+        return turnPage;
+    }
 
 
 }

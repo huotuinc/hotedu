@@ -11,6 +11,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -70,32 +71,32 @@ public class MemberService {
         return memberRepository.findAll(new Specification<Member>() {
             @Override
             public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if ("".equals(keyword)||keyword==null) {
+                if ("".equals(keyword) || keyword == null) {
                     return cb.and(cb.equal(root.get("agent").as(Agent.class), agent),
                             cb.isTrue(root.get("enabled").as(boolean.class))
                     );
-                }else if("all".equals(type)){
+                } else if ("all".equals(type)) {
                     Join<Member, ClassTeam> join = root.join(root.getModel().getSingularAttribute("theClass", ClassTeam.class), JoinType.LEFT);//左连接
                     return cb.and(
                             cb.equal(root.get("agent").as(Agent.class), agent),
                             cb.isTrue(root.get("enabled").as(boolean.class)),
                             cb.or(
-                                    cb.like(root.get("realName").as(String.class),"%"+keyword+"%"),
-                                    cb.like(root.get("phoneNo").as(String.class),"%"+keyword+"%"),
-                                    cb.like(root.get("agent").get("area").as(String.class),"%"+keyword+"%"),
-                                    cb.like(join.get("className").as(String.class),"%"+keyword+"%")
+                                    cb.like(root.get("realName").as(String.class), "%" + keyword + "%"),
+                                    cb.like(root.get("phoneNo").as(String.class), "%" + keyword + "%"),
+                                    cb.like(root.get("agent").get("area").as(String.class), "%" + keyword + "%"),
+                                    cb.like(join.get("className").as(String.class), "%" + keyword + "%")
                             )
                     );
-                }else{
+                } else {
                     return cb.and(
                             cb.equal(root.get("agent").as(Agent.class), agent),
                             cb.isTrue(root.get("enabled").as(boolean.class)),
-                            cb.equal(root.get(type).as(boolean.class),"是".equals(keyword)? true:false)
+                            cb.equal(root.get(type).as(boolean.class), "是".equals(keyword) ? true : false)
                     );
 
                 }
             }
-        },new PageRequest(pageNo,pageSize));
+        }, new PageRequest(pageNo, pageSize));
     }
 
 
@@ -119,7 +120,8 @@ public class MemberService {
     }
 
     /**
-     * 确认交费
+     *  Created by jiashubing on 2015/7/24.
+     * 单个学员确认交费
      * @param id 学员id
      */
     public void checkPay(Long id){
@@ -128,6 +130,22 @@ public class MemberService {
         mb.setPayed(true);
         mb.setPayDate(d);
         memberRepository.save(mb);
+    }
+
+    /**
+     *  Created by jiashubing on 2015/7/27.
+     *  多个学员确认缴费
+     * @param arrayList 学员id集合
+     */
+    public void checkPayList(ArrayList<Long> arrayList){
+        Member mb = null;
+        Date d = new Date();
+        for(int i=0; i<arrayList.size();i++){
+            mb = memberRepository.findOne(arrayList.get(i));
+            mb.setPayed(true);
+            mb.setPayDate(d);
+            memberRepository.save(mb);
+        }
     }
 
     /**
