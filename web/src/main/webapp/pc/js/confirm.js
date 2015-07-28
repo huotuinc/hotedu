@@ -143,8 +143,22 @@ function check_payMember() {
     $.MsgBox.Alert("温馨提示", "请选择需要确认缴费的的学员！");
 }
 
-function check_payEnter(h) {
+function check_payEnter() {
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员的状态改为已交费吗？", function () {
         $("#checkPayLisForm").submit();
+    });
+}
+
+function check_arageNewClass() {
+    $.MsgBox.Confirm("温馨提示", "确认要将选中学员安排到新建班级中吗？", function () {
+        $("#noClassMemberArrageClassDiv2").hide();
+        $("#noClassMemberArrageClassDiv2Form").submit();
+    });
+}
+
+function check_arrageExistClass() {
+    $.MsgBox.Confirm("温馨提示", "确认要将选中学员安排到选中班级中吗？", function () {
+        $("#existClassDiv").hide();
+        $("#existClassDivForm").submit();
     });
 }

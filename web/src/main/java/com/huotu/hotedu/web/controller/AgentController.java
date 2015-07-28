@@ -17,6 +17,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -41,7 +42,6 @@ public class AgentController {
     /**
      * Created by jiashubing on 2015/7/24.
      * 将学员保存到新建班级中
-     *
      * @param className             新建班级的名字
      * @param noClassMemberArrayLis 复选框选中成员的id集合,Strring类型
      * @param model                 返回客户端集
@@ -142,6 +142,8 @@ public class AgentController {
         model.addAttribute("totalRecords", totalRecords);
         model.addAttribute("totalPages", pages.getTotalPages());
         model.addAttribute("noClassMemberArrageClassDiv2Style", noClassMemberArrageClassDiv2Style);
+        model.addAttribute("existClassDivStyle",false);
+        model.addAttribute("noClassMemberArrageClassDivStyle",false);
 
         return "/pc/yun-daili";
     }
@@ -149,7 +151,6 @@ public class AgentController {
     /**
      * Created by jiashubing on 2015/7/24.
      * 判断新建班级的名称是否已经存在
-     *
      * @param className             新建班级的名字
      * @param noClassMemberArrayLis 复选框选中成员的id集合,Strring类型
      * @param model                 返回客户端集
@@ -171,8 +172,41 @@ public class AgentController {
         }
         model.addAttribute("noClassMemberArrageClassDiv2Style", style);
         model.addAttribute("className", className);
-        model.addAttribute("noClassMemberArrayLis", URLEncoder.encode(noClassMemberArrayLis,"UTF-8"));
+        model.addAttribute("noClassMemberArrayLis", URLEncoder.encode(noClassMemberArrayLis, "UTF-8"));
         model.addAttribute("errInfo", errInfo);
+        return turnPage;
+    }
+
+    /**
+     * Created by jiashubing on 2015/7/28.
+     * 查找当前代理商已有班级
+     * @param agent     当前代理商
+     * @param model     返回客户端集
+     * @return          重定向到/pc/loadNoClassMembers
+     */
+    @RequestMapping("/pc/findExistClassAll")
+    public String findExistClassAll(@AuthenticationPrincipal Agent agent,
+                                    @RequestParam(required = false) String keywords,
+                                    @RequestParam(required = false) String searchSort,
+                                    @RequestParam(required = false) Integer pageNo,
+                                    Model model){
+        String turnPage = "/pc/yun-daili";
+        Page<Member> pages = agentService.findNoClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort);
+        long totalRecords = pages.getTotalElements();
+        model.addAttribute("agent", agent);
+        model.addAttribute("allNoClassMembersList", pages);
+        model.addAttribute("totalMembers", memberService.searchMembers(agent, pageNo, PAGE_SIZE).getTotalElements());
+        model.addAttribute("navigation", "bjgl");
+        model.addAttribute("searchSort", searchSort == null ? "all" : searchSort);
+        model.addAttribute("keywords", keywords);
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("totalRecords", totalRecords);
+        model.addAttribute("totalPages", pages.getTotalPages());
+
+        List<ClassTeam> list = agentService.findExistClassAll(agent);
+        model.addAttribute("existClassList",list);
+        model.addAttribute("existClassDivStyle",true);
+        model.addAttribute("noClassMemberArrageClassDivStyle",false);
         return turnPage;
     }
 }

@@ -1,27 +1,27 @@
 package com.huotu.hotedu.test.web;
 
+import com.huotu.hotedu.entity.Editor;
+import com.huotu.hotedu.entity.Manager;
 import com.huotu.hotedu.entity.Member;
-import com.huotu.hotedu.service.MemberService;
-import com.huotu.hotedu.repository.MemberRepository;
+import com.huotu.hotedu.repository.ExamGuideRepository;
+import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.test.TestWebConfig;
-import com.jcraft.jsch.Session;
 import libspringtest.SpringWebTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpSession;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.util.StreamUtils;
 
-import java.io.ByteArrayOutputStream;
+import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 
 /**
  * Created by jiashubing on 2015/7/17.
@@ -33,6 +33,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @ContextConfiguration(classes = TestWebConfig.class)
 @WebAppConfiguration
 public class MemberControllerTest extends SpringWebTest {
+    @Autowired
+    private LoginService loginService;
+    @Autowired
+    private ExamGuideRepository examGuideRepository;
+
 
     protected MockHttpSession loginAs(String userName, String password) throws Exception {
         MockHttpSession session = (MockHttpSession) this.mockMvc.perform(get("/"))
@@ -48,17 +53,28 @@ public class MemberControllerTest extends SpringWebTest {
 
     @Test
     @Rollback
-    public void detailMember() throws Exception {
-//        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-//        StreamUtils.copy(getClass().getResourceAsStream("testUpload.jpg"), buffer);
-//        Member mb = new Member();
-//        mb.setIsPayed(true);
-//        mb.setPictureUri("com.huotu.hotedu.test.web.testUpload.jpg");
-//        mockMvc.perform(
-//                fileUpload("pc/detailMember")
-//        ).andDo(print());
+    public void chargelMember() throws Exception {
+
+        String password = UUID.randomUUID().toString();
+        String memberUsername = UUID.randomUUID().toString();
+        String editorUsername = UUID.randomUUID().toString();
+        String ManagerUsername = UUID.randomUUID().toString();
+
+        Member member = new Member();
+        member.setLoginName(memberUsername);
+
+        Editor editor = new Editor();
+        editor.setLoginName(editorUsername);
+
+        Manager manager = new Manager();
+        manager.setLoginName(ManagerUsername);
+
+        loginService.newLogin(member, password);
+        loginService.newLogin(editor, password);
+        loginService.newLogin(manager, password);
         mockMvc.perform(
-                get("pc/detailMember")
+                post("pc/chargeMembers") .session(loginAs(editorUsername, password))
+                        .param("arrayIds", "[\"5\",\"6\",\"9\",\"10\",\"11\",\"12\",\"13\",\"14\",\"15\",\"16\"]")
         ).andDo(print());
     }
 
