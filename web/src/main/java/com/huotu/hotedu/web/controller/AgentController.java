@@ -77,9 +77,33 @@ public class AgentController {
     }
 
     /**
+     * Created by cwb on 2015/7/24
+     * 将学员保存到已有班级中
+     * @param noClassMemberArrayLis
+     * @return
+     */
+    @RequestMapping("/pc/addMembersIntoExitClass")
+    @ResponseBody
+    public Result addMembersIntoExitClass(String className,String noClassMemberArrayLis) {
+        Result result = new Result();
+        MyJsonUtil myJsonUtil = new MyJsonUtil();
+        ArrayList<Long> arrayList = myJsonUtil.convertJsonBytesToArrayList(noClassMemberArrayLis);
+        if (arrayList == null || arrayList.isEmpty()) {
+            result.setStatus(0);
+            result.setMessage("成员集合为空，没有需要安排分班的学员");
+        } else {
+            ClassTeam classTeam = agentService.findClassTeamById(Long.parseLong(className));
+            agentService.arrangeClass(arrayList, classTeam);
+            result.setStatus(1);
+            result.setMessage("分班成功！");
+        }
+        return result;
+    }
+
+    /**
      * Created by jiashubing on 2015/7/24.
      * 将学员保存到已有班级中
-     * @param className  已有班级的名字
+     * @param className  已有班级的id
      * @param noClassMemberArrayLis 复选框选中成员的id集合,Strring类型
      * @param model    返回客户端集
      * @return 新建班级页面
@@ -136,6 +160,7 @@ public class AgentController {
             pageNo = pageNo<0 ? 0 : pageNo;
             pages = "true".equals(isHaveClass) ? agentService.findHaveClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort) : agentService.findNoClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort);
         }
+        model.addAttribute("classAndExam","true".equals(isHaveClass)?"kssj":"apbj");
         model.addAttribute("agent", agent);
         model.addAttribute("allClassMembersList", pages);
         model.addAttribute("totalMembers", memberService.searchMembers(agent, pageNo, PAGE_SIZE).getTotalElements());

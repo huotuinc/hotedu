@@ -139,6 +139,10 @@ function check_noClassMember() {
     $.MsgBox.Alert("温馨提示", "请选择需要安排分班的的学员！");
 }
 
+function check_ClassMember() {
+    $.MsgBox.Alert("温馨提示","请选择需要安排考试的学员！");
+}
+
 function check_payMember() {
     $.MsgBox.Alert("温馨提示", "请选择需要确认缴费的的学员！");
 }
@@ -158,7 +162,24 @@ function check_arageNewClass() {
 
 function check_arrageExistClass() {
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员安排到选中班级中吗？", function () {
-        $("#existClassDiv").hide();
-        $("#existClassDivForm").submit();
+        var noClassMemberArrayLis = $("#noClassMemberArrayLis").val().trim();
+        var existClassSelect = $("#existClassSelect").val().trim();
+        $.ajax({
+            url:path+"/pc/addMembersIntoExitClass",
+            type:"post",
+            data:{"className":existClassSelect,"noClassMemberArrayLis":noClassMemberArrayLis},
+            dataType:"json",
+            success:function(result){
+                if(result.status==0){
+                    $("#apyysb").text(result.message);
+                }else if(result.status==1){
+                    alert(result.message);
+                    $("#searchClassMembers").submit();
+                }
+            },
+            error:function(){
+                alert("安排失败");
+            }
+        });
     });
 }

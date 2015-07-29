@@ -280,20 +280,16 @@
                          class="ystwo">
                         <div>
                             <a href="#" th:href="@{/pc/loadClassMembers(keywords=${keywords},searchSort=${searchSort},pageNo=${pageNo},isHaveClass='false')}">
-                                <div class="bjgl_class on" th:class="${isHaveClass} ? 'bjgl_class' : 'bjgl_class on'"><span>未分班</span></div> </a>
-                            <!--<input title="" style="display: none" class="newfb ysss" name="sub" value="未分班" type="submit"/>-->
-                            <button class="newfb ysss"><a th:href="@{/pc/loadClassMembers}"><span style="color: white">未分班</span></a></button>
+                                <div class="newfb ysss on" th:class="${classAndExam}=='apbj' ? 'newfb ysss on':'newfb ysss'"><span>未分班</span></div> </a>
                         </div>
                         <div>
                             <a href="#" th:href="@{/pc/loadClassMembers(keywords=${keywords},searchSort=${searchSort},pageNo=${pageNo},isHaveClass='true')}">
-                                <div class="bjgl_class" th:class="${isHaveClass} ? 'bjgl_class on' : 'bjgl_class'"><span>已有班级</span></div> </a>
-                            <!--<input title="" style="display: none" class="newfb ysss" name="sub" value="已有班级" type="submit"/>-->
-                            <button class="newfb ysss"><a th:href="@{/pc/loadClassMembers(isHaveClass='true')}"><span style="color: white">已有班级</span></a></button>
+                                <div class="newfb ysss" th:class="${classAndExam}=='kssj' ? 'newfb ysss on':'newfb ysss'"><span>已有班级</span></div> </a>
                         </div>
 
                     </div>
                     <p style="clear:both"></p>
-                    <form action="#" method="post" th:action="@{/pc/loadClassMembers(isHaveClass=${isHaveClass})}">
+                    <form action="#" id="searchClassMembers" method="post" th:action="@{/pc/loadClassMembers(isHaveClass=${isHaveClass})}">
                         <p style="height:5px;"></p>
                         <table style="float: left;" class="search-tab" th:style="${isHaveClass} ? 'display: none;' : 'float: left;'">
                         <tr>
@@ -310,8 +306,8 @@
                                             }
                                     );
                                 </script>
-                                <td><input  class="ysss" th:style="${classAndExam!='apbj'?'display:none'" name="apbj" value="安排班级" type="button" onclick="noClassMemberArrageClass()"/>
-                                    <input  class="ysss" th:style="${classAndExam!='kssj'?'display:none'" name="kssj" value="安排考试时间" type="button" onclick="ClassMemberArrageClass()"/></td>
+                                <td><input  class="ysss" th:style="${classAndExam}!='apbj'?'display:none'" name="apbj" value="安排班级" type="button" onclick="noClassMemberArrageClass()"/>
+                                    <input  class="ysss" th:style="${classAndExam}!='kssj'?'display:none'" name="kssj" value="安排考试时间" type="button" onclick="ClassMemberArrageClass()"/></td>
                                 <script>
                                     function noClassMemberArrageClass() {
                                         var str="";
@@ -693,7 +689,8 @@
                 </select>
             </p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="check_arrageExistClass()">保存</button></p>
-            <span style="color:red;" th:text="${errInfo}"/>
+            <span id="apyysb" style="color:red;text-align: center;" th:text="${errInfo}"/>
+            <span id="apyycg" style="color:blue;text-align: center;" th:text="${msgInfo}"/>
         </form>
     </div>
 </div>
