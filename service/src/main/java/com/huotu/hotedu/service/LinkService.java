@@ -11,7 +11,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.List;
 
 /**
  *
@@ -22,23 +21,15 @@ public class LinkService {
 
     @Autowired
     private LinkRepository linkRepository;
-
-    //返回所有友情链接
-    public Page<Link> loadLink(int n,int pagesize){
-        return linkRepository.findAll(new PageRequest(n,pagesize));
-    }
-
     //分页
     public Page<Link> searchLink(int n,int pagesize,String keyword){
-        // SQL
-        // 面向对象的SQL
         return  linkRepository.findAll(new Specification<Link>() {
             @Override
             public Predicate toPredicate(Root<Link> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if (keyword.length()==0)
+                if ("".equals(keyword)||keyword==null) {
                     return null;
+                }
                 return cb.or(cb.like(root.get("title").as(String.class),"%"+keyword+"%"),cb.like(root.get("url").as(String.class),"%"+keyword+"%"));
-               // return cb.like(root.get("title").as(String.class),"%"+keyword+"%");
             }
         },new PageRequest(n, pagesize));
 

@@ -11,8 +11,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by shiliting 2015/6/25.
@@ -25,21 +23,15 @@ public class QaService {
     @Autowired
     private QaRepository qaRepository;
 
-    //返回所有常见问题
-    public Page<Qa> loadQa(int n,int pagesize){
-        return qaRepository.findAll(new PageRequest(n,pagesize));
-    }
 
     //分页
     public Page<Qa> searchQa(int n,int pagesize,String keyword){
-        // SQL
-        // 面向对象的SQL
-        // select Qa from Qa where title like ?
         return  qaRepository.findAll(new Specification<Qa>() {
             @Override
             public Predicate toPredicate(Root<Qa> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if (keyword.length()==0)
+                if ("".equals(keyword)||keyword==null) {
                     return null;
+                }
                 return cb.like(root.get("title").as(String.class),"%"+keyword+"%");
             }
         },new PageRequest(n, pagesize));
