@@ -291,8 +291,8 @@
                     <p style="clear:both"></p>
                     <form action="#" method="post" th:action="@{/pc/loadClassMembers(isHaveClass=${isHaveClass})}">
                         <p style="height:5px;"></p>
-                        <table style="float: left;" class="search-tab">
-                            <tr>
+                        <table style="float: left;" class="search-tab" th:style="${isHaveClass} ? 'display: none;' : 'float: left;'">
+                        <tr>
                                 <th width="10"></th>
                                 <td><input title="" id="noClassCheckAll" type="checkbox" value="checkbox"/></td>
                                 <script>
@@ -333,6 +333,16 @@
                                 </script>
                             </tr>
                         </table>
+
+                        <table style="display: none;" class="search-tab" th:style="${isHaveClass} ? 'float: left;' : 'display: none;'">
+                            <tr>
+                                <th width="10"></th>
+                                <td><input title="" type="checkbox" value="checkbox"/></td>
+                                <td><input title="" class="ysss" name="sub" value="安排考试时间" type="button" onclick="noClassMemberArrageClass()"/></td>
+                            </tr>
+                        </table>
+
+
                         <table style="float: right;" class="search-tab">
                             <tr>
                                 <th width="10"></th>
