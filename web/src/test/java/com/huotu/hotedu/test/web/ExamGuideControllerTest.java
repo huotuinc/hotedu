@@ -380,7 +380,7 @@ public class ExamGuideControllerTest extends WebTestBase {
         )
                 .andExpect(status().isOk())
                 .andReturn().getModelAndView().getViewName();
-        Assert.assertEquals("返回的视图名字是否相等","/backend/modifyguide",ViewName);
+        Assert.assertEquals("返回的视图名字是否相等", "/backend/modifyguide", ViewName);
 
 
         Map<String, Object> model = mockMvc.perform(
@@ -434,14 +434,17 @@ public class ExamGuideControllerTest extends WebTestBase {
                 .andExpect(status().isFound());
         mockMvc.perform(
                 get("/backend/modifySaveExamGuide")
-                .session(loginAs(editorUsername, password))
-                .param("id", examGuideold.getId() + "")
-                .param("title","测试2")
-                .param("content","内容测试2")
-                .param("top",true+"")
+                        .session(loginAs(editorUsername, password))
+                        .param("id", examGuideold.getId() + "")
+                        .param("title", "测试2")
+                        .param("content", "内容测试2")
+                        .param("top", "true")
         )
                 .andExpect(status().isFound())
-                .andExpect(redirectedUrlPattern("**/backend/searchExamGuide/**"));
+                .andDo(print())
+                .andExpect(redirectedUrl("/backend/searchExamGuide"))
+                ;
+//                .andExpect(redirectedUrlPattern("*/backend/searchExamGuide*"));
 
         ExamGuide examGuidenew=examGuideRepository.findOne(examGuideold.getId());
         Assert.assertEquals(examGuidenew.getTitle(),"测试2");
