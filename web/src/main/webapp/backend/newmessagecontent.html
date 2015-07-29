@@ -20,6 +20,13 @@
             th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
     <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
             th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
+    <script type="text/javascript">
+        $(function(){
+           $(":input[name='smallimg']").change(function(){
+
+           });
+        });
+    </script>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -130,7 +137,7 @@
                             <tbody>
                             <tr>
                                 <th><i class="require-red">*</i>上传照片：</th>
-                                <td><img src="images/logo.png" style="width: 100px; height: auto;"/><input name="smallimg" type="file"/></td>
+                                <td><img id="img_photo" src="images/logo.png" style="width: 100px; height: auto;"/><input name="smallimg" type="file"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>标题：</th>
