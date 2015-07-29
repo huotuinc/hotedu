@@ -76,7 +76,7 @@
          class="ystwo">
         <div class="ysykone bg " th:class="${navigation}=='bmxx'? 'ysykone bg on':'ysykone bg'"><a href="#" th:href="@{/pc/searchMembers}"><span>报名信息</span> </a></div>
         <div class="ysyktwo bg" th:class="${navigation}=='xxtz'? 'ysyktwo bg on':'ysyktwo bg'"><a href="#"><span>消息通知</span> </a></div>
-        <div class="ysykthree bg" th:class="${navigation}=='bjgl'? 'ysykthree bg on':'ysykthree bg'"><a href="#" th:href="@{/pc/loadNoClassMembers}"><span>班级管理</span> </a></div>
+        <div class="ysykthree bg" th:class="${navigation}=='bjgl'? 'ysykthree bg on':'ysykthree bg'"><a href="#" th:href="@{/pc/loadClassMembers}"><span>班级管理</span> </a></div>
         <div class="ysykfour bg on" th:class="${navigation}=='bygl'? 'ysykfour bg on':'ysykfour bg'"><a href="#" th:href="@{/pc/graduationMembers}"><span>毕业管理</span> </a></div>
     </div>
 
@@ -279,14 +279,17 @@
                     <div style=" text-align:center;display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex;"
                          class="ystwo">
                         <div>
-                            <input title="" class="newfb ysss" name="sub" value="未分班" type="submit"/>
+                            <!--<input title="" class="newfb ysss" name="sub" value="未分班" type="submit"/>-->
+                            <a href="#" th:href="@{/pc/loadClassMembers(keywords=${keywords},searchSort=${searchSort},pageNo=${pageNo},isHaveClass='false')}">
+                                <div class="bjgl_class on" th:class="${isHaveClass} ? 'bjgl_class' : 'bjgl_class on'"><span>未分班</span></div> </a>
                         </div>
                         <div>
-                            <input title="" class="newfb ysss" name="sub" value="已有班级" type="submit"/>
+                            <a href="#" th:href="@{/pc/loadClassMembers(keywords=${keywords},searchSort=${searchSort},pageNo=${pageNo},isHaveClass='true')}">
+                                <div class="bjgl_class" th:class="${isHaveClass} ? 'bjgl_class on' : 'bjgl_class'"><span>已分班</span></div> </a>
                         </div>
                     </div>
                     <p style="clear:both"></p>
-                    <form action="#" method="post" th:action="@{/pc/loadNoClassMembers}">
+                    <form action="#" method="post" th:action="@{/pc/loadClassMembers(isHaveClass=${isHaveClass})}">
                         <p style="height:5px;"></p>
                         <table style="float: left;" class="search-tab">
                             <tr>
@@ -321,12 +324,9 @@
                                             check_noClassMember();
                                         }
                                         else{
-                                            var $arrayLis=$("#noClassMemberArrayLis");
-                                                $arrayLis.val(str);
+                                            $("#noClassMemberArrayLis").val(str);
                                             $("#noClassMemberArrayLis2").val(str);
                                             $("#noClassMemberArrayLis3").val(str);
-                                            console.log(str);
-
                                             $("#noClassMemberArrageClassDiv").show();
                                         }
                                     }
@@ -417,7 +417,7 @@
                                     <td>15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
-                                <tr th:each="g:${allNoClassMembersList}">
+                                <tr th:each="g:${allClassMembersList}">
                                     <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
                                     <td class="checkboxId" th:text="${g.id}">01</td>
                                     <td th:text="${g.realName}">小米</td>
@@ -437,8 +437,8 @@
                                 </script>
                             </table>
                             <div style="text-align:center; margin-top:10px;">
-                                <a href="#" th:href="@{/pc/loadNoClassMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
-                                <a href="#" th:href="@{/pc/loadNoClassMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
+                                <a href="#" th:href=" @{/pc/loadClassMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort},isHaveClass=${isHaveClass})}">上一页</a>
+                                <a href="#" th:href="@{/pc/loadClassMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort},isHaveClass=${isHaveClass})}">下一页</a>
                                 <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
                             </div>
                         </div>
@@ -627,7 +627,7 @@
 
 <!--安排班级-->
 
-<div id="noClassMemberArrageClassDiv" style="display:block" class="ystc" th:style="${noClassMemberArrageClassDivStyle}? 'display:block' : 'display:none'">
+<div id="noClassMemberArrageClassDiv" style="display:none;" class="ystc" th:style="${noClassMemberArrageClassDivStyle}? 'display:block' : 'display:none'">
     <div class="box-ys">
         <P style="text-align:right;"><a href="#" onclick="$('#noClassMemberArrageClassDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
         <p style="height:20px"></p>
@@ -640,14 +640,7 @@
         </script>
         <form method="post" action="#" th:action="@{/pc/findExistClassAll(pageNo=${pageNo},keywords=${keywords},searchSort=${searchSort})}">
             <span style="display: none;"><input title="" type="text" value="" name="noClassMemberArrayLis" th:value="${noClassMemberArrayLis}" id="noClassMemberArrayLis3" /></span>
-            <p><button class="sign-in__button ys-form__button" name="button" type="submit" onclick="ffff()">选择已有</button></p>
-            <script>
-                function ffff(){
-                    console.log($("#noClassMemberArrayLis").val());
-                    console.log($("#noClassMemberArrayLis2").val());
-
-                }
-            </script>
+            <p><button class="sign-in__button ys-form__button" name="button" type="submit">选择已有</button></p>
         </form>
         <!--<p><button class="sign-in__button ys-form__button" name="button" type="submit">下一步</button></p>-->
     </div>

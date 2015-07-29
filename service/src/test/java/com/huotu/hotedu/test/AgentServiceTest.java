@@ -69,8 +69,8 @@ public class AgentServiceTest {
 //        Page<Member> pages = agentService.findNoClassMembers(0,PAGE_SIZE);
 //        assertEquals("没有班级的学员为1",1, pages.getTotalElements());
 
-        Page<Member> pages2 = agentService.findHaveClassMembers(0,PAGE_SIZE);
-        assertEquals("有班级的学员数量为1",1, pages2.getTotalElements());
+//        Page<Member> pages2 = agentService.findHaveClassMembers(0,PAGE_SIZE);
+//        assertEquals("有班级的学员数量为1",1, pages2.getTotalElements());
     }
 
     /**
