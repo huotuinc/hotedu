@@ -433,7 +433,7 @@
                                     <td th:text="${g.realName}">小米</td>
                                     <td th:text="${g.agent.area}">杭州</td>
                                     <td th:text="${g.phoneNo}">15236699696</td>
-                                    <td><a class="link-update" href="#" th:href="@{/pc/detailMember_class(id=${g.id})}">查看</a></td>
+                                    <td><a class="link-update" href="#" th:href="@{/pc/detailMember(id=${g.id})}">查看</a></td>
                                 </tr>
                                 <tr style="display: none;">
                                     <td><input title="" type="text" id="noClassMember_hidden_text" value="all" th:value="${searchSort}"/></td>
