@@ -29,7 +29,6 @@ public class ExamGuideController {
      * 用来储存分页中每页的记录数
      */
     public static final int PAGE_SIZE = 10;
-    //public static final String SEARCH_URL="/backend/searchExamGuide";
 
     /**
      * 搜索符合条件的考试指南信息

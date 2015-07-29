@@ -4,6 +4,7 @@ import com.huotu.hotedu.entity.Banners;
 import com.huotu.hotedu.service.BannersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,7 @@ import java.util.Date;
      * @param model 返回客户端集
      * @return  banner.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/loadBanners")
     public String loadBanners(Model model){
         Page<Banners> pages=BannersService.loadBanners(0, PAGE_SIZE);
@@ -52,6 +54,7 @@ import java.util.Date;
      * @param model     返回客户端参数集
      * @return      banner.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/searchBanners")
     public String searchBanners(String keywords,Model model){
         Page<Banners> pages=BannersService.searchBanners(0, PAGE_SIZE, keywords);
@@ -72,6 +75,7 @@ import java.util.Date;
      * @param model         返回客户端集合
      * @return          banner.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/pageBanners")
     public String pageBanners(int n,int sumpage,String keywords,Model model){
         //如果已经到分页的第一页了，将页数设置为0
@@ -145,6 +149,7 @@ import java.util.Date;
      * @return      不出异常重定向：/backend/loadBanners
      */
     //TODO 是否搞抛出异常
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/addSaveBanners")
     public String addSaveBanners(String title,String content){
         Banners banners=new Banners();
@@ -162,6 +167,7 @@ import java.util.Date;
      * @param content   url
      * @return      重定向到：/backend/loadBanners
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveBanners")
     public String modifySaveBanners(Long id,String title,String content){
         Banners banners=BannersService.findOneById(id);

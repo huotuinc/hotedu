@@ -54,7 +54,7 @@ public class AgentController {
     public String addSaveNewClassTeam(@AuthenticationPrincipal Agent agent, String className, String noClassMemberArrayLis, Model model) throws UnsupportedEncodingException {
         String errInfo = "";
         String msgInfo = "";
-        String turnPage = "redirect:/pc/loadNoClassMembers";
+        String turnPage = "redirect:/pc/loadClassMembers";
         noClassMemberArrayLis = URLDecoder.decode(noClassMemberArrayLis, "UTF-8");
         MyJsonUtil myJsonUtil = new MyJsonUtil();
         ArrayList<Long> arrayList = myJsonUtil.convertJsonBytesToArrayList(noClassMemberArrayLis);
@@ -88,7 +88,7 @@ public class AgentController {
     public String addSaveOldClassTeam(String className, String noClassMemberArrayLis, Model model) {
         String errInfo = "";
         String msgInfo = "";
-        String turnPage = "redirect:/pc/loadNoClassMembers";
+        String turnPage = "redirect:/pc/loadClassMembers";
         MyJsonUtil myJsonUtil = new MyJsonUtil();
         ArrayList<Long> arrayList = myJsonUtil.convertJsonBytesToArrayList(noClassMemberArrayLis);
         if (arrayList == null || arrayList.isEmpty()) {
@@ -110,30 +110,32 @@ public class AgentController {
      * @param keywords   关键词
      * @param searchSort 搜索类型
      * @param pageNo     第几页
+     * @param noClassMemberArrageClassDiv2Style    新建班级框是否显示
+     * @param isHaveClass   显示未分班还是已分班
      * @param model      返回客户端集
      * @return yun-daili.html  班级管理选项卡
      */
-    @RequestMapping("/pc/loadNoClassMembers")
-    public String loadNoClassMembers(@AuthenticationPrincipal Agent agent,
+    @RequestMapping("/pc/loadClassMembers")
+    public String loadClassMembers(@AuthenticationPrincipal Agent agent,
                                      @RequestParam(required = false) String keywords,
                                      @RequestParam(required = false) String searchSort,
                                      @RequestParam(required = false) Integer pageNo,
                                      @RequestParam(required = false) Boolean noClassMemberArrageClassDiv2Style,
+                                     @RequestParam(required = false) Boolean isHaveClass,
                                      Model model) {
         if (pageNo == null || pageNo < 0) {
             pageNo = 0;
         }
-        Page<Member> pages = agentService.findNoClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort);
+        isHaveClass = isHaveClass==null ? false : isHaveClass;
+        Page<Member> pages = isHaveClass ? agentService.findHaveClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort) : agentService.findNoClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort);
         long totalRecords = pages.getTotalElements();
         if (pages.getNumberOfElements() == 0) {
             pageNo = pages.getTotalPages() - 1;
-            if (pageNo < 0) {
-                pageNo = 0;
-            }
-            pages = agentService.findNoClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort);
+            pageNo = pageNo<0 ? 0 : pageNo;
+            pages = isHaveClass ? agentService.findHaveClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort) : agentService.findNoClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort);
         }
         model.addAttribute("agent", agent);
-        model.addAttribute("allNoClassMembersList", pages);
+        model.addAttribute("allClassMembersList", pages);
         model.addAttribute("totalMembers", memberService.searchMembers(agent, pageNo, PAGE_SIZE).getTotalElements());
         model.addAttribute("navigation", "bjgl");
         model.addAttribute("searchSort", searchSort == null ? "all" : searchSort);
@@ -142,6 +144,7 @@ public class AgentController {
         model.addAttribute("totalRecords", totalRecords);
         model.addAttribute("totalPages", pages.getTotalPages());
         model.addAttribute("noClassMemberArrageClassDiv2Style", noClassMemberArrageClassDiv2Style);
+        model.addAttribute("isHaveClass", isHaveClass);
         model.addAttribute("existClassDivStyle",false);
         model.addAttribute("noClassMemberArrageClassDivStyle",false);
 
@@ -168,7 +171,7 @@ public class AgentController {
         } else {
             errInfo = "该班级名字已经被注册,请使用其他的名字";
             style = true;
-            turnPage = "redirect:/pc/loadNoClassMembers";
+            turnPage = "redirect:/pc/loadClassMembers";
         }
         model.addAttribute("noClassMemberArrageClassDiv2Style", style);
         model.addAttribute("className", className);
@@ -202,7 +205,7 @@ public class AgentController {
      * 查找当前代理商已有班级
      * @param agent     当前代理商
      * @param model     返回客户端集
-     * @return          重定向到/pc/loadNoClassMembers
+     * @return          重定向到/pc/loadClassMembers
      */
     @RequestMapping("/pc/findExistClassAll")
     public String findExistClassAll(@AuthenticationPrincipal Agent agent,

@@ -22,8 +22,7 @@ import java.util.*;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -288,6 +287,7 @@ public class ExamGuideControllerTest extends WebTestBase {
         allGuideList = (Page<ExamGuide>) model.get("allGuideList");
         Assert.assertEquals("删除之后应该没有数据：",0,allGuideList.getTotalElements());//删除之后应该找不到数据
     }
+
     @Test
     public void addExamGuideTest() throws Exception{
 
@@ -380,7 +380,7 @@ public class ExamGuideControllerTest extends WebTestBase {
         )
                 .andExpect(status().isOk())
                 .andReturn().getModelAndView().getViewName();
-        Assert.assertEquals("返回的视图名字是否相等","/backend/modifyguide",ViewName);
+        Assert.assertEquals("返回的视图名字是否相等", "/backend/modifyguide", ViewName);
 
 
         Map<String, Object> model = mockMvc.perform(
@@ -394,6 +394,66 @@ public class ExamGuideControllerTest extends WebTestBase {
 
         ExamGuide examGuide1 = (ExamGuide) model.get("examGuide");
         Assert.assertEquals("判断获取的对象是否是修改的对象：", examGuidenew, examGuide1);
+    }
+    @Test
+    @Rollback
+    public void modifySaveExamGuide()throws Exception{
+        //准备测试环境
+        Random random = new Random();
+        String password = UUID.randomUUID().toString();
+
+        String memberUsername = UUID.randomUUID().toString();
+        String editorUsername = UUID.randomUUID().toString();
+        String ManagerUsername = UUID.randomUUID().toString();
+
+        Member member = new Member();
+        member.setLoginName(memberUsername);
+
+        Editor editor = new Editor();
+        editor.setLoginName(editorUsername);
+
+        Manager manager = new Manager();
+        manager.setLoginName(ManagerUsername);
+
+        loginService.newLogin(member, password);
+        loginService.newLogin(editor, password);
+        loginService.newLogin(manager, password);
+
+
+        ExamGuide examGuide=new ExamGuide();
+        examGuide.setTitle("测试1");
+        examGuide.setContent("内容测试1");
+        examGuide.setIsTop(false);
+        examGuide.setLastUploadDate(new Date());
+        ExamGuide examGuideold=examGuideRepository.save(examGuide);
+        //准备测试环境END
+
+        mockMvc.perform(
+                get("/backend/modifySaveExamGuide")
+        )
+                .andExpect(status().isFound());
+        mockMvc.perform(
+                get("/backend/modifySaveExamGuide")
+                        .session(loginAs(editorUsername, password))
+                        .param("id", examGuideold.getId() + "")
+                        .param("title", "测试2")
+                        .param("content", "内容测试2")
+                        .param("top", "true")
+        )
+                .andExpect(status().isFound())
+                .andDo(print())
+                .andExpect(redirectedUrl("/backend/searchExamGuide"))
+                ;
+//                .andExpect(redirectedUrlPattern("*/backend/searchExamGuide*"));
+
+        ExamGuide examGuidenew=examGuideRepository.findOne(examGuideold.getId());
+        Assert.assertEquals(examGuidenew.getTitle(),"测试2");
+        Assert.assertEquals(examGuidenew.getContent(),"内容测试2");
+        Assert.assertEquals(examGuidenew.isTop(),true);
+
+
+
+
     }
 
 

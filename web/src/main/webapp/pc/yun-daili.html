@@ -286,10 +286,10 @@
                         </div>
                     </div>
                     <p style="clear:both"></p>
-                    <form action="#" method="post" th:action="@{/pc/loadNoClassMembers}">
+                    <form action="#" method="post" th:action="@{/pc/loadClassMembers(isHaveClass=${isHaveClass})}">
                         <p style="height:5px;"></p>
-                        <table style="float: left;" class="search-tab">
-                            <tr>
+                        <table style="float: left;" class="search-tab" th:style="${isHaveClass} ? 'display: none;' : 'float: left;'">
+                        <tr>
                                 <th width="10"></th>
                                 <td><input title="" id="noClassCheckAll" type="checkbox" value="checkbox"/></td>
                                 <script>
@@ -321,18 +321,25 @@
                                             check_noClassMember();
                                         }
                                         else{
-                                            var $arrayLis=$("#noClassMemberArrayLis");
-                                                $arrayLis.val(str);
+                                            $("#noClassMemberArrayLis").val(str);
                                             $("#noClassMemberArrayLis2").val(str);
                                             $("#noClassMemberArrayLis3").val(str);
-                                            console.log(str);
-
                                             $("#noClassMemberArrageClassDiv").show();
                                         }
                                     }
                                 </script>
                             </tr>
                         </table>
+
+                        <table style="display: none;" class="search-tab" th:style="${isHaveClass} ? 'float: left;' : 'display: none;'">
+                            <tr>
+                                <th width="10"></th>
+                                <td><input title="" type="checkbox" value="checkbox"/></td>
+                                <td><input title="" class="ysss" name="sub" value="安排考试时间" type="button" onclick="noClassMemberArrageClass()"/></td>
+                            </tr>
+                        </table>
+
+
                         <table style="float: right;" class="search-tab">
                             <tr>
                                 <th width="10"></th>
@@ -423,7 +430,7 @@
                                     <td th:text="${g.realName}">小米</td>
                                     <td th:text="${g.agent.area}">杭州</td>
                                     <td th:text="${g.phoneNo}">15236699696</td>
-                                    <td><a class="link-update" href="#" th:href="@{/pc/detailMember_class(id=${g.id})}">查看</a></td>
+                                    <td><a class="link-update" href="#" th:href="@{/pc/detailMember(id=${g.id})}">查看</a></td>
                                 </tr>
                                 <tr style="display: none;">
                                     <td><input title="" type="text" id="noClassMember_hidden_text" value="all" th:value="${searchSort}"/></td>
@@ -437,8 +444,8 @@
                                 </script>
                             </table>
                             <div style="text-align:center; margin-top:10px;">
-                                <a href="#" th:href="@{/pc/loadNoClassMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
-                                <a href="#" th:href="@{/pc/loadNoClassMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
+                                <a href="#" th:href=" @{/pc/loadClassMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort},isHaveClass=${isHaveClass})}">上一页</a>
+                                <a href="#" th:href="@{/pc/loadClassMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort},isHaveClass=${isHaveClass})}">下一页</a>
                                 <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
                             </div>
                         </div>
@@ -627,7 +634,7 @@
 
 <!--安排班级弹窗-->
 
-<div id="noClassMemberArrageClassDiv" style="display:block" class="ystc" th:style="${noClassMemberArrageClassDivStyle}? 'display:block' : 'display:none'">
+<div id="noClassMemberArrageClassDiv" style="display:none;" class="ystc" th:style="${noClassMemberArrageClassDivStyle}? 'display:block' : 'display:none'">
     <div class="box-ys">
         <P style="text-align:right;"><a href="#" onclick="$('#noClassMemberArrageClassDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
         <p style="height:20px"></p>
