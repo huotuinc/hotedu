@@ -59,8 +59,9 @@ function addMember(){
 		dataType:"json",
 		success:function(result){
 			if(result.status==0){
-				alert(result.message);
+				//alert(result.message);
 				$("#addMember").hide();
+				location.reload();
 			}else if(result.status==1){
 				$("#add_Memberinfo").text(result.message);
 			}

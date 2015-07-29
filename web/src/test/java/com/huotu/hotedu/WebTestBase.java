@@ -28,7 +28,7 @@ public class WebTestBase extends SpringWebTest{
     protected MockHttpSession loginAs(String userName, String password) throws Exception {
         MockHttpSession session = (MockHttpSession) this.mockMvc.perform(get("/"))
                 .andReturn().getRequest().getSession(true);
-        session = (MockHttpSession) this.mockMvc.perform(post(SecurityConfig.LoginURI).session(session)
+        session = (MockHttpSession) this.mockMvc.perform(post(SecurityConfig.pcLoginURI).session(session)
                 .param("username", userName).param("password", password))
 //                .andDo(print())
                 .andReturn().getRequest().getSession();
