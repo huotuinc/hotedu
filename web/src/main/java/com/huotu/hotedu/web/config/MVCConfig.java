@@ -25,9 +25,10 @@ import java.util.List;
 @EnableWebMvc
 @ComponentScan({
         "com.huotu.hotedu.web.service",
+        "com.huotu.hotedu.web.advice",
         "com.huotu.hotedu.web.controller"
 })
-public class MVCConfig  extends WebMvcConfigurerAdapter {
+public class MVCConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
     private Environment env;
@@ -36,7 +37,7 @@ public class MVCConfig  extends WebMvcConfigurerAdapter {
      * for upload
      */
     @Bean
-    public CommonsMultipartResolver multipartResolver(){
+    public CommonsMultipartResolver multipartResolver() {
         return new CommonsMultipartResolver();
     }
 
