@@ -25,14 +25,15 @@
             <li id="loginLi" style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)" th:text="${msgInfo}"
                                                                   onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
             </li>
-            <li id="userLi" style="padding:0px;" th:style="${style}">
+            <li id="userLi" style="padding:0px;display:none" th:style="${style}">
                 <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
-                <p class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+                <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
 
-                <p class="lbpo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
+                <p style="display: none" class="lbpo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
                 <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
                 <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
-                    <a href="#" th:href="@{/pc/login}">退出</a></p>
+                    <a href="#" th:href="@{/pc/login}">退出</a>
+                </p>
             </li>
         </ul>
 </div>

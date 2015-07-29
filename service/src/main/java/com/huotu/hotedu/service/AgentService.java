@@ -119,12 +119,20 @@ public class AgentService {
     public Agent findOneById(Long id){return agentRepository.findOne(id);}
 
     /**
-     *
+     *Created by jiashubing on 2015/7/24.
      * 查找一个已有班级
      * @param id 班级id
      * @return 班级对象
      */
     public ClassTeam findOneClassTeamById(Long id){return classTeamRepository.findOne(id);}
+
+    /**
+     *Created by jiashubing on 2015/7/24.
+     * 查找一个已有班级
+     * @param className 班级名称
+     * @return 班级对象
+     */
+    public ClassTeam findOneClassTeamByClassName(String className){return classTeamRepository.findByClassName(className);}
 
     /**
      * Created by jiashubing on 2015/7/24.

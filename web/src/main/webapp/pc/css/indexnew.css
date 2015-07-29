@@ -1081,12 +1081,12 @@ button.btn, input.btn {
 	border: 1px solid #2D9CE7;
 	border-bottom: 0px;
 }
-.ystwo .ysykone.bg.on, .ystwo .ysyktwo.bg.on, .ystwo .ysykthree.bg.on {
+.ystwo .ysykone.bg.on, .ystwo .ysyktwo.bg.on, .ystwo .ysykthree.bg.on, .ystwo .ysykfour.bg.on {
 	background-color: #fff;
 	border: 1px solid #56abe4;
 	border-bottom: 0px;
 }
-.ystwo .ysykone.bg.on a, .ystwo .ysyktwo.bg.on a, .ystwo .ysykthree.bg.on a {
+.ystwo .ysykone.bg.on a, .ystwo .ysyktwo.bg.on a, .ystwo .ysykthree.bg.on a , .ystwo .ysykfour.bg.on a{
 	color: #111
 }
 .ystwo {

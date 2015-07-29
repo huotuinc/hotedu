@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 /**
  * web方向测试基类
@@ -27,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 public class WebTestBase extends SpringWebTest{
 
     protected MockHttpSession loginAs(String userName, String password) throws Exception {
-        MockHttpSession session = (MockHttpSession) this.mockMvc.perform(get("/"))
+        MockHttpSession session = (MockHttpSession) this.mockMvc.perform(get("/hotedu"))
                 .andReturn().getRequest().getSession(true);
         session = (MockHttpSession) this.mockMvc.perform(post(SecurityConfig.LoginURI).session(session)
                 .param("username", userName).param("password", password))

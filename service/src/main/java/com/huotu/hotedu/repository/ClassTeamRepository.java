@@ -14,5 +14,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ClassTeamRepository extends JpaRepository<ClassTeam,Long>,ClassicsRepository<ClassTeam>,JpaSpecificationExecutor<ClassTeam>{
 
-
+ClassTeam findByClassName(String className);
 }

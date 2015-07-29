@@ -45,7 +45,7 @@ public class AgentController {
      * @param className             新建班级的名字
      * @param noClassMemberArrayLis 复选框选中成员的id集合,Strring类型
      * @param model                 返回客户端集
-     * @return 新建班级页面
+     * @return                      新建班级页面
      * @throws UnsupportedEncodingException
      */
     @RequestMapping("/pc/addSaveNewClassTeam")
@@ -77,23 +77,22 @@ public class AgentController {
     /**
      * Created by jiashubing on 2015/7/24.
      * 将学员保存到已有班级中
-     *
-     * @param classId  已有班级的名字
-     * @param arrayLis 复选框选中成员的id集合,Strring类型
+     * @param className  已有班级的名字
+     * @param noClassMemberArrayLis 复选框选中成员的id集合,Strring类型
      * @param model    返回客户端集
      * @return 新建班级页面
      */
     @RequestMapping("/pc/addSaveOldClassTeam")
-    public String addSaveOldClassTeam(Long classId, String arrayLis, Model model) {
+    public String addSaveOldClassTeam(String className, String noClassMemberArrayLis, Model model) {
         String errInfo = "";
         String msgInfo = "";
         String turnPage = "redirect:/pc/loadNoClassMembers";
         MyJsonUtil myJsonUtil = new MyJsonUtil();
-        ArrayList<Long> arrayList = myJsonUtil.convertJsonBytesToArrayList(arrayLis);
+        ArrayList<Long> arrayList = myJsonUtil.convertJsonBytesToArrayList(noClassMemberArrayLis);
         if (arrayList == null || arrayList.isEmpty()) {
             errInfo = "成员集合为空，没有需要安排分班的学员";
         } else {
-            ClassTeam classTeam = agentService.findOneClassTeamById(classId);
+            ClassTeam classTeam = agentService.findOneClassTeamByClassName(className);
             agentService.arrangeClass(arrayList, classTeam);
         }
         model.addAttribute("errInfo", errInfo);
@@ -105,7 +104,6 @@ public class AgentController {
      * Created by jiashubing on 2015/7/24.
      * 显示未分班的学员信息
      * 加载、搜索、上一页、下一页
-     *
      * @param agent      当前代理商
      * @param keywords   关键词
      * @param searchSort 搜索类型
@@ -188,6 +186,7 @@ public class AgentController {
     public String findExistClassAll(@AuthenticationPrincipal Agent agent,
                                     @RequestParam(required = false) String keywords,
                                     @RequestParam(required = false) String searchSort,
+                                    String noClassMemberArrayLis,
                                     @RequestParam(required = false) Integer pageNo,
                                     Model model){
         String turnPage = "/pc/yun-daili";
@@ -204,6 +203,7 @@ public class AgentController {
         model.addAttribute("totalPages", pages.getTotalPages());
 
         List<ClassTeam> list = agentService.findExistClassAll(agent);
+        model.addAttribute("noClassMemberArrayLis",noClassMemberArrayLis);
         model.addAttribute("existClassList",list);
         model.addAttribute("existClassDivStyle",true);
         model.addAttribute("noClassMemberArrageClassDivStyle",false);
