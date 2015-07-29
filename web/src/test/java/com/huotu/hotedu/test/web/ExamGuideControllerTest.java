@@ -21,6 +21,7 @@ import org.springframework.test.annotation.Rollback;
 import java.util.*;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -126,6 +127,11 @@ public class ExamGuideControllerTest extends WebTestBase {
                 .andExpect(status().isFound())
                 .andDo(print());
                // .andExpect(redirectedUrlPattern("**/" + SecurityConfig.LoginURI)); 暂时不测试
+        mockMvc.perform(
+                get("/backend/addSaveExamGuide")
+                        .session(loginAs(ManagerUsername, password))
+        )
+                .andExpect(status().isForbidden());
         /**
          * 1.测试用户登录之后，是否能正常访问
          * 2.测试返回model中的"allGuideList"属性是否是Page类型，长度是否为设置的长度10
@@ -239,6 +245,11 @@ public class ExamGuideControllerTest extends WebTestBase {
                 .andExpect(status().isFound());
 
         mockMvc.perform(
+                get("/backend/addSaveExamGuide")
+                        .session(loginAs(ManagerUsername, password))
+        )
+                .andExpect(status().isForbidden());
+        mockMvc.perform(
                 get("/backend/searchExamGuide")
                         .session(loginAs(editorUsername, password))
         ).andExpect(status().isOk());
@@ -275,8 +286,7 @@ public class ExamGuideControllerTest extends WebTestBase {
 
         )
                 .andExpect(status().isFound());
-//                .andDo(print());
-//        .andExpect(redirectedUrlPattern("redirect:/backend/searchExamGuide"));//有问题
+//        .andExpect(redirectedUrl("/backend/searchExamGuide?keywords="));
 
 
         model = mockMvc.perform(
@@ -317,6 +327,11 @@ public class ExamGuideControllerTest extends WebTestBase {
                 get("/backend/addExamGuide")
         )
                 .andExpect(status().isFound());
+        mockMvc.perform(
+                get("/backend/addSaveExamGuide")
+                        .session(loginAs(ManagerUsername, password))
+        )
+                .andExpect(status().isForbidden());
 
        String ViewName=mockMvc.perform(
                 get("/backend/addExamGuide")
@@ -372,6 +387,11 @@ public class ExamGuideControllerTest extends WebTestBase {
                 get("/backend/modifyExamGuide")
         )
                 .andExpect(status().isFound());
+        mockMvc.perform(
+                get("/backend/addSaveExamGuide")
+                        .session(loginAs(ManagerUsername, password))
+        )
+                .andExpect(status().isForbidden());
 
         String ViewName=mockMvc.perform(
                 get("/backend/modifyExamGuide")
@@ -380,7 +400,7 @@ public class ExamGuideControllerTest extends WebTestBase {
         )
                 .andExpect(status().isOk())
                 .andReturn().getModelAndView().getViewName();
-        Assert.assertEquals("返回的视图名字是否相等", "/backend/modifyguide", ViewName);
+        Assert.assertEquals("返回的视图名字是否相等","/backend/modifyguide",ViewName);
 
 
         Map<String, Object> model = mockMvc.perform(
@@ -418,14 +438,12 @@ public class ExamGuideControllerTest extends WebTestBase {
         loginService.newLogin(member, password);
         loginService.newLogin(editor, password);
         loginService.newLogin(manager, password);
-
-
         ExamGuide examGuide=new ExamGuide();
         examGuide.setTitle("测试1");
         examGuide.setContent("内容测试1");
         examGuide.setIsTop(false);
         examGuide.setLastUploadDate(new Date());
-        ExamGuide examGuideold=examGuideRepository.save(examGuide);
+        ExamGuide examGuideOld=examGuideRepository.save(examGuide);
         //准备测试环境END
 
         mockMvc.perform(
@@ -433,28 +451,98 @@ public class ExamGuideControllerTest extends WebTestBase {
         )
                 .andExpect(status().isFound());
         mockMvc.perform(
+                get("/backend/addSaveExamGuide")
+                        .session(loginAs(ManagerUsername, password))
+        )
+                .andExpect(status().isForbidden());
+        mockMvc.perform(
                 get("/backend/modifySaveExamGuide")
-                        .session(loginAs(editorUsername, password))
-                        .param("id", examGuideold.getId() + "")
-                        .param("title", "测试2")
-                        .param("content", "内容测试2")
-                        .param("top", "true")
+                .session(loginAs(editorUsername, password))
+                .param("id", examGuideOld.getId() + "")
+                .param("title","测试2")
+                .param("content","内容测试2")
+                .param("top","1")
         )
                 .andExpect(status().isFound())
-                .andDo(print())
-                .andExpect(redirectedUrl("/backend/searchExamGuide"))
-                ;
-//                .andExpect(redirectedUrlPattern("*/backend/searchExamGuide*"));
+                .andExpect(redirectedUrl("/backend/searchExamGuide"));
 
-        ExamGuide examGuidenew=examGuideRepository.findOne(examGuideold.getId());
-        Assert.assertEquals(examGuidenew.getTitle(),"测试2");
-        Assert.assertEquals(examGuidenew.getContent(),"内容测试2");
-        Assert.assertEquals(examGuidenew.isTop(),true);
+        ExamGuide examGuideNew=examGuideRepository.findOne(examGuideOld.getId());
+        Assert.assertEquals(examGuideNew.getTitle(),"测试2");
+        Assert.assertEquals(examGuideNew.getContent(),"内容测试2");
+        Assert.assertEquals(examGuideNew.isTop(),true);
+
+    }
 
 
+    @Test
+    @Rollback
+    public void addSaveExamGuide()throws Exception{
+        //准备测试环境
+        Random random = new Random();
+        String password = UUID.randomUUID().toString();
+
+        String memberUsername = UUID.randomUUID().toString();
+        String editorUsername = UUID.randomUUID().toString();
+        String ManagerUsername = UUID.randomUUID().toString();
+
+        Member member = new Member();
+        member.setLoginName(memberUsername);
+
+        Editor editor = new Editor();
+        editor.setLoginName(editorUsername);
+
+        Manager manager = new Manager();
+        manager.setLoginName(ManagerUsername);
+
+        loginService.newLogin(member, password);
+        loginService.newLogin(editor, password);
+        loginService.newLogin(manager, password);
+        String examGuideTitle = UUID.randomUUID().toString();
+        //准备测试环境END
+
+        mockMvc.perform(
+                get("/backend/addSaveExamGuide")
+        )
+                .andExpect(status().isFound());
+
+
+        mockMvc.perform(
+                get("/backend/addSaveExamGuide")
+                .session(loginAs(ManagerUsername, password))
+        )
+                .andExpect(status().isForbidden());
+
+        List<ExamGuide> lists=examGuideRepository.findAll();
+        Boolean flag=true;
+        for(int i=0;i<lists.size();i++){
+            if(lists.get(i).getTitle().equals(examGuideTitle)){
+                flag=false;
+                break;
+            }
+        }
+        Assert.assertTrue("添加考试指南的时候已经有被添加的数据",flag);
+        mockMvc.perform(
+                post("/backend/addSaveExamGuide")
+                        .session(loginAs(editorUsername, password))
+                        .param("title",examGuideTitle)
+                        .param("content","内容测试1")
+                        .param("top","0")
+        )
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrl("/backend/searchExamGuide"));
+
+        lists=examGuideRepository.findAll();
+        int n=0;
+        for(int i=0;i<lists.size();i++){
+            if(lists.get(i).getTitle().equals(examGuideTitle)){
+                n++;
+            }
+        }
+        Assert.assertEquals("添加考试指南之后是否能找到该记录且只有一条",1,n);
 
 
     }
+
 
 
 

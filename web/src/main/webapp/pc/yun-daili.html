@@ -279,11 +279,14 @@
                     <div style=" text-align:center;display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex;"
                          class="ystwo">
                         <div>
-                            <input title="" class="newfb ysss on" name="sub" value="未分班" type="submit"/>
+                            <a href="#" th:href="@{/pc/loadClassMembers(keywords=${keywords},searchSort=${searchSort},pageNo=${pageNo},isHaveClass='false')}">
+                                <div class="bjgl_class on" th:class="${isHaveClass} ? 'bjgl_class' : 'bjgl_class on'"><span>未分班</span></div> </a>
                         </div>
                         <div>
-                            <input title="" class="newfb ysss" name="sub" value="已有班级" type="submit"/>
+                            <a href="#" th:href="@{/pc/loadClassMembers(keywords=${keywords},searchSort=${searchSort},pageNo=${pageNo},isHaveClass='true')}">
+                                <div class="bjgl_class" th:class="${isHaveClass} ? 'bjgl_class on' : 'bjgl_class'"><span>已有班级</span></div> </a>
                         </div>
+
                     </div>
                     <p style="clear:both"></p>
                     <form action="#" method="post" th:action="@{/pc/loadClassMembers(isHaveClass=${isHaveClass})}">
