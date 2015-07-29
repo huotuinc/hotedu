@@ -24,21 +24,20 @@
     <div style="background-color:#fff;">
         <div style="background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" class="logoimg"/>
             <ul class="navi">
-                <li><a href="yun-index.html">首页</a></li>
+                <li><a href="yun-index.html" th:href="@{/pc/loginSuccess}">首页</a></li>
                 <li><a href="javascript:void(0)">公司简介</a></li>
                 <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
                 <li><a href="javascript:void(0)">师资力量</a></li>
                 <li><a href="javascript:void(0)">教学视频</a></li>
                 <li><a href="javascript:void(0)">考试指南</a></li>
                 <li><a href="javascript:void(0)">招|应聘</a></li>
-                <li style="padding:0px 0px 0px 20px;display:none"><a href="javascript:void(0)"
-                                                                     onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">登录</a>
+                <li style="padding:0px 0px 0px 20px;display:none"><a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">登录</a>
                 </li>
                 <li id="userLi" style="padding:0px;" th:style="${style}">
                     <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimgi" src="images/toux.png" width="100%"/></a><!--会员头像-->
-                    <p class="zhizheno"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+                    <p style="display: none" class="zhizheno"><img src="images/lodingj.png" width="18px" height="7px"/></p>
 
-                    <p class="lbpoo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
+                    <p style="display: none" class="lbpoo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
                         <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
                         <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
                         <a href="#" th:href="@{/pc/login}">退出</a></p>

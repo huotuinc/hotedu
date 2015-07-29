@@ -203,6 +203,24 @@ public class MemberController {
 
 
     /**
+     * Create by shiliting on 2015.7.28
+     * 通过考试
+     * @param id      学员ID
+     * @param model   返回的参数
+     * @return
+     */
+    @PreAuthorize("hasRole('AGENT')")
+    @RequestMapping("/pc/passExam")
+    public String passExam(Long id, Model model) {
+        String returnPage="redirect:/pc/searchMembers";
+        memberService.passExamById(id);
+        return returnPage;
+    }
+
+
+
+
+    /**
      * Created by shiliting on 2015/7/27
      * 毕业管理
      * @param agent     当前代理商
@@ -261,7 +279,7 @@ public class MemberController {
         mb.setLoginName(phoneNo);
         mb.setRegisterDate(d);
         mb.setApplyDate(d);
-        loginService.newLogin(mb,"123456");
+        loginService.newLogin(mb, "123456");
         result.setStatus(0);
         result.setMessage("注册成功");
         return result;

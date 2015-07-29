@@ -231,15 +231,6 @@ public class ExamGuideControllerTest extends WebTestBase {
             Assert.assertEquals("输入当前页检查",expectpages,actualpages);
         }
 
-
-
-
-
-
-
-
-
-
         /**
          * 删除测试
          */
