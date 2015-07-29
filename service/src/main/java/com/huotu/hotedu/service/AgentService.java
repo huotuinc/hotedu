@@ -134,6 +134,10 @@ public class AgentService {
      */
     public ClassTeam findOneClassTeamByClassName(String className){return classTeamRepository.findByClassName(className);}
 
+    public ClassTeam findClassTeamById(long id) {
+        return classTeamRepository.findOne(id);
+    }
+
     /**
      * Created by jiashubing on 2015/7/24.
      * 检查该班级名称是否已经使用
@@ -295,4 +299,14 @@ public class AgentService {
         classTeamRepository.save(classTeam);
     }
 
+    /**
+     * Created by cwb on 2015/7/29
+     * 根据代理商查找可用于分班的班级
+     * @param agent
+     * @return
+     */
+    public List<ClassTeam> findAvailableClassTeams(Agent agent) {
+        List<ClassTeam> classTeams = classTeamRepository.findByAgent(agent);
+        return classTeams;
+    }
 }

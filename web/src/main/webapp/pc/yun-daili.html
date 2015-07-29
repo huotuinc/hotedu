@@ -625,7 +625,7 @@
 </div>
 <!--新增班级end-->
 
-<!--安排班级-->
+<!--安排班级弹窗-->
 
 <div id="noClassMemberArrageClassDiv" style="display:block" class="ystc" th:style="${noClassMemberArrageClassDivStyle}? 'display:block' : 'display:none'">
     <div class="box-ys">
@@ -638,22 +638,15 @@
                 $("#noClassMemberArrageClassDiv2").show();
             }
         </script>
-        <form method="post" action="#" th:action="@{/pc/findExistClassAll(pageNo=${pageNo},keywords=${keywords},searchSort=${searchSort})}">
+        <!--<form method="post" action="#" th:action="@{/pc/findExistClassAll(pageNo=${pageNo},keywords=${keywords},searchSort=${searchSort})}">
             <span style="display: none;"><input title="" type="text" value="" name="noClassMemberArrayLis" th:value="${noClassMemberArrayLis}" id="noClassMemberArrayLis3" /></span>
-            <p><button class="sign-in__button ys-form__button" name="button" type="submit" onclick="ffff()">选择已有</button></p>
-            <script>
-                function ffff(){
-                    console.log($("#noClassMemberArrayLis").val());
-                    console.log($("#noClassMemberArrayLis2").val());
-
-                }
-            </script>
-        </form>
-        <!--<p><button class="sign-in__button ys-form__button" name="button" type="submit">下一步</button></p>-->
+            <p><button class="sign-in__button ys-form__button" name="button" type="submit">选择已有</button></p>
+        </form>-->
+        <p><button class="sign-in__button ys-form__button" name="button" id="btn_chooseExistClass" type="button">选择已有</button></p>
     </div>
 </div>
 
-<!--安排班级1end-->
+<!--安排班级弹窗end-->
 
 <!--新建班级2-->
 
@@ -681,20 +674,11 @@
             <P style="text-align:right;"><a href="#" onclick="$('#existClassDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
             <p style="height:20px"></p>
             <span style="display: none;"><input title="" type="text" value="" name="noClassMemberArrayLis" th:value="${noClassMemberArrayLis}" id="noClassMemberArrayLis2" /></span>
-            <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="className" id="existClassName" placeholder="班级名称" type="text" readonly="readonly"/></p>
             <p>
-                <select id="existClassSelect" class="ys-form__button" title="existClassSelect" name="existClassSelect" style="text-align: center;">
+                <select id="existClassSelect" class="ys-form__button" title="existClassSelect" name="className" style="text-align: center;">
                     <option th:each="ex:${existClassList}" th:value="${ex.className}" th:text="${ex.className}">欧洲</option>
                 </select>
             </p>
-            <script>
-               $("#existClassName").val($("#existClassSelect").children().eq(0).text());
-            </script>
-            <script>
-                $("#existClassSelect").bind("change", function () {
-                    $("#existClassName").val($(this).val());
-                });
-            </script>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="check_arrageExistClass()">保存</button></p>
             <span style="color:red;" th:text="${errInfo}"/>
         </form>

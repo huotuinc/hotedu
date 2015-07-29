@@ -14,6 +14,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * @author CJ
  */
@@ -213,6 +215,7 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
 
             if(agentRepository.count()==0){
                 Agent agent=new Agent();
+                Date d = new Date();
                 agent.setName("火图科技");
                 agent.setLoginName("hotedu");
                 agent.setArea("杭州");
@@ -220,6 +223,7 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 agent.setCertificateNumber(600);
                 agent.setSendCertificateNumber(0);
                 agent.setLevel("一级");
+                agent.setRegisterDate(d);
                 loginService.newLogin(agent,"123456");
             }
 

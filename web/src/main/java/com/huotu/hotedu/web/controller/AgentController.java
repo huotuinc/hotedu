@@ -3,6 +3,7 @@ package com.huotu.hotedu.web.controller;
 import com.huotu.hotedu.entity.Agent;
 import com.huotu.hotedu.entity.ClassTeam;
 import com.huotu.hotedu.entity.Member;
+import com.huotu.hotedu.entity.Result;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -92,7 +94,7 @@ public class AgentController {
         if (arrayList == null || arrayList.isEmpty()) {
             errInfo = "成员集合为空，没有需要安排分班的学员";
         } else {
-            ClassTeam classTeam = agentService.findOneClassTeamByClassName(className);
+            ClassTeam classTeam = agentService.findClassTeamById(Long.parseLong(className));
             agentService.arrangeClass(arrayList, classTeam);
         }
         model.addAttribute("errInfo", errInfo);
@@ -173,6 +175,26 @@ public class AgentController {
         model.addAttribute("noClassMemberArrayLis", URLEncoder.encode(noClassMemberArrayLis, "UTF-8"));
         model.addAttribute("errInfo", errInfo);
         return turnPage;
+    }
+
+    /**
+     * Created by cwb on 2015/7/29
+     * @param agent
+     * @return
+     */
+    @RequestMapping("/pc/loadAvailableClassTeams")
+    @ResponseBody
+    public Result loadAvailableClassTeams(@AuthenticationPrincipal Agent agent) {
+        Result result = new Result();
+        List<ClassTeam> existClassList = agentService.findAvailableClassTeams(agent);
+        if(existClassList==null) {
+            result.setStatus(0);
+            result.setMessage("没有可用的班级，请新建");
+        }else {
+            result.setStatus(1);
+            result.setBody(existClassList);
+        }
+        return result;
     }
 
     /**
