@@ -20,8 +20,6 @@ import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Created by luffy on 2015/6/10.
  *
@@ -101,7 +99,7 @@ public class ExamGuideServiceTest {
     }
     @Test
     public void loadQa(){
-        Page<Qa> pages=qaService.loadQa(0, 10);
+        Page<Qa> pages=qaService.searchQa(0,10,null);
         for(Qa q:pages){
             System.out.println(q);
         }

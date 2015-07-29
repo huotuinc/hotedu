@@ -46,7 +46,7 @@ public class MessageContentController {
 //     * @param model 返回客户端集
 //     * @return  messagecontent.html
 //     */
-//    @RequestMapping("/backend/loadMessagecontent")
+//    @RequestMapping("/backend/searchMessagecontent")
 //    public String loadMessageContent(Model model){
 //        Page<MessageContent> pages=messageContentService.loadMessageContent(0, PAGE_SIZE);
 //        long sumElement=pages.getTotalElements();
@@ -66,7 +66,6 @@ public class MessageContentController {
      */
     @RequestMapping("/backend/searchMessagecontent")
     public String searchMessageContent(@RequestParam(required = false)Integer pageNo,
-                                       @RequestParam(required = false)Integer pageSize,
                                        @RequestParam(required = false) String keywords, Model model){
         String turnPage="/backend/messagecontent";
         if(pageNo==null||pageNo<0){
@@ -127,6 +126,8 @@ public class MessageContentController {
     public String delMessageContent(@RequestParam(required = false)Integer pageNo,@RequestParam(required = false)String keywords,Long id,Model model){
         String returnPage="redirect:/backend/searchMessagecontent";
         messageContentService.delMessageContent(id);
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("keywords", keywords);
         return returnPage;
     }
 
@@ -156,7 +157,7 @@ public class MessageContentController {
      * newmessagecontent.html页面点击保存添加后跳转
      * @param title     标题
      * @param content   描述
-     * @return      不出异常重定向：/backend/loadMessagecontent
+     * @return      不出异常重定向：/backend/searchMessagecontent
      */
     //TODO 是否搞抛出异常
     @RequestMapping(value="/backend/addSaveMessagecontent",method = RequestMethod.POST)
@@ -179,7 +180,7 @@ public class MessageContentController {
             messageContent.setLastUploadDate(new Date());
             messageContent.setTop("1".equals(top)? true:false);
             messageContentService.addMessageContent(messageContent);
-            return "redirect:/backend/loadMessagecontent";
+            return "redirect:/backend/searchMessagecontent";
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -194,7 +195,7 @@ public class MessageContentController {
      * @param title     标题
      * @param content     描述
      * @param top    是否置顶
-     * @return      重定向到：/backend/loadMessagecontent
+     * @return      重定向到：/backend/searchMessagecontent
      */
     @RequestMapping("/backend/modifySaveMessagecontent")
     public String modifySaveMessageContent(Long id,String title,String content,Boolean top,@RequestParam("smallimg") MultipartFile file) throws Exception{
@@ -214,7 +215,7 @@ public class MessageContentController {
             messageContent.setTop(top);
             messageContent.setLastUploadDate(new Date());
             messageContentService.modify(messageContent);
-            return "redirect:/backend/loadMessagecontent";
+            return "redirect:/backend/searchMessagecontent";
         } catch (IOException e) {
             e.printStackTrace();
         }

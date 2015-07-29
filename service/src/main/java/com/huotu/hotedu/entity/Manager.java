@@ -28,7 +28,7 @@ public class Manager extends Login{
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(
-                //new SimpleGrantedAuthority("ROLE_EDITOR"),//编辑权限
+                new SimpleGrantedAuthority("ROLE_EDITOR"),//编辑权限
                 new SimpleGrantedAuthority("ROLE_USER"),
                 new SimpleGrantedAuthority("ROLE_ADMIN"),
                 new SimpleGrantedAuthority("ROLE_GRANT")

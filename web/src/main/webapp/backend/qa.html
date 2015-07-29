@@ -72,18 +72,18 @@
                     <li>
                         <p style="height:30px; line-height:30px; margin-left: 20px;">友情链接</p>
                         <ul class="sub-menu">
-                            <li><a href="link.html" th:href="@{/backend/loadLink}">友情链接</a></li>
+                            <li><a href="link.html" th:href="@{/backend/searchLink}">友情链接</a></li>
                         </ul>
                     </li>
                     <li>
                         <p style="height:30px; line-height:30px; margin-left: 20px;">常见问题</p>
                         <ul class="sub-menu">
-                            <li class="on"><a href="qa.html" th:href="@{/backend/loadQa}">常见问题</a></li>
+                            <li class="on"><a href="qa.html" th:href="@{/backend/searchQa}">常见问题</a></li>
                         </ul>
                     </li>
                     <li><p style="height:30px; line-height:30px; margin-left: 20px;">资讯动态</p>
                         <ul class="sub-menu">
-                            <li><a href="messagecontent.html" th:href="@{/backend/loadMessagecontent}">资讯动态</a></li>
+                            <li><a href="messagecontent.html" th:href="@{/backend/searchMessagecontent}">资讯动态</a></li>
                         </ul>
                     </li>
 
@@ -179,14 +179,15 @@
                             <td>
                                 <a class="link-update" href="newqa.html" th:href="@{/backend/modifyQa(id=${g.id})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a>
-                                <a class="real-delete" href="#" th:href="@{/backend/delQa(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}"></a>
+                                <a class="real-delete" href="#"
+                                   th:href="@{/backend/delQa(id=${g.id},pageNo=${pageNo},keywords=${keywords})}"></a>
                             </td>
                         </tr>
                     </table>
                     <div class="list-page">
-                        <a href="#" th:href="@{/backend/pageQa(n=${n}-1,keywords=${keywords},sumpage=${sumpage})}">上一页</a>
-                        <a href="#" th:href="@{/backend/pageQa(n=${n}+1,keywords=${keywords},sumpage=${sumpage})}">下一页</a>
-                        <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span th:text="${sumpage}">1</span> 页
+                        <a href="#" th:href="@{/backend/searchQa(pageNo=${pageNo}-1,keywords=${keywords})}">上一页</a>
+                        <a href="#" th:href="@{/backend/searchQa(pageNo=${pageNo}+1,keywords=${keywords})}">下一页</a>
+                        <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
                     </div>
                 </div>
             </form>
