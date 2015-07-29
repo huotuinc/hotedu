@@ -242,11 +242,13 @@
 <div class="lhx" style=" background-color:#0195ff; color:#fff"><a href="#">友情链接</a>| <a href="http://www.gcvaic.org">公共证书查询入口</a></div>
 
 
-<div class="footer">
+<div class="footer" th:remove="all">
     <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
 
     <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
 </div>
+<!--载入footer-->
+<div class="footer" th:include="pc/footer :: copyfooter"></div>
 
 
 <div style="width: 126px; height: 189px; position: fixed; top:220px; right: 20px; display: block; z-index: 100;">
