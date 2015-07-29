@@ -76,7 +76,7 @@
          class="ystwo">
         <div class="ysykone bg " th:class="${navigation}=='bmxx'? 'ysykone bg on':'ysykone bg'"><a href="#" th:href="@{/pc/searchMembers}"><span>报名信息</span> </a></div>
         <div class="ysyktwo bg" th:class="${navigation}=='xxtz'? 'ysyktwo bg on':'ysyktwo bg'"><a href="#"><span>消息通知</span> </a></div>
-        <div class="ysykthree bg" th:class="${navigation}=='bjgl'? 'ysykthree bg on':'ysykthree bg'"><a href="#" th:href="@{/pc/loadNoClassMembers}"><span>班级管理</span> </a></div>
+        <div class="ysykthree bg" th:class="${navigation}=='bjgl'? 'ysykthree bg on':'ysykthree bg'"><a href="#" th:href="@{/pc/loadClassMembers}"><span>班级管理</span> </a></div>
         <div class="ysykfour bg on" th:class="${navigation}=='bygl'? 'ysykfour bg on':'ysykfour bg'"><a href="#" th:href="@{/pc/graduationMembers}"><span>毕业管理</span> </a></div>
     </div>
 
@@ -424,7 +424,7 @@
                                     <td>15236699696</td>
                                     <td><a class="link-update" href="#">查看</a></td>
                                 </tr>
-                                <tr th:each="g:${allNoClassMembersList}">
+                                <tr th:each="g:${allClassMembersList}">
                                     <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
                                     <td class="checkboxId" th:text="${g.id}">01</td>
                                     <td th:text="${g.realName}">小米</td>
