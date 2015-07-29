@@ -11,7 +11,7 @@ import org.springframework.orm.jpa.vendor.EclipseLinkJpaDialect;
  * 生产时的配置
  * @author luffy luffy.ja at gmail.com
  */
-@Profile("prod")
+@Profile("container")
 @Configuration
 public class ProdRuntimeConfig extends RuntimeConfig{
     @Override
@@ -21,7 +21,7 @@ public class ProdRuntimeConfig extends RuntimeConfig{
 
     @Override
     public String persistenceUnitName() {
-        return "hotedu_deve";
+        return "hotedu";
     }
 
     @Override
