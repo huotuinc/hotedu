@@ -121,18 +121,20 @@ public class AgentController {
                                      @RequestParam(required = false) String searchSort,
                                      @RequestParam(required = false) Integer pageNo,
                                      @RequestParam(required = false) Boolean noClassMemberArrageClassDiv2Style,
-                                     @RequestParam(required = false) Boolean isHaveClass,
+                                     @RequestParam(required = false) String isHaveClass,
                                      Model model) {
         if (pageNo == null || pageNo < 0) {
             pageNo = 0;
         }
-        isHaveClass = isHaveClass==null ? false : isHaveClass;
-        Page<Member> pages = isHaveClass ? agentService.findHaveClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort) : agentService.findNoClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort);
+        if(isHaveClass==null||"".equals(isHaveClass)) {
+            isHaveClass = "false";
+        }
+        Page<Member> pages = "true".equals(isHaveClass) ? agentService.findHaveClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort) : agentService.findNoClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort);
         long totalRecords = pages.getTotalElements();
         if (pages.getNumberOfElements() == 0) {
             pageNo = pages.getTotalPages() - 1;
             pageNo = pageNo<0 ? 0 : pageNo;
-            pages = isHaveClass ? agentService.findHaveClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort) : agentService.findNoClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort);
+            pages = "true".equals(isHaveClass) ? agentService.findHaveClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort) : agentService.findNoClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort);
         }
         model.addAttribute("agent", agent);
         model.addAttribute("allClassMembersList", pages);

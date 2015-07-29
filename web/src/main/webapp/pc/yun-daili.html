@@ -279,10 +279,12 @@
                     <div style=" text-align:center;display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex;"
                          class="ystwo">
                         <div>
-                            <input title="" class="newfb ysss" name="sub" value="未分班" type="submit"/>
+                            <!--<input title="" style="display: none" class="newfb ysss" name="sub" value="未分班" type="submit"/>-->
+                            <button class="newfb ysss"><a th:href="@{/pc/loadClassMembers}"><span style="color: white">未分班</span></a></button>
                         </div>
                         <div>
-                            <input title="" class="newfb ysss" name="sub" value="已有班级" type="submit"/>
+                            <!--<input title="" style="display: none" class="newfb ysss" name="sub" value="已有班级" type="submit"/>-->
+                            <button class="newfb ysss"><a th:href="@{/pc/loadClassMembers(isHaveClass='true')}"><span style="color: white">已有班级</span></a></button>
                         </div>
                     </div>
                     <p style="clear:both"></p>
@@ -303,7 +305,8 @@
                                             }
                                     );
                                 </script>
-                                <td><input title="" class="ysss" name="sub" value="安排班级" type="button" onclick="noClassMemberArrageClass()"/></td>
+                                <td><input  class="ysss" th:style="${classAndExam!='apbj'?'display:none'" name="apbj" value="安排班级" type="button" onclick="noClassMemberArrageClass()"/>
+                                    <input  class="ysss" th:style="${classAndExam!='kssj'?'display:none'" name="kssj" value="安排考试时间" type="button" onclick="ClassMemberArrageClass()"/></td>
                                 <script>
                                     function noClassMemberArrageClass() {
                                         var str="";
@@ -322,8 +325,6 @@
                                         }
                                         else{
                                             $("#noClassMemberArrayLis").val(str);
-                                            $("#noClassMemberArrayLis2").val(str);
-                                            $("#noClassMemberArrayLis3").val(str);
                                             $("#noClassMemberArrageClassDiv").show();
                                         }
                                     }
