@@ -173,8 +173,8 @@ function check_arrageExistClass() {
                 if(result.status==0){
                     $("#apyysb").text(result.message);
                 }else if(result.status==1){
-                    alert(result.message);
                     $("#searchClassMembers").submit();
+                    alert(result.message);
                 }
             },
             error:function(){
