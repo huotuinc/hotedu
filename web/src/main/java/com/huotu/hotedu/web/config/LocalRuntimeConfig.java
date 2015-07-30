@@ -11,7 +11,7 @@ import org.springframework.orm.jpa.vendor.EclipseLinkJpaDialect;
  * 为了允许本地运行整个webapplication而设置的本地专用配置项
  * @author luffy luffy.ja at gmail.com
  */
-@Profile("!prod")
+@Profile("!container")
 @Configuration
 public class LocalRuntimeConfig extends RuntimeConfig {
     @Override
@@ -21,7 +21,7 @@ public class LocalRuntimeConfig extends RuntimeConfig {
 
     @Override
     public String persistenceUnitName() {
-        return "hotedu_deve";
+        return "hotedu_dev";
     }
 
     @Override

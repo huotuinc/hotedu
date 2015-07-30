@@ -159,4 +159,11 @@ public class MemberService {
     }
 
 
+    public void passExamById(Long id){
+        Member member=memberRepository.findOne(id);
+        member.setPassed(true);
+        memberRepository.save(member);
+    }
+
+
 }

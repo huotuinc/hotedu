@@ -67,6 +67,23 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>com.huotu.tools.deploy</groupId>
+                <artifactId>huotu-maven-plugin</artifactId>
+                <version>1.0</version>
+                <configuration>
+                    <server>huotudeployserver</server>
+                    <url>http://120.24.243.104/huotudeploy</url>
+                    <projectId>4501</projectId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>

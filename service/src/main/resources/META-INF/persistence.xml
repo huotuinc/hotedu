@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
 
-    <persistence-unit name="hotedu_deve" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="hotedu_dev" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://120.24.243.104:3307/hotedu?useUnicode=true&amp;characterEncoding=UTF8"/>
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://120.24.243.104:3307/hotedu?useUnicode=true&amp;characterEncoding=UTF8"/>
             <property name="javax.persistence.jdbc.user" value="dbuser"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.password" value="ddbbuusseerr"/>
             <property name="javax.persistence.schema-generation.database.action" value="create"/>
             <property name="eclipselink.logging.level.sql" value="FINE"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="hotedu" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <non-jta-data-source>jdbc/hotedu</non-jta-data-source>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <properties>
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
         </properties>
     </persistence-unit>
 

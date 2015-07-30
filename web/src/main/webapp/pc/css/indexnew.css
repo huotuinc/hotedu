@@ -1135,3 +1135,20 @@ button.btn, input.btn {
   background-color: #A5A5A5;
   border: 1px solid #A5A5A5;
   width: 117px;}
+.newfb.on{ background-color: #0097FE;
+  border: 1px solid #0097FE;}
+.bjgl_class{
+	text-align: center;
+	font:14px/20px Verdana,Simsun,Helvetica,Arial,sans-serif;
+	padding: 3px 10px;
+	color: #fff;
+	margin-left: 24px;
+	background-color: #A5A5A5;
+	border: 1px solid #A5A5A5;
+	width: 95px;
+}
+.bjgl_class.on{
+	background-color: #ffffff;
+	color: #000000;
+	border: 1px solid #56abe4;
+}

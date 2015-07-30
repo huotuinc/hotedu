@@ -119,12 +119,24 @@ public class AgentService {
     public Agent findOneById(Long id){return agentRepository.findOne(id);}
 
     /**
-     *
+     *Created by jiashubing on 2015/7/24.
      * 查找一个已有班级
      * @param id 班级id
      * @return 班级对象
      */
     public ClassTeam findOneClassTeamById(Long id){return classTeamRepository.findOne(id);}
+
+    /**
+     *Created by jiashubing on 2015/7/24.
+     * 查找一个已有班级
+     * @param className 班级名称
+     * @return 班级对象
+     */
+    public ClassTeam findOneClassTeamByClassName(String className){return classTeamRepository.findByClassName(className);}
+
+    public ClassTeam findClassTeamById(long id) {
+        return classTeamRepository.findOne(id);
+    }
 
     /**
      * Created by jiashubing on 2015/7/24.
@@ -199,38 +211,63 @@ public class AgentService {
             }
         }, new PageRequest(pageNo, pageSize));
     }
-//
-//    /**
-//     * Created by jiashubing on 2015/7/24.
-//     * 显示所有未分班学员 每页10条
-//     * @param n         第几页
-//     * @param pagesize  每页几条
-//     * @return          学员集合
-//     */
-//    public Page<Member> findNoClassMembers(Integer n,Integer pagesize){
-//        return  memberRepository.findAll(new Specification<Member>() {
-//            @Override
-//            public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)), cb.isNull(root.get("theClass").as(ClassTeam.class)));
-//            }
-//        }, new PageRequest(n, pagesize));
-//    }
-
 
     /**
      * Created by jiashubing on 2015/7/24.
      * 显示所有已分班学员 每页10条
-     * @param n         第几页
-     * @param pagesize  每页几条
-     * @return          学员集合
+     * 加载、搜索、上一页、下一页
+     * @param agent         当前代理商
+     * @param pageNo        第几页
+     * @param pageSize      每页几条
+     * @param keywords      关键词
+     * @param searchSort    搜索类型
+     * @return              学员集合
      */
-    public Page<Member> findHaveClassMembers(Integer n,Integer pagesize){
+    public Page<Member> findHaveClassMembers(Agent agent,Integer pageNo,Integer pageSize,String keywords,String searchSort){
         return  memberRepository.findAll(new Specification<Member>() {
             @Override
             public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)), cb.isNotNull(root.get("theClass").as(ClassTeam.class)));
+                if ("".equals(keywords)||keywords==null) {
+                    return cb.and(
+                            cb.equal(root.get("agent").as(Agent.class), agent),
+                            cb.isTrue(root.get("enabled").as(Boolean.class)),
+                            cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+                            cb.isTrue(root.get("payed").as(Boolean.class))
+                    );
+                }else if("all".equals(searchSort)){
+                    return cb.and(
+                            cb.equal(root.get("agent").as(Agent.class), agent),
+                            cb.isTrue(root.get("enabled").as(boolean.class)),
+                            cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+                            cb.isTrue(root.get("payed").as(Boolean.class)),
+                            cb.or(
+                                    cb.like(root.get("realName").as(String.class),"%"+keywords+"%"),
+                                    cb.like(root.get("phoneNo").as(String.class),"%"+keywords+"%"),
+                                    cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
+                            )
+                    );
+                }else{
+                    if("area".equals(searchSort)) {
+                        return cb.and(
+                                cb.equal(root.get("agent").as(Agent.class), agent),
+                                cb.isTrue(root.get("enabled").as(boolean.class)),
+                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+                                cb.isTrue(root.get("payed").as(Boolean.class)),
+                                cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
+                        );
+                    }
+                    else{
+                        return cb.and(
+                                cb.equal(root.get("agent").as(Agent.class), agent),
+                                cb.isTrue(root.get("enabled").as(boolean.class)),
+                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+                                cb.isTrue(root.get("payed").as(Boolean.class)),
+                                cb.like(root.get(searchSort).as(String.class), "%" + keywords + "%")
+                        );
+                    }
+                }
             }
-        }, new PageRequest(n, pagesize));
+        }, new PageRequest(pageNo, pageSize));
     }
 
     /**
@@ -287,4 +324,14 @@ public class AgentService {
         classTeamRepository.save(classTeam);
     }
 
+    /**
+     * Created by cwb on 2015/7/29
+     * 根据代理商查找可用于分班的班级
+     * @param agent
+     * @return
+     */
+    public List<ClassTeam> findAvailableClassTeams(Agent agent) {
+        List<ClassTeam> classTeams = classTeamRepository.findByAgent(agent);
+        return classTeams;
+    }
 }

@@ -1,11 +1,11 @@
 $(function(){
 	$("#memberLi").mouseenter(function(){
 		$(".lbpo").fadeIn("fast");
-		$(".zhizhen").fadeIn("fast");
+		$(".zhizheni").fadeIn("fast");
 	});
 	$(".lbpo").mouseleave(function(){
 		$(this).fadeOut("fast");
-		$(".zhizhen").fadeOut("fast");
+		$(".zhizheni").fadeOut("fast");
 	});
 	$("#btn_newMember").click(function(){
 		$("#addMember").show();
@@ -24,7 +24,45 @@ $(function(){
 		}
 	});
 
-})
+});
+$(function() {
+	$("#btn_chooseExistClass").click(function() {
+		$.ajax({
+			url:path+"/pc/loadAvailableClassTeams",
+			type:"post",
+			dataType:"json",
+			success:function(result){
+				if(result.status==0){
+					alert(result.message);
+				}else if(result.status==1){
+					$("#noClassMemberArrageClassDiv").hide();
+					$("#existClassDiv").show();
+					var sel = $("#existClassSelect");
+					sel.empty();
+					for(var i=0;i<result.body.length;i++) {
+						$("<option value='"+ result.body[i].id+"'>"+
+							result.body[i].className+
+							"</option>").appendTo(sel);
+					}
+				}
+			},
+			error:function(){
+				alert("系统异常,加载班级列表失败");
+			}
+		});
+	})
+});
+
+$(function() {
+	$("#memberLi").mouseenter(function(){
+		$(".zhizheno").fadeIn("fast");
+		$(".lbpoo").fadeIn("fast");
+	});
+	$(".lbpoo").mouseleave(function(){
+		$(this).fadeOut("fast");
+		$(".zhizheno").fadeOut("fast");
+	});
+});
 
 function addMember(){
 	var reg=/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
@@ -48,8 +86,9 @@ function addMember(){
 		dataType:"json",
 		success:function(result){
 			if(result.status==0){
-				alert(result.message);
+				//alert(result.message);
 				$("#addMember").hide();
+				location.reload();
 			}else if(result.status==1){
 				$("#add_Memberinfo").text(result.message);
 			}

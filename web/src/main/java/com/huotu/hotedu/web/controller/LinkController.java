@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
 
@@ -28,92 +29,56 @@ public class LinkController {
     public static final int PAGE_SIZE=10;
 
     /**
-     * 显示友情链接信息
-     * @param model 返回客户端集
-     * @return  link.html
-     */
-    @RequestMapping("/backend/loadLink")
-    public String searchExamGuide(Model model){
-        Page<Link> pages=linkService.loadLink(0,PAGE_SIZE);
-        long sumElement=pages.getTotalElements();
-        model.addAttribute("allLinkList",pages);
-        model.addAttribute("sumpage",sumElement/pages.getSize()+(sumElement%pages.getSize()>0? 1:0));
-        model.addAttribute("n",0);
-        model.addAttribute("keywords","");
-        model.addAttribute("sumElement",sumElement);
-        return "/backend/link";
-    }
-
-    /**
      * 搜索符合条件的友情链接信息
      * @param keywords  搜索关键字
      * @param model     返回客户端参数集
      * @return      link.html
      */
     @RequestMapping("/backend/searchLink")
-    public String searchLinkController(String keywords,Model model) {
-
-        Page<Link> pages=linkService.searchLink(0, PAGE_SIZE, keywords);
-        long sumElement=pages.getTotalElements();
-        model.addAttribute("allLinkList",pages);
-        model.addAttribute("sumpage",sumElement/pages.getSize()+(sumElement%pages.getSize()>0? 1:0));
-        model.addAttribute("n",0);
-        model.addAttribute("keywords",keywords);
-        model.addAttribute("sumElement",sumElement);
-        return "/backend/link";
-
-    }
-
-    /**
-     * 分页显示
-     * @param n             显示第几页
-     * @param sumpage    分页总页数
-     * @param keywords      检索关键字(使用检索功能后有效)
-     * @param model         返回客户端集合
-     * @return          link.html
-     */
-    @RequestMapping("/backend/pageLink")
-    public String pageLink(int n,int sumpage,String keywords,Model model){
-        //如果已经到分页的第一页了，将页数设置为0
-        if (n < 0){
-            n++;
-        }else if(n + 1 > sumpage){//如果超过分页的最后一页了，将页数设置为最后一页
-            n--;
+    public String searchLinkController(@RequestParam(required = false)Integer pageNo,
+                                       @RequestParam(required = false) String keywords, Model model) {
+        String turnPage="/backend/link";
+        if(pageNo==null||pageNo<0){
+            pageNo=0;
         }
-        Page<Link> pages = linkService.searchLink(n, PAGE_SIZE, keywords);
-        model.addAttribute("allLinkList",pages);
-        model.addAttribute("sumpage",sumpage);
-        model.addAttribute("n",n);
-        model.addAttribute("keywords",keywords);
-        model.addAttribute("sumElement",pages.getTotalElements());
-        return "/backend/link";
+        Page<Link> pages = linkService.searchLink(pageNo, PAGE_SIZE, keywords);
+        long totalRecords = pages.getTotalElements();
+        int numEl =  pages.getNumberOfElements();
+        if(numEl==0) {
+            pageNo=pages.getTotalPages()-1;
+            if(pageNo<0) {
+                pageNo = 0;
+            }
+            pages = linkService.searchLink(pageNo, PAGE_SIZE, keywords);
+            totalRecords = pages.getTotalElements();
+        }
+        model.addAttribute("allLinkList", pages);
+        model.addAttribute("totalPages",pages.getTotalPages());
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("keywords", keywords);
+        model.addAttribute("totalRecords", totalRecords);
+        return turnPage;
+
+
     }
+
+
 
      /**
      * 删除友情链接信息
-     * @param n             显示第几页
-     * @param sumpage       分页总页数
      * @param keywords      检索关键字(使用检索功能后有效)
      * @param id            需要被删除的记录id
-     * @param sumElement    总记录数
      * @param model         返回客户端集合
      * @return      link.html
      */
     @RequestMapping("/backend/delLink")
-    public String delLink(int n,int sumpage,String keywords,Long id,Long sumElement,Model model){
+
+    public String delLink(@RequestParam(required = false)Integer pageNo,@RequestParam(required = false)String keywords, Long id, Model model) {
+        String returnPage="redirect:/backend/searchLink";
         linkService.delLink(id);
-        if((sumElement-1)%PAGE_SIZE==0){
-            if(n>0&&n+1==sumpage){n--;}
-            sumpage--;
-        }
-        sumElement--;
-        Page<Link> pages = linkService.searchLink(n, PAGE_SIZE, keywords);
-        model.addAttribute("sumpage",sumpage);
-        model.addAttribute("allLinkList",pages);
-        model.addAttribute("n",n);
-        model.addAttribute("keywords",keywords);
-        model.addAttribute("sumElement",sumElement);
-        return "/backend/link";
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("keywords", keywords);
+        return returnPage;
     }
 
     /**
@@ -142,7 +107,7 @@ public class LinkController {
      * newlink.html页面点击保存添加后跳转
      * @param title     标题
      * @param url   url
-     * @return      不出异常重定向：/backend/loadLink
+     * @return      不出异常重定向：/backend/searchLink
      */
     //TODO 是否搞抛出异常
     @RequestMapping("/backend/addSaveLink")
@@ -152,7 +117,7 @@ public class LinkController {
         link.setUrl(url);
         link.setLastUploadDate(new Date());
         linkService.addLink(link);
-        return "redirect:/backend/loadLink";
+        return "redirect:/backend/searchLink";
     }
 
     /**
@@ -160,7 +125,7 @@ public class LinkController {
      * @param id    修改后的id
      * @param title     标题
      * @param url     url
-     * @return      重定向到：/backend/loadLink
+     * @return      重定向到：/backend/searchLink
      */
     @RequestMapping("/backend/modifySaveLink")
     public String ModifySaveLink(Long id,String title,String url){
@@ -169,6 +134,6 @@ public class LinkController {
         link.setUrl(url);
         link.setLastUploadDate(new Date());
         linkService.modify(link);
-        return "redirect:/backend/loadLink";
+        return "redirect:/backend/searchLink";
     }
 }

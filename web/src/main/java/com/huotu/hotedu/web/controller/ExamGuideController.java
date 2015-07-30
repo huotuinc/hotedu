@@ -1,4 +1,5 @@
 package com.huotu.hotedu.web.controller;
+
 import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.service.ExamGuideService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,28 +30,24 @@ public class ExamGuideController {
      * 用来储存分页中每页的记录数
      */
     public static final int PAGE_SIZE = 10;
-    //public static final String SEARCH_URL="/backend/searchExamGuide";
+
 
     /**
      * 搜索符合条件的考试指南信息
-     *
-     * @param keywords 搜索关键字 可以为空
-     * @param model    返回客户端参数集
-     * @return examguide.html
+     * @param pageNo       当前显示的页数
+     * @param keywords     关键字
+     * @param model        返回的参数
+     * @return             examguide.html
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/searchExamGuide")
     public String searchExamGuide(@RequestParam(required = false)Integer pageNo,
-                                  @RequestParam(required = false)Integer pageSize,
                                   @RequestParam(required = false) String keywords, Model model) {
         String turnPage="/backend/examguide";
         if(pageNo==null||pageNo<0){
             pageNo=0;
         }
-        if(pageSize==null) {
-            pageSize = PAGE_SIZE;
-        }
-        Page<ExamGuide> pages = examGuideService.searchExamGuide(pageNo, pageSize, keywords);
+        Page<ExamGuide> pages = examGuideService.searchExamGuide(pageNo, PAGE_SIZE, keywords);
         long totalRecords = pages.getTotalElements();
         int numEl =  pages.getNumberOfElements();
         if(numEl==0) {
@@ -58,7 +55,7 @@ public class ExamGuideController {
             if(pageNo<0) {
                 pageNo = 0;
             }
-            pages = examGuideService.searchExamGuide(pageNo, pageSize, keywords);
+            pages = examGuideService.searchExamGuide(pageNo, PAGE_SIZE, keywords);
             totalRecords = pages.getTotalElements();
         }
         model.addAttribute("allGuideList", pages);

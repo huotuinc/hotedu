@@ -1,77 +1,48 @@
 package com.huotu.hotedu.test.web;
 
-import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.repository.MessageContentRepository;
 import com.huotu.hotedu.service.LoginService;
-import com.huotu.hotedu.test.TestWebConfig;
 import libspringtest.SpringWebTest;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockHttpSession;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.util.StreamUtils;
-
-import java.io.ByteArrayOutputStream;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 /**
- * Created by luffy on 2015/6/10.
+ * Created by shiliting on 2015/7/29.
  *
- * @author luffy luffy.ja at gmail.com
+ * @author shiliting
  */
-@ActiveProfiles("test")
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestWebConfig.class)
-@WebAppConfiguration
+
 public class MessageContentControllerTest extends SpringWebTest {
 
-    protected MockHttpSession loginAs(String userName, String password) throws Exception {
-        MockHttpSession session = (MockHttpSession) this.mockMvc.perform(get("/"))
-                .andReturn().getRequest().getSession(true);
-        session = (MockHttpSession) this.mockMvc.perform(post("/login").session(session)
-                .param("username", userName).param("password", password))
-                .andDo(print())
-                .andReturn().getRequest().getSession();
-
-        saveAuthedSession(session);
-        return session;
-    }
+    private static final Log log = LogFactory.getLog(ExamGuideControllerTest.class);
 
     @Autowired
     private LoginService loginService;
     @Autowired
     private MessageContentRepository messageContentRepository;
+    // /backend/searchExamGuide 非登录状态无法访问
+    //
+    // /backend/searchExamGuide 最多展示 n 个数据 n 自定义
+    //
+    // /backend/delExamGuide  删除&查询
+    // 删除
+    // id 要删除的ID
+    // 查询
+    // &keywords= 删除以后 显示指定关键字搜索页面
+    // &n=0 删除完成以后显示的页索引
+    // &paging=10 每页10条
+
+    // /backend/searchExamGuide
+    // 查询
+    // &keywords= 删除以后 显示标题包含指定关键字搜索页面
+    // &n=0 删除完成以后显示的页索引
+    // &paging=10 每页10条
+
+    // 修改的操作 需要ROLE_EDITOR 权限
+    // Editor 是可以修改的
+    // 但是Member 是不可以的
 
 
 
-
-    private void checkMemeber(String name) {
-        try {
-            loginService.loadUserByUsername(name);
-        } catch (UsernameNotFoundException ex) {
-            Member member = new Member();
-            member.setLoginName(name);
-            loginService.newLogin(member, name);
-        }
-    }
-
-    @Test
-    public void newMessageCheck() throws Exception{
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        StreamUtils.copy(getClass().getResourceAsStream("testUpload.jpg"), buffer);
-        mockMvc.perform(
-                fileUpload("/backend/addSaveMessagecontent")
-                .file("smallimg", buffer.toByteArray())
-                .param("title", "1234567890")
-                .param("content", "asdfghjkll")
-                .param("top", "false")
-        ).andDo(print());
-    }
 }
