@@ -1,10 +1,13 @@
 package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.Agent;
+import com.huotu.hotedu.entity.Login;
+import com.huotu.hotedu.entity.Manager;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,8 +30,8 @@ public class LoginController {
      * @return login.html
      */
     @RequestMapping("/backend/login")
-    public String index(Model model){
-        return "backend/login";
+    public String index(){
+        return "backend/index";
     }
 
 
@@ -55,12 +58,16 @@ public class LoginController {
     }
 
     @RequestMapping("/pc/loginSuccess")
-    public String loginSuccess(Model model) {
+    public String loginSuccess(@AuthenticationPrincipal Login user, Model model) {
         String turnPage = "pc/yun-index";
         String msgInfo = "";
-        String style = "padding:0px;";
-        model.addAttribute("style",style);
-        model.addAttribute("msgInfo",msgInfo);
+        if(user instanceof Manager) {
+            turnPage = "redirect:/backend/login";
+        }else {
+            String style = "padding:0px;";
+            model.addAttribute("style",style);
+            model.addAttribute("msgInfo",msgInfo);
+        }
         return turnPage;
     }
 
