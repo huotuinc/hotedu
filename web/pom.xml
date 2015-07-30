@@ -20,6 +20,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.huotu.huobanplus</groupId>
+            <artifactId>iqiyi-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!--VFS-->
         <dependency>
             <groupId>org.apache.commons</groupId>

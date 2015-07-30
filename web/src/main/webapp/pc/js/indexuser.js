@@ -33,6 +33,7 @@ $(function() {
 			dataType:"json",
 			success:function(result){
 				if(result.status==0){
+					noClassMemberArrageClass();
 					alert(result.message);
 				}else if(result.status==1){
 					$("#noClassMemberArrageClassDiv").hide();
