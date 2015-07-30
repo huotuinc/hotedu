@@ -291,7 +291,8 @@
                     <p style="clear:both"></p>
                     <form action="#" id="searchClassMembers" method="post" th:action="@{/pc/loadClassMembers(isHaveClass=${isHaveClass})}">
                         <p style="height:5px;"></p>
-                        <table style="float: left;" class="search-tab" th:style="${isHaveClass} ? 'display: none;' : 'float: left;'">
+                        <!--安排班级start-->
+                        <table style="float: left;" class="search-tab" th:style="${isHaveClass}=='true' ? 'display: none;' : 'float: left;'">
                         <tr>
                                 <th width="10"></th>
                                 <td><input title="" id="noClassCheckAll" type="checkbox" value="checkbox"/></td>
@@ -306,8 +307,8 @@
                                             }
                                     );
                                 </script>
-                                <td><input  class="ysss" th:style="${classAndExam}!='apbj'?'display:none'" name="apbj" value="安排班级" type="button" onclick="noClassMemberArrageClass()"/>
-                                    <input  class="ysss" th:style="${classAndExam}!='kssj'?'display:none'" name="kssj" value="安排考试时间" type="button" onclick="ClassMemberArrageClass()"/></td>
+                                <td><input  class="ysss" th:style="${classAndExam}!='apbj'?'display:none'" name="apbj" value="安排班级" type="button" onclick="noClassMemberArrageClass()"/></td>
+                                    <!--<input  class="ysss" th:style="${classAndExam}!='kssj'?'display:none'" name="kssj" value="安排考试时间" type="button" onclick="ClassMemberArrageClass()"/></td>-->
                                 <script>
                                     function noClassMemberArrageClass() {
                                         var str="";
@@ -329,11 +330,15 @@
                                             $("#noClassMemberArrageClassDiv").show();
                                         }
                                     }
+                                    function ClassMemberArrageClass() {
+
+                                    }
                                 </script>
                             </tr>
                         </table>
-
-                        <table style="display: none;" class="search-tab" th:style="${isHaveClass} ? 'float: left;' : 'display: none;'">
+                        <!--安排班级end-->
+                        <!--安排考试时间start-->
+                        <table style="display: none;" class="search-tab" th:style="${isHaveClass}=='true' ? 'float: left;' : 'display: none;'">
                             <tr>
                                 <th width="10"></th>
                                 <td><input title="" type="checkbox" value="checkbox"/></td>
@@ -355,10 +360,12 @@
                                 <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
                             </tr>
                         </table>
+                        <!--安排考试时间end-->
                     </form>
                     <p style="clear:both"></p>
                 </div>
-                <div class="result-wrap">
+                <!--安排班级start-->
+                <div class="result-wrap" th:style="${isHaveClass}=='true' ? 'display: none;' : 'display: block;'">
                     <form name="myform" class="myform" method="post">
                         <div class="result-content">
                             <table class="result-tab" width="100%">
@@ -453,6 +460,64 @@
                         </div>
                     </form>
                 </div>
+                <!--安排班级end-->
+                <!--安排考试时间start-->
+                <div class="result-wrap" style="display: none;" th:style="${isHaveClass}=='true' ? 'display: block;' : 'display: none;'">
+                    <form name="myform" class="myform" method="post">
+                        <div class="result-content">
+                            <table class="result-tab" width="100%">
+                                <thead>
+                                    <th style="width:80px">选择</th>
+                                    <th style="width:80px">序号</th>
+                                    <th style="width:300px">班级</th>
+                                    <th style="width:80px">区域</th>
+                                    <th style="width:80px">人数</th>
+                                    <th style="width:300px">考试时间</th>
+                                    <th style="width:300px">考试地点</th>
+                                    <th style="width:80px;">操作</th>
+                                </thead>
+                                <tbody th:remove="all-but-first">
+                                    <tr>
+                                        <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
+                                        <td class="checkboxId">01</td>
+                                        <td>201504第一期</td>
+                                        <td title="">杭州</td>
+                                        <td>60</td>
+                                        <td>2015-04-01</td>
+                                        <td>火炬大厦</td>
+                                        <td><a class="link-update" href="#">查看</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
+                                        <td class="checkboxId">01</td>
+                                        <td>201504第一期</td>
+                                        <td title="">杭州</td>
+                                        <td>60</td>
+                                        <td>2015-04-01</td>
+                                        <td>火炬大厦</td>
+                                        <td><a class="link-update" href="#">查看</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
+                                        <td class="checkboxId">01</td>
+                                        <td>201504第一期</td>
+                                        <td title="">杭州</td>
+                                        <td>60</td>
+                                        <td>2015-04-01</td>
+                                        <td>火炬大厦</td>
+                                        <td><a class="link-update" href="#">查看</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div style="text-align:center; margin-top:10px;">
+                                <a href="#" th:href=" @{/pc/loadClassMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort},isHaveClass=${isHaveClass})}">上一页</a>
+                                <a href="#" th:href="@{/pc/loadClassMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort},isHaveClass=${isHaveClass})}">下一页</a>
+                                <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--安排考试时间end-->
             </div>
         </div>
 
