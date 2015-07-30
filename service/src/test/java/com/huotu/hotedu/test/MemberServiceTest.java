@@ -116,7 +116,6 @@ public class MemberServiceTest {
         member.setPhoneNo("18069875423");
         member.setApplyDate(new Date(System.currentTimeMillis()));
         member.setConfirmPerson("slt");
-        member.setPassed(false);
         member.setAgent(new Agent());
         member.setPictureUri("/images/");
         member.setPayed(true);

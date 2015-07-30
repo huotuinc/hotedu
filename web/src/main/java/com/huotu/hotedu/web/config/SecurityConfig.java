@@ -65,7 +65,6 @@ public class SecurityConfig {
                             "/backend/js/**",
                             "/backend/fonts/**",
                             "/backend/**.html",
-                            "/backend/login",
                             "/pc/css/**",
                             "/pc/images/**",
                             "/pc/fonts/**",
@@ -82,15 +81,12 @@ public class SecurityConfig {
 
                     //确保任何请求应用程序的用户需要通过身份验证
                     .authorizeRequests()
-                    /*.antMatchers("").authenticated()
-                    .anyRequest().permitAll()*/
                     .antMatchers(
                             "/backend/css/**",
                             "/backend/images/**",
                             "/backend/fonts/**",
                             "/backend/js/**",
                             "/backend/**.html",
-                            "/backend/login",
                             "/pc/css/**",
                             "/pc/images/**",
                             "/pc/fonts/**",

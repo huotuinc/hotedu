@@ -211,7 +211,7 @@
                                 <td th:text="${g.phoneNo}" title="">125656256356</td>
                                 <td th:text="${g.payed}?'是':'否'" title="">是</td>
                                 <td th:text="${#calendars.format(g.applyDate,'yyyy-MM-dd')}" title="">2015.04.01</td>
-                                <td th:text="${g.passed}?'是':'否'" title="">--</td>
+                                <td th:text="${g.passed}==1?'是':'否'" title="">--</td>
                                 <td th:text="${g.haveLicense}?'是':'否'" title="">--</td>
                                 <td th:text="${g.theClass}==null? '未分配':${g.theClass.className}" title="">201504第一期</td>
                                 <td><a class="link-update" href="#"

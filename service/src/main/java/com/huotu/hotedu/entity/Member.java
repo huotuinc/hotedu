@@ -58,8 +58,9 @@ public class Member extends Login {
     private boolean payed = false;
     /**
      * 是否通过考试
+     * 0:还未考试，1:考试通过,2:考试没通过
      */
-    private boolean passed = false;
+    private int passed;
     /**
      * 是否领证
      */
@@ -90,7 +91,11 @@ public class Member extends Login {
         this.sex = sex;
     }
 
-    public void setPassed(boolean passed) {
+    public int getPassed() {
+        return passed;
+    }
+
+    public void setPassed(int passed) {
         this.passed = passed;
     }
 
@@ -175,9 +180,6 @@ public class Member extends Login {
         this.applyDate = applyDate;
     }
 
-    public boolean isPassed() {
-        return passed;
-    }
 
     public boolean isHaveLicense() {
         return haveLicense;

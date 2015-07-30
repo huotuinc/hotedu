@@ -2,6 +2,7 @@ package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.Video;
 import com.huotu.hotedu.service.VideoService;
+import com.huotu.iqiyi.sdk.IqiyiVideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ import java.util.Date;
  */
 @Controller
 public class VideoController {
+
+    @Autowired
+    private IqiyiVideoRepository iqiyiVideoRepository;
 
     /**
      * 教学视频的service层

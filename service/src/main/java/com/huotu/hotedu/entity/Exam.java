@@ -14,6 +14,10 @@ public class Exam implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     /**
+     * 考场名字
+     */
+    private String examName;
+    /**
      * 考试时间
      */
     @Column
@@ -23,6 +27,28 @@ public class Exam implements Serializable {
      * 考试地点
      */
     private String examAddress;
+
+    /**
+     * 所属代理商
+     */
+    @ManyToOne
+    private Agent agent;
+
+    public Agent getAgent() {
+        return agent;
+    }
+
+    public String getExamName() {
+        return examName;
+    }
+
+    public void setExamName(String examName) {
+        this.examName = examName;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
 
     public Long getId() {
         return id;

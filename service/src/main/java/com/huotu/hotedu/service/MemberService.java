@@ -161,7 +161,7 @@ public class MemberService {
 
     public void passExamById(Long id){
         Member member=memberRepository.findOne(id);
-        member.setPassed(true);
+        member.setPassed(1);
         memberRepository.save(member);
     }
 
