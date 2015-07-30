@@ -33,7 +33,7 @@ public interface StaticResourceService {
     /**
      * 咨询动态的图片
      */
-    public  String MESSAGECONTENT_ICON="/image/messagecontent/";
+    public  String MESSAGECONTENT_ICON="/image/messageContent/";
     /**
      * 会员的头像
      */

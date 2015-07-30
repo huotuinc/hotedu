@@ -35,7 +35,8 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li><span th:text="${#authentication.name}"></span></li>
+                <li>
+                <span th:text="${#authentication.name}"></span></li>
                 <li><a href="changethepassword.html" th:href="@{/backend/loadChangethepassword}">修改密码</a></li>
                 <li><a href="#">退出</a></li>
             </ul>
@@ -84,7 +85,7 @@
                     </li>
                     <li><p style="height:30px; line-height:30px; margin-left: 20px;">资讯动态</p>
                         <ul class="sub-menu">
-                            <li><a href="messagecontent.html" th:href="@{/backend/searchMessagecontent}">资讯动态</a></li>
+                            <li><a href="MessageContent.html" th:href="@{/backend/searchMessageContent}">资讯动态</a></li>
                         </ul>
                     </li>
 

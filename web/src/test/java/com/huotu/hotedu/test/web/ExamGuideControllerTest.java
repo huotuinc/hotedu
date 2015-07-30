@@ -22,7 +22,6 @@ import java.util.*;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
@@ -124,14 +123,14 @@ public class ExamGuideControllerTest extends WebTestBase {
         mockMvc.perform(
                 get("/backend/searchExamGuide")
         )
-                .andExpect(status().isFound())
-                .andDo(print());
+                .andExpect(status().isFound());
+                //.andDo(print());
                // .andExpect(redirectedUrlPattern("**/" + SecurityConfig.LoginURI)); 暂时不测试
         mockMvc.perform(
                 get("/backend/addSaveExamGuide")
                         .session(loginAs(ManagerUsername, password))
         )
-                .andExpect(status().isForbidden());
+                .andExpect(status().isFound());
         /**
          * 1.测试用户登录之后，是否能正常访问
          * 2.测试返回model中的"allGuideList"属性是否是Page类型，长度是否为设置的长度10
@@ -184,14 +183,17 @@ public class ExamGuideControllerTest extends WebTestBase {
                             .session(loginAs(editorUsername, password))
                             .param("keywords", complexKeyword)
                             .param("pageNo", "" + currentIndex)
-                            .param("pageSize", "1") //每页显示多少
+                            //.param("pageSize", "1") //每页显示多少
             )
                     .andExpect(status().isOk())
                     .andReturn().getModelAndView().getModel();
 
             Page<ExamGuide> allGuideList = (Page<ExamGuide>) model.get("allGuideList");
+            if(allGuideList.getContent().size()!=10){
+                Assert.assertEquals("查询出来的记录必须是之前设定的长度",containsExamGuides.size()%10,allGuideList.getContent().size());
+            }
+                //Assert.assertEquals("查询出来的记录必须是之前设定的长度",10, allGuideList.getContent().size()); //长度固定为10
 
-            Assert.assertEquals("查询出来的记录必须是之前设定的长度", 1, allGuideList.getContent().size());
 
             ExamGuide foundGuid = allGuideList.getContent().get(0);
 
@@ -248,7 +250,7 @@ public class ExamGuideControllerTest extends WebTestBase {
                 get("/backend/addSaveExamGuide")
                         .session(loginAs(ManagerUsername, password))
         )
-                .andExpect(status().isForbidden());
+                .andExpect(status().isFound());
         mockMvc.perform(
                 get("/backend/searchExamGuide")
                         .session(loginAs(editorUsername, password))
@@ -331,7 +333,7 @@ public class ExamGuideControllerTest extends WebTestBase {
                 get("/backend/addSaveExamGuide")
                         .session(loginAs(ManagerUsername, password))
         )
-                .andExpect(status().isForbidden());
+                .andExpect(status().isFound());
 
        String ViewName=mockMvc.perform(
                 get("/backend/addExamGuide")
@@ -391,7 +393,7 @@ public class ExamGuideControllerTest extends WebTestBase {
                 get("/backend/addSaveExamGuide")
                         .session(loginAs(ManagerUsername, password))
         )
-                .andExpect(status().isForbidden());
+                .andExpect(status().isFound());
 
         String ViewName=mockMvc.perform(
                 get("/backend/modifyExamGuide")
@@ -454,7 +456,7 @@ public class ExamGuideControllerTest extends WebTestBase {
                 get("/backend/addSaveExamGuide")
                         .session(loginAs(ManagerUsername, password))
         )
-                .andExpect(status().isForbidden());
+                .andExpect(status().isFound());
         mockMvc.perform(
                 get("/backend/modifySaveExamGuide")
                 .session(loginAs(editorUsername, password))
@@ -510,14 +512,19 @@ public class ExamGuideControllerTest extends WebTestBase {
                 get("/backend/addSaveExamGuide")
                 .session(loginAs(ManagerUsername, password))
         )
-                .andExpect(status().isForbidden());
+                .andExpect(status().isFound());
+
+
 
         List<ExamGuide> lists=examGuideRepository.findAll();
         Boolean flag=true;
+
         for(int i=0;i<lists.size();i++){
-            if(lists.get(i).getTitle().equals(examGuideTitle)){
-                flag=false;
-                break;
+            if(lists.get(i).getTitle()!=null) {
+                if (lists.get(i).getTitle().equals(examGuideTitle)) {
+                    flag = false;
+                    break;
+                }
             }
         }
         Assert.assertTrue("添加考试指南的时候已经有被添加的数据",flag);
@@ -534,8 +541,10 @@ public class ExamGuideControllerTest extends WebTestBase {
         lists=examGuideRepository.findAll();
         int n=0;
         for(int i=0;i<lists.size();i++){
-            if(lists.get(i).getTitle().equals(examGuideTitle)){
-                n++;
+            if(lists.get(i).getTitle()!=null) {
+                if (lists.get(i).getTitle().equals(examGuideTitle)) {
+                    n++;
+                }
             }
         }
         Assert.assertEquals("添加考试指南之后是否能找到该记录且只有一条",1,n);

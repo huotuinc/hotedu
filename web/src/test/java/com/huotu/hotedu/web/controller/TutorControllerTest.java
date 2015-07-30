@@ -25,15 +25,27 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 public class TutorControllerTest extends SpringWebTest{
 
     @Test
+    public void tt(){
+        System.out.println("根目录：" + getClass().getResource("/"));
+    }
+
+    @Test
     public void testAddSaveTutor() throws Exception {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        StreamUtils.copy(getClass().getResourceAsStream("testUpload.jpg"),buffer);
+        StreamUtils.copy(getClass().getResourceAsStream("/test/resources/testUpload.jpg"),buffer);
 
         mockMvc.perform(
                 fileUpload("/backend/addSaveTutor")
                 .file("smallimg",buffer.toByteArray())
         );
+
     }
+
+
+
+
+
+
     @Test
     public  void testDelTutor() throws Exception{
         mockMvc.perform(get("/backend/delTutor?n=0&id=2&sumpage=1&searchSort='all'&keywords=''&dateStart=''&dateEnd=''&sumElement=4"));

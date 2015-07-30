@@ -84,7 +84,7 @@
                     </li>
                     <li><p style="height:30px; line-height:30px; margin-left: 20px;">资讯动态</p>
                         <ul class="sub-menu">
-                            <li><a href="messagecontent.html" th:href="@{/backend/searchMessagecontent}">资讯动态</a></li>
+                            <li><a href="MessageContent.html" th:href="@{/backend/searchMessageContent}">资讯动态</a></li>
                         </ul>
                     </li>
 
@@ -118,12 +118,12 @@
     <div class="main-wrap">
         <div class="crumb-wrap">
             <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span
-                    class="crumb-step">&gt;</span><a href="messagecontent.html" th:href="@{/backend/loadMessagecontent}"><span class="crumb-name">资讯指南</span></a><span
+                    class="crumb-step">&gt;</span><a href="MessageContent.html" th:href="@{/backend/loadMessageContent}"><span class="crumb-name">资讯指南</span></a><span
                     class="crumb-step">&gt;</span><span class="crumb-name">修改</span></div>
         </div>
         <div class="jp-container2">
         <div class="result-wrap">
-            <form action="#" th:action="@{/backend/modifySaveMessagecontent(id=${messagecontent.id})}" method="post"
+            <form action="#" th:action="@{/backend/modifySaveMessageContent(id=${MessageContent.id})}" method="post"
                   class="myform" name="myform">
                 <div class="config-items">
                     <div class="result-content">
@@ -131,18 +131,18 @@
                             <tbody>
                             <tr>
                                 <th><i class="require-red">*</i>标题：</th>
-                                <td><input title="" type="text" id="" value="" th:value="${messagecontent.title}" size="70"
+                                <td><input title="" type="text" id="" value="" th:value="${MessageContent.title}" size="70"
                                            name="title" class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>描述：</th>
-                                <td><textarea title="" name="content" th:text="${messagecontent.content}" class="common-textarea"
+                                <td><textarea title="" name="content" th:text="${MessageContent.content}" class="common-textarea"
                                               id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
                             </tr>
                             <tr>
                                 <th>置顶</th>
-                                <td><input title="" type="radio" name="top" value="1" th:checked="${messagecontent.top}"/>&nbsp;是&nbsp;&nbsp;
-                                    <input title="" type="radio" name="top" value="0" th:checked="!${messagecontent.top}"/>&nbsp;否&nbsp;&nbsp;
+                                <td><input title="" type="radio" name="top" value="1" th:checked="${MessageContent.top}"/>&nbsp;是&nbsp;&nbsp;
+                                    <input title="" type="radio" name="top" value="0" th:checked="!${MessageContent.top}"/>&nbsp;否&nbsp;&nbsp;
                                 </td>
                             </tr>
                             <tr>
