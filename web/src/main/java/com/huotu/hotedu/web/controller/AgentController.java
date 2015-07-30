@@ -261,4 +261,51 @@ public class AgentController {
         model.addAttribute("noClassMemberArrageClassDivStyle",false);
         return turnPage;
     }
+
+
+/**
+ *   ckm
+ *显示已经考试过的学员
+ *
+ */
+ @RequestMapping("/pc/loadExamedMembersAll")
+    public String loadExamedMembers (@AuthenticationPrincipal Agent agent,
+                                     @RequestParam(required = false) String keywords,
+                                     @RequestParam(required = false) String searchSort,
+                                     @RequestParam(required = false) Integer pageNo,
+                                     @RequestParam(required = false) Boolean ExamedMemberArrageClassDiv3Style,
+                                     @RequestParam(required = false) String isGraduated,
+                                     Model model){
+    if (pageNo == null || pageNo < 0) {
+        pageNo = 0;
+    }
+    if(isGraduated==null||"".equals(isGraduated)) {
+        isGraduated = "false";
+    }
+    Page<Member> pages = "true".equals(isGraduated) ? agentService.findExamedMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort) : agentService.findNoClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort);
+    long totalRecords = pages.getTotalElements();
+    if (pages.getNumberOfElements() == 0) {
+        pageNo = pages.getTotalPages() - 1;
+        pageNo = pageNo<0 ? 0 : pageNo;
+        pages = "true".equals(isGraduated) ? agentService.findExamedMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort) : agentService.findNoClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort);
+    }
+    model.addAttribute("classAndExam","true".equals(isGraduated)?"kssj":"apbj");
+    model.addAttribute("agent", agent);
+    model.addAttribute("allClassMembersList", pages);
+    model.addAttribute("totalMembers", memberService.searchMembers(agent, pageNo, PAGE_SIZE).getTotalElements());
+    model.addAttribute("navigation", "bygl");
+    model.addAttribute("searchSort", searchSort == null ? "all" : searchSort);
+    model.addAttribute("keywords", keywords);
+    model.addAttribute("pageNo", pageNo);
+    model.addAttribute("totalRecords", totalRecords);
+    model.addAttribute("totalPages", pages.getTotalPages());
+    model.addAttribute("ExamedMemberArrageClassDiv3Style", ExamedMemberArrageClassDiv3Style);
+    model.addAttribute("isGraduated", isGraduated);
+    model.addAttribute("existClassDivStyle",false);
+    model.addAttribute("noPassedMemberArrageClassDivStyle",false);
+
+        return "/pc/yun-daili";
+     }
+
+
 }

@@ -169,27 +169,27 @@ public class AgentService {
         return  memberRepository.findAll(new Specification<Member>() {
             @Override
             public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if ("".equals(keywords)||keywords==null) {
+                if ("".equals(keywords) || keywords == null) {
                     return cb.and(
                             cb.equal(root.get("agent").as(Agent.class), agent),
                             cb.isTrue(root.get("enabled").as(Boolean.class)),
                             cb.isNull(root.get("theClass").as(ClassTeam.class)),
                             cb.isTrue(root.get("payed").as(Boolean.class))
                     );
-                }else if("all".equals(searchSort)){
+                } else if ("all".equals(searchSort)) {
                     return cb.and(
                             cb.equal(root.get("agent").as(Agent.class), agent),
                             cb.isTrue(root.get("enabled").as(boolean.class)),
                             cb.isNull(root.get("theClass").as(ClassTeam.class)),
                             cb.isTrue(root.get("payed").as(Boolean.class)),
                             cb.or(
-                                    cb.like(root.get("realName").as(String.class),"%"+keywords+"%"),
-                                    cb.like(root.get("phoneNo").as(String.class),"%"+keywords+"%"),
+                                    cb.like(root.get("realName").as(String.class), "%" + keywords + "%"),
+                                    cb.like(root.get("phoneNo").as(String.class), "%" + keywords + "%"),
                                     cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
                             )
                     );
-                }else{
-                    if("area".equals(searchSort)) {
+                } else {
+                    if ("area".equals(searchSort)) {
                         return cb.and(
                                 cb.equal(root.get("agent").as(Agent.class), agent),
                                 cb.isTrue(root.get("enabled").as(boolean.class)),
@@ -197,8 +197,7 @@ public class AgentService {
                                 cb.isTrue(root.get("payed").as(Boolean.class)),
                                 cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
                         );
-                    }
-                    else{
+                    } else {
                         return cb.and(
                                 cb.equal(root.get("agent").as(Agent.class), agent),
                                 cb.isTrue(root.get("enabled").as(boolean.class)),
@@ -261,6 +260,64 @@ public class AgentService {
                                 cb.equal(root.get("agent").as(Agent.class), agent),
                                 cb.isTrue(root.get("enabled").as(boolean.class)),
                                 cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+                                cb.isTrue(root.get("payed").as(Boolean.class)),
+                                cb.like(root.get(searchSort).as(String.class), "%" + keywords + "%")
+                        );
+                    }
+                }
+            }
+        }, new PageRequest(pageNo, pageSize));
+    }
+
+    /**
+     * Created by jiashubing on 2015/7/24.        ckm
+     * 显示所有已考试学员 每页10条
+     * 加载、搜索、上一页、下一页
+     * @param agent         当前代理商
+     * @param pageNo        第几页
+     * @param pageSize      每页几条
+     * @param keywords      关键词
+     * @param searchSort    搜索类型
+     * @return              学员集合
+     */
+    public Page<Member> findExamedMembers(Agent agent,Integer pageNo,Integer pageSize,String keywords,String searchSort){
+        return  memberRepository.findAll(new Specification<Member>() {
+            @Override
+            public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                if ("".equals(keywords)||keywords==null) {
+                    return cb.and(
+                            cb.equal(root.get("agent").as(Agent.class), agent),
+                            cb.isTrue(root.get("enabled").as(Boolean.class)),
+                            cb.isFalse(root.get("passed").as(Boolean.class)),
+                            cb.isTrue(root.get("payed").as(Boolean.class))
+                    );
+                }else if("all".equals(searchSort)){
+                    return cb.and(
+                            cb.equal(root.get("agent").as(Agent.class), agent),
+                            cb.isTrue(root.get("enabled").as(boolean.class)),
+                            cb.isFalse(root.get("passed").as(Boolean.class)),
+                            cb.isTrue(root.get("payed").as(Boolean.class)),
+                            cb.or(
+                                    cb.like(root.get("realName").as(String.class), "%" + keywords + "%"),
+                                    cb.like(root.get("phoneNo").as(String.class), "%" + keywords + "%"),
+                                    cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
+                            )
+                    );
+                }else{
+                    if("area".equals(searchSort)) {
+                        return cb.and(
+                                cb.equal(root.get("agent").as(Agent.class), agent),
+                                cb.isTrue(root.get("enabled").as(boolean.class)),
+                                cb.isFalse(root.get("passed").as(Boolean.class)),
+                                cb.isTrue(root.get("payed").as(Boolean.class)),
+                                cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
+                        );
+                    }
+                    else{
+                        return cb.and(
+                                cb.equal(root.get("agent").as(Agent.class), agent),
+                                cb.isTrue(root.get("enabled").as(boolean.class)),
+                                cb.isFalse(root.get("passed").as(Boolean.class)),
                                 cb.isTrue(root.get("payed").as(Boolean.class)),
                                 cb.like(root.get(searchSort).as(String.class), "%" + keywords + "%")
                         );
@@ -334,4 +391,18 @@ public class AgentService {
         List<ClassTeam> classTeams = classTeamRepository.findByAgent(agent);
         return classTeams;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

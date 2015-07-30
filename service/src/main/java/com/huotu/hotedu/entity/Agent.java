@@ -59,6 +59,7 @@ public class Agent extends Login{
      * 已发证书数量
      */
     private int sendCertificateNumber;
+
     /**
      * 注册时间
      */

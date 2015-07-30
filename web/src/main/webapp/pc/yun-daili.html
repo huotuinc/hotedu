@@ -291,8 +291,7 @@
                     <p style="clear:both"></p>
                     <form action="#" id="searchClassMembers" method="post" th:action="@{/pc/loadClassMembers(isHaveClass=${isHaveClass})}">
                         <p style="height:5px;"></p>
-                        <!--安排班级start-->
-                        <table style="float: left;" class="search-tab" th:style="${isHaveClass}=='true' ? 'display: none;' : 'float: left;'">
+                        <table style="float: left;" class="search-tab" th:style="${isHaveClass} ? 'display: none;' : 'float: left;'">
                         <tr>
                                 <th width="10"></th>
                                 <td><input title="" id="noClassCheckAll" type="checkbox" value="checkbox"/></td>
@@ -307,8 +306,8 @@
                                             }
                                     );
                                 </script>
-                                <td><input  class="ysss" th:style="${classAndExam}!='apbj'?'display:none'" name="apbj" value="安排班级" type="button" onclick="noClassMemberArrageClass()"/></td>
-                                    <!--<input  class="ysss" th:style="${classAndExam}!='kssj'?'display:none'" name="kssj" value="安排考试时间" type="button" onclick="ClassMemberArrageClass()"/></td>-->
+                                <td><input  class="ysss" th:style="${classAndExam}!='apbj'?'display:none'" name="apbj" value="安排班级" type="button" onclick="noClassMemberArrageClass()"/>
+                                    <input  class="ysss" th:style="${classAndExam}!='kssj'?'display:none'" name="kssj" value="安排考试时间" type="button" onclick="ClassMemberArrageClass()"/></td>
                                 <script>
                                     function noClassMemberArrageClass() {
                                         var str="";
@@ -330,15 +329,11 @@
                                             $("#noClassMemberArrageClassDiv").show();
                                         }
                                     }
-                                    function ClassMemberArrageClass() {
-
-                                    }
                                 </script>
                             </tr>
                         </table>
-                        <!--安排班级end-->
-                        <!--安排考试时间start-->
-                        <table style="display: none;" class="search-tab" th:style="${isHaveClass}=='true' ? 'float: left;' : 'display: none;'">
+
+                        <table style="display: none;" class="search-tab" th:style="${isHaveClass} ? 'float: left;' : 'display: none;'">
                             <tr>
                                 <th width="10"></th>
                                 <td><input title="" type="checkbox" value="checkbox"/></td>
@@ -360,12 +355,10 @@
                                 <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
                             </tr>
                         </table>
-                        <!--安排考试时间end-->
                     </form>
                     <p style="clear:both"></p>
                 </div>
-                <!--安排班级start-->
-                <div class="result-wrap" th:style="${isHaveClass}=='true' ? 'display: none;' : 'display: block;'">
+                <div class="result-wrap">
                     <form name="myform" class="myform" method="post">
                         <div class="result-content">
                             <table class="result-tab" width="100%">
@@ -460,64 +453,6 @@
                         </div>
                     </form>
                 </div>
-                <!--安排班级end-->
-                <!--安排考试时间start-->
-                <div class="result-wrap" style="display: none;" th:style="${isHaveClass}=='true' ? 'display: block;' : 'display: none;'">
-                    <form name="myform" class="myform" method="post">
-                        <div class="result-content">
-                            <table class="result-tab" width="100%">
-                                <thead>
-                                    <th style="width:80px">选择</th>
-                                    <th style="width:80px">序号</th>
-                                    <th style="width:300px">班级</th>
-                                    <th style="width:80px">区域</th>
-                                    <th style="width:80px">人数</th>
-                                    <th style="width:300px">考试时间</th>
-                                    <th style="width:300px">考试地点</th>
-                                    <th style="width:80px;">操作</th>
-                                </thead>
-                                <tbody th:remove="all-but-first">
-                                    <tr>
-                                        <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
-                                        <td class="checkboxId">01</td>
-                                        <td>201504第一期</td>
-                                        <td title="">杭州</td>
-                                        <td>60</td>
-                                        <td>2015-04-01</td>
-                                        <td>火炬大厦</td>
-                                        <td><a class="link-update" href="#">查看</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
-                                        <td class="checkboxId">01</td>
-                                        <td>201504第一期</td>
-                                        <td title="">杭州</td>
-                                        <td>60</td>
-                                        <td>2015-04-01</td>
-                                        <td>火炬大厦</td>
-                                        <td><a class="link-update" href="#">查看</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
-                                        <td class="checkboxId">01</td>
-                                        <td>201504第一期</td>
-                                        <td title="">杭州</td>
-                                        <td>60</td>
-                                        <td>2015-04-01</td>
-                                        <td>火炬大厦</td>
-                                        <td><a class="link-update" href="#">查看</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div style="text-align:center; margin-top:10px;">
-                                <a href="#" th:href=" @{/pc/loadClassMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort},isHaveClass=${isHaveClass})}">上一页</a>
-                                <a href="#" th:href="@{/pc/loadClassMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort},isHaveClass=${isHaveClass})}">下一页</a>
-                                <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <!--安排考试时间end-->
             </div>
         </div>
 
@@ -701,7 +636,7 @@
 
 <!--安排班级弹窗-->
 
-<div id="noClassMemberArrageClassDiv" style="display:none;" class="ystc" th:style="${noClassMemberArrageClassDivStyle}? 'display:block' : 'display:none'">
+<div id="noClassMemberArrageClassDiv" style="display:none" class="ystc" th:style="${noClassMemberArrageClassDivStyle}? 'display:block' : 'display:none'">
     <div class="box-ys">
         <P style="text-align:right;"><a href="#" onclick="$('#noClassMemberArrageClassDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
         <p style="height:20px"></p>
@@ -712,15 +647,20 @@
                 $("#noClassMemberArrageClassDiv2").show();
             }
         </script>
-        <!--<form method="post" action="#" th:action="@{/pc/findExistClassAll(pageNo=${pageNo},keywords=${keywords},searchSort=${searchSort})}">
-            <span style="display: none;"><input title="" type="text" value="" name="noClassMemberArrayLis" th:value="${noClassMemberArrayLis}" id="noClassMemberArrayLis3" /></span>
-            <p><button class="sign-in__button ys-form__button" name="button" type="submit">选择已有</button></p>
-        </form>-->
-        <p><button class="sign-in__button ys-form__button" name="button" id="btn_chooseExistClass" type="button">选择已有</button></p>
+        <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="noClassMemberArrageClassExistForm()">选择已有</button></p>
+        <p style="display: block"><a id="noClassMemberArrageClassExistHref" href="#" th:href="@{/pc/findExistClassAll(pageNo=${pageNo},keywords=${keywords},searchSort=${searchSort})}">选择已有</a></p>
+        <script>
+            function noClassMemberArrageClassExistForm(){
+                $("#noClassMemberArrageClassDiv").hide();
+                $("#existClassDiv").show();
+                $("#noClassMemberArrageClassExistHref").click();
+            }
+        </script>
+        <!--<p><button class="sign-in__button ys-form__button" name="button" type="submit">下一步</button></p>-->
     </div>
 </div>
 
-<!--安排班级弹窗end-->
+<!--安排班级1end-->
 
 <!--新建班级2-->
 
@@ -729,7 +669,7 @@
         <form action="#" id="noClassMemberArrageClassDiv2Form" method="post" th:action="@{/pc/isClassNameExist}">
             <P style="text-align:right;"><a href="#" onclick="$('#noClassMemberArrageClassDiv2').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
             <p style="height:20px"></p>
-            <span style="display: none;"><input title="" type="text" value="" name="noClassMemberArrayLis" th:value="${noClassMemberArrayLis}" id="noClassMemberArrayLis" /></span>
+            <span style="display: none;"><input title="" type="text" value="" name="noClassMemberArrayLis" th:value="${noClassMemberArrayLis}" class="noClassMemberArrayLis" /></span>
             <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="className" id="className" placeholder="班级名称" type="text"/></p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="check_arageNewClass()">保存</button></p>
             <!--<p><button class="sign-in__button ys-form__button" name="button" type="submit">安排考试时间</button></p>-->
@@ -742,20 +682,28 @@
 
 <!--选择已有班级-->
 
-<div id="existClassDiv" style="display:none" class="ystc" th:style="${existClassDivStyle}? 'display:block' : 'display:none'">
+<div id="existClassDiv" style="display:block" class="ystc" th:style="${existClassDivStyle}? 'display:block' : 'display:none'">
     <div class="box-ys">
-        <form action="#" id="existClassDivForm" method="post" th:action="@{/pc/addSaveOldClassTeam}">
+        <form action="#" id="existClassDivForm" method="post" th:action="@{/pc/isClassNameExist}">
             <P style="text-align:right;"><a href="#" onclick="$('#existClassDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
             <p style="height:20px"></p>
-            <span style="display: none;"><input title="" type="text" value="" name="noClassMemberArrayLis" th:value="${noClassMemberArrayLis}" id="noClassMemberArrayLis2" /></span>
+            <span style="display: none;"><input title="" type="text" value="" name="noClassMemberArrayLis" th:value="${noClassMemberArrayLis}" class="noClassMemberArrayLis" /></span>
+            <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="className" id="existClassName" placeholder="班级名称" type="text"/></p>
             <p>
-                <select id="existClassSelect" class="ys-form__button" title="existClassSelect" name="className" style="text-align: center;">
+                <select id="existClassSelect" class="ys-form__button" title="existClassSelect" name="existClassSelect" style="text-align: center;">
                     <option th:each="ex:${existClassList}" th:value="${ex.className}" th:text="${ex.className}">欧洲</option>
                 </select>
             </p>
+            <script>
+               $("#existClassName").val($("#existClassSelect").children().eq(0).text());
+            </script>
+            <script>
+                $("#existClassSelect").bind("change", function () {
+                    $("#existClassName").val($(this).val());
+                });
+            </script>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="check_arrageExistClass()">保存</button></p>
-            <span id="apyysb" style="color:red;text-align: center;" th:text="${errInfo}"/>
-            <span id="apyycg" style="color:blue;text-align: center;" th:text="${msgInfo}"/>
+            <span style="color:red;" th:text="${errInfo}"/>
         </form>
     </div>
 </div>
