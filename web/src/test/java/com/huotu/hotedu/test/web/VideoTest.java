@@ -15,7 +15,7 @@ import java.io.IOException;
 public class VideoTest extends WebTestBase{
 
     @Autowired
-    private IqiyiVideoRepository iqiyiVideoRepository;
+    IqiyiVideoRepository iqiyiVideoRepository;
 
     @Test
     public void printAll() throws IOException {
