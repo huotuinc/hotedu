@@ -31,7 +31,7 @@ public class ClassTeam implements Serializable {
     /**
      * 考场
      */
-    @ManyToOne
+    @ManyToOne(optional = true,cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
     private Exam exam;
 
     public Long getId() {return id;}

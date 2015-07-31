@@ -41,7 +41,7 @@ public class MemberServiceTest {
     public static final int PAGE_SIZE=10;   //分页，每页假设10条数据
 
 
-    @Test
+    /*@Test
     @Rollback
     public void addMember() {
         Agent agent = new Agent();
@@ -54,12 +54,12 @@ public class MemberServiceTest {
         mb.setAgent(agent);
         memberService.addMember(mb);
         assertEquals(mb.getLoginName(), memberRepository.findByPhoneNo(phoneNo).getLoginName());
-    }
+    }*/
 
     /**
      * 测试  显示某个代理商名下的所有学员
      */
-    @Test
+    /*@Test
     @Rollback
     public void loadMembersByAgent(){
         //搭建测试环境
@@ -77,7 +77,7 @@ public class MemberServiceTest {
         pages= memberService.searchMembers(agent, 0, PAGE_SIZE,"0","payed");
         assertEquals(4,pages.getTotalElements());
 
-    }
+    }*/
 
 
     /**

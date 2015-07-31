@@ -84,6 +84,10 @@ public class ClassTeamControllerTest extends WebTestBase {
         String memberUsername = UUID.randomUUID().toString();
         String editorUsername = UUID.randomUUID().toString();
         String ManagerUsername = UUID.randomUUID().toString();
+        String agentUsername = UUID.randomUUID().toString();
+
+        Agent agent = new Agent();
+        agent.setLoginName(agentUsername);
 
         Member member = new Member();
         member.setLoginName(memberUsername);
@@ -94,6 +98,7 @@ public class ClassTeamControllerTest extends WebTestBase {
         Manager manager = new Manager();
         manager.setLoginName(ManagerUsername);
 
+        loginService.newLogin(agent,password);
         loginService.newLogin(member, password);
         loginService.newLogin(editor, password);
         loginService.newLogin(manager, password);
@@ -138,16 +143,16 @@ public class ClassTeamControllerTest extends WebTestBase {
         )
                 .andExpect(status().isFound())
                 .andDo(print())
-                .andExpect(redirectedUrlPattern("**/" + SecurityConfig.LoginURI));
+                .andExpect(redirectedUrlPattern("**/" + SecurityConfig.pcLoginURI));
 
 
         /**
          * 测试登录后能否正常访问
          * 测试分页是否显示正确
          */
-        int totalCount = (int) classTeamRepository.count();
+        long totalCount =  classTeamRepository.count();
         int defaultPageSize = ClassTeamController.PAGE_SIZE;
-        int pages = (totalCount + defaultPageSize - 1) / defaultPageSize;
+        long pages = (totalCount + defaultPageSize - 1) / defaultPageSize;
         mockMvc.perform(
                 get("/backend/searchClassTeam")
                         .session(loginAs(memberUsername, password))

@@ -21,7 +21,7 @@ public class TestConfig extends RuntimeConfig{
 
     @Override
     public String persistenceUnitName() {
-        return "hotedu_deve";
+        return "hotedu_dev";
     }
 
     @Override

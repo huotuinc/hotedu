@@ -31,7 +31,7 @@ public class Exam implements Serializable {
     /**
      * 所属代理商
      */
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
     private Agent agent;
 
     public Agent getAgent() {

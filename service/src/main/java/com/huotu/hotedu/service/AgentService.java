@@ -414,10 +414,11 @@ public class AgentService {
     /**
      * Created by jiashubing on 2015/7/31.
      * 增加考场
-     * @param exam  增加的考场
+     * @param newExam  增加的考场
      */
-    public Exam addExam(Exam exam){
-        return examRepository.save(exam);
+    public Exam addExam(Exam newExam){
+        Exam exam = examRepository.save(newExam);
+        return exam;
     }
 
     /**
