@@ -154,7 +154,6 @@ public class Agent extends Login{
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(
                 new SimpleGrantedAuthority("ROLE_AGENT")
-
         );
     }
 }

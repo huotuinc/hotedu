@@ -355,15 +355,12 @@ public class AgentService {
     }
 
     /**
+     * Modified by cwb on 2015/7/31
      * Created by jiashubing on 2015/7/24.
-     * 注册增加班级
-     * @param classTeam  注册的班级
+     * 增加班级
+     * @param classTeam  班级名字
      */
-    public ClassTeam addClassTeam(Agent agent,ClassTeam classTeam){
-        Exam exam = new Exam();
-        exam.setAgent(agent);
-        Exam test = examRepository.save(exam);
-        classTeam.setExam(test);
+    public ClassTeam addClassTeam(ClassTeam classTeam){
         return classTeamRepository.save(classTeam);
     }
 

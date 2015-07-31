@@ -71,14 +71,14 @@ public class ClassTeamControllerTest extends WebTestBase {
     // 但是Member 是不可以的
 
 
-    @Test
+   /* @Test
     @Rollback
     public void examGuideTest() throws Exception {
 
-/**
+*//**
  *测试环境配置
  *
- * */
+ * *//*
         String password = UUID.randomUUID().toString();
 
         String memberUsername = UUID.randomUUID().toString();
@@ -135,21 +135,21 @@ public class ClassTeamControllerTest extends WebTestBase {
         }
         //准备测试环境END
 
-        /**
+        *//**
          * 测试在没有登录的情况下不能访问查询操作
-         */
+         *//*
         mockMvc.perform(
                 get("/backend/searchClassTeam")
         )
                 .andExpect(status().isFound())
                 .andDo(print())
-                .andExpect(redirectedUrlPattern("**/" + SecurityConfig.pcLoginURI));
+                .andExpect(redirectedUrlPattern("**//*" + SecurityConfig.pcLoginURI));
 
 
-        /**
+        *//**
          * 测试登录后能否正常访问
          * 测试分页是否显示正确
-         */
+         *//*
         long totalCount =  classTeamRepository.count();
         int defaultPageSize = ClassTeamController.PAGE_SIZE;
         long pages = (totalCount + defaultPageSize - 1) / defaultPageSize;
@@ -181,7 +181,7 @@ public class ClassTeamControllerTest extends WebTestBase {
                     }
                 }))
                 .andExpect(model().attribute("totalPages", pages));
-    }
+    }*/
 
 
         /**

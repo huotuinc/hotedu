@@ -60,7 +60,7 @@ public class AgentController {
             ClassTeam classTeam = new ClassTeam();
             classTeam.setAgent(agent);
             classTeam.setClassName(className);
-            ClassTeam ct = agentService.addClassTeam(agent, classTeam);
+            ClassTeam ct = agentService.addClassTeam(classTeam);
             agentService.arrangeClass(arrayList, ct);
             result.setStatus(1);
             result.setMessage("安排成功");

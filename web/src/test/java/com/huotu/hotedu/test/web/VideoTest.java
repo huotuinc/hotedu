@@ -1,6 +1,5 @@
 package com.huotu.hotedu.test.web;
 
-import com.huotu.hotedu.WebTestBase;
 import com.huotu.iqiyi.sdk.IqiyiVideoRepository;
 import com.huotu.iqiyi.sdk.model.Video;
 import com.huotu.iqiyi.sdk.model.VideoForPlay;
@@ -10,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 
 /**
- * Created by Administrator on 2015/7/30.
+ * Created by Administrator on 2015/7/31.
  */
-public class VideoTest extends WebTestBase{
+public class VideoTest extends WebFlowTest {
 
     @Autowired
     IqiyiVideoRepository iqiyiVideoRepository;
