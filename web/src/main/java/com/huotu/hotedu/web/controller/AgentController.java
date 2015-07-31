@@ -5,6 +5,7 @@ import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,7 +54,7 @@ public class AgentController {
     public String addSaveNewClassTeam(@AuthenticationPrincipal Agent agent, String className, String noClassMemberArrayLis, Model model) throws UnsupportedEncodingException {
         String errInfo = "";
         String msgInfo = "";
-        String turnPage = "redirect:/pc/loadClassMembers";
+        String turnPage = "redirect:pc/loadClassMembers";
         noClassMemberArrayLis = URLDecoder.decode(noClassMemberArrayLis, "UTF-8");
         MyJsonUtil myJsonUtil = new MyJsonUtil();
         ArrayList<Long> arrayList = myJsonUtil.convertJsonBytesToArrayList(noClassMemberArrayLis);
@@ -71,6 +74,31 @@ public class AgentController {
         model.addAttribute("errInfo", errInfo);
         model.addAttribute("msgInfo", msgInfo);
         return turnPage;
+    }
+
+    @RequestMapping("/pc/addSaveNewExam")
+    @ResponseBody
+    public Result addSaveNewExam(@AuthenticationPrincipal Agent agent,@DateTimeFormat(pattern = "yyyy-MM-dd")Date examDate,String examAddress, String classExamArrayLis) {
+        Result result = new Result();
+        String examName = examAddress + new SimpleDateFormat("yyyy-MM-dd").format(examDate);
+        if(agentService.isExamNameAvailable(examName)){
+            MyJsonUtil myJsonUtil = new MyJsonUtil();
+            ArrayList<Long> arrayList = myJsonUtil.convertJsonBytesToArrayList(classExamArrayLis);
+            Exam exam = new Exam();
+            exam.setExamAddress(examAddress);
+            exam.setExamDate(examDate);
+            exam.setExamName(examName);
+            exam.setAgent(agent);
+            Exam ex= agentService.addExam(exam);
+            agentService.arrangeExam(arrayList, ex);
+            result.setStatus(1);
+            result.setMessage("安排成功");
+
+        }else {
+            result.setStatus(0);
+            result.setMessage("考场已经存在，请重新设置考试时间和地点");
+        }
+        return result;
     }
 
     /**

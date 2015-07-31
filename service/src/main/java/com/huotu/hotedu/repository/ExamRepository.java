@@ -16,6 +16,7 @@ import java.util.List;
 @Repository
 public interface ExamRepository extends JpaRepository<Exam,Long>,ClassicsRepository<Exam>,JpaSpecificationExecutor<Exam> {
 
+    Exam findByExamName(String examName);
     List<Exam> findByAgent(Agent agent);
 
 }

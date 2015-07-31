@@ -155,6 +155,32 @@ public class AgentService {
         return list.isEmpty();
     }
 
+
+    public boolean isExamNameAvailable(String examName) {
+        Exam exam = examRepository.findByExamName(examName);
+        if(exam==null) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    /**
+     * Created by jiashubing on 2015/7/31.
+     * 检查该考场名称是否已经使用
+     * @param examName     考场名称
+     * @return             若没有使用，返回true；若使用过，则返回false
+     */
+    public boolean checkExamByName(String examName){
+        List<Exam> list = examRepository.findAll(new Specification<Exam>() {
+            @Override
+            public Predicate toPredicate(Root<Exam> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                return cb.equal(root.get("examName").as(String.class), examName);
+            }
+        });
+        return list.isEmpty();
+    }
+
     /**
      * Created by jiashubing on 2015/7/24.
      * 显示所有未分班学员 每页10条
@@ -347,6 +373,16 @@ public class AgentService {
         classTeamRepository.save(classTeam);
     }
 
+    public void arrangeExam(ArrayList<Long> classExamArrayLis,Exam exam){
+        ClassTeam ct = null;
+        for(int i=0; i<classExamArrayLis.size();i++){
+            ct = classTeamRepository.findOne(classExamArrayLis.get(i));
+            ct.setExam(exam);
+            classTeamRepository.save(ct);
+        }
+//        examRepository.save(exam);
+    }
+
     /**
      * Created by jiashubing on 2015/7/24.
      * 查询该代理商已有班级 下拉框展示
@@ -373,6 +409,15 @@ public class AgentService {
         Exam test = examRepository.save(exam);
         classTeam.setExam(test);
         return classTeamRepository.save(classTeam);
+    }
+
+    /**
+     * Created by jiashubing on 2015/7/31.
+     * 增加考场
+     * @param exam  增加的考场
+     */
+    public Exam addExam(Exam exam){
+        return examRepository.save(exam);
     }
 
     /**
