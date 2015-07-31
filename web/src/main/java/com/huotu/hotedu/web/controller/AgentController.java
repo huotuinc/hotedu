@@ -68,6 +68,7 @@ public class AgentController {
             ClassTeam classTeam = new ClassTeam();
             classTeam.setClassName(className);
             classTeam.setAgent(agent);
+            classTeam.setExam(null);
             ClassTeam ct = agentService.addClassTeam(agent,classTeam);
             agentService.arrangeClass(arrayList, ct);
         }
