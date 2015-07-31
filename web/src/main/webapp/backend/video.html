@@ -143,27 +143,27 @@
         <div class="jp-container2">
         <div class="search-wrap">
             <div class="search-content">
-                <form action="#" th:action="@{/backend/searchVideo}" method="post">
-                    <table class="search-tab">
-                        <tr>
-                            <th width="10"></th>
-                            <td>
-                                <select title="searchSort" name="search-sort" id="searchSort" style=" height:29px;border-radius: 4px;padding: 0 4px; border:1px solid #ccc; vertical-align:middle">
-                                    <option value="all">全部</option>
-                                    <option value="name">片名</option>
-                                    <option value="limit">权限</option>
-                                    <option value="date">上传时间</option>
-                                    <option value="time">时长</option>
-                                </select>
-                            </td>
-                            <td>
-                                <div id="video_nodate"><input title="keywords" class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}" id="keywords" type="text"/></div>
-                                <div id="video_date" style="display:none;"><input readonly="true" id="dateStart" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input readonly="true" id="dateEnd" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/></div>
-                            </td>
-                            <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
-                        </tr>
-                    </table>
-                </form>
+                <!--<form action="#" th:action="@{/backend/searchVideo}" method="post">-->
+                    <!--<table class="search-tab">-->
+                        <!--<tr>-->
+                            <!--<th width="10"></th>-->
+                            <!--<td>-->
+                                <!--<select title="searchSort" name="search-sort" id="searchSort" style=" height:29px;border-radius: 4px;padding: 0 4px; border:1px solid #ccc; vertical-align:middle">-->
+                                    <!--<option value="all" selected="selected">全部</option>-->
+                                    <!--<option value="name">片名</option>-->
+                                    <!--<option value="limit">权限</option>-->
+                                    <!--<option value="date">上传时间</option>-->
+                                    <!--<option value="time">时长</option>-->
+                                <!--</select>-->
+                            <!--</td>-->
+                            <!--<td>-->
+                                <!--<div id="video_nodate"><input title="keywords" class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}" id="keywords" type="text"/></div>-->
+                                <!--<div id="video_date" style="display:none;"><input readonly="true" id="dateStart" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input readonly="true" id="dateEnd" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/></div>-->
+                            <!--</td>-->
+                            <!--<td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>-->
+                        <!--</tr>-->
+                    <!--</table>-->
+                <!--</form>-->
             </div>
         </div>
         <div class="result-wrap">
@@ -193,42 +193,42 @@
                         </tr>
                         <tr th:remove="all">
                             <td>01</td>
+
                             <td title="">第一章第一节</td>
                             <td title="">2：30：00</td>
                             <td>2015.01.01/13.00.00</td>
                             <td title="">免费</td>
                             <td><a class="link-update" href="newvideo.html">修改</a><br/><a class="link-delete" href="#">删除</a></td>
+
                         </tr>
-                        <tr th:each="g:${videoList}">
-                            <td th:text="${g.id}"></td>
-                            <td title="" th:text="${g.videoName}">mou某mou某mou某mou某</td>
-                            <td >3</td>
-                            <td th:text="${#calendars.format(g.uploadTime,'yyyy-MM-dd hh:mm:ss')}">2014-07-13 15:15:50</td>
-                            <td th:text="${g.free}?'免费':'会员'">权限</td>
+                        <tr th:each="g:${AllVideoList}">
+                            <td th:text="${g.fileId}"></td>
+                            <td title="" th:text="${g.fileName}">mou某mou某mou某mou某</td>
+                            <td th:text="${g.duration}">3</td>
+                            <td th:text="${#calendars.format(g.createTime,'yyyy.MM.dd/hh.mm.ss')}">2014-07-13 15:15:50</td>
+                            <!--<td th:text="${g.createTime}">2014-07-13 15:15:50</td>-->
+                            <td>免费</td>
                             <td>
-                                <a class="link-update" href="modifyvideo.html" th:href="@{/backend/modifyVideo(id=${g.id})}">修改</a><br/>
+                                <a class="link-update" href="modifyvideo.html" th:href="@{/backend/modifyVideo(id=${g.fileId})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a>
-                                <a class="real-delete" href="#" th:href="@{/backend/delVideo(id=${g.id},n=${n},keywords=${keywords},totalPages=${totalPages},totalRecords=${totalRecords})}"></a>
+                                <a class="real-delete" href="#" th:href="@{/backend/delVideo(id=${g.fileId},pageNo=${pageNo},keywords=${keywords})}"></a>
                             </td>
                         </tr>
                         <tr style="display: none;">
                             <td><input title="hidden_text" type="text" id="hidden_text" value="all" th:value="${searchSort}"/></td>
                         </tr>
                     </table>
-                    <div class="list-page">
-                        <a href="#"
-                           th:href="@{/backend/pageVideo(n=${n}-1,keywords=${keywords},totalPages=${totalPages})}">上一页</a>
-                        <a href="#"
-                           th:href="@{/backend/pageVideo(n=${n}+1,keywords=${keywords},totalPages=${totalPages})}">下一页</a>
-                        <span th:text="${totalRecords}">2</span> 条 <span th:text="${n}+1">1</span>/<span
-                            th:text="${totalPages}">1</span> 页
-                    </div>
+                    <!--<div class="list-page">-->
+                        <!--<a href="#" th:href="@{/backend/searchVideo(pageNo=${pageNo}-1,keywords=${keywords})}">上一页</a>-->
+                        <!--<a href="#" th:href="@{/backend/searchVideo(pageNo=${pageNo}+1,keywords=${keywords})}">下一页</a>-->
+                        <!--<span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页-->
+                    <!--</div>-->
                 </div>
             </form>
             </div>
         </div>
     </div>
     <!--/main-->
-</div>
+    </div>
 </body>
 </html>

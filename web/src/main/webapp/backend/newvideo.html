@@ -121,7 +121,7 @@
         </div>
         <div class="jp-container2">
         <div class="result-wrap">
-            <form action="#" th:action="@{/backend/addSaveVideo}" method="post" class="myform" name="myform">
+            <form action="#" th:action="@{/backend/addSaveVideo}" method="post" class="myform" name="myform" enctype="multipart/form-data">
                 <div class="config-items">
                     <div class="result-content">
                         <table width="100%" class="insert-tab">
@@ -132,14 +132,22 @@
                                            class="common-text"/></td>
                             </tr>
                             <tr>
-                                <th><i class="require-red">*</i>视频地址：</th>
-                                <td><input title="" type="text" id="videoAddr" value="" size="70" name="videoAddr"
+                                <th><i class="require-red">*</i>视频文件：</th>
+                                <td><input name="videoFile" type="file"/></td>
+                            </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>视频描述：</th>
+                                <td><textarea title="" name="description" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
+                            </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>类型，以半角逗号分开，如"青春,搞笑"  可以为空</th>
+                                <td><input title="" type="text" id="tags" value="" size="70" name="tags"
                                            class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th>权限</th>
-                                <td><input title="" type="radio" checked="checked" value="1" name="free"/>&nbsp;免费&nbsp;&nbsp;
-                                    <input title="" type="radio" value="0" name="free"/>&nbsp;会员&nbsp;&nbsp;
+                                <td><input title="" disabled="disabled" type="radio" checked="checked" value="1" name="free"/>&nbsp;免费&nbsp;&nbsp;
+                                    <input title="" disabled="disabled" type="radio" value="0" name="free"/>&nbsp;会员&nbsp;&nbsp;
                                 </td>
                             </tr>
                             <tr>

@@ -3,7 +3,6 @@ package com.huotu.hotedu.web.controller;
 import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.MemberService;
-import jdk.management.resource.internal.TotalResourceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,13 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.IdentityHashMap;
 import java.util.List;
+
+//import jdk.management.resource.internal.TotalResourceContext;
 
 /**
  * Created by luffy on 2015/6/10.
