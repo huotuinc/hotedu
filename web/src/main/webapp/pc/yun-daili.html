@@ -95,7 +95,7 @@
 
     <div class="ysthree">
         <!--报名信息-->
-        <div style="display:block;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
+        <div style="display:none;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
             <div style=" float: right; margin-right: 14px;margin-bottom: 6px;margin-top:5px; width:1000px;" class="search-content">
                 <form action="#" th:action="@{/pc/searchMembers}" method="post">
                     <p style="height:5px;"></p>
@@ -111,29 +111,14 @@
                     <table style="float: right;margin-top: -31px;" class="search-tab">
                         <tr>
                             <th width="10"></th>
-                            <td><select id="sel_searchMember" title="" name="searchSort"
-                                        style=" height:29px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
+                            <td><select id="sel_searchMember" title="" name="searchSort" style=" height:29px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
                                 <option value="all">全部</option>
                                 <option value="payed">交费状态</option>
                                 <option value="passed">考试状态</option>
                                 <option value="haveLicense">领证状态</option>
                             </select></td>
                             <td id="td_key">
-                                <input id="input_search1" style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字"
-                                       name="keywords" th:value="${keywords}" value="" type="text"/>
-                            </td>
-                            <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
-                            
-                             <!--<td>-->
-                             <!--&lt;!&ndash;<select class="yssp " id="sel_searchMember" title="" name="searchSort"&ndash;&gt;-->
-                                        <!--&lt;!&ndash;style=" height:29px;padding: 0px 90px 0px 4px; border:1px solid #ddd; vertical-align:middle">&ndash;&gt;-->
-                                <!--&lt;!&ndash;<option value="all">全部</option>&ndash;&gt;-->
-                                <!--&lt;!&ndash;<option value="payed">交费状态</option>&ndash;&gt;-->
-                                <!--&lt;!&ndash;<option value="passed">考试状态</option>&ndash;&gt;-->
-                                <!--&lt;!&ndash;<option value="haveLicense">领证状态</option>&ndash;&gt;-->
-                            <!--&lt;!&ndash;</select>&ndash;&gt;-->
-                               <!-- -->
-                            <!--</td>-->
+                                <input id="input_search1" style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" th:value="${keywords}" value="" type="text"/></td>
                             <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
@@ -236,7 +221,7 @@
                                 <td th:text="${g.phoneNo}" title="">125656256356</td>
                                 <td th:text="${g.payed}?'是':'否'" title="">是</td>
                                 <td th:text="${#calendars.format(g.applyDate,'yyyy-MM-dd')}" title="">2015.04.01</td>
-                                <td th:text="${g.passed}==0?'还未考试':(${g.passed}==1?'考试通过':'考试没通过')" title="">--</td>
+                                <td th:text="${g.passed}==0?'':(${g.passed}==1?'通过':'待补考')" title="">--</td>
                                 <td th:text="${g.haveLicense}?'是':'否'" title="">--</td>
                                 <td th:text="${g.theClass}==null? '未分配':${g.theClass.className}" title="">201504第一期</td>
                                 <td><a class="link-update" href="#"
@@ -294,7 +279,7 @@
         <!--消息通知end-->
 
         <!--班级管理 未分班 安排班级 start-->
-        <div id="noClassMemberDiv" style="display:block;" th:style="${navigation}=='bjgl'? 'display:block;':'display:none;'" class="ysthree">
+        <div id="noClassMemberDiv" style="display:none;" th:style="${navigation}=='bjgl'? 'display:block;':'display:none;'" class="ysthree">
             <div class="main-wrapi">
                 <div style="margin-right: 14px;margin-bottom: 6px;" class="search-content">
                     <div style=" text-align:center;display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex;" class="ystwo">
@@ -570,7 +555,8 @@
                                         <td th:text="${g.className}">201504第一期</td>
                                         <td th:text="${g.agent.area}">杭州</td>
                                         <td th:text="${g.memberNum}">60</td>
-                                        <td th:text="${g.exam}==null ? '': ${#calendars.format(g.exam.examDate,'yyyy-MM-dd')}">2015-04-01</td>
+                                        <!--<td th:text="${g.exam}==null ? '': ${#calendars.format(g.exam.examDate,'yyyy-MM-dd')}">2015-04-01</td>-->
+                                        <td>出错了</td>
                                         <td th:text="${g.exam}==null ? '': ${g.exam.examAddress}">火炬大厦</td>
                                         <td><a class="link-update" href="#">查看</a></td>
                                     </tr>
@@ -652,13 +638,13 @@
         <!--毕业管理-->
         <div style="display:block" th:style="${navigation}=='bygl'? 'display:block;':'display:none;'" class="main-wrapi">
             <div style="float: right;width:1000px;margin-bottom: 6px;margin-top:15px;" class="search-content">
-                <form action="#" method="post">
+                <form action="#" id="searchGraduationMembers" th:action="@{/pc/loadGraduationMembers}" method="post">
                     <p style="height:5px;"></p>
                     <table style="float: left;margin-right:412px;" class="search-tab">
                         <tr>
                             <th width="10"></th>
                             <td><input title="" id="examMemberCheckAll" type="checkbox" value="checkbox"/></td>
-                            <td><input title="" class="ysss" name="sub" value="确认通过" type="submit"/></td>
+                            <td><button class="ysss si" name="sub" value="确认通过" type="button" onclick=""><span style="color:white">确认通过</span></button></td>
                             <script>
                                 $("#examMemberCheckAll").click(
                                         function(){
@@ -717,11 +703,22 @@
                                     <td th:text="${g.realName}">小米</td>
                                     <td th:text="${g.agent.area}">杭州</td>
                                     <td th:text="${g.phoneNo}">15236699696</td>
-                                    <td th:text="${g.passed}">通过</td>
-                                    <td>201504第一期</td>
-                                    <td><a class="link-update" href="#" th:href="@{/pc/detailMember(id=${g.id})}">查看</a></td>
+                                    <td th:text="${g.passed}==0 ? '': (${g.passed}==1 ? '通过' : '待补考')"></td>
+                                    <td th:text="${g.theClass}==null ? '未分班':${g.theClass.className}">201504第一期</td>
+                                    <td th:style="${g.passed}==0 ? 'display:block;':'display:none;'">
+                                        <a class="link-update" href="#" onclick="btn_setExamPass(this)">通过</a>
+                                        <a class="link-update" href="#" onclick="btn_setExamNoPass(this)">未通过</a>
+                                        <a class="link-update" href="#" th:href="@{/pc/detailMember(id=${g.id})}">查看</a>
+                                     </td>
+                                    <td th:style="${g.passed}==1 ? 'display:block;':'display:none;'">
+                                        <a class="link-update" href="#" th:href="@{/pc/detailMember(id=${g.id})}">查看</a>
+                                    </td>
+                                    <td th:style="${g.passed}==2 ? 'display:block;':'display:none;'">
+                                        <a class="link-update" href="#" onclick="btn_setExamPass(this)">通过</a>
+                                        <a class="link-update" href="#" th:href="@{/pc/detailMember(id=${g.id})}">查看</a>
+                                    </td>
                                 </tr>
-                                <tr th:remove="all">
+                                <tr>
                                     <td><input title="" name="checkboxExamMember" type="checkbox" value="checkbox"/></td>
                                     <td>01</td>
                                     <td>小米</td>
@@ -732,7 +729,7 @@
                                     <td><a class="link-update" href="#">通过</a>
                                         <a class="link-update" href="#">查看</a></td>
                                 </tr>
-                                <tr th:remove="all">
+                                <tr>
                                     <td><input title="" name="checkboxExamMember" type="checkbox" value="checkbox"/></td>
                                     <td>01</td>
                                     <td>小米</td>
@@ -743,7 +740,7 @@
                                     <td><a class="link-update" href="#">通过</a>
                                         <a class="link-update" href="#">查看</a></td>
                                 </tr>
-                                <tr th:remove="all">
+                                <tr>
                                     <td><input title="" name="checkboxExamMember" type="checkbox" value="checkbox"/></td>
                                     <td>01</td>
                                     <td>小米</td>
@@ -754,7 +751,7 @@
                                     <td><a class="link-update" href="#">通过</a>
                                         <a class="link-update" href="#">查看</a></td>
                                 </tr>
-                                <tr th:remove="all">
+                                <tr>
                                     <td><input title="" name="checkboxExamMember" type="checkbox" value="checkbox"/></td>
                                     <td>01</td>
                                     <td>小米</td>
@@ -765,7 +762,7 @@
                                     <td><a class="link-update" href="#">通过</a>
                                         <a class="link-update" href="#">查看</a></td>
                                 </tr>
-                                <tr th:remove="all">
+                                <tr>
                                     <td><input title="" name="checkboxExamMember" type="checkbox" value="checkbox"/></td>
                                     <td>01</td>
                                     <td>小米</td>
@@ -786,7 +783,6 @@
                                     var searchSortValue = $("#examMember_hidden_text").val();
                                     $searchSort.val(searchSortValue);
                                 })
-
                             </script>
                         </table>
                         <div style="text-align:center; margin-top:10px;"> 2 条 1/1 页</div>
