@@ -226,26 +226,41 @@ function check_arrageExistClass() {
     });
 }
 
-function check_arrageExistExam() {
-    $.MsgBox.Confirm("温馨提示", "确认要将选中班级安排到选中考场中吗？", function () {
-        var classExamArrayLis = $("#classExamArrayLis").val().trim();
-        var existExamSelect = $("#existExamSelect").val().trim();
+function btn_setExamPass(h) {
+    $.MsgBox.Confirm("温馨提示", "确认要将选中学员通过考试吗？", function () {
+        var memberId = $(h).parent().parent().children().eq(1).text();
         $.ajax({
-            url:path+"/pc/addClassIntoExistExam",
+            url:path+"/pc/setExamPass",
             type:"post",
-            data:{"examName":existExamSelect,"classExamArrayLis":classExamArrayLis},
+            data:{"id":memberId},
             dataType:"json",
             success:function(result){
-                if(result.status==0){
-                    $("#errInfo_existExam").text(result.message);
-                }else if(result.status==1){
-                    $("#searchClassExam").submit();
-                    alert(result.message);
-                }
+                $("#searchGraduationMembers").submit();
+                alert(result.message);
             },
             error:function(){
-                alert("安排失败");
+                alert("操作失败");
             }
         });
     });
 }
+
+function btn_setExamNoPass(h) {
+    $.MsgBox.Confirm("温馨提示", "确认要将选中学员通过考试吗？", function () {
+        var memberId = $(h).parent().parent().children().eq(1).text();
+        $.ajax({
+            url:path+"/pc/setExamNoPass",
+            type:"post",
+            data:{"id":memberId},
+            dataType:"json",
+            success:function(result){
+                $("#searchGraduationMembers").submit();
+                alert(result.message);
+            },
+            error:function(){
+                alert("操作失败");
+            }
+        });
+    });
+}
+

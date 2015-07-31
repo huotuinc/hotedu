@@ -3,7 +3,6 @@ package com.huotu.hotedu.web.controller;
 import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.MemberService;
-import jdk.management.resource.internal.TotalResourceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,12 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.IdentityHashMap;
 import java.util.List;
 
 /**
@@ -288,18 +284,15 @@ public class AgentController {
         return result;
     }
 
-
-
     /**
      * Created by jiashubing on 2015/7/30.
-     * 显示毕业管理员信息
-     * 加载、搜索、上一页、下一页
+     * 显示安排考场信息
      * @param agent      当前代理商
      * @param keywords   关键词
      * @param searchSort 搜索类型
      * @param pageNo     第几页
      * @param model      返回客户端集
-     * @return           yun-daili.html  毕业管理选项卡
+     * @return           yun-daili.html  安排考场
      */
     @RequestMapping("/pc/loadClassExam")
     public String loadClassExam(@AuthenticationPrincipal Agent agent,
@@ -333,13 +326,15 @@ public class AgentController {
     }
 
     /**
-     * 毕业管理
-     * @param agent
-     * @param keywords
-     * @param searchSort
-     * @param pageNo
-     * @param model
-     * @return
+     * Created by jiashubing on 2015/7/30.
+     * 显示毕业管理信息
+     * 加载、搜索、上一页、下一页
+     * @param agent      当前代理商
+     * @param keywords   关键词
+     * @param searchSort 搜索类型
+     * @param pageNo     第几页
+     * @param model      返回客户端集
+     * @return           yun-daili.html  毕业管理选项卡
      */
     @RequestMapping("/pc/loadGraduationMembers")
     public String loadGraduationMembers(@AuthenticationPrincipal Agent agent,
@@ -368,6 +363,38 @@ public class AgentController {
         model.addAttribute("totalPages", pages.getTotalPages());
 
         return "/pc/yun-daili";
+    }
+
+    /**
+     * Created by jiashubing on 2015/7/31.
+     * 设置学员通过考试
+     * @param id  学员id
+     * @return
+     */
+    @RequestMapping("/pc/setExamPass")
+    @ResponseBody
+    public Result setExamPass(Long id){
+        Result result = new Result();
+        agentService.setExamPassById(id,1);
+        result.setStatus(1);
+        result.setMessage("操作成功");
+        return result;
+    }
+
+    /**
+     * Created by jiashubing on 2015/7/31.
+     * 设置学员通过考试
+     * @param id  学员id
+     * @return
+     */
+    @RequestMapping("/pc/setExamNoPass")
+    @ResponseBody
+    public Result setExamNoPass(Long id){
+        Result result = new Result();
+        agentService.setExamPassById(id,2);
+        result.setStatus(1);
+        result.setMessage("操作成功");
+        return result;
     }
 
 

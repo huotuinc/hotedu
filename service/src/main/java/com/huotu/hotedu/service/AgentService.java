@@ -277,14 +277,12 @@ public class AgentService {
                     return cb.and(
                             cb.equal(root.get("agent").as(Agent.class), agent),
                             cb.isTrue(root.get("enabled").as(Boolean.class)),
-                            cb.isFalse(root.get("passed").as(Boolean.class)),
                             cb.isTrue(root.get("payed").as(Boolean.class))
                     );
                 }else if("all".equals(searchSort)){
                     return cb.and(
                             cb.equal(root.get("agent").as(Agent.class), agent),
                             cb.isTrue(root.get("enabled").as(boolean.class)),
-                            cb.isFalse(root.get("passed").as(Boolean.class)),
                             cb.isTrue(root.get("payed").as(Boolean.class)),
                             cb.or(
                                     cb.like(root.get("realName").as(String.class), "%" + keywords + "%"),
@@ -297,7 +295,6 @@ public class AgentService {
                         return cb.and(
                                 cb.equal(root.get("agent").as(Agent.class), agent),
                                 cb.isTrue(root.get("enabled").as(boolean.class)),
-                                cb.isFalse(root.get("passed").as(Boolean.class)),
                                 cb.isTrue(root.get("payed").as(Boolean.class)),
                                 cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
                         );
@@ -306,7 +303,6 @@ public class AgentService {
                         return cb.and(
                                 cb.equal(root.get("agent").as(Agent.class), agent),
                                 cb.isTrue(root.get("enabled").as(boolean.class)),
-                                cb.isFalse(root.get("passed").as(Boolean.class)),
                                 cb.isTrue(root.get("payed").as(Boolean.class)),
                                 cb.like(root.get(searchSort).as(String.class), "%" + keywords + "%")
                         );
@@ -474,5 +470,27 @@ public class AgentService {
                 }
             }
         }, new PageRequest(pageNo, pageSize));
+    }
+
+    /**
+     * Created by jiashubing on 2015/7/31.
+     * 设置学员通过考试
+     * @param id  学员id
+     */
+    public void setExamPassById(Long id,int x){
+        Member member=memberRepository.findOne(id);
+        member.setPassed(x);
+        memberRepository.save(member);
+    }
+
+    /**
+     * Created by jiashubing on 2015/7/31.
+     * 设置学员未通过考试
+     * @param id  学员id
+     */
+    public void setExamNoPassById(Long id){
+        Member member=memberRepository.findOne(id);
+        member.setPassed(2);
+        memberRepository.save(member);
     }
 }

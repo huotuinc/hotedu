@@ -23,10 +23,6 @@ public class MessageContentService {
     @Autowired
     private MessageContentRepository messageContentRepository;
 
-//    //返回所有资讯指南
-//    public Page<MessageContent> loadMessageContent(int n,int pagesize){
-//        return messageContentRepository.findAll(new PageRequest(n,pagesize));
-//    }
 
     //分页
     public Page<MessageContent> searchMessageContent(int n,int pagesize,String keyword){
