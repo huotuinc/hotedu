@@ -113,6 +113,18 @@
                                        name="keywords" th:value="${keywords}" value="" type="text"/>
                             </td>
                             <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
+                            
+                             <td>
+                             <select class="yssp " id="sel_searchMember" title="" name="searchSort"
+                                        style=" height:29px;padding: 0px 90px 0px 4px; border:1px solid #ddd; vertical-align:middle">
+                                <option value="all">全部</option>
+                                <option value="payed">交费状态</option>
+                                <option value="passed">考试状态</option>
+                                <option value="haveLicense">领证状态</option>
+                            </select>
+                               
+                            </td>
+                            <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
                 </form>
@@ -900,8 +912,8 @@
             <P style="text-align:right;"><a href="#" onclick="$('#classArrageNewExamDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
             <p style="height:20px"></p>
             <span style="display: none;"><input title="" type="text" value="" name="classExamArrayLis" th:value="${classExamArrayLis}" id="classExamArrayLis" /></span>
-            <p style="display: block;"><input style="width:500px;" title="" readonly="readonly" class="sign-in__field ys-form__field" name="examName" id="examName" placeholder="考场名称" type="text"/></p>
-            <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="examDate" id="examDate" placeholder="考试时间" type="text" readonly="readonly"/></p>
+            <p style="display: block;"><input style="width:500px;" title="" readonly class="sign-in__field ys-form__field" name="examName" id="examName" placeholder="考场名称" type="text"/></p>
+            <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="examDate" id="examDate" placeholder="考试时间" type="text" readonly/></p>
             <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="examAddress" id="examAddress" placeholder="考试地点" type="text"/></p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="check_arrageNewExam()">保存</button></p>
             <span id="addNewExamSuccess" style="color:blue;"/>
