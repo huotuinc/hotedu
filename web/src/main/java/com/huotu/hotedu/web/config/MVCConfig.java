@@ -1,11 +1,9 @@
 package com.huotu.hotedu.web.config;
 
-import com.huotu.iqiyi.sdk.springboot.IqiyiConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -25,7 +23,7 @@ import java.util.List;
  */
 @Configuration
 @EnableWebMvc
-@Import(IqiyiConfig.class)  // add by CJ for IqiyiVideoRepository
+//@Import(IqiyiConfig.class)  // add by CJ for IqiyiVideoRepository
 @ComponentScan({
         "com.huotu.hotedu.web.service",
         "com.huotu.hotedu.web.advice",

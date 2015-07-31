@@ -40,7 +40,7 @@ public class ExamGuideControllerTest extends WebTestBase {
 
     // /backend/searchExamGuide 非登录状态无法访问
     //
-    // /backend/searchExamGuide 最多展示 n 个数据 n 自定义
+    // /backend/searchExamGuide 最多展示 10 个数据
     //
     // /backend/delExamGuide  删除&查询
     // 删除

@@ -24,15 +24,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @WebAppConfiguration
 public class TutorControllerTest extends SpringWebTest{
 
-    @Test
-    public void tt(){
-        System.out.println("根目录：" + getClass().getResource("/"));
-    }
 
-    @Test
+    @Test//TODO 待解决
     public void testAddSaveTutor() throws Exception {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        StreamUtils.copy(getClass().getResourceAsStream("/test/resources/testUpload.jpg"),buffer);
+        StreamUtils.copy(getClass().getResourceAsStream("testUpload.jpg"),buffer);
 
         mockMvc.perform(
                 fileUpload("/backend/addSaveTutor")
