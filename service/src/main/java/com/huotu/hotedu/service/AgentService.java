@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -139,9 +140,20 @@ public class AgentService {
         return classTeamRepository.findOne(id);
     }
 
+
+
     public Exam findExamById(long id) {
         return examRepository.findOne(id);
     }
+
+    /**
+     *  查询班级信息
+     **/
+    public ClassTeam findOneClassTeamInfoById(long id)
+    {return  classTeamRepository.findOneById(id);}
+
+
+
 
     /**
      * Created by jiashubing on 2015/7/24.

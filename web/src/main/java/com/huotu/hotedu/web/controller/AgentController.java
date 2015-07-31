@@ -3,6 +3,7 @@ package com.huotu.hotedu.web.controller;
 import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.MemberService;
+import jdk.management.resource.internal.TotalResourceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,6 +20,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.IdentityHashMap;
 import java.util.List;
 
 /**
@@ -286,6 +288,8 @@ public class AgentController {
         return result;
     }
 
+
+
     /**
      * Created by jiashubing on 2015/7/30.
      * 显示毕业管理员信息
@@ -366,4 +370,31 @@ public class AgentController {
         return "/pc/yun-daili";
     }
 
+
+
+
+
+     @RequestMapping("/pc/loadClassTeamInfo")
+    public String loadClassTeamInfo(@AuthenticationPrincipal Agent agent,
+                                    @RequestParam(required = false) String keywords,
+                                    @RequestParam(required = false) String searchSort,
+                                    @RequestParam(required = false) Integer pageNo,
+                                    @RequestParam(required = false) Boolean ClassTeamInfoDivStyle,
+                                    Model model){
+         if (pageNo == null || pageNo < 0) {
+             pageNo = 0;
+         };
+         model.addAttribute("agent", agent);
+         model.addAttribute("navigation", "bjxx");
+         model.addAttribute("searchSort", searchSort == null ? "all" : searchSort);
+         model.addAttribute("keywords", keywords);
+         model.addAttribute("pageNo", pageNo);
+         model.addAttribute("ClassTeamInfoDivStyle", ClassTeamInfoDivStyle);
+         model.addAttribute("existClassDivStyle",false);
+         model.addAttribute("classArrageExamDiv",false);
+
+         return "/pc/yun-daili";
+
+
+     }
 }
