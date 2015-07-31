@@ -171,6 +171,21 @@ public class AgentService {
     }
 
     /**
+     * Created by jiashubing on 2015/7/31.
+     * 检查该考场名称是否已经使用
+     * @param className     班级名称
+     * @return             若没有使用，返回true；若使用过，则返回false
+     */
+    public boolean isClassTeamNameAvailable(String className) {
+        ClassTeam classTeam = classTeamRepository.findByClassName(className);
+        if(classTeam==null) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    /**
      * Created by jiashubing on 2015/7/24.
      * 显示所有未分班学员 每页10条
      * 加载、搜索、上一页、下一页

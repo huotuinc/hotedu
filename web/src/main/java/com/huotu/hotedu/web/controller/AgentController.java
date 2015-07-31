@@ -44,39 +44,43 @@ public class AgentController {
     /**
      * Created by jiashubing on 2015/7/24.
      * 将学员保存到新建班级中
+     * @param agent     当前代理商
      * @param className             新建班级的名字
      * @param noClassMemberArrayLis 复选框选中成员的id集合,Strring类型
-     * @param model                 返回客户端集
-     * @return                      新建班级页面
+     * @return
      * @throws UnsupportedEncodingException
      */
     @RequestMapping("/pc/addSaveNewClassTeam")
-    public String addSaveNewClassTeam(@AuthenticationPrincipal Agent agent, String className, String noClassMemberArrayLis, Model model) throws UnsupportedEncodingException {
-        String errInfo = "";
-        String msgInfo = "";
-        String turnPage = "redirect:pc/loadClassMembers";
-        noClassMemberArrayLis = URLDecoder.decode(noClassMemberArrayLis, "UTF-8");
-        MyJsonUtil myJsonUtil = new MyJsonUtil();
-        ArrayList<Long> arrayList = myJsonUtil.convertJsonBytesToArrayList(noClassMemberArrayLis);
-        if (arrayList == null || arrayList.isEmpty()) {
-            errInfo = "成员集合为空，没有需要安排分班的学员";
-        } else if (className.equals("")) {
-            errInfo = "班级名称为空，请输入新建班级名称";
-        } else if (!agentService.checkClassTeamByName(className)) {
-            errInfo = "班级名称已经占用，请输入其他名称";
-        } else {
+    @ResponseBody
+    public Result addSaveNewClassTeam(@AuthenticationPrincipal Agent agent, String className, String noClassMemberArrayLis) {
+        Result result = new Result();
+        if(agentService.isClassTeamNameAvailable(className)){
+            MyJsonUtil myJsonUtil = new MyJsonUtil();
+            ArrayList<Long> arrayList = myJsonUtil.convertJsonBytesToArrayList(noClassMemberArrayLis);
             ClassTeam classTeam = new ClassTeam();
-            classTeam.setClassName(className);
             classTeam.setAgent(agent);
-            classTeam.setExam(null);
-            ClassTeam ct = agentService.addClassTeam(agent,classTeam);
+            classTeam.setClassName(className);
+            ClassTeam ct = agentService.addClassTeam(agent, classTeam);
             agentService.arrangeClass(arrayList, ct);
+            result.setStatus(1);
+            result.setMessage("安排成功");
+
+        }else {
+            result.setStatus(0);
+            result.setMessage("班级已经存在，请重新设置班级名称");
         }
-        model.addAttribute("errInfo", errInfo);
-        model.addAttribute("msgInfo", msgInfo);
-        return turnPage;
+        return result;
     }
 
+    /**
+     * Created by jiashubing on 2015/7/24.
+     * 将班级保存到新建考场中  AJAX
+     * @param agent     当前代理商
+     * @param examDate      考试时间
+     * @param examAddress       考试地点
+     * @param classExamArrayLis     需要安排的班级
+     * @return
+     */
     @RequestMapping("/pc/addSaveNewExam")
     @ResponseBody
     public Result addSaveNewExam(@AuthenticationPrincipal Agent agent,@DateTimeFormat(pattern = "yyyy-MM-dd")Date examDate,String examAddress, String classExamArrayLis) {
@@ -197,34 +201,34 @@ public class AgentController {
         return "/pc/yun-daili";
     }
 
-    /**
-     * Created by jiashubing on 2015/7/24.
-     * 判断新建班级的名称是否已经存在
-     * @param className             新建班级的名字
-     * @param noClassMemberArrayLis 复选框选中成员的id集合,Strring类型
-     * @param model                 返回客户端集
-     * @return 重定向到addSaveNewClassTeam 将成员添加保存到新建班级
-     * @throws UnsupportedEncodingException
-     */
-    @RequestMapping("/pc/isClassNameExist")
-    public String isClassNameExist(String className, String noClassMemberArrayLis, Model model) throws UnsupportedEncodingException {
-        String errInfo = "";
-        Boolean style = false;
-        String turnPage = "";
-        boolean flag = agentService.checkClassTeamByName(className);
-        if (flag) {
-            turnPage = "redirect:/pc/addSaveNewClassTeam";
-        } else {
-            errInfo = "该班级名字已经被注册,请使用其他的名字";
-            style = true;
-            turnPage = "redirect:/pc/loadClassMembers";
-        }
-        model.addAttribute("noClassMemberArrageNewClassDivStyle", style);
-        model.addAttribute("className", className);
-        model.addAttribute("noClassMemberArrayLis", URLEncoder.encode(noClassMemberArrayLis, "UTF-8"));
-        model.addAttribute("errInfo", errInfo);
-        return turnPage;
-    }
+//    /**
+//     * Created by jiashubing on 2015/7/24.
+//     * 判断新建班级的名称是否已经存在
+//     * @param className             新建班级的名字
+//     * @param noClassMemberArrayLis 复选框选中成员的id集合,Strring类型
+//     * @param model                 返回客户端集
+//     * @return 重定向到addSaveNewClassTeam 将成员添加保存到新建班级
+//     * @throws UnsupportedEncodingException
+//     */
+//    @RequestMapping("/pc/isClassNameExist")
+//    public String isClassNameExist(String className, String noClassMemberArrayLis, Model model) throws UnsupportedEncodingException {
+//        String errInfo = "";
+//        Boolean style = false;
+//        String turnPage = "";
+//        boolean flag = agentService.checkClassTeamByName(className);
+//        if (flag) {
+//            turnPage = "redirect:/pc/addSaveNewClassTeam";
+//        } else {
+//            errInfo = "该班级名字已经被注册,请使用其他的名字";
+//            style = true;
+//            turnPage = "redirect:/pc/loadClassMembers";
+//        }
+//        model.addAttribute("noClassMemberArrageNewClassDivStyle", style);
+//        model.addAttribute("className", className);
+//        model.addAttribute("noClassMemberArrayLis", URLEncoder.encode(noClassMemberArrayLis, "UTF-8"));
+//        model.addAttribute("errInfo", errInfo);
+//        return turnPage;
+//    }
 
     /**
      * Created by cwb on 2015/7/29

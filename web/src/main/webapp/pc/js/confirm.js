@@ -155,13 +155,31 @@ function check_payEnter() {
 
 function check_arrageNewClass() {
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员安排到新建班级中吗？", function () {
-        $("#noClassMemberArrageNewClassDiv").hide();
-        $("#noClassMemberArrageNewClassDivForm").submit();
+        var className = $("#className").val().trim();
+        var noClassMemberArrayLis = $("#noClassMemberArrayLis").val().trim();
+        $.ajax({
+            url:path+"/pc/addSaveNewClassTeam",
+            type:"post",
+            data:{"className":className,"noClassMemberArrayLis":noClassMemberArrayLis},
+            dataType:"json",
+            success:function(result){
+                if(result.status==0){
+                    $("#addNewClassTeamError").text(result.message);
+                }else if(result.status==1){
+                    $("#searchClassMembers").submit();
+                    alert(result.message);
+                }
+            },
+            error:function(){
+                alert("安排失败");
+            }
+        });
+       /* $("#noClassMemberArrageNewClassDiv").hide();
+        $("#noClassMemberArrageNewClassDivForm").submit();*/
     });
 }
 
 function check_arrageNewExam() {
-    $("#examName").val($("#examAddress").val()+$("#examDate").val());
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员安排到新建考场中吗？", function () {
         var examDate = $("#examDate").val().trim();
         var examAddress = $("#examAddress").val().trim();

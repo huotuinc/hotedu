@@ -876,7 +876,8 @@
             <span style="display: none;"><input title="" type="text" value="" name="noClassMemberArrayLis" th:value="${noClassMemberArrayLis}" id="noClassMemberArrayLis" /></span>
             <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="className" id="className" placeholder="班级名称" type="text"/></p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="check_arrageNewClass()">保存</button></p>
-            <span style="color:red;" th:text="${errInfo}"/>
+            <span id="addNewClassTeamSuccess" style="color:blue;"/>
+            <span id="addNewClassTeamError" style="color:red;"/>
         </form>
     </div>
 </div>
