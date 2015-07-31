@@ -392,4 +392,34 @@ public class AgentController {
 //     }
 
 
+    @RequestMapping("/pc/loadGraduationMembers")
+    public String loadGraduationMembers(@AuthenticationPrincipal Agent agent,
+                                        @RequestParam(required = false) String keywords,
+                                        @RequestParam(required = false) String searchSort,
+                                        @RequestParam(required = false) Integer pageNo,
+                                        Model model){
+        if (pageNo == null || pageNo < 0) {
+            pageNo = 0;
+        }
+        Page<Member> pages = agentService.findExamedMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort);
+        long totalRecords = pages.getTotalElements();
+        if (pages.getNumberOfElements() == 0) {
+            pageNo = pages.getTotalPages() - 1;
+            pageNo = pageNo<0 ? 0 : pageNo;
+            pages = agentService.findExamedMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort);
+        }
+        model.addAttribute("agent", agent);
+        model.addAttribute("allExamMembersList", pages);
+        model.addAttribute("totalMembers", memberService.searchMembers(agent, pageNo, PAGE_SIZE).getTotalElements());
+        model.addAttribute("navigation", "bygl");
+        model.addAttribute("searchSort", searchSort == null ? "all" : searchSort);
+        model.addAttribute("keywords", keywords);
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("totalRecords", totalRecords);
+        model.addAttribute("totalPages", pages.getTotalPages());
+
+        return "/pc/yun-daili";
+    }
+
+
 }
