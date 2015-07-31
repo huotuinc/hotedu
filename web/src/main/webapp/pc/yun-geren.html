@@ -16,7 +16,7 @@
     <div style=" background-color:#fff;">
         <div style=" background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" class="logoimg"/>
             <ul class="navi">
-                <li><a href="yun-index.html">首页</a></li>
+                <li><a href="yun-index.html" th:href="@{/pc/gerenToIndex}">首页</a></li>
                 <li><a href="#">公司简介</a></li>
                 <li class="active"><a href="yun-baomin.html">考证报名</a></li>
                 <li><a href="#">师资力量</a></li>
@@ -31,9 +31,9 @@
                     <a id="memberLi" href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
                     <p class="zhizhen"><img src="images/lodingj.png" width="18px" height="7px"/></p>
 
-                    <p class="lbpo"><a href="#">个人中心</a>
+                    <p class="lbpo"><a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
                         <a href="#">修改密码</a>
-                        <a href="#">退出</a></p>
+                        <a href="#" th:href="@{/pc/login}">退出</a></p>
                 </li>
             </ul>
         </div>
@@ -61,14 +61,14 @@
             <li class="lileft">
                 <p>号码：<span th:text="${mb.phoneNo}">15063568971</span></p>
 
-                <p>注册时间：<span th:text="${#dates.format(mb.registerDate, 'yyyy-MM-dd hh:ss:mm')}">2105.01.01</span></p>
+                <p>注册时间：<span th:text="${#dates.format(mb.registerDate, 'yyyy-MM-dd')}">2105.01.01</span></p>
 
                 <p>班级：<span th:text="${mb.theClass==null}?'未安排':${mb.theClass.className}">201204第一期</span></p>
 
                 <p>报名考试：<span th:text="${#dates.format(mb.applyDate, 'yyyy-MM-dd hh:ss:mm')}">2105.01.01</span>提交报名</p>
 
-                <p><span>考试通过：<b><span th:text="${mb.passed}?'已通过':'未通过'">未知</span></b></span>&nbsp;&nbsp;&nbsp;<span>考试时间：<b><span
-                        th:text="${mb.theClass==null}?'未安排':(${mb.theClass.exam==null}?'未安排':${#dates.format(mb.theClass.exam.examDate, 'yyyy-MM-dd hh:ss:mm')})">未知</span></b></span>&nbsp;&nbsp;&nbsp;<span>考试地点：<b><span
+                <p><span>考试通过：<b><span th:text="${mb.passed}==0?'还未考试':(${mb.passed}==1?'通过':'未通过')">未知</span></b></span>&nbsp;&nbsp;&nbsp;<span>考试时间：<b><span
+                        th:text="${mb.theClass==null}?'未安排':(${mb.theClass.exam==null}?'未安排':${#dates.format(mb.theClass.exam.examDate, 'yyyy-MM-dd')})">未知</span></b></span>&nbsp;&nbsp;&nbsp;<span>考试地点：<b><span
                         th:text="${mb.theClass==null}?'未安排':(${mb.theClass.exam==null}?'未安排':${mb.theClass.exam.examAddress})">未知</span></b></span>
                 </p>
             </li>

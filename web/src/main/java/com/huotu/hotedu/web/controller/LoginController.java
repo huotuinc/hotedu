@@ -34,6 +34,13 @@ public class LoginController {
         return "backend/index";
     }
 
+    @RequestMapping("/pc/gerenToIndex")
+    public String gerenToIndex(Model model) {
+        String turnPage = "pc/yun-index";
+        String style = "padding:0px;";
+        model.addAttribute("style",style);
+        return turnPage;
+    }
 
     @RequestMapping("/pc/baominLogin")
     public String baominLogin(Model model) {
