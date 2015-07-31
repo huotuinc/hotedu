@@ -2,6 +2,7 @@ package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.service.AgentService;
+import com.huotu.hotedu.service.ClassTeamService;
 import com.huotu.hotedu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,6 +33,9 @@ public class AgentController {
     private AgentService agentService;
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private ClassTeamService classTeamService;
 
     /**
      * 用来储存分页中每页的记录数
@@ -375,7 +379,7 @@ public class AgentController {
     @ResponseBody
     public Result setExamPass(Long id){
         Result result = new Result();
-        agentService.setExamPassById(id,1);
+        agentService.setExamPassById(id, 1);
         result.setStatus(1);
         result.setMessage("操作成功");
         return result;
@@ -391,7 +395,7 @@ public class AgentController {
     @ResponseBody
     public Result setExamNoPass(Long id){
         Result result = new Result();
-        agentService.setExamPassById(id,2);
+        agentService.setExamPassById(id, 2);
         result.setStatus(1);
         result.setMessage("操作成功");
         return result;
@@ -401,27 +405,13 @@ public class AgentController {
 
 
 
-     @RequestMapping("/pc/loadClassTeamInfo")
-    public String loadClassTeamInfo(@AuthenticationPrincipal Agent agent,
-                                    @RequestParam(required = false) String keywords,
-                                    @RequestParam(required = false) String searchSort,
-                                    @RequestParam(required = false) Integer pageNo,
-                                    @RequestParam(required = false) Boolean ClassTeamInfoDivStyle,
-                                    Model model){
-         if (pageNo == null || pageNo < 0) {
-             pageNo = 0;
-         };
-         model.addAttribute("agent", agent);
-         model.addAttribute("navigation", "bjxx");
-         model.addAttribute("searchSort", searchSort == null ? "all" : searchSort);
-         model.addAttribute("keywords", keywords);
-         model.addAttribute("pageNo", pageNo);
-         model.addAttribute("ClassTeamInfoDivStyle", ClassTeamInfoDivStyle);
-         model.addAttribute("existClassDivStyle",false);
-         model.addAttribute("classArrageExamDiv",false);
-
-         return "/pc/yun-daili";
-
-
+    @RequestMapping("/pc/loadClassTeamInfo")
+    public String loadClassTeamInfo(long id,Model model){
+        String classTeamDetailcss = "display:block";
+        String turnPage = "/pc/yun-daili";
+        ClassTeam classTeam = classTeamService.findOneById(id);
+        model.addAttribute("classTeamInfo",classTeam);
+        model.addAttribute("classTeamDetailcss",classTeamDetailcss);
+        return turnPage;
      }
 }

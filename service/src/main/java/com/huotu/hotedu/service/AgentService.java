@@ -146,12 +146,6 @@ public class AgentService {
         return examRepository.findOne(id);
     }
 
-    /**
-     *  查询班级信息
-     **/
-    public ClassTeam findOneClassTeamInfoById(long id)
-    {return  classTeamRepository.findOneById(id);}
-
 
 
 
