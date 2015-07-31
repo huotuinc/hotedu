@@ -60,7 +60,7 @@ public class Member extends Login {
      * 是否通过考试
      * 0:还未考试，1:考试通过,2:考试没通过
      */
-    private int passed;
+    private int passed=0;
     /**
      * 是否领证
      */

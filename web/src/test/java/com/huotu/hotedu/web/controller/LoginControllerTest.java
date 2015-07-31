@@ -1,7 +1,9 @@
 package com.huotu.hotedu.web.controller;
 
+import com.huotu.hotedu.WebTestBase;
 import com.huotu.hotedu.test.TestWebConfig;
-import libspringtest.SpringWebTest;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ActiveProfiles;
@@ -19,7 +21,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestWebConfig.class)
 @WebAppConfiguration
-public class LoginControllerTest extends SpringWebTest{
+public class LoginControllerTest extends WebTestBase {
+    private static final Log log = LogFactory.getLog(LoginControllerTest.class);
 
     @Test
     public void testLoginTutor() throws Exception {

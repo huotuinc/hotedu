@@ -98,17 +98,18 @@ public class MemberControllerTest extends WebTestBase {
         Random random = new Random();
 
         int count = 20 + random.nextInt(20);
+        int sum=count;
         int countHaveKeywordsName=0;
         int countHaveKeywordsClass=0;
         int countHaveKeywordsPnoto=0;
+        int pass=0;
+        int noPass=0;
 
         ClassTeam classTeamTest=new ClassTeam();
         classTeamTest.setAgent(agent);
         classTeamTest.setClassName("测试班级" + complexKeyword + System.currentTimeMillis());
         classTeamTest.setId((long) 1);
         classTeamRepository.save(classTeamTest);
-
-
         ArrayList<Member> containsMembers = new ArrayList<>();//拿到包含关键字的member记录
 
         while (count-- > 0) {
@@ -125,14 +126,23 @@ public class MemberControllerTest extends WebTestBase {
                 switch (random.nextInt(3)){
                     case 0:
                         member.setRealName("测试姓名" + complexKeyword + System.currentTimeMillis());
+                        member.setPayed(true);
                         countHaveKeywordsName++;
                         break;
                     case 1:
                         member.setPhoneNo("测试手机"+complexKeyword+System.currentTimeMillis());
+                        member.setHaveLicense(true);
                         countHaveKeywordsPnoto++;
                         break;
                     case 2:
                         member.setTheClass(classTeamTest);
+                        if(random.nextInt(2)+1==1){
+                            member.setPassed(1);
+                            pass++;
+                        }else{
+                            member.setPassed(2);
+                            noPass++;
+                        }
                         countHaveKeywordsClass++;
                         break;
                 }
@@ -241,6 +251,78 @@ public class MemberControllerTest extends WebTestBase {
                 .andReturn().getModelAndView().getModel();
         pages=(Page<Member>)model.get("allMemberList");
         Assert.assertEquals("包含关键字的电话记录数",countHaveKeywordsPnoto,pages.getTotalElements());
+
+        model=  mockMvc.perform(
+                get("/pc/searchMembers")
+                        .session(loginAs(agentUsername, password))
+                        .param("searchSort","haveLicense")
+                        .param("keywords","1")
+        ) .andExpect(status().isOk())
+                .andReturn().getModelAndView().getModel();
+        pages=(Page<Member>)model.get("allMemberList");
+        Assert.assertEquals("已经领证的记录数",countHaveKeywordsPnoto,pages.getTotalElements());
+
+        model=  mockMvc.perform(
+                get("/pc/searchMembers")
+                        .session(loginAs(agentUsername, password))
+                        .param("searchSort","passed")
+                        .param("keywords","1")
+        ) .andExpect(status().isOk())
+                .andReturn().getModelAndView().getModel();
+        pages=(Page<Member>)model.get("allMemberList");
+        Assert.assertEquals("通过考试的记录数",pass,pages.getTotalElements());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        String ViewName=mockMvc.perform(
+                get("/pc/searchMembers")
+                        .session(loginAs(agentUsername, password))
+        )
+                .andExpect(status().isOk())
+                .andReturn().getModelAndView().getViewName();
+        Assert.assertEquals("返回的视图名字是否相等","/pc/yun-daili",ViewName);
 
 
 

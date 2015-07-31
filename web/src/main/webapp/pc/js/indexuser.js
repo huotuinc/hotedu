@@ -24,7 +24,27 @@ $(function(){
 		}
 	});
 
+	$("#sel_searchMember").change(function(){
+		changeSearchSelect(this.value);
+	});
 });
+function changeSearchSelect(type){
+	if(type=="all"){
+		$("#td_key").html('<input id="input_search1" style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字"name="keywords" th:value="${keywords}" value="" type="text"/>');
+
+	}else if(type=="payed"){
+		$("#td_key").html('<select id="select_search2" name="keywords" class="yssp" style="width: 180px"> <option value="1">是</option> <option value="0">否</option> </select>');
+
+	}else if(type=="passed"){
+		$("#td_key").html('<select id="select_search3" name="keywords" class="yssp" style="width: 180px"> <option value="1">通过考试</option> <option value="2">未通过考试</option> <option value="0">未参加考试</option></select>');
+
+	}else if(type=="haveLicense"){
+		$("#td_key").html('<select id="select_search4" name="keywords" class="yssp" style="width: 180px"> <option value="1">是</option> <option value="0">否</option> </select>');
+
+	}
+
+}
+
 $(function() {
 	$("#btn_chooseExistClass").click(function() {
 		$.ajax({

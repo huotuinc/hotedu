@@ -15,9 +15,18 @@
     <script type="text/javascript" src="js/date/jquery_ui.js"></script>
     <script type="text/javascript" src="js/date/mydate.js"></script>
     <link rel="stylesheet" type="text/css" href="css/jquery_ui.css"/>
-    <script rel="stylesheet" type="text/javascript">
+    <script rel="stylesheet" type="text/javascript" th:inline="javascript">
         $(function(){
             $("#btn_addMember").click(addMember);
+            /*<![CDATA[*/
+            var type = [[${searchSort}]];
+            $("#sel_searchMember option").each(function(){
+               if(this.value==type){
+                   $(this).attr("selected", "selected");
+               }
+            });
+            changeSearchSelect(type);
+            /*]]>*/
         });
     </script>
 </head>
@@ -85,7 +94,7 @@
 
     <div class="ysthree">
         <!--报名信息-->
-        <div style="display:none;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
+        <div style="display:block;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
             <div style=" float: right; margin-right: 14px;margin-bottom: 6px;margin-top:5px; width:1000px;" class="search-content">
                 <form action="#" th:action="@{/pc/searchMembers}" method="post">
                     <p style="height:5px;"></p>
@@ -108,7 +117,7 @@
                                 <option value="passed">考试状态</option>
                                 <option value="haveLicense">领证状态</option>
                             </select></td>
-                            <td>
+                            <td id="td_key">
                                 <input id="input_search1" style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字"
                                        name="keywords" th:value="${keywords}" value="" type="text"/>
                             </td>
@@ -214,7 +223,7 @@
                                 <td th:text="${g.phoneNo}" title="">125656256356</td>
                                 <td th:text="${g.payed}?'是':'否'" title="">是</td>
                                 <td th:text="${#calendars.format(g.applyDate,'yyyy-MM-dd')}" title="">2015.04.01</td>
-                                <td th:text="${g.passed}?'是':'否'" title="">--</td>
+                                <td th:text="${g.passed}==0?'还未考试':(${g.passed}==1?'考试通过':'考试没通过')" title="">--</td>
                                 <td th:text="${g.haveLicense}?'是':'否'" title="">--</td>
                                 <td th:text="${g.theClass}==null? '未分配':${g.theClass.className}" title="">201504第一期</td>
                                 <td><a class="link-update" href="#"
