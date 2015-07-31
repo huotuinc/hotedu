@@ -250,9 +250,7 @@ public class TutorController {
         try {
             //文件格式判断
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
-            System.out.println("文件大小：" + file.getSize());
             if(file.getSize()==0){throw new Exception("文件为空！");}
-            if(file.getSize()>1024*1024*5){throw new Exception("文件太大");}
 
             //保存图片
             String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
@@ -293,8 +291,6 @@ public class TutorController {
         if(file.getSize()!=0){
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
         }
-        if(file.getSize()>1024*1024*5){throw new Exception("文件太大");}
-
         //获取需要修改的图片路径，并删除
         staticResourceService.deleteResource(staticResourceService.getResource(tutorService.findOneById(id).getPictureUri()));
         //保存图片
