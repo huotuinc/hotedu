@@ -58,7 +58,7 @@ public class AgentServiceTest {
 
         ClassTeam classTeam = new ClassTeam();
         classTeam.setId((long) 20);
-        agentService.addClassTeam(classTeam);
+//        agentService.addClassTeam(classTeam);
 
         Member mb2 = new Member();
         mb2.setLoginName("12348");
@@ -132,7 +132,7 @@ public class AgentServiceTest {
     public void checkClassTeamOneByName(){
         ClassTeam classTeam = new ClassTeam();
         classTeam.setClassName("nihao");
-        agentService.addClassTeam(classTeam);
+//        agentService.addClassTeam(classTeam);
 
         boolean flag= agentService.checkClassTeamByName("nihao");
         assertEquals("该名称不可用",false,flag);

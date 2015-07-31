@@ -4,9 +4,7 @@ import com.huotu.hotedu.entity.Agent;
 import com.huotu.hotedu.entity.ClassTeam;
 import com.huotu.hotedu.entity.Exam;
 import com.huotu.hotedu.entity.Member;
-import com.huotu.hotedu.repository.AgentRepository;
-import com.huotu.hotedu.repository.ClassTeamRepository;
-import com.huotu.hotedu.repository.MemberRepository;
+import com.huotu.hotedu.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +16,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,6 +36,8 @@ public class AgentService {
     @Autowired
     private ClassTeamRepository classTeamRepository;
 
+    @Autowired
+    private ExamRepository examRepository;
 
     /**
      * 返回按照类型和关键字搜索过之后的代理商
@@ -211,63 +212,63 @@ public class AgentService {
         }, new PageRequest(pageNo, pageSize));
     }
 
-    /**
-     * Created by jiashubing on 2015/7/24.
-     * 显示所有已分班学员 每页10条
-     * 加载、搜索、上一页、下一页
-     * @param agent         当前代理商
-     * @param pageNo        第几页
-     * @param pageSize      每页几条
-     * @param keywords      关键词
-     * @param searchSort    搜索类型
-     * @return              学员集合
-     */
-    public Page<Member> findHaveClassMembers(Agent agent,Integer pageNo,Integer pageSize,String keywords,String searchSort){
-        return  memberRepository.findAll(new Specification<Member>() {
-            @Override
-            public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if ("".equals(keywords)||keywords==null) {
-                    return cb.and(
-                            cb.equal(root.get("agent").as(Agent.class), agent),
-                            cb.isTrue(root.get("enabled").as(Boolean.class)),
-                            cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
-                            cb.isTrue(root.get("payed").as(Boolean.class))
-                    );
-                }else if("all".equals(searchSort)){
-                    return cb.and(
-                            cb.equal(root.get("agent").as(Agent.class), agent),
-                            cb.isTrue(root.get("enabled").as(boolean.class)),
-                            cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
-                            cb.isTrue(root.get("payed").as(Boolean.class)),
-                            cb.or(
-                                    cb.like(root.get("realName").as(String.class),"%"+keywords+"%"),
-                                    cb.like(root.get("phoneNo").as(String.class),"%"+keywords+"%"),
-                                    cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
-                            )
-                    );
-                }else{
-                    if("area".equals(searchSort)) {
-                        return cb.and(
-                                cb.equal(root.get("agent").as(Agent.class), agent),
-                                cb.isTrue(root.get("enabled").as(boolean.class)),
-                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
-                                cb.isTrue(root.get("payed").as(Boolean.class)),
-                                cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
-                        );
-                    }
-                    else{
-                        return cb.and(
-                                cb.equal(root.get("agent").as(Agent.class), agent),
-                                cb.isTrue(root.get("enabled").as(boolean.class)),
-                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
-                                cb.isTrue(root.get("payed").as(Boolean.class)),
-                                cb.like(root.get(searchSort).as(String.class), "%" + keywords + "%")
-                        );
-                    }
-                }
-            }
-        }, new PageRequest(pageNo, pageSize));
-    }
+//    /**
+//     * Created by jiashubing on 2015/7/24.
+//     * 显示所有已分班学员 每页10条
+//     * 加载、搜索、上一页、下一页
+//     * @param agent         当前代理商
+//     * @param pageNo        第几页
+//     * @param pageSize      每页几条
+//     * @param keywords      关键词
+//     * @param searchSort    搜索类型
+//     * @return              学员集合
+//     */
+//    public Page<Member> findHaveClassMembers(Agent agent,Integer pageNo,Integer pageSize,String keywords,String searchSort){
+//        return  memberRepository.findAll(new Specification<Member>() {
+//            @Override
+//            public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+//                if ("".equals(keywords)||keywords==null) {
+//                    return cb.and(
+//                            cb.equal(root.get("agent").as(Agent.class), agent),
+//                            cb.isTrue(root.get("enabled").as(Boolean.class)),
+//                            cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+//                            cb.isTrue(root.get("payed").as(Boolean.class))
+//                    );
+//                }else if("all".equals(searchSort)){
+//                    return cb.and(
+//                            cb.equal(root.get("agent").as(Agent.class), agent),
+//                            cb.isTrue(root.get("enabled").as(boolean.class)),
+//                            cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+//                            cb.isTrue(root.get("payed").as(Boolean.class)),
+//                            cb.or(
+//                                    cb.like(root.get("realName").as(String.class),"%"+keywords+"%"),
+//                                    cb.like(root.get("phoneNo").as(String.class),"%"+keywords+"%"),
+//                                    cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
+//                            )
+//                    );
+//                }else{
+//                    if("area".equals(searchSort)) {
+//                        return cb.and(
+//                                cb.equal(root.get("agent").as(Agent.class), agent),
+//                                cb.isTrue(root.get("enabled").as(boolean.class)),
+//                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+//                                cb.isTrue(root.get("payed").as(Boolean.class)),
+//                                cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
+//                        );
+//                    }
+//                    else{
+//                        return cb.and(
+//                                cb.equal(root.get("agent").as(Agent.class), agent),
+//                                cb.isTrue(root.get("enabled").as(boolean.class)),
+//                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+//                                cb.isTrue(root.get("payed").as(Boolean.class)),
+//                                cb.like(root.get(searchSort).as(String.class), "%" + keywords + "%")
+//                        );
+//                    }
+//                }
+//            }
+//        }, new PageRequest(pageNo, pageSize));
+//    }
 
     /**
      * Created by jiashubing on 2015/7/24.        ckm
@@ -342,13 +343,13 @@ public class AgentService {
             memberNum ++;
             memberRepository.save(mb);
         }
-        classTeam.setMemberNum(memberNum);
+        classTeam.setMemberNum(classTeam.getMemberNum()+memberNum);
         classTeamRepository.save(classTeam);
     }
 
     /**
      * Created by jiashubing on 2015/7/24.
-     * 查询该代理商已有班级
+     * 查询该代理商已有班级 下拉框展示
      * @param agent     所属代理商
      * @return          班级集合
      */
@@ -366,7 +367,11 @@ public class AgentService {
      * 注册增加班级
      * @param classTeam  注册的班级
      */
-    public ClassTeam addClassTeam(ClassTeam classTeam){
+    public ClassTeam addClassTeam(Agent agent,ClassTeam classTeam){
+        Exam exam = new Exam();
+        exam.setAgent(agent);
+        Exam test = examRepository.save(exam);
+        classTeam.setExam(test);
         return classTeamRepository.save(classTeam);
     }
 
@@ -384,25 +389,79 @@ public class AgentService {
     /**
      * Created by cwb on 2015/7/29
      * 根据代理商查找可用于分班的班级
-     * @param agent
-     * @return
+     * @param agent 当前代理商
+     * @return      班级集合
      */
     public List<ClassTeam> findAvailableClassTeams(Agent agent) {
         List<ClassTeam> classTeams = classTeamRepository.findByAgent(agent);
         return classTeams;
     }
 
+    /**
+     * Created by jiashubing on 2015/7/30
+     * 根据代理商查找用于安排班级的考场
+     * @param agent 当前代理商
+     * @return      考场集合
+     */
+    public List<Exam> findAvailableExamTeams(Agent agent) {
+        List<Exam> exam = examRepository.findByAgent(agent);
+        return exam;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * Created by jiashubing on 2015/7/24.
+     * 显示代理商所有的班级 分页显示
+     * 加载、搜索、上一页、下一页
+     * @param agent         当前代理商
+     * @param pageNo        第几页
+     * @param pageSize      每页几条
+     * @param keywords      关键词
+     * @param searchSort    搜索类型
+     * @return              班级集合
+     */
+    public Page<ClassTeam> findClassArrageExam(Agent agent,Integer pageNo,Integer pageSize,String keywords,String searchSort){
+        return  classTeamRepository.findAll(new Specification<ClassTeam>() {
+            @Override
+            public Predicate toPredicate(Root<ClassTeam> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                Date date = new Date();
+                if ("".equals(keywords)||keywords==null) {
+                    return cb.and(
+                            cb.equal(root.get("agent").as(Agent.class), agent)
+                    );
+                }else if("all".equals(searchSort)){
+                    return cb.and(
+                            cb.equal(root.get("agent").as(Agent.class), agent),
+                            cb.or(
+                                    cb.like(root.get("className").as(String.class),"%"+keywords+"%"),
+                                    cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%"),
+                                    cb.like(root.get("exam").get("examDate").as(String.class), "%" + keywords + "%"),
+                                    cb.like(root.get("exam").get("examAddress").as(String.class), "%" + keywords + "%")
+                            )
+                    );
+                }else{
+                    if("area".equals(searchSort)) {
+                        return cb.and(
+                                cb.equal(root.get("agent").as(Agent.class), agent),
+                                cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
+                        );
+                    }else if("examDate".equals(searchSort)) {
+                        return cb.and(
+                                cb.equal(root.get("agent").as(Agent.class), agent),
+                                cb.like(root.get("exam").get("examDate").as(String.class), "%" + keywords + "%")
+                        );
+                    }else if("examAddress".equals(searchSort)) {
+                        return cb.and(
+                                cb.equal(root.get("agent").as(Agent.class), agent),
+                                cb.like(root.get("exam").get("examAddress").as(String.class), "%" + keywords + "%")
+                        );
+                    } else{
+                        return cb.and(
+                                cb.equal(root.get("agent").as(Agent.class), agent),
+                                cb.like(root.get(searchSort).as(String.class), "%" + keywords + "%")
+                        );
+                    }
+                }
+            }
+        }, new PageRequest(pageNo, pageSize));
+    }
 }

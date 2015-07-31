@@ -136,15 +136,15 @@ $(document).ready(function () {
 //}
 
 function check_noClassMember() {
-    $.MsgBox.Alert("温馨提示", "请选择需要安排分班的的学员！");
+    $.MsgBox.Alert("温馨提示", "请选择需要安排分班的学员！");
 }
 
-function check_ClassMember() {
-    $.MsgBox.Alert("温馨提示","请选择需要安排考试的学员！");
+function check_classExam() {
+    $.MsgBox.Alert("温馨提示", "请选择需要安排考场的班级！");
 }
 
 function check_payMember() {
-    $.MsgBox.Alert("温馨提示", "请选择需要确认缴费的的学员！");
+    $.MsgBox.Alert("温馨提示", "请选择需要确认缴费的学员！");
 }
 
 function check_payEnter() {
@@ -155,8 +155,8 @@ function check_payEnter() {
 
 function check_arageNewClass() {
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员安排到新建班级中吗？", function () {
-        $("#noClassMemberArrageClassDiv2").hide();
-        $("#noClassMemberArrageClassDiv2Form").submit();
+        $("#noClassMemberArrageNewClassDiv").hide();
+        $("#noClassMemberArrageNewClassDivForm").submit();
     });
 }
 
@@ -172,6 +172,30 @@ function check_arrageExistClass() {
             success:function(result){
                 if(result.status==0){
                     $("#apyysb").text(result.message);
+                }else if(result.status==1){
+                    $("#searchClassMembers").submit();
+                    alert(result.message);
+                }
+            },
+            error:function(){
+                alert("安排失败");
+            }
+        });
+    });
+}
+
+function check_arrageExistExam() {
+    $.MsgBox.Confirm("温馨提示", "确认要将选中班级安排到选中考场中吗？", function () {
+        var noClassMemberArrayLis = $("#classExamArrayLis").val().trim();
+        var existClassSelect = $("#existExamSelect").val().trim();
+        $.ajax({
+            url:path+"/pc/addMembersIntoExitClass",
+            type:"post",
+            data:{"className":existClassSelect,"noClassMemberArrayLis":noClassMemberArrayLis},
+            dataType:"json",
+            success:function(result){
+                if(result.status==0){
+                    $("#errInfo_exacClass").text(result.message);
                 }else if(result.status==1){
                     $("#searchClassMembers").submit();
                     alert(result.message);
