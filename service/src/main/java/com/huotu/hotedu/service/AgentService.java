@@ -155,7 +155,12 @@ public class AgentService {
         return list.isEmpty();
     }
 
-
+    /**
+     * Created by cwb on 2015/7/31.
+     * 检查该考场名称是否已经使用
+     * @param examName     考场名称
+     * @return             若没有使用，返回true；若使用过，则返回false
+     */
     public boolean isExamNameAvailable(String examName) {
         Exam exam = examRepository.findByExamName(examName);
         if(exam==null) {
@@ -163,22 +168,6 @@ public class AgentService {
         }else {
             return false;
         }
-    }
-
-    /**
-     * Created by jiashubing on 2015/7/31.
-     * 检查该考场名称是否已经使用
-     * @param examName     考场名称
-     * @return             若没有使用，返回true；若使用过，则返回false
-     */
-    public boolean checkExamByName(String examName){
-        List<Exam> list = examRepository.findAll(new Specification<Exam>() {
-            @Override
-            public Predicate toPredicate(Root<Exam> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return cb.equal(root.get("examName").as(String.class), examName);
-            }
-        });
-        return list.isEmpty();
     }
 
     /**
@@ -237,64 +226,6 @@ public class AgentService {
             }
         }, new PageRequest(pageNo, pageSize));
     }
-
-//    /**
-//     * Created by jiashubing on 2015/7/24.
-//     * 显示所有已分班学员 每页10条
-//     * 加载、搜索、上一页、下一页
-//     * @param agent         当前代理商
-//     * @param pageNo        第几页
-//     * @param pageSize      每页几条
-//     * @param keywords      关键词
-//     * @param searchSort    搜索类型
-//     * @return              学员集合
-//     */
-//    public Page<Member> findHaveClassMembers(Agent agent,Integer pageNo,Integer pageSize,String keywords,String searchSort){
-//        return  memberRepository.findAll(new Specification<Member>() {
-//            @Override
-//            public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//                if ("".equals(keywords)||keywords==null) {
-//                    return cb.and(
-//                            cb.equal(root.get("agent").as(Agent.class), agent),
-//                            cb.isTrue(root.get("enabled").as(Boolean.class)),
-//                            cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
-//                            cb.isTrue(root.get("payed").as(Boolean.class))
-//                    );
-//                }else if("all".equals(searchSort)){
-//                    return cb.and(
-//                            cb.equal(root.get("agent").as(Agent.class), agent),
-//                            cb.isTrue(root.get("enabled").as(boolean.class)),
-//                            cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
-//                            cb.isTrue(root.get("payed").as(Boolean.class)),
-//                            cb.or(
-//                                    cb.like(root.get("realName").as(String.class),"%"+keywords+"%"),
-//                                    cb.like(root.get("phoneNo").as(String.class),"%"+keywords+"%"),
-//                                    cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
-//                            )
-//                    );
-//                }else{
-//                    if("area".equals(searchSort)) {
-//                        return cb.and(
-//                                cb.equal(root.get("agent").as(Agent.class), agent),
-//                                cb.isTrue(root.get("enabled").as(boolean.class)),
-//                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
-//                                cb.isTrue(root.get("payed").as(Boolean.class)),
-//                                cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
-//                        );
-//                    }
-//                    else{
-//                        return cb.and(
-//                                cb.equal(root.get("agent").as(Agent.class), agent),
-//                                cb.isTrue(root.get("enabled").as(boolean.class)),
-//                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
-//                                cb.isTrue(root.get("payed").as(Boolean.class)),
-//                                cb.like(root.get(searchSort).as(String.class), "%" + keywords + "%")
-//                        );
-//                    }
-//                }
-//            }
-//        }, new PageRequest(pageNo, pageSize));
-//    }
 
     /**
      * Created by jiashubing on 2015/7/24.        ckm
