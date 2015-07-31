@@ -17,7 +17,6 @@ import java.util.List;
 @Repository
 public interface ClassTeamRepository extends JpaRepository<ClassTeam,Long>,ClassicsRepository<ClassTeam>,JpaSpecificationExecutor<ClassTeam>{
 
-ClassTeam findByClassName(String className);
-
+    ClassTeam findByClassName(String className);
     List<ClassTeam> findByAgent(Agent agent);
 }
