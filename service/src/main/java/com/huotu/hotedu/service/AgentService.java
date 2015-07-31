@@ -139,6 +139,10 @@ public class AgentService {
         return classTeamRepository.findOne(id);
     }
 
+    public Exam findExamById(long id) {
+        return examRepository.findOne(id);
+    }
+
     /**
      * Created by jiashubing on 2015/7/24.
      * 检查该班级名称是否已经使用
@@ -319,6 +323,12 @@ public class AgentService {
         classTeamRepository.save(classTeam);
     }
 
+    /**
+     * Created by jiashubing on 2015/7/30.
+     * 安排分考场
+     * @param classExamArrayLis  需要分考场的班级
+     * @param exam             分配的考场
+     */
     public void arrangeExam(ArrayList<Long> classExamArrayLis,Exam exam){
         ClassTeam ct = null;
         for(int i=0; i<classExamArrayLis.size();i++){
@@ -326,7 +336,7 @@ public class AgentService {
             ct.setExam(exam);
             classTeamRepository.save(ct);
         }
-//        examRepository.save(exam);
+        examRepository.save(exam);
     }
 
     /**

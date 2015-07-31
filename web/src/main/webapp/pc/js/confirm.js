@@ -174,8 +174,6 @@ function check_arrageNewClass() {
                 alert("安排失败");
             }
         });
-       /* $("#noClassMemberArrageNewClassDiv").hide();
-        $("#noClassMemberArrageNewClassDivForm").submit();*/
     });
 }
 
@@ -201,8 +199,6 @@ function check_arrageNewExam() {
                 alert("安排失败");
             }
         });
-        /*$("#classArrageNewExamDiv").hide();
-        $("#classArrageNewExamDivForm").submit();*/
     });
 }
 
@@ -217,7 +213,7 @@ function check_arrageExistClass() {
             dataType:"json",
             success:function(result){
                 if(result.status==0){
-                    $("#apyysb").text(result.message);
+                    $("#errInfo_existClass").text(result.message);
                 }else if(result.status==1){
                     $("#searchClassMembers").submit();
                     alert(result.message);
@@ -232,18 +228,18 @@ function check_arrageExistClass() {
 
 function check_arrageExistExam() {
     $.MsgBox.Confirm("温馨提示", "确认要将选中班级安排到选中考场中吗？", function () {
-        var noClassMemberArrayLis = $("#classExamArrayLis").val().trim();
-        var existClassSelect = $("#existExamSelect").val().trim();
+        var classExamArrayLis = $("#classExamArrayLis").val().trim();
+        var existExamSelect = $("#existExamSelect").val().trim();
         $.ajax({
-            url:path+"/pc/addMembersIntoExitClass",
+            url:path+"/pc/addClassIntoExistExam",
             type:"post",
-            data:{"className":existClassSelect,"noClassMemberArrayLis":noClassMemberArrayLis},
+            data:{"examName":existExamSelect,"classExamArrayLis":classExamArrayLis},
             dataType:"json",
             success:function(result){
                 if(result.status==0){
-                    $("#errInfo_exacClass").text(result.message);
+                    $("#errInfo_existExam").text(result.message);
                 }else if(result.status==1){
-                    $("#searchClassMembers").submit();
+                    $("#searchClassExam").submit();
                     alert(result.message);
                 }
             },

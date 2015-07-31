@@ -88,7 +88,8 @@
          class="ystwo">
         <div class="ysykone bg " th:class="${navigation}=='bmxx'? 'ysykone bg on':'ysykone bg'"><a href="#" th:href="@{/pc/searchMembers}"><span>报名信息</span> </a></div>
         <div class="ysyktwo bg" th:class="${navigation}=='xxtz'? 'ysyktwo bg on':'ysyktwo bg'"><a href="#"><span>消息通知</span> </a></div>
-        <div class="ysykthree bg" th:class="${navigation}=='bjgl'? 'ysykthree bg on':'ysykthree bg'"><a href="#" th:href="@{/pc/loadClassMembers}"><span>班级管理</span> </a></div>
+        <div class="ysykthree bg" th:class="${navigation}=='bjgl' ? 'ysykthree bg on':'ysykthree bg'" th:style="${navigation}=='apkc' ? 'display:none':'display:block'"><a href="#" th:href="@{/pc/loadClassMembers}"><span>班级管理</span> </a></div>
+        <div class="ysykthree bg" th:class="${navigation}=='apkc' ? 'ysykthree bg on':'ysykthree bg'" th:style="${navigation}=='apkc' ? 'display:block':'display:none'"><a href="#" th:href="@{/pc/loadClassExam}"><span>班级管理</span> </a></div>
         <div class="ysykfour bg on" th:class="${navigation}=='bygl'? 'ysykfour bg on':'ysykfour bg'"><a href="#" th:href="@{/pc/loadGraduationMembers}"><span>毕业管理</span> </a></div>
     </div>
 
@@ -569,8 +570,8 @@
                                         <td th:text="${g.className}">201504第一期</td>
                                         <td th:text="${g.agent.area}">杭州</td>
                                         <td th:text="${g.memberNum}">60</td>
-                                        <td th:text="${g.exam.examDate}==null ? '': ${#calendars.format(g.exam.examDate,'yyyy-MM-dd')}">2015-04-01</td>
-                                        <td th:text="${g.exam.examAddress}">火炬大厦</td>
+                                        <td th:text="${g.exam}==null ? '': ${#calendars.format(g.exam.examDate,'yyyy-MM-dd')}">2015-04-01</td>
+                                        <td th:text="${g.exam}==null ? '': ${g.exam.examAddress}">火炬大厦</td>
                                         <td><a class="link-update" href="#">查看</a></td>
                                     </tr>
                                     <tr>
@@ -851,7 +852,7 @@
 <!--新增班级end-->
 
 <!--安排班级弹窗-->
-<div id="noClassMemberArrageClassDiv" style="display:none;" class="ystc" th:style="${noClassMemberArrageClassDivStyle}? 'display:block' : 'display:none'">
+<div id="noClassMemberArrageClassDiv" style="display:none;" class="ystc">
     <div class="box-ys">
         <P style="text-align:right;"><a href="#" onclick="$('#noClassMemberArrageClassDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
         <p style="height:20px"></p>
@@ -868,7 +869,7 @@
 <!--未分班学员安排班级弹窗end-->
 
 <!--新建班级-->
-<div id="noClassMemberArrageNewClassDiv" style="display:none" th:style="${noClassMemberArrageNewClassDivStyle}? 'display:block' : 'display:none'" class="ystc">
+<div id="noClassMemberArrageNewClassDiv" style="display:none" class="ystc">
     <div class="box-ys">
         <form action="#" id="noClassMemberArrageNewClassDivForm" method="post" th:action="@{/pc/isClassNameExist}">
             <P style="text-align:right;"><a href="#" onclick="$('#noClassMemberArrageNewClassDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
@@ -884,27 +885,26 @@
 <!--新建班级end-->
 
 <!--选择已有班级-->
-<div id="existClassDiv" style="display:none" class="ystc" th:style="${existClassDivStyle}? 'display:block' : 'display:none'">
+<div id="existClassDiv" style="display:none" class="ystc">
     <div class="box-ys">
         <form action="#" id="existClassDivForm" method="post" th:action="@{/pc/addSaveOldClassTeam}">
             <P style="text-align:right;"><a href="#" onclick="$('#existClassDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
             <p style="height:20px"></p>
-            <span style="display: none;"><input title="" type="text" value="" name="noClassMemberArrayLis" th:value="${noClassMemberArrayLis}" id="noClassMemberArrayLis2" /></span>
+            <!--<span style="display: none;"><input title="" type="text" value="" name="noClassMemberArrayLis" th:value="${noClassMemberArrayLis}" id="noClassMemberArrayLis2" /></span>-->
             <p>
                 <select id="existClassSelect" class="ys-form__button" title="existClassSelect" name="className" style="text-align: center;">
                     <option th:each="ex:${existClassList}" th:value="${ex.className}" th:text="${ex.className}">欧洲</option>
                 </select>
             </p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="check_arrageExistClass()">保存</button></p>
-            <span id="apyysb" style="color:red;text-align: center;" th:text="${errInfo}"/>
-            <span id="apyycg" style="color:blue;text-align: center;" th:text="${msgInfo}"/>
+            <span id="errInfo_existClass" style="color:red;text-align: center;"/>
         </form>
     </div>
 </div>
 <!--选择已有班级end-->
 
 <!--班级安排考场弹窗-->
-<div id="classArrageExamDiv" style="display:none;" class="ystc" th:style="${classArrageExamDivStyle}? 'display:block' : 'display:none'">
+<div id="classArrageExamDiv" style="display:none;" class="ystc">
     <div class="box-ys">
         <P style="text-align:right;"><a href="#" onclick="$('#classArrageExamDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
         <p style="height:20px"></p>
@@ -921,7 +921,7 @@
 <!--班级安排考场弹窗end-->
 
 <!--新建考场-->
-<div id="classArrageNewExamDiv" style="display:block" th:style="${classArrageNewExamDivStyle}? 'display:block' : 'display:none'" class="ystc">
+<div id="classArrageNewExamDiv" style="display:none" class="ystc">
     <div class="box-ys">
         <form action="#" id="classArrageNewExamDivForm" method="post" th:action="@{/pc/isExamNameExist}">
             <P style="text-align:right;"><a href="#" onclick="$('#classArrageNewExamDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
@@ -938,20 +938,19 @@
 <!--新建考场end-->
 
 <!--选择已有考场-->
-<div id="classArrageExistExamDiv" style="display:none" class="ystc" th:style="${classArrageExistExamDivStyle}? 'display:block' : 'display:none'">
+<div id="classArrageExistExamDiv" style="display:none" class="ystc">
     <div class="box-ys">
         <form action="#" id="classArrageExistExamDivForm" method="post" th:action="@{/pc/addSaveOldClassTeam}">
             <P style="text-align:right;"><a href="#" onclick="$('#classArrageExistExamDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
             <p style="height:20px"></p>
-            <span style="display: none;">
-                <input title="" type="text" value="" name="classExamArrayLis" th:value="${classExamArrayLis}" id="classExamArrayLis2" /></span>
+           <!-- <span style="display: none;"><input title="" type="text" value="" name="classExamArrayLis" th:value="${classExamArrayLis}" id="classExamArrayLis2" /></span>-->
             <p>
                 <select id="existExamSelect" class="ys-form__button" title="existExamSelect" name="examName" style="text-align: center;">
                     <option th:each="ex:${existExamList}" th:value="${ex.examName}" th:text="${ex.examName}">欧洲</option>
                 </select>
             </p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="check_arrageExistExam()">保存</button></p>
-            <span id="errInfo_exacClass" style="color:red;text-align: center;" th:text="${errInfo}"/>
+            <span id="errInfo_existExam" style="color:red;text-align: center;"/>
         </form>
     </div>
 </div>
