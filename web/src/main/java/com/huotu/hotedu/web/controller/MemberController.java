@@ -280,7 +280,7 @@ public class MemberController {
         String turnPage = "/pc/yun-xyge";
         if(id==null) {
             errInfo = "请重新登录";
-            turnPage = "redirect:/pc/login";
+            turnPage = "redirect:/pc/index";
         }else {
             Member mb = memberService.findOneById(id);
             model.addAttribute("mb",mb);
@@ -306,7 +306,7 @@ public class MemberController {
         String turnPage = "redirect:/pc/searchMembers";
         if(id==null) {
             errInfo = "请重新登录";
-            turnPage = "redirect:/pc/login";
+            turnPage = "redirect:/pc/index";
         }else {
             memberService.checkPay(id);
             msgInfo = "交费成功";

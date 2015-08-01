@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -180,6 +181,8 @@
                             <a href="newvideo.html" th:href="@{/backend/addVideo}"><i class="icon-font">+</i>新增视频</a>
                         </div>
                     </div>
+                </div>
+                <div class="result-content">
                     <table class="result-tab" width="100%">
                         <thead>
                         <tr>
@@ -212,16 +215,16 @@
                         </tbody>
                     </table>
                     <div class="list-page">
-                        <a href="#" th:href="@{/backend/loadVideo(pageNo=${pageNo}-1,keywords=${keywords})}">上一页</a>
-                        <a href="#" th:href="@{/backend/loadVideo(pageNo=${pageNo}+1,keywords=${keywords})}">下一页</a>
-                        <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span
-                            th:text="${totalPages}">1</span> 页
+                        <a href="#" th:href="@{/backend/searchVideo(pageNo=${pageNo}-1,keywords=${keywords})}">上一页</a>
+                        <a href="#" th:href="@{/backend/searchVideo(pageNo=${pageNo}+1,keywords=${keywords})}">下一页</a>
+                        <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
                     </div>
-                </form>
+                </div>
+            </form>
             </div>
         </div>
     </div>
     <!--/main-->
-</div>
+    </div>
 </body>
 </html>

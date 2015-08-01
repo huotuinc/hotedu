@@ -36,7 +36,7 @@
     <div style="background-color:#fff;">
         <div style="background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" class="logoimg"/>
             <ul class="navi">
-                <li><a href="yun-index.html" th:href="@{/pc/loginSuccess}">首页</a></li>
+                <li><a href="yun-index.html" th:href="${/pc/index}">首页</a></li>
                 <li><a href="javascript:void(0)">公司简介</a></li>
                 <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
                 <li><a href="javascript:void(0)">师资力量</a></li>
@@ -52,7 +52,7 @@
                     <p style="display: none" class="lbpoo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
                         <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
                         <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
-                        <a href="#" th:href="@{/pc/login}">退出</a></p>
+                        <a href="#" th:href="@{/pc/loginOut}">退出</a></p>
                 </li>
             </ul>
         </div>

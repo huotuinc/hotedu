@@ -26,7 +26,7 @@ public class LoginControllerTest extends WebTestBase {
 
     @Test
     public void testLoginTutor() throws Exception {
-        mockMvc.perform(get("/pc/login?LoginName='admin'&password='admin'")).andDo(print());
+        mockMvc.perform(get("/pc/index?LoginName='admin'&password='admin'")).andDo(print());
 
     }
 

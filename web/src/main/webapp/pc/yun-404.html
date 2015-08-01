@@ -16,11 +16,11 @@
     <div style=" background-color:#fff;">
         <div style=" background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" class="logoimg"/>
             <ul class="navi">
-                <li><a href="yun-index.html">首页</a></li>
+                <li><a href="yun-index.html" th:href="${/pc/index}">首页</a></li>
                 <li><a href="javascript:void(0)">公司简介</a></li>
                 <li class="active"><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
                 <li><a href="javascript:void(0)">师资力量</a></li>
-                <li><a href="javascript:void(0)">教学视频</a></li>
+                <li><a href="javascript:void(0)"  th:href="@{/pc/loadVideo}">教学视频</a></li>
                 <li><a href="javascript:void(0)">考试指南</a></li>
                 <li><a href="javascript:void(0)">招|应聘</a></li>
                 <li ><a href="javascript:void(0)" th:href="@{/pc/baominLogin}">登录</a>

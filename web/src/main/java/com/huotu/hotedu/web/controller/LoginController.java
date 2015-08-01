@@ -1,24 +1,16 @@
 package com.huotu.hotedu.web.controller;
 
-import com.huotu.hotedu.entity.Agent;
+import com.huotu.hotedu.entity.Editor;
 import com.huotu.hotedu.entity.Login;
 import com.huotu.hotedu.entity.Manager;
-import com.huotu.hotedu.entity.Member;
-import com.huotu.hotedu.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by luffy on 2015/6/10.
+ * Modify by shiliting on 2015/8/1
  * 登录有关的Controller
  * @author luffy luffy.ja at gmail.com
  */
@@ -54,26 +46,19 @@ public class LoginController {
         return turnPage;
     }
 
-    @RequestMapping("/pc/login")
-    public String check(Model model) {
+    @RequestMapping("/pc/index")
+    public String check() {
         String turnPage = "pc/yun-index";
-        String msgInfo = "登录";
-        String style = "padding:0px;display:none";
-        model.addAttribute("style",style);
-        model.addAttribute("msgInfo",msgInfo);
         return turnPage;
     }
 
     @RequestMapping("/pc/loginSuccess")
-    public String loginSuccess(@AuthenticationPrincipal Login user, Model model) {
-        String turnPage = "pc/yun-index";
-        String msgInfo = "";
+    public String loginSuccess(@AuthenticationPrincipal Login user) {
+        String turnPage = "redirect:/pc/index";
         if(user instanceof Manager) {
             turnPage = "redirect:/backend/login";
-        }else {
-            String style = "padding:0px;";
-            model.addAttribute("style",style);
-            model.addAttribute("msgInfo",msgInfo);
+        }else if(user instanceof Editor){
+            turnPage = "redirect:/backend/login";
         }
         return turnPage;
     }

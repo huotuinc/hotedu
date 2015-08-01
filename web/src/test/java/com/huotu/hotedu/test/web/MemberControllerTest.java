@@ -163,13 +163,13 @@ public class MemberControllerTest extends WebTestBase {
                 get("/pc/searchMembers")
         )
                 .andExpect(status().isFound())
-        .andExpect(redirectedUrlPattern("**/pc/login"));
+        .andExpect(redirectedUrlPattern("**/pc/index"));
 
         mockMvc.perform(
                 get("/pc/loadPersonalCenter")
         )       .andDo(print())
                 .andExpect(status().isFound())
-                .andExpect(redirectedUrlPattern("**/pc/login"));
+                .andExpect(redirectedUrlPattern("**/pc/index"));
 
 
         mockMvc.perform(
