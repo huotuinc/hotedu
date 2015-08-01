@@ -632,8 +632,9 @@
         <!--班级管理 已有班级 安排考场 end-->
 
         <!--毕业管理-->
+
         <div style="display:block" th:style="${navigation}=='bygl'? 'display:block;':'display:none;'" class="main-wrapi">
-            <div style="float: right;width:1000px;margin-bottom: 6px;margin-top:15px;" class="search-content">
+            <div style="float: right;width:1000px;margin-bottom: 6px;margin-top:5px;" class="search-content">
                 <form action="#" id="searchGraduationMembers" th:action="@{/pc/loadGraduationMembers}" method="post">
                     <p style="height:5px;"></p>
                     <table style="float: left;margin-right:412px;" class="search-tab">
@@ -641,25 +642,13 @@
                             <th width="10"></th>
                             <td><input title="" id="examMemberCheckAll" type="checkbox" value="checkbox"/></td>
                             <td><button class="ysss si" name="sub" value="确认通过" type="button" onclick=""><span style="color:white">确认通过</span></button></td>
-                            <script>
-                                $("#examMemberCheckAll").click(
-                                        function(){
-                                            if(this.checked){
-                                                $("input[name='checkboxExamMember']").each(function(){this.checked=true;});
-                                            }else{
-                                                $("input[name='checkboxExamMember']").each(function(){this.checked=false;});
-                                            }
-                                        }
-                                );
-                            </script>
                         </tr>
                     </table>
-
                     <p style="clear:both"></p>
                     <table style="float: right; margin-top:-31px" class="search-tab">
                         <tr>
                             <th width="10"></th>
-                            <td><select title="" name="search-sort" style=" height:29px;padding: 0 4px; border:1px solid #ccc; vertical-align:middle">
+                            <td><select title="" id="examMemberSearchSort" name="searchSort" style="height:29px;padding: 0 4px; border:1px solid #ccc; vertical-align:middle">
                                 <option value="all">全部</option>
                                 <option value="realName">姓名</option>
                                 <option value="area">区域</option>
@@ -667,7 +656,17 @@
                                 <option value="passed">毕业</option>
                                 <option value="className">班级</option>
                             </select></td>
-                            <td><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" value="" type="text"/></td>
+                            <td>
+                                <div id="examMember_noPassed"><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" value="" th:value="${keywords}" type="text"/></div>
+                                <div id="examMember_havePassed" style="display:none; width: 157px;">
+                                    <input title="" type="radio" name="passedSort" value="0" />未参加
+                                    <input title="" type="radio" name="passedSort" value="1" />通过
+                                    <input title="" type="radio" name="passedSort" value="2" />待补考
+                                </div>
+                            </td>
+                            <td style="display: none;" >
+                                <input title="" type="text" name="passedSortText" id="examMember_passedText" value="" th:value="${passedSortText}"/>
+                            </td>
                             <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
@@ -694,7 +693,7 @@
                             </thead>
                             <tbody th:remove="all-but-first">
                                 <tr th:each="g:${allExamMembersList}">
-                                    <td><input title="" name="checkboxExamMember" class="u109_input" type="checkbox" value="checkbox"/></td>
+                                    <td><input title="" name="checkboxExamMember" type="checkbox" value="checkbox"/></td>
                                     <td class="checkboxId" th:text="${g.id}">01</td>
                                     <td th:text="${g.realName}">小米</td>
                                     <td th:text="${g.agent.area}">杭州</td>
@@ -769,23 +768,64 @@
                                     <td><a class="link-update" href="#">通过</a>
                                         <a class="link-update" href="#">查看</a></td>
                                 </tr>
-                                <tr style="display: none;">
-                                    <td><input title="" type="text" id="examMember_hidden_text" value="all" th:value="${searchSort}"/></td>
-                                </tr>
                             </tbody>
-                            <script type="text/javascript">
-                                $(document).ready(function () {
-                                    var $searchSort = $("#examMemberSearchSort");
-                                    var searchSortValue = $("#examMember_hidden_text").val();
-                                    $searchSort.val(searchSortValue);
-                                })
-                            </script>
                         </table>
-                        <div style="text-align:center; margin-top:10px;"> 2 条 1/1 页</div>
+                        <input style="display: none;" title="" type="text" id="examMember_hidden_text" value="all" th:value="${searchSort}"/>
+                        <div style="text-align:center; margin-top:10px;">
+                            <a href="#" th:href="@{/pc/loadGraduationMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
+                            <a href="#" th:href="@{/pc/loadGraduationMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
+                            <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
+        <script type="text/javascript">
+            function ifPassedSelect(){
+                var passedSortValue = $("#examMember_passedText").val();
+                $("#examMemberSearchSort").val("passed");
+                $("#examMember_noPassed").hide();
+                $("#examMember_havePassed").show();
+                if(passedSortValue==0)
+                    $("#examMember_havePassed input[name=passedSort][value=0]").attr("checked",'checked');
+                else if(passedSortValue==1)
+                    $("#examMember_havePassed input[name=passedSort][value=1]").attr("checked",'checked');
+                else if(passedSortValue==2)
+                    $("#examMember_havePassed input[name=passedSort][value=2]").attr("checked",'checked');
+                else{
+
+                }
+            }
+            $(document).ready(function () {
+                var $examMemberSearchSort = $("#examMemberSearchSort");
+                $examMemberSearchSort.val($("#examMember_hidden_text").val());
+                if ($examMemberSearchSort.val() == "passed") {
+                    ifPassedSelect();
+                }
+                $examMemberSearchSort.bind("change", function () {
+                    if ($(this).val() == "passed") {
+                        ifPassedSelect();
+                    }
+                    else {
+                        $("#examMember_noPassed").show();
+                        $("#examMember_havePassed").hide();
+                    }
+                });
+                $("#examMember_havePassed").bind("change", function () {
+                    $("#examMember_passedText").val($("#examMember_havePassed input[name='passedSort']:checked ").val());
+                    console.log($("#examMember_passedText").val());
+                });
+            });
+            $("#examMemberCheckAll").click(
+                    function(){
+                        if(this.checked){
+                            $("input[name='checkboxExamMember']").each(function(){this.checked=true;});
+                        }else{
+                            $("input[name='checkboxExamMember']").each(function(){this.checked=false;});
+                        }
+                    }
+            );
+        </script>
         <!--毕业管理end-->
     </div>
 </div>

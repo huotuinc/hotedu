@@ -315,6 +315,7 @@ public class AgentController {
      * @param agent      当前代理商
      * @param keywords   关键词
      * @param searchSort 搜索类型
+     * @param passedSortText 是否通过考试的状态
      * @param pageNo     第几页
      * @param model      返回客户端集
      * @return           yun-daili.html  毕业管理选项卡
@@ -323,17 +324,18 @@ public class AgentController {
     public String loadGraduationMembers(@AuthenticationPrincipal Agent agent,
                                         @RequestParam(required = false) String keywords,
                                         @RequestParam(required = false) String searchSort,
+                                        @RequestParam(required = false) Integer passedSortText,
                                         @RequestParam(required = false) Integer pageNo,
                                         Model model){
         if (pageNo == null || pageNo < 0) {
             pageNo = 0;
         }
-        Page<Member> pages = agentService.findExamedMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort);
+        Page<Member> pages = agentService.findExamedMembers(agent, pageNo, PAGE_SIZE, keywords, passedSortText,searchSort);
         long totalRecords = pages.getTotalElements();
         if (pages.getNumberOfElements() == 0) {
             pageNo = pages.getTotalPages() - 1;
             pageNo = pageNo<0 ? 0 : pageNo;
-            pages = agentService.findExamedMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort);
+            pages = agentService.findExamedMembers(agent, pageNo, PAGE_SIZE, keywords, passedSortText,searchSort);
         }
         model.addAttribute("agent", agent);
         model.addAttribute("allExamMembersList", pages);
@@ -342,6 +344,7 @@ public class AgentController {
         model.addAttribute("searchSort", searchSort == null ? "all" : searchSort);
         model.addAttribute("keywords", keywords);
         model.addAttribute("pageNo", pageNo);
+        model.addAttribute("passedSortText",passedSortText == null ? 4 : passedSortText);
         model.addAttribute("totalRecords", totalRecords);
         model.addAttribute("totalPages", pages.getTotalPages());
 
