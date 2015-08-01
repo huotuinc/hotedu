@@ -457,7 +457,7 @@
         </div>
         <!--班级管理 未分班 安排班级 end-->
         <!--班级管理 已有班级 安排考场 start-->
-        <div id="arrageClassExamDiv" style="display:none;" th:style="${navigation}=='apkc'? 'display:block;':'display:none;'" class="ysthree">
+        <div id="arrageClassExamDiv" style="display:block;" th:style="${navigation}=='apkc'? 'display:block;':'display:none;'" class="ysthree">
             <div class="main-wrapi">
                 <div style="margin-right: 14px;margin-bottom: 6px;" class="search-content">
                     <div style=" text-align:center;display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex;" class="ystwo">
@@ -554,7 +554,7 @@
                                         <td th:text="${g.memberNum}">60</td>
                                         <td th:text="${g.exam}==null?'':${#dates.format(g.exam.examDate, 'yyyy-MM-dd')}">2015-7-31</td>
                                         <td th:text="${g.exam}==null ? '': ${g.exam.examAddress}">火炬大厦</td>
-                                        <td><a class="link-update" href="javascript:void(0)">查看</a></td>
+                                        <td><a href="#" class="link-update" th:href="@{/pc/loadClassTeamDetailInfo(id=${g.id},keywords=${keywords},searchSort=${searchSort},pageNo=${pageNo})}">查看</a></td>
                                     </tr>
                                     <tr>
                                         <td><input title="" name="checkboxClassExam" type="checkbox" value="checkbox"/></td>
@@ -632,7 +632,6 @@
         <!--班级管理 已有班级 安排考场 end-->
 
         <!--毕业管理-->
-
         <div style="display:block" th:style="${navigation}=='bygl'? 'display:block;':'display:none;'" class="main-wrapi">
             <div style="float: right;width:1000px;margin-bottom: 6px;margin-top:5px;" class="search-content">
                 <form action="#" id="searchGraduationMembers" th:action="@{/pc/loadGraduationMembers}" method="post">
@@ -837,50 +836,56 @@
 </div>
 
 <!--班级详情弹窗-->
-<div style="display:none" id="classTeamDetailDiv" class="ystci">
+<div style="display:block" id="classTeamDetailDiv" class="ystci" th:style="${classTeamDetailcss}? 'display:block' : 'display:none' ">
     <div class="box-ys">
-        <P align="right" style="margin:0px; padding:0px; float:right;"><a href="javascript:void(0)"
-                                                                          onclick="document.getElementById('classTeamDetailDiv').style.display='none';">
+        <P align="right" style="margin:0px; padding:0px; float:right;"><a href="javascript:void(0)" onclick="document.getElementById('classTeamDetailDiv').style.display='none';">
             <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
-
         <div id="classTeamDetail" class="ys500 ystx">
-
-            <form action="#" method="post" id="myform" name="myform">
+            <form action="#" method="post" name="myform">
                 <div class="config-items">
                     <div class="result-content">
-                        <table width="100%" class="insert-tab">
+                        <table width="100%" class="insert-tab" th:each="g:${classTeamInfo}">
                             <tbody>
                             <tr>
                                 <th style="width:100px;"><i class="require-red">*</i>班级：</th>
-                                <td >201504第一期</td>
+                                <td><input id="classTeamDetailInfoName" th:value="${g.className}" style="border: none;" title=""/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>区域：</th>
-                                <td>杭州</td>
+                                <td th:text="${g.agent.area}">杭州</td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>考试时间：</th>
-                                <td>2015.04.01</td>
+                                <td th:text="${g.exam}==null? '':${#dates.format(g.exam.examDate, 'yyyy-MM-dd')}">2015.04.01</td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>考试地点：</th>
-                                <td>杭州</td>
+                                <td th:text="${g.exam}==null ? '': ${g.exam.examAddress}">杭州</td>
+                            </tr>
+                            <tr style="display: none;">
+                                <td><input title="" id="classTeamDetailInfoId" th:value="${g.id}" /></td>
                             </tr>
                             </tbody>
                         </table>
                         <p style="height:20px"></p>
-
                         <div class="ysright">
-                            <input title="" type="submit" value="修改班级" class="btni btn-primaryi btn6 mr10"/>
-                            <input type="submit" value="修改考试时间" class="btni btn-primaryi btn6 mr10"/>
+                            <input type="button" value="修改班级" onclick="btn_modifyClassTeamInfo()" class="btni btn-primaryi btn6 mr10"/>
+                            <input type="button" value="修改考试时间" onclick="btn_classTeamModifyExam()" class="btni btn-primaryi btn6 mr10" />
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-
     </div>
 </div>
+<script>
+    function btn_classTeamModifyExam() {
+        var classTeamId = $("#classTeamDetailInfoId").val()
+        $("#classExamArrayLis").val(classTeamId);
+        $("#classTeamDetailDiv").hide();
+        $("#classArrageExamDiv").show();
+    }
+</script>
 <!--班级详情弹窗end-->
 
 <!--安排班级弹窗-->
@@ -975,7 +980,6 @@
         <form action="#" id="classArrageExistExamDivForm" method="post" th:action="@{/pc/addSaveOldClassTeam}">
             <P style="text-align:right;"><a href="#" onclick="$('#classArrageExistExamDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
             <p style="height:20px"></p>
-           <!-- <span style="display: none;"><input title="" type="text" value="" name="classExamArrayLis" th:value="${classExamArrayLis}" id="classExamArrayLis2" /></span>-->
             <p>
                 <select id="existExamSelect" class="ys-form__button" title="existExamSelect" name="examName" style="text-align: center;">
                     <option th:each="ex:${existExamList}" th:value="${ex.examName}" th:text="${ex.examName}">欧洲</option>

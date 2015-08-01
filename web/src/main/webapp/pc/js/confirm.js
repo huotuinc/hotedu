@@ -226,6 +226,30 @@ function check_arrageExistClass() {
     });
 }
 
+function check_arrageExistExam() {
+    $.MsgBox.Confirm("温馨提示", "确认要将选中学员安排到选中考场中吗？", function () {
+        var classExamArrayLis = $("#classExamArrayLis").val().trim();
+        var existExamSelect = $("#existExamSelect").val().trim();
+        $.ajax({
+            url:path+"/pc/addClassIntoExistExam",
+            type:"post",
+            data:{"examName":existExamSelect,"classExamArrayLis":classExamArrayLis},
+            dataType:"json",
+            success:function(result){
+                if(result.status==0){
+                    $("#errInfo_existExam").text(result.message);
+                }else if(result.status==1){
+                    $("#searchClassExam").submit();
+                    alert(result.message);
+                }
+            },
+            error:function(){
+                alert("安排失败");
+            }
+        });
+    });
+}
+
 function btn_setExamPass(h) {
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员通过考试吗？", function () {
         var memberId = $(h).parent().parent().children().eq(1).text();
@@ -255,6 +279,26 @@ function btn_setExamNoPass(h) {
             dataType:"json",
             success:function(result){
                 $("#searchGraduationMembers").submit();
+                alert(result.message);
+            },
+            error:function(){
+                alert("操作失败");
+            }
+        });
+    });
+}
+
+function btn_modifyClassTeamInfo(h) {
+    $.MsgBox.Confirm("温馨提示", "确认要将选中学员通过考试吗？", function () {
+        var classId = $("#classTeamDetailInfoId").val().trim();
+        var className = $("#classTeamDetailInfoName").val().trim();
+        $.ajax({
+            url:path+"/pc/modifyClassTeamName",
+            type:"post",
+            data:{"id":classId,"className":className},
+            dataType:"json",
+            success:function(result){
+                $("#searchClassExam").submit();
                 alert(result.message);
             },
             error:function(){

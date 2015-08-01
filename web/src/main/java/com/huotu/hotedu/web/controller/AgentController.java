@@ -330,12 +330,12 @@ public class AgentController {
         if (pageNo == null || pageNo < 0) {
             pageNo = 0;
         }
-        Page<Member> pages = agentService.findExamedMembers(agent, pageNo, PAGE_SIZE, keywords, passedSortText,searchSort);
+        Page<Member> pages = agentService.findExamedMembers(agent, pageNo, PAGE_SIZE, keywords, passedSortText, searchSort);
         long totalRecords = pages.getTotalElements();
         if (pages.getNumberOfElements() == 0) {
             pageNo = pages.getTotalPages() - 1;
             pageNo = pageNo<0 ? 0 : pageNo;
-            pages = agentService.findExamedMembers(agent, pageNo, PAGE_SIZE, keywords, passedSortText,searchSort);
+            pages = agentService.findExamedMembers(agent, pageNo, PAGE_SIZE, keywords, passedSortText, searchSort);
         }
         model.addAttribute("agent", agent);
         model.addAttribute("allExamMembersList", pages);
@@ -344,7 +344,7 @@ public class AgentController {
         model.addAttribute("searchSort", searchSort == null ? "all" : searchSort);
         model.addAttribute("keywords", keywords);
         model.addAttribute("pageNo", pageNo);
-        model.addAttribute("passedSortText",passedSortText == null ? 4 : passedSortText);
+        model.addAttribute("passedSortText", passedSortText == null ? 4 : passedSortText);
         model.addAttribute("totalRecords", totalRecords);
         model.addAttribute("totalPages", pages.getTotalPages());
 
@@ -383,17 +383,57 @@ public class AgentController {
         return result;
     }
 
-
-
-
-
-    @RequestMapping("/pc/loadClassTeamInfo")
-    public String loadClassTeamInfo(long id,Model model){
-        String classTeamDetailcss = "display:block";
-        String turnPage = "/pc/yun-daili";
+    /**
+     * Created by jiashubing on 2015/8/1.
+     * 班级管理 安排考场 查看班级详细信息
+     * @param agent         当前代理商
+     * @param keywords      关键词
+     * @param searchSort    搜索类型
+     * @param pageNo        第几页
+     * @param id            查看班级的id
+     * @param model         返回客户端集
+     * @return       查看班级详细信息
+     */
+    @RequestMapping("/pc/loadClassTeamDetailInfo")
+    public String loadClassTeamDetailInfo(@AuthenticationPrincipal Agent agent,
+                                    @RequestParam(required = false) String keywords,
+                                    @RequestParam(required = false) String searchSort,
+                                    @RequestParam(required = false) Integer pageNo,
+                                    Long id,Model model){
+        Boolean classTeamDetailcss = true;
         ClassTeam classTeam = classTeamService.findOneById(id);
-        model.addAttribute("classTeamInfo",classTeam);
-        model.addAttribute("classTeamDetailcss",classTeamDetailcss);
-        return turnPage;
-     }
+        model.addAttribute("classTeamInfo", classTeam);
+        model.addAttribute("classTeamDetailcss", classTeamDetailcss);
+
+        Page<ClassTeam> pages = agentService.findClassArrageExam(agent, pageNo, PAGE_SIZE, keywords, searchSort);
+        long totalRecords = pages.getTotalElements();
+        model.addAttribute("agent", agent);
+        model.addAttribute("allClassExamList", pages);
+        model.addAttribute("totalMembers", memberService.searchMembers(agent, pageNo, PAGE_SIZE).getTotalElements());
+        model.addAttribute("navigation", "apkc");
+        model.addAttribute("searchSort", searchSort == null ? "all" : searchSort);
+        model.addAttribute("keywords", keywords);
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("totalRecords", totalRecords);
+        model.addAttribute("totalPages", pages.getTotalPages());
+        return "/pc/yun-daili";
+    }
+
+    /**
+     * Created by jiashubing on 2015/8/1.
+     * 修改班级名称 AJAX
+     * @param id        班级ID
+     * @param className     修改的名称
+     * @return
+     */
+    @RequestMapping("/pc/modifyClassTeamName")
+    @ResponseBody
+    public Result modifyClassTeamName(Long id,String className) {
+        Result result = new Result();
+        agentService.modifyClassTeamName(id,className);
+        result.setStatus(1);
+        result.setMessage("操作成功");
+        return result;
+    }
+
 }

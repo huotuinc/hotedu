@@ -140,6 +140,12 @@ public class AgentService {
         return classTeamRepository.findOne(id);
     }
 
+    public ClassTeam modifyClassTeamName(Long id, String className) {
+        ClassTeam classTeam = classTeamRepository.findOne(id);
+        classTeam.setClassName(className);
+        return classTeamRepository.save(classTeam);
+    }
+
 
 
     public Exam findExamById(long id) {
