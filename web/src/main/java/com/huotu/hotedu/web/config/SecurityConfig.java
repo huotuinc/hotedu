@@ -72,7 +72,8 @@ public class SecurityConfig {
                             "/pc/**.html",
                             "/pc/loadMemberRegister",
                             "/pc/yun-baomin",
-                            "/pc/register"
+                            "/pc/register",
+                            "/pc/loadVideo"
                     );
         }
         //设置拦截规则
@@ -94,7 +95,8 @@ public class SecurityConfig {
                             "/pc/**.html",
                             "/pc/loadMemberRegister",
                             "/pc/yun-baomin",
-                            "/pc/register"
+                            "/pc/register",
+                            "/pc/loadVideo"
                     ).permitAll()   // 允许未登录用户访问静态资源
                     .anyRequest().authenticated()
                     .and()

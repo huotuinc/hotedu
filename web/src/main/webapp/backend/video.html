@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -7,7 +6,8 @@
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
     <script type="text/javascript" src="js/libs/jquery.min.js" th:src="@{/backend/js/libs/jquery.min.js}"></script>
-    <script type="text/javascript" src="js/libs/modernizr.min.js" th:src="@{/backend/js/libs/modernizr.min.js}"></script>
+    <script type="text/javascript" src="js/libs/modernizr.min.js"
+            th:src="@{/backend/js/libs/modernizr.min.js}"></script>
     <!--警告框控件-->
     <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
     <script type="text/javascript" src="js/confirm.js" th:src="@{/backend/js/confirm.js}"></script>
@@ -16,11 +16,15 @@
     <script type="text/javascript" src="js/date/mydate.js" th:src="@{/backend/js/date/mydate.js}"></script>
     <link rel="stylesheet" type="text/css" href="css/jquery_ui.css" th:href="@{/backend/css/jquery_ui.css}"/>
     <!--滚动条-->
-    <script type="text/javascript" src="js/scroll/scroll_height_width.js" th:src="@{/backend/js/scroll/scroll_height_width.js}"></script>
+    <script type="text/javascript" src="js/scroll/scroll_height_width.js"
+            th:src="@{/backend/js/scroll/scroll_height_width.js}"></script>
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
-    <script type="text/javascript" src="js/scroll/jquery.mousewheel.js" th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
-    <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js" th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
-    <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js" th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
+    <script type="text/javascript" src="js/scroll/jquery.mousewheel.js"
+            th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
+    <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js"
+            th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
+    <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
+            th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             var $searchSort = $("#searchSort");
@@ -53,7 +57,8 @@
             <ul class="navbar-list clearfix">
                 <li><a href="index.html" th:href="@{/backend/index}">首页</a></li>
                 <li><a class="on" href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a></li>
-                <li><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a></li>
+                <li><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a>
+                </li>
             </ul>
         </div>
         <div class="top-info-wrap">
@@ -68,167 +73,155 @@
 <div class="container clearfix">
     <div class="sidebar-wrap">
         <div class="sidebar-title">
-            <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}" style=" width:160px;margin-left: -10px;"/>
+            <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}"
+                 style=" width:160px;margin-left: -10px;"/>
         </div>
         <div class="sidebar-content">
             <div class="jp-container">
-            <ul class="sidebar-list">
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">企业信息</a>
-                    <ul class="sub-menu">
-                        <li><a href="wanted.html" th:href="@{/backend/loadWanted}">招聘信息</a></li>
-                        <li><a href="enterprises.html" th:href=" @{/backend/loadEnterprises}">发布企业</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">banner图</a>
-                    <ul class="sub-menu">
-                        <li><a href="banners.html" th:href="@{/backend/loadBanners}">banner图</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">考试指南</a>
-                    <ul class="sub-menu">
-                        <li><a href="examguide.html" th:href="@{/backend/searchExamGuide}">考试指南</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">友情链接</a>
-                    <ul class="sub-menu">
-                        <li><a href="link.html" th:href="@{/backend/searchLink}">友情链接</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">常见问题</a>
-                    <ul class="sub-menu">
-                        <li><a href="qa.html" th:href="@{/backend/searchQa}">常见问题</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">资讯动态</a>
-                    <ul class="sub-menu">
-                        <li><a href="MessageContent.html" th:href="@{/backend/searchMessageContent}">资讯动态</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">公司简介</a>
-                    <ul class="sub-menu">
-                        <li><a href="editenterprise.html" th:href="@{/backend/loadEditenterprise}">公司简介编辑</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">视频</a>
-                    <ul class="sub-menu"  style="display:block;">
-                        <li class="on"><a href="video.html" th:href="@{/backend/loadVideo}">教学视频</a></li>
-                        <li><a href="http://www.baidu.com" target="_blank">精彩录制</a></li>
-                        <li><a href="http://www.baidu.com" target="_blank">经验分享</a></li>
-                        <li><a href="http://www.baidu.com" target="_blank">其他视频</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#" style="height:30px; line-height:30px;">师资力量</a>
-                    <ul class="sub-menu">
-                        <li><a href="tutor.html" th:href="@{/backend/loadTutor}">师资力量</a></li>
-                    </ul>
-                </li>
-            </ul>
+                <ul class="sidebar-list">
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">企业信息</a>
+                        <ul class="sub-menu">
+                            <li><a href="wanted.html" th:href="@{/backend/loadWanted}">招聘信息</a></li>
+                            <li><a href="enterprises.html" th:href=" @{/backend/loadEnterprises}">发布企业</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">banner图</a>
+                        <ul class="sub-menu">
+                            <li><a href="banners.html" th:href="@{/backend/loadBanners}">banner图</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">考试指南</a>
+                        <ul class="sub-menu">
+                            <li><a href="examguide.html" th:href="@{/backend/searchExamGuide}">考试指南</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">友情链接</a>
+                        <ul class="sub-menu">
+                            <li><a href="link.html" th:href="@{/backend/searchLink}">友情链接</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">常见问题</a>
+                        <ul class="sub-menu">
+                            <li><a href="qa.html" th:href="@{/backend/searchQa}">常见问题</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">资讯动态</a>
+                        <ul class="sub-menu">
+                            <li><a href="MessageContent.html" th:href="@{/backend/searchMessageContent}">资讯动态</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">公司简介</a>
+                        <ul class="sub-menu">
+                            <li><a href="editenterprise.html" th:href="@{/backend/loadEditenterprise}">公司简介编辑</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">视频</a>
+                        <ul class="sub-menu" style="display:block;">
+                            <li class="on"><a href="video.html" th:href="@{/backend/loadVideo}">教学视频</a></li>
+                            <li><a href="http://www.baidu.com" target="_blank">精彩录制</a></li>
+                            <li><a href="http://www.baidu.com" target="_blank">经验分享</a></li>
+                            <li><a href="http://www.baidu.com" target="_blank">其他视频</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" style="height:30px; line-height:30px;">师资力量</a>
+                        <ul class="sub-menu">
+                            <li><a href="tutor.html" th:href="@{/backend/loadTutor}">师资力量</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
     <!--/sidebar-->
     <div class="main-wrap">
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span class="crumb-step">&gt;</span><span class="crumb-name">教学视频</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span
+                    class="crumb-step">&gt;</span><span class="crumb-name">教学视频</span></div>
         </div>
         <div class="jp-container2">
-        <div class="search-wrap">
-            <div class="search-content">
-                <!--<form action="#" th:action="@{/backend/searchVideo}" method="post">-->
+            <div class="search-wrap">
+                <div class="search-content">
+                    <!--<form action="#" th:action="@{/backend/searchVideo}" method="post">-->
                     <!--<table class="search-tab">-->
-                        <!--<tr>-->
-                            <!--<th width="10"></th>-->
-                            <!--<td>-->
-                                <!--<select title="searchSort" name="search-sort" id="searchSort" style=" height:29px;border-radius: 4px;padding: 0 4px; border:1px solid #ccc; vertical-align:middle">-->
-                                    <!--<option value="all" selected="selected">全部</option>-->
-                                    <!--<option value="name">片名</option>-->
-                                    <!--<option value="limit">权限</option>-->
-                                    <!--<option value="date">上传时间</option>-->
-                                    <!--<option value="time">时长</option>-->
-                                <!--</select>-->
-                            <!--</td>-->
-                            <!--<td>-->
-                                <!--<div id="video_nodate"><input title="keywords" class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}" id="keywords" type="text"/></div>-->
-                                <!--<div id="video_date" style="display:none;"><input readonly="true" id="dateStart" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input readonly="true" id="dateEnd" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/></div>-->
-                            <!--</td>-->
-                            <!--<td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>-->
-                        <!--</tr>-->
+                    <!--<tr>-->
+                    <!--<th width="10"></th>-->
+                    <!--<td>-->
+                    <!--<select title="searchSort" name="search-sort" id="searchSort" style=" height:29px;border-radius: 4px;padding: 0 4px; border:1px solid #ccc; vertical-align:middle">-->
+                    <!--<option value="all" selected="selected">全部</option>-->
+                    <!--<option value="name">片名</option>-->
+                    <!--<option value="limit">权限</option>-->
+                    <!--<option value="date">上传时间</option>-->
+                    <!--<option value="time">时长</option>-->
+                    <!--</select>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                    <!--<div id="video_nodate"><input title="keywords" class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}" id="keywords" type="text"/></div>-->
+                    <!--<div id="video_date" style="display:none;"><input readonly="true" id="dateStart" placeholder="起始时间" name="dateStart" class="common-text" type="text"/> - <input readonly="true" id="dateEnd" placeholder="结束时间" name="dateEnd" class="common-text" type="text"/></div>-->
+                    <!--</td>-->
+                    <!--<td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>-->
+                    <!--</tr>-->
                     <!--</table>-->
-                <!--</form>-->
-            </div>
-        </div>
-        <div class="result-wrap">
-            <form name="myform" id="myform" method="post">
-                <div class="result-title">
-                    <div class="result-list">
-                        <a href="newvideo.html" th:href="@{/backend/addVideo}"><i class="icon-font">+</i>新增视频</a>
-                    </div>
+                    <!--</form>-->
                 </div>
-                <div class="result-content">
+            </div>
+            <div class="result-wrap">
+                <form name="myform" id="myform" method="post">
+                    <div class="result-title">
+                        <div class="result-list">
+                            <a href="newvideo.html" th:href="@{/backend/addVideo}"><i class="icon-font">+</i>新增视频</a>
+                        </div>
+                    </div>
                     <table class="result-tab" width="100%">
+                        <thead>
                         <tr>
-                            <th style="width:80px">序号</th>
+                            <th style="width:80px">视频图片</th>
                             <th style="width:80px;">片名</th>
-                            <th style="width:100px">时长</th>
+                            <th style="width:30px">时长</th>
+                            <th style="width:100px">视频地址</th>
+                            <th style="width:30px">播放次数</th>
                             <th style="width:100px">上传时间</th>
-                            <th style="width:100px">权限</th>
                             <th style="width:80px">操作</th>
                         </tr>
-                        <tr th:remove="all">
-                            <td th:remove="all">01</td>
-                            <td th:remove="all">第一章第一节</td>
-                            <td th:remove="all">2：30：00</td>
-                            <td th:remove="all">2015.01.01/13.00.00</td>
-                            <td th:remove="all">免费</td>
-                            <td th:remove="all"><a class="link-update" href="newvideo.html" >修改</a><br/><a class="link-delete" href="#" >删除</a></td>
-                        </tr>
-                        <tr th:remove="all">
-                            <td>01</td>
-
-                            <td title="">第一章第一节</td>
-                            <td title="">2：30：00</td>
-                            <td>2015.01.01/13.00.00</td>
-                            <td title="">免费</td>
-                            <td><a class="link-update" href="newvideo.html">修改</a><br/><a class="link-delete" href="#">删除</a></td>
-
-                        </tr>
+                        </thead>
+                        <tbody th:remove="all-but-first">
                         <tr th:each="g:${AllVideoList}">
-                            <td th:text="${g.fileId}"></td>
-                            <td title="" th:text="${g.fileName}">mou某mou某mou某mou某</td>
-                            <td th:text="${g.duration}">3</td>
-                            <td th:text="${#calendars.format(g.createTime,'yyyy.MM.dd/hh.mm.ss')}">2014-07-13 15:15:50</td>
-                            <!--<td th:text="${g.createTime}">2014-07-13 15:15:50</td>-->
-                            <td>免费</td>
+                            <td><img th:src="${g.img}"/></td>
+                            <td th:text="${g.fileName}">3</td>
+                            <td th:text="${g.duration}+'秒'">3</td>
+                            <td th:text="${g.pageUrl}">3</td>
+                            <td th:text="${g.playCount}">3</td>
+                            <td th:text="${#calendars.format(g.createTime,'yyyy-MM-dd hh:mm:ss')}">2014-07-13 15:15:50
+                            </td>
                             <td>
-                                <a class="link-update" href="modifyvideo.html" th:href="@{/backend/modifyVideo(id=${g.fileId})}">修改</a><br/>
+                                <a class="link-update" href="modifyvideo.html"
+                                   th:href="@{/backend/modifyVideo(id=${g.fileId})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a>
-                                <a class="real-delete" href="#" th:href="@{/backend/delVideo(id=${g.fileId},pageNo=${pageNo},keywords=${keywords})}"></a>
+                                <a class="real-delete" href="#"
+                                   th:href="@{/backend/delVideo(id=${g.fileId},pageNo=${pageNo},keywords=${keywords})}"></a>
                             </td>
                         </tr>
-                        <tr style="display: none;">
-                            <td><input title="hidden_text" type="text" id="hidden_text" value="all" th:value="${searchSort}"/></td>
-                        </tr>
+                        </tbody>
                     </table>
-                    <!--<div class="list-page">-->
-                        <!--<a href="#" th:href="@{/backend/searchVideo(pageNo=${pageNo}-1,keywords=${keywords})}">上一页</a>-->
-                        <!--<a href="#" th:href="@{/backend/searchVideo(pageNo=${pageNo}+1,keywords=${keywords})}">下一页</a>-->
-                        <!--<span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页-->
-                    <!--</div>-->
-                </div>
-            </form>
+                    <div class="list-page">
+                        <a href="#" th:href="@{/backend/loadVideo(pageNo=${pageNo}-1,keywords=${keywords})}">上一页</a>
+                        <a href="#" th:href="@{/backend/loadVideo(pageNo=${pageNo}+1,keywords=${keywords})}">下一页</a>
+                        <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span
+                            th:text="${totalPages}">1</span> 页
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     <!--/main-->
-    </div>
+</div>
 </body>
 </html>

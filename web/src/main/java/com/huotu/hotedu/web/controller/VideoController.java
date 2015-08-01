@@ -1,12 +1,16 @@
 package com.huotu.hotedu.web.controller;
 
+import com.huotu.hotedu.entity.Login;
+import com.huotu.hotedu.entity.Manager;
 import com.huotu.hotedu.service.VideoService;
 import com.huotu.iqiyi.sdk.IqiyiVideoRepository;
 import com.huotu.iqiyi.sdk.model.Video;
+import com.huotu.iqiyi.sdk.model.VideoForPlay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by shiliting on 2015/6/10.
@@ -42,7 +48,7 @@ public class VideoController {
     @RequestMapping("/backend/loadVideo")
     public String searchVideo(@RequestParam(required = false)Integer pageNo,
                               @RequestParam(required = false) String keywords, Model model) throws IOException{
-        String turnPage="/backend/video";
+        String turnPage = "/backend/video";
         if(pageNo==null||pageNo<0){
             pageNo=0;
         }
@@ -65,7 +71,36 @@ public class VideoController {
         return turnPage;
     }
 
-
+    @RequestMapping("/pc/loadVideo")
+    public String loadVideo(@RequestParam(required = false)Integer pageNo,
+                              @RequestParam(required = false) String keywords, Model model) throws IOException{
+        String turnPage = "/pc/yun-jxsp";
+        if(pageNo==null||pageNo<0){
+            pageNo=0;
+        }
+        Page<Video> pages = iqiyiVideoRepository.find(new PageRequest(pageNo, PAGE_SIZE));
+        long totalRecords = pages.getTotalElements();
+        int numEl =  pages.getNumberOfElements();
+        if(numEl==0) {
+            pageNo=pages.getTotalPages()-1;
+            if(pageNo<0) {
+                pageNo = 0;
+            }
+            pages = iqiyiVideoRepository.find(new PageRequest(pageNo, PAGE_SIZE));
+            totalRecords = pages.getTotalElements();
+        }
+        List<VideoForPlay> videos = new ArrayList<>();
+        for(Video video:pages) {
+            VideoForPlay vfp = iqiyiVideoRepository.play(video.getFileId());
+            videos.add(vfp);
+        }
+        model.addAttribute("AllVideoList", videos);
+        model.addAttribute("totalPages",pages.getTotalPages());
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("keywords", keywords);
+        model.addAttribute("totalRecords", totalRecords);
+        return turnPage;
+    }
 
 
     @PreAuthorize("hasRole('EDITOR')")

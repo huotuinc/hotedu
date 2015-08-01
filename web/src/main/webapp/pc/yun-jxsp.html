@@ -1,92 +1,112 @@
 <!doctype html>
-<html>
-    <head>
-    <meta charset="utf-8">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
     <title>教学视频</title>
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link rel="stylesheet" type="text/css" href="css/indexnew.css">
-     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <script type="text/javascript" src="js/jquery1.42.min.js"></script>
-	<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
-    </head>
-    <body style="background-color:#f0f0f0">
+    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+</head>
+<body style="background-color:#f0f0f0">
 <div style="min-height:834px">
     <div style=" background-color:#fff;">
-<div style=" background-color:#fff; font-size:14px;"class="header"> <img src="images/logo.png" class="logoimg">
-      <ul class="navi">
-    <li><a href="index.html">首页</a></li>
-    <li><a href="index2.html">公司简介</a></li>
-    <li><a href="index3.html">考证报名</a></li>
-    <li><a href="about.html">师资力量</a></li>
-    <li class="active"><a href="about.html">教学视频</a></li>
-    <li><a href="about.html">考试指南</a></li>
-    <li><a href="about.html">招|应聘</a></li>
-    <li style="padding:0px 0px 0px 20px;display:none"><a href="javascript:void(0)" onclick = "document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">登录&nbsp;&nbsp;|</a></li>
- 
-    <li style="padding:0px;"> <a href="#"><img class="lodingimgi" src="images/toux.png" width="100%"></a>
-          <p style="display:none" class="zhizhen"><img src="images/ystoux.png" width="18px" height="7px"></p>
-          <p style="display:none" class="lbpo"> <a href="#">HHSHIJIJ</a> <a href="#">个人中心</a> <a href="#">修改密码</a> <a href="#">退出</a> </p>
-        </li>
-  </ul>
-    </div>
-    </div>
+        <div style=" background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" class="logoimg"/>
+            <ul class="navi">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="index2.html">公司简介</a></li>
+                <li><a href="index3.html">考证报名</a></li>
+                <li><a href="about.html">师资力量</a></li>
+                <li class="active"><a href="about.html">教学视频</a></li>
+                <li><a href="about.html">考试指南</a></li>
+                <li><a href="about.html">招|应聘</a></li>
+                <li style="padding:0px 0px 0px 20px;display:none"><a href="javascript:void(0)"
+                                                                     onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">登录&nbsp;&nbsp;|</a>
+                </li>
 
+                <li style="padding:0px;"><a href="#"><img class="lodingimgi" src="images/toux.png" width="100%"/></a>
 
-<p style="clear:both">啊水电费啊时代发生的发</p>
-<p style="height:20px">阿斯顿发生的噶速度噶速度</p>
-<div class="ysfour">
-    视频
-<div>
-<ul class="yscenterc">
-<li class="spkj">asdfasdfasd</li>
-<li class="spkj">asdfaeasdf</li>
-<li class="spkj">asdfas</li>
-<li class="spkj">eawfaeasdf</li>
-<li class="spkj">asdfesahsdfg</li>
-</ul>
-<ul class="yscenterc">
-<li class="spkj">asdfeasdf</li>
-<li class="spkj">ghgdf</li>
-<li class="spkj">adsfgadfgqwert</li>
-<li class="spkj">sdfgsdfgdsfb</li>
-<li class="spkj">asfaergwserg</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<p style="clear:both">发生地方噶速度过</p>
-<p style=" height:60px">啊速度飞哇是的帅哥</p>
-<div class="footer">       
-      <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
-      <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
-    </div>
-<div>
+                    <p style="display:none" class="zhizhen"><img src="images/ystoux.png" width="18px" height="7px"/></p>
 
-
-      <div id="asaimsg" class="AsaiDivShow">
-    <P align="right" style="margin:0px; padding:0px;"> <a href="javascript:void(0)" onclick = "document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'"> <FONT style="color:#111; font-size:20px;">×</FONT></a> </P>
-    <div class="sign-in">
-          <div class="user-form">
-        <form accept-charset="UTF-8" action="" class="sign-in__form user-form__form" method="post">
-              <div class="user-form__fieldset">
-            <label class="user-form__label" for="session_login" style="color:#111">用户名：</label>
-            <input title="" autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field" id="session_login" name="session[login]" placeholder="ID" type="text"/>
-          </div>
-              <div class="user-form__fieldset">
-            <label class="user-form__label" for="session_password" style="color:#111">密码：</label>
-            <input title="" class="sign-in__field user-form__field" id="session_password" name="session[password]" placeholder="password" type="password"/>
-          </div>
-              <button class="sign-in__button user-form__button" name="button" type="submit">登录<i class="icon-arrow-right user-form__button-icon"></i></button>
-            </form>
-      </div>
+                    <p style="display:none" class="lbpo"><a href="#">HHSHIJIJ</a> <a href="#">个人中心</a> <a
+                            href="#">修改密码</a> <a href="#">退出</a></p>
+                </li>
+            </ul>
         </div>
-  </div>
-      <div id="asaimsgbg" class="AsaiDivBG"></div>
     </div>
+
+    <div class="ysfour">
+        视频
+        <div>
+            <ul class="yscenterc" th:remove="all-but-first" th:each="g:${AllVideoList}">
+                <li class="spkj">
+                    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="680" height="520">
+                        <param name="movie" th:value="${g.swfurl}" value="http://dispatcher.video.qiyi.com/disp/shareplayer.swf?vid=ade484a7c87734eee38f7f77cd9f3159&tvId=250912700&coop=&cid=&bd=1"/>
+                        <param name="quality" value="high"/>
+                        <param name="wmode" value="transparent"/>
+                        <param value="true" name="allowFullScreen"/>
+                        <embed th:src="${g.swfurl}"  src="http://dispatcher.video.qiyi.com/disp/shareplayer.swf?vid=ade484a7c87734eee38f7f77cd9f3159&tvId=250912700&coop=&cid=&bd=1" wmode="transparent" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="680" height="520" allowfullscreen="true"/>
+                    </object>
+                    <!--<a href="javascript:void(0)" th:href="${g.swfurl}" target="_blank"><img th:src="${g.img}"/></a>--></li>
+                <li class="spkj">asdfas</li>
+                <li class="spkj">eawfaeasdf</li>
+                <li class="spkj">eawfaeasdf</li>
+            </ul>
+            <ul class="yscenterc">
+                <li class="spkj">asdfeasdf</li>
+                <li class="spkj">ghgdf</li>
+                <li class="spkj">adsfgadfgqwert</li>
+                <li class="spkj">sdfgsdfgdsfb</li>
+                <li class="spkj">asfaergwserg</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
+
+    <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
+</div>
+<div>
+
+
+    <div id="asaimsg" class="AsaiDivShow">
+        <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
+                                                             onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
+            <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+
+        <div class="sign-in">
+            <div class="user-form">
+                <form accept-charset="UTF-8" action="" class="sign-in__form user-form__form" method="post">
+                    <div class="user-form__fieldset">
+                        <label class="user-form__label" for="session_login" style="color:#111">用户名：</label>
+                        <input title="" autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
+                               id="session_login" name="session[login]" placeholder="ID" type="text"/>
+                    </div>
+                    <div class="user-form__fieldset">
+                        <label class="user-form__label" for="session_password" style="color:#111">密码：</label>
+                        <input title="" class="sign-in__field user-form__field" id="session_password"
+                               name="session[password]" placeholder="password" type="password"/>
+                    </div>
+                    <button class="sign-in__button user-form__button" name="button" type="submit">登录<i
+                            class="icon-arrow-right user-form__button-icon"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="asaimsgbg" class="AsaiDivBG"></div>
+</div>
 </body>
-    </html>
+</html>
 <script type="text/javascript">
-		jQuery(".fullSlide").slide({ titCell:".hd ul", mainCell:".bd ul", effect:"fold",  autoPlay:true, autoPage:true, trigger:"click" });
-	</script>
+    jQuery(".fullSlide").slide({
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        effect: "fold",
+        autoPlay: true,
+        autoPage: true,
+        trigger: "click"
+    });
+</script>
