@@ -53,7 +53,6 @@ $(function() {
 			dataType:"json",
 			success:function(result){
 				if(result.status==0){
-					noClassMemberArrageClass();
 					alert(result.message);
 				}else if(result.status==1){
 					$("#noClassMemberArrageClassDiv").hide();
@@ -82,7 +81,6 @@ $(function() {
 			dataType:"json",
 			success:function(result){
 				if(result.status==0){
-					classArrageExam();
 					alert(result.message);
 				}else if(result.status==1){
 					$("#classArrageExamDiv").hide();
@@ -97,40 +95,12 @@ $(function() {
 				}
 			},
 			error:function(){
-				alert("系统异常,加载班级列表失败");
+				alert("系统异常,加载考场列表失败");
 			}
 		});
 	})
 });
 
-$(function() {
-	$("#btn_chooseExistExam").click(function() {
-		$.ajax({
-			url:path+"/pc/loadAvailableExamTeams",
-			type:"post",
-			dataType:"json",
-			success:function(result){
-				if(result.status==0){
-					noClassMemberArrageClass();
-					alert(result.message);
-				}else if(result.status==1){
-					$("#noClassMemberArrageClassDiv").hide();
-					$("#existClassDiv").show();
-					var sel = $("#existClassSelect");
-					sel.empty();
-					for(var i=0;i<result.body.length;i++) {
-						$("<option value='"+ result.body[i].id+"'>"+
-							result.body[i].className+
-							"</option>").appendTo(sel);
-					}
-				}
-			},
-			error:function(){
-				alert("系统异常,加载班级列表失败");
-			}
-		});
-	})
-});
 
 $(function() {
 	$("#memberLi").mouseenter(function(){

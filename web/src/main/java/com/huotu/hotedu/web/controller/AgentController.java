@@ -247,33 +247,12 @@ public class AgentController {
     }
 
     /**
-     * Created by jiashubing on 2015/7/30
-     * 当前代理商选择已有考场 AJAX实现
-     * @param agent 当前代理商
-     * @return  AJAX实现已有考场
-     */
-    @RequestMapping("/pc/loadAvailableExam")
-    @ResponseBody
-    public Result loadAvailableExam(@AuthenticationPrincipal Agent agent) {
-        Result result = new Result();
-        List<Exam> existClassList = agentService.findAvailableExamTeams(agent);
-        if(existClassList==null) {
-            result.setStatus(0);
-            result.setMessage("没有可用的考场，请新建");
-        }else {
-            result.setStatus(1);
-            result.setBody(existClassList);
-        }
-        return result;
-    }
-
-    /**
      * Created by jiashubing on 2015/7/30.
      * 当前代理商选择已有的考场
      * @param agent 当前代理商
      * @return  AJAX实现已有考场
      */
-    @RequestMapping("/pc/loadAvailableExamTeams")
+    @RequestMapping("/pc/loadAvailableExam")
     @ResponseBody
     public Result loadAvailableExamTeams(@AuthenticationPrincipal Agent agent) {
         Result result = new Result();
