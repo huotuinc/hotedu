@@ -97,7 +97,7 @@
         <!--报名信息-->
         <div style="display:none;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
             <div style=" float: right; margin-right: 14px;margin-bottom: 6px;margin-top:5px; width:1000px;" class="search-content">
-                <form action="#" th:action="@{/pc/searchMembers}" method="post">
+                <form action="#" id="searchMemberInfo" th:action="@{/pc/searchMembers}" method="post">
                     <p style="height:5px;"></p>
                     <table style="float: left;" class="search-tab">
                         <tr>
@@ -141,16 +141,13 @@
                         check_payMember();
                     }
                     else {
-                        var $arrayLis = $("#checkPayLis");
-                        $arrayLis.val(str);
+                        $("#checkPayLis").val(str);
                         check_payEnter();
                     }
                 }
             </script>
             <span style="display: none;">
-                    <form id="checkPayLisForm" name="checkPayLisForm" method="post" action="#" th:action="@{/pc/checkPayList}">
-                        <input title="" type="text" value="" name="checkPayLis" th:value="${checkPayLis}" id="checkPayLis" />
-                    </form>
+                 <input title="" type="text" value="" name="checkPayLis" th:value="${checkPayLis}" id="checkPayLis" />
             </span>
             <p style="clear:both;"></p>
             <div class="result-wrap">
@@ -640,9 +637,12 @@
                         <tr>
                             <th width="10"></th>
                             <td><input title="" id="examMemberCheckAll" type="checkbox" value="checkbox"/></td>
-                            <td><button class="ysss si" name="sub" value="确认通过" type="button" onclick=""><span style="color:white">确认通过</span></button></td>
+                            <td><button class="ysss si" name="sub" value="确认通过" type="button" onclick="checkAllExamMember()"><span style="color:white">确认通过</span></button></td>
                         </tr>
                     </table>
+                    <span style="display: none;">
+                        <input title="" type="text" value="" name="checkExamMemberList" th:value="${checkExamMemberList}" id="checkExamMemberList" />
+                    </span>
                     <p style="clear:both"></p>
                     <table style="float: right; margin-top:-31px" class="search-tab">
                         <tr>
@@ -676,7 +676,6 @@
                 </form>
             </div>
             <p style="clear:both"></p>
-
             <div class="result-wrap">
                 <form name="myform" method="post">
                     <div class="result-content">
@@ -782,7 +781,28 @@
                 </form>
             </div>
         </div>
+
         <script type="text/javascript">
+            function checkAllExamMember(){
+                var str = "";
+                var sum = 0;
+                $("input[name='checkboxExamMember']:checkbox").each(function () {
+                    if ($(this).attr("checked")) {
+                        if (sum == 0)
+                            str += $(this).parent().parent().children().eq(1).text();
+                        else
+                            str += "," + $(this).parent().parent().children().eq(1).text();
+                        sum++;
+                    }
+                });
+                if (sum == 0) {
+                    check_ExamMember();
+                }
+                else {
+                    $("#checkExamMemberList").val(str);
+                    check_ExamMemberEnter();
+                }
+            }
             function ifPassedSelect(){
                 var passedSortValue = $("#examMember_passedText").val();
                 $("#examMemberSearchSort").val("passed");
@@ -838,7 +858,7 @@
 </div>
 
 <!--班级详情弹窗-->
-<div style="display:block" id="classTeamDetailDiv" class="ystci" th:style="${classTeamDetailcss}? 'display:block' : 'display:none' ">
+<div style="display:none" id="classTeamDetailDiv" class="ystci" th:style="${classTeamDetailcss}? 'display:block' : 'display:none' ">
     <div class="box-ys">
         <P align="right" style="margin:0px; padding:0px; float:right;"><a href="javascript:void(0)" onclick="document.getElementById('classTeamDetailDiv').style.display='none';">
             <FONT style="color:#111; font-size:20px;">×</FONT></a></P>

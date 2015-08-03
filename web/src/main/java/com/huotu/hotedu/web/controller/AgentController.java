@@ -94,7 +94,7 @@ public class AgentController {
             exam.setExamAddress(examAddress);
             exam.setExamDate(examDate);
             exam.setExamName(examName);
-            Exam ex= agentService.addExam(agent,exam);
+            Exam ex= agentService.addExam(agent, exam);
             agentService.arrangeExam(arrayList, ex);
             result.setStatus(1);
             result.setMessage("安排成功");
@@ -427,7 +427,25 @@ public class AgentController {
     @ResponseBody
     public Result modifyClassTeamName(Long id,String className) {
         Result result = new Result();
-        agentService.modifyClassTeamName(id,className);
+        agentService.modifyClassTeamName(id, className);
+        result.setStatus(1);
+        result.setMessage("操作成功");
+        return result;
+    }
+
+    /**
+     * Created by jiashubing on 2015/8/3.
+     * 毕业管理的确认通过
+     * @param checkExamMemberList  学员id集合
+     * @return  confirm.js中 check_ExamMemberEnter方法
+     */
+    @RequestMapping("/pc/allMemberPassExam")
+    @ResponseBody
+    public Result allMemberPassExam(String checkExamMemberList){
+        Result result = new Result();
+        MyJsonUtil myJsonUtil = new MyJsonUtil();
+        ArrayList<Long> arrayList = myJsonUtil.convertJsonBytesToArrayList(checkExamMemberList);
+        agentService.allMemberPassExam(arrayList);
         result.setStatus(1);
         result.setMessage("操作成功");
         return result;
