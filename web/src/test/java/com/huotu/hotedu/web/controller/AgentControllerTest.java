@@ -56,15 +56,15 @@ public class AgentControllerTest extends SpringWebTest{
     @Test
     @Rollback
     public void addSaveNewClassTeam() throws Exception {
-        ArrayList<Object> arrayList = new ArrayList<>();
-        arrayList.add(1);
-        arrayList.add(2);
+        ArrayList<Long> arrayList = new ArrayList<>();
+        arrayList.add((long)1);
+        arrayList.add((long)2);
         MyJsonUtil myJsonUtil = new MyJsonUtil();
-//        String stringArrayList = myJsonUtil.convertObjectToJsonBytes(arrayList);
+        String stringArrayList = myJsonUtil.convertObjectToJsonBytes(arrayList);
         mockMvc.perform(
                 post("pc/addSaveNewClassTeam")
                         .param("className", "1234")
-//                        .param("arrayList", stringArrayList)
+                        .param("arrayList", stringArrayList)
         ).andDo(print());
     }
 
@@ -72,23 +72,23 @@ public class AgentControllerTest extends SpringWebTest{
      * 测试将学员保存到已有班级中
      * @throws Exception
      */
-//    @Test
-//    @Rollback
-//    public void addSaveOldClassTeam() throws Exception {
-//        ArrayList<Object> arrayList = new ArrayList<>();
-//        arrayList.add(1);
-//        arrayList.add(2);
-//        ClassTeam classTeam = new ClassTeam();
-//        classTeam.setClassName("nihao");;
-////        ClassTeam ct = agentService.addClassTeam(classTeam);
-//        MyJsonUtil myJsonUtil = new MyJsonUtil();
-////        String stringArrayList = myJsonUtil.convertObjectToJsonBytes(arrayList);
-//        mockMvc.perform(
-//                post("pc/addSaveOldClassTeam")
-//                        .param("classId", ct.getId().toString())
-////                        .param("arrayList", stringArrayList)
-//        ).andDo(print());
-//    }
+    @Test
+    @Rollback
+    public void addSaveOldClassTeam() throws Exception {
+        ArrayList<Long> arrayList = new ArrayList<>();
+        arrayList.add((long)1);
+        arrayList.add((long)2);
+        ClassTeam classTeam = new ClassTeam();
+        classTeam.setClassName("nihao");;
+        ClassTeam ct = agentService.addClassTeam(classTeam);
+        MyJsonUtil myJsonUtil = new MyJsonUtil();
+        String stringArrayList = myJsonUtil.convertObjectToJsonBytes(arrayList);
+        mockMvc.perform(
+                post("pc/addSaveOldClassTeam")
+                        .param("classId", ct.getId().toString())
+                        .param("arrayList", stringArrayList)
+        ).andDo(print());
+    }
 
 
 }

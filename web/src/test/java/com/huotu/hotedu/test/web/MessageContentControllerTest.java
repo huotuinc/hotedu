@@ -176,39 +176,29 @@ public class MessageContentControllerTest extends WebTestBase {
 
                     }
                 }))
-                .andExpect(model().attribute("totalPages", pages))
-        ;
+                .andExpect(model().attribute("totalPages", pages));
 
         /**
          * 1.测试登录之后能否根据所传参数找全所有的包含关键字的记录
          */
         ArrayList<MessageContent> found = new ArrayList<>();
         int currentIndex = 0;
-
         while (found.size() < containsMessageContents.size()) {
             Map<String, Object> model = mockMvc.perform(
                     get("/backend/searchMessageContent")
                             .session(loginAs(editorUsername, password))
                             .param("keywords", complexKeyword)
                             .param("pageNo", "" + currentIndex)
-                    //.param("pageSize", "1") //每页显示多少
             )
                     .andExpect(status().isOk())
                     .andReturn().getModelAndView().getModel();
-
             Page<MessageContent> allMessageContentList = (Page<MessageContent>) model.get("allMessageContentList");
             if(allMessageContentList.getContent().size()!=10){
                 Assert.assertEquals("查询出来的记录必须是之前设定的长度",containsMessageContents.size()%10,allMessageContentList.getContent().size());
             }
-            //Assert.assertEquals("查询出来的记录必须是之前设定的长度",10, allMessageContentList.getContent().size()); //长度固定为10
-
-
             MessageContent foundGuid = allMessageContentList.getContent().get(0);
-
             Assert.assertTrue("查询出来的资讯动态记录是否包含在之前预期的记录里", containsMessageContents.contains(foundGuid));
-
             currentIndex = ((Number) (model.get("pageNo"))).intValue() + 1;//当前显示第几页，+1
-
             found.add(allMessageContentList.getContent().get(0));
         }
 
@@ -227,8 +217,6 @@ public class MessageContentControllerTest extends WebTestBase {
             if(i>=pages){expectpages=pages-1;}
             Assert.assertEquals("输入当前页检查",expectpages,actualpages);
         }
-
-
 
         for(int i=-2;i<haveKeywordPages+2;i++){
             Map<String, Object> model=mockMvc.perform(
@@ -251,21 +239,11 @@ public class MessageContentControllerTest extends WebTestBase {
          */
         mockMvc.perform(
                 get("/backend/delMessageContent")
-        )
-                .andExpect(status().isFound());
-
-//        mockMvc.perform(
-//                get("/backend/addSaveMessageContent")
-//                        .session(loginAs(ManagerUsername, password))
-//        )
-//                .andExpect(status().);
+        ).andExpect(status().isFound());
         mockMvc.perform(
                 get("/backend/searchMessageContent")
                         .session(loginAs(editorUsername, password))
         ).andExpect(status().isOk());
-
-
-
 
         MessageContent messageContent=new MessageContent();
         messageContent.setTitle("删除测试"+System.currentTimeMillis());
@@ -278,27 +256,17 @@ public class MessageContentControllerTest extends WebTestBase {
                 get("/backend/searchMessageContent")
                         .session(loginAs(editorUsername, password))
                         .param("keywords","删除测试")
-
         ).andExpect(status().isOk())
                 .andReturn().getModelAndView().getModel();
-
-
         Page<MessageContent> allMessageContentList = (Page<MessageContent>) model.get("allMessageContentList");
         Assert.assertEquals("删除之前应该有数据1条：", 1, allMessageContentList.getTotalElements());//删除之前能找到
-
-
-        //
         mockMvc.perform(
                 get("/backend/delMessageContent")
                         .session(loginAs(editorUsername, password))
                         .param("id", "" + messageContentnew.getId())
                         .param("keywords",messageContentnew.getTitle())
-
-        )
-                .andExpect(status().isFound());
+        ).andExpect(status().isFound());
 //        .andExpect(redirectedUrl("/backend/searchMessageContent?keywords="));
-
-
         model = mockMvc.perform(
                 get("/backend/searchMessageContent")
                         .session(loginAs(editorUsername, password))
@@ -309,6 +277,7 @@ public class MessageContentControllerTest extends WebTestBase {
     }
 
     @Test
+    @Rollback
     public void addMessageContentTest() throws Exception{
 
         //准备测试环境
@@ -332,27 +301,15 @@ public class MessageContentControllerTest extends WebTestBase {
         loginService.newLogin(manager, password);
         //准备测试环境END
 
-
         mockMvc.perform(
                 get("/backend/addMessageContent")
-        )
-                .andExpect(status().isFound());
-//        mockMvc.perform(
-//                get("/backend/addSaveMessageContent")
-//                        .session(loginAs(ManagerUsername, password))
-//        )
-//                .andExpect(status().isFound());
-
+        ).andExpect(status().isFound());
         String ViewName=mockMvc.perform(
                 get("/backend/addMessageContent")
                         .session(loginAs(editorUsername, password))
-        )
-                .andExpect(status().isOk())
+        ).andExpect(status().isOk())
                 .andReturn().getModelAndView().getViewName();
         Assert.assertEquals("返回的视图名字是否相等","/backend/newMessageContent",ViewName);
-
-
-
 
     }
 
