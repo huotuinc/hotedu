@@ -29,8 +29,8 @@
 
                     <p style="display:none" class="zhizhen"><img src="images/ystoux.png" width="18px" height="7px"/></p>
 
-                    <p style="display:none" class="lbpo"><a href="#">HHSHIJIJ</a> <a href="#">个人中心</a> <a
-                            href="#">修改密码</a> <a href="#">退出</a></p>
+                    <p style="display:none" class="lbpo"><a href="#">HHSHIJIJ</a> <a href="#">个人中心</a>
+                        <a href="#" th:href="@{/logout}">退出</a></p>
                 </li>
             </ul>
         </div>
@@ -77,7 +77,7 @@
 
                             <div class="ysright">
                                 <button th:if="${!mb.payed}" type="button" class="btni btn-primaryi btn6 mr10"><a href="#" th:href="@{/pc/checkPay(id=${mb.id})}"><span style="color:white">确认交费</span></a></button>
-                                <button type="button" class="btni btn-primaryi btn6 mr10"><a href="#" th:href="@{/pc/searchMembers}"><span style="color:white">返回</span></a></button>
+                                <button type="button" class="btni btn-primaryi btn6 mr10"  onclick="history.go(-1)"><span style="color:white">返回</span></button>
                             </div>
                         </div>
                     </div>
