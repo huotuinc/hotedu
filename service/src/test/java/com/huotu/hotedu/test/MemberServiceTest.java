@@ -59,7 +59,7 @@ public class MemberServiceTest {
     /**
      * 测试  显示某个代理商名下的所有学员
      */
-    /*@Test
+   /* @Test
     @Rollback
     public void loadMembersByAgent(){
         //搭建测试环境
@@ -126,9 +126,7 @@ public class MemberServiceTest {
         member.setLoginName("asdfedsa");
         member.setRealName("test1");
         member.setLoginName("slttt");
-        member.setAgent(agent);
-        memberService.addMember(member);
-
+        memberService.addMember(agent,member);
 
         }
 

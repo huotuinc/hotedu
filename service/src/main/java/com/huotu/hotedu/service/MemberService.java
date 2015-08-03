@@ -29,7 +29,8 @@ public class MemberService {
      * @param mb 学员对象
      * @return 持久化学员对象
      */
-    public Member addMember(Member mb) {
+    public Member addMember(Agent agent,Member mb) {
+        mb.setAgent(agent);
         return memberRepository.save(mb);
     }
 

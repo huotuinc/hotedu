@@ -40,45 +40,11 @@ public class AgentService {
     private ExamRepository examRepository;
 
     /**
-     * 返回按照类型和关键字搜索过之后的代理商
-     * @param n         第几页
-     * @param pageSize  每页几条记录
-     * @param keyword   搜索关键字
-     * @param type      搜索类型
-     * @return          代理商集合
+     * 添加一位代理商
+     * @param agent 代理商对象
      */
-    public Page<Agent> searchAgentType(int n,int pageSize,String keyword,String type){
-        return  agentRepository.findAll(new Specification<Agent>() {
-            @Override
-            public Predicate toPredicate(Root<Agent> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if ("".equals(keyword)||keyword==null)
-                    return cb.isTrue(root.get("enabled").as(Boolean.class));
-                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)), cb.like(root.get(type).as(String.class), "%" + keyword + "%"));
-            }
-        }, new PageRequest(n, pageSize));
-    }
-
-    /**
-     * 分页依据全部搜索 搜索的代理商
-     * @param n             第几页
-     * @param pageSize      每页显示几条
-     * @param keyword       关键词
-     * @return              代理商集合
-     */
-    public Page<Agent> searchAgentAll(int n,int pageSize,String keyword){
-        return  agentRepository.findAll(new Specification<Agent>() {
-            @Override
-            public Predicate toPredicate(Root<Agent> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if (keyword==null)
-                    return null;
-                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)), cb.or(
-                        cb.like(root.get("name").as(String.class), "%" + keyword + "%"),
-                        cb.like(root.get("area").as(String.class), "%" + keyword + "%"),
-                        cb.like(root.get("LoginName").as(String.class), "%" + keyword + "%")
-                ));
-            }
-        },new PageRequest(n, pageSize));
-
+    public Agent addAgent(Agent agent){
+        return agentRepository.save(agent);
     }
 
     /**
@@ -89,7 +55,7 @@ public class AgentService {
     }
 
     /**
-     * 查找一位代理商
+     * 查找一位代理商所属区域
      * @param areaId 代理商id
      * @return 代理商对象
      */
@@ -349,22 +315,6 @@ public class AgentService {
             ct.setExam(exam);
             classTeamRepository.save(ct);
         }
-        examRepository.save(exam);
-    }
-
-    /**
-     * Created by jiashubing on 2015/7/24.
-     * 查询该代理商已有班级 下拉框展示
-     * @param agent     所属代理商
-     * @return          班级集合
-     */
-    public List<ClassTeam> findExistClassAll(Agent agent){
-        return classTeamRepository.findAll(new Specification<ClassTeam>() {
-            @Override
-            public Predicate toPredicate(Root<ClassTeam> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return cb.and(cb.equal(root.get("agent").as(Agent.class), agent), cb.isNull(root.get("exam").as(Exam.class)));
-            }
-        });
     }
 
     /**
@@ -382,7 +332,8 @@ public class AgentService {
      * 增加考场
      * @param newExam  增加的考场
      */
-    public Exam addExam(Exam newExam){
+    public Exam addExam(Agent agent,Exam newExam){
+        newExam.setAgent(agent);
         Exam exam = examRepository.save(newExam);
         return exam;
     }
@@ -393,9 +344,9 @@ public class AgentService {
      * @param agent         代理商
      * @param classTeam     添加的班级
      */
-    public void agentAddClassTeam(Agent agent,ClassTeam classTeam){
+    public ClassTeam agentAddClassTeam(Agent agent,ClassTeam classTeam){
         classTeam.setAgent(agent);
-        classTeamRepository.save(classTeam);
+        return classTeamRepository.save(classTeam);
     }
 
     /**
@@ -422,7 +373,7 @@ public class AgentService {
 
     /**
      * Created by jiashubing on 2015/7/24.
-     * 显示代理商所有的班级 分页显示
+     * 显示代理商所有的班级 安排考场 分页显示
      * 加载、搜索、上一页、下一页
      * @param agent         当前代理商
      * @param pageNo        第几页

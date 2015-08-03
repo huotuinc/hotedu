@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -36,10 +37,6 @@ import static org.junit.Assert.assertEquals;
 @Transactional
 public class AgentServiceTest {
     @Autowired
-    MemberRepository memberRepository;
-    @Autowired
-    AgentRepository agentRepository;
-    @Autowired
     MemberService memberService;
     @Autowired
     AgentService agentService;
@@ -47,99 +44,87 @@ public class AgentServiceTest {
     public static final int PAGE_SIZE=10;   //分页，每页假设10条数据
 
     /**
-     * 测试 显示全部未分班和已经分班的学员
+     * 测试
      */
     @Test
     @Rollback
-    public void checkNoClassMember(){
-        Member mb = new Member();
-        mb.setLoginName("12345");
-        mb.setEnabled(true);
-        memberService.addMember(mb);
-
-        ClassTeam classTeam = new ClassTeam();
-        classTeam.setId((long) 20);
-//        agentService.addClassTeam(classTeam);
-
-        Member mb2 = new Member();
-        mb2.setLoginName("12348");
-        mb2.setEnabled(true);
-        mb2.setTheClass(classTeam);
-        memberService.addMember(mb2);
-
-//        Page<Member> pages = agentService.findNoClassMembers(0,PAGE_SIZE);
-//        assertEquals("没有班级的学员为1",1, pages.getTotalElements());
-
-//        Page<Member> pages2 = agentService.findHaveClassMembers(0,PAGE_SIZE);
-//        assertEquals("有班级的学员数量为1",1, pages2.getTotalElements());
-    }
-
-    /**
-     * 测试分班
-     */
-    @Test
-    @Rollback
-    public void checkArrangeClass(){
-        Member mb = new Member();
-        mb.setLoginName("1111");
-        mb.setEnabled(true);
-        memberService.addMember(mb);
-        Member mb2 = new Member();
-        mb2.setLoginName("2222");
-        mb2.setEnabled(true);
-        memberService.addMember(mb2);
-        ClassTeam classTeam = new ClassTeam();
-        classTeam.setClassName("nihao");
-        ArrayList<Long> list = new ArrayList<Long>(13);
-        agentService.arrangeClass(list, classTeam);
-    }
-
-    /**
-     * 测试 注册班级
-     * 代理商添加班级
-     * 查找代理商所拥有的班级
-     */
-   /* @Test
-    @Rollback
-    public void checkFindExistClassAll(){
+    public void testAgent(){
         Agent agen = new Agent();
         agen.setEnabled(true);
-        agen.setName("hahahahaha");
+        agen.setName("测试hahahahaha");
         Agent agent = agentService.addAgent(agen);
 
-        Exam exam = new Exam();
+        ClassTeam classTea = new ClassTeam();
+        classTea.setClassName("测试001");
+        ClassTeam classTeam = agentService.agentAddClassTeam(agent, classTea);
 
-        ClassTeam classTeam = new ClassTeam();
-        classTeam.setClassName("123");
-        classTeam.setAgent(agent);
-        classTeam.setExam(exam);
-        agentService.agentAddClassTeam(agent, classTeam);
+        ClassTeam classTea2 = new ClassTeam();
+        classTea.setClassName("测试002");
+        ClassTeam classTeam2 = agentService.agentAddClassTeam(agent,classTea2);
 
-        ClassTeam classTeam2 = new ClassTeam();
-        classTeam2.setClassName("456");
-        classTeam2.setAgent(agent);
-        agentService.agentAddClassTeam(agent, classTeam2);
+        List<ClassTeam> classTeamsList = agentService.findAvailableClassTeams(agent);
+        assertEquals("该代理商可用于分班的班级数量为2", 2, classTeamsList.size());
+        Page<ClassTeam> classTeamPage = agentService.findClassArrageExam(agent, 0, PAGE_SIZE, null, "all");
+        assertEquals("该代理商的所有班级分页显示为2条", 2, classTeamPage.getTotalElements());
 
-        List<ClassTeam> pages = agentService.findExistClassAll(agent);
-//        assertEquals("该代理商所拥有的班级数目为1", 1, pages.size());
+        Member _mb = new Member();
+        _mb.setLoginName("测试001");
+        _mb.setEnabled(true);
+        _mb.setPayed(true);
+        Member mb = memberService.addMember(agent,_mb);
 
-    }*/
+        Member _mb2 = new Member();
+        _mb2.setLoginName("测试001");
+        _mb2.setEnabled(true);
+        _mb2.setPayed(true);
+        Member mb2 = memberService.addMember(agent,_mb2);
 
-    /**
-     * 测试该班级名称是否已经被占用,该名称不可以使用
-     */
-   /* @Test
-    @Rollback
-    public void checkClassTeamOneByName(){
-        ClassTeam classTeam = new ClassTeam();
-        classTeam.setClassName("nihao");
-//        agentService.addClassTeam(classTeam);
+        Member _mb3 = new Member();
+        _mb3.setLoginName("测试003");
+        _mb3.setEnabled(true);
+        _mb3.setPayed(true);
+        Member mb3 =memberService.addMember(agent, _mb3);
 
-        boolean flag= agentService.checkClassTeamByName("nihao");
-        assertEquals("该名称不可用",false,flag);
-        flag = agentService.checkClassTeamByName("buhao");
-        assertEquals("该名称可用",true,flag);
+        Page<Member> pages = agentService.findNoClassMembers(agent,0,PAGE_SIZE,null,"all");
+        assertEquals("该代理商未分班的学员为3", 3, pages.getTotalElements());
 
-    }*/
+        ArrayList<Long> arrayList= new ArrayList<Long>();
+        arrayList.add(mb.getId());
+        arrayList.add(mb2.getId());
+        ArrayList<Long> arrayList2= new ArrayList<Long>();
+        arrayList2.add(mb3.getId());
+
+        agentService.arrangeClass(arrayList, classTeam);
+        agentService.arrangeClass(arrayList2, classTeam2);
+        Page<Member> pages2 = agentService.findNoClassMembers(agent,0,PAGE_SIZE,null,"all");
+        assertEquals("该代理商未分班的学员为0", 0, pages2.getTotalElements());
+
+        Exam exa = new Exam();
+        exa.setExamName("测试001");
+        exa.setExamAddress("测试");
+        exa.setExamDate(new Date());
+        Exam exam = agentService.addExam(agent,exa);
+        List<Exam> examList = agentService.findAvailableExamTeams(agent);
+        assertEquals("该代理商可以用于安排的考场数为1", 1, examList.size());
+
+        ArrayList<Long> arrayList3= new ArrayList<Long>();
+        arrayList3.add(classTeam.getId());
+        arrayList3.add(classTeam2.getId());
+        agentService.arrangeExam(arrayList3, exam);
+
+        Page<Member> pages3 = agentService.findExamedMembers(agent,0,PAGE_SIZE,null,4,"passed");
+        assertEquals("该代理商所有已经考试了的学员数量为3", 3, pages3.getTotalElements());
+
+        agentService.setExamPassById(mb.getId(), 1);
+        agentService.setExamPassById(mb2.getId(), 2);
+        agentService.setExamPassById(mb3.getId(),1);
+
+        pages3 = agentService.findExamedMembers(agent,0,PAGE_SIZE,null,1,"passed");
+        assertEquals("该代理商所有通过考试了的学员数量为2", 2, pages3.getTotalElements());
+
+        pages3 = agentService.findExamedMembers(agent,0,PAGE_SIZE,null,2,"passed");
+        assertEquals("该代理商所有未通过考试了的学员数量为1",1,pages3.getTotalElements());
+
+    }
 
 }

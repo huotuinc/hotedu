@@ -94,8 +94,7 @@ public class AgentController {
             exam.setExamAddress(examAddress);
             exam.setExamDate(examDate);
             exam.setExamName(examName);
-            exam.setAgent(agent);
-            Exam ex= agentService.addExam(exam);
+            Exam ex= agentService.addExam(agent,exam);
             agentService.arrangeExam(arrayList, ex);
             result.setStatus(1);
             result.setMessage("安排成功");
