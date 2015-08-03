@@ -665,6 +665,9 @@
                             </td>
                             <td style="display: none;" >
                                 <input title="" type="text" name="passedSortText" id="examMember_passedText" value="" th:value="${passedSortText}"/>
+                                <script>
+                                    console.log($("#examMember_passedText").val());
+                                </script>
                             </td>
                             <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
                         </tr>
@@ -812,7 +815,6 @@
                 });
                 $("#examMember_havePassed").bind("change", function () {
                     $("#examMember_passedText").val($("#examMember_havePassed input[name='passedSort']:checked ").val());
-                    console.log($("#examMember_passedText").val());
                 });
             });
             $("#examMemberCheckAll").click(

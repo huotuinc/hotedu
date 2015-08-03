@@ -82,16 +82,6 @@ public class AgentService {
     }
 
     /**
-     * 禁用代理商
-     * @param id 代理商id
-     */
-    public void delAgent(Long id){
-        Agent agent=findOneById(id);
-        agent.setEnabled(false);
-        modify(agent);
-    }
-
-    /**
      * 修改一位代理商
      * @param agent 代理商对象
      */
@@ -144,22 +134,6 @@ public class AgentService {
      */
     public Exam findExamById(long id) {
         return examRepository.findOne(id);
-    }
-
-    /**
-     * Created by jiashubing on 2015/7/24.
-     * 检查该班级名称是否已经使用
-     * @param className     班级名称
-     * @return              若没有使用，返回true；若使用过，则返回false
-     */
-    public boolean checkClassTeamByName(String className){
-        List<ClassTeam> list = classTeamRepository.findAll(new Specification<ClassTeam>() {
-            @Override
-            public Predicate toPredicate(Root<ClassTeam> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return cb.equal(root.get("className").as(String.class), className);
-            }
-        });
-        return list.isEmpty();
     }
 
     /**
@@ -505,8 +479,9 @@ public class AgentService {
 
     /**
      * Created by jiashubing on 2015/7/31.
-     * 设置学员通过考试
+     * 设置学员是否通过考试
      * @param id  学员id
+     * @param x   1为通过，2为不通过
      */
     public void setExamPassById(Long id,int x){
         Member member=memberRepository.findOne(id);
@@ -514,14 +489,4 @@ public class AgentService {
         memberRepository.save(member);
     }
 
-    /**
-     * Created by jiashubing on 2015/7/31.
-     * 设置学员未通过考试
-     * @param id  学员id
-     */
-    public void setExamNoPassById(Long id){
-        Member member=memberRepository.findOne(id);
-        member.setPassed(2);
-        memberRepository.save(member);
-    }
 }

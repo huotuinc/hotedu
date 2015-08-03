@@ -49,8 +49,7 @@ public class AgentController {
      * @param agent     当前代理商
      * @param className             新建班级的名字
      * @param noClassMemberArrayLis 复选框选中成员的id集合,Strring类型
-     * @return
-     * @throws UnsupportedEncodingException
+     * @return      confirm.js中 check_arrageNewClass方法
      */
     @RequestMapping("/pc/addSaveNewClassTeam")
     @ResponseBody
@@ -81,7 +80,7 @@ public class AgentController {
      * @param examDate      考试时间
      * @param examAddress       考试地点
      * @param classExamArrayLis     需要安排的班级
-     * @return
+     * @return      confirm.js中 check_arrageNewExam方法
      */
     @RequestMapping("/pc/addSaveNewExam")
     @ResponseBody
@@ -112,7 +111,7 @@ public class AgentController {
      * Created by cwb on 2015/7/24
      * 将学员保存到已有班级中 AJAX实现
      * @param noClassMemberArrayLis 未分班的学员
-     * @return
+     * @return      confirm.js中 check_arrageExistClass方法
      */
     @RequestMapping("/pc/addMembersIntoExitClass")
     @ResponseBody
@@ -136,7 +135,7 @@ public class AgentController {
      * Created by jiashubing on 2015/7/30
      * 将班级保存到已有考场中 AJAX实现
      * @param classExamArrayLis 未分考场的班级
-     * @return
+     * @return confirm.js中 check_arrageExistExam方法
      */
     @RequestMapping("/pc/addClassIntoExistExam")
     @ResponseBody
@@ -229,7 +228,7 @@ public class AgentController {
      * Created by cwb on 2015/7/29
      * 当前代理商选择已有班级 AJAX实现
      * @param agent 当前代理商
-     * @return  AJAX实现已有班级
+     * @return  indexuser.js中 btn_chooseExistClass按钮事件
      */
     @RequestMapping("/pc/loadAvailableClassTeams")
     @ResponseBody
@@ -355,7 +354,7 @@ public class AgentController {
      * Created by jiashubing on 2015/7/31.
      * 设置学员通过考试
      * @param id  学员id
-     * @return
+     * @return  confirm.js中 btn_setExamPass方法
      */
     @RequestMapping("/pc/setExamPass")
     @ResponseBody
@@ -371,7 +370,7 @@ public class AgentController {
      * Created by jiashubing on 2015/7/31.
      * 设置学员通过考试
      * @param id  学员id
-     * @return
+     * @return  confirm.js中 btn_setExamNoPass方法
      */
     @RequestMapping("/pc/setExamNoPass")
     @ResponseBody
@@ -400,10 +399,9 @@ public class AgentController {
                                     @RequestParam(required = false) String searchSort,
                                     @RequestParam(required = false) Integer pageNo,
                                     Long id,Model model){
-        Boolean classTeamDetailcss = true;
         ClassTeam classTeam = classTeamService.findOneById(id);
         model.addAttribute("classTeamInfo", classTeam);
-        model.addAttribute("classTeamDetailcss", classTeamDetailcss);
+        model.addAttribute("classTeamDetailcss", true);
 
         Page<ClassTeam> pages = agentService.findClassArrageExam(agent, pageNo, PAGE_SIZE, keywords, searchSort);
         long totalRecords = pages.getTotalElements();
@@ -424,7 +422,7 @@ public class AgentController {
      * 修改班级名称 AJAX
      * @param id        班级ID
      * @param className     修改的名称
-     * @return
+     * @return      confirm.js中 btn_modifyClassTeamInfo方法
      */
     @RequestMapping("/pc/modifyClassTeamName")
     @ResponseBody
