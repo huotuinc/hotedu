@@ -169,7 +169,7 @@ public class MemberController {
         model.addAttribute("totalPages",pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("keywords", keywords);
-        model.addAttribute("searchSort",type);
+        model.addAttribute("searchSort", type);
         model.addAttribute("totalRecords", totalRecords);
         model.addAttribute("navigation","bmxx");
         model.addAttribute("totalMembers",memberService.searchMembers(agent,pageNo,PAGE_SIZE).getTotalElements());
@@ -222,12 +222,12 @@ public class MemberController {
         if(pageNo==null||pageNo<0){
             pageNo=0;
         }
-        model.addAttribute("agent",agent);
+        model.addAttribute("agent", agent);
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("keywords", keywords);
-        model.addAttribute("searchSort",type);
-        model.addAttribute("totalMembers",memberService.searchMembers(agent,pageNo,PAGE_SIZE).getTotalElements());
-        model.addAttribute("navigation","bygl");
+        model.addAttribute("searchSort", type);
+        model.addAttribute("totalMembers", memberService.searchMembers(agent, pageNo, PAGE_SIZE).getTotalElements());
+        model.addAttribute("navigation", "bygl");
         return turnPage;
     }
 
@@ -325,12 +325,15 @@ public class MemberController {
      * @return
      */
     @RequestMapping("/pc/checkPayList")
-    public String checkPayList(String checkPayLis,Model model){
-        String turnPage = "redirect:/pc/searchMembers";
+    @ResponseBody
+    public Result checkPayList(String checkPayLis,Model model){
+        Result result = new Result();
         MyJsonUtil myJsonUtil = new MyJsonUtil();
         ArrayList<Long> arrayList = myJsonUtil.convertJsonBytesToArrayList(checkPayLis);
         memberService.checkPayList(arrayList);
-        return turnPage;
+        result.setStatus(1);
+        result.setMessage("操作成功");
+        return result;
     }
 
 

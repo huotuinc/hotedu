@@ -440,4 +440,18 @@ public class AgentService {
         memberRepository.save(member);
     }
 
+    /**
+     *  Created by jiashubing on 2015/7/27.
+     *  多个学员确认通过考试
+     * @param arrayList 学员id集合
+     */
+    public void allMemberPassExam(ArrayList<Long> arrayList){
+        Member mb = null;
+        Date d = new Date();
+        for(int i=0; i<arrayList.size();i++){
+            mb = memberRepository.findOne(arrayList.get(i));
+            mb.setPassed(1);
+            memberRepository.save(mb);
+        }
+    }
 }

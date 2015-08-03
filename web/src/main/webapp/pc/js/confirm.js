@@ -91,49 +91,13 @@
 })(jQuery);
 
 $(document).ready(function () {
-    //静态页面弹出添加时后应有
-    //$("#link-add").bind("click", function () {
-    //    $.MsgBox.Alert("消息", "添加成功！");
-    //});
-//              回调函数可以直接写方法function(){}
     $(".link-delete").bind("click", function () {
         $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
             /*alert("你居然真的删除了...");*/
         });
     });
-//            function test() {
-//                alert("你点击了确定,进行了修改");
-//            }
-//            //也可以传方法名 test
-//            $("#update").bind("click", function () {
-//                $.MsgBox.Confirm("温馨提示", "确定要进行修改吗？", test);
-//            });
 });
 
-//获取同td下的第3个超链接，真正删除的a href
-//注意传递的参数，$.MsgBox已经将this改为弹出框了
-//Confirm函数的在这个js里面定义，第三个功能为点击确定后的功能
-//$(h).parents().children().eq(3)[0]就是获取到了同td下的第三个孩子 .find()不能准确找到 .next()也选不中，这里用前台调试
-//.click() 就是点击当前链接的效果
-//function check_del(h) {
-//    $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
-//       // console.log($(h).parents().children().find(".real-delete")[0]);
-//      //  $(h).parents().children().find(".real-delete")[0].click();
-//       // alert("删除前");
-//        //$(h).parents().children().eq(3)[0].click();
-//        $(h).siblings(".real-delete")[0].click();
-//        console.log($(h).siblings(".real-delete")[0]);
-//       // alert("删除后");
-//    });
-//}
-//
-//function check_save(h) {
-//    $.MsgBox.Confirm("温馨提示", "请选择需要安排分班的的学员请选择", function () {
-//       // $(h).parent().parent().parent().parent().parent().parent().parent().submit();
-//        $(h).parents('.myform').submit();
-//    });
-//    // $.MsgBox.Confirm("温馨提示", "即将保存内容，确定继续吗？", function () { $(h).parents('#myform').sumbit()});
-//}
 
 function check_noClassMember() {
     $.MsgBox.Alert("温馨提示", "请选择需要安排分班的学员！");
@@ -147,9 +111,45 @@ function check_payMember() {
     $.MsgBox.Alert("温馨提示", "请选择需要确认缴费的学员！");
 }
 
+function check_ExamMember() {
+    $.MsgBox.Alert("温馨提示", "请选择需要确认通过的学员！");
+}
+
 function check_payEnter() {
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员的状态改为已交费吗？", function () {
-        $("#checkPayLisForm").submit();
+        var arrayLis = $("#checkPayLis").val().trim();
+        $.ajax({
+            url:path+"/pc/checkPayList",
+            type:"post",
+            data:{"checkPayLis":arrayLis},
+            dataType:"json",
+            success:function(result){
+                $("#searchMemberInfo").submit();
+                alert(result.message);
+            },
+            error:function(){
+                alert("安排失败");
+            }
+        });
+    });
+}
+
+function check_ExamMemberEnter() {
+    $.MsgBox.Confirm("温馨提示", "确认要将选中学员的状态改为通过吗？", function () {
+        var arrayLis = $("#checkExamMemberList").val().trim();
+        $.ajax({
+            url:path+"/pc/allMemberPassExam",
+            type:"post",
+            data:{"checkExamMemberList":arrayLis},
+            dataType:"json",
+            success:function(result){
+                    $("#searchGraduationMembers").submit();
+                    alert(result.message);
+            },
+            error:function(){
+                alert("安排失败");
+            }
+         });
     });
 }
 
