@@ -52,6 +52,12 @@ public class LoginController {
         return turnPage;
     }
 
+    @RequestMapping("/pc/videoLoginIndex")
+    public String videoLoginIndex() {
+        String turnPage = "pc/yun-jxsp";
+        return turnPage;
+    }
+
     @RequestMapping("/pc/loginSuccess")
     public String loginSuccess(@AuthenticationPrincipal Login user) {
         String turnPage = "redirect:/pc/index";

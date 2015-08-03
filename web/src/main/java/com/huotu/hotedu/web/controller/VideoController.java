@@ -43,6 +43,7 @@ public class VideoController {
      * 用来储存分页中每页的记录数
      */
     public static final int PAGE_SIZE=10;//每张页面的记录数
+    public static final int PAGE_SIZE_F = 9;
     //后台显示所有视频信息
 
     @RequestMapping("/backend/loadVideo")
@@ -78,7 +79,7 @@ public class VideoController {
         if(pageNo==null||pageNo<0){
             pageNo=0;
         }
-        Page<Video> pages = iqiyiVideoRepository.find(new PageRequest(pageNo, PAGE_SIZE));
+        Page<Video> pages = iqiyiVideoRepository.find(new PageRequest(pageNo, PAGE_SIZE_F));
         long totalRecords = pages.getTotalElements();
         int numEl =  pages.getNumberOfElements();
         if(numEl==0) {
@@ -86,18 +87,30 @@ public class VideoController {
             if(pageNo<0) {
                 pageNo = 0;
             }
-            pages = iqiyiVideoRepository.find(new PageRequest(pageNo, PAGE_SIZE));
+            pages = iqiyiVideoRepository.find(new PageRequest(pageNo, PAGE_SIZE_F));
             totalRecords = pages.getTotalElements();
         }
-        List<VideoForPlay> videos = new ArrayList<>();
+        List<VideoForPlay> videos1 = new ArrayList<>();
+        List<VideoForPlay> videos2 = new ArrayList<>();
+        List<VideoForPlay> videos3 = new ArrayList<>();
+        int sum = 0;
         for(Video video:pages) {
             VideoForPlay vfp = iqiyiVideoRepository.play(video.getFileId());
-            videos.add(vfp);
+            vfp.setSwfurl(vfp.getSwfurl().replace("autoplay=1", "autoplay=0"));
+            if(sum<4) {
+                videos1.add(vfp);
+            }else if(sum<7) {
+                videos2.add(vfp);
+            }else {
+                videos3.add(vfp);
+            }
+            sum++;
         }
-        model.addAttribute("AllVideoList", videos);
+        model.addAttribute("videos1", videos1);
+        model.addAttribute("videos2", videos2);
+        model.addAttribute("videos3", videos3);
         model.addAttribute("totalPages",pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
-        model.addAttribute("keywords", keywords);
         model.addAttribute("totalRecords", totalRecords);
         return turnPage;
     }
