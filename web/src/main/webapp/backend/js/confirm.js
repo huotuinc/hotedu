@@ -10,19 +10,29 @@
             GenerateHtml("confirm", title, msg);
             btnOk(callback);
             btnNo();
+        },
+        AjaxAlert: function (title, msg, callback) {
+            GenerateHtml("ajaxAlert", title, msg);
+            btnOk(callback);
+            btnNo(callback);
         }
     };
     //生成Html
     var GenerateHtml = function (type, title, msg) {
         var _html = "";
         _html += '<div id="mb_box"></div><div id="mb_con_pop"><span id="mb_tit">' + title + '</span>';
-        _html += '<a id="mb_ico">x</a><div id="mb_msg">' + msg + '</div><div id="mb_btnbox">';
         if (type == "alert") {
+            _html += '<a id="mb_ico">x</a><div id="mb_msg">' + msg + '</div><div id="mb_btnbox">';
             _html += '<input id="mb_btn_ok" type="button" value="确定" />';
         }
         if (type == "confirm" || type == "Save") {
+            _html += '<a id="mb_ico">x</a><div id="mb_msg">' + msg + '</div><div id="mb_btnbox">';
             _html += '<input id="mb_btn_ok" type="button" value="确定" />';
             _html += '<input id="mb_btn_no" type="button" value="取消" />';
+        }
+        if (type == "ajaxAlert") {
+            _html += '<div id="mb_msg">' + msg + '</div><div id="mb_btnbox">';
+            _html += '<input id="mb_btn_ok" type="button" value="确定" />';
         }
         _html += '</div></div>';
         //必须先将_html添加到body，再设置Css样式
