@@ -15,7 +15,7 @@
     <div style=" background-color:#fff;">
         <div style=" background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" class="logoimg"/>
             <ul class="navi">
-                <li><a href="index.html" th:href="${/pc/index}">首页</a></li>
+                <li><a href="index.html" th:href="@{/pc/index}">首页</a></li>
                 <li><a href="index2.html">公司简介</a></li>
                 <li><a href="index3.html">考证报名</a></li>
                 <li><a href="about.html">师资力量</a></li>
@@ -42,14 +42,8 @@
         <div>
             <ul class="yscenterc" th:remove="all-but-first" th:each="g:${AllVideoList}">
                 <li class="spkj">
-                    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="680" height="520">
-                        <param name="movie" th:value="${g.swfurl}" value="http://dispatcher.video.qiyi.com/disp/shareplayer.swf?vid=ade484a7c87734eee38f7f77cd9f3159&tvId=250912700&coop=&cid=&bd=1"/>
-                        <param name="quality" value="high"/>
-                        <param name="wmode" value="transparent"/>
-                        <param value="true" name="allowFullScreen"/>
-                        <embed th:src="${g.swfurl}"  src="http://dispatcher.video.qiyi.com/disp/shareplayer.swf?vid=ade484a7c87734eee38f7f77cd9f3159&tvId=250912700&coop=&cid=&bd=1" wmode="transparent" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="680" height="520" allowfullscreen="true"/>
-                    </object>
-                    <!--<a href="javascript:void(0)" th:href="${g.swfurl}" target="_blank"><img th:src="${g.img}"/></a>--></li>
+                    <embed th:src="${g.swfurl}" src="http://player.youku.com/player.php/sid/XMzI2NTc4NTMy/v.swf" type="application/x-shockwave-flash"> </embed>
+                </li>
                 <li class="spkj">asdfas</li>
                 <li class="spkj">eawfaeasdf</li>
                 <li class="spkj">eawfaeasdf</li>
