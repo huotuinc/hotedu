@@ -10,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -93,12 +92,6 @@ public class AgentService {
     }
 
     /**
-     * 增加一个代理商
-     * @param agent 代理商对象faks
-     */
-    public Agent addAgent(Agent agent){return agentRepository.save(agent);}
-
-    /**
      * 修改一位代理商
      * @param agent 代理商对象
      */
@@ -121,39 +114,37 @@ public class AgentService {
     public Agent findOneById(Long id){return agentRepository.findOne(id);}
 
     /**
-     *Created by jiashubing on 2015/7/24.
+     * Created by jiashubing on 2015/7/24.
      * 查找一个已有班级
      * @param id 班级id
      * @return 班级对象
      */
-    public ClassTeam findOneClassTeamById(Long id){return classTeamRepository.findOne(id);}
-
-    /**
-     *Created by jiashubing on 2015/7/24.
-     * 查找一个已有班级
-     * @param className 班级名称
-     * @return 班级对象
-     */
-    public ClassTeam findOneClassTeamByClassName(String className){return classTeamRepository.findByClassName(className);}
-
     public ClassTeam findClassTeamById(long id) {
         return classTeamRepository.findOne(id);
     }
 
+    /**
+     * Created by jiashubing on 2015/8/1.
+     * 修改班级名称
+     * @param id        班级id
+     * @param className 修改名称
+     * @return      班级对象
+     */
     public ClassTeam modifyClassTeamName(Long id, String className) {
         ClassTeam classTeam = classTeamRepository.findOne(id);
         classTeam.setClassName(className);
         return classTeamRepository.save(classTeam);
     }
 
-
-
+    /**
+     * Created by jiashubing on 2015/7/24.
+     * 查找一个已有考场
+     * @param id    考场id
+     * @return      考场对象
+     */
     public Exam findExamById(long id) {
         return examRepository.findOne(id);
     }
-
-
-
 
     /**
      * Created by jiashubing on 2015/7/24.
@@ -279,6 +270,7 @@ public class AgentService {
                                 cb.equal(root.get("agent").as(Agent.class), agent),
                                 cb.isTrue(root.get("enabled").as(Boolean.class)),
                                 cb.isTrue(root.get("payed").as(Boolean.class)),
+                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
                                 cb.isFalse(root.get("haveLicense").as(Boolean.class))
                         );
                     }
@@ -287,6 +279,7 @@ public class AgentService {
                                 cb.equal(root.get("agent").as(Agent.class), agent),
                                 cb.isTrue(root.get("enabled").as(boolean.class)),
                                 cb.isTrue(root.get("payed").as(Boolean.class)),
+                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
                                 cb.isFalse(root.get("haveLicense").as(Boolean.class)),
                                 cb.equal(root.get("passed").as(Integer.class), passedSortText)
                         );
@@ -298,6 +291,7 @@ public class AgentService {
                                 cb.equal(root.get("agent").as(Agent.class), agent),
                                 cb.isTrue(root.get("enabled").as(Boolean.class)),
                                 cb.isTrue(root.get("payed").as(Boolean.class)),
+                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
                                 cb.isFalse(root.get("haveLicense").as(Boolean.class))
                         );
                     } else if ("all".equals(searchSort)) {
@@ -305,6 +299,7 @@ public class AgentService {
                                 cb.equal(root.get("agent").as(Agent.class), agent),
                                 cb.isTrue(root.get("enabled").as(boolean.class)),
                                 cb.isTrue(root.get("payed").as(Boolean.class)),
+                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
                                 cb.isFalse(root.get("haveLicense").as(Boolean.class)),
                                 cb.or(
                                         cb.like(root.get("realName").as(String.class), "%" + keywords + "%"),
@@ -319,6 +314,7 @@ public class AgentService {
                                     cb.equal(root.get("agent").as(Agent.class), agent),
                                     cb.isTrue(root.get("enabled").as(boolean.class)),
                                     cb.isTrue(root.get("payed").as(Boolean.class)),
+                                    cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
                                     cb.isFalse(root.get("haveLicense").as(Boolean.class)),
                                     cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
                             );
@@ -327,6 +323,7 @@ public class AgentService {
                                     cb.equal(root.get("agent").as(Agent.class), agent),
                                     cb.isTrue(root.get("enabled").as(boolean.class)),
                                     cb.isTrue(root.get("payed").as(Boolean.class)),
+                                    cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
                                     cb.isFalse(root.get("haveLicense").as(Boolean.class)),
                                     cb.like(root.get("theClass").get("className").as(String.class), "%" + keywords + "%")
                             );
@@ -335,6 +332,7 @@ public class AgentService {
                                     cb.equal(root.get("agent").as(Agent.class), agent),
                                     cb.isTrue(root.get("enabled").as(boolean.class)),
                                     cb.isTrue(root.get("payed").as(Boolean.class)),
+                                    cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
                                     cb.isFalse(root.get("haveLicense").as(Boolean.class)),
                                     cb.like(root.get(searchSort).as(String.class), "%" + keywords + "%")
                             );
