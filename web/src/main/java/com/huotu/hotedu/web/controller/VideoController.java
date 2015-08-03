@@ -61,9 +61,7 @@ public class VideoController {
             pages = iqiyiVideoRepository.find(new PageRequest(pageNo, PAGE_SIZE));
             totalRecords = pages.getTotalElements();
         }
-        for(Video video:pages) {
-            video.setFileName(new String(video.getFileName().getBytes("GBK"),"UTF-8"));
-        }
+
         model.addAttribute("AllVideoList", pages);
         model.addAttribute("totalPages",pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
