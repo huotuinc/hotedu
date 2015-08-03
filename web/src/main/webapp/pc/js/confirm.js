@@ -119,7 +119,7 @@ function check_payEnter() {
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员的状态改为已交费吗？", function () {
         var arrayLis = $("#checkPayLis").val().trim();
         $.ajax({
-            url:path+"/pc/checkPayList",
+            url:"checkPayList",
             type:"post",
             data:{"checkPayLis":arrayLis},
             dataType:"json",
@@ -138,7 +138,7 @@ function check_ExamMemberEnter() {
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员的状态改为通过吗？", function () {
         var arrayLis = $("#checkExamMemberList").val().trim();
         $.ajax({
-            url:path+"/pc/allMemberPassExam",
+            url:"allMemberPassExam",
             type:"post",
             data:{"checkExamMemberList":arrayLis},
             dataType:"json",
@@ -158,7 +158,7 @@ function check_arrageNewClass() {
         var className = $("#className").val().trim();
         var noClassMemberArrayLis = $("#noClassMemberArrayLis").val().trim();
         $.ajax({
-            url:path+"/pc/addSaveNewClassTeam",
+            url:"addSaveNewClassTeam",
             type:"post",
             data:{"className":className,"noClassMemberArrayLis":noClassMemberArrayLis},
             dataType:"json",
@@ -183,7 +183,7 @@ function check_arrageNewExam() {
         var examAddress = $("#examAddress").val().trim();
         var classExamArrayLis = $("#classExamArrayLis").val().trim();
         $.ajax({
-            url:path+"/pc/addSaveNewExam",
+            url:"addSaveNewExam",
             type:"post",
             data:{"examDate":examDate,"examAddress":examAddress,"classExamArrayLis":classExamArrayLis},
             dataType:"json",
@@ -207,7 +207,7 @@ function check_arrageExistClass() {
         var noClassMemberArrayLis = $("#noClassMemberArrayLis").val().trim();
         var existClassSelect = $("#existClassSelect").val().trim();
         $.ajax({
-            url:path+"/pc/addMembersIntoExitClass",
+            url:"addMembersIntoExitClass",
             type:"post",
             data:{"className":existClassSelect,"noClassMemberArrayLis":noClassMemberArrayLis},
             dataType:"json",
@@ -231,7 +231,7 @@ function check_arrageExistExam() {
         var classExamArrayLis = $("#classExamArrayLis").val().trim();
         var existExamSelect = $("#existExamSelect").val().trim();
         $.ajax({
-            url:path+"/pc/addClassIntoExistExam",
+            url:"addClassIntoExistExam",
             type:"post",
             data:{"examName":existExamSelect,"classExamArrayLis":classExamArrayLis},
             dataType:"json",
@@ -254,7 +254,7 @@ function btn_setExamPass(h) {
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员通过考试吗？", function () {
         var memberId = $(h).parent().parent().children().eq(1).text();
         $.ajax({
-            url:path+"/pc/setExamPass",
+            url:"setExamPass",
             type:"post",
             data:{"id":memberId},
             dataType:"json",
@@ -273,7 +273,7 @@ function btn_setExamNoPass(h) {
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员通过考试吗？", function () {
         var memberId = $(h).parent().parent().children().eq(1).text();
         $.ajax({
-            url:path+"/pc/setExamNoPass",
+            url:"setExamNoPass",
             type:"post",
             data:{"id":memberId},
             dataType:"json",
@@ -293,7 +293,7 @@ function btn_modifyClassTeamInfo(h) {
         var classId = $("#classTeamDetailInfoId").val().trim();
         var className = $("#classTeamDetailInfoName").val().trim();
         $.ajax({
-            url:path+"/pc/modifyClassTeamName",
+            url:"modifyClassTeamName",
             type:"post",
             data:{"id":classId,"className":className},
             dataType:"json",

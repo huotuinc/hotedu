@@ -48,7 +48,7 @@ function changeSearchSelect(type){
 $(function() {
 	$("#btn_chooseExistClass").click(function() {
 		$.ajax({
-			url:path+"/pc/loadAvailableClassTeams",
+			url:"loadAvailableClassTeams",
 			type:"post",
 			dataType:"json",
 			success:function(result){
@@ -76,7 +76,7 @@ $(function() {
 $(function() {
 	$("#btn_chooseExistExam").click(function() {
 		$.ajax({
-			url:path+"/pc/loadAvailableExam",
+			url:"loadAvailableExam",
 			type:"post",
 			dataType:"json",
 			success:function(result){
@@ -129,7 +129,7 @@ function addMember(){
 	}
 
 	$.ajax({
-		url:path+"/pc/addMembers",
+		url:"addMembers",
 		type:"post",
 		data:{"realName":realName,"sex":sex,"phoneNo":phoneNo},
 		dataType:"json",
