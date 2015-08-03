@@ -706,10 +706,10 @@
                                         <a class="link-update" href="#" onclick="btn_setExamNoPass(this)">未通过</a>
                                         <a class="link-update" href="#" th:href="@{/pc/detailMember(id=${g.id})}">查看</a>
                                      </td>
-                                    <td th:style="${g.passed}==1 ? 'display:block;':'display:none;'">
+                                    <td style="display:none;" th:style="${g.passed}==1 ? 'display:block;':'display:none;'">
                                         <a class="link-update" href="#" th:href="@{/pc/detailMember(id=${g.id})}">查看</a>
                                     </td>
-                                    <td th:style="${g.passed}==2 ? 'display:block;':'display:none;'">
+                                    <td style="display:none;" th:style="${g.passed}==2 ? 'display:block;':'display:none;'">
                                         <a class="link-update" href="#" onclick="btn_setExamPass(this)">通过</a>
                                         <a class="link-update" href="#" th:href="@{/pc/detailMember(id=${g.id})}">查看</a>
                                     </td>
@@ -870,7 +870,7 @@
                             <tbody>
                             <tr>
                                 <th style="width:100px;"><i class="require-red">*</i>班级：</th>
-                                <td><input id="classTeamDetailInfoName" th:value="${g.className}" style="border: none;" title=""/></td>
+                                <td style="font-size: 14px;font-weight: normal;"><input id="classTeamDetailInfoName" th:value="${g.className}" style="border: none;" title=""/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>区域：</th>

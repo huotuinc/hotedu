@@ -10,19 +10,29 @@
             GenerateHtml("confirm", title, msg);
             btnOk(callback);
             btnNo();
+        },
+        AjaxAlert: function (title, msg, callback) {
+            GenerateHtml("ajaxAlert", title, msg);
+            btnOk(callback);
+            btnNo(callback);
         }
     };
     //生成Html
     var GenerateHtml = function (type, title, msg) {
         var _html = "";
         _html += '<div id="mb_box"></div><div id="mb_con_pop"><span id="mb_tit">' + title + '</span>';
-        _html += '<a id="mb_ico">x</a><div id="mb_msg">' + msg + '</div><div id="mb_btnbox">';
         if (type == "alert") {
+            _html += '<a id="mb_ico">x</a><div id="mb_msg">' + msg + '</div><div id="mb_btnbox">';
             _html += '<input id="mb_btn_ok" type="button" value="确定" />';
         }
         if (type == "confirm" || type == "Save") {
+            _html += '<a id="mb_ico">x</a><div id="mb_msg">' + msg + '</div><div id="mb_btnbox">';
             _html += '<input id="mb_btn_ok" type="button" value="确定" />';
             _html += '<input id="mb_btn_no" type="button" value="取消" />';
+        }
+        if (type == "ajaxAlert") {
+            _html += '<div id="mb_msg">' + msg + '</div><div id="mb_btnbox">';
+            _html += '<input id="mb_btn_ok" type="button" value="确定" />';
         }
         _html += '</div></div>';
         //必须先将_html添加到body，再设置Css样式
@@ -124,8 +134,7 @@ function check_payEnter() {
             data:{"checkPayLis":arrayLis},
             dataType:"json",
             success:function(result){
-                $("#searchMemberInfo").submit();
-                alert(result.message);
+                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchMemberInfo").submit();});
             },
             error:function(){
                 alert("安排失败");
@@ -143,8 +152,7 @@ function check_ExamMemberEnter() {
             data:{"checkExamMemberList":arrayLis},
             dataType:"json",
             success:function(result){
-                    $("#searchGraduationMembers").submit();
-                    alert(result.message);
+                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchGraduationMembers").submit();});
             },
             error:function(){
                 alert("安排失败");
@@ -166,8 +174,7 @@ function check_arrageNewClass() {
                 if(result.status==0){
                     $("#addNewClassTeamError").text(result.message);
                 }else if(result.status==1){
-                    $("#searchClassMembers").submit();
-                    alert(result.message);
+                    $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchClassMembers").submit();});
                 }
             },
             error:function(){
@@ -191,8 +198,7 @@ function check_arrageNewExam() {
                 if(result.status==0){
                     $("#addNewExamError").text(result.message);
                 }else if(result.status==1){
-                    $("#searchClassExam").submit();
-                    alert(result.message);
+                    $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchClassExam").submit();});
                 }
             },
             error:function(){
@@ -215,8 +221,7 @@ function check_arrageExistClass() {
                 if(result.status==0){
                     $("#errInfo_existClass").text(result.message);
                 }else if(result.status==1){
-                    $("#searchClassMembers").submit();
-                    alert(result.message);
+                    $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchClassMembers").submit();});
                 }
             },
             error:function(){
@@ -239,8 +244,7 @@ function check_arrageExistExam() {
                 if(result.status==0){
                     $("#errInfo_existExam").text(result.message);
                 }else if(result.status==1){
-                    $("#searchClassExam").submit();
-                    alert(result.message);
+                    $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchClassExam").submit();});
                 }
             },
             error:function(){
@@ -259,8 +263,7 @@ function btn_setExamPass(h) {
             data:{"id":memberId},
             dataType:"json",
             success:function(result){
-                $("#searchGraduationMembers").submit();
-                alert(result.message);
+                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchGraduationMembers").submit();});
             },
             error:function(){
                 alert("操作失败");
@@ -278,8 +281,7 @@ function btn_setExamNoPass(h) {
             data:{"id":memberId},
             dataType:"json",
             success:function(result){
-                $("#searchGraduationMembers").submit();
-                alert(result.message);
+                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchGraduationMembers").submit();});
             },
             error:function(){
                 alert("操作失败");
@@ -289,7 +291,7 @@ function btn_setExamNoPass(h) {
 }
 
 function btn_modifyClassTeamInfo(h) {
-    $.MsgBox.Confirm("温馨提示", "确认要将选中学员通过考试吗？", function () {
+    $.MsgBox.Confirm("温馨提示", "确认要修改班级信息？", function () {
         var classId = $("#classTeamDetailInfoId").val().trim();
         var className = $("#classTeamDetailInfoName").val().trim();
         $.ajax({
@@ -298,8 +300,7 @@ function btn_modifyClassTeamInfo(h) {
             data:{"id":classId,"className":className},
             dataType:"json",
             success:function(result){
-                $("#searchClassExam").submit();
-                alert(result.message);
+                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchClassExam").submit();});
             },
             error:function(){
                 alert("操作失败");
