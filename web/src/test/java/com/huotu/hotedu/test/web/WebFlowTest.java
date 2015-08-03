@@ -26,8 +26,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 public class WebFlowTest extends WebTestBase {
 
-
-
     @Autowired
     private LoginService loginService;
     @Autowired
@@ -35,47 +33,26 @@ public class WebFlowTest extends WebTestBase {
     @Autowired
     private Environment env;
 
-
     @Test
     @Rollback
     public void login() throws Exception {
-
         String username = UUID.randomUUID().toString();
         String password = UUID.randomUUID().toString();
-
         Manager manager = new Manager();
         manager.setLoginName(username);
 
         manager = loginService.newLogin(manager,password);
 
         mockMvc.perform(
-//                get("/backend/test/open")
                 get("/backend/searchExamGuide")
         )
                 .andExpect(status().isFound());//尚未登录是302 已登录则是403
-
-
         MockHttpSession session = loginAs(username,password);
-
-
         mockMvc.perform(
                 get("/backend/searchExamGuide")
                 .session(session)
         )
                 .andExpect(status().isOk());
-
-
-//        ExamGuide exam=new ExamGuide();
-//        exam.setTitle("dd");
-//        exam.setContent("asdfe");
-//        exam.setTop(true);
-//        exam.setLastUploadDate(new Date());
-//        examGuideRepository.save(exam);
-//        mockMvc.perform(
-//                get("/load/examGuide")
-//        ).andDo(print())
-//        ;
-
     }
 
     private void checkMemeber(String name) {
