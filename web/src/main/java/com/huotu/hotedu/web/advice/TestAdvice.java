@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class TestAdvice {
 
     /**
-     * 空指针异常处理器，然并卵。
+     * 所有异常统一处理
      */
-    @ExceptionHandler(NullPointerException.class)
-    public String onNullPointerException(NullPointerException ex,Model model){
-        model.addAttribute("message","系统故障");
-        return "/errorPage";
+    @ExceptionHandler(Throwable.class)
+    public String onNullPointerException(Throwable ex,Model model){
+        //model.addAttribute("message","系统故障");
+        return "/error";
     }
 
 }

@@ -15,8 +15,8 @@ public class ErrorController {
      * 出错时跳转
      * @return error.html
      */
-    @RequestMapping("/backend/error")
+    @RequestMapping("/error")
     public String loadBannersController() {
-        return "/backend/error";
+        return "/pc/yun-404.html";
     }
 }
