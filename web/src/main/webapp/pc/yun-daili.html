@@ -229,9 +229,9 @@
                             </tr>
                         </table>
                         <div style="text-align:center; margin-top:10px;">
-                            <a href="#" th:href="@{/pc/searchMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
-                            <a href="#" th:href="@{/pc/searchMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
-                            <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
+                            <a href="#" th:if="${pageNo}!=0" th:href="@{/pc/searchMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
+                            <a href="#" th:if="${pageNo+1}!=${totalPages}" th:href="@{/pc/searchMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
+                            <span th:text="'当前第'+${pageNo+1}">1</span>页/<span th:text="'共'+${totalPages}">1</span>页
                         </div>
                         <span style="color:blue" th:text="${msgInfo}"/>
                         <span style="color:red" th:text="${errInfo}"/>
@@ -441,9 +441,9 @@
                                 })
                             </script>
                             <div style="text-align:center; margin-top:10px;">
-                                <a href="#" th:href=" @{/pc/loadClassMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
-                                <a href="#" th:href="@{/pc/loadClassMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
-                                <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
+                                <a href="#" th:if="${pageNo}!=0" th:href=" @{/pc/loadClassMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
+                                <a href="#" th:if="${pageNo+1}!=${totalPages}" th:href="@{/pc/loadClassMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
+                                <span th:text="'当前第'+${pageNo+1}">1</span>页/<span th:text="'共'+${totalPages}">1</span>页
                             </div>
                         </div>
                     </form>
@@ -616,9 +616,9 @@
                                 })
                             </script>
                             <div style="text-align:center; margin-top:10px;">
-                                <a href="#" th:href=" @{/pc/loadClassExam(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
-                                <a href="#" th:href="@{/pc/loadClassExam(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
-                                <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
+                                <a href="#" th:if="${pageNo}!=0" th:href=" @{/pc/loadClassExam(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
+                                <a href="#" th:if="${pageNo+1}!=${totalPages}" th:href="@{/pc/loadClassExam(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
+                                <span th:text="'当前第'+${pageNo+1}">1</span>页/<span th:text="'共'+${totalPages}">1</span>页
                             </div>
                         </div>
                     </form>
@@ -773,9 +773,9 @@
                         </table>
                         <input style="display: none;" title="" type="text" id="examMember_hidden_text" value="all" th:value="${searchSort}"/>
                         <div style="text-align:center; margin-top:10px;">
-                            <a href="#" th:href="@{/pc/loadGraduationMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort},passedSortText=${passedSortText})}">上一页</a>
-                            <a href="#" th:href="@{/pc/loadGraduationMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort},passedSortText=${passedSortText})}">下一页</a>
-                            <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
+                            <a href="#" th:if="${pageNo}!=0" th:href="@{/pc/loadGraduationMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort},passedSortText=${passedSortText})}">上一页</a>
+                            <a href="#" th:if="${pageNo+1}!=${totalPages}" th:href="@{/pc/loadGraduationMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort},passedSortText=${passedSortText})}">下一页</a>
+                            <span th:text="'当前第'+${pageNo+1}">1</span>页/<span th:text="'共'+${totalPages}">1</span>页
                         </div>
                     </div>
                 </form>

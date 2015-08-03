@@ -40,7 +40,7 @@ public class VideoController {
      * 用来储存分页中每页的记录数
      */
     public static final int PAGE_SIZE=10;//每张页面的记录数
-    public static final int PAGE_SIZE_F = 4;
+    public static final int PAGE_SIZE_F = 9;
     //后台显示所有视频信息
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/loadVideo")
@@ -87,21 +87,23 @@ public class VideoController {
             pages = iqiyiVideoRepository.find(new PageRequest(pageNo, PAGE_SIZE_F));
             totalRecords = pages.getTotalElements();
         }
-        List<VideoForPlay> videos1 = new ArrayList<>();
-        List<VideoForPlay> videos2 = new ArrayList<>();
+        List<Video> videos1 = new ArrayList<>();
+        List<Video> videos2 = new ArrayList<>();
+        List<Video> videos3 = new ArrayList<>();
         int sum = 0;
         for(Video video:pages) {
-            VideoForPlay vfp = iqiyiVideoRepository.play(video.getFileId());
-            vfp.setSwfurl(vfp.getSwfurl().replace("autoplay=1", "autoplay=0"));
-            if(sum<2) {
-                videos1.add(vfp);
+            if(sum<3) {
+                videos1.add(video);
+            }else if(sum<6) {
+                videos2.add(video);
             }else {
-                videos2.add(vfp);
+                videos3.add(video);
             }
             sum++;
         }
         model.addAttribute("videos1", videos1);
         model.addAttribute("videos2", videos2);
+        model.addAttribute("videos3", videos3);
         model.addAttribute("totalPages",pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("totalRecords", totalRecords);
