@@ -1,9 +1,6 @@
 package com.huotu.hotedu.web.controller;
 
-import com.huotu.hotedu.entity.Agent;
-import com.huotu.hotedu.entity.Login;
-import com.huotu.hotedu.entity.Member;
-import com.huotu.hotedu.entity.Result;
+import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.service.MemberService;
@@ -125,6 +122,9 @@ public class MemberController {
             }
         }else if(user instanceof Agent) {
             return "redirect:/pc/searchMembers";
+        }else if(user instanceof Manager) {
+            return "redirect:/backend/index";
+
         }
         model.addAttribute("errInfo",errInfo);
         model.addAttribute("style",style);

@@ -148,6 +148,7 @@
                     class="crumb-step">&gt;</span><span class="crumb-name">教学视频</span></div>
         </div>
         <div class="jp-container2">
+
             <div class="search-wrap">
                 <div class="search-content">
                     <!--<form action="#" th:action="@{/backend/searchVideo}" method="post">-->
@@ -180,53 +181,56 @@
                             <a href="newvideo.html" th:href="@{/backend/addVideo}"><i class="icon-font">+</i>新增视频</a>
                         </div>
                     </div>
-                    <div class="result-content">
-                        <table class="result-tab" width="100%">
-                            <thead>
-                            <tr>
-                                <th style="width:80px">视频图片</th>
-                                <th style="width:80px;">片名</th>
-                                <th style="width:30px">时长</th>
-                                <th style="width:100px">视频地址</th>
-                                <th style="width:30px">播放次数</th>
-                                <th style="width:100px">上传时间</th>
-                                <th style="width:80px">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody th:remove="all-but-first">
-                            <tr th:each="g:${AllVideoList}">
-                                <td><img th:src="${g.img}"/></td>
-                                <td th:text="${g.fileName}">3</td>
-                                <td th:text="${g.duration}+'秒'">3</td>
-                                <td th:text="${g.pageUrl}">3</td>
-                                <td th:text="${g.playCount}">3</td>
-                                <td th:text="${#calendars.format(g.createTime,'yyyy-MM-dd hh:mm:ss')}">2014-07-13
-                                    15:15:50
-                                </td>
-                                <td>
-                                    <a class="link-update" href="modifyvideo.html"
-                                       th:href="@{/backend/modifyVideo(id=${g.fileId})}">修改</a><br/>
-                                    <a class="link-update" href="#" onclick="check_del(this)">删除</a>
-                                    <a class="real-delete" href="#"
-                                       th:href="@{/backend/delVideo(id=${g.fileId},pageNo=${pageNo},keywords=${keywords})}"></a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div class="list-page">
-                            <a href="#"
-                               th:href="@{/backend/searchVideo(pageNo=${pageNo}-1,keywords=${keywords})}">上一页</a>
-                            <a href="#"
-                               th:href="@{/backend/searchVideo(pageNo=${pageNo}+1,keywords=${keywords})}">下一页</a>
-                            <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span
-                                th:text="${totalPages}">1</span> 页
-                        </div>
+
+                <div class="result-content">
+                    <table class="result-tab" width="100%">
+                        <thead>
+                        <tr>
+                            <th style="width:80px">视频图片</th>
+                            <th style="width:80px;">片名</th>
+                            <th style="width:30px">时长</th>
+                            <th style="width:100px">视频地址</th>
+                            <th style="width:30px">播放次数</th>
+                            <th style="width:100px">上传时间</th>
+                            <th style="width:80px">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody th:remove="all-but-first">
+                        <!--@thymesVar id="AllVideoList" type="java.lang.Iterable<com.huotu.iqiyi.sdk.model.Video>"-->
+                        <tr th:each="g:${AllVideoList}">
+                            <td><img th:src="${g.img}"/></td>
+                            <td th:text="${g.fileName}">3</td>
+                            <td th:text="${#numbers.formatInteger(g.duration/3600,0)}+'小时'+${#numbers.formatInteger((g.duration%3600)/60,0)}+'分'+${g.duration%60}+'秒'">3</td>
+                            <!--<td th:text="${#numbers.formatInteger(365264/3600)}+'小时'+(3000%3600)/60+'分'+3000%60+'秒'">3</td>-->
+                            <td><a th:href="${g.pageUrl}" th:text="${g.pageUrl}" target="_blank">www.iqiyi.com</a></td>
+                            <td th:text="${g.playCount}+'次'">3</td>
+                            <td th:text="${#calendars.format(g.createTime,'yyyy-MM-dd hh:mm:ss')}">2014-07-13 15:15:50
+                            </td>
+                            <td>
+                                <a class="link-update" href="modifyvideo.html"
+                                   th:href="@{/backend/modifyVideo(id=${g.fileId})}">修改</a><br/>
+                                <a class="link-update" href="#" onclick="check_del(this)">删除</a>
+                                <a class="real-delete" href="#"
+                                   th:href="@{/backend/delVideo(id=${g.fileId},pageNo=${pageNo},keywords=${keywords})}"></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="list-page">
+                        <a href="#" th:href="@{/backend/loadVideo(pageNo=${pageNo}-1,keywords=${keywords})}">上一页</a>
+                        <a href="#" th:href="@{/backend/loadVideo(pageNo=${pageNo}+1,keywords=${keywords})}">下一页</a>
+                        <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
                     </div>
-                </form>
+                </div>
+            </form>
+
+
+
+
             </div>
         </div>
     </div>
     <!--/main-->
-</div>
+    </div>
 </body>
 </html>

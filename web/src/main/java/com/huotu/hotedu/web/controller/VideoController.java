@@ -1,7 +1,5 @@
 package com.huotu.hotedu.web.controller;
 
-import com.huotu.hotedu.entity.Login;
-import com.huotu.hotedu.entity.Manager;
 import com.huotu.hotedu.service.VideoService;
 import com.huotu.iqiyi.sdk.IqiyiVideoRepository;
 import com.huotu.iqiyi.sdk.model.Video;
@@ -10,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +42,7 @@ public class VideoController {
     public static final int PAGE_SIZE=10;//每张页面的记录数
     public static final int PAGE_SIZE_F = 9;
     //后台显示所有视频信息
-
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/loadVideo")
     public String searchVideo(@RequestParam(required = false)Integer pageNo,
                               @RequestParam(required = false) String keywords, Model model) throws IOException{
@@ -63,6 +60,9 @@ public class VideoController {
             }
             pages = iqiyiVideoRepository.find(new PageRequest(pageNo, PAGE_SIZE));
             totalRecords = pages.getTotalElements();
+        }
+        for(Video video:pages) {
+            video.setFileName(new String(video.getFileName().getBytes("GBK"),"UTF-8"));
         }
         model.addAttribute("AllVideoList", pages);
         model.addAttribute("totalPages",pages.getTotalPages());
@@ -122,7 +122,7 @@ public class VideoController {
         return "/backend/newvideo";
     }
 
-
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping(value = "/backend/addSaveVideo",method = RequestMethod.POST)
     public String addSaveVideo(String videoName,@RequestParam("videoFile") MultipartFile file,String tags,String description) throws IOException{
             iqiyiVideoRepository.upload(file.getInputStream(),file.getSize(),"mov",videoName,description,tags,null);
