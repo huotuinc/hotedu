@@ -1153,3 +1153,15 @@ button.btn, input.btn {
 	border: 1px solid #56abe4;
 }
 .spkj{width:380px; height:269px; background-color:#ddd; border:1px solid #4B4B4B; margin:10px}
+.ysspo{ color:#B6B6B6; font-size:14px; margin:5px;text-overflow:ellipsis;white-space:nowrap; overflow:hidden;display:inline-block; width:177px}
+.smallbox{background-color:#ddd;width:182px; padding-bottom:1px;float:left; margin-left:10px;margin-bottom: 11px;}
+.splb{width:180px; background-color:#fff; border:solid 1px #888; height:101px}
+.sptit{ font-size:14px; margin:5px}
+.bigboxo{ color:#B6B6B6; font-size:14px; margin:5px;  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  width:240px;}
+  .bigtit{ font-size:14px; margin:5px}
+  .biglb{width:380px; background-color:#fff; border:solid 1px #888; height:270px}
+  .ysbigbox{background-color:#ddd;width:382px; padding-bottom:5px}
