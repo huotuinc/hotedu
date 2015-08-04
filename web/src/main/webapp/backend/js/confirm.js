@@ -126,6 +126,13 @@ $(document).ready(function () {
 //$(h).parents().children().eq(3)[0]就是获取到了同td下的第三个孩子 .find()不能准确找到 .next()也选不中，这里用前台调试
 //.click() 就是点击当前链接的效果
 function check_del(h) {
+    $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
+          $(h).siblings(".real-delete")[0].click();
+          console.log($(h).siblings(".real-delete")[0]);
+    });
+}
+
+function delVideoByFileId(obj) {
     var fileIds = $(h).parent().children().eq(0).val();
     $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
         $.ajax({
@@ -145,6 +152,7 @@ function check_del(h) {
             }
         });
     });
+
 }
 
 function check_save(h) {
