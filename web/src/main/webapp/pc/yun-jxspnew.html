@@ -50,7 +50,7 @@
         <div>
             <div>
 
-                <ul style="float:left" th:remove="all-but-first">
+                <ul style="float:left;padding-left: 10px;" th:remove="all-but-first">
                     <li class="ysbigbox" th:each="g:${video1}">
                         <p class="biglb">
                             <a th:alt="${g.description}" th:href="${g.pageUrl}" target="_blank">
@@ -132,35 +132,7 @@
 
                         <p class="ysspo">极限挑战极限挑战极限挑战极限挑战</p>
                     </li>
-                </ul>
 
-                <ul style="float:left" th:remove="all-but-first">
-                    <li class="ysbigbox" th:each="g:${video2}">
-                        <p class="biglb">
-                            <a th:alt="${g.description}" th:href="${g.pageUrl}" target="_blank">
-                                <img th:alt="${g.description}" width="100%" height="100%" th:src="${g.img}"/>
-                            </a>
-                        </p>
-
-                        <p class="bigtit" th:text="${g.fileName}">极限挑战</p>
-
-                        <p class="bigboxo" th:text="${g.description}">极限挑战极限挑战极限挑战极限挑战</p>
-                    </li>
-                </ul>
-
-
-                <ul th:remove="all-but-first">
-                    <li class="smallbox" th:each="g:${videos2}">
-                        <p class="splb">
-                            <a th:alt="${g.description}" th:href="${g.pageUrl}" target="_blank">
-                                <img th:alt="${g.description}" width="100%" height="100%" th:src="${g.img}"/>
-                            </a>
-                        </p>
-
-                        <p class="sptit" th:text="${g.fileName}">极限挑战</p>
-
-                        <p class="ysspo" th:text="${g.description}">极限挑战极限挑战极限挑战极限挑战</p>
-                    </li>
                     <li class="smallbox">
                         <p class="splb"></p>
 
@@ -217,6 +189,7 @@
                         <p class="ysspo">极限挑战极限挑战极限挑战极限挑战</p>
                     </li>
                 </ul>
+
 
                 <p style="clear:both;"></p>
 

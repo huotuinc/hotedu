@@ -42,7 +42,7 @@ public class VideoController {
      * 用来储存分页中每页的记录数
      */
     public static final int PAGE_SIZE = 10;//每张页面的记录数
-    public static final int PAGE_SIZE_F = 18;
+    public static final int PAGE_SIZE_F = 21;
 
     //后台显示所有视频信息
     @PreAuthorize("hasRole('EDITOR')")
@@ -90,25 +90,17 @@ public class VideoController {
         }
         List<Video> video1 = new ArrayList<>();
         List<Video> videos1 = new ArrayList<>();
-        List<Video> video2 = new ArrayList<>();
-        List<Video> videos2 = new ArrayList<>();
         int sum = 0;
         for (Video video : pages) {
             if(sum==0) {
                 video1.add(video);
-            }else if (sum < 9) {
+            }else if (sum < 21) {
                 videos1.add(video);
-            } else if (sum==9) {
-                video2.add(video);
-            } else {
-                videos2.add(video);
             }
             sum++;
         }
         model.addAttribute("video1", video1);
         model.addAttribute("videos1", videos1);
-        model.addAttribute("video2", video2);
-        model.addAttribute("videos2", videos2);
         model.addAttribute("totalPages", pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("totalRecords", totalRecords);
