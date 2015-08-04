@@ -1,6 +1,9 @@
 package com.huotu.hotedu.test.web;
 import com.huotu.hotedu.WebTestBase;
-import com.huotu.hotedu.entity.*;
+import com.huotu.hotedu.entity.Editor;
+import com.huotu.hotedu.entity.Manager;
+import com.huotu.hotedu.entity.Member;
+import com.huotu.hotedu.entity.MessageContent;
 import com.huotu.hotedu.repository.MessageContentRepository;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.web.controller.MessageContentController;
@@ -9,7 +12,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,12 +21,10 @@ import org.springframework.util.StreamUtils;
 import java.io.ByteArrayOutputStream;
 import java.util.*;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.fileUpload;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 
 /**
  * Created by shiliting on 2015/7/29.
@@ -384,7 +384,7 @@ public class MessageContentControllerTest extends WebTestBase {
     }
     @Test
     @Rollback
-    @Ignore
+//    @Ignore
     public void modifySaveMessageContent()throws Exception{
         //准备测试环境
         Random random = new Random();
@@ -444,7 +444,7 @@ public class MessageContentControllerTest extends WebTestBase {
 
     @Test
     @Rollback
-    @Ignore
+//    @Ignore
     public void addSaveMessageContent()throws Exception{
         //准备测试环境
         Random random = new Random();
@@ -517,6 +517,17 @@ public class MessageContentControllerTest extends WebTestBase {
         Assert.assertEquals("添加资讯动态之后是否能找到该记录且只有一条",1,n);
 
 
+    }
+    @Test
+    public void showView() throws Exception{
+        String password = UUID.randomUUID().toString();
+        String editorUsername = UUID.randomUUID().toString();
+        Editor editor = new Editor();
+        editor.setLoginName(editorUsername);
+        loginService.newLogin(editor, password);
+        mockMvc.perform(get("/backend/searchMessageContent")
+                        .session(loginAs(editorUsername, password))
+        ).andExpect(status().isOk()).andDo(print());
     }
 
 

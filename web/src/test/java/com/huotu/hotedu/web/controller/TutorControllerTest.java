@@ -57,7 +57,7 @@ public class TutorControllerTest extends SpringWebTest{
     }
 
     @Test
-    @Rollback
+//    @Rollback
     public void newTutorCheck() throws Exception{
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         StreamUtils.copy(getClass().getResourceAsStream("testUpload.jpg"), buffer);

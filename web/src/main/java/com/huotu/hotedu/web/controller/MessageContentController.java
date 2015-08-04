@@ -111,11 +111,11 @@ public class MessageContentController {
      * @return      modifyMessageContent.html
      */
     @PreAuthorize("hasRole('EDITOR')")
-    @RequestMapping("/backend/modify/messageContent")
+    @RequestMapping("/backend/modifyMessageContent")
     public String ModifyMessageContent(Long id, Model model){
         MessageContent messageContent=messageContentService.findOneById(id);
         model.addAttribute("messageContent",messageContent);
-        return "/backend/newMessageContent";
+        return "/backend/modifymessagecontent";
     }
 
     /**
@@ -162,12 +162,9 @@ public class MessageContentController {
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveMessageContent")
     public String modifySaveMessageContent(Long id,String title,String content,Boolean top,@RequestParam("smallimg") MultipartFile file) throws Exception{
-        try {
             //文件格式判断
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
-            System.out.println("文件大小：" + file.getSize());
             if(file.getSize()==0){throw new Exception("文件为空！");}
-            if(file.getSize()>1024*1024*5){throw new Exception("文件太大");}
 
             //保存图片
             String fileName = StaticResourceService.MESSAGECONTENT_ICON + UUID.randomUUID().toString() + ".png";
@@ -179,9 +176,5 @@ public class MessageContentController {
             messageContent.setLastUploadDate(new Date());
             messageContentService.modify(messageContent);
             return "redirect:/backend/searchMessageContent";
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "redirect:/backend/error";
     }
 }
