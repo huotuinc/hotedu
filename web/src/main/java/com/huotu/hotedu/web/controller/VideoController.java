@@ -1,5 +1,6 @@
 package com.huotu.hotedu.web.controller;
 
+import com.huotu.hotedu.entity.Result;
 import com.huotu.hotedu.service.VideoService;
 import com.huotu.iqiyi.sdk.IqiyiVideoRepository;
 import com.huotu.iqiyi.sdk.model.Video;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -39,23 +41,23 @@ public class VideoController {
     /**
      * 用来储存分页中每页的记录数
      */
-    public static final int PAGE_SIZE=10;//每张页面的记录数
-    public static final int PAGE_SIZE_F = 9;
+    public static final int PAGE_SIZE = 10;//每张页面的记录数
+    public static final int PAGE_SIZE_F = 18;
+
     //后台显示所有视频信息
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/loadVideo")
-    public String searchVideo(@RequestParam(required = false)Integer pageNo,
-                              @RequestParam(required = false) String keywords, Model model) throws IOException{
+    public String searchVideo(@RequestParam(required = false) Integer pageNo,Model model) throws IOException {
         String turnPage = "/backend/video";
-        if(pageNo==null||pageNo<0){
-            pageNo=0;
+        if (pageNo == null || pageNo < 0) {
+            pageNo = 0;
         }
         Page<Video> pages = iqiyiVideoRepository.find(new PageRequest(pageNo, PAGE_SIZE));
         long totalRecords = pages.getTotalElements();
-        int numEl =  pages.getNumberOfElements();
-        if(numEl==0) {
-            pageNo=pages.getTotalPages()-1;
-            if(pageNo<0) {
+        int numEl = pages.getNumberOfElements();
+        if (numEl == 0) {
+            pageNo = pages.getTotalPages() - 1;
+            if (pageNo < 0) {
                 pageNo = 0;
             }
             pages = iqiyiVideoRepository.find(new PageRequest(pageNo, PAGE_SIZE));
@@ -63,48 +65,51 @@ public class VideoController {
         }
 
         model.addAttribute("AllVideoList", pages);
-        model.addAttribute("totalPages",pages.getTotalPages());
+        model.addAttribute("totalPages", pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
-        model.addAttribute("keywords", keywords);
         model.addAttribute("totalRecords", totalRecords);
         return turnPage;
     }
 
     @RequestMapping("/pc/loadVideo")
-    public String loadVideo(@RequestParam(required = false)Integer pageNo, Model model) throws IOException{
-        String turnPage = "/pc/yun-jxsp";
-        if(pageNo==null||pageNo<0){
-            pageNo=0;
+    public String loadVideo(@RequestParam(required = false) Integer pageNo, Model model) throws IOException {
+        String turnPage = "/pc/yun-jxspnew";
+        if (pageNo == null || pageNo < 0) {
+            pageNo = 0;
         }
         Page<Video> pages = iqiyiVideoRepository.find(new PageRequest(pageNo, PAGE_SIZE_F));
         long totalRecords = pages.getTotalElements();
-        int numEl =  pages.getNumberOfElements();
-        if(numEl==0) {
-            pageNo=pages.getTotalPages()-1;
-            if(pageNo<0) {
+        int numEl = pages.getNumberOfElements();
+        if (numEl == 0) {
+            pageNo = pages.getTotalPages() - 1;
+            if (pageNo < 0) {
                 pageNo = 0;
             }
             pages = iqiyiVideoRepository.find(new PageRequest(pageNo, PAGE_SIZE_F));
             totalRecords = pages.getTotalElements();
         }
+        List<Video> video1 = new ArrayList<>();
         List<Video> videos1 = new ArrayList<>();
+        List<Video> video2 = new ArrayList<>();
         List<Video> videos2 = new ArrayList<>();
-        List<Video> videos3 = new ArrayList<>();
         int sum = 0;
-        for(Video video:pages) {
-            if(sum<3) {
+        for (Video video : pages) {
+            if(sum==0) {
+                video1.add(video);
+            }else if (sum < 9) {
                 videos1.add(video);
-            }else if(sum<6) {
+            } else if (sum==9) {
+                video2.add(video);
+            } else {
                 videos2.add(video);
-            }else {
-                videos3.add(video);
             }
             sum++;
         }
+        model.addAttribute("video1", video1);
         model.addAttribute("videos1", videos1);
+        model.addAttribute("video2", video2);
         model.addAttribute("videos2", videos2);
-        model.addAttribute("videos3", videos3);
-        model.addAttribute("totalPages",pages.getTotalPages());
+        model.addAttribute("totalPages", pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("totalRecords", totalRecords);
         return turnPage;
@@ -118,15 +123,26 @@ public class VideoController {
     }
 
     @PreAuthorize("hasRole('EDITOR')")
-    @RequestMapping(value = "/backend/addSaveVideo",method = RequestMethod.POST)
-    public String addSaveVideo(String videoName,@RequestParam("videoFile") MultipartFile file,String tags,String description) throws IOException{
-            iqiyiVideoRepository.upload(file.getInputStream(),file.getSize(),"mov",videoName,description,tags,null);
-            return "redirect:/backend/loadVideo";
+    @RequestMapping(value = "/backend/addSaveVideo", method = RequestMethod.POST)
+    public String addSaveVideo(String videoName, @RequestParam("videoFile") MultipartFile file, String tags, String description) throws IOException {
+        iqiyiVideoRepository.upload(file.getInputStream(), file.getSize(), "mov", videoName, description, tags, null);
+        return "redirect:/backend/loadVideo";
     }
 
-
-
-}
+    /**
+     * 删除视频
+     * @param fileIds
+     * @return
+     */
+    @RequestMapping("/backend/delVideo")
+    @ResponseBody
+    public Result delVideo(String fileIds) throws IOException {
+        Result result = new Result();
+        iqiyiVideoRepository.deleteVideo(1,fileIds);
+        result.setStatus(1);
+        result.setMessage("删除成功");
+        return result;
+    }
 
 //    /**
 //     * 搜索符合条件的视频信息
@@ -171,32 +187,6 @@ public class VideoController {
 //        return "/backend/video";
 //    }
 //
-//    /**
-//     * 删除视频信息
-//     * @param n             显示第几页
-//     * @param totalPages    分页总页数
-//     * @param keywords      检索关键字(使用检索功能后有效)
-//     * @param id            需要被删除的记录id
-//     * @param totalRecords  总记录数
-//     * @param model         返回客户端集合
-//     * @return      video.html
-//     */
-//    @RequestMapping("/backend/delVideo")
-//    public String delVideo(int n,int totalPages,String keywords,Long id,Long totalRecords,Model model){
-//        videoService.delVideo(id);
-//        if((totalRecords-1)%PAGE_SIZE==0){
-//            if(n>0&&n+1==totalPages){n--;}
-//            totalPages--;
-//        }
-//        totalRecords--;
-//        Page<Video> pages = videoService.searchVideo(n, PAGE_SIZE, keywords);
-//        model.addAttribute("totalPages",totalPages);
-//        model.addAttribute("videoList",pages);
-//        model.addAttribute("n",n);
-//        model.addAttribute("keywords",keywords);
-//        model.addAttribute("totalRecords",totalRecords);
-//        return "/backend/video";
-//    }
 //
 //    /**
 //     * video.html页面单击新建跳转
@@ -257,5 +247,5 @@ public class VideoController {
 //        videoService.modifyVideo(video);
 //        return "redirect:/backend/loadVideo";
 //    }
-
+}
 

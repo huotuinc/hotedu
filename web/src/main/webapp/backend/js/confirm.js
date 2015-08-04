@@ -126,14 +126,24 @@ $(document).ready(function () {
 //$(h).parents().children().eq(3)[0]就是获取到了同td下的第三个孩子 .find()不能准确找到 .next()也选不中，这里用前台调试
 //.click() 就是点击当前链接的效果
 function check_del(h) {
+    var fileIds = $(h).parent().children().eq(0).val();
     $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
-       // console.log($(h).parents().children().find(".real-delete")[0]);
-      //  $(h).parents().children().find(".real-delete")[0].click();
-       // alert("删除前");
-        //$(h).parents().children().eq(3)[0].click();
-        $(h).siblings(".real-delete")[0].click();
-        console.log($(h).siblings(".real-delete")[0]);
-       // alert("删除后");
+        $.ajax({
+            url:"delVideo",
+            type:"post",
+            data:{"fileIds":fileIds},
+            dataType:"json",
+            success:function(result){
+                if(result.status==1){
+                    $.MsgBox.Alert("提示信息","删除成功");
+                }else {
+                    $.MsgBox.Alert("错误信息","网络异常，删除失败");
+                }
+            },
+            error:function(){
+                alert("系统异常,删除失败");
+            }
+        });
     });
 }
 
