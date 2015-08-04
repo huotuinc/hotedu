@@ -309,3 +309,22 @@ function btn_modifyClassTeamInfo(h) {
     });
 }
 
+function btn_examRePass() {
+    $.MsgBox.Confirm("温馨提示", "确认要让该学员通过考试吗？", function () {
+        var memberId = $("#examPassInput").val().trim();
+        $.ajax({
+            url:"setExamPass",
+            type:"post",
+            data:{"id":memberId},
+            dataType:"json",
+            success:function(result){
+                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){
+                    history.go(0);  });
+            },
+            error:function(){
+                alert("操作失败");
+            }
+        });
+    });
+}
+

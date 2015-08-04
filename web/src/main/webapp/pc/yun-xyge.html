@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/indexnew.css"/>
     <script type="text/javascript" src="js/jquery1.42.min.js"></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+    <script type="text/javascript" src="js/confirm.js"></script>
 </head>
 
 <body style=" background-color:#f0f0f0; background:url(images/banner2.jpg) no-repeat; background-size:cover;">
@@ -83,8 +84,6 @@
                     </div>
                 </form>
                 <p style="height:30px"></p>
-
-                <form action="#" th:action="@{/pc/passExam(id=${mb.id})}" method="post" id="myform" name="myform">
                     <div class="config-items">
                         <div class="result-content">
                             <table width="100%" class="insert-tab">
@@ -94,6 +93,7 @@
                                     <td th:text="${!mb.payed}?'暂无':${#dates.format(mb.payDate, 'yyyy-MM-dd hh:ss:mm')}">
                                         2015.04.01
                                     </td>
+                                    <td style="display: none"><input id="examPassInput" type="text" title="" th:value="${mb.id}" /></td>
                                 </tr>
                                 <tr>
                                     <th>确认人：</th>
@@ -124,12 +124,12 @@
                             <p style="height:20px"></p>
 
                             <div class="ysright">
-                                <input th:if="${mb.passed==2}" type="submit" value="补考通过" class="btni btn-primaryi btn6 mr10"/>
+                                <a style="display: none;" id="bmxx_href" href="#" th:href="@{/pc/searchMembers}"></a>
+                                <input th:if="${mb.passed==2}" type="button" onclick="btn_examRePass()" value="补考通过" class="btni btn-primaryi btn6 mr10"/>
                             </div>
                             <p style="height:40px"></p>
                         </div>
                     </div>
-                </form>
             </div>
         </div>
     </div>
@@ -140,15 +140,12 @@
 
 <div class="footer">
     <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
-
     <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
 </div>
 <div>
     <div id="asaimsg" class="AsaiDivShow">
-        <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
-                                                             onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
+        <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
             <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
-
         <div class="sign-in">
             <div class="user-form">
                 <form accept-charset="UTF-8" action="" class="sign-in__form user-form__form" method="post">
