@@ -1,0 +1,172 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>云商学院后台管理</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
+    <script type="text/javascript" src="js/libs/jquery.min.js" th:src="@{/backend/js/libs/jquery.min.js}"></script>
+    <script type="text/javascript" src="js/libs/modernizr.min.js"
+            th:src="@{/backend/js/libs/modernizr.min.js}"></script>
+    <!--警告框控件-->
+    <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
+    <script type="text/javascript" src="js/confirm.js" th:src="@{/backend/js/confirm.js}"></script>
+    <!--滚动条-->
+    <script type="text/javascript" src="js/scroll/scroll_height_width.js" th:src="@{/backend/js/scroll/scroll_height_width.js}"></script>
+    <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
+    <script type="text/javascript" src="js/scroll/jquery.mousewheel.js"
+            th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
+    <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js"
+            th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
+    <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
+            th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
+    <script type="text/javascript">
+        $(function(){
+           $(":input[name='smallimg']").change(function(){
+
+           });
+        });
+    </script>
+</head>
+<body>
+<div class="topbar-wrap white">
+    <div class="topbar-inner clearfix">
+        <div class="topbar-logo-wrap clearfix">
+            <h1 class="topbar-logo none"><a href="index.html" class="navbar-brand">云商学院后台管理</a></h1>
+            <ul class="navbar-list clearfix">
+                <li><a href="index.html" th:href="@{/backend/index}">首页</a></li>
+                <li><a class="on" href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a></li>
+                <li><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a>
+                </li>
+            </ul>
+        </div>
+        <div class="top-info-wrap">
+            <ul class="top-info-list clearfix">
+                <li><span th:text="${#authentication.name}"></span></li>
+                <li><a href="changethepassword.html" th:href="@{/backend/loadChangeThePassword}">修改密码</a></li>
+                <li><a href="#" th:href="@{/logout}">退出</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container clearfix">
+    <div class="sidebar-wrap">
+        <div class="sidebar-title">
+            <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}"
+                 style=" width:160px;margin-left: -10px;"/>
+        </div>
+        <div class="sidebar-content">
+            <div class="jp-container">
+                <ul class="sidebar-list">
+                    <li><p style="height:30px; line-height:30px; margin-left: 20px;">企业信息</p>
+                        <ul class="sub-menu">
+                            <li><a href="wanted.html" th:href="@{/backend/loadWanted}">招聘信息</a></li>
+                            <li><a href="enterprises.html" th:href=" @{/backend/loadEnterprises}">发布企业</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p style="height:30px; line-height:30px; margin-left: 20px;">banner图</p>
+                        <ul class="sub-menu">
+                            <li><a href="banners.html" th:href="@{/backend/loadBanners}">banner图</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p style="height:30px; line-height:30px; margin-left: 20px;">考试指南</p>
+                        <ul class="sub-menu" style="display:block;">
+                            <li><a href="examguide.html" th:href="@{/backend/searchExamGuide}">考试指南</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p style="height:30px; line-height:30px; margin-left: 20px;">友情链接</p>
+                        <ul class="sub-menu">
+                            <li><a href="link.html" th:href="@{/backend/searchLink}">友情链接</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p style="height:30px; line-height:30px; margin-left: 20px;">常见问题</p>
+                        <ul class="sub-menu">
+                            <li><a href="qa.html" th:href="@{/backend/searchQa}">常见问题</a></li>
+                        </ul>
+                    </li>
+                    <li><p style="height:30px; line-height:30px; margin-left: 20px;">资讯动态</p>
+                        <ul class="sub-menu">
+                            <li class="on"><a href="MessageContent.html" th:href="@{/backend/searchMessageContent}">资讯动态</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <p style="height:30px; line-height:30px; margin-left: 20px;">公司简介</p>
+                        <ul class="sub-menu">
+                            <li><a href="editenterprise.html" th:href="@{/backend/loadEditenterprise}">公司简介编辑</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <p style="height:30px; line-height:30px; margin-left: 20px;">视频</p>
+                        <ul class="sub-menu">
+                            <li><a href="video.html" th:href="@{/backend/loadVideo}">教学视频</a></li>
+                            <li><a href="http://www.baidu.com" target="_blank">精彩录制</a></li>
+                            <li><a href="http://www.baidu.com" target="_blank">经验分享</a></li>
+                            <li><a href="http://www.baidu.com" target="_blank">其他视频</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p style="height:30px; line-height:30px; margin-left: 20px;">师资力量</p>
+                        <ul class="sub-menu">
+                            <li><a href="tutor.html" th:href="@{/backend/loadTutor}">师资力量</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--/sidebar-->
+    <div class="main-wrap">
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span
+                    class="crumb-step">&gt;</span><a href="MessageContent.html" th:href="@{/backend/loadMessageContent}"><span class="crumb-name">资讯指南</span></a><span
+                    class="crumb-step">&gt;</span><span class="crumb-name">新建</span></div>
+        </div>
+        <div class="jp-container2">
+        <div class="result-wrap">
+            <form action="#" th:action="@{/backend/addSaveMessageContent}" method="post" class="myform" name="myform" enctype="multipart/form-data">
+                <div class="config-items">
+                    <div class="result-content">
+                        <table width="100%" class="insert-tab">
+                            <tbody>
+                            <tr>
+                                <th><i class="require-red">*</i>上传图片：</th>
+                                <td><img id="img_photo" src="images/logo.png" style="width: 100px; height: auto;"/><input name="smallimg" type="file"/></td>
+                            </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>标题：</th>
+                                <td><input title="" type="text" id="" value="" size="70" name="title" class="common-text"/></td>
+                            </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>描述：</th>
+                                <td><textarea title="" name="content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
+                            </tr>
+                            <tr>
+                                <th>置顶</th>
+                                <td><input title="" type="radio" checked="checked" name="top" value="1"/>&nbsp;是&nbsp;&nbsp;
+                                    <input title="" type="radio" name="top" value="0"/>&nbsp;否&nbsp;&nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td><input type="button" value="保存" class="btn btn-primary btn6 mr10" onclick="check_save(this)"/>
+                                    <input type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    <!--/main-->
+</div>
+</body>
+</html>
