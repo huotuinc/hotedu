@@ -54,6 +54,8 @@ $(function() {
 			success:function(result){
 				if(result.status==0){
 					alert(result.message);
+					$("#noClassMemberArrageClassDiv").hide();
+					$("#noClassMemberArrageNewClassDiv").show();
 				}else if(result.status==1){
 					$("#noClassMemberArrageClassDiv").hide();
 					$("#existClassDiv").show();

@@ -927,7 +927,7 @@
 </div>
 <!--安排班级弹窗end-->
 
-<!--新建班级-->
+<!--新建班级弹窗-->
 <div id="noClassMemberArrageNewClassDiv" style="display:none" class="ystc">
     <div class="box-ys">
         <form action="#" id="noClassMemberArrageNewClassDivForm" method="post" th:action="@{/pc/isClassNameExist}">
@@ -936,14 +936,15 @@
             <span style="display: none;"><input title="" type="text" value="" name="noClassMemberArrayLis" th:value="${noClassMemberArrayLis}" id="noClassMemberArrayLis" /></span>
             <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="className" id="className" placeholder="班级名称" type="text"/></p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="check_arrageNewClass()">保存</button></p>
+            <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="goBackToArrangeClassFromNewClass()">返回</button></p>
             <span id="addNewClassTeamSuccess" style="color:blue;"/>
             <span id="addNewClassTeamError" style="color:red;"/>
         </form>
     </div>
 </div>
-<!--新建班级end-->
+<!--新建班级弹窗end-->
 
-<!--选择已有班级-->
+<!--选择已有班级弹窗-->
 <div id="existClassDiv" style="display:none" class="ystc">
     <div class="box-ys">
         <form action="#" id="existClassDivForm" method="post" th:action="@{/pc/addSaveOldClassTeam}">
@@ -956,11 +957,12 @@
                 </select>
             </p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="check_arrageExistClass()">保存</button></p>
+            <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="goBackToArrangeClassFromExistClass()">返回</button></p>
             <span id="errInfo_existClass" style="color:red;text-align: center;"/>
         </form>
     </div>
 </div>
-<!--选择已有班级end-->
+<!--选择已有班级弹窗end-->
 
 <!--安排考场弹窗-->
 <div id="classArrageExamDiv" style="display:none;" class="ystc">
@@ -989,6 +991,7 @@
             <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="examDate" id="examDate" placeholder="考试时间" type="text" readonly="readonly"/></p>
             <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="examAddress" id="examAddress" placeholder="考试地点" type="text"/></p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="check_arrageNewExam()">保存</button></p>
+            <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="goBackToArrangeExamFromNewExam()">返回</button></p>
             <span id="addNewExamSuccess" style="color:blue;"/>
             <span id="addNewExamError" style="color:red;"/>
         </form>
@@ -1008,6 +1011,7 @@
                 </select>
             </p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="check_arrageExistExam()">保存</button></p>
+            <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="goBackToArrangeExamFromExistExam()">返回</button></p>
             <span id="errInfo_existExam" style="color:red;text-align: center;"/>
         </form>
     </div>
@@ -1047,6 +1051,24 @@
     </div>
 </div>
 <!--新增学员end-->
+<script type="text/javascript">
+    function goBackToArrangeClassFromNewClass() {
+        $("#noClassMemberArrageClassDiv").show();
+        $("#noClassMemberArrageNewClassDiv").hide();
+    }
+    function goBackToArrangeClassFromExistClass() {
+        $("#noClassMemberArrageClassDiv").show();
+        $("#existClassDiv").hide();
+    }
+    function goBackToArrangeExamFromNewExam() {
+        $("#classArrageExamDiv").show();
+        $("#classArrageNewExamDiv").hide();
+    }
+    function goBackToArrangeExamFromExistExam() {
+        $("#classArrageExamDiv").show();
+        $("#classArrageExistExamDiv").hide();
+    }
+</script>
 </body>
 <script type="text/javascript">
     jQuery(".fullSlide").slide({
@@ -1059,4 +1081,5 @@
     });
 </script>
 </html>
+
 
