@@ -163,7 +163,7 @@ public class AgentController {
      * @return 新建班级页面
      */
     @RequestMapping("/pc/addSaveExistClassTeam")
-    public String addSaveOldClassTeam(String className, String noClassMemberArrayLis, Model model) {
+    public String addSaveExistClassTeam(String className, String noClassMemberArrayLis, Model model) {
         String errInfo = "";
         String msgInfo = "";
         String turnPage = "redirect:/pc/loadClassMembers";

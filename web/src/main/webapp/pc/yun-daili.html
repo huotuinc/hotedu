@@ -95,7 +95,7 @@
 
     <div class="ysthree">
         <!--报名信息-->
-        <div style="display:none;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
+        <div style="display:block;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
             <div style=" float: right; margin-right: 14px;margin-bottom: 6px;margin-top:5px; width:1000px;" class="search-content">
                 <form action="#" id="searchMemberInfo" th:action="@{/pc/searchMembers}" method="post">
                     <p style="height:5px;"></p>
@@ -276,7 +276,7 @@
         <!--消息通知end-->
 
         <!--班级管理 未分班 安排班级 start-->
-        <div id="noClassMemberDiv" style="display:none;" th:style="${navigation}=='bjgl'? 'display:block;':'display:none;'" class="ysthree">
+        <div id="noClassMemberDiv" style="display:block;" th:style="${navigation}=='bjgl'? 'display:block;':'display:none;'" class="ysthree">
             <div class="main-wrapi">
                 <div style="margin-right: 14px;margin-bottom: 6px;" class="search-content">
                     <div style=" text-align:center;display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex;" class="ystwo">
@@ -297,7 +297,7 @@
                         <tr>
                                 <th width="10"></th>
                                 <td><input title="" id="noClassCheckAll" type="checkbox" value="checkbox"/></td>
-                                <td><input  class="ysss" name="apbj" value="安排班级" type="button" onclick="noClassMemberArrageClass()"/></td>
+                                <td><button class="ysss si" name="apbj" value="安排班级" type="button" onclick="noClassMemberArrageClass()"><span style="color:white">安排班级</span></button></td>
                             </tr>
                         </table>
                         <script>
@@ -475,7 +475,7 @@
                             <tr>
                                 <th width="10"></th>
                                 <td><input title="" id="classExamCheckAll" type="checkbox" value="checkbox"/></td>
-                                <td><input title="" class="ysss" name="sub" value="安排考试时间" type="button" onclick="classArrageExam()"/></td>
+                                <td><button class="ysss si" name="sub" value="安排考试时间" type="button" onclick="classArrageExam()"><span style="color:white">安排考试时间</span></button></td>
                             </tr>
                         </table>
                         <script>

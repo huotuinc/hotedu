@@ -6,7 +6,7 @@ $(function(){
     var contentHeight2 = height - (115);
     var contentWidth = width-(200);
     var contentHeight3 = height - (90);
-    console.log(contentHeight3);
+    //console.log(contentHeight3);
     $(".sidebar-wrap").css("height",contentHeight);
     $(".jp-container").css("max-height",contentHeight2);
     $(".main-wrap").css("height",contentHeight);
@@ -21,7 +21,7 @@ $(window).resize(function () {
     var contentHeight2 = height - (115);
     var contentWidth = width-(200);
     var contentHeight3 = height - (90);
-    console.log(contentHeight3);
+    //console.log(contentHeight3);
     $(".sidebar-wrap").css("height",contentHeight);
     $(".jp-container").css("max-height",contentHeight2);
     $(".main-wrap").css("height",contentHeight);

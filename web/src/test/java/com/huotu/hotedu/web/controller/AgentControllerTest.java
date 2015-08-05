@@ -1,6 +1,7 @@
 package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.ClassTeam;
+import com.huotu.hotedu.entity.Agent;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.test.TestWebConfig;
 import libspringtest.SpringWebTest;
@@ -55,15 +56,15 @@ public class AgentControllerTest extends SpringWebTest{
      */
     @Test
     @Rollback
-    public void addSaveNewClassTeam() throws Exception {
+    public void addSaveNewClassTeamTest() throws Exception {
         ArrayList<Long> arrayList = new ArrayList<>();
         arrayList.add((long)1);
         arrayList.add((long)2);
         MyJsonUtil myJsonUtil = new MyJsonUtil();
         String stringArrayList = myJsonUtil.convertObjectToJsonBytes(arrayList);
         mockMvc.perform(
-                post("pc/addSaveNewClassTeam")
-                        .param("className", "1234")
+                post("/pc/addSaveNewClassTeam")
+                        .param("className", "测试1234")
                         .param("arrayList", stringArrayList)
         ).andDo(print());
     }
@@ -74,21 +75,38 @@ public class AgentControllerTest extends SpringWebTest{
      */
     @Test
     @Rollback
-    public void addSaveOldClassTeam() throws Exception {
+    public void addSaveExistClassTeamTest() throws Exception {
         ArrayList<Long> arrayList = new ArrayList<>();
         arrayList.add((long)1);
         arrayList.add((long)2);
         ClassTeam classTeam = new ClassTeam();
-        classTeam.setClassName("nihao");;
+        classTeam.setClassName("测试nihao");
         ClassTeam ct = agentService.addClassTeam(classTeam);
         MyJsonUtil myJsonUtil = new MyJsonUtil();
         String stringArrayList = myJsonUtil.convertObjectToJsonBytes(arrayList);
         mockMvc.perform(
-                post("pc/addSaveOldClassTeam")
+                post("/pc/addSaveExistClassTeam")
                         .param("classId", ct.getId().toString())
                         .param("arrayList", stringArrayList)
         ).andDo(print());
     }
 
-
+    /**
+     * 1.测试新增学员
+     */
+    @Test
+    @Rollback
+    public void agentTest() throws Exception{
+        Agent agen = new Agent();
+        agen.setName("测试agent");
+        agen.setArea("杭州");
+        Agent agent = agentService.addAgent(agen);
+        mockMvc.perform(
+                post("/pc/addMembers")
+//                .param("agent",agent)
+                .param("realName", "测试测试名字")
+                .param("sex", "0")
+                .param("phoneNo", "18011122233")
+        ).andDo(print());
+    }
 }
