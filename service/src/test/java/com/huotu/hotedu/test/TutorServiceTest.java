@@ -42,7 +42,7 @@ public class TutorServiceTest {
     @Test
     @Rollback
     public void searchTutorTypeTest(){
-        Page<Tutor> pages=tutorService.searchTutorType(0, 10, "", "name");
+        Page<Tutor> pages=tutorService.searchTutorType(0, 10,null,null,"","name");
         for(Tutor t:pages){
             System.out.println(t);
         }

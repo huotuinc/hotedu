@@ -1,8 +1,13 @@
 //文本有效性验证
-$(function(){
+function checkText(text){
+    if(text==""){
 
+        return false;
+    }else if(text.length>255){
 
-})
+    }
+
+}
 
 
  
