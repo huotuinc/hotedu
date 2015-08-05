@@ -30,7 +30,6 @@ public class WebTestBase extends SpringWebTest{
                 .andReturn().getRequest().getSession(true);
         session = (MockHttpSession) this.mockMvc.perform(post(SecurityConfig.pcLoginURI).session(session)
                 .param("username", userName).param("password", password))
-//                .andDo(print())
                 .andReturn().getRequest().getSession();
 
         saveAuthedSession(session);

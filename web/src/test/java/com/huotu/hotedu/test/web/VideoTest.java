@@ -6,7 +6,6 @@ import com.huotu.hotedu.service.LoginService;
 import com.huotu.iqiyi.sdk.IqiyiVideoRepository;
 import com.huotu.iqiyi.sdk.model.Video;
 import com.huotu.iqiyi.sdk.model.VideoForPlay;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StreamUtils;
@@ -61,10 +60,10 @@ public class VideoTest extends WebTestBase {
 
 
     @Test
-    @Ignore
+//    @Ignore
     public void add() throws Exception {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        StreamUtils.copy(getClass().getResourceAsStream("XX.jpg"), buffer);
+        StreamUtils.copy(getClass().getResourceAsStream("testUpload.jpg"), buffer);
         String password = UUID.randomUUID().toString();
         String editorUsername = UUID.randomUUID().toString();
         Editor editor = new Editor();

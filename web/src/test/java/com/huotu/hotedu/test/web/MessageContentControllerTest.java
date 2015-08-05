@@ -412,6 +412,8 @@ public class MessageContentControllerTest extends WebTestBase {
         messageContent.setTop(false);
         messageContent.setLastUploadDate(new Date());
         MessageContent messageContentOld=messageContentRepository.save(messageContent);
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        StreamUtils.copy(getClass().getResourceAsStream("testUpload.jpg"), buffer);
         //准备测试环境END
 
         mockMvc.perform(
@@ -424,12 +426,14 @@ public class MessageContentControllerTest extends WebTestBase {
 //        )
 //                .andExpect(status().isFound());
         mockMvc.perform(
-                get("/backend/modifySaveMessageContent")
+                fileUpload("/backend/modifySaveMessageContent")
+                        .file("smallimg", buffer.toByteArray())
                         .session(loginAs(editorUsername, password))
                         .param("id", messageContentOld.getId() + "")
                         .param("title","测试2")
                         .param("content","内容测试2")
                         .param("top","1")
+
         )
                 .andExpect(status().isFound())
                 .andExpect(redirectedUrl("/backend/searchMessageContent"));
@@ -467,6 +471,8 @@ public class MessageContentControllerTest extends WebTestBase {
         loginService.newLogin(editor, password);
         loginService.newLogin(manager, password);
         String messageContentTitle = UUID.randomUUID().toString();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        StreamUtils.copy(getClass().getResourceAsStream("testUpload.jpg"), buffer);
         //准备测试环境END
 
         mockMvc.perform(
@@ -496,7 +502,8 @@ public class MessageContentControllerTest extends WebTestBase {
         }
         Assert.assertTrue("添加资讯动态的时候已经有被添加的数据",flag);
         mockMvc.perform(
-                post("/backend/addSaveMessageContent")
+                fileUpload("/backend/addSaveMessageContent")
+                        .file("smallimg", buffer.toByteArray())
                         .session(loginAs(editorUsername, password))
                         .param("title",messageContentTitle)
                         .param("content","内容测试1")

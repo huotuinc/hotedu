@@ -12,6 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -51,6 +52,8 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private MemberRepository memberRepository;
+    @Autowired
+    private Environment environment;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -61,7 +64,6 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 Manager manager = new Manager();
                 manager.setLoginName("admin");
                 loginService.newLogin(manager,"admin");
-                System.out.println("测试用户以添加！");
             }
         }
 
@@ -74,6 +76,10 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                         "火图科技经过2014年的创新及努力，成功的打造了“伙伴+”移动电商服务平台。伙伴+为品牌企业提供“移动商城搭建服务”，“大数据挖掘分析服务”，“精准广告投放服务”，“企业内容分发服务”。以此帮助企业快速、低成本的拥有移动电商能力。\n" +
                         "2015年1月28日，CEO杨震昊携其团队荣获“新商业合伙人峰会优秀项目奖");
                 huotuRepository.save(huotu);
+            }
+
+            if (environment.acceptsProfiles("test")){
+
             }
             // 做一些初始化工作 比如
             /*if (examGuideRepository.count()==0){
