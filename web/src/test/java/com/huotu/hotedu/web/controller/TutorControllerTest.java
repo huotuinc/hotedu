@@ -5,7 +5,6 @@ import com.huotu.hotedu.entity.Editor;
 import com.huotu.hotedu.repository.TutorRepository;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.test.TestWebConfig;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.util.StreamUtils;
 
 import java.io.ByteArrayOutputStream;
-import java.util.Random;
 import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -90,17 +88,14 @@ public class TutorControllerTest extends WebTestBase {
 
 
     @Test
-    @Ignore
+//    @Ignore
     public  void errorTest() throws Exception{
-        Random random=new Random();
         String editName= UUID.randomUUID().toString();
         String passWord=UUID.randomUUID().toString();
         Editor editor=new Editor();
         editor.setLoginName(editName);
         loginService.newLogin(editor,passWord);
-
         mockMvc.perform(
-
                 get("/backend/errorTest")
                 .session(loginAs(editName,passWord))
 

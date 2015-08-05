@@ -17,11 +17,11 @@ public class ErrorController {
      */
     @RequestMapping("/error")
     public String loadBannersController() {
-        return "/pc/yun-404.html";
+        return "/pc/yun-404";
     }
 
     @RequestMapping("/backend/errorTest")
-    public String errorTest() throws Exception{
+    public String errorTest()throws Exception{
         throw new  Exception("测试错误！");
     }
 }

@@ -3,22 +3,22 @@
 <head>
     <meta charset="utf-8"/>
     <title>考证报名</title>
-    <link rel="stylesheet" type="text/css" href="css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="css/index.css"/>
-    <link rel="stylesheet" type="text/css" href="css/indexnew.css"/>
-    <link rel="stylesheet" type="text/css" href="css/main.css"/>
-    <script type="text/javascript" src="js/jquery1.42.min.js"></script>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/pc/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/pc/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css" th:href="@{/pc/css/indexnew.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/pc/css/main.css}"/>
+    <script type="text/javascript" src="js/jquery1.42.min.js" th:href="@{/pc/js/jquery1.42.min.js}"></script>
+    <script type="text/javascript" src="js/jquery.min.js" th:href="@{/pc/js/jquery.min.js}"></script>
+    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" th:href="@{/pc/js/jquery.SuperSlide.2.1.1.js}"></script>
 </head>
 <body style="background-color:#f0f0f0">
 <div style="min-height:834px">
     <div style=" background-color:#fff;">
-        <div style=" background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" class="logoimg"/>
+        <div style=" background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" th:src="@{/pc/images/logo.png}" class="logoimg"/>
             <ul class="navi">
                 <li><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>
                 <li><a href="javascript:void(0)">公司简介</a></li>
-                <li class="active"><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
+                <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
                 <li><a href="javascript:void(0)">师资力量</a></li>
                 <li><a href="javascript:void(0)"  th:href="@{/pc/loadVideo}">教学视频</a></li>
                 <li><a href="javascript:void(0)">考试指南</a></li>
@@ -32,12 +32,12 @@
 
         <div class="bd">
             <ul style="position: relative; width: 1903px; height: 648px;">
-                <li style="position: absolute; width: 1903px; left: 0px; top: 0px; display: list-item; opacity: 0.975664; background:url(images/404.png) 50% 0px no-repeat;"></li>
+                <li th:style="'position: absolute; width: 1903px; left: 0px; top: 0px; display: list-item; opacity: 0.975664; background:url(pc/images/404.png) 50% 0px no-repeat;'" style="position: absolute; width: 1903px; left: 0px; top: 0px; display: list-item; opacity: 0.975664; background:url(images/404.png) 50% 0px no-repeat;"></li>
             </ul>
         </div>
     </div>
 </a>
- 
+
 </div>
 <p style="clear:both"></p>
 
