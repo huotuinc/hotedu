@@ -41,7 +41,7 @@ public class VideoController {
     /**
      * 用来储存分页中每页的记录数
      */
-    public static final int PAGE_SIZE = 10;//每张页面的记录数
+    public static final int PAGE_SIZE = 5;//每张页面的记录数
     public static final int PAGE_SIZE_F = 21;
 
     //后台显示所有视频信息
