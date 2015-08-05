@@ -16,7 +16,7 @@ import java.net.URISyntaxException;
  * @author CJ
  */
 @Service
-@Profile("!prod")
+@Profile("!container")
 public class LocalStaticResourceService extends AbstractStaticResourceService{
 
     private static final Log log = LogFactory.getLog(LocalStaticResourceService.class);
