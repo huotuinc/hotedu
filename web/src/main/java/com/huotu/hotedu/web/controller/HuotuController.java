@@ -3,6 +3,7 @@ package com.huotu.hotedu.web.controller;
 import com.huotu.hotedu.entity.Huotu;
 import com.huotu.hotedu.service.HuotuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ public class HuotuController {
      * @param model 返回客户端集
      * @return  editenterprise.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/loadEditenterprise")
     public String loadHuotu(Model model){
         List<Huotu> list=huotuService.findHuotu();
@@ -46,6 +48,7 @@ public class HuotuController {
      * @param model 返回客户端集
      * @return  重定向到：/backend/loadEditenterprise
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/saveEditenterprise")
     //TODO 方法名应该以小写开头 by CJ(已经解决)
     public String saveHuotu(String title,String introduction,Model model){

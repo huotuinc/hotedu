@@ -19,4 +19,9 @@ public class ErrorController {
     public String loadBannersController() {
         return "/pc/yun-404.html";
     }
+
+    @RequestMapping("/backend/errorTest")
+    public String errorTest() throws Exception{
+        throw new  Exception("测试错误！");
+    }
 }

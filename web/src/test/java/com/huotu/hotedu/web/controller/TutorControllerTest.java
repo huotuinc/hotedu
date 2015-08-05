@@ -1,10 +1,14 @@
 package com.huotu.hotedu.web.controller;
 
+import com.huotu.hotedu.WebTestBase;
+import com.huotu.hotedu.entity.Editor;
+import com.huotu.hotedu.repository.TutorRepository;
+import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.test.TestWebConfig;
-import libspringtest.SpringWebTest;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.mock.web.MockHttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -13,10 +17,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.util.StreamUtils;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Random;
+import java.util.UUID;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.fileUpload;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 /**
@@ -26,20 +30,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestWebConfig.class)
 @WebAppConfiguration
-public class TutorControllerTest extends SpringWebTest{
-
-    protected MockHttpSession loginAs(String userName, String password) throws Exception {
-        MockHttpSession session = (MockHttpSession) this.mockMvc.perform(get("/"))
-                .andReturn().getRequest().getSession(true);
-        session = (MockHttpSession) this.mockMvc.perform(post("/login").session(session)
-                .param("username", userName).param("password", password))
-                .andDo(print())
-                .andReturn().getRequest().getSession();
-
-        saveAuthedSession(session);
-        return session;
-    }
-
+public class TutorControllerTest extends WebTestBase {
+    @Autowired
+    LoginService loginService;
+    @Autowired
+    TutorRepository tutorRepository;
     /**
      * 搜索特定日期之间的数据
      * @throws Exception
@@ -91,5 +86,24 @@ public class TutorControllerTest extends SpringWebTest{
         mockMvc.perform(
                 get("/backend/searchTutor?searchSort='all'&keywords=''&dateStart=''&dateEnd=''")
         );
+    }
+
+
+    @Test
+    @Ignore
+    public  void errorTest() throws Exception{
+        Random random=new Random();
+        String editName= UUID.randomUUID().toString();
+        String passWord=UUID.randomUUID().toString();
+        Editor editor=new Editor();
+        editor.setLoginName(editName);
+        loginService.newLogin(editor,passWord);
+
+        mockMvc.perform(
+
+                get("/backend/errorTest")
+                .session(loginAs(editName,passWord))
+
+        ).andDo(print());
     }
 }

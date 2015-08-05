@@ -4,6 +4,7 @@ import com.huotu.hotedu.entity.Qa;
 import com.huotu.hotedu.service.QaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,22 +31,7 @@ public class QaController {
      */
     public static final int PAGE_SIZE=10;
 
-//    /**
-//     * 显示常见问题信息
-//     * @param model 返回客户端集
-//     * @return  qa.html
-//     */
-//    @RequestMapping("/backend/searchQa")
-//    public String searchQa(Model model){
-//        Page<Qa> pages=qaService.searchQa(0,PAGE_SIZE);
-//        long sumElement=pages.getTotalElements();
-//        model.addAttribute("allQaList",pages);
-//        model.addAttribute("sumpage",sumElement/pages.getSize()+(sumElement%pages.getSize()>0? 1:0));
-//        model.addAttribute("n",0);
-//        model.addAttribute("keywords","");
-//        model.addAttribute("sumElement",sumElement);
-//        return "/backend/qa";
-//    }
+
 
     /**
      * 搜索符合条件的常见问题信息
@@ -53,6 +39,7 @@ public class QaController {
      * @param model     返回客户端参数集
      * @return      qa.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/searchQa")
     public String searchQa(@RequestParam(required = false)Integer pageNo,
                            @RequestParam(required = false) String keywords, Model model) {
@@ -79,30 +66,7 @@ public class QaController {
         return turnPage;
     }
 
-//    /**
-//     * 分页显示
-//     * @param n             显示第几页
-//     * @param sumpage    分页总页数
-//     * @param keywords      检索关键字(使用检索功能后有效)
-//     * @param model         返回客户端集合
-//     * @return          qa.html
-//     */
-//    @RequestMapping("/backend/pageQa")
-//    public String pageQa(int n,int sumpage,String keywords,Model model){
-//        //如果已经到分页的第一页了，将页数设置为0
-//        if (n < 0){
-//            n = 0;
-//        }else if(n  > sumpage - 1){//如果超过分页的最后一页了，将页数设置为最后一页
-//            n = sumpage - 1;
-//        }
-//        Page<Qa> pages = qaService.searchQa(n, PAGE_SIZE, keywords);
-//        model.addAttribute("allQaList",pages);
-//        model.addAttribute("sumpage",sumpage);
-//        model.addAttribute("n",n);
-//        model.addAttribute("keywords",keywords);
-//        model.addAttribute("sumElement",pages.getTotalElements());
-//        return "/backend/qa";
-//    }
+
 
     /**
      * 删除视频信息
@@ -111,6 +75,7 @@ public class QaController {
      * @param model         返回客户端集合
      * @return      video.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/delQa")
     public String delQa(@RequestParam(required = false)Integer pageNo,@RequestParam(required = false)String keywords, Long id, Model model) {
         String returnPage="redirect:/backend/searchQa";
@@ -124,8 +89,9 @@ public class QaController {
      * qa.html页面单击新建跳转
      * @return newqa.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/addQa")
-    public String addQa(Model model){
+    public String addQa(){
         return "/backend/newqa";
     }
 
@@ -135,6 +101,7 @@ public class QaController {
      * @param model     返回客户端集
      * @return      modifyqa.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifyQa")
     public String modifyQa(Long id, Model model){
         Qa qa=qaService.findOneById(id);
@@ -149,13 +116,14 @@ public class QaController {
      * @return      不出异常重定向：/backend/searchQa
      */
     //TODO 是否搞抛出异常
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/addSaveQa")
     public String addSaveQa(String title,String content,String top){
         Qa qa=new Qa();
         qa.setTitle(title);
         qa.setContent(content);
         qa.setLastUploadDate(new Date());
-        qa.setTop("1".equals(top)? true:false);
+        qa.setTop("1".equals(top));
         qaService.addQa(qa);
         return "redirect:/backend/searchQa";
     }
@@ -168,6 +136,7 @@ public class QaController {
      * @param top    是否置顶
      * @return      重定向到：/backend/searchQa
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveQa")
     public String modifySaveQa(Long id,String title,String content,Boolean top){
         Qa qa=qaService.findOneById(id);

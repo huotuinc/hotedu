@@ -4,6 +4,7 @@ import com.huotu.hotedu.entity.Link;
 import com.huotu.hotedu.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,7 @@ public class LinkController {
      * @param model     返回客户端参数集
      * @return      link.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/searchLink")
     public String searchLinkController(@RequestParam(required = false)Integer pageNo,
                                        @RequestParam(required = false) String keywords, Model model) {
@@ -71,8 +73,8 @@ public class LinkController {
      * @param model         返回客户端集合
      * @return      link.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/delLink")
-
     public String delLink(@RequestParam(required = false)Integer pageNo,@RequestParam(required = false)String keywords, Long id, Model model) {
         String returnPage="redirect:/backend/searchLink";
         linkService.delLink(id);
@@ -85,6 +87,7 @@ public class LinkController {
      * link.html页面单击新建跳转
      * @return newlink.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/addLink")
     public String AddLink(){
         return "/backend/newlink";
@@ -96,6 +99,7 @@ public class LinkController {
      * @param model     返回客户端集
      * @return      modifylink.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifyLink")
     public String ModifyLink(Long id, Model model){
         Link link=linkService.findOneById(id);
@@ -110,6 +114,7 @@ public class LinkController {
      * @return      不出异常重定向：/backend/searchLink
      */
     //TODO 是否搞抛出异常
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/addSaveLink")
     public String AddSaveLink(String title,String url){
         Link link=new Link();
@@ -127,6 +132,7 @@ public class LinkController {
      * @param url     url
      * @return      重定向到：/backend/searchLink
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveLink")
     public String ModifySaveLink(Long id,String title,String url){
         Link link=linkService.findOneById(id);

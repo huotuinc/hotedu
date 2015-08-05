@@ -6,6 +6,7 @@ import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,35 +47,6 @@ public class TutorController {
      */
     public static final int PAGE_SIZE=10;
 
-//    /**
-//     * 接收显示多条师资力量的请求，加载tutor页面
-//     * 根据分页控制显示企业信息的条数，
-//     * 请求完成之后model层会添加
-//     * 1.多条师资力量信息的集合
-//     * 2.分页的总页数
-//     * 3.默认检索时使用的关键字(默认为空)
-//     * 4.默认显示第几页(默认为0：第一页)
-//     * 5.默认起始时间(以时间检索的时候有效)
-//     * 6.默认结束时间(以时间检索的时候有效)
-//     * 7.默认的检索类型
-//     * 8.企业的总记录数
-//     * @param model 准备向客户端发送的参数集合
-//     * @return tutor.html
-//     */
-//    @RequestMapping("/backend/loadTutor")
-//    public String loadTutor(Model model){
-//        Page<Tutor> pages=tutorService.loadTutor(0, PAGE_SIZE);
-//        long sumElement=pages.getTotalElements();
-//        model.addAttribute("allTutorList",pages);
-//        model.addAttribute("sumpage",sumElement/pages.getSize()+(sumElement%pages.getSize()>0? 1:0));
-//        model.addAttribute("n",0);
-//        model.addAttribute("keywords","");
-//        model.addAttribute("dateStart","");
-//        model.addAttribute("dateEnd","");
-//        model.addAttribute("searchSort","all");
-//        model.addAttribute("sumElement", sumElement);
-//        return "/backend/tutor";
-//    }
 
     /**
      *
@@ -86,6 +58,7 @@ public class TutorController {
      * @return           tutor.html
      * @throws Exception
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/searchTutor")
     public String searchTutor(@RequestParam(required = false,value = "searchSort")String searchSort,
                               @RequestParam(required = false)Integer pageNo,
@@ -117,79 +90,9 @@ public class TutorController {
         model.addAttribute("dateStart",dateStart==null?"":format1.format(dateStart));
         model.addAttribute("dateEnd",dateEnd==null?"":format1.format(dateEnd));
         model.addAttribute("searchSort",searchSort);
-
-
         return turnPage;
     }
-//
-//        Page<Tutor> pages=null;
-//        if("date".equals(searchSort)){
-//            pages=tutorService.searchTutorDate(0,PAGE_SIZE,dateStart,dateEnd);
-//        }else if("all".equals(searchSort)){
-//            pages=tutorService.searchTutorAll(0,PAGE_SIZE,keywords);
-//        }else{
-//            pages=tutorService.searchTutorType(0,PAGE_SIZE,keywords,searchSort);
-//
-//        }
-//        if(pages==null){
-//            throw new Exception("没有数据！");
-//        }
-//        long sumElement=pages.getTotalElements();
-//        model.addAttribute("allTutorList",pages);
-//        model.addAttribute("sumpage",sumElement/pages.getSize()+1);
-//        model.addAttribute("n",0);
-//        model.addAttribute("keywords",keywords);
-//
-//        model.addAttribute("dateStart",dateStart==null?"":format1.format(dateStart));
-//        model.addAttribute("dateEnd",dateEnd==null?"":format1.format(dateEnd));
-//        model.addAttribute("searchSort",searchSort);
-//        model.addAttribute("sumElement",sumElement);
-//        return "/backend/tutor";
 
-
-//    /**
-//     * 师资力量接收一个分页请求，返回一个分页之后的HTML页面
-//     * @param n             显示第几页
-//     * @param sumpage       分页总页数
-//     * @param searchSort    检索类型(使用检索功能后有效)
-//     * @param keywords      检索关键字(使用检索功能后有效)
-//     * @param dateStart     检索起始时间(使用检索功能后有效)
-//     * @param dateEnd       检索结束时间(使用检索功能后有效)
-//     * @param model         准备向客户端发送的参数集合
-//     * @return              tutor.html
-//     * @throws Exception
-//     */
-//    @RequestMapping("/backend/pageTutor")
-//    public String pageTutor(int n,int sumpage,@RequestParam("searchSort")String searchSort,String keywords,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateStart,@DateTimeFormat(pattern = "yyyy.MM.dd")Date dateEnd,Model model) throws Exception{
-//        //如果已经到分页的第一页了，将页数设置为0
-//        if (n < 0){
-//            n++;
-//        }else if(n + 1 > sumpage){//如果超过分页的最后一页了，将页数设置为最后一页
-//            n--;
-//        }
-//        DateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
-//        Page<Tutor> pages=null;
-//        if("date".equals(searchSort)){
-//            pages=tutorService.searchTutorDate(n,PAGE_SIZE,dateStart,dateEnd);
-//
-//        }else if("all".equals(searchSort)){
-//            pages=tutorService.searchTutorAll(n,PAGE_SIZE,keywords);
-//        }else{
-//            pages=tutorService.searchTutorType(n,PAGE_SIZE,keywords,searchSort);
-//        }
-//        if(pages==null){
-//            throw new Exception("没有数据！");
-//        }
-//        model.addAttribute("allTutorList",pages);
-//        model.addAttribute("sumpage",sumpage);
-//        model.addAttribute("n",n);
-//        model.addAttribute("keywords",keywords);
-//        model.addAttribute("searchSort",searchSort);
-//        model.addAttribute("dateStart",dateStart==null?"":format1.format(dateStart));
-//        model.addAttribute("dateEnd",dateEnd==null?"":format1.format(dateEnd));
-//        model.addAttribute("sumElement",pages.getTotalElements());
-//        return "/backend/tutor";
-//    }
 
     /**
      * 师资力量删除请求
@@ -202,6 +105,7 @@ public class TutorController {
      * @param model         准备向客户端发送的参数集合
      * @return              tutor.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/delTutor")
     public String delTutor(
                            @RequestParam(required = false)Integer pageNo,
@@ -220,41 +124,13 @@ public class TutorController {
         model.addAttribute("dateEnd",dateEnd==null?"":format1.format(dateEnd));
         model.addAttribute("searchSort",searchSort);
         return returnPage;
-
-        //如果删除一条记录后总记录数为10的倍数，则修改总页数
-//        if((sumElement-1)%PAGE_SIZE==0){
-//            if(n>0&&n+1==sumpage){n--;}
-//            sumpage--;
-//        }
-//        sumElement--;
-//
-//        Page<Tutor> pages=null;
-//        DateFormat format1 = new SimpleDateFormat("yyyy.MM.dd");
-//
-//        if("date".equals(searchSort)){
-//                pages=tutorService.searchTutorDate(n,PAGE_SIZE,dateStart,dateEnd);
-//        }else if("all".equals(searchSort)){
-//            pages=tutorService.searchTutorAll(n,PAGE_SIZE,keywords);
-//
-//        }else{
-//            pages=tutorService.searchTutorType(n,PAGE_SIZE,keywords,searchSort);
-//
-//        }
-//        model.addAttribute("sumpage",sumpage);
-//        model.addAttribute("allTutorList",pages);
-//        model.addAttribute("n",n);
-//        model.addAttribute("keywords",keywords);
-//        model.addAttribute("searchSort",searchSort);
-//        model.addAttribute("dateStart",dateStart==null?"":format1.format(dateStart));
-//        model.addAttribute("dateEnd",dateEnd==null?"":format1.format(dateEnd));
-//        model.addAttribute("sumElement",sumElement);
-//        return "/backend/tutor";
     }
 
     /**
      * 师资力量新建
      * @return newtutor.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/addTutor")
     public String addTutor(){
         return "/backend/newtutor";
@@ -267,6 +143,7 @@ public class TutorController {
      * @param request   网页请求
      * @return          modifytutor.html
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifyTutor")
     public String modifyTutor(Long id, Model model,HttpServletRequest request){
         Tutor tutor=tutorService.findOneById(id);
@@ -286,6 +163,7 @@ public class TutorController {
      * @return                  不出异常重定向：/backend/loadTutor 抛出异常重定向：/backend/error
      * @throws Exception
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping(value = "/backend/addSaveTutor",method = RequestMethod.POST)
     public String addSaveTutor(String name,String introduction,String qualification,String area,@RequestParam("smallimg") MultipartFile file) throws Exception{
             //文件格式判断
@@ -319,6 +197,7 @@ public class TutorController {
      * @return                  重定向到：/backend/loadTutor
      * @throws Exception
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveTutor")
     public String ModifySaveTutor(Long id,String name,String introduction,String qualification,String area,@RequestParam("smallimg") MultipartFile file) throws Exception{
 

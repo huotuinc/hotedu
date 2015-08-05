@@ -273,6 +273,7 @@ public class MemberController {
      * @param model 返回值
      * @return      查看学员个人详细信息页面
      */
+    @PreAuthorize("hasRole('AGENT')")
     @RequestMapping("/pc/detailMember")
     public String detailMember(Long id,Model model)
     {
@@ -298,6 +299,7 @@ public class MemberController {
      * @param model 返回值
      * @return
      */
+    @PreAuthorize("hasRole('AGENT')")
     @RequestMapping("/pc/checkPay")
     public String checkPay(Long id,Model model)
     {
@@ -324,6 +326,7 @@ public class MemberController {
      * @param model          返回客户端集合
      * @return
      */
+    @PreAuthorize("hasRole('AGENT')")
     @RequestMapping("/pc/checkPayList")
     @ResponseBody
     public Result checkPayList(String checkPayLis,Model model){
