@@ -166,3 +166,28 @@ function check_save(h) {
 function check_add() {
     $.MsgBox.Alert("消息", "添加成功！");
 }
+
+
+//TODO ajax不能异步上传文件，这个功能未实现
+function btn_addVideo(){
+    $.MsgBox.Confirm("温馨提示", "确认要上传该视频吗？", function () {
+        var videoName = $("#videoName").val().trim();
+        var videoFile = $("#videoFile");
+        var description = $("#description").val().trim();
+        var tags = $("#tags").val().trim();
+        $.ajax({
+            url:"addSaveVideo",
+            type:"post",
+            data:{"videoName":videoName,"videoFile":videoFile,"description":description,"tags":tags},
+            dataType:"json",
+            success:function(result){
+                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){
+                    $("#video_href").click();
+                });
+            },
+            error:function(){
+                alert("上传失败");
+            }
+        });
+    });
+}

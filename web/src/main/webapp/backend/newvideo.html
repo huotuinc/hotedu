@@ -8,6 +8,9 @@
     <script type="text/javascript" src="js/libs/jquery.min.js" th:src="@{/backend/js/libs/jquery.min.js}"></script>
     <script type="text/javascript" src="js/libs/modernizr.min.js"
             th:src="@{/backend/js/libs/modernizr.min.js}"></script>
+    <!--警告框控件-->
+    <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
+    <script type="text/javascript" src="js/confirm.js" th:src="@{/backend/js/confirm.js}"></script>
     <!--滚动条-->
     <script type="text/javascript" src="js/scroll/scroll_height_width.js" th:src="@{/backend/js/scroll/scroll_height_width.js}"></script>
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
@@ -114,9 +117,8 @@
     <!--/sidebar-->
     <div class="main-wrap">
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html"
-                                                                 th:href="@{/backend/loadWanted}">网站维护</a><span
-                    class="crumb-step">&gt;</span><a href="video.html" th:href="@{/backend/loadVideo}"><span class="crumb-name">教学视频</span></a><span
+            <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span
+                    class="crumb-step">&gt;</span><a href="video.html" id="video_href" th:href="@{/backend/loadVideo}"><span class="crumb-name">教学视频</span></a><span
                     class="crumb-step">&gt;</span><span class="crumb-name">新增视频</span></div>
         </div>
         <div class="jp-container2">
@@ -152,8 +154,9 @@
                             </tr>
                             <tr>
                                 <th></th>
-                                <td><input type="submit" value="提交" class="btn btn-primary btn6 mr10"/><input
-                                        type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
+                                <td><input type="submit" value="提交" class="btn btn-primary btn6 mr10"/>
+                                    <!--<input type="button" value="提交" onclick="btn_addVideo()" class="btn btn-primary btn6 mr10"/>-->
+                                    <input type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
                             </tr>
                             </tbody>
                         </table>
