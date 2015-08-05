@@ -172,21 +172,23 @@ function check_add() {
 function btn_addVideo(){
     $.MsgBox.Confirm("温馨提示", "确认要上传该视频吗？", function () {
         var videoName = $("#videoName").val().trim();
-        var videoFile = $("#videoFile");
-        var description = $("#description").val().trim();
+        var description = $("#description").val();
         var tags = $("#tags").val().trim();
-        $.ajax({
+        $.ajaxFileUpload({
             url:"addSaveVideo",
+            secureuri: false,//安全协议
+            fileElementId: 'videoFile',
             type:"post",
-            data:{"videoName":videoName,"videoFile":videoFile,"description":description,"tags":tags},
-            dataType:"json",
+            data:{"videoName":videoName,"description":description,"tags":tags},
+            dataType:"JSON",
             success:function(result){
+                alert("上传成功AJAX");
                 $.MsgBox.AjaxAlert("温馨提示",result.message,function(){
                     $("#video_href").click();
                 });
             },
             error:function(){
-                alert("上传失败");
+                alert("上传失败AJAX");
             }
         });
     });
