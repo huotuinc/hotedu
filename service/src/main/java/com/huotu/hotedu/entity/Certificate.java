@@ -8,6 +8,7 @@ import javax.persistence.*;
  */
 @Entity
 public class Certificate{
+
     private static final long serialVersionUID = -349012453592429794L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,6 +30,7 @@ public class Certificate{
      */
     @Column
     private String contactAddress;
+
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

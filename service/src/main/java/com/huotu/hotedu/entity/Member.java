@@ -62,9 +62,9 @@ public class Member extends Login {
      */
     private int passed=0;
     /**
-     * 是否申请领证
+     * 是否申请过领证
      */
-    private boolean haveLicense=false;
+    private boolean applyedCertificateOrNot =false;
 
     /**
      * 报名时间
@@ -82,6 +82,27 @@ public class Member extends Login {
      */
     @Temporal(TemporalType.TIMESTAMP)
     private Date registerDate;
+
+    /**
+     * 申请领证时间
+     * @return
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date applyCertificateDate;
+
+    /**
+     * 实际领证时间
+     * @return
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date receiveCertificateDate;
+
+    /**
+     * 电子证书
+     * @return
+     */
+    @OneToOne
+    private Certificate certificate;
 
     public int getSex() {
         return sex;
@@ -181,12 +202,12 @@ public class Member extends Login {
     }
 
 
-    public boolean isHaveLicense() {
-        return haveLicense;
+    public boolean isApplyedCertificateOrNot() {
+        return applyedCertificateOrNot;
     }
 
-    public void setHaveLicense(boolean haveLicense) {
-        this.haveLicense = haveLicense;
+    public void setApplyedCertificateOrNot(boolean applyedCertificateOrNot) {
+        this.applyedCertificateOrNot = applyedCertificateOrNot;
     }
 
 
@@ -200,5 +221,29 @@ public class Member extends Login {
         return Arrays.asList(
                 new SimpleGrantedAuthority("ROLE_MEMBER_CENTER")//进入学员个人中心的权限
         );
+    }
+
+    public Date getApplyCertificateDate() {
+        return applyCertificateDate;
+    }
+
+    public void setApplyCertificateDate(Date applyCertificateDate) {
+        this.applyCertificateDate = applyCertificateDate;
+    }
+
+    public Certificate getCertificate() {
+        return certificate;
+    }
+
+    public void setCertificate(Certificate certificate) {
+        this.certificate = certificate;
+    }
+
+    public Date getReceiveCertificateDate() {
+        return receiveCertificateDate;
+    }
+
+    public void setReceiveCertificateDate(Date receiveCertificateDate) {
+        this.receiveCertificateDate = receiveCertificateDate;
     }
 }
