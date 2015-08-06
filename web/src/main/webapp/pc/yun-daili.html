@@ -97,7 +97,7 @@
         <!--报名信息-->
         <div style="display:block;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
             <div style=" float: right; margin-right: 14px;margin-bottom: 6px;margin-top:5px; width:1000px;" class="search-content">
-                <form action="#" id="searchMemberInfo" th:action="@{/pc/searchMembers}" method="post">
+                <form action="#" id="searchMemberInfo" th:action="@{/pc/searchMembers}" method="get">
                     <p style="height:5px;"></p>
                     <table style="float: left;" class="search-tab">
                         <tr>
@@ -219,8 +219,8 @@
                                 <td th:text="${g.payed}?'是':'否'" title="">是</td>
                                 <td th:text="${#calendars.format(g.applyDate,'yyyy-MM-dd')}" title="">2015.04.01</td>
                                 <td th:text="${g.passed}==0?'':(${g.passed}==1?'通过考试':'未通过考试')" title="">--</td>
-                                <!--<td th:text="${g.certificateStatus}==1?'已领证':${g.certificateStatus}==2?'申请中':''" title="">&#45;&#45;</td>-->
-                                <td th:text="${g.certificateStatus}" title="">--</td>
+                                <td th:text="${g.certificateStatus}==1?'已领证':(${g.certificateStatus}==2?'申请中':'')" title="">--</td>
+                                <!--<td th:text="${g.certificateStatus}" title="">&#45;&#45;</td>-->
                                 <td th:text="${g.theClass}==null? '':${g.theClass.className}" title="">201504第一期</td>
                                 <td><a class="link-update" href="#"
                                        th:href="@{/pc/detailMember(id=${g.id})}">查看</a><br/>
