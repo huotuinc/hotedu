@@ -145,10 +145,11 @@ public class TutorController {
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifyTutor")
-    public String modifyTutor(Long id, Model model,HttpServletRequest request){
+    public String modifyTutor(Long id, Model model,HttpServletRequest request) throws Exception {
         Tutor tutor=tutorService.findOneById(id);
         //返回
-        tutor.setPictureUri(request.getContextPath() + "/uploadResources"+tutor.getPictureUri());
+//        tutor.setPictureUri(request.getContextPath()+tutor.getPictureUri());
+        tutor.setPictureUri(staticResourceService.getResource(tutor.getPictureUri()).toURL().toString());
         model.addAttribute("tutor",tutor);
         return "/backend/modifytutor";
     }
