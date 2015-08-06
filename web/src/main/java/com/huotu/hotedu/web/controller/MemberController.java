@@ -4,6 +4,7 @@ import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.service.MemberService;
+import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,9 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 
 /**
@@ -31,6 +35,8 @@ public class MemberController {
     private AgentService agentService;
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private StaticResourceService  staticResourceService;
     /**
      * 用来储存分页中每页的记录数
      */
@@ -339,5 +345,56 @@ public class MemberController {
         return result;
     }
 
+    /**
+     * Created by jiashubing on 2015/8.
+     * 申请领证
+     * @param user      当前的成员
+     * @param file      上传的图片
+     * @param receiveName       收件人
+     * @param receiveAddress    收件地址
+     * @param contactAddress    联系地址
+     * @param model     返回客户端集
+     * @return          成员详细信息
+     */
+    @RequestMapping("/pc/applyForCertificate")
+    public String applyForCertificate(@AuthenticationPrincipal Login user,@RequestParam("pictureImg") MultipartFile file,
+                                      String receiveName,String receiveAddress,String contactAddress,String phoneNo,Model model)throws Exception {
+
+        String errInfo = "";
+        String turnPage = "redirect:/pc/loadPersonalCenter";
+        if(user==null) {
+            throw new IllegalStateException("尚未登录");
+        }else if(user instanceof Member) {
+            Member mb = memberService.findOneByLoginName(user.getLoginName());
+            if(mb==null) {
+                errInfo = "加载信息失败";
+                turnPage = "/pc/yun-index";
+            }else {
+                //文件格式判断
+                if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+                if(file.getSize()==0){throw new Exception("文件为空！");}
+                //保存图片
+                String fileName = StaticResourceService.MESSAGECONTENT_ICON + UUID.randomUUID().toString() + ".png";
+                staticResourceService.uploadResource(fileName, file.getInputStream());
+
+                Certificate certificate = new Certificate();
+                certificate.setPictureUri(fileName);
+                certificate.setReceiveName(receiveName);
+                certificate.setReceiveAddress(receiveAddress);
+                certificate.setContactAddress(contactAddress);
+                certificate.setPhoneNo(phoneNo);
+                memberService.addCertificateToMember(mb,certificate);
+
+                model.addAttribute("mb",mb);
+            }
+        }else if(user instanceof Agent) {
+            return "redirect:/pc/searchMembers";
+        }else if(user instanceof Manager) {
+            return "redirect:/backend/index";
+
+        }
+        model.addAttribute("errInfo",errInfo);
+        return turnPage;
+    }
 
 }

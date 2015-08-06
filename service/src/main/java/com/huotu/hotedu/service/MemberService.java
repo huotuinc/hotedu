@@ -1,8 +1,10 @@
 package com.huotu.hotedu.service;
 
 import com.huotu.hotedu.entity.Agent;
+import com.huotu.hotedu.entity.Certificate;
 import com.huotu.hotedu.entity.ClassTeam;
 import com.huotu.hotedu.entity.Member;
+import com.huotu.hotedu.repository.CertificateRepository;
 import com.huotu.hotedu.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,8 @@ import java.util.Date;
 public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
+    @Autowired
+    private CertificateRepository certificateRepository;
 
 
     /**
@@ -157,6 +161,19 @@ public class MemberService {
     public Member findOneByLoginName(String loginName) {
         Member mb = memberRepository.findByLoginName(loginName);
         return mb;
+    }
+
+    /**
+     * Created by jiashubing on 2015/8/6.
+     * 会员添加证书信息
+     * @param mb        会员实体
+     * @param certificate    证书实体
+     * @return      会员实体
+     */
+    public Member addCertificateToMember(Member mb, Certificate certificate){
+        certificateRepository.save(certificate);
+        mb.setCertificate(certificate);
+        return memberRepository.save(mb);
     }
 
 

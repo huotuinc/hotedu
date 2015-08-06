@@ -366,3 +366,8 @@ $(function() {
     })
 });
 
+function btn_applyForCertificateSubmit(){
+    $.MsgBox.Confirm("温馨提示", "确认提交申请领证信息吗？", function () {
+        $("#applyForCertificateForm").submit();
+    });
+}

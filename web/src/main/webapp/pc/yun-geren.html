@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="css/common.css"/>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
     <link rel="stylesheet" type="text/css" href="css/indexnew.css"/>
-    <!--<script type="text/javascript" src="js/jquery1.42.min.js"></script>-->
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
     <script rel="stylesheet" type="text/javascript" src="js/indexuser.js"></script>
@@ -25,8 +24,7 @@
                 <li><a href="#" th:href="@{/pc/loadVideo}">教学视频</a></li>
                 <li><a href="#">考试指南</a></li>
                 <li><a href="#">招|应聘</a></li>
-                <li id="loginLi" style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)" th:text="${loginButton}"
-                                                                      onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
+                <li id="loginLi" style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)" th:text="${loginButton}" onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
                 </li>
                 <!--@thymesVar id="style" type="java.lang.String"-->
                 <li id="userLi" style="padding:0px;display: none" th:style="${style}">
@@ -54,7 +52,7 @@
                     <button class="ysan">我的电子证书</button>
                 </p>
                 <p style="font-size:14px">
-                    <button class="ysan">申请领证</button>
+                    <button class="ysan" onclick="$('#applyForCertificateDiv').show()">申请领证</button>
                 </p>
             </li>
         </ul>
@@ -132,48 +130,43 @@
 
 
 <!--申请领证弹窗-->
-<div style="display:block;" class="ystci">
+<div style="display:none;" class="ystci" id="applyForCertificateDiv">
     <div class="box-ysi">
-        <P align="right" style="margin:0px; padding:0px; float:right；"><a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
-            <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
-
-        <div class="ys761 ystx">
-
-            <form action="#" method="post" id="myform" name="myform">
+        <P style="text-align:right;"><a href="#" onclick="$('#applyForCertificateDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+        <div class="ys761 ystx" style="margin-top: 10px;">
+            <form action="#" th:action="@{/pc/applyForCertificate}" method="post" id="applyForCertificateForm" enctype="multipart/form-data">
                 <div class="config-items">
                     <div class="result-content">
                         <table width="100%" class="insert-tab">
                             <tbody>
                             <tr>
                                 <th><i class="require-red">*</i>上传一寸照：</th>
-                                <td><img src="images/toux.png" width="50px" height="auto"/>
-                                    <!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>-->
+                                <td>
+                                    <img id="img_photo" th:src="${mb.certificate}==null ? '' : ${mb.certificate.pictureUri}" src="images/toux.png" style="width: 50px; height: auto;"/>
+                                    <input name="pictureImg" type="file"/>
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>收件人：</th>
-                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" title=""
-                                            type="text" id="" value="" size="50" name="description"
-                                           class="common-text"/></td>
+                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="receiveName" name="receiveName" th:value="${mb.certificate}==null ? '' : ${mb.certificate.receiveName}" title="" type="text" value="" size="50" class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>收件地址：</th>
-                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" title=""
-                                            type="text" id="" value="" size="50" name="description"
-                                           class="common-text"/></td>
+                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="receiveAddress" name="receiveAddress" th:value="${mb.certificate}==null ? '' : ${mb.certificate.receiveAddress}" title="" type="text" value="" size="50" class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>联系地址：</th>
-                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" title=""
-                                            type="text" id="" value="" size="50" name="description"
-                                           class="common-text"/></td>
+                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="contactAddress" name="contactAddress" th:value="${mb.certificate}==null ? '' : ${mb.certificate.contactAddress}" title="" type="text" value="" size="50" class="common-text"/></td>
+                            </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>联系电话：</th>
+                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="phoneNo" name="phoneNo" th:value="${mb.certificate}==null ? '' : ${mb.certificate.phoneNo}" title="" type="text" value="" size="50" class="common-text"/></td>
                             </tr>
                             </tbody>
                         </table>
                         <p style="height:10px"></p>
-
                         <div style="float:right;">
-                            <input title="" type="submit" value="提交" class="btni btn-primaryi btn6 mr10"/>
+                            <button title="" type="button" class="btni btn-primaryi btn6 mr10" onclick="btn_applyForCertificateSubmit()">提交</button>
                         </div>
                     </div>
                 </div>

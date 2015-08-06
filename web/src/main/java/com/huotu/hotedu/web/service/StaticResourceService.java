@@ -38,6 +38,10 @@ public interface StaticResourceService {
      * 会员的头像
      */
     public  String MEMBER_ICON="/image/member/";
+    /**
+     * 证书所属人的照片
+     */
+    public  String CERTIFICATE_ICON="/image/certificate/";
 
     /**
      * 上传资源
