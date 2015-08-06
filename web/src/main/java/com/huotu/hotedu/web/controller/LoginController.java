@@ -54,13 +54,13 @@ public class LoginController {
 
     @RequestMapping("/pc/videoLoginIndex")
     public String videoLoginIndex() {
-        String turnPage = "pc/yun-jxsp";
+        String turnPage = "pc/yun-jxspnew";
         return turnPage;
     }
 
     @RequestMapping("/pc/loginSuccess")
     public String loginSuccess(@AuthenticationPrincipal Login user) {
-        String turnPage = "redirect:/pc/index";
+        String turnPage = "pc/yun-index";
         if(user instanceof Manager) {
             turnPage = "redirect:/backend/login";
         }else if(user instanceof Editor){

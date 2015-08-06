@@ -54,27 +54,6 @@ public class SecurityConfig {
         // Since we didn't specify an AuthenticationManager for this class,
         // the global instance is used
 
-        public void configure(WebSecurity web) throws Exception {
-            web
-//                    .debug(!env.acceptsProfiles("prod"))
-                    .ignoring()
-                    .antMatchers(
-                            "/backend/css/**",
-                            "/backend/images/**",
-                            "/backend/js/**",
-                            "/backend/fonts/**",
-                            "/backend/**.html",
-                            "/pc/css/**",
-                            "/pc/images/**",
-                            "/pc/fonts/**",
-                            "/pc/js/**",
-                            "/pc/**.html",
-                            "/pc/loadMemberRegister",
-                            "/pc/yun-baomin",
-                            "/pc/register",
-                            "/pc/loadVideo"
-                    );
-        }
         //设置拦截规则
         protected void configure(HttpSecurity http) throws Exception {
             http
@@ -95,7 +74,9 @@ public class SecurityConfig {
                             "/pc/loadMemberRegister",
                             "/pc/yun-baomin",
                             "/pc/register",
-                            "/pc/loadVideo"
+                            "/pc/loadVideo",
+                            "/pc/loadTutors",
+                            "/pc/loadCompanyIntroduction"
                     ).permitAll()   // 允许未登录用户访问静态资源
                     .anyRequest().authenticated()
                     .and()

@@ -7,36 +7,34 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
-    <script type="text/javascript" src="js/jquery1.7.2.min.js"></script>
-    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
-    <script rel="stylesheet" type="text/javascript" src="js/indexuser.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js" ></script>
+    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" ></script>
+    <script type="text/javascript" src="js/indexuser.js" ></script>
 </head>
 <body style=" background-color:#f0f0f0; background:url(images/banner2.jpg) no-repeat; background-size:cover;">
     <div style="min-height:834px">
-        <div style=" background-color:#fff;">
-            <div style=" background-color:#fff; font-size:14px;" class="header"> <img src="images/logo.png" class="logoimg" />
-                <ul class="navi">
-                    <li><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>
-                    <li><a href="javascript:void(0)">公司简介</a></li>
-                    <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
-                    <li><a href="javascript:void(0)">师资力量</a></li>
-                    <li><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
-                    <li class="active"><a href="yun-kaoshizn.html" th:href="@{/pc/loadExamGuide}">考试指南</a></li>
-                    <li><a href="javascript:void(0)">招|应聘</a></li>
-                    <li style="padding:0px 0px 0px 20px;display:none"><a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">登录</a>
-                    </li>
-                    <li id="userLi" style="padding:0px;">
-                        <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimgi" src="images/toux.png" width="100%"/></a><!--会员头像-->
-                        <p style="display: none" class="zhizheno"><img src="images/lodingj.png" width="18px" height="7px"/></p>
-
-                        <p style="display: none" class="lbpoo">
-                            <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
-                            <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
-                            <a href="#" onclick="showChangePwdForm()">修改密码</a>
-                            <a href="#" th:href="@{/logout}">退出</a></p>
-                    </li>
-                </ul>
-            </div>
+        <div style="background-color:#fff;" class="headeri"><img src="images/logo.png" class="logoimgi"/>
+            <ul class="navi">
+                <li><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>
+                <li><a href="javascript:void(0)" th:href="@{/pc/loadCompanyIntroduction}">公司简介</a></li>
+                <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
+                <li><a href="javascript:void(0)" th:href="@{/pc/loadTutors}">师资力量</a></li>
+                <li><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
+                <li class="active"><a href="yun-kaoshizn.html" th:href="@{/pc/loadExamGuide}">考试指南</a></li>
+                <li><a href="#">招|应聘</a></li>
+                <li id="loginLi" style="padding:0px 0px 0px 20px;" th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
+                    <a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
+                </li>
+                <li id="userLi" style="padding:0px;display:none" th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
+                    <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
+                    <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+                    <p style="display: none" class="lbpo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
+                        <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
+                        <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
+                        <a href="#" th:href="@{/logout}">退出</a>
+                    </p>
+                </li>
+            </ul>
         </div>
         <p style=" height:40px;"></p>
         <p style="clear:both"></p>
@@ -144,6 +142,7 @@
     </div>
 </body>
 </html>
+<!--
 <script type="text/javascript">
     jQuery(".fullSlide").slide({ titCell:".hd ul", mainCell:".bd ul", effect:"fold",  autoPlay:true, autoPage:true, trigger:"click" });
-</script>
+</script>-->

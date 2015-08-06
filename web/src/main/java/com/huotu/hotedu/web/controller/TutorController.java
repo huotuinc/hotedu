@@ -224,4 +224,10 @@ public class TutorController {
         return "redirect:/backend/searchTutor";
     }
 
+    @RequestMapping("/pc/loadTutors")
+    public String loadTutors() {
+        String turnPage = "pc/yun-shizi";
+        return turnPage;
+    }
+
 }

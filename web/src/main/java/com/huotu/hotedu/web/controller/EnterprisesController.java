@@ -1,11 +1,13 @@
 package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.Enterprise;
+import com.huotu.hotedu.entity.Login;
 import com.huotu.hotedu.service.EnterpriseService;
 import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -344,7 +346,11 @@ public class EnterprisesController {
         return "redirect:/backend/loadEnterprises";
     }
 
-
+    @RequestMapping("/pc/loadCompanyIntroduction")
+    public String loadCompanyIntroduction(@AuthenticationPrincipal Login login) {
+        String turnPage = "pc/yun-about";
+        return turnPage;
+    }
 
 
 }

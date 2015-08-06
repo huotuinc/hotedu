@@ -10,23 +10,32 @@
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+    <script rel="stylesheet" type="text/javascript" src="js/indexuser.js" ></script>
 </head>
 <body style="background-color:#f0f0f0">
 <div style="min-height:834px">
-    <div style=" background-color:#fff;">
-        <div style=" background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" class="logoimg"/>
-            <ul class="navi">
-                <li><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>
-                <li><a href="javascript:void(0)">公司简介</a></li>
-                <li class="active"><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
-                <li><a href="javascript:void(0)">师资力量</a></li>
-                <li><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
-                <li><a href="yun-kaoshizn.html" th:href="@{/pc/loadExamGuide}">考试指南</a></li>
-                <li><a href="javascript:void(0)">招|应聘</a></li>
-                <li><a href="javascript:void(0)" th:href="@{/pc/baominLogin}">登录</a>
-                </li>
-            </ul>
-        </div>
+    <div style="background-color:#fff;" class="headeri"><img src="images/logo.png" class="logoimgi"/>
+        <ul class="navi">
+            <li><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>
+            <li><a href="javascript:void(0)" th:href="@{/pc/loadCompanyIntroduction}">公司简介</a></li>
+            <li class="active"><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
+            <li><a href="javascript:void(0)" th:href="@{/pc/loadTutors}">师资力量</a></li>
+            <li><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
+            <li><a href="yun-kaoshizn.html" th:href="@{/pc/loadExamGuide}">考试指南</a></li>
+            <li><a href="#">招|应聘</a></li>
+            <li id="loginLi" style="padding:0px 0px 0px 20px;" th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
+                <a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
+            </li>
+            <li id="userLi" style="padding:0px;display:none" th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
+                <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
+                <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+                <p style="display: none" class="lbpo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
+                    <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
+                    <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
+                    <a href="#" th:href="@{/logout}">退出</a>
+                </p>
+            </li>
+        </ul>
     </div>
     <div class="fullSlidei">
 
@@ -84,7 +93,41 @@
 <p style="clear:both"></p>
 
 <p style=" height:60px"></p>
+<!--登录框-->
+<div id="asaimsg" class="AsaiDivShow" th:style="${loginForm}">
+    <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
+                                                         onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
+        <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
 
+    <div class="sign-in">
+        <div class="user-form">
+
+
+            <form accept-charset="UTF-8" action="yun-geren.html" th:action="@{/pc/index}"
+                  class="sign-in__form user-form__form" method="post">
+
+                <div class="user-form__fieldset">
+                    <label class="user-form__label" for="username" style="color:#111">用户名：</label>
+                    <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
+                           id="username" name="username" placeholder="ID" type="text"/>
+                </div>
+                <div class="user-form__fieldset">
+                    <label class="user-form__label" for="password" style="color:#111">密码：</label>
+                    <input class="sign-in__field user-form__field" id="password" name="password"
+                           placeholder="password" type="password"/>
+
+                </div>
+                <button class="sign-in__button user-form__button" name="button" type="submit">登录<i
+                        class="icon-arrow-right user-form__button-icon"></i></button>
+            </form>
+            <span style="color:red" th:text="${errInfo}"></span>
+
+
+        </div>
+    </div>
+</div>
+<div id="asaimsgbg" class="AsaiDivBG" th:style="${loginForm}"></div>
+<!--登录框end-->
 <div class="footer">
     <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
 
