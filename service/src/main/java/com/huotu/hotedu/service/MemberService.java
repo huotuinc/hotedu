@@ -178,18 +178,4 @@ public class MemberService {
         return mb;
     }
 
-    /**
-     * Created by jiashubing on 2015/8/6.
-     * 会员添加证书信息
-     * @param mb        会员实体
-     * @param certificate    证书实体
-     * @return      会员实体
-     */
-    public Member addCertificateToMember(Member mb, Certificate certificate){
-        certificateRepository.save(certificate);
-        mb.setCertificate(certificate);
-        return memberRepository.save(mb);
-    }
-
-
 }

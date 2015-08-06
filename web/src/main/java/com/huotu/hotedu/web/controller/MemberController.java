@@ -2,6 +2,7 @@ package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.service.AgentService;
+import com.huotu.hotedu.service.CertificateService;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.service.MemberService;
 import com.huotu.hotedu.web.service.StaticResourceService;
@@ -37,6 +38,9 @@ public class MemberController {
     private LoginService loginService;
     @Autowired
     private StaticResourceService  staticResourceService;
+    @Autowired
+    private CertificateService certificateService;
+
     /**
      * 用来储存分页中每页的记录数
      */
@@ -396,7 +400,8 @@ public class MemberController {
         if(user==null) {
             throw new IllegalStateException("尚未登录");
         }else if(user instanceof Member) {
-            Member mb = memberService.findOneByLoginName(user.getLoginName());
+//            Member mb = memberService.findOneByLoginName(user.getLoginName());
+            Member mb=(Member)user;
             if(mb==null) {
                 errInfo = "加载信息失败";
                 turnPage = "/pc/yun-index";
@@ -407,7 +412,6 @@ public class MemberController {
                 //保存图片
                 String fileName = StaticResourceService.MESSAGECONTENT_ICON + UUID.randomUUID().toString() + ".png";
                 staticResourceService.uploadResource(fileName, file.getInputStream());
-
                 mb.setApplyCertificateDate(new Date());
                 memberService.modifyMember(mb);
                 Certificate certificate = new Certificate();
@@ -416,8 +420,8 @@ public class MemberController {
                 certificate.setReceiveAddress(receiveAddress);
                 certificate.setContactAddress(contactAddress);
                 certificate.setPhoneNo(phoneNo);
-                memberService.addCertificateToMember(mb,certificate);
-
+                certificate.setMember(mb);
+                certificateService.addCertificate(certificate);
                 model.addAttribute("mb",mb);
             }
         }else if(user instanceof Agent) {
