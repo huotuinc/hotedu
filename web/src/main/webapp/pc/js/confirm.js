@@ -328,3 +328,41 @@ function btn_examRePass() {
     });
 }
 
+$(function() {
+    $("#submitNewPwdButton").click(function () {
+        var oldPwd = $("#oldPwd").val();
+        var newPwd = $("#newPwd").val();
+        var confirmPwd = $("#confirmPwd").val();
+        if(oldPwd==""){
+            $("#changePwdFailed").text("密码不能为空！");
+            return;
+        }
+        if(newPwd==""){
+            $("#changePwdFailed").text("密码不能为空！");
+            return;
+        }
+        if(newPwd!==confirmPwd){
+            $("#changePwdFailed").text("两次密码不同！");
+            return;
+        }
+        $.ajax({
+            url:"../backend/changePassword",
+            type:"post",
+            dataType:"json",
+            data:{"oldPd":oldPwd,"newPd":newPwd},
+            success:function(result){
+                if(result.status==0){
+                    $("#changePwdSuccess").text(result.message);
+                    $("#changePwdFailed").text("");
+                }else if(result.status==1){
+                    $("#changePwdFailed").text(result.message);
+                    $("#changePwdSuccess").text("");
+                }
+            },
+            error:function(){
+                alert("系统错误,修改密码失败！");
+            }
+        });
+    })
+});
+

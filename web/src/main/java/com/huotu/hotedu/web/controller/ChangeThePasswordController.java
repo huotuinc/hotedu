@@ -34,7 +34,6 @@ public class ChangeThePasswordController {
         return turnPage;
     }
 
-    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/changePassword")
     @ResponseBody
     public Result changePassword(@AuthenticationPrincipal Login user, CharSequence oldPd,String newPd){
@@ -45,8 +44,10 @@ public class ChangeThePasswordController {
             result.setMessage("密码修改成功！");
         }else{
             result.setStatus(1);
-            result.setMessage("密码错误！");
+            result.setMessage("原密码错误！");
         }
         return result;
     }
+
+
 }
