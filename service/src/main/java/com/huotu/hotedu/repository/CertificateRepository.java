@@ -1,6 +1,7 @@
 package com.huotu.hotedu.repository;
 
 import com.huotu.hotedu.entity.Certificate;
+import com.huotu.hotedu.entity.Member;
 import org.luffy.lib.libspring.data.ClassicsRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -13,5 +14,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CertificateRepository extends JpaRepository<Certificate,Long>,ClassicsRepository<Certificate>,JpaSpecificationExecutor<Certificate>{
-
+    Certificate findBymember(Member member);
 }

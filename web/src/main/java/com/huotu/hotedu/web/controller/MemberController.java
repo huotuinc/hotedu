@@ -415,7 +415,7 @@ public class MemberController {
                 staticResourceService.uploadResource(fileName, file.getInputStream());
                 //设置学员的申请领证时间
                 mb.setApplyCertificateDate(new Date());
-                mb.setCertificateStatus(1);
+                mb.setCertificateStatus(2);
                 memberService.modifyMember(mb);
 
                 Certificate certificate = new Certificate();
@@ -460,4 +460,21 @@ public class MemberController {
         }
         return result;
     }
+
+    @RequestMapping("/backend/getCertificateByMemberId")
+    @ResponseBody
+    public Result getCertificateByMemberId(long id){
+        Result result=new Result();
+        Member member=memberService.findOneById(id);
+        if(member!=null){
+            Certificate certificate=certificateService.findOneByMember(member);
+            result.setStatus(1);
+            result.setBody(certificate);
+        }else{
+            result.setStatus(0);
+        }
+        return result;
+    }
+
+
 }

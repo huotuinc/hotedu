@@ -1,6 +1,7 @@
 package com.huotu.hotedu.service;
 
 import com.huotu.hotedu.entity.Certificate;
+import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.repository.CertificateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,10 @@ public class CertificateService {
 
     public Certificate addCertificate(Certificate certificate) {
         return certificateRepository.save(certificate);
+    }
+
+    public Certificate findOneByMember(Member member){
+        return certificateRepository.findBymember(member);
     }
 
 }

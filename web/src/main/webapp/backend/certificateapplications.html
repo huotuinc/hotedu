@@ -18,6 +18,45 @@
             th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
     <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
             th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
+    <script type="text/javascript" th:inline="javascript">
+        $(function(){
+            //发证按钮添加弹出窗口
+            $("#apply_tab tr a:odd").click(function(){
+                var memberTds=$(this).parent().parent().children("td");
+                var memberId=memberTds[0].innerHTML;
+                var applyDate=memberTds[4].innerHTML;
+                $.ajax({
+                    url:"getCertificateByMemberId",
+                    type:"post",
+                    dataType:"json",
+                    data:{"id":memberId},
+                    success:function(result){
+                        if(result.status==1){
+                            $(".res-info").eq(0).text(result.body.receiveName);
+                            $(".res-info").eq(1).text(applyDate);
+                            $(".res-info").eq(2).text(result.body.receiveAddress);
+                            $(".res-info").eq(3).text(result.body.phoneNo);
+                        }else{
+                            alert("ID无效~");
+                        }
+                    },
+                    error:function(){
+                        alert("系统异常,加载地址信息失败！");
+                    }
+                });
+                $("#popup_app").show();
+
+            });
+
+            //关闭弹出窗口
+            $("#popup_app").on("click","#button_close",function(){
+                $("#popup_app").hide();
+            });
+        });
+
+
+
+    </script>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -79,13 +118,16 @@
                         <div class="result-content">
                             <ul class="sys-info-list">
                                 <li>
-                                    <label class="res-lab">收件人：</label><span class="res-info">XXX</span>
+                                    <label class="res-lab">收件人：</label><span class="res-info">加载中...</span>
                                 </li>
                                 <li>
-                                    <label class="res-lab">申请时间：</label><span class="res-info">20150401 12：00：00</span>
+                                    <label class="res-lab">申请时间：</label><span class="res-info">加载中...</span>
                                 </li>
                                 <li>
-                                    <label class="res-lab">收件地址:</label><span class="res-info">文一路</span>
+                                    <label class="res-lab">收件地址:</label><span class="res-info">加载中...</span>
+                                </li>
+                                <li>
+                                    <label class="res-lab">电话:</label><span class="res-info">加载中...</span>
                                 </li>
                             </ul>
                         </div>
@@ -165,9 +207,10 @@
                             <td th:text="${g.agent.area}">杭州</td>
                             <td th:text="${g.phoneNo}">15068564912</td>
                             <td th:text="${#calendars.format(g.applyCertificateDate,'yyyy-MM-dd hh:mm:ss')}">2015/01/01</td>
-                            <td th:text="${g.certificateStatus}==1?'已领证':${g.certificateStatus}==2?'申请中':''">申请发证</td>
+                            <td th:text="${g.certificateStatus}==1?'已领证':(${g.certificateStatus}==2?'申请中':'')">申请发证</td>
                             <td th:text="${g.theClass}==null? '':${g.theClass.className}">201504第一期</td>
-                            <td><a class="link-update" href="prentice.html" th:href="@{/backend/lookMember}">查看</a><br/><a class="link-update" href="#">发证</a>
+                            <td><a class="link-update" href="prentice.html" th:href="@{/backend/lookMember}">查看</a><br/>
+                                <a class="link-update" href="#">发证</a>
                             </td>
                         </tr>
                     </table>
