@@ -37,6 +37,19 @@ public class Certificate{
      */
     private String phoneNo;
 
+    /**
+     * 证书编号
+     * @return
+     */
+    private String certificateNo;
+
+    /**
+     * 所属学员
+     * @return
+     */
+    @OneToOne
+    private Member member;
+
     public String getPhoneNo() {
         return phoneNo;
     }
@@ -87,5 +100,21 @@ public class Certificate{
 
     public void setContactAddress(String contactAddress) {
         this.contactAddress = contactAddress;
+    }
+
+    public String getCertificateNo() {
+        return certificateNo;
+    }
+
+    public void setCertificateNo(String certificateNo) {
+        this.certificateNo = certificateNo;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
     }
 }
