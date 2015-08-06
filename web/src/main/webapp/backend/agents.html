@@ -26,7 +26,7 @@
             <ul class="navbar-list clearfix">
                 <li><a href="index.html" th:href="@{/backend/index}">首页</a></li>
                 <li><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a></li>
-                <li><a class="on" href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a>
+                <li><a class="on" href="certificateapplications.html" th:href="@{/backend/searchMembers}">代理商管理</a>
                 </li>
             </ul>
         </div>
@@ -53,7 +53,7 @@
                         <p style="height:30px; line-height:30px; margin-left: 20px;">管理代理商</p>
                         <ul class="sub-menu" style="display:block;">
                             <li><a href="certificateapplications.html"
-                                   th:href="@{/backend/loadCertificateapplications}">申请领证列表</a></li>
+                                   th:href="@{/backend/searchMembers}">申请领证列表</a></li>
                             <li class="on"><a href="agents.html" th:href="@{/backend/searchAgents}">代理商列表</a></li>
                         </ul>
                     </li>
@@ -65,7 +65,7 @@
     <!--/sidebar-->
     <div class="main-wrap">
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">管理代理商表</a><span
+            <div class="crumb-list"><i class="icon-font"></i><a href="certificateapplications.html" th:href="@{/backend/searchMembers}">管理代理商表</a><span
                     class="crumb-step">&gt;</span><span class="crumb-name">代理商列表</span></div>
         </div>
         <div class="jp-container2">
@@ -92,10 +92,10 @@
             </div>
         </div>
         <div class="result-wrap">
-            <form name="myform" id="myform" method="post" th:href="@{/backend/addAgent}">
+            <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="newagent.html"><i class="icon-font">+</i>新增代理商</a>
+                        <a href="newagent.html" th:href="@{/backend/addAgent}"><i class="icon-font">+</i>新增代理商</a>
                     </div>
                 </div>
                 <div class="result-content">

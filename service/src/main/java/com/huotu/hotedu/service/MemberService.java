@@ -1,9 +1,6 @@
 package com.huotu.hotedu.service;
 
-import com.huotu.hotedu.entity.Agent;
-import com.huotu.hotedu.entity.Certificate;
-import com.huotu.hotedu.entity.ClassTeam;
-import com.huotu.hotedu.entity.Member;
+import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.repository.CertificateRepository;
 import com.huotu.hotedu.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +60,17 @@ public class MemberService {
         return searchMembers(agent,pageNo,pageSize,null,null);
     }
 
+
+    /**
+     * 显示申请领证的学员
+     * @param pageNo    学员属于第几页
+     * @param pageSize  每页显示几条记录
+     * @param type      申请类型
+     * @return          学员集合
+     */
+    public Page<Member> searchMembers(Integer pageNo,Integer pageSize,String type){
+        return searchMembers(null,pageNo,pageSize,null,type);
+    }
     /**
      * 搜索会员
      * @param agent      会员属于的代理商
@@ -77,6 +85,10 @@ public class MemberService {
             @Override
             public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 if ("".equals(keyword) || keyword == null) {
+                    if("applyed".equals(type)){
+                        return cb.and(cb.isTrue(root.get("applyedCertificateOrNot").as(boolean.class)),
+                                cb.isTrue(root.get("enabled").as(boolean.class)));
+                    }
                     return cb.and(cb.equal(root.get("agent").as(Agent.class), agent),
                             cb.isTrue(root.get("enabled").as(boolean.class))
                     );
@@ -151,6 +163,9 @@ public class MemberService {
             mb.setPayDate(d);
             memberRepository.save(mb);
         }
+    }
+    public void modifyMember(Member member){
+        memberRepository.save(member);
     }
 
     /**

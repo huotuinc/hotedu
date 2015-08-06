@@ -281,5 +281,17 @@ public class MemberControllerTest extends WebTestBase {
         Assert.assertEquals("返回的视图名字是否相等","/pc/yun-daili",ViewName);
 
     }
+    @Test
+    public void searchMember() throws Exception{
+        String password=UUID.randomUUID().toString();
+        String adminName=UUID.randomUUID().toString();
+        Manager manager=new Manager();
+        manager.setLoginName(adminName);
+        loginService.newLogin(manager,password);
+        mockMvc.perform(
+                get("/backend/searchMembers")
+                        .session(loginAs(adminName, password))
+        ).andExpect(status().isOk());
+    }
 
 }

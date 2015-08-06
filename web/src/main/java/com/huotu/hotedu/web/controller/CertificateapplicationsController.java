@@ -1,7 +1,6 @@
 package com.huotu.hotedu.web.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 代理商有关的Controller,主要处理与代理商有关的请求
@@ -12,33 +11,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class CertificateapplicationsController {
-    /**
-     * 接收一个请求，用来显示申请领证的信息，然后返回给客户端一个HTML页面
-     * @return certificateapplications.html
-     */
-    @RequestMapping("/backend/loadCertificateapplications")
-    public String loadCertificateapplicationsController() {
-        return "/backend/certificateapplications";
-    }
+//    /**
+//     * 接收一个请求，用来显示申请领证的信息，然后返回给客户端一个HTML页面
+//     * @return certificateapplications.html
+//     */
+//    @RequestMapping("/backend/searchMembers")
+//    public String loadCertificateapplicationsController() {
+//        return "/backend/certificateapplications";
+//    }
 
-    /**
-     * 接收一个请求，用来显示多条代理商信息，然后返回给客户端一个HTML页面
-     * @return agents.html
-     */
-    @RequestMapping("/backend/loadAgents")
-    public String loaDagentsController() {
-        return "/backend/agents";
-    }
-
-
-    /**
-     * 接收一个请求，用来显示某个代理商信息，然后返回给客户端一个HTML页面
-     * @return agent.html
-     */
-    @RequestMapping("/backend/loadAgent")
-    public String loadDagentController() {
-        return "/backend/agent";
-    }
+//    /**
+//     * 接收一个请求，用来显示多条代理商信息，然后返回给客户端一个HTML页面
+//     * @return agents.html
+//     */
+//    @RequestMapping("/backend/loadAgents")
+//    public String loaDagentsController() {
+//        return "/backend/agents";
+//    }
+//
+//
+//    /**
+//     * 接收一个请求，用来显示某个代理商信息，然后返回给客户端一个HTML页面
+//     * @return agent.html
+//     */
+//    @RequestMapping("/backend/loadAgent")
+//    public String loadDagentController() {
+//        return "/backend/agent";
+//    }
 
 
     //后台显示检索之后的代理商

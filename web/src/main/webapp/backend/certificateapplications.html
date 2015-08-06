@@ -5,6 +5,7 @@
     <title>云商学院后台管理</title>
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/alert.css" th:href="@{/backend/css/alert.css}"/>
     <script type="text/javascript" src="js/libs/jquery-1.7.2.min.js" th:src="@{/backend/js/libs/jquery-1.7.2.min.js}"></script>
     <script type="text/javascript" src="js/libs/modernizr.min.js"
             th:src="@{/backend/js/libs/modernizr.min.js}"></script>
@@ -26,7 +27,7 @@
             <ul class="navbar-list clearfix">
                 <li><a href="index.html" th:href="@{/backend/index}">首页</a></li>
                 <li><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a></li>
-                <li><a class="on" href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">代理商管理</a>
+                <li><a class="on" href="certificateapplications.html" th:href="@{/backend/searchMembers}">代理商管理</a>
                 </li>
             </ul>
         </div>
@@ -52,7 +53,7 @@
                         <p style="height:30px; line-height:30px; margin-left: 20px;">管理代理商</p>
                         <ul class="sub-menu" style="display:block;">
                             <li class="on"><a href="certificateapplications.html"
-                                              th:href="@{/backend/loadCertificateapplications}">申请领证列表</a></li>
+                                              th:href="@{/backend/searchMembers}">申请领证列表</a></li>
                             <li><a href="agents.html" th:href="@{/backend/searchAgents}">代理商列表</a></li>
                         </ul>
                     </li>
@@ -60,17 +61,22 @@
             </div>
         </div>
     </div>
+
+
     <!--/sidebar-->
     <div class="main-wrap">
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">管理代理商表</a><span
+            <div class="crumb-list"><i class="icon-font"></i><a href="certificateapplications.html" th:href="@{/backend/searchMembers}">管理代理商表</a><span
                     class="crumb-step">&gt;</span><span class="crumb-name">申请领证列表</span></div>
         </div>
+
         <div class="jp-container2">
+        <!--弹窗-->
+        <div id="popup_app"></div>
         <div class="result-wrap">
             <form name="myform" id="myform" method="post">
                 <div class="result-content">
-                    <table class="result-tab" width="100%">
+                    <table id="apply_tab" class="result-tab" width="100%">
                         <tr>
                             <th style="width:80px">序号</th>
                             <th style="width:80px;">姓名</th>
@@ -81,7 +87,7 @@
                             <th style="width:100px">班级</th>
                             <th style="width:80px">操作</th>
                         </tr>
-                        <tr>
+                        <tr th:remove="all">
                             <td>01</td>
                             <td title="">某某</td>
                             <td>杭州</td>
@@ -89,24 +95,38 @@
                             <td>2015/01/01</td>
                             <td>申请发证</td>
                             <td>201504第一期</td>
-                            <td><a class="link-update" href="prentice.html">查看</a><br/><a class="link-update"
-                                                                                          href="sendcertificate.html">发证</a>
+                            <td><a class="link-update" href="prentice.html">查看</a><br/><a class="link-update" href="#">发证</a>
                             </td>
                         </tr>
-                        <tr>
+                        <tr th:remove="all">
                             <td>01</td>
                             <td title="">某某</td>
                             <td>杭州</td>
                             <td>15068564912</td>
                             <td>2015/01/01</td>
                             <td>申请发证</td>
-                            <td>201504第一期</td>
-                            <td><a class="link-update" href="prentice.html">查看</a><br/><a class="link-update"
-                                                                                          href="sendcertificate.html">发证</a>
+                                <td>201504第一期</td>
+                            <td><a class="link-update" href="prentice.html">查看</a><br/><a class="link-update" href="#">发证</a>
+                            </td>
+                        </tr>
+
+                        <tr th:each="g:${allMemberList}">
+                            <td th:text="${g.id}">01</td>
+                            <td th:text="${g.realName}" title="">某某</td>
+                            <td th:text="${g.agent.area}">杭州</td>
+                            <td th:text="${g.phoneNo}">15068564912</td>
+                            <td th:text="${#calendars.format(g.applyCertificateDate,'yyyy-MM-dd hh:mm:ss')}">2015/01/01</td>
+                            <td th:text="${g.applyedCertificateOrNot}?'申请发证':'未申请发证'">申请发证</td>
+                            <td th:text="${g.theClass}==null? '未分配':${g.theClass.className}">201504第一期</td>
+                            <td><a class="link-update" href="prentice.html" th:href="@{/backend/lookMember}">查看</a><br/><a class="link-update" href="#">发证</a>
                             </td>
                         </tr>
                     </table>
-                    <div class="list-page"> 2 条 1/1 页</div>
+                    <div class="list-page">
+                        <a href="#" th:if="${pageNo}>0" th:href="@{/backend/searchMember(pageNo=${pageNo}-1)}">上一页</a>
+                        <a href="#" th:if="${totalPages}-1>${pageNo}" th:href="@{/backend/loadVideo(pageNo=${pageNo}+1)}">下一页</a>
+                        <span th:text="'当前第'+${pageNo+1}">1</span>页/<span th:text="'共'+${totalPages}">1</span> 页
+                    </div>
                 </div>
             </form>
             </div>

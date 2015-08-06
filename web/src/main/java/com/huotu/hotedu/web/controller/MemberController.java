@@ -183,6 +183,37 @@ public class MemberController {
     }
 
 
+
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping("/backend/searchMembers")
+    public String applyForMembers(@RequestParam(required = false)Integer pageNo, Model model) {
+        String turnPage = "/backend/certificateapplications";
+        if(pageNo==null||pageNo<0){
+            pageNo=0;
+        }
+
+        Page<Member> pages = memberService.searchMembers(pageNo,PAGE_SIZE,"applyed");
+        long totalRecords = pages.getTotalElements();  //总记录数
+        int numEl =  pages.getNumberOfElements();      //当前分页记录数
+        if(numEl==0) {
+            pageNo=pages.getTotalPages()-1;
+            if(pageNo<0) {
+                pageNo = 0;
+            }
+            pages = memberService.searchMembers(pageNo,PAGE_SIZE,"applyed");
+        }
+        model.addAttribute("allMemberList", pages);
+        model.addAttribute("totalPages",pages.getTotalPages());
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("totalRecords", totalRecords);
+        return turnPage;
+    }
+
+
+
+
+
     /**
      * Created by shiliting on 2015/7/25.
      * 删除一位学员
@@ -377,6 +408,8 @@ public class MemberController {
                 String fileName = StaticResourceService.MESSAGECONTENT_ICON + UUID.randomUUID().toString() + ".png";
                 staticResourceService.uploadResource(fileName, file.getInputStream());
 
+                mb.setApplyCertificateDate(new Date());
+                memberService.modifyMember(mb);
                 Certificate certificate = new Certificate();
                 certificate.setPictureUri(fileName);
                 certificate.setReceiveName(receiveName);
