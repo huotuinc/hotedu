@@ -422,7 +422,9 @@ public class MemberController {
                 certificate.setPhoneNo(phoneNo);
                 certificate.setMember(mb);
                 certificateService.addCertificate(certificate);
-                model.addAttribute("mb",mb);
+
+                model.addAttribute("mb", mb);
+                model.addAttribute("certificate",certificate);
             }
         }else if(user instanceof Agent) {
             return "redirect:/pc/searchMembers";
