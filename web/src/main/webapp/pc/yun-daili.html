@@ -632,7 +632,7 @@
         <!--毕业管理-->
         <div style="display:block" th:style="${navigation}=='bygl'? 'display:block;':'display:none;'" class="main-wrapi">
             <div style="float: right;width:1000px;margin-bottom: 6px;margin-top:5px;" class="search-content">
-                <form action="#" id="searchGraduationMembers" th:action="@{/pc/loadGraduationMembers}" method="post">
+                <form action="#" id="searchGraduationMembers" th:action="@{/pc/loadGraduationMembers}" method="get">
                     <p style="height:5px;"></p>
                     <table style="float: left;margin-right:412px;" class="search-tab">
                         <tr>
