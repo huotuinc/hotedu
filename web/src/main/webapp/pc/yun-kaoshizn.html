@@ -1,120 +1,146 @@
 <!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>考试指南</title>
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link rel="stylesheet" type="text/css" href="css/indexnew.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script type="text/javascript" src="js/jquery1.42.min.js"></script><script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script type="text/javascript" src="js/jquery1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+    <script rel="stylesheet" type="text/javascript" src="js/indexuser.js"></script>
 </head>
-
 <body style=" background-color:#f0f0f0; background:url(images/banner2.jpg) no-repeat; background-size:cover;">
-<div style="min-height:834px">
-    <div style=" background-color:#fff;">
-        <div style=" background-color:#fff; font-size:14px;"class="header"> <img src="images/logo.png" class="logoimg">
-            <ul class="navi">
-                <li class="active"><a href="index.html">首页</a></li>
-                <li><a href="index2.html">公司简介</a></li>
-                <li><a href="index3.html">考证报名</a></li>
-                <li><a href="about.html">师资力量</a></li>
-                <li><a href="about.html">教学视频</a></li>
-                <li><a href="about.html">考试指南</a></li>
-                <li><a href="about.html">招|应聘</a></li>
-                <li style="padding:0px 0px 0px 20px;display:none"><a href="javascript:void(0)" onclick = "document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">登录&nbsp;&nbsp;|</a></li>
-                <li style="padding:0px;"> <a href="#"><img class="lodingimgi" src="images/toux.png" width="100%"></a>
-                    <p style="display:none" class="zhizhen"><img src="images/ystoux.png" width="18px" height="7px"></p>
-                    <p style="display:none" class="lbpo"> <a href="#">HHSHIJIJ</a> <a href="#">个人中心</a> <a href="#">修改密码</a> <a href="#">退出</a> </p>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <p style=" height:40px;"></p>
-    <p style="clear:both"></p>
-    <div class="ysthree">
-        <div class="searchLeftS xLeft">
-            <!-- 活动列表 -->
+    <div style="min-height:834px">
+        <div style=" background-color:#fff;">
+            <div style=" background-color:#fff; font-size:14px;" class="header"> <img src="images/logo.png" class="logoimg" />
+                <ul class="navi">
+                    <li><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>
+                    <li><a href="javascript:void(0)">公司简介</a></li>
+                    <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
+                    <li><a href="javascript:void(0)">师资力量</a></li>
+                    <li><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
+                    <li class="active"><a href="yun-kaoshizn.html" th:href="@{/pc/loadExamGuide}">考试指南</a></li>
+                    <li><a href="javascript:void(0)">招|应聘</a></li>
+                    <li style="padding:0px 0px 0px 20px;display:none"><a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">登录</a>
+                    </li>
+                    <li id="userLi" style="padding:0px;">
+                        <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimgi" src="images/toux.png" width="100%"/></a><!--会员头像-->
+                        <p style="display: none" class="zhizheno"><img src="images/lodingj.png" width="18px" height="7px"/></p>
 
-            <div class="upJyBox">
-                <ul>
-                    <li> <a class="fLeft mr10" target="_blank" title="热门热门热门热门热门热门" href="#"> <img width="250" height="188" src="http://img.zcool.cn/community/035f43555a8ad516ac72520ee625de4.jpg@250w_188h_1c_1e"> </a>
-                        <div class="upJyBoxCon">
-                            <div class="ujTitle"> <b><a target="_blank" title="热门热门热门热门热门热门" href="#">热门热热门热门热门热门门</a></b> <span class="hotSpan lv2"></span> </div>
-                            <div class="mt5" style="height: 134px">
-                                <p class="c999"> <b style="color:#fabe00;">活动</b> - <a href="/activities/775!0!1">热门话题</a> </p>
-                                <p style="height: 63px;" class="c999 mt5 ofHidden">热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题</p>
-                            </div>
-                            <div class="mt5 c999"> <span class="fLeft"><a href="#" target="_blank">火图科技</a><span class="ml10">21小时前发起</span></span></div>
-                        </div>
-                    </li>
-                    <li> <a class="fLeft mr10" target="_blank" title="其他其他其他其他其他" href="#"> </a>
-                        <div class="upJyBoxConi">
-                            <div class="ujTitle"> <b><a target="_blank" title="其他其他其他其他其他" href="#">其他其他其他其他其他</a></b> <span class="hotSpan lv2"></span> </div>
-                            <div class="mt5" style="height:69px">
-                                <p class="c999"> <b style="color:#fabe00;">活动</b> - <a href="/activities/775!0!1">热门话题</a> </p>
-                                <p style="height: 63px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;" class="c999 mt5 ofHidden">其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他</p>
-                            </div>
-                            <div class="mt5 c999"> <span class="fLeft"><a href="#" target="_blank">火图科技</a><span class="ml10">21小时前发起</span></span></div>
-                        </div>
-                    </li>
-                    <li> <a class="fLeft mr10" target="_blank" title="其他其他其他其他其他" href="#"> </a>
-                        <div class="upJyBoxConi">
-                            <div class="ujTitle"> <b><a target="_blank" title="其他其他其他其他其他" href="#">其他其他其他其他其他</a></b> <span class="hotSpan lv2"></span> </div>
-                            <div class="mt5" style="height:69px">
-                                <p class="c999"> <b style="color:#fabe00;">活动</b> - <a href="/activities/775!0!1">热门话题</a> </p>
-                                <p style="height: 63px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;" class="c999 mt5 ofHidden">其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他</p>
-                            </div>
-                            <div class="mt5 c999"> <span class="fLeft"><a href="#" target="_blank">火图科技</a><span class="ml10">21小时前发起</span></span> </div>
-                        </div>
-                    </li>
-                    <li> <a class="fLeft mr10" target="_blank" title="其他其他其他其他其他" href="#"> </a>
-                        <div class="upJyBoxConi">
-                            <div class="ujTitle"> <b><a target="_blank" title="其他其他其他其他其他" href="#">其他其他其他其他其他</a></b> <span class="hotSpan lv2"></span> </div>
-                            <div class="mt5" style="height:69px">
-                                <p class="c999"> <b style="color:#fabe00;">活动</b> - <a href="/activities/775!0!1">热门话题</a> </p>
-                                <p style="height: 63px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;" class="c999 mt5 ofHidden">其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他</p>
-                            </div>
-                            <div class="mt5 c999"> <span class="fLeft"><a href="#" target="_blank">火图科技</a><span class="ml10">21小时前发起</span></span></div>
-                        </div>
+                        <p style="display: none" class="lbpoo">
+                            <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
+                            <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
+                            <a href="#" onclick="showChangePwdForm()">修改密码</a>
+                            <a href="#" th:href="@{/logout}">退出</a></p>
                     </li>
                 </ul>
             </div>
-            <div class="bigPage pt30 pb20 clear vm center">
-                <!-- 分页信息 -->
-                <div class="bigPage pt20 pb30 vm center"> <a class="pagePrev" btnmode="true" hidefocus="" style="display:none;"><b></b></a> <a href="#" btnmode="true" hidefocus="" class=" bone selected">1</a> <a href="#" btnmode="true" hidefocus="" class="bone">2</a> <a href="#" btnmode="true" hidefocus="" class="pageNext"><b></b></a> <span class="pl30 f14 c999">跳转到:</span>
-                    <input title="" style="border: 1px solid #ddd;padding: 5px 0px;" class=" isTxtBig w30" type="text" value="">
-                    <a href="javascript:void(0);" onclick="javascript:if ($.trim($(this).prev().val())!='' &amp;&amp; !isNaN($(this).prev().val()))location.href='/activities/0!0!'+$.trim($(this).prev().val())+'/'" btnmode="true" hidefocus="">GO</a></div>
-            </div>
         </div>
-    </div>
-    <div> </div>
-    <p style="clear:both"></p>
-    <p style=" height:60px"></p>
-    <div>
-        <div class="footer">
-            <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
-            <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
-        </div>
-        <div id="asaimsg" class="AsaiDivShow">
-            <P align="right" style="margin:0px; padding:0px;"> <a href="javascript:void(0)" onclick = "document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'"> <FONT style="color:#111; font-size:20px;">×</FONT></a> </P>
-            <div class="sign-in">
-                <div class="user-form">
-                    <form accept-charset="UTF-8" action="" class="sign-in__form user-form__form" method="post">
-                        <div class="user-form__fieldset">
-                            <label class="user-form__label" for="session_login" style="color:#111">用户名：</label>
-                            <input title="" autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field" id="session_login" name="session[login]" placeholder="ID" type="text"/>
-                        </div>
-                        <div class="user-form__fieldset">
-                            <label class="user-form__label" for="session_password" style="color:#111">密码：</label>
-                            <input title="" class="sign-in__field user-form__field" id="session_password" name="session[password]" placeholder="password" type="password"/>
-                        </div>
-                        <button class="sign-in__button user-form__button" name="button" type="submit">登录<i class="icon-arrow-right user-form__button-icon"></i></button>
-                    </form>
+        <p style=" height:40px;"></p>
+        <p style="clear:both"></p>
+        <div class="ysthree">
+            <div class="searchLeftS xLeft">
+                <!-- 活动列表 -->
+                <div class="upJyBox">
+                    <ul th:remove="all-but-first">
+                        <li th:each="examGuide:${allExamGuideList}">
+                            <div th:if="${examGuide.top}"><a class="fLeft mr10" target="_blank" href="#"> <img width="250" height="188" src="http://img.zcool.cn/community/035f43555a8ad516ac72520ee625de4.jpg@250w_188h_1c_1e" /> </a></div>
+                            <div class="upJyBoxCon">
+                                <div class="ujTitle"> <b><a target="_blank" href="#"><span th:text="${examGuide.title}"></span></a></b> <span class="hotSpan lv2"></span> </div>
+                                <div class="mt5" style="${examGuide.top} ? 'height: 134px;' : 'height: 69px;'">
+                                    <p class="c999"> <b style="color:#fabe00;">活动</b> - <a href="#">热门话题</a> </p>
+                                    <p style="height: 63px;" class="c999 mt5 ofHidden"><span th:text="${examGuide.content}"></span></p>
+                                </div>
+                                <div class="mt5 c999"> <span class="fLeft"><a href="#" target="_blank">火图科技</a>
+                                    <!--<span class="ml10" th:text="${#calendars.millisecond(today)} - ${#calendars.millisecond(examGuide.lastUploadDate)} + '秒前发起'"></span>-->
+                                    <span class="ml10" th:text="${#calendars.format(examGuide.lastUploadDate,'yyyy-MM-dd/hh:mm:ss')} + '发起'"></span>
+                                </span></div>
+                            </div>
+                        </li>
+                        <li> <a class="fLeft mr10" target="_blank" title="热门热门热门热门热门热门" href="#"> <img width="250" height="188" src="http://img.zcool.cn/community/035f43555a8ad516ac72520ee625de4.jpg@250w_188h_1c_1e" /> </a>
+                            <div class="upJyBoxCon">
+                                <div class="ujTitle"> <b><a target="_blank" title="热门热门热门热门热门热门" href="#">热门热热门热门热门热门门</a></b> <span class="hotSpan lv2"></span> </div>
+                                <div class="mt5" style="height: 134px">
+                                    <p class="c999"> <b style="color:#fabe00;">活动</b> - <a href="#">热门话题</a> </p>
+                                    <p style="height: 63px;" class="c999 mt5 ofHidden">热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题热门话题</p>
+                                </div>
+                                <div class="mt5 c999"> <span class="fLeft"><a href="#" target="_blank">火图科技</a><span class="ml10">21小时前发起</span></span></div>
+                            </div>
+                        </li>
+                        <li> <a class="fLeft mr10" target="_blank" title="其他其他其他其他其他" href="#"> </a>
+                            <div class="upJyBoxConi">
+                                <div class="ujTitle"> <b><a target="_blank" title="其他其他其他其他其他" href="#">其他其他其他其他其他</a></b> <span class="hotSpan lv2"></span> </div>
+                                <div class="mt5" style="height:69px">
+                                    <p class="c999"> <b style="color:#fabe00;">活动</b> - <a href="#">热门话题</a> </p>
+                                    <p style="height: 63px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;" class="c999 mt5 ofHidden">其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他</p>
+                                </div>
+                                <div class="mt5 c999"> <span class="fLeft"><a href="#" target="_blank">火图科技</a><span class="ml10">21小时前发起</span></span></div>
+                            </div>
+                        </li>
+                        <li> <a class="fLeft mr10" target="_blank" title="其他其他其他其他其他" href="#"> </a>
+                            <div class="upJyBoxConi">
+                                <div class="ujTitle"> <b><a target="_blank" title="其他其他其他其他其他" href="#">其他其他其他其他其他</a></b> <span class="hotSpan lv2"></span> </div>
+                                <div class="mt5" style="height:69px">
+                                    <p class="c999"> <b style="color:#fabe00;">活动</b> - <a href="#">热门话题</a> </p>
+                                    <p style="height: 63px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;" class="c999 mt5 ofHidden">其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他</p>
+                                </div>
+                                <div class="mt5 c999"> <span class="fLeft"><a href="#" target="_blank">火图科技</a><span class="ml10">21小时前发起</span></span> </div>
+                            </div>
+                        </li>
+                        <li> <a class="fLeft mr10" target="_blank" title="其他其他其他其他其他" href="#"> </a>
+                            <div class="upJyBoxConi">
+                                <div class="ujTitle"> <b><a target="_blank" title="其他其他其他其他其他" href="#">其他其他其他其他其他</a></b> <span class="hotSpan lv2"></span> </div>
+                                <div class="mt5" style="height:69px">
+                                    <p class="c999"> <b style="color:#fabe00;">活动</b> - <a href="#">热门话题</a> </p>
+                                    <p style="height: 63px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;" class="c999 mt5 ofHidden">其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他</p>
+                                </div>
+                                <div class="mt5 c999"> <span class="fLeft"><a href="#" target="_blank">火图科技</a><span class="ml10">21小时前发起</span></span></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!--<div class="bigPage pt30 pb20 clear vm center">-->
+                   <!-- 分页信息 -->
+                   <!-- <div class="bigPage pt20 pb30 vm center"> <a class="pagePrev" btnmode="true" hidefocus="" style="display:none;"><b></b></a> <a href="#" btnmode="true" hidefocus="" class=" bone selected">1</a> <a href="#" btnmode="true" hidefocus="" class="bone">2</a> <a href="#" btnmode="true" hidefocus="" class="pageNext"><b></b></a> <span class="pl30 f14 c999">跳转到:</span>
+                        <input title="" style="border: 1px solid #ddd;padding: 5px 0px;" class=" isTxtBig w30" type="text" value="">
+                        <a href="javascript:void(0);" onclick="javascript:if ($.trim($(this).prev().val())!='' &amp;&amp; !isNaN($(this).prev().val()))location.href='/activities/0!0!'+$.trim($(this).prev().val())+'/'" btnmode="true" hidefocus="">GO</a></div>
+                    </div>-->
+                <div style="text-align:center; margin-top:10px;">
+                    <a href="#" th:if="${pageNo}!=0" th:href=" @{/pc/loadExamGuide(pageNo=${pageNo}-1)}">上一页</a>
+                    <a href="#" th:if="${pageNo+1}!=${totalPages}" th:href="@{/pc/loadExamGuide(pageNo=${pageNo}+1)}">下一页</a>
+                    <span th:text="'当前第'+${pageNo+1}">1</span>页/<span th:text="'共'+${totalPages}">1</span>页
                 </div>
             </div>
         </div>
-        <div id="asaimsgbg" class="AsaiDivBG"></div>
+        <p style="clear:both"></p>
+        <p style=" height:60px"></p>
+        <div>
+            <div class="footer">
+                <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
+                <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
+            </div>
+            <div id="asaimsg" class="AsaiDivShow">
+                <P align="right" style="margin:0px; padding:0px;"> <a href="javascript:void(0)" onclick = "document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'"> <FONT style="color:#111; font-size:20px;">×</FONT></a> </P>
+                <div class="sign-in">
+                    <div class="user-form">
+                        <form accept-charset="UTF-8" action="" class="sign-in__form user-form__form" method="post">
+                            <div class="user-form__fieldset">
+                                <label class="user-form__label" for="session_login" style="color:#111">用户名：</label>
+                                <input title="" autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field" id="session_login" name="session[login]" placeholder="ID" type="text"/>
+                            </div>
+                            <div class="user-form__fieldset">
+                                <label class="user-form__label" for="session_password" style="color:#111">密码：</label>
+                                <input title="" class="sign-in__field user-form__field" id="session_password" name="session[password]" placeholder="password" type="password"/>
+                            </div>
+                            <button class="sign-in__button user-form__button" name="button" type="submit">登录<i class="icon-arrow-right user-form__button-icon"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="asaimsgbg" class="AsaiDivBG"></div>
+        </div>
     </div>
 </body>
 </html>

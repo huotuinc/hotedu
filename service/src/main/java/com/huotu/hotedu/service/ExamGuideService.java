@@ -4,6 +4,7 @@ import com.huotu.hotedu.repository.ExamGuideRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +56,15 @@ public class ExamGuideService {
     //查找一条考试消息
     public ExamGuide findOneById(Long id){
         return examGuideRepository.findOne(id);
+    }
+
+    /**
+     * 加载前台考试指南界面
+     * @param n     第几页
+     * @param pageSize  分页数
+     */
+    public Page<ExamGuide> loadExamGuide(int n,int pageSize){
+        return examGuideRepository.findAll(new PageRequest(n, pageSize,new Sort(Sort.Direction.DESC,"top","lastUploadDate")));
     }
 
 }

@@ -101,7 +101,7 @@ public class ExamGuideControllerTest extends WebTestBase {
             ExamGuide examGuide = new ExamGuide();
             examGuide.setLastUploadDate(new Date());
             examGuide.setContent("123");
-            examGuide.setIsTop(random.nextBoolean());
+            examGuide.setTop(random.nextBoolean());
             boolean containKeyword = random.nextBoolean();
             if (containKeyword) {
                 examGuide.setTitle("测试t" + complexKeyword + System.currentTimeMillis());
@@ -261,7 +261,7 @@ public class ExamGuideControllerTest extends WebTestBase {
 
         ExamGuide examGuide=new ExamGuide();
         examGuide.setTitle("删除测试"+System.currentTimeMillis());
-        examGuide.setIsTop(random.nextBoolean());
+        examGuide.setTop(random.nextBoolean());
         examGuide.setLastUploadDate(new Date());
         examGuide.setContent("5555");
         ExamGuide examGuidenew = examGuideRepository.save(examGuide);//保存新增的对象，为了之后删除做比较
@@ -378,7 +378,7 @@ public class ExamGuideControllerTest extends WebTestBase {
 
         ExamGuide examGuide=new ExamGuide();
         examGuide.setTitle("修改测试"+System.currentTimeMillis());
-        examGuide.setIsTop(random.nextBoolean());
+        examGuide.setTop(random.nextBoolean());
         examGuide.setLastUploadDate(new Date());
         examGuide.setContent("6666");
         ExamGuide examGuidenew = examGuideRepository.save(examGuide);//修改的examguide
@@ -443,7 +443,7 @@ public class ExamGuideControllerTest extends WebTestBase {
         ExamGuide examGuide=new ExamGuide();
         examGuide.setTitle("测试1");
         examGuide.setContent("内容测试1");
-        examGuide.setIsTop(false);
+        examGuide.setTop(false);
         examGuide.setLastUploadDate(new Date());
         ExamGuide examGuideOld=examGuideRepository.save(examGuide);
         //准备测试环境END

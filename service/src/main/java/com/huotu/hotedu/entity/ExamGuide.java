@@ -23,7 +23,7 @@ public  class ExamGuide implements Serializable {
     @Column(length = 5000)
     private String content;                       //考试指南内容
     @Column
-    private boolean isTop=true;                    //是否置顶
+    private boolean top=true;                    //是否置顶
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUploadDate;                 //考试指南最后修改时间
 
@@ -51,14 +51,6 @@ public  class ExamGuide implements Serializable {
         this.content = content;
     }
 
-    public boolean isTop() {
-        return isTop;
-    }
-
-    public void setIsTop(boolean isTop) {
-        this.isTop = isTop;
-    }
-
     public Date getLastUploadDate() {
         return lastUploadDate;
     }
@@ -67,5 +59,11 @@ public  class ExamGuide implements Serializable {
         this.lastUploadDate = lastUploadDate;
     }
 
+    public boolean isTop() {
+        return top;
+    }
 
+    public void setTop(boolean top) {
+        this.top = top;
+    }
 }

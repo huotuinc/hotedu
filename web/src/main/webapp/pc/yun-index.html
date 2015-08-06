@@ -15,11 +15,11 @@
 <div style="background-color:#fff;" class="headeri"><img src="images/logo.png" class="logoimgi"/>
         <ul class="navi">
             <li class="active"><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>
-            <li><a href="#">公司简介</a></li>
+            <li><a href="javascript:void(0)">公司简介</a></li>
             <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
-            <li><a href="#" >师资力量</a></li>
-            <li><a href="#" th:href="@{/pc/loadVideo}">教学视频</a></li>
-            <li><a href="#">考试指南</a></li>
+            <li><a href="javascript:void(0)">师资力量</a></li>
+            <li><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
+            <li><a href="yun-kaoshizn.html" th:href="@{/pc/loadExamGuide}">考试指南</a></li>
             <li><a href="#">招|应聘</a></li>
             <li id="loginLi" style="padding:0px 0px 0px 20px;" th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
                 <a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>

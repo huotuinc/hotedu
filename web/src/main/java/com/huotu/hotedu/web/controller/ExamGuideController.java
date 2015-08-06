@@ -128,7 +128,7 @@ public class ExamGuideController {
         examGuide.setTitle(title);
         examGuide.setContent(content);
         examGuide.setLastUploadDate(new Date());
-        examGuide.setIsTop("1".equals(top));
+        examGuide.setTop("1".equals(top));
         examGuideService.addExamGuide(examGuide);
         return "redirect:/backend/searchExamGuide";
     }
@@ -148,9 +148,35 @@ public class ExamGuideController {
         ExamGuide examGuide = examGuideService.findOneById(id);
         examGuide.setTitle(title);
         examGuide.setContent(content);
-        examGuide.setIsTop("1".equals(top));
+        examGuide.setTop("1".equals(top));
         examGuide.setLastUploadDate(new Date());
         examGuideService.modify(examGuide);
         return "redirect:/backend/searchExamGuide";
+    }
+
+    @RequestMapping("/pc/loadExamGuide")
+    public String loadExamGuide(@RequestParam(required = false)Integer pageNo,Model model){
+        String turnPage="/pc/yun-kaoshizn";
+        if(pageNo==null||pageNo<0){
+            pageNo=0;
+        }
+        Page<ExamGuide> pages = examGuideService.loadExamGuide(pageNo, PAGE_SIZE);
+        long totalRecords = pages.getTotalElements();
+        int numEl =  pages.getNumberOfElements();
+        if(numEl==0) {
+            pageNo=pages.getTotalPages()-1;
+            if(pageNo<0) {
+                pageNo = 0;
+            }
+            pages = examGuideService.loadExamGuide(pageNo, PAGE_SIZE);
+            totalRecords = pages.getTotalElements();
+        }
+        Date today = new Date();
+        model.addAttribute("allExamGuideList", pages);
+        model.addAttribute("totalPages",pages.getTotalPages());
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("today", today);
+        model.addAttribute("totalRecords", totalRecords);
+        return turnPage;
     }
 }
