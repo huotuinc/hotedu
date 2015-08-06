@@ -31,6 +31,19 @@ public class Certificate{
     @Column
     private String contactAddress;
 
+    /**
+     * 联系人电话
+     * @return
+     */
+    private String phoneNo;
+
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

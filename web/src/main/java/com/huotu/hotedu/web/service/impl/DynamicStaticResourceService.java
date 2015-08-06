@@ -30,7 +30,7 @@ public class DynamicStaticResourceService extends AbstractStaticResourceService 
     private void setEnv(Environment env) {
         String uri = env.getProperty("huotu.resourcesUri", (String) null);
         if (uri == null) {
-            throw new IllegalStateException("huotu.resourcesUri和huotu.resourcesHome属性");
+            throw new IllegalStateException("请设置huotu.resourcesUri和huotu.resourcesHome属性");
         }
         String home = env.getProperty("huotu.resourcesHome", (String) null);
         if (home == null) {
