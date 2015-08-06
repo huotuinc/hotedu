@@ -38,8 +38,8 @@ function changeSearchSelect(type){
 	}else if(type=="passed"){
 		$("#td_key").html('<select id="select_search3" name="keywords" class="yssp" style=" height:29px;padding: 0px 90px 0px 4px; border:1px solid #ddd; vertical-align:middle"> <option value="1">通过考试</option> <option value="2">未通过考试</option> <option value="0">未参加考试</option></select>');
 
-	}else if(type=="applyedCertificateOrNot"){
-		$("#td_key").html('<select id="select_search4" name="keywords" class="yssp" style=" height:29px;padding: 0px 90px 0px 4px; border:1px solid #ddd; vertical-align:middle"> <option value="1">是</option> <option value="0">否</option> </select>');
+	}else if(type=="certificateStatus"){
+		$("#td_key").html('<select id="select_search4" name="keywords" class="yssp" style=" height:29px;padding: 0px 90px 0px 4px; border:1px solid #ddd; vertical-align:middle"> <option value="2">申请领证中</option><option value="1">已领证</option> <option value="0">未领证</option> </select>');
 
 	}
 

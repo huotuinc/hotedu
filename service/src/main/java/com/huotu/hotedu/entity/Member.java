@@ -62,9 +62,10 @@ public class Member extends Login {
      */
     private int passed=0;
     /**
-     * 是否申请过领证
+     * 领证状态
+     * 0：未领证，1：已领证，3申请领证中
      */
-    private boolean applyedCertificateOrNot =false;
+    private int certificateStatus =0;
 
     /**
      * 报名时间
@@ -201,15 +202,13 @@ public class Member extends Login {
         this.applyDate = applyDate;
     }
 
-
-    public boolean isApplyedCertificateOrNot() {
-        return applyedCertificateOrNot;
+    public int getCertificateStatus() {
+        return certificateStatus;
     }
 
-    public void setApplyedCertificateOrNot(boolean applyedCertificateOrNot) {
-        this.applyedCertificateOrNot = applyedCertificateOrNot;
+    public void setCertificateStatus(int certificateStatus) {
+        this.certificateStatus = certificateStatus;
     }
-
 
     @Override
     public String getUsername() {
@@ -219,7 +218,7 @@ public class Member extends Login {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(
-                new SimpleGrantedAuthority("ROLE_MEMBER_CENTER")//进入学员个人中心的权限
+                new SimpleGrantedAuthority("ROLE_MEMBER")//进入学员个人中心的权限
         );
     }
 

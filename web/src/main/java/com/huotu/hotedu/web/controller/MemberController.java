@@ -391,6 +391,7 @@ public class MemberController {
      * @param model     返回客户端集
      * @return          成员详细信息
      */
+    @PreAuthorize("hasRole('MEMBER')")
     @RequestMapping("/pc/applyForCertificate")
     public String applyForCertificate(@AuthenticationPrincipal Login user,@RequestParam("pictureImg") MultipartFile file,
                                       String receiveName,String receiveAddress,String contactAddress,String phoneNo,Model model)throws Exception {
@@ -412,8 +413,11 @@ public class MemberController {
                 //保存图片
                 String fileName = StaticResourceService.MESSAGECONTENT_ICON + UUID.randomUUID().toString() + ".png";
                 staticResourceService.uploadResource(fileName, file.getInputStream());
+                //设置学员的申请领证时间
                 mb.setApplyCertificateDate(new Date());
+                mb.setCertificateStatus(1);
                 memberService.modifyMember(mb);
+
                 Certificate certificate = new Certificate();
                 certificate.setPictureUri(fileName);
                 certificate.setReceiveName(receiveName);
@@ -426,14 +430,32 @@ public class MemberController {
                 model.addAttribute("mb", mb);
                 model.addAttribute("certificate",certificate);
             }
-        }else if(user instanceof Agent) {
-            return "redirect:/pc/searchMembers";
-        }else if(user instanceof Manager) {
-            return "redirect:/backend/index";
-
         }
         model.addAttribute("errInfo",errInfo);
         return turnPage;
     }
+    @RequestMapping("/pc/checkIsPassExam")
+    @ResponseBody
+    public Result checkIsPassExam(long id){
+        Member member=memberService.findOneById(id);
+        Result result=new Result();
+        result.setStatus(member.getPassed());
+        return result;
+    }
 
+    @RequestMapping("/pc/checkHaveCertificate")
+    @ResponseBody
+    public Result checkHaveCertificate(long id){
+        Member member=memberService.findOneById(id);
+        Result result=new Result();
+        boolean flag=false;
+        if(member!=null) {
+            flag = member.getPassed() == 1 && member.getCertificate() != null;
+            result.setStatus(flag?1:0);
+            result.setBody(member.getCertificate().getCertificateNo());
+        }else{
+            result.setStatus(0);
+        }
+        return result;
+    }
 }

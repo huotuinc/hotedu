@@ -86,8 +86,10 @@ public class MemberService {
             public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 if ("".equals(keyword) || keyword == null) {
                     if("applyed".equals(type)){
-                        return cb.and(cb.isTrue(root.get("applyedCertificateOrNot").as(boolean.class)),
-                                cb.isTrue(root.get("enabled").as(boolean.class)));
+                        return cb.and(
+                                cb.equal(root.get("certificateStatus").as(int.class),2),
+                                cb.isTrue(root.get("enabled").as(boolean.class))
+                        );
                     }
                     return cb.and(cb.equal(root.get("agent").as(Agent.class), agent),
                             cb.isTrue(root.get("enabled").as(boolean.class))
@@ -104,11 +106,23 @@ public class MemberService {
                                     cb.like(join.get("className").as(String.class), "%" + keyword + "%")
                             )
                     );
-                } else {
+                } else if("passed".equals(type)) {
                     return cb.and(
                             cb.equal(root.get("agent").as(Agent.class), agent),
                             cb.isTrue(root.get("enabled").as(boolean.class)),
-                            cb.equal(root.get(type).as(boolean.class), "1".equals(keyword))
+                            cb.equal(root.get("passed").as(int.class), keyword)
+                    );
+                }else if("certificateStatus".equals(type)){
+                    return cb.and(
+                            cb.equal(root.get("agent").as(Agent.class), agent),
+                            cb.isTrue(root.get("enabled").as(boolean.class)),
+                            cb.equal(root.get("certificateStatus").as(int.class), keyword)
+                    );
+                }else{
+                    return cb.and(
+                            cb.equal(root.get("agent").as(Agent.class), agent),
+                            cb.isTrue(root.get("enabled").as(boolean.class)),
+                            cb.equal(root.get(type).as(boolean.class), keyword)
                     );
 
                 }

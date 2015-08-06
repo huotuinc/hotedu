@@ -131,7 +131,7 @@ public class MemberControllerTest extends WebTestBase {
                         break;
                     case 1:
                         member.setPhoneNo("测试手机"+complexKeyword+System.currentTimeMillis());
-                        member.setApplyedCertificateOrNot(true);
+                        member.setCertificateStatus(1);
                         countHaveKeywordsPnoto++;
                         break;
                     case 2:
@@ -255,7 +255,7 @@ public class MemberControllerTest extends WebTestBase {
         model=  mockMvc.perform(
                 get("/pc/searchMembers")
                         .session(loginAs(agentUsername, password))
-                        .param("searchSort","applyedCertificateOrNot")
+                        .param("searchSort","certificateStatus")
                         .param("keywords","1")
         ) .andExpect(status().isOk())
                 .andReturn().getModelAndView().getModel();

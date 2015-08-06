@@ -10,6 +10,56 @@
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
     <script rel="stylesheet" type="text/javascript" src="js/indexuser.js"></script>
     <script type="text/javascript" src="js/confirm.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        $(function(){
+            $("#btn_applyCertificate").click(function(){
+                /*<![CDATA[*/
+                var memberId = [[${mb.id}]];
+                /*]]>*/
+                $.ajax({
+                    url:"checkIsPassExam",
+                    type:"post",
+                    data:{"id":memberId},
+                    dataType:"json",
+                    success:function(result){
+                        if(result.status==1){
+                            $('#applyForCertificateDiv').show()
+                        }else if(result.status==0){
+                            alert("还没参加考试呢~");
+                        }else if(result.status==2){
+                            alert("考试未通过，无法申请领证哦~")
+                        }
+                    },
+                    error:function(){
+                        alert("系统异常,获取考试信息失败！");
+                    }
+                });
+            });
+            $("#btn_showCertificate").click(function(){
+                /*<![CDATA[*/
+                var memberId = [[${mb.id}]];
+                /*]]>*/
+                $.ajax({
+                    url:"checkHaveCertificate",
+                    type:"post",
+                    data:{"id":memberId},
+                    dataType:"json",
+                    success:function(result){
+                        if(result.status==1){
+                            //跳转链接
+                            alert("您的证书编号为："+result.body);
+//                            window.location.href="http://www.gcvaic.org:8080/index.aspx";
+                        }else if(result.status==0){
+                            alert("还没领到证书哦~");
+                        }
+                    },
+                    error:function(){
+                        alert("系统异常,获取考试信息失败！");
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 
 <body style=" background-color:#f0f0f0; background:url(images/banner2.jpg) no-repeat; background-size:cover;">
@@ -49,10 +99,10 @@
             </li>
             <li style="float:right; margin-top:-4px">
                 <p style="font-size:14px">
-                    <button class="ysan">我的电子证书</button>
+                    <button id="btn_showCertificate" class="ysan">我的电子证书</button>
                 </p>
                 <p style="font-size:14px">
-                    <button class="ysan" onclick="$('#applyForCertificateDiv').show()">申请领证</button>
+                    <button id="btn_applyCertificate" class="ysan">申请领证</button>
                 </p>
             </li>
         </ul>

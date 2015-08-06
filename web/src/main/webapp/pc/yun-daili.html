@@ -115,7 +115,7 @@
                                 <option value="all">全部</option>
                                 <option value="payed">交费状态</option>
                                 <option value="passed">考试状态</option>
-                                <option value="applyedCertificateOrNot">领证状态</option>
+                                <option value="certificateStatus">领证状态</option>
                             </select></td>
                             <td id="td_key">
                                 <input id="input_search1" style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" th:value="${keywords}" value="" type="text"/></td>
@@ -218,9 +218,10 @@
                                 <td th:text="${g.phoneNo}" title="">125656256356</td>
                                 <td th:text="${g.payed}?'是':'否'" title="">是</td>
                                 <td th:text="${#calendars.format(g.applyDate,'yyyy-MM-dd')}" title="">2015.04.01</td>
-                                <td th:text="${g.passed}==0?'':(${g.passed}==1?'通过':'待补考')" title="">--</td>
-                                <td th:text="${g.applyedCertificateOrNot}?'是':'否'" title="">--</td>
-                                <td th:text="${g.theClass}==null? '未分配':${g.theClass.className}" title="">201504第一期</td>
+                                <td th:text="${g.passed}==0?'':(${g.passed}==1?'通过考试':'未通过考试')" title="">--</td>
+                                <!--<td th:text="${g.certificateStatus}==1?'已领证':${g.certificateStatus}==2?'申请中':''" title="">&#45;&#45;</td>-->
+                                <td th:text="${g.certificateStatus}" title="">--</td>
+                                <td th:text="${g.theClass}==null? '':${g.theClass.className}" title="">201504第一期</td>
                                 <td><a class="link-update" href="#"
                                        th:href="@{/pc/detailMember(id=${g.id})}">查看</a><br/>
                                     <a class="link-update" href="#"
