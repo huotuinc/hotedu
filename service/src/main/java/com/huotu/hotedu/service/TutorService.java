@@ -33,12 +33,6 @@ public class TutorService {
      */
     public Page<Tutor> loadTutor(int pageNo,int pageSize) {
         return searchTutorType(pageNo,pageSize,null,null,null,null);
-//        return tutorRepository.findAll(new Specification<Tutor>() {
-//            @Override
-//            public Predicate toPredicate(Root<Tutor> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//                return cb.isTrue(root.get("enabled").as(Boolean.class));
-//            }
-//        }, new PageRequest(n, pageSize));
     }
 
 
@@ -90,19 +84,6 @@ public class TutorService {
      */
     public Page<Tutor> searchTutorAll(int pageNo,int pageSize,String keyword){
         return searchTutorType(pageNo,pageSize,null,null,keyword,"all");
-//        return  tutorRepository.findAll(new Specification<Tutor>() {
-//            @Override
-//            public Predicate toPredicate(Root<Tutor> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//                if (keyword==null)
-//                    return null;
-//                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)),cb.or(
-//                        cb.like(root.get("name").as(String.class), "%" + keyword + "%"),
-//                        cb.like(root.get("qualification").as(String.class),"%"+keyword+"%"),
-//                        cb.like(root.get("area").as(String.class),"%"+keyword+"%")
-//                ));
-//            }
-//        },new PageRequest(n, pagesize));
-
     }
 
     /**
@@ -115,15 +96,6 @@ public class TutorService {
      */
     public Page<Tutor> searchTutorDate(int pageNo,int pageSize,Date start,Date end){
         return searchTutorType(pageNo,pageSize,start,end,"1","date");
-//        return  tutorRepository.findAll(new Specification<Tutor>() {
-//            @Override
-//            public Predicate toPredicate(Root<Tutor> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//                if (start==null&&end==null)
-//                    return null;
-//                return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)),cb.between(root.get("lastUploadDate").as(Date.class),start,end));
-//            }
-//        },new PageRequest(n, pagesize));
-
     }
 
 

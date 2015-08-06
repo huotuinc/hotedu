@@ -42,26 +42,26 @@ public class CertificateapplicationsController {
 
 
     //后台显示检索之后的代理商
-
-    /**
-     * 接收一个检索代理商的请求，显示检索之后的多条代理商信息，然后返回给客户端一个HTML页面
-     * @return
-     */
-    @RequestMapping("/backend/searchAgents")
-    public String searchAgentsController() {
-        return "";
-    }
+//
+//    /**
+//     * 接收一个检索代理商的请求，显示检索之后的多条代理商信息，然后返回给客户端一个HTML页面
+//     * @return
+//     */
+//    @RequestMapping("/backend/searchAgents")
+//    public String searchAgentsController() {
+//        return "";
+//    }
 
     //后台显示检索之后的代理商班级信息
 
-    /**
-     * 接收一个检索代理商班级的请求，显示检索之后的代理商班级的信息，然后返回给客户端一个HTML页面
-     * @return
-     */
-    @RequestMapping("/backend/searchAgent")
-    public String searchAgentController() {
-        return "";
-    }
+//    /**
+//     * 接收一个检索代理商班级的请求，显示检索之后的代理商班级的信息，然后返回给客户端一个HTML页面
+//     * @return
+//     */
+//    @RequestMapping("/backend/searchAgent")
+//    public String searchAgentController() {
+//        return "";
+//    }
 
 
 }

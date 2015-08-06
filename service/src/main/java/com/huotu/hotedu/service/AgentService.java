@@ -1,9 +1,6 @@
 package com.huotu.hotedu.service;
 
-import com.huotu.hotedu.entity.Agent;
-import com.huotu.hotedu.entity.ClassTeam;
-import com.huotu.hotedu.entity.Exam;
-import com.huotu.hotedu.entity.Member;
+import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -45,13 +42,6 @@ public class AgentService {
      */
     public Agent addAgent(Agent agent){
         return agentRepository.save(agent);
-    }
-
-    /**
-     * 修改一位代理商
-     * @param agent 代理商对象
-     */
-    public void modify(Agent agent){agentRepository.save(agent);
     }
 
     /**
@@ -454,4 +444,60 @@ public class AgentService {
             memberRepository.save(mb);
         }
     }
+
+
+    /**
+     * Create by shiliting on 2015,8,5
+     * 查询代理商
+     * @param pageNo    显示第几页代理商
+     * @param pageSize  每页显示代理商数
+     * @param keyword   查询代理商关键字
+     * @param type      查询代理商类型
+     * @return
+     */
+    public Page<Agent> searchAgent(int pageNo,int pageSize,String keyword,String type){
+        return  agentRepository.findAll(new Specification<Agent>() {
+            @Override
+            public Predicate toPredicate(Root<Agent> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                if ("".equals(keyword)||keyword==null) {
+                    return cb.isTrue(root.get("enabled").as(Boolean.class));
+                }else if("all".equals(type)){
+                    return cb.and(cb.isTrue(root.get("enabled").as(Boolean.class)),cb.or(
+                            cb.like(root.get("name").as(String.class), "%" + keyword + "%"),
+                            cb.like(root.get("phoneNo").as(String.class), "%" + keyword + "%"),
+                            cb.like(root.get("area").as(String.class), "%" + keyword + "%"),
+                            cb.like(root.get("level").as(String.class), "%" + keyword + "%"),
+                            cb.like(root.get("loginName").as(String.class), "%" + keyword + "%")
+
+                            ));
+
+                }else{
+                    return  cb.and(
+                            cb.like(root.get(type).as(String.class),"%"+keyword+"%"),
+                            cb.isTrue(root.get("enabled").as(Boolean.class))
+                    );
+
+                }
+            }
+        },new PageRequest(pageNo, pageSize));
+    }
+
+    /**
+     * 修改代理商
+     * @param agent   修改过的代理商
+     */
+    public void modifyAgent(Agent agent){
+        agentRepository.save(agent);
+    }
+
+    /**
+     * 查找一个代理商
+     * @param id    代理商ID
+     * @return
+     */
+    public Agent findAgentById(long id){
+        return agentRepository.findOne(id);
+    }
+
+
 }

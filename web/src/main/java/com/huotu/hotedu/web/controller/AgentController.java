@@ -3,26 +3,32 @@ package com.huotu.hotedu.web.controller;
 import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.ClassTeamService;
+import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.service.MemberService;
+import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.UnsupportedEncodingException;
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by luffy on 2015/6/10.
- * 登录有关的Controller
  *
  * @author luffy luffy.ja at gmail.com
  */
@@ -33,9 +39,15 @@ public class AgentController {
     private AgentService agentService;
     @Autowired
     private MemberService memberService;
-
     @Autowired
     private ClassTeamService classTeamService;
+    /**
+     * 用来储存处理静态资源的接口
+     */
+    @Autowired
+    StaticResourceService staticResourceService;
+    @Autowired
+    LoginService loginService;
 
     /**
      * 用来储存分页中每页的记录数
@@ -450,5 +462,151 @@ public class AgentController {
         result.setMessage("操作成功");
         return result;
     }
+//    ==============================================华丽丽的分割线=========================================================
+
+    /**
+     * Create by shiliting on 2015,8,5
+     * 查找代理商
+     * @param searchSort    查询代理商类型
+     * @param pageNo        显示代理商页数
+     * @param keywords      查询代理商关键字
+     * @param model         返回的参数
+     * @return              agents.html
+     */
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping("/backend/searchAgents")
+    public String searchAgents(@RequestParam(required = false,value = "searchSort")String searchSort,
+                               @RequestParam(required = false)Integer pageNo,
+                               @RequestParam(required = false) String keywords,
+                               Model model){
+        String turnPage="/backend/agents";
+        if(pageNo==null||pageNo<0){
+            pageNo=0;
+        }
+        Page<Agent> pages = agentService.searchAgent(pageNo, PAGE_SIZE,keywords, searchSort);
+        long totalRecords = pages.getTotalElements();
+        int numEl =  pages.getNumberOfElements();
+        if(numEl==0) {
+            pageNo=pages.getTotalPages()-1;
+            if(pageNo<0) {
+                pageNo = 0;
+            }
+            pages = agentService.searchAgent(pageNo, PAGE_SIZE, keywords, searchSort);
+            totalRecords = pages.getTotalElements();
+        }
+        model.addAttribute("allAgentList", pages);
+        model.addAttribute("totalPages",pages.getTotalPages());
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("keywords", keywords);
+        model.addAttribute("totalRecords", totalRecords);
+        model.addAttribute("searchSort",searchSort);
+        return turnPage;
+    }
+
+
+    /**
+     * 进入修改代理商页面
+     * @param id       代理商ID
+     * @param model    返回的参数
+     * @param request  请求
+     * @return
+     */
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping("/backend/modifyAgent")
+    public String modifyAgent(Long id, Model model,HttpServletRequest request){
+        Agent agent=agentService.findOneById(id);
+        //返回
+        agent.setPictureUri(request.getContextPath() + "/uploadResources" + agent.getPictureUri());
+        model.addAttribute("agent",agent);
+        return "/backend/modifyAgent";
+    }
+
+    /**
+     * 跳转到添加代理商页面
+     * @return
+     */
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping("/backend/addAgent")
+    public String addAgent(){
+        return "/backend/newagent";
+    }
+
+
+    /**
+     * 添加代理商
+     * @param name        代理商姓名
+     * @param loginName   登录用户名
+     * @param sex         性别
+     * @param area        区域
+     * @param phoneNo     手机号
+     * @param level       代理商等级
+     * @param file        代理商照片
+     * @return            重定向到搜索代理商
+     * @throws Exception  图片出错异常
+     */
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping(value = "/backend/addSaveAgent",method = RequestMethod.POST)
+    public String addSaveAgent(String name,String loginName,int sex,String area,String phoneNo,String level,@RequestParam("smallimg") MultipartFile file) throws Exception{
+        //文件格式判断
+        if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+        if(file.getSize()==0){throw new Exception("文件为空！");}
+
+        //保存图片
+        String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+        staticResourceService.uploadResource(fileName,file.getInputStream());
+
+        Agent agent=new Agent();
+        agent.setPictureUri(fileName);
+        agent.setArea(area);
+        agent.setName(name);
+        agent.setRegisterDate(new Date());
+        agent.setPhoneNo(phoneNo);
+        agent.setLevel(level);
+        agent.setLoginName(loginName);
+        agent.setSex(sex);
+        loginService.newLogin(agent,"123456");
+        return "redirect:/backend/searchAgents";
+    }
+
+
+    /**
+     * 修改一位代理商
+     * @param id          代理商ID
+     * @param name        代理商姓名
+     * @param loginName   登录用户名
+     * @param sex         性别
+     * @param area        区域
+     * @param phoneNo     手机号
+     * @param level       代理商等级
+     * @param file        代理商照片
+     * @return            重定向到/backend/searchAgents
+     * @throws Exception  文件格式出错
+     */
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping("/backend/modifySaveAgent")
+    public String modifySaveAgent(Long id,String name,String loginName,int sex,String area,String phoneNo,String level,@RequestParam("smallimg") MultipartFile file) throws Exception{
+        if(file.getSize()!=0){
+            if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+        }
+        staticResourceService.deleteResource(staticResourceService.getResource(agentService.findOneById(id).getPictureUri()));
+        String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+        staticResourceService.uploadResource(fileName,file.getInputStream());
+
+        Agent agent=agentService.findOneById(id);
+        if(file.getSize()!=0){
+            agent.setPictureUri(fileName);
+        }
+        agent.setArea(area);
+        agent.setName(name);
+        agent.setPhoneNo(phoneNo);
+        agent.setLevel(level);
+        agent.setLoginName(loginName);
+        agent.setSex(sex);
+        agentService.modifyAgent(agent);
+        return "redirect:/backend/searchAgents";
+    }
+
+
 
 }

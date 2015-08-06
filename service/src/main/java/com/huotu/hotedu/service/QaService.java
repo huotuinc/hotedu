@@ -51,7 +51,6 @@ public class QaService {
     //修改一条常见问题
     public void modify(Qa Qa){
         qaRepository.save(Qa);
-
     }
     //查找一条常见问题
     public Qa findOneById(Long id){

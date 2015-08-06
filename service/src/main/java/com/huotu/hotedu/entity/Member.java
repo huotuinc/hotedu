@@ -62,7 +62,7 @@ public class Member extends Login {
      */
     private int passed=0;
     /**
-     * 是否领证
+     * 是否申请领证
      */
     private boolean haveLicense=false;
 
@@ -188,6 +188,7 @@ public class Member extends Login {
     public void setHaveLicense(boolean haveLicense) {
         this.haveLicense = haveLicense;
     }
+
 
     @Override
     public String getUsername() {

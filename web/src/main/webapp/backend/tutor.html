@@ -6,7 +6,7 @@
     <title>云商学院后台管理</title>
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
-    <script type="text/javascript" src="js/libs/jquery.min.js" th:src="@{/backend/js/libs/jquery.min.js}"></script>
+    <script type="text/javascript" src="js/libs/jquery-1.7.2.min.js" th:src="@{/backend/js/libs/jquery-1.7.2.min.js}"></script>
     <script type="text/javascript" src="js/libs/modernizr.min.js" th:src="@{/backend/js/libs/modernizr.min.js}"></script>
     <!--警告框控件-->
     <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
@@ -207,7 +207,7 @@
                     </table>
                     <div class="list-page">
                         <a href="#" th:if="${pageNo}>0" th:href="@{/backend/searchTutor(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort},dateStart=${dateStart},dateEnd=${dateEnd})}">上一页</a>
-                        <a href="#" th:if="${totalPages}-1>${pageNo}" th:href="@{/backend/searchTutor(n=${pageNo}+1,keywords=${keywords},searchSort=${searchSort},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage})}">下一页</a>
+                        <a href="#" th:if="${totalPages}-1>${pageNo}" th:href="@{/backend/searchTutor(n=${pageNo}+1,keywords=${keywords},searchSort=${searchSort},dateStart=${dateStart},dateEnd=${dateEnd})}">下一页</a>
                         <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
                     </div>
                 </div>

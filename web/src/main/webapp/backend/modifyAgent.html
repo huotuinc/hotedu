@@ -56,7 +56,7 @@
                         <ul class="sub-menu" style="display: block;">
                             <li><a href="certificateapplications.html"
                                    th:href="@{/backend/loadCertificateapplications}">申请领证列表</a></li>
-                            <li class="on"><a href="agents.html" th:href="@{/backend/loadAgents}">代理商列表</a></li>
+                            <li class="on"><a href="agents.html" th:href="@{/backend/searchAgents}">代理商列表</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -68,51 +68,52 @@
         <div class="crumb-wrap">
             <div class="crumb-list"><i class="icon-font"></i><a href="certificateapplications.html" th:href="@{/backend/loadCertificateapplications}">管理代理商表</a><span
                     class="crumb-step">&gt;</span><a href="agents.html"><span class="crumb-name" th:href="@{/backend/searchAgents}">代理商列表</span></a><span
-                    class="crumb-step">&gt;</span><span class="crumb-name">新增代理商</span></div>
+                    class="crumb-step">&gt;</span><span class="crumb-name">修改代理商</span></div>
         </div>
         <div class="jp-container2">
         <div class="result-wrap">
-            <form action="#" method="post" class="myform" name="myform" th:action="@{/backend/addSaveAgent}">
+            <form action="#" method="post" class="myform" name="myform" th:action="@{/backend/modifySaveAgent()}" enctype="multipart/form-data">
                 <div class="config-items">
                     <div class="result-content">
                         <table width="100%" class="insert-tab">
                             <tbody>
                             <tr>
                                 <th><i class="require-red">*</i>上传图片：</th>
-                                <td><img src="images/logo.png"  style="width: 100px; height: auto;"/><input name="smallimg" type="file"/><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>-->
+                                <td><img src="images/logo.png"  style="width: 100px; height: auto;"/><input name="smallimg"
+                                                                                                   type="file"/><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>-->
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>姓名：</th>
-                                <td><input title="" type="text" value="" size="70" name="name" class="common-text"/>
+                                <td><input title="" type="text" value="" size="70" name="description" class="common-text"/>
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>用户名：</th>
-                                <td><input title="" type="text" value="" size="70" name="loginName" class="common-text"/>
+                                <td><input title="" type="text" value="" size="70" name="description" class="common-text"/>
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>性别：</th>
-                                <td><input title="" type="text" value="" size="70" name="sex" class="common-text"/>
+                                <td><input title="" type="text" value="" size="70" name="description" class="common-text"/>
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>电话：</th>
-                                <td><input title="" type="text" value="" size="70" name="phoneNo" class="common-text"/>
+                                <td><input title="" type="text" value="" size="70" name="description" class="common-text"/>
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>区域：</th>
-                                <td><input title="" type="text" value="" size="70" name="area" class="common-text"/>
+                                <td><input title="" type="text" value="" size="70" name="description" class="common-text"/>
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>设置代理级别：</th>
-                                <td><select title="" name="level" class="required">
-                                    <option value="1">一级代理</option>
-                                    <option value="2">二级代理</option>
-                                    <option value="3">三级代理</option>
+                                <td><select title="" name="colId" class="required">
+                                    <option value="">一级代理</option>
+                                    <option value="">二级代理</option>
+                                    <option value="">三级代理</option>
                                 </select></td>
                             </tr>
                             <tr>

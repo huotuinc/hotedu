@@ -5,7 +5,7 @@
     <title>云商学院后台管理</title>
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
-    <script type="text/javascript" src="js/libs/jquery.min.js" th:src="@{/backend/js/libs/jquery.min.js}"></script>
+    <script type="text/javascript" src="js/libs/jquery-1.7.2.min.js" th:src="@{/backend/js/libs/jquery-1.7.2.min.js}"></script>
     <script type="text/javascript" src="js/libs/modernizr.min.js"
             th:src="@{/backend/js/libs/modernizr.min.js}"></script>
     <!--滚动条-->
@@ -54,7 +54,7 @@
                         <ul class="sub-menu" style="display:block;">
                             <li><a href="certificateapplications.html"
                                    th:href="@{/backend/loadCertificateapplications}">申请领证列表</a></li>
-                            <li class="on"><a href="agents.html" th:href="@{/backend/loadAgents}">代理商列表</a></li>
+                            <li class="on"><a href="agents.html" th:href="@{/backend/searchAgents}">代理商列表</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -71,14 +71,19 @@
         <div class="jp-container2">
         <div class="search-wrap">
             <div class="search-content">
-                <form action="#" method="post">
+                <form action="#" method="post" th:action="@{/backend/searchAgents}">
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
-                            <td><select name="search-sort" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
-                                <option value="">区域</option>
+                            <td><select name="searchSort" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
+                                <option value="all" selected="selected">全部</option>
+                                <option value="name">姓名</option>
+                                <option value="loginName">用户名</option>
+                                <option value="level">代理级别</option>
+                                <option value="area">区域</option>
+                                <option value="phoneNo">电话</option>
                             </select></td>
-                            <td><input class="common-text" placeholder="关键字" name="keywords" value=""
+                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" th:value="${keywords}"
                                        type="text"/></td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
                         </tr>
@@ -87,10 +92,10 @@
             </div>
         </div>
         <div class="result-wrap">
-            <form name="myform" id="myform" method="post">
+            <form name="myform" id="myform" method="post" th:href="@{/backend/addAgent}">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="newagent.html"><i class="icon-font"></i>新增代理商</a>
+                        <a href="newagent.html"><i class="icon-font">+</i>新增代理商</a>
                     </div>
                 </div>
                 <div class="result-content">
@@ -106,7 +111,7 @@
                             <th style="width:100px">总共有</th>
                             <th style="width:80px">操作</th>
                         </tr>
-                        <tr>
+                        <tr th:remove="all">
                             <td>01</td>
                             <td title="">某某</td>
                             <td title="">asfdafds</td>
@@ -118,7 +123,7 @@
                             <td><a class="link-update" href="agent.html">查看</a><br/><a class="link-update"
                                                                                        href="#">修改</a></td>
                         </tr>
-                        <tr>
+                        <tr th:remove="all">
                             <td>01</td>
                             <td title="">某某</td>
                             <td title="">asfdafds</td>
@@ -129,9 +134,26 @@
                             <td>1600本</td>
                             <td><a class="link-update" href="agent.html">查看</a><br/><a class="link-update"
                                                                                        href="#">修改</a></td>
+                        </tr>
+                        <tr th:each="g:${allAgentList}">
+                            <td th:text="${g.id}">01</td>
+                            <td th:text="${g.name}" title="">某某</td>
+                            <td th:text="${g.loginName}" title="">asfdafds</td>
+                            <td th:text="${g.level}" title="">总级代理</td>
+                            <td th:text="${g.area}">杭州</td>
+                            <td th:text="${g.phoneNo}">15068564912</td>
+                            <td th:text="${g.sendCertificateNumber}+'本'">160本</td>
+                            <td th:text="${g.certificateNumber}+'本'"> 1600本</td>
+                            <td><a class="link-update" href="agent.html" th:href="@{/backend/lookAgent}">查看</a><br/>
+                                <a class="link-update" th:href="@{/backend/modifyAgent}" href="#">修改</a></td>
                         </tr>
                     </table>
-                    <div class="list-page"> 2 条 1/1 页</div>
+                    <div class="list-page">
+                        <a href="#" th:if="${pageNo}>0" th:href="@{/backend/searchAgent(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
+                        <a href="#" th:if="${totalPages}-1>${pageNo}" th:href="@{/backend/searchAgent(n=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
+                        <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
+                    </div>
+
                 </div>
             </form>
         </div>

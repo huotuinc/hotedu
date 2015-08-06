@@ -9,7 +9,6 @@
     <script type="text/javascript" src="js/jquery-1.7.2.min.js" ></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" ></script>
     <script rel="stylesheet" type="text/javascript" src="js/cookie_util.js" ></script>
-    <script rel="stylesheet" type="text/javascript" src="js/baseValue.js" ></script>
     <script rel="stylesheet" type="text/javascript" src="js/indexuser.js" ></script>
 </head>
 <body>
@@ -25,11 +24,6 @@
             <li id="loginLi" style="padding:0px 0px 0px 20px;" th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
                 <a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
             </li>
-
-
-
-
-
             <li id="userLi" style="padding:0px;display:none" th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
                 <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
                 <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
@@ -250,6 +244,7 @@
     <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
 
     <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
+    <p th:text="${#authentication.name}"></p>
 </div>
 
 

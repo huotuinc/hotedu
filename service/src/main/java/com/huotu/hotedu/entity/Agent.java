@@ -24,6 +24,10 @@ public class Agent extends Login{
      */
     private String name;
     /**
+     * 性别：0代表女生，1代表男生
+     */
+    private int sex;
+    /**
      * 法人代表
      */
     private String corporation;
@@ -143,6 +147,14 @@ public class Agent extends Login{
 
     public void setCorporation(String corporation) {
         this.corporation = corporation;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
     }
 
     @Override
