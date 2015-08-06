@@ -133,7 +133,7 @@ function check_del(h) {
 }
 
 function delVideoByFileId(obj) {
-    var fileIds = $(h).parent().children().eq(0).val();
+    var fileIds = $(obj).parent().children().eq(0).val();
     $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
         $.ajax({
             url:"delVideo",

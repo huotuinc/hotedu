@@ -47,8 +47,8 @@
                     success:function(result){
                         if(result.status==1){
                             //跳转链接
-                            alert("您的证书编号为："+result.body);
-//                            window.location.href="http://www.gcvaic.org:8080/index.aspx";
+                            alert("您的证书编号为："+result.body+" 请复制保存并在公共证书查询网站中查询！");
+                            window.location.href="http://www.gcvaic.org";
                         }else if(result.status==0){
                             alert("还没领到证书哦~");
                         }

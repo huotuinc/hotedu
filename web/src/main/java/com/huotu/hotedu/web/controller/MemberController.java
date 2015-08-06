@@ -452,7 +452,9 @@ public class MemberController {
         if(member!=null) {
             flag = member.getPassed() == 1 && member.getCertificate() != null;
             result.setStatus(flag?1:0);
-            result.setBody(member.getCertificate().getCertificateNo());
+            if(result.getStatus()==1) {
+                result.setBody(member.getCertificate().getCertificateNo());
+            }
         }else{
             result.setStatus(0);
         }
