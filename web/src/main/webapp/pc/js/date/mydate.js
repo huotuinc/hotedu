@@ -7,9 +7,9 @@ $(function (){
         showWeek:false,          //是否显示星期,默认为false
         showButtonPanel:true,   //是否显示取消按钮，并含有today按钮，默认为false
         yearRange:'2010:2060',  //显示可供选择的年份
-        defaultDate:+0          //表示默认日期是在当前日期加0天
-
-});
+        defaultDate:+0,          //表示默认日期是在当前日期加0天
+        minDate:new Date()
+    });
 
     $.datepicker.regional['zh-CN'] = {
         closeText: '关闭',
