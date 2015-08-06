@@ -45,7 +45,7 @@ public class Member extends Login {
     /**
      * 报名信息确认者
      */
-    private String ConfirmPerson;
+    private String confirmPerson;
 
     /**
      * 所属班级
@@ -157,11 +157,11 @@ public class Member extends Login {
 
 
     public String getConfirmPerson() {
-        return ConfirmPerson;
+        return confirmPerson;
     }
 
     public void setConfirmPerson(String confirmPerson) {
-        ConfirmPerson = confirmPerson;
+        confirmPerson = confirmPerson;
     }
 
     public ClassTeam getTheClass() {
