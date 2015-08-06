@@ -192,4 +192,8 @@ public class MemberService {
         return mb;
     }
 
+    public Member findOneByCertificate(Certificate certificate){
+        return memberRepository.findBycertificate(certificate);
+    }
+
 }

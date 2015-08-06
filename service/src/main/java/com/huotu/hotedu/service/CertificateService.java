@@ -24,4 +24,14 @@ public class CertificateService {
         return certificateRepository.findBymember(member);
     }
 
+    public Certificate findOneBycertificateNo(String no){
+        return certificateRepository.findBycertificateNo(no);
+    }
+    public Certificate findOneById(Long id){
+        return certificateRepository.findOne(id);
+    }
+    public void modifyCertificate(Certificate certificate){
+        certificateRepository.save(certificate);
+    }
+
 }

@@ -477,4 +477,24 @@ public class MemberController {
     }
 
 
+    @RequestMapping("/backend/issueCertificate")
+    @ResponseBody
+    public Result issueCertificate(String certificateNo,long memberId,long certificateId){
+        Result result=new Result();
+        if(certificateService.findOneBycertificateNo(certificateNo)!=null){  //验证发的证书是否已经发过了
+            result.setStatus(0);
+        }else{
+            Member member=memberService.findOneById(memberId);
+            Certificate certificate=certificateService.findOneById(certificateId);
+            certificate.setCertificateNo(certificateNo);
+            certificateService.modifyCertificate(certificate);
+            member.setCertificate(certificate);
+            memberService.modifyMember(member);
+            result.setStatus(1);
+        }
+        return result;
+    }
+    //TODO有待完善
+
+
 }

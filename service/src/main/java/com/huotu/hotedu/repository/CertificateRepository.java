@@ -15,4 +15,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CertificateRepository extends JpaRepository<Certificate,Long>,ClassicsRepository<Certificate>,JpaSpecificationExecutor<Certificate>{
     Certificate findBymember(Member member);
+    Certificate findBycertificateNo(String no);
 }

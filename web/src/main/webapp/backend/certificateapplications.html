@@ -19,11 +19,13 @@
     <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
             th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
     <script type="text/javascript" th:inline="javascript">
+        var memberId;
+        var certificateId;
         $(function(){
             //发证按钮添加弹出窗口
             $("#apply_tab tr a:odd").click(function(){
                 var memberTds=$(this).parent().parent().children("td");
-                var memberId=memberTds[0].innerHTML;
+                memberId=memberTds[0].innerHTML;
                 var applyDate=memberTds[4].innerHTML;
                 $.ajax({
                     url:"getCertificateByMemberId",
@@ -36,6 +38,7 @@
                             $(".res-info").eq(1).text(applyDate);
                             $(".res-info").eq(2).text(result.body.receiveAddress);
                             $(".res-info").eq(3).text(result.body.phoneNo);
+                            certificateId=result.body.id;
                         }else{
                             alert("ID无效~");
                         }
@@ -50,6 +53,31 @@
 
             //关闭弹出窗口
             $("#popup_app").on("click","#button_close",function(){
+                $("#popup_app").hide();
+            });
+            //单机提交
+            $("#popup_app").on('click',"#button_submit",function(){
+                var certificateNo=$("#Cer_no").val();
+                console.log(memberId);
+                console.log(certificateNo);
+                $.ajax({
+                    url:"issueCertificate",
+                    type:"post",
+                    dataType:"json",
+                    data:{"certificateNo":certificateNo,"memberId":memberId,"certificateId":certificateId},
+                    success:function(result){
+                        if(result.status==1){
+                            alert("颁发证书成功！")
+                        }else{
+                            alert("证书已经被使用或无效证书");
+                        }
+                    },
+                    error:function(){
+                        alert("系统异常,颁发证书异常！");
+                    }
+                });
+
+                console.log("已经执行过ajax了")
                 $("#popup_app").hide();
             });
         });
@@ -140,7 +168,7 @@
                                         <tbody>
                                         <tr>
                                             <th><i class="require-red">*</i>证书编号：</th>
-                                            <td><input type="text" id="" value="" size="30" name="description" class="common-text"/></td>
+                                            <td><input id="Cer_no" type="text" value="" size="30" name="description" class="common-text"/></td>
                                         </tr>
 
                                         <tr>
@@ -148,7 +176,7 @@
                                             <span id="span_warn" class="warning-style" style="display: none">警告！已经有证书了/格式不正确/</span>
                                             <td>
 
-                                                <input id="button_submit" type="submit" value="提交" class="btn btn-primary btn6 mr10"/>
+                                                <input id="button_submit" type="button" value="提交" class="btn btn-primary btn6 mr10"/>
                                                 <input id="button_close" type="button" value="关闭" class="btn btn6"/>
                                             </td>
                                         </tr>
