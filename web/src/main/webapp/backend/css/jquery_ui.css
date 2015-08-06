@@ -1,6 +1,4 @@
 
-/* jquery ÈÕÆÚ¿Ø¼þ
-----------------------------------*/
 .ui-helper-hidden {
 	display: none;
 }
@@ -932,7 +930,7 @@ body .ui-tooltip {
 .ui-state-default .ui-icon {
 	background-image: url(images/ui-icons_228ef1_256x240.png);
 }
-/*×óÓÒ°´Å¥µã»÷ºóµÄÍ¼Æ¬Ð§¹û*/
+/*ï¿½ï¿½ï¿½Ò°ï¿½Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬Ð§ï¿½ï¿½*/
 .ui-state-hover .ui-icon,
 .ui-state-focus .ui-icon {
 	background-image: url(images/ui-icons_228ef1_256x240.png);
