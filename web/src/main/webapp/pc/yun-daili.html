@@ -51,6 +51,7 @@
                     <p style="display: none" class="lbpoo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
                         <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
                         <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
+                        <a href="#" onclick="showChangePwdForm()">修改密码</a>
                         <a href="#" th:href="@{/logout}">退出</a></p>
                 </li>
             </ul>
@@ -114,7 +115,7 @@
                                 <option value="all">全部</option>
                                 <option value="payed">交费状态</option>
                                 <option value="passed">考试状态</option>
-                                <option value="haveLicense">领证状态</option>
+                                <option value="applyedCertificateOrNot">领证状态</option>
                             </select></td>
                             <td id="td_key">
                                 <input id="input_search1" style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" th:value="${keywords}" value="" type="text"/></td>
@@ -218,7 +219,7 @@
                                 <td th:text="${g.payed}?'是':'否'" title="">是</td>
                                 <td th:text="${#calendars.format(g.applyDate,'yyyy-MM-dd')}" title="">2015.04.01</td>
                                 <td th:text="${g.passed}==0?'':(${g.passed}==1?'通过':'待补考')" title="">--</td>
-                                <td th:text="${g.haveLicense}?'是':'否'" title="">--</td>
+                                <td th:text="${g.applyedCertificateOrNot}?'是':'否'" title="">--</td>
                                 <td th:text="${g.theClass}==null? '未分配':${g.theClass.className}" title="">201504第一期</td>
                                 <td><a class="link-update" href="#"
                                        th:href="@{/pc/detailMember(id=${g.id})}">查看</a><br/>
@@ -1050,6 +1051,43 @@
     </div>
 </div>
 <!--新增学员end-->
+<!--修改密码弹窗-->
+<div id="showChangePwdDiv" style="display:none" class="ystc">
+    <div class="box-ys" width="462px">
+        <P style="text-align:right;"><a href="#" onclick="$('#showChangePwdDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+        <p style="height:20px"></p>
+        <table width="100%" class="insert-tab" style="padding-left:20px" >
+            <tbody>
+            <tr>
+                <th><i class="require-red">*</i>旧密码：</th>
+                <td><input id="oldPwd" style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;"
+                           type="password" size="20"
+                           class="common-text"/>
+                </td>
+            </tr>
+            <tr>
+                <th><i class="require-red">*</i>新密码：</th>
+                <td><input id="newPwd" style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;"
+                           type="password" size="20"
+                           class="common-text"/></td>
+            </tr>
+            <tr>
+                <th><i class="require-red">*</i>确认密码：</th>
+                <td><input id="confirmPwd" style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;"
+                           type="password" size="20"
+                           class="common-text"/></td>
+            </tr>
+            </tbody>
+        </table>
+        <p style="height:20px"/>
+        <div style="float:right;">
+            <button type="button" class="btni btn-primaryi btn6 mr10" id="submitNewPwdButton">提交</button>
+        </div>
+        <span id="changePwdSuccess" style="color:blue;"/>
+        <span id="changePwdFailed" style="color:red;"/>
+    </div>
+</div>
+<!--修改密码弹窗end-->
 <script type="text/javascript">
     function goBackToArrangeClassFromNewClass() {
         $("#noClassMemberArrageClassDiv").show();
@@ -1078,6 +1116,11 @@
         autoPage: true,
         trigger: "click"
     });
+</script>
+<script type="text/javascript">
+    function showChangePwdForm() {
+        $("#showChangePwdDiv").show();
+    }
 </script>
 </html>
 
