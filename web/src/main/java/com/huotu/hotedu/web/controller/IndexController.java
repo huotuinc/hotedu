@@ -51,12 +51,21 @@ public class IndexController {
     }
 
     /**
-     * 显示主页信息
+     * 显示后台主页信息
      * @return
      */
     @RequestMapping("/backend/index")
     public String loadIndex(){
         return "/backend/index";
+    }
+
+    /**
+     * 显示网站主页
+     * @return
+     */
+    @RequestMapping("/")
+    public String loadWeb() {
+        return "redirect:/pc/index";
     }
 
 }

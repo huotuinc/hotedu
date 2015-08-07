@@ -25,23 +25,28 @@ public interface StaticResourceService {
     /**
      * 企业的LOGO
      */
-    public  String COMPANY_LOGO="/image/company/";
+    public  String COMPANY_LOGO="image/company/";
     /**
      * 导师的头像
      */
-    public  String TUTOR_ICON="/image/tutor/";
+    public  String TUTOR_ICON="image/tutor/";
     /**
      * 咨询动态的图片
      */
-    public  String MESSAGECONTENT_ICON="/image/messageContent/";
+    public  String MESSAGECONTENT_ICON="image/messageContent/";
     /**
      * 会员的头像
      */
-    public  String MEMBER_ICON="/image/member/";
+    public  String MEMBER_ICON="image/member/";
     /**
      * 证书所属人的照片
      */
-    public  String CERTIFICATE_ICON="/image/certificate/";
+    public  String CERTIFICATE_ICON="image/certificate/";
+
+    /**
+     * 考试指南图片uri
+     */
+    public String EXAMGUIDE_ICON = "image/examGuide/";
 
     /**
      * 上传资源
