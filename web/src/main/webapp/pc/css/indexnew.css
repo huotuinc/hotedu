@@ -1240,3 +1240,9 @@ button.btn, input.btn {
   margin: 0 auto;
   left: 0;
   right: 0;}
+  .jsjj{margin: 0 auto;
+  width: 960px;
+  line-height: 31px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 20px;}
+  .jsjj b{color:#00C3FF; font-size:16px;}
