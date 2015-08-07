@@ -2,6 +2,7 @@ package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.service.ExamGuideService;
+import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -9,8 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.beans.Expression;
+import java.net.URISyntaxException;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by shiliting on 2015/6/10.
@@ -25,11 +31,15 @@ public class ExamGuideController {
      */
     @Autowired
     private ExamGuideService examGuideService;
-
     /**
      * 用来储存分页中每页的记录数
      */
     public static final int PAGE_SIZE = 10;
+    /**
+     * 用来储存处理静态资源的接口
+     */
+    @Autowired
+    StaticResourceService staticResourceService;
 
 
     /**
@@ -105,8 +115,9 @@ public class ExamGuideController {
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifyExamGuide")
-    public String modifyExamGuide(Long id, Model model) {
+    public String modifyExamGuide(Long id, Model model) throws Exception {
         ExamGuide examGuide = examGuideService.findOneById(id);
+        examGuide.setPictureUri(staticResourceService.getResource(examGuide.getPictureUri()).toURL().toString());
         model.addAttribute("examGuide", examGuide);
         return "/backend/modifyguide";
     }
@@ -120,11 +131,19 @@ public class ExamGuideController {
      * @param top     是否置顶
      * @return 不出异常重定向：/backend/searchExamGuide
      */
-    //TODO 是否搞抛出异常
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/addSaveExamGuide")
-    public String addSaveExamGuide(String title, String content, String top) {
+    public String addSaveExamGuide(String title, String content, String top ,@RequestParam("smallimg") MultipartFile file) throws Exception{
+        //文件格式判断
+        if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+        if(file.getSize()==0){throw new Exception("文件为空！");}
+
+        //保存图片
+        String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+        staticResourceService.uploadResource(fileName,file.getInputStream());
+
         ExamGuide examGuide = new ExamGuide();
+        examGuide.setPictureUri(fileName);
         examGuide.setTitle(title);
         examGuide.setContent(content);
         examGuide.setLastUploadDate(new Date());
@@ -144,8 +163,17 @@ public class ExamGuideController {
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveExamGuide")
-    public String modifySaveExamGuide(Long id, String title, String content, String top) {
+    public String modifySaveExamGuide(Long id, String title, String content, String top ,@RequestParam("smallimg") MultipartFile file) throws Exception{
+        //文件格式判断
+        if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+        if(file.getSize()==0){throw new Exception("文件为空！");}
+
+        //保存图片
+        String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+        staticResourceService.uploadResource(fileName,file.getInputStream());
+
         ExamGuide examGuide = examGuideService.findOneById(id);
+        examGuide.setPictureUri(fileName);
         examGuide.setTitle(title);
         examGuide.setContent(content);
         examGuide.setTop("1".equals(top));
@@ -154,8 +182,15 @@ public class ExamGuideController {
         return "redirect:/backend/searchExamGuide";
     }
 
+    /**
+     * Created by shiliting on 2015/8/7.
+     * 前台加载考试指南
+     * @param pageNo    第几页
+     * @param model     返回客户端集
+     * @return          yun-kaoshizn.html
+     */
     @RequestMapping("/pc/loadExamGuide")
-    public String loadExamGuide(@RequestParam(required = false)Integer pageNo,Model model){
+    public String loadExamGuide(@RequestParam(required = false)Integer pageNo,Model model) throws Exception{
         String turnPage="/pc/yun-kaoshizn";
         if(pageNo==null||pageNo<0){
             pageNo=0;
@@ -171,6 +206,11 @@ public class ExamGuideController {
             pages = examGuideService.loadExamGuide(pageNo, PAGE_SIZE);
             totalRecords = pages.getTotalElements();
         }
+
+        for(ExamGuide examGuide : pages){
+            examGuide.setPictureUri(staticResourceService.getResource(examGuide.getPictureUri()).toURL().toString());
+        }
+
         Date today = new Date();
         model.addAttribute("allExamGuideList", pages);
         model.addAttribute("totalPages",pages.getTotalPages());

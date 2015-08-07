@@ -200,7 +200,6 @@ public class AgentController {
      * @param keywords   关键词
      * @param searchSort 搜索类型
      * @param pageNo     第几页
-     * @param noClassMemberArrageNewClassDivStyle    新建班级框是否显示
      * @param model      返回客户端集
      * @return yun-daili.html  班级管理选项卡
      */
@@ -209,7 +208,6 @@ public class AgentController {
                                      @RequestParam(required = false) String keywords,
                                      @RequestParam(required = false) String searchSort,
                                      @RequestParam(required = false) Integer pageNo,
-                                     @RequestParam(required = false) Boolean noClassMemberArrageNewClassDivStyle,
                                      Model model) {
         if (pageNo == null || pageNo < 0) {
             pageNo = 0;
@@ -230,7 +228,6 @@ public class AgentController {
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("totalRecords", totalRecords);
         model.addAttribute("totalPages", pages.getTotalPages());
-        model.addAttribute("noClassMemberArrageNewClassDivStyle", noClassMemberArrageNewClassDivStyle);
 
         return "/pc/yun-daili";
     }
@@ -292,7 +289,6 @@ public class AgentController {
                                    @RequestParam(required = false) String keywords,
                                    @RequestParam(required = false) String searchSort,
                                    @RequestParam(required = false) Integer pageNo,
-                                   @RequestParam(required = false) Boolean noClassMemberArrageNewClassDivStyle,
                                    Model model) {
         if (pageNo == null || pageNo < 0) {
             pageNo = 0;
@@ -313,7 +309,6 @@ public class AgentController {
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("totalRecords", totalRecords);
         model.addAttribute("totalPages", pages.getTotalPages());
-        model.addAttribute("noClassMemberArrageNewClassDivStyle", noClassMemberArrageNewClassDivStyle);
 
         return "/pc/yun-daili";
     }
