@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -121,7 +122,6 @@ public class MemberController {
     public String loadPersonalCenter(@AuthenticationPrincipal Login user, Model model) {
         String errInfo = "";
         String turnPage = "/pc/yun-geren";
-        String style = "padding:0px;";
         String loginButton = "";
         if(user==null) {
             throw new IllegalStateException("尚未登录");
@@ -137,10 +137,8 @@ public class MemberController {
             return "redirect:/pc/searchMembers";
         }else if(user instanceof Manager) {
             return "redirect:/backend/index";
-
         }
         model.addAttribute("errInfo",errInfo);
-        model.addAttribute("style",style);
         model.addAttribute("loginButton",loginButton);
         return turnPage;
     }
@@ -412,65 +410,11 @@ public class MemberController {
         return result;
     }
 
- /*   *//**
-     * Created by jiashubing on 2015/8.
-     * 申请领证
-     * @param user      当前的成员
-     * @param file      上传的图片
-     * @param receiveName       收件人
-     * @param receiveAddress    收件地址
-     * @param contactAddress    联系地址
-     * @param model     返回客户端集
-     * @return          成员详细信息
-     *//*
-    @PreAuthorize("hasRole('MEMBER')")
-    @RequestMapping("/pc/applyForCertificate")
-    public String applyForCertificate(@AuthenticationPrincipal Login user,@RequestParam("pictureImg") MultipartFile file,
-                                      String receiveName,String receiveAddress,String contactAddress,String phoneNo,Model model)throws Exception {
-
-        String errInfo = "";
-        String turnPage = "redirect:/pc/loadPersonalCenter";
-        if(user==null) {
-            throw new IllegalStateException("尚未登录");
-        }else if(user instanceof Member) {
-//            Member mb = memberService.findOneByLoginName(user.getLoginName());
-            Member mb=(Member)user;
-            if(mb==null) {
-                errInfo = "加载信息失败";
-                turnPage = "/pc/yun-index";
-            }else {
-                //文件格式判断
-                if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
-                if(file.getSize()==0){throw new Exception("文件为空！");}
-                //保存图片
-                String fileName = StaticResourceService.MESSAGECONTENT_ICON + UUID.randomUUID().toString() + ".png";
-                staticResourceService.uploadResource(fileName, file.getInputStream());
-                //设置学员的申请领证时间
-                mb.setApplyCertificateDate(new Date());
-                mb.setCertificateStatus(2);
-                memberService.modifyMember(mb);
-
-                Certificate certificate = new Certificate();
-                certificate.setPictureUri(fileName);
-                certificate.setReceiveName(receiveName);
-                certificate.setReceiveAddress(receiveAddress);
-                certificate.setContactAddress(contactAddress);
-                certificate.setPhoneNo(phoneNo);
-                certificate.setMember(mb);
-                certificateService.addCertificate(certificate);
-
-                model.addAttribute("mb", mb);
-                model.addAttribute("certificate",certificate);
-            }
-        }
-        model.addAttribute("errInfo",errInfo);
-        return turnPage;
-    }*/
 
     @PreAuthorize("hasRole('MEMBER')")
     @RequestMapping("/pc/applyForCertificate")
     @ResponseBody
-    public Result applyForCertificate(@AuthenticationPrincipal Login user,@RequestParam("pictureImg") MultipartFile file,
+    public Result applyForCertificate(@AuthenticationPrincipal Login user,
                                       String receiveName,String receiveAddress,String contactAddress,String phoneNo)throws Exception {
 
         Result result = new Result();
@@ -479,23 +423,24 @@ public class MemberController {
             result.setMessage("尚未登录,请登录");
         }else if(user instanceof Member) {
             Member mb=(Member)user;
-            //文件格式判断
-            if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
-            if(file.getSize()==0){throw new Exception("文件为空！");}
-            //保存图片
-            String fileName = StaticResourceService.MESSAGECONTENT_ICON + UUID.randomUUID().toString() + ".png";
-            staticResourceService.uploadResource(fileName, file.getInputStream());
+            Certificate certificate = certificateService.findOneByMember(mb);
+            if(certificate==null) {
+                certificate = new Certificate();
+                certificate.setReceiveName(receiveName);
+                certificate.setReceiveAddress(receiveAddress);
+                certificate.setContactAddress(contactAddress);
+                certificate.setPhoneNo(phoneNo);
+                certificate.setMember(mb);
+            }else {
+                certificate.setReceiveName(receiveName);
+                certificate.setReceiveAddress(receiveAddress);
+                certificate.setContactAddress(contactAddress);
+                certificate.setPhoneNo(phoneNo);
+            }
             //设置学员的申请领证时间
             mb.setApplyCertificateDate(new Date());
             mb.setCertificateStatus(2);
             memberService.modifyMember(mb);
-            Certificate certificate = new Certificate();
-            certificate.setPictureUri(fileName);
-            certificate.setReceiveName(receiveName);
-            certificate.setReceiveAddress(receiveAddress);
-            certificate.setContactAddress(contactAddress);
-            certificate.setPhoneNo(phoneNo);
-            certificate.setMember(mb);
             certificateService.addCertificate(certificate);
             result.setStatus(1);
             result.setMessage("操作成功");
@@ -599,5 +544,46 @@ public class MemberController {
         return "redirect:/backend/searchMembers";
     }
 
+    /**
+     * 用ajaxfileupload上传文件
+     * @param user
+     * @param file
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/pc/ajaxFileUpload")
+    @ResponseBody
+    public Result ajaxFileUpload(@AuthenticationPrincipal Login user,@RequestParam("pictureImg") MultipartFile file,HttpServletResponse response)throws Exception {
+        Result result = new Result();
+        if(user==null) {
+            result.setStatus(0);
+            result.setMessage("尚未登录,请登录");
+        }else if(user instanceof Member) {
+            Member mb=(Member)user;
+            //文件格式判断
+            if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+            if(file.getSize()==0){throw new Exception("文件为空！");}
+            //保存图片
+            String fileName = StaticResourceService.MESSAGECONTENT_ICON + UUID.randomUUID().toString() + ".png";
+            staticResourceService.uploadResource(fileName, file.getInputStream());
+            Certificate certificate = certificateService.findOneByMember(mb);
+            //判断该学员是否提交过申请信息
+            if(certificate!=null) {
+                certificate.setPictureUri(fileName);
+            }else {
+                certificate = new Certificate();
+                certificate.setPictureUri(fileName);
+                certificate.setMember(mb);
+                certificateService.addCertificate(certificate);
+                certificate.setPictureUri(staticResourceService.getResource(certificate.getPictureUri()).toString());
+            }
+            result.setStatus(1);
+            result.setBody(certificate);
+            response.setHeader("X-frame-Options","SAMEORIGIN");
+            result.setMessage("操作成功");
+        }
+        return result;
+    }
 
 }

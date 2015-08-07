@@ -11,56 +11,6 @@
     <script rel="stylesheet" type="text/javascript" src="js/indexuser.js"></script>
     <script type="text/javascript" src="js/ajaxfileupload.js"></script>
     <script type="text/javascript" src="js/confirm.js"></script>
-    <script type="text/javascript" th:inline="javascript">
-        $(function(){
-            $("#btn_applyCertificate").click(function(){
-                /*<![CDATA[*/
-                var memberId = [[${mb.id}]];
-                /*]]>*/
-                $.ajax({
-                    url:"checkIsPassExam",
-                    type:"post",
-                    data:{"id":memberId},
-                    dataType:"json",
-                    success:function(result){
-                        if(result.status==1){
-                            $('#applyForCertificateDiv').show()
-                        }else if(result.status==0){
-                            alert("还没参加考试呢~");
-                        }else if(result.status==2){
-                            alert("考试未通过，无法申请领证哦~")
-                        }
-                    },
-                    error:function(){
-                        alert("系统异常,获取考试信息失败！");
-                    }
-                });
-            });
-            $("#btn_showCertificate").click(function(){
-                /*<![CDATA[*/
-                var memberId = [[${mb.id}]];
-                /*]]>*/
-                $.ajax({
-                    url:"checkHaveCertificate",
-                    type:"post",
-                    data:{"id":memberId},
-                    dataType:"json",
-                    success:function(result){
-                        if(result.status==1){
-                            //跳转链接
-                            alert("您的证书编号为："+result.body+" 请复制保存并在公共证书查询网站中查询！");
-                            window.location.href="http://www.gcvaic.org";
-                        }else if(result.status==0){
-                            alert("还没领到证书哦~");
-                        }
-                    },
-                    error:function(){
-                        alert("系统异常,获取考试信息失败！");
-                    }
-                });
-            });
-        });
-    </script>
 </head>
 
 <body style=" background-color:#f0f0f0; background:url(images/banner2.jpg) no-repeat; background-size:cover;">
@@ -68,21 +18,19 @@
     <div style=" background-color:#fff;">
         <div style=" background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png" class="logoimg"/>
             <ul class="navi">
-                <li><a href="yun-index.html" th:href="@{/pc/gerenToIndex}">首页</a></li>
-                <li><a href="#">公司简介</a></li>
-                <li class="active"><a href="yun-baomin.html">考证报名</a></li>
-                <li><a href="#">师资力量</a></li>
+                <li><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>
+                <li><a href="#" th:href="@{/pc/loadCompanyIntroduction}">公司简介</a></li>
+                <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
+                <li><a href="#" th:href="@{/pc/loadTutors}">师资力量</a></li>
                 <li><a href="#" th:href="@{/pc/loadVideo}">教学视频</a></li>
                 <li><a href="#" th:href="@{/pc/loadExamGuide}">考试指南</a></li>
                 <li><a href="#">招|应聘</a></li>
-                <li id="loginLi" style="padding:0px 0px 0px 20px;"><a href="javascript:void(0)" th:text="${loginButton}" onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
-                </li>
                 <!--@thymesVar id="style" type="java.lang.String"-->
-                <li id="userLi" style="padding:0px;display: none" th:style="${style}">
+                <li id="userLi" style="padding:0px;">
                     <a id="memberLi" href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
                     <p class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
 
-                    <p class="lbpo"><a id="" href="personalCenter_href" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
+                    <p class="lbpo"><a href="#" th:href="@{/pc/loadPersonalCenter}" th:text="${#authentication.name}">个人中心</a>
                         <a href="#" onclick="showChangePwdForm()">修改密码</a>
                         <a href="#" th:href="@{/logout}">退出</a></p>
                 </li>
@@ -199,7 +147,7 @@
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>收件人：</th>
-                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="receiveName" name="receiveName" th:value="${mb.certificate}==null?'':${mb.certificate.receiveName}" title="" type="text" value="" size="50" class="common-text"/></td>
+                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="receiveName" name="receiveName" th:value="${mb.certificate}==null?'':${mb.certificate.receiveName}" type="text" size="50" class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>收件地址：</th>
@@ -294,6 +242,57 @@
     function showChangePwdForm() {
         $("#showChangePwdDiv").show();
     }
+</script>
+<script type="text/javascript" th:inline="javascript">
+    $(function(){
+        $("#btn_applyCertificate").click(function(){
+            /*<![CDATA[*/
+            var memberId = [[${mb.id}]];
+            /*]]>*/
+            $.ajax({
+                url:"checkIsPassExam",
+                type:"post",
+                data:{"id":memberId},
+                dataType:"json",
+                success:function(result){
+                    if(result.status==1){
+                        $('#applyForCertificateDiv').show()
+                    }else if(result.status==0){
+                        $.MsgBox.Alert("温馨提醒","还没参加考试呢~");
+                    }else if(result.status==2){
+                        $.MsgBox.Alert("温馨提醒","考试未通过，无法申请领证哦~");
+                    }
+                },
+                error:function(){
+                    $.MsgBox.Alert("系统异常","系统出错了，请联系我们技术人员！");
+                }
+            });
+        });
+        $("#btn_showCertificate").click(function(){
+            /*<![CDATA[*/
+            var memberId = [[${mb.id}]];
+            /*]]>*/
+            $.ajax({
+                url:"checkHaveCertificate",
+                type:"post",
+                data:{"id":memberId},
+                dataType:"json",
+                success:function(result){
+                    if(result.status==1){
+                        //跳转链接
+                        $.MsgBox.Confirm("温馨提醒","您的证书编号为："+result.body+" 请保存并在公共证书查询网站中查询！",function() {
+                            window.location.href="http://www.gcvaic.org";
+                        });
+                    }else if(result.status==0){
+                        $.MsgBox.Alert("温馨提醒","还没领到证书哦~");
+                    }
+                },
+                error:function(){
+                    $.MsgBox.Alert("温馨提醒","系统异常,获取考试信息失败！");
+                }
+            });
+        });
+    });
 </script>
 </html>
 <script type="text/javascript">

@@ -368,20 +368,16 @@ $(function() {
 
 function btn_applyForCertificateSubmit(){
     $.MsgBox.Confirm("温馨提示", "确认提交申请领证信息吗？", function () {
-        //$("#applyForCertificateForm").submit();
-        var receiveName= $("#receiveName").val().trim();
-        var receiveAddress= $("#receiveAddress").val().trim();
-        var contactAddress= $("#contactAddress").val().trim();
-        var phoneNo= $("#phoneNo").val().trim();
-        $.ajaxFileUpload({
+        var receiveName= $("#receiveName").val();
+        var receiveAddress= $("#receiveAddress").val();
+        var contactAddress= $("#contactAddress").val();
+        var phoneNo= $("#phoneNo").val();
+        $.ajax({
             url:"applyForCertificate",
-            secureuri: false,//安全协议
-            fileElementId: "pictureImg",
             type:"post",
             data:{"receiveName":receiveName,"receiveAddress":receiveAddress,"contactAddress":contactAddress,"phoneNo":phoneNo},
             dataType:"json",
             success:function(result){
-                alert("上传成功AJAX");
                 if(result.status==0){
                     $.MsgBox.Alert("温馨提示",result.message);
                 }else if(result.status==1){
@@ -391,9 +387,39 @@ function btn_applyForCertificateSubmit(){
                     });
                 }
             },
-            error:function(){
-                alert("上传失败AJAX");
+            error:function(e){
+                $.MsgBox.Alert("错误提示", e.print());
             }
         });
+    });
+}
+
+$(function() {
+   $("#pictureImg").change(function() {
+       ajaxFileUpload();
+   });
+});
+
+//ajax文件上传
+function ajaxFileUpload() {
+    $.ajaxFileUpload
+    ({
+        url: 'ajaxFileUpload',
+        secureuri: false,
+        fileElementId: 'pictureImg',
+        dataType: 'json',
+        data: "",
+        success:function(result){
+            if(result.status==1){
+                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){
+                    $("#img_photo").attr("src",result.body.pictureUri);
+                });
+            }else {
+                $.MsgBox.Alert("温馨提示","程序出错了");
+            }
+        },
+        error:function(e){
+            $.MsgBox.Alert("错误信息", e.print());
+        }
     });
 }

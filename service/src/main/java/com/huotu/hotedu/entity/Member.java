@@ -63,7 +63,7 @@ public class Member extends Login {
     private int passed=0;
     /**
      * 领证状态
-     * 0：未领证，1：已领证，3申请领证中
+     * 0：未领证，1：已领证，2申请领证中
      */
     private int certificateStatus =0;
 
