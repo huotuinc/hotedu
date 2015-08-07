@@ -26,7 +26,8 @@
             $("#apply_tab tr a:odd").click(function(){
                 var memberTds=$(this).parent().parent().children("td");
                 memberId=memberTds[0].innerHTML;
-                var applyDate=memberTds[4].innerHTML;
+                $(":input[type='hidden']").eq(0).attr("value",memberId);
+//                var applyDate=memberTds[4].innerHTML;
                 $.ajax({
                     url:"getCertificateByMemberId",
                     type:"post",
@@ -35,19 +36,23 @@
                     success:function(result){
                         if(result.status==1){
                             $(".res-info").eq(0).text(result.body.receiveName);
-                            $(".res-info").eq(1).text(applyDate);
-                            $(".res-info").eq(2).text(result.body.receiveAddress);
-                            $(".res-info").eq(3).text(result.body.phoneNo);
+//                            $(".res-info").eq(1).text(applyDate);
+                            $(".res-info").eq(1).text(result.body.receiveAddress);
+                            $(".res-info").eq(2).text(result.body.phoneNo);
                             certificateId=result.body.id;
-                        }else{
+                            $(":input[type='hidden']").eq(1).attr("value",certificateId);
+                            $("#popup_app").show();
+                        }else if(result.status==0){
                             alert("ID无效~");
+                        }else{
+                            alert("已经发过证书了~");
                         }
                     },
                     error:function(){
                         alert("系统异常,加载地址信息失败！");
                     }
                 });
-                $("#popup_app").show();
+
 
             });
 
@@ -55,31 +60,39 @@
             $("#popup_app").on("click","#button_close",function(){
                 $("#popup_app").hide();
             });
-            //单机提交
-            $("#popup_app").on('click',"#button_submit",function(){
-                var certificateNo=$("#Cer_no").val();
-                console.log(memberId);
-                console.log(certificateNo);
-                $.ajax({
-                    url:"issueCertificate",
-                    type:"post",
-                    dataType:"json",
-                    data:{"certificateNo":certificateNo,"memberId":memberId,"certificateId":certificateId},
-                    success:function(result){
-                        if(result.status==1){
-                            alert("颁发证书成功！")
-                        }else{
-                            alert("证书已经被使用或无效证书");
-                        }
-                    },
-                    error:function(){
-                        alert("系统异常,颁发证书异常！");
-                    }
-                });
-
-                console.log("已经执行过ajax了")
-                $("#popup_app").hide();
+            $("#popup_app").on("focus","#Cer_no",function(){
+                $("#span_warn").hide();
             });
+
+
+
+
+//            //单机提交
+//            $("#popup_app").on('click',"#button_submit",function(){
+//                var certificateNo=$("#Cer_no").val();
+//                console.log(memberId);
+//                console.log(certificateNo);
+//                $.ajax({
+//                    url:"issueCertificate",
+//                    type:"post",
+//                    dataType:"json",
+//                    data:{"certificateNo":certificateNo,"memberId":memberId,"certificateId":certificateId},
+//                    success:function(result){
+//                        if(result.status==1){
+//                            alert("颁发证书成功！")
+//
+//                        }else{
+//                            alert("证书已经被使用或无效证书");
+//                        }
+//                    },
+//                    error:function(){
+//                        alert("系统异常,颁发证书异常！");
+//                    }
+//                });
+//
+//                console.log("已经执行过ajax了")
+//                $("#popup_app").hide();
+//            });
         });
 
 
@@ -139,44 +152,45 @@
 
         <div class="jp-container2">
         <!--弹窗-->
-        <div id="popup_app" style="display: none">
+        <div id="popup_app" style="display: none" th:style="${info}==null?'display: none':'display: block'">
             <div id="app">
                 <div class="tko">
                     <div class="result-wrap">
                         <div class="result-content">
                             <ul class="sys-info-list">
                                 <li>
-                                    <label class="res-lab">收件人：</label><span class="res-info">加载中...</span>
+                                    <label class="res-lab">收件人：</label><span class="res-info" th:text="${certificate}!=null? ${certificate.receiveName}:''">加载中...</span>
+                                </li>
+                                <!--<li>-->
+                                    <!--<label class="res-lab">申请时间：</label><span class="res-info" th:text="${certificate.receiveName}">加载中...</span>-->
+                                <!--</li>-->
+                                <li>
+                                    <label class="res-lab">收件地址:</label><span class="res-info" th:text="${certificate}!=null?${certificate.receiveAddress}:''">加载中...</span>
                                 </li>
                                 <li>
-                                    <label class="res-lab">申请时间：</label><span class="res-info">加载中...</span>
-                                </li>
-                                <li>
-                                    <label class="res-lab">收件地址:</label><span class="res-info">加载中...</span>
-                                </li>
-                                <li>
-                                    <label class="res-lab">电话:</label><span class="res-info">加载中...</span>
+                                    <label class="res-lab">电话:</label><span class="res-info" th:text="${certificate}!=null?${certificate.phoneNo}:''">加载中...</span>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="result-wrap">
-                        <form action="#" method="post" id="myform" name="myform">
+                        <form action="#" method="get" id="myform" name="myform" th:action="@{/backend/issueCertificate}">
                             <div class="config-items">
                                 <div class="result-content">
                                     <table width="100%" class="insert-tab">
                                         <tbody>
                                         <tr>
                                             <th><i class="require-red">*</i>证书编号：</th>
-                                            <td><input id="Cer_no" type="text" value="" size="30" name="description" class="common-text"/></td>
-                                        </tr>
+                                            <td><input id="Cer_no" type="text" value="" size="30" name="certificateNo" class="common-text"/></td>
+                                            <input type="hidden" th:value="${certificate}!=null?${certificate.member.id}:''" name="memberId"/>
+                                            <input type="hidden" th:value="${certificate}!=null?${certificate.id}:''" name="certificateId"/>
 
+                                        </tr>
                                         <tr>
                                             <th></th>
-                                            <span id="span_warn" class="warning-style" style="display: none">警告！已经有证书了/格式不正确/</span>
+                                            <span id="span_warn" class="warning-style" style="display: none" th:style="${info}==null?'display: none':'display: block'" th:text="${info}">警告！已经有证书了/格式不正确/</span>
                                             <td>
-
-                                                <input id="button_submit" type="button" value="提交" class="btn btn-primary btn6 mr10"/>
+                                                <input id="button_submit" type="submit" value="提交" class="btn btn-primary btn6 mr10"/>
                                                 <input id="button_close" type="button" value="关闭" class="btn btn6"/>
                                             </td>
                                         </tr>
@@ -237,7 +251,7 @@
                             <td th:text="${#calendars.format(g.applyCertificateDate,'yyyy-MM-dd hh:mm:ss')}">2015/01/01</td>
                             <td th:text="${g.certificateStatus}==1?'已领证':(${g.certificateStatus}==2?'申请中':'')">申请发证</td>
                             <td th:text="${g.theClass}==null? '':${g.theClass.className}">201504第一期</td>
-                            <td><a class="link-update" href="prentice.html" th:href="@{/backend/lookMember}">查看</a><br/>
+                            <td><a class="link-update" href="prentice.html" th:href="@{/backend/lookMember(id=${g.id})}">查看</a><br/>
                                 <a class="link-update" href="#">发证</a>
                             </td>
                         </tr>

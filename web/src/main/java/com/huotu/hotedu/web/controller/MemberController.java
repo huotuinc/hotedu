@@ -194,7 +194,10 @@ public class MemberController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/backend/searchMembers")
-    public String applyForMembers(@RequestParam(required = false)Integer pageNo, Model model) {
+    public String applyForMembers(@RequestParam(required = false)Integer pageNo,
+                                  @RequestParam(required = false)String info,
+                                  @RequestParam(required = false)Long certificateId,
+                                  Model model) {
         String turnPage = "/backend/certificateapplications";
         if(pageNo==null||pageNo<0){
             pageNo=0;
@@ -210,12 +213,38 @@ public class MemberController {
             }
             pages = memberService.searchMembers(pageNo,PAGE_SIZE,"applyed");
         }
+        if(info!=null){
+            model.addAttribute("info",info);
+            model.addAttribute("certificate",certificateService.findOneById(certificateId));
+        }
         model.addAttribute("allMemberList", pages);
         model.addAttribute("totalPages",pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("totalRecords", totalRecords);
         return turnPage;
     }
+
+
+
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping("/backend/lookMember")
+    public String lookMembers(Long id, Model model) {
+        String turnPage = "/backend/prentice";
+        Member member=memberService.findOneById(id);
+        Certificate certificate=certificateService.findOneByMember(member);
+        model.addAttribute("member",member);
+        model.addAttribute("certificate",certificate);
+        return turnPage;
+    }
+
+
+
+
+
+
+
+
 
 
 
@@ -506,10 +535,15 @@ public class MemberController {
     public Result getCertificateByMemberId(long id){
         Result result=new Result();
         Member member=memberService.findOneById(id);
+
         if(member!=null){
-            Certificate certificate=certificateService.findOneByMember(member);
-            result.setStatus(1);
-            result.setBody(certificate);
+            if(member.getCertificate()==null){
+                Certificate certificate=certificateService.findOneByMember(member);
+                result.setStatus(1);
+                result.setBody(certificate);
+            }else{
+                result.setStatus(2);
+            }
         }else{
             result.setStatus(0);
         }
@@ -517,7 +551,7 @@ public class MemberController {
     }
 
 
-    @RequestMapping("/backend/issueCertificate")
+    @RequestMapping("/backend/issueCertificateAjax")
     @ResponseBody
     public Result issueCertificate(String certificateNo,long memberId,long certificateId){
         Result result=new Result();
@@ -529,12 +563,41 @@ public class MemberController {
             certificate.setCertificateNo(certificateNo);
             certificateService.modifyCertificate(certificate);
             member.setCertificate(certificate);
+            member.setReceiveCertificateDate(new Date());
+            member.setCertificateStatus(1);
             memberService.modifyMember(member);
             result.setStatus(1);
         }
         return result;
     }
     //TODO有待完善
+
+
+
+
+
+
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping("/backend/issueCertificate")
+    public String issueCertificate(String certificateNo,long memberId,long certificateId,
+                                   @RequestParam(required = false)Integer pageNo,Model model){
+        if(certificateService.findOneBycertificateNo(certificateNo)!=null){  //验证发的证书是否已经发过了
+            model.addAttribute("info","该证书已经发过了");
+            model.addAttribute("certificateId",certificateId);
+        }else{
+            Member member=memberService.findOneById(memberId);
+            Certificate certificate=certificateService.findOneById(certificateId);
+            certificate.setCertificateNo(certificateNo);
+            certificateService.modifyCertificate(certificate);
+            member.setCertificate(certificate);
+            member.setReceiveCertificateDate(new Date());
+            member.setCertificateStatus(1);
+            memberService.modifyMember(member);
+        }
+        model.addAttribute("pageNo",pageNo);
+        return "redirect:/backend/searchMembers";
+    }
 
 
 }

@@ -294,4 +294,39 @@ public class MemberControllerTest extends WebTestBase {
         ).andExpect(status().isOk());
     }
 
+
+    @Test
+    public void getCertificateByMemberIdTest() throws Exception{
+        String password=UUID.randomUUID().toString();
+        String adminName=UUID.randomUUID().toString();
+        Manager manager=new Manager();
+        manager.setLoginName(adminName);
+        loginService.newLogin(manager,password);
+        mockMvc.perform(
+                get("/backend/getCertificateByMemberId")
+                        .session(loginAs(adminName, password))
+                .param("id","3919")
+        ).andDo(print()).andExpect(status().isOk());
+    }
+
+
+    @Test
+    @Rollback
+    public void issueCertificate() throws Exception{
+        String password=UUID.randomUUID().toString();
+        String adminName=UUID.randomUUID().toString();
+        Manager manager=new Manager();
+        manager.setLoginName(adminName);
+        loginService.newLogin(manager,password);
+        mockMvc.perform(
+                get("/backend/issueCertificate")
+                        .session(loginAs(adminName, password))
+                        .param("certificateNo","123456789")
+                        .param("memberId","4")
+                        .param("certificateId","52")
+        ).andDo(print()).andExpect(status().isFound());
+    }
+
+
+
 }
