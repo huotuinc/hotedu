@@ -18,14 +18,32 @@ public  class ExamGuide implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    /**
+     * 考试指南标题
+     */
     @Column
-    private String title;                          //考试指南标题
+    private String title;
+    /**
+     * 考试指南内容
+     */
     @Column(length = 5000)
-    private String content;                       //考试指南内容
+    private String content;
+    /**
+     * 是否置顶
+     */
     @Column
-    private boolean top=true;                    //是否置顶
+    private boolean top=true;
+    /**
+     * 图片地址
+     */
+    @Column
+    private String pictureUri;
+    /**
+     * 考试指南最后修改时间
+     */
     @Temporal(TemporalType.TIMESTAMP)
-    private Date lastUploadDate;                 //考试指南最后修改时间
+    private Date lastUploadDate;
+
 
     public Long getId() {
         return id;
@@ -65,5 +83,13 @@ public  class ExamGuide implements Serializable {
 
     public void setTop(boolean top) {
         this.top = top;
+    }
+
+    public String getPictureUri() {
+        return pictureUri;
+    }
+
+    public void setPictureUri(String pictureUri) {
+        this.pictureUri = pictureUri;
     }
 }
