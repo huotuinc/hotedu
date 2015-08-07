@@ -6,6 +6,7 @@ import com.huotu.hotedu.service.CertificateService;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.service.MemberService;
 import com.huotu.hotedu.web.service.StaticResourceService;
+import com.huotu.iqiyi.sdk.IqiyiVideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -40,6 +41,8 @@ public class MemberController {
     private StaticResourceService  staticResourceService;
     @Autowired
     private CertificateService certificateService;
+    @Autowired
+    IqiyiVideoRepository iqiyiVideoRepository;
 
     /**
      * 用来储存分页中每页的记录数
@@ -354,8 +357,8 @@ public class MemberController {
             memberService.checkPay(id);
             msgInfo = "交费成功";
         }
-        model.addAttribute("msgInfo",msgInfo);
-        model.addAttribute("errInfo",errInfo);
+        model.addAttribute("msgInfo", msgInfo);
+        model.addAttribute("errInfo", errInfo);
         return turnPage;
     }
 
@@ -380,7 +383,7 @@ public class MemberController {
         return result;
     }
 
-    /**
+ /*   *//**
      * Created by jiashubing on 2015/8.
      * 申请领证
      * @param user      当前的成员
@@ -390,7 +393,7 @@ public class MemberController {
      * @param contactAddress    联系地址
      * @param model     返回客户端集
      * @return          成员详细信息
-     */
+     *//*
     @PreAuthorize("hasRole('MEMBER')")
     @RequestMapping("/pc/applyForCertificate")
     public String applyForCertificate(@AuthenticationPrincipal Login user,@RequestParam("pictureImg") MultipartFile file,
@@ -433,7 +436,44 @@ public class MemberController {
         }
         model.addAttribute("errInfo",errInfo);
         return turnPage;
+    }*/
+
+    @PreAuthorize("hasRole('MEMBER')")
+    @RequestMapping("/pc/applyForCertificate")
+    @ResponseBody
+    public Result applyForCertificate(@AuthenticationPrincipal Login user,@RequestParam("pictureImg") MultipartFile file,
+                                      String receiveName,String receiveAddress,String contactAddress,String phoneNo)throws Exception {
+
+        Result result = new Result();
+        if(user==null) {
+            result.setStatus(0);
+            result.setMessage("尚未登录,请登录");
+        }else if(user instanceof Member) {
+            Member mb=(Member)user;
+            //文件格式判断
+            if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+            if(file.getSize()==0){throw new Exception("文件为空！");}
+            //保存图片
+            String fileName = StaticResourceService.MESSAGECONTENT_ICON + UUID.randomUUID().toString() + ".png";
+            staticResourceService.uploadResource(fileName, file.getInputStream());
+            //设置学员的申请领证时间
+            mb.setApplyCertificateDate(new Date());
+            mb.setCertificateStatus(2);
+            memberService.modifyMember(mb);
+            Certificate certificate = new Certificate();
+            certificate.setPictureUri(fileName);
+            certificate.setReceiveName(receiveName);
+            certificate.setReceiveAddress(receiveAddress);
+            certificate.setContactAddress(contactAddress);
+            certificate.setPhoneNo(phoneNo);
+            certificate.setMember(mb);
+            certificateService.addCertificate(certificate);
+            result.setStatus(1);
+            result.setMessage("操作成功");
+        }
+        return result;
     }
+
     @RequestMapping("/pc/checkIsPassExam")
     @ResponseBody
     public Result checkIsPassExam(long id){
