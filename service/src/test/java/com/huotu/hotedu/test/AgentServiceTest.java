@@ -64,7 +64,7 @@ public class AgentServiceTest {
 
         List<ClassTeam> classTeamsList = agentService.findAvailableClassTeams(agent);
         assertEquals("该代理商可用于分班的班级数量为2", 2, classTeamsList.size());
-        Page<ClassTeam> classTeamPage = agentService.findClassArrageExam(agent, 0, PAGE_SIZE, null, "all");
+        Page<ClassTeam> classTeamPage = agentService.findClassArrangeExam(agent, 0, PAGE_SIZE, null, "all");
         assertEquals("该代理商的所有班级分页显示为2条", 2, classTeamPage.getTotalElements());
 
         Member _mb = new Member();

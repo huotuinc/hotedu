@@ -161,7 +161,7 @@ function check_ExamMemberEnter() {
     });
 }
 
-function check_arrageNewClass() {
+function check_arrangeNewClass() {
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员安排到新建班级中吗？", function () {
         var className = $("#className").val().trim();
         var noClassMemberArrayLis = $("#noClassMemberArrayLis").val().trim();
@@ -184,7 +184,7 @@ function check_arrageNewClass() {
     });
 }
 
-function check_arrageNewExam() {
+function check_arrangeNewExam() {
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员安排到新建考场中吗？", function () {
         var examDate = $("#examDate").val().trim();
         var examAddress = $("#examAddress").val().trim();
@@ -208,7 +208,7 @@ function check_arrageNewExam() {
     });
 }
 
-function check_arrageExistClass() {
+function check_arrangeExistClass() {
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员安排到选中班级中吗？", function () {
         var noClassMemberArrayLis = $("#noClassMemberArrayLis").val().trim();
         var existClassSelect = $("#existClassSelect").val().trim();
@@ -231,7 +231,7 @@ function check_arrageExistClass() {
     });
 }
 
-function check_arrageExistExam() {
+function check_arrangeExistExam() {
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员安排到选中考场中吗？", function () {
         var classExamArrayLis = $("#classExamArrayLis").val().trim();
         var existExamSelect = $("#existExamSelect").val().trim();

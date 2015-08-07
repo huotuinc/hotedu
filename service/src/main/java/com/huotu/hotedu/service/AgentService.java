@@ -372,7 +372,7 @@ public class AgentService {
      * @param searchSort    搜索类型
      * @return              班级集合
      */
-    public Page<ClassTeam> findClassArrageExam(Agent agent,Integer pageNo,Integer pageSize,String keywords,String searchSort){
+    public Page<ClassTeam> findClassArrangeExam(Agent agent,Integer pageNo,Integer pageSize,String keywords,String searchSort){
         return  classTeamRepository.findAll(new Specification<ClassTeam>() {
             @Override
             public Predicate toPredicate(Root<ClassTeam> root, CriteriaQuery<?> query, CriteriaBuilder cb) {

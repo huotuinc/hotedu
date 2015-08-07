@@ -61,7 +61,7 @@ public class AgentController {
      * @param agent     当前代理商
      * @param className             新建班级的名字
      * @param noClassMemberArrayLis 复选框选中成员的id集合,Strring类型
-     * @return      confirm.js中 check_arrageNewClass方法
+     * @return      confirm.js中 check_arrangeNewClass方法
      */
     @RequestMapping("/pc/addSaveNewClassTeam")
     @ResponseBody
@@ -92,7 +92,7 @@ public class AgentController {
      * @param examDate      考试时间
      * @param examAddress       考试地点
      * @param classExamArrayLis     需要安排的班级
-     * @return      confirm.js中 check_arrageNewExam方法
+     * @return      confirm.js中 check_arrangeNewExam方法
      */
     @RequestMapping("/pc/addSaveNewExam")
     @ResponseBody
@@ -122,7 +122,7 @@ public class AgentController {
      * Created by cwb on 2015/7/24
      * 将学员保存到已有班级中 AJAX实现
      * @param noClassMemberArrayLis 未分班的学员
-     * @return      confirm.js中 check_arrageExistClass方法
+     * @return      confirm.js中 check_arrangeExistClass方法
      */
     @RequestMapping("/pc/addMembersIntoExitClass")
     @ResponseBody
@@ -146,7 +146,7 @@ public class AgentController {
      * Created by jiashubing on 2015/7/30
      * 将班级保存到已有考场中 AJAX实现
      * @param classExamArrayLis 未分考场的班级
-     * @return confirm.js中 check_arrageExistExam方法
+     * @return confirm.js中 check_arrangeExistExam方法
      */
     @RequestMapping("/pc/addClassIntoExistExam")
     @ResponseBody
@@ -293,12 +293,12 @@ public class AgentController {
         if (pageNo == null || pageNo < 0) {
             pageNo = 0;
         }
-        Page<ClassTeam> pages = agentService.findClassArrageExam(agent, pageNo, PAGE_SIZE, keywords, searchSort);
+        Page<ClassTeam> pages = agentService.findClassArrangeExam(agent, pageNo, PAGE_SIZE, keywords, searchSort);
         long totalRecords = pages.getTotalElements();
         if (pages.getNumberOfElements() == 0) {
             pageNo = pages.getTotalPages() - 1;
             pageNo = pageNo<0 ? 0 : pageNo;
-            pages = agentService.findClassArrageExam(agent, pageNo, PAGE_SIZE, keywords, searchSort);
+            pages = agentService.findClassArrangeExam(agent, pageNo, PAGE_SIZE, keywords, searchSort);
         }
         model.addAttribute("agent", agent);
         model.addAttribute("allClassExamList", pages);
@@ -409,7 +409,7 @@ public class AgentController {
         model.addAttribute("classTeamInfo", classTeam);
         model.addAttribute("classTeamDetailcss", true);
 
-        Page<ClassTeam> pages = agentService.findClassArrageExam(agent, pageNo, PAGE_SIZE, keywords, searchSort);
+        Page<ClassTeam> pages = agentService.findClassArrangeExam(agent, pageNo, PAGE_SIZE, keywords, searchSort);
         long totalRecords = pages.getTotalElements();
         model.addAttribute("agent", agent);
         model.addAttribute("allClassExamList", pages);

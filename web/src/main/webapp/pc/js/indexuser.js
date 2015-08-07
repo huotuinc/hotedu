@@ -54,10 +54,10 @@ $(function() {
 			success:function(result){
 				if(result.status==0){
 					alert(result.message);
-					$("#noClassMemberArrageClassDiv").hide();
-					$("#noClassMemberArrageNewClassDiv").show();
+					$("#noClassMemberArrangeClassDiv").hide();
+					$("#noClassMemberArrangeNewClassDiv").show();
 				}else if(result.status==1){
-					$("#noClassMemberArrageClassDiv").hide();
+					$("#noClassMemberArrangeClassDiv").hide();
 					$("#existClassDiv").show();
 					var sel = $("#existClassSelect");
 					sel.empty();
@@ -85,8 +85,8 @@ $(function() {
 				if(result.status==0){
 					alert(result.message);
 				}else if(result.status==1){
-					$("#classArrageExamDiv").hide();
-					$("#classArrageExistExamDiv").show();
+					$("#classArrangeExamDiv").hide();
+					$("#classArrangeExistExamDiv").show();
 					var sel = $("#existExamSelect");
 					sel.empty();
 					for(var i=0;i<result.body.length;i++) {
