@@ -30,7 +30,7 @@
                     <a id="memberLi" href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
                     <p class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
 
-                    <p class="lbpo"><a href="#" th:href="@{/pc/loadPersonalCenter}" th:text="${#authentication.name}">个人中心</a>
+                    <p class="lbpo"><a href="#" id="personalCenter_href" th:href="@{/pc/loadPersonalCenter}" th:text="${#authentication.name}">个人中心</a>
                         <a href="#" onclick="showChangePwdForm()">修改密码</a>
                         <a href="#" th:href="@{/logout}">退出</a></p>
                 </li>
@@ -51,7 +51,9 @@
                     <button id="btn_showCertificate" class="ysan">我的电子证书</button>
                 </p>
                 <p style="font-size:14px">
-                    <button id="btn_applyCertificate" class="ysan">申请领证</button>
+                    <button id="btn_applyCertificate" th:if="${mb.certificateStatus}==0" class="ysan">申请领证</button>
+                    <button th:if="${mb.certificateStatus}==2" class="ysan" disabled="disabled">已申请领证</button>
+                    <button th:if="${mb.certificateStatus}==1" class="ysan" disabled="disabled">已获得证书</button>
                 </p>
             </li>
         </ul>
@@ -141,25 +143,25 @@
                             <tr>
                                 <th><i class="require-red">*</i>上传一寸照：</th>
                                 <td>
-                                    <img id="img_photo" th:src="${mb.certificate}==null?'':${mb.certificate.pictureUri}" src="images/toux.png" style="width: 50px; height: auto;"/>
+                                    <img id="img_photo" th:src="${picUrl}==1?${certificate.pictureUri}" src="images/toux.png" style="width: 50px; height: auto;"/>
                                     <input id="pictureImg" name="pictureImg" type="file"/>
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>收件人：</th>
-                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="receiveName" name="receiveName" th:value="${mb.certificate}==null?'':${mb.certificate.receiveName}" type="text" size="50" class="common-text"/></td>
+                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="receiveName" name="receiveName" th:value="${certificate}==null?'':${certificate.receiveName}" type="text" size="50" class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>收件地址：</th>
-                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="receiveAddress" name="receiveAddress" th:value="${mb.certificate}==null?'':${mb.certificate.receiveAddress}" title="" type="text" value="" size="50" class="common-text"/></td>
+                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="receiveAddress" name="receiveAddress" th:value="${mb.certificate}==null?'':${certificate.receiveAddress}" title="" type="text" value="" size="50" class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>联系地址：</th>
-                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="contactAddress" name="contactAddress" th:value="${mb.certificate}==null?'':${mb.certificate.contactAddress}" title="" type="text" value="" size="50" class="common-text"/></td>
+                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="contactAddress" name="contactAddress" th:value="${certificate}==null?'':${certificate.contactAddress}" title="" type="text" value="" size="50" class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>联系电话：</th>
-                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="phoneNo" name="phoneNo" th:value="${mb.certificate}==null?'':${mb.certificate.phoneNo}" title="" type="text" value="" size="50" class="common-text"/></td>
+                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="phoneNo" name="phoneNo" th:value="${certificate}==null?'':${certificate.phoneNo}" title="" type="text" value="" size="50" class="common-text"/></td>
                             </tr>
                             </tbody>
                         </table>

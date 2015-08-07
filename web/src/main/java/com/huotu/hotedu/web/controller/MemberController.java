@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -119,7 +120,7 @@ public class MemberController {
      * @return
      */
     @RequestMapping("/pc/loadPersonalCenter")
-    public String loadPersonalCenter(@AuthenticationPrincipal Login user, Model model) {
+    public String loadPersonalCenter(@AuthenticationPrincipal Login user, Model model) throws URISyntaxException {
         String errInfo = "";
         String turnPage = "/pc/yun-geren";
         String loginButton = "";
@@ -131,6 +132,16 @@ public class MemberController {
                 errInfo = "加载信息失败";
                 turnPage = "/pc/yun-index";
             }else {
+                Certificate certificate = certificateService.findOneByMember(mb);
+                int picExist = 0;
+                if(certificate!=null) {
+                    if(certificate.getPictureUri()!=null) {
+                        certificate.setPictureUri(staticResourceService.getResource(certificate.getPictureUri()).toString());
+                        picExist = 1;
+                    }
+                    model.addAttribute("certificate",certificate);
+                }
+                model.addAttribute("picUrl",picExist);
                 model.addAttribute("mb",mb);
             }
         }else if(user instanceof Agent) {
@@ -236,18 +247,6 @@ public class MemberController {
         model.addAttribute("certificate",certificate);
         return turnPage;
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * Created by shiliting on 2015/7/25.
@@ -432,15 +431,16 @@ public class MemberController {
                 certificate.setContactAddress(contactAddress);
                 certificate.setPhoneNo(phoneNo);
                 certificate.setMember(mb);
+                mb.setCertificateStatus(0);
             }else {
                 certificate.setReceiveName(receiveName);
                 certificate.setReceiveAddress(receiveAddress);
                 certificate.setContactAddress(contactAddress);
                 certificate.setPhoneNo(phoneNo);
+                mb.setCertificateStatus(2);
+                //设置学员的申请领证时间
+                mb.setApplyCertificateDate(new Date());
             }
-            //设置学员的申请领证时间
-            mb.setApplyCertificateDate(new Date());
-            mb.setCertificateStatus(2);
             memberService.modifyMember(mb);
             certificateService.addCertificate(certificate);
             result.setStatus(1);
@@ -584,6 +584,8 @@ public class MemberController {
             //判断该学员是否提交过申请信息
             if(certificate!=null) {
                 certificate.setPictureUri(fileName);
+                certificateService.addCertificate(certificate);
+                certificate.setPictureUri(staticResourceService.getResource(certificate.getPictureUri()).toString());
             }else {
                 certificate = new Certificate();
                 certificate.setPictureUri(fileName);

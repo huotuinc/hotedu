@@ -208,7 +208,7 @@ function check_arrangeNewExam() {
     });
 }
 
-function check_arrangeExistClass() {
+function check_ArrangeExistClass() {
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员安排到选中班级中吗？", function () {
         var noClassMemberArrayLis = $("#noClassMemberArrayLis").val().trim();
         var existClassSelect = $("#existClassSelect").val().trim();
@@ -372,6 +372,22 @@ function btn_applyForCertificateSubmit(){
         var receiveAddress= $("#receiveAddress").val();
         var contactAddress= $("#contactAddress").val();
         var phoneNo= $("#phoneNo").val();
+        if(receiveName=="") {
+            $.MsgBox.Alert("温馨提示","收件人不能为空！");
+            return;
+        }
+        if(receiveAddress=="") {
+            $.MsgBox.Alert("温馨提示","收件地址不能为空！");
+            return;
+        }
+        if(contactAddress=="") {
+            $.MsgBox.Alert("温馨提示","联系地址不能为空！");
+            return;
+        }
+        if(phoneNo=="") {
+            $.MsgBox.Alert("温馨提示","联系号码不能为空！");
+            return;
+        }
         $.ajax({
             url:"applyForCertificate",
             type:"post",
@@ -383,7 +399,7 @@ function btn_applyForCertificateSubmit(){
                 }else if(result.status==1){
                     $.MsgBox.AjaxAlert("温馨提示",result.message,function(){
                         $("#applyForCertificateDiv").hide();
-                        $("#personalCenter_href").click();
+                        $("#personalCenter_href").trigger("click");
                     });
                 }
             },
