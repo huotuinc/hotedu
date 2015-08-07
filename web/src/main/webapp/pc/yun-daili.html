@@ -95,7 +95,7 @@
 
     <div class="ysthree">
         <!--报名信息-->
-        <div style="display:none;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
+        <div style="display:block;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
             <div style=" float: right; margin-right: 14px;margin-bottom: 6px;margin-top:5px; width:1000px;" class="search-content">
                 <form action="#" id="searchMemberInfo" th:action="@{/pc/searchMembers}" method="get">
                     <p style="height:5px;"></p>
@@ -104,7 +104,7 @@
                             <th width="10"></th>
                             <td><input title="" id="u109_input" type="checkbox" value="checkbox"/></td>
                             <td><button class="ysss si" name="sub" value="确认收费" type="button" onclick="checkMemberPay()"><span style="color:white">确认收费</span></button></td>
-                            <td><input id="btn_newMember" title="" class="ysss si" name="sub" value="新增学员" type="button"/></td>
+                            <td><button id="btn_newMember" class="ysss si" name="sub" type="button" onclick="checkMemberPay()"><span style="color:white">新增学员</span></button></td>
                         </tr>
                     </table>
                     <p style="clear:both;"></p>
@@ -279,7 +279,7 @@
         <!--班级管理 未分班 安排班级 start-->
         <div id="noClassMemberDiv" style="display:block;" th:style="${navigation}=='bjgl'? 'display:block;':'display:none;'" class="main-wrapi">
             <div style="margin-right: 14px;margin-bottom: 6px;" class="search-content">
-                <div style=" text-align:center;display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex; padding-top:15px;" class="ystwo">
+                <div style=" text-align:center;display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex; padding-top:10px;" class="ystwo">
                     <div>
                         <a href="#" th:href="@{/pc/loadClassMembers(keywords=${keywords},searchSort=${searchSort},pageNo=${pageNo})}">
                             <div class="newfb ysss on"><span>未分班</span></div> </a>
@@ -454,7 +454,7 @@
         <!--班级管理 已有班级 安排考场 start-->
         <div id="arrangeClassExamDiv" style="display:block;" th:style="${navigation}=='apkc'? 'display:block;':'display:none;'" class="main-wrapi">
             <div style="margin-right: 14px;margin-bottom: 6px;" class="search-content">
-                <div style=" text-align:center;display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex; padding-top:15px;" class="ystwo">
+                <div style=" text-align:center;display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex; padding-top:10px;" class="ystwo">
                     <div>
                         <a href="#" th:href="@{/pc/loadClassMembers}">
                             <div class="newfb ysss"><span>未分班</span></div> </a>
