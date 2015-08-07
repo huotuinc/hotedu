@@ -144,8 +144,8 @@
                             <td th:text="${g.phoneNo}">15068564912</td>
                             <td th:text="${g.sendCertificateNumber}+'本'">160本</td>
                             <td th:text="${g.certificateNumber}+'本'"> 1600本</td>
-                            <td><a class="link-update" href="agent.html" th:href="@{/backend/lookAgent}">查看</a><br/>
-                                <a class="link-update" th:href="@{/backend/modifyAgent}" href="#">修改</a></td>
+                            <td><a class="link-update" href="agent.html" th:href="@{/backend/lookAgentClass(id=${g.id})}">查看</a><br/>
+                                <a class="link-update" th:href="@{/backend/modifyAgent(id=${g.id})}" href="#">修改</a></td>
                         </tr>
                     </table>
                     <div class="list-page">

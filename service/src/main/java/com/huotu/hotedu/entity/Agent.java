@@ -53,16 +53,16 @@ public class Agent extends Login{
     /**
      * 代理商级别
      */
-    private String level;
+        private String level;
     /**
      * 证书总数量
      */
-    private int certificateNumber;
+    private int certificateNumber=0;
 
     /**
      * 已发证书数量
      */
-    private int sendCertificateNumber;
+    private int sendCertificateNumber=0;
 
     /**
      * 注册时间

@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://java.sun.com/jsf/facelets">
 <head>
     <meta charset="UTF-8"/>
     <title>云商学院后台管理</title>
@@ -51,8 +51,8 @@
                         <p style="height:30px; line-height:30px; margin-left: 20px;">管理代理商</p>
                         <ul class="sub-menu" style="display:block;">
                             <li><a href="certificateapplications.html"
-                                   th:href="@{/load/certificateapplications}">申请领证列表</a></li>
-                            <li class="on"><a href="agents.html" th:href="@{/load/agent}">代理商列表</a></li>
+                                   th:href="@{/backend/searchMembers}">申请领证列表</a></li>
+                            <li class="on"><a href="agents.html" th:href="@{/backend/searchAgents}">代理商列表</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -64,43 +64,47 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="certificateapplications.html" th:href="@{/backend/searchMembers}">管理代理商表</a><span
+            <div class="crumb-list"><i class="icon-font"></i><a href="certificateapplications.html" th:href="@{/backend/searchAgents}">管理代理商表</a><span
                     class="crumb-step">&gt;</span><span class="crumb-name">查看代理名下</span></div>
         </div>
         <div class="jp-container2">
         <div class="result-content">
             <ul style="float:left;" class="sys-info-list">
                 <li>
-                    <label class="res-lab">照片：</label><span class="res-info"><img src="images/logo.png" width="100px"
+                    <label class="res-lab">照片：</label><span class="res-info"><img src="images/logo.png" th:src="${agent.pictureUri}" width="100px"
                                                                                   height="auto"/></span>
                 </li>
                 <li>
-                    <label class="res-lab">姓名:</label><span class="res-info">某某</span>
+                    <label class="res-lab">姓名:</label><span class="res-info" th:text="${agent.name}">某某</span>
                 </li>
             </ul>
             <ul style=" float:left;" class="sys-info-list">
-                <li><label class="res-lab">级别：</label><span class="res-info">杭州区总代理</span></li>
-                <li><label class="res-lab">联系方式:</label><span class="res-info">15263458967</span></li>
-                <li><label class="res-lab">注册时间：</label><span class="res-info">2014年3月18日</span></li>
+                <li><label class="res-lab">级别：</label><span class="res-info" th:text="${agent.level}">杭州区总代理</span></li>
+                <li><label class="res-lab">联系方式:</label><span class="res-info" th:text="${agent.phoneNo}">15263458967</span></li>
+                <li><label class="res-lab">注册时间：</label><span class="res-info" th:text="${#calendars.format(agent.registerDate,'yyyy年MM月dd日')}">2014年3月18日</span></li>
             </ul>
             <ul style=" float:left;" class="sys-info-list">
-                <li><label class="res-lab">总人数：</label><span class="res-info">900人</span></li>
-                <li><label class="res-lab">已发证：</label><span class="res-info">400本</span></li>
-                <li><label class="res-lab">剩余证：</label><span class="res-info">200本</span></li>
+                <li><label class="res-lab">总人数：</label><span class="res-info" th:text="${totalMembers}+'人'">900人</span></li>
+                <li><label class="res-lab">已发证：</label><span class="res-info" th:text="${agent.sendCertificateNumber}+'本'">400本</span></li>
+                <li><label class="res-lab">剩余证：</label><span class="res-info" th:text="${agent.certificateNumber-agent.sendCertificateNumber}+'本'">200本</span></li>
             </ul>
         </div>
         <p style="height:150px;"></p>
 
         <div class="search-wrap">
             <div class="search-content">
-                <form action="#" method="post">
+                <form action="#" method="post" th:action="@{/backend/lookAgentClass(id=${agent.id})}">
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
                             <td>
-                                <select name="search-sort" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle"><option value="">班级</option></select>
+                                <!--<select name="searchSort" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">-->
+                                    <!--<option value="all">全部</option>-->
+                                    <!--<option value="className">班级名称</option>-->
+                                    <!--<option value="examAddress">考试地点</option>-->
+                                <!--</select>-->
                             </td>
-                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" type="text"/></td>
+                            <td><input class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}" value="" type="text"/></td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
@@ -120,7 +124,7 @@
                             <th style="width:80px">地点</th>
                             <th style="width:80px">操作</th>
                         </tr>
-                        <tr>
+                        <tr th:remove="all">
                             <td>01</td>
                             <td title="">201504第一期</td>
                             <td>杭州</td>
@@ -129,7 +133,7 @@
                             <td></td>
                             <td><a class="link-update" href="batch.html">查看</a><br/></td>
                         </tr>
-                        <tr>
+                        <tr th:remove="all">
                             <td>01</td>
                             <td title="">201504第一期</td>
                             <td>杭州</td>
@@ -138,7 +142,7 @@
                             <td></td>
                             <td><a class="link-update" href="batch.html">查看</a><br/></td>
                         </tr>
-                        <tr>
+                        <tr th:remove="all">
                             <td>01</td>
                             <td title="">201504第一期</td>
                             <td>杭州</td>
@@ -147,8 +151,22 @@
                             <td></td>
                             <td><a class="link-update" href="batch.html">查看</a><br/></td>
                         </tr>
+                        <tr th:each="g:${allAgentClassList}">
+                            <td th:text="${g.id}">01</td>
+                            <td th:text="${g.className}" title="">201504第一期</td>
+                            <td th:text="${g.agent.area}">杭州</td>
+                            <td th:text="${g.memberNum}">60</td>
+                            <td th:text="${g.exam}==null?'':${#calendars.format(g.exam.examDate,'yyyy.MM.dd/hh.mm.ss')}">2015/04/01</td>
+                            <td th:text="${g.exam}==null?'':${g.exam.examAddress}"></td>
+                            <td><a class="link-update" href="batch.html" th:href="@{/backend/agentClassMember(classId=${g.id},agentId=${agent.id})}">查看</a><br/></td>
+                        </tr>
+
                     </table>
-                    <div class="list-page"> 2 条 1/1 页</div>
+                    <div class="list-page">
+                        <a href="#" th:if="${pageNo}>0" th:href="@{/backend/searchExamGuide(pageNo=${pageNo}-1,keywords=${keywords},id=${agent.id})}">上一页</a>
+                        <a href="#" th:if="${totalPages}-1>${pageNo}" th:href="@{/backend/searchExamGuide(pageNo=${pageNo}+1,keywords=${keywords},id=${agent.id})}">下一页</a>
+                        <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
+                    </div>
                 </div>
             </form>
         </div>

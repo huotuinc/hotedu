@@ -72,50 +72,63 @@
         </div>
         <div class="jp-container2">
         <div class="result-wrap">
-            <form action="#" method="post" class="myform" name="myform" th:action="@{/backend/modifySaveAgent()}" enctype="multipart/form-data">
+            <form action="#" method="post" class="myform" name="myform" th:action="@{/backend/modifySaveAgent(id=${agent.id})}" enctype="multipart/form-data">
                 <div class="config-items">
                     <div class="result-content">
                         <table width="100%" class="insert-tab">
                             <tbody>
                             <tr>
                                 <th><i class="require-red">*</i>上传图片：</th>
-                                <td><img src="images/logo.png"  style="width: 100px; height: auto;"/><input name="smallimg"
-                                                                                                   type="file"/><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>-->
+                                <td><img src="images/logo.png" th:src="${agent.pictureUri}"  style="width: 100px; height: auto;"/><input name="smallimg" type="file"/><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>-->
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>姓名：</th>
-                                <td><input title="" type="text" value="" size="70" name="description" class="common-text"/>
+                                <td><input th:value="${agent.name}" title="" type="text" value="" size="70" name="name" class="common-text"/>
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>用户名：</th>
-                                <td><input title="" type="text" value="" size="70" name="description" class="common-text"/>
+                                <td><input th:value="${agent.loginName}" title="" type="text" value="" size="70" name="loginName" class="common-text"/>
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>性别：</th>
-                                <td><input title="" type="text" value="" size="70" name="description" class="common-text"/>
+                                <td><input title="" type="radio" checked="checked" th:checked="${agent.sex}==1?true:false" name="sex" value="1"/>&nbsp;男&nbsp;&nbsp;
+                                    <input title="" type="radio" name="sex" th:checked="${agent.sex}==0? true:false" value="0"/>&nbsp;女&nbsp;&nbsp;
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>电话：</th>
-                                <td><input title="" type="text" value="" size="70" name="description" class="common-text"/>
+                                <td><input th:value="${agent.phoneNo}" title="" type="text" value="" size="70" name="phoneNo" class="common-text"/>
                                 </td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>区域：</th>
-                                <td><input title="" type="text" value="" size="70" name="description" class="common-text"/>
+                                <td><input th:value="${agent.area}" title="" type="text" value="" size="70" name="area" class="common-text"/>
                                 </td>
                             </tr>
                             <tr>
-                                <th><i class="require-red">*</i>设置代理级别：</th>
-                                <td><select title="" name="colId" class="required">
-                                    <option value="">一级代理</option>
-                                    <option value="">二级代理</option>
-                                    <option value="">三级代理</option>
-                                </select></td>
+                                <th><i class="require-red">*</i>证书数量：</th>
+                                <td><input th:value="${agent.certificateNumber}"  title="" type="text" value="" size="70" name="certificateNumber" class="common-text"/>
+                                </td>
                             </tr>
+
+                            <tr>
+                                <th><i class="require-red">*</i>设置代理级别：</th>
+                                <td><input th:value="${agent.level}" title="" type="text" value="" size="70" name="level" class="common-text"/>
+                                </td>
+                            </tr>
+
+
+                            <!--<tr>-->
+                                <!--<th><i class="require-red">*</i>设置代理级别：</th>-->
+                                <!--<td><select id="colId" title="" name="colId" class="required" name="level">-->
+                                    <!--<option value="一级代理">一级代理</option>-->
+                                    <!--<option value="二级代理">二级代理</option>-->
+                                    <!--<option value="三级代理">三级代理</option>-->
+                                <!--</select></td>-->
+                            <!--</tr>-->
                             <tr>
                                 <th></th>
                                 <td><input type="button" value="保存" class="btn btn-primary btn6 mr10" onclick="check_save(this)"/><input

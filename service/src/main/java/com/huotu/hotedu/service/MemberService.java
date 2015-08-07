@@ -131,6 +131,52 @@ public class MemberService {
     }
 
 
+
+
+    public Page<Member> searchMembersByClass(Integer pageNo,Integer pageSize,String keyword,ClassTeam classTeam,String type){
+        return memberRepository.findAll(new Specification<Member>() {
+            @Override
+            public Predicate toPredicate(Root<Member> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                if ("".equals(keyword) || keyword == null) {
+                    return cb.and(
+                            cb.equal(root.get("theClass").as(ClassTeam.class),classTeam),
+                            cb.isTrue(root.get("enabled").as(boolean.class))
+                    );
+                } else if ("all".equals(type)) {
+                    return cb.and(
+                            cb.equal(root.get("theClass").as(ClassTeam.class), classTeam),
+                            cb.or(
+                                    cb.like(root.get("realName").as(String.class), "%" + keyword + "%"),
+                                    cb.like(root.get("phoneNo").as(String.class), "%" + keyword + "%"),
+                                    cb.like(root.get("agent").get("area").as(String.class), "%" + keyword + "%")
+                            ),
+                            cb.isTrue(root.get("enabled").as(boolean.class))
+                    );
+                } else if("passed".equals(type)) {
+                    return cb.and(
+                            cb.equal(root.get("theClass").as(ClassTeam.class), classTeam),
+                            cb.isTrue(root.get("enabled").as(boolean.class)),
+                            cb.equal(root.get("passed").as(int.class), keyword)
+                    );
+                }else if("certificateStatus".equals(type)){
+                    return cb.and(
+                            cb.equal(root.get("theClass").as(ClassTeam.class), classTeam),
+                            cb.isTrue(root.get("enabled").as(boolean.class)),
+                            cb.equal(root.get("certificateStatus").as(int.class), keyword)
+                    );
+                }else{
+                    return cb.and(
+                            cb.equal(root.get("theClass").as(ClassTeam.class), classTeam),
+                            cb.isTrue(root.get("enabled").as(boolean.class)),
+                            cb.equal(root.get(type).as(boolean.class), keyword)
+                    );
+                }
+            }
+        }, new PageRequest(pageNo, pageSize));
+    }
+
+
+
     /**
      * 查找学员
      * @param id 学员id

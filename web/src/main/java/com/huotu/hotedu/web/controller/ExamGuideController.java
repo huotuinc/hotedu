@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
-import java.beans.Expression;
-import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.UUID;
 
@@ -164,16 +162,16 @@ public class ExamGuideController {
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveExamGuide")
     public String modifySaveExamGuide(Long id, String title, String content, String top ,@RequestParam("smallimg") MultipartFile file) throws Exception{
-        //文件格式判断
-        if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
-        if(file.getSize()==0){throw new Exception("文件为空！");}
-
-        //保存图片
-        String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
-        staticResourceService.uploadResource(fileName,file.getInputStream());
-
         ExamGuide examGuide = examGuideService.findOneById(id);
-        examGuide.setPictureUri(fileName);
+        if(file.getSize()!=0){
+            if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+            //获取需要修改的图片路径，并删除
+            staticResourceService.deleteResource(staticResourceService.getResource(examGuideService.findOneById(id).getPictureUri()));
+            //保存图片
+            String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+            staticResourceService.uploadResource(fileName,file.getInputStream());
+            examGuide.setPictureUri(fileName);
+        }
         examGuide.setTitle(title);
         examGuide.setContent(content);
         examGuide.setTop("1".equals(top));

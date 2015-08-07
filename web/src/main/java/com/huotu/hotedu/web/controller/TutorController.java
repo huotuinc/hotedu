@@ -201,19 +201,16 @@ public class TutorController {
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveTutor")
     public String ModifySaveTutor(Long id,String name,String introduction,String qualification,String area,@RequestParam("smallimg") MultipartFile file) throws Exception{
-
-        if(file.getSize()!=0){
-            if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
-        }
-        //获取需要修改的图片路径，并删除
-        staticResourceService.deleteResource(staticResourceService.getResource(tutorService.findOneById(id).getPictureUri()));
-        //保存图片
-        String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
-        staticResourceService.uploadResource(fileName,file.getInputStream());
-
         Tutor tutor=tutorService.findOneById(id);
         if(file.getSize()!=0){
+            if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+            //获取需要修改的图片路径，并删除
+            staticResourceService.deleteResource(staticResourceService.getResource(tutorService.findOneById(id).getPictureUri()));
+            //保存图片
+            String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+            staticResourceService.uploadResource(fileName,file.getInputStream());
             tutor.setPictureUri(fileName);
+
         }
         tutor.setQualification(qualification);
         tutor.setArea(area);

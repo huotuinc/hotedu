@@ -94,7 +94,8 @@
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>性别：</th>
-                                <td><input title="" type="text" value="" size="70" name="sex" class="common-text"/>
+                                <td><input title="" type="radio" checked="checked" name="sex" value="1"/>&nbsp;男&nbsp;&nbsp;
+                                    <input title="" type="radio" name="sex" value="0"/>&nbsp;女&nbsp;&nbsp;
                                 </td>
                             </tr>
                             <tr>
@@ -108,13 +109,23 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th><i class="require-red">*</i>设置代理级别：</th>
-                                <td><select title="" name="level" class="required">
-                                    <option value="1">一级代理</option>
-                                    <option value="2">二级代理</option>
-                                    <option value="3">三级代理</option>
-                                </select></td>
+                                <th><i class="require-red">*</i>证书数量：</th>
+                                <td><input title="" type="text" value="" size="70" name="certificateNumber" class="common-text"/>
+                                </td>
                             </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>设置代理级别：</th>
+                                <td><input title="" type="text" value="" size="70" name="level" class="common-text"/>
+                                </td>
+                            </tr>
+                            <!--<tr>-->
+                                <!--<th><i class="require-red">*</i>设置代理级别：</th>-->
+                                <!--<td><select title="" name="level" class="required">-->
+                                    <!--<option value="1">一级代理</option>-->
+                                    <!--<option value="2">二级代理</option>-->
+                                    <!--<option value="3">三级代理</option>-->
+                                <!--</select></td>-->
+                            <!--</tr>-->
                             <tr>
                                 <th></th>
                                 <td><input type="button" value="保存" class="btn btn-primary btn6 mr10" onclick="check_save(this)"/><input

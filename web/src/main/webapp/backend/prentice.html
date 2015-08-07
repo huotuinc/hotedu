@@ -17,22 +17,26 @@
             th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
     <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
             th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" th:inline="javascript">
         $(function(){
-            $("#Cer_no").focus(function(){
-                $("#span_warn").hide();
-            });
             //单机提交
             $("#btn_fz").click(function(){
+                console.log("123")
                 if($("#span_cerStatus").text()=='已发'){
                     alert("证书已发");
                     return;
                 }
                 /*<![CDATA[*/
                 var memberId = [[${member.id}]];
+                /*]]>*/
+                /*<![CDATA[*/
                 var certificateId=[[${certificate.id}]];
                 /*]]>*/
                 var certificateNo=$("#Cer_no").val();
+                if(certificateNo==""){
+                    alert("编号不能为空！");
+                    return;
+                }
                 $.ajax({
                     url:"issueCertificateAjax",
                     type:"post",
@@ -42,8 +46,11 @@
                         if(result.status==1){
                             alert("颁发证书成功！")
                             $("#span_cerStatus").text("已发");
-
-                        }else{
+                            $("#Cer_no").val("");
+                        }else if(result.status==2){
+                            alert("该代理商的证书发完啦~")
+                        }
+                        else{
                             alert("证书已经被使用或无效证书");
                         }
                     },
@@ -52,17 +59,6 @@
                     }
                 });
             });
-
-
-
-
-
-
-
-
-
-
-
         });
     </script>
 </head>
@@ -111,9 +107,11 @@
     <!--/sidebar-->
     <div class="main-wrap">
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="certificateapplications.html" th:href="@{/backend/searchMembers}">管理代理商表</a>
-                <span>class="crumb-step">&gt;</span><a href="batch.html"><span class="crumb-name">班级详情</span></a>
-                <span>class="crumb-step">&gt;</span><span class="crumb-name">学员详细</span>
+            <div class="crumb-list">
+                <i class="icon-font"></i>
+                <a href="certificateapplications.html" th:href="@{/backend/searchMembers}">管理代理商表</a>
+                <span class="crumb-step">&gt;</span><a href="batch.html"><span class="crumb-name">班级详情</span></a>
+                <span class="crumb-step">&gt;</span><span class="crumb-name">学员详细</span>
             </div>
         </div>
         <div class="jp-container2">
@@ -154,7 +152,7 @@
             </div>
         </div>
         <div class="result-wrap">
-            <form action="#" method="get" id="myform" name="myform" th:action="@{/backend/issueCertificate}">
+            <form action="#" method="get" id="myform" name="myform">
                 <div class="config-items">
                     <div class="result-content">
                         <table width="100%" class="insert-tab">
@@ -162,15 +160,15 @@
                             <tr>
                                 <th><i class="require-red">*</i>证书编号：</th>
                                 <td><input type="text" id="Cer_no" value="" size="70" name="certificateNo" class="common-text"/>
-                                    <input type="hidden" th:value="${certificate}!=null?${certificate.member.id}:''" name="memberId"/>
-                                    <input type="hidden" th:value="${certificate}!=null?${certificate.id}:''" name="certificateId"/>
+                                    <!--<input type="hidden" th:value="${certificate}!=null?${certificate.member.id}:''" name="memberId"/>-->
+                                    <!--<input type="hidden" th:value="${certificate}!=null?${certificate.id}:''" name="certificateId"/>-->
                                 </td>
                             </tr>
                             <tr>
                                 <th></th>
-                                <td><input id="btn_fz" type="button" value="发证" class="btn btn-primary btn6 mr10"/><input
-                                        type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
-                                <span id="span_warn" class="warning-style" style="display: none" th:style="${info}==null?'display: none':'display: block'" th:text="${info}">警告！已经有证书了/格式不正确/</span>
+                                <td><input id="btn_fz" type="button" value="发证" class="btn btn-primary btn6 mr10"/>
+                                    <input type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
+                                <!--<span id="span_warn" class="warning-style" style="display: none" th:style="${info}==null?'display: none':'display: block'" th:text="${info}">警告！已经有证书了/格式不正确/</span>-->
                             </tr>
                             </tbody>
                         </table>

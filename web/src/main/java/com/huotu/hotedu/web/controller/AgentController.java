@@ -509,10 +509,11 @@ public class AgentController {
      */
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/backend/modifyAgent")
-    public String modifyAgent(Long id, Model model,HttpServletRequest request){
+    public String modifyAgent(Long id, Model model,HttpServletRequest request) throws Exception{
         Agent agent=agentService.findOneById(id);
         //返回
-        agent.setPictureUri(request.getContextPath() + "/uploadResources" + agent.getPictureUri());
+//        agent.setPictureUri(request.getContextPath() + "/uploadResources" + agent.getPictureUri());
+        agent.setPictureUri(staticResourceService.getResource(agent.getPictureUri()).toURL().toString());
         model.addAttribute("agent",agent);
         return "/backend/modifyAgent";
     }
@@ -542,7 +543,7 @@ public class AgentController {
      */
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/backend/addSaveAgent",method = RequestMethod.POST)
-    public String addSaveAgent(String name,String loginName,int sex,String area,String phoneNo,String level,@RequestParam("smallimg") MultipartFile file) throws Exception{
+    public String addSaveAgent(String name,String loginName,int sex,String area,String phoneNo,String level,int certificateNumber,@RequestParam("smallimg") MultipartFile file) throws Exception{
         //文件格式判断
         if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
         if(file.getSize()==0){throw new Exception("文件为空！");}
@@ -558,6 +559,7 @@ public class AgentController {
         agent.setRegisterDate(new Date());
         agent.setPhoneNo(phoneNo);
         agent.setLevel(level);
+        agent.setCertificateNumber(certificateNumber);
         agent.setLoginName(loginName);
         agent.setSex(sex);
         loginService.newLogin(agent,"123456");
@@ -580,28 +582,35 @@ public class AgentController {
      */
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/backend/modifySaveAgent")
-    public String modifySaveAgent(Long id,String name,String loginName,int sex,String area,String phoneNo,String level,@RequestParam("smallimg") MultipartFile file) throws Exception{
-        if(file.getSize()!=0){
-            if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
-        }
-        staticResourceService.deleteResource(staticResourceService.getResource(agentService.findOneById(id).getPictureUri()));
-        String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
-        staticResourceService.uploadResource(fileName,file.getInputStream());
-
+    public String modifySaveAgent(Long id,String name,String loginName,int sex,String area,String phoneNo,String level,int certificateNumber,@RequestParam("smallimg") MultipartFile file) throws Exception{
         Agent agent=agentService.findOneById(id);
         if(file.getSize()!=0){
+            if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+            staticResourceService.deleteResource(staticResourceService.getResource(agentService.findOneById(id).getPictureUri()));
+            String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+            staticResourceService.uploadResource(fileName,file.getInputStream());
             agent.setPictureUri(fileName);
         }
         agent.setArea(area);
         agent.setName(name);
         agent.setPhoneNo(phoneNo);
         agent.setLevel(level);
+        agent.setCertificateNumber(certificateNumber);
         agent.setLoginName(loginName);
         agent.setSex(sex);
         agentService.modifyAgent(agent);
         return "redirect:/backend/searchAgents";
     }
 
-
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @RequestMapping("/backend/lookAgentClass")
+//    public String lookAgent(long id,Model model) throws  Exception{
+//        String turnPage="/backend/agent";
+//        Agent agent=agentService.findOneById(id);
+//        agent.setPictureUri(staticResourceService.getResource(agent.getPictureUri()).toURL().toString());
+//        model.addAttribute("agent",agent);
+//        model.addAttribute("totalMembers",memberService.searchMembers(agent,0,PAGE_SIZE).getTotalElements());
+//        return turnPage;
+//    }
 
 }

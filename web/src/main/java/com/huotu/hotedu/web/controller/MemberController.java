@@ -227,10 +227,11 @@ public class MemberController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/backend/lookMember")
-    public String lookMembers(Long id, Model model) {
+    public String lookMembers(Long id, Model model)throws Exception{
         String turnPage = "/backend/prentice";
         Member member=memberService.findOneById(id);
         Certificate certificate=certificateService.findOneByMember(member);
+        certificate.setPictureUri(staticResourceService.getResource(certificate.getPictureUri()).toURL().toString());
         model.addAttribute("member",member);
         model.addAttribute("certificate",certificate);
         return turnPage;
@@ -498,27 +499,29 @@ public class MemberController {
 
     @RequestMapping("/backend/issueCertificateAjax")
     @ResponseBody
-    public Result issueCertificate(String certificateNo,long memberId,long certificateId){
+    public Result issueCertificateAjax(String certificateNo,long memberId,long certificateId){
+        Member member=memberService.findOneById(memberId);
         Result result=new Result();
         if(certificateService.findOneBycertificateNo(certificateNo)!=null){  //验证发的证书是否已经发过了
             result.setStatus(0);
-        }else{
-            Member member=memberService.findOneById(memberId);
+        }else if(member.getAgent().getSendCertificateNumber()>=member.getAgent().getCertificateNumber()){
+            result.setStatus(2);
+        }
+        else{
             Certificate certificate=certificateService.findOneById(certificateId);
             certificate.setCertificateNo(certificateNo);
             certificateService.modifyCertificate(certificate);
             member.setCertificate(certificate);
             member.setReceiveCertificateDate(new Date());
             member.setCertificateStatus(1);
+            Agent agent=member.getAgent();
+            member.getAgent().setSendCertificateNumber(agent.getSendCertificateNumber()+1);//代理商的证书减1
+            agentService.modifyAgent(agent);
             memberService.modifyMember(member);
             result.setStatus(1);
         }
         return result;
     }
-    //TODO有待完善
-
-
-
 
 
 
@@ -526,18 +529,28 @@ public class MemberController {
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/backend/issueCertificate")
     public String issueCertificate(String certificateNo,long memberId,long certificateId,
-                                   @RequestParam(required = false)Integer pageNo,Model model){
+                                   @RequestParam(required = false)Integer pageNo,
+                                   String returnPage,
+                                   Model model){
+        Member member=memberService.findOneById(memberId);
         if(certificateService.findOneBycertificateNo(certificateNo)!=null){  //验证发的证书是否已经发过了
             model.addAttribute("info","该证书已经发过了");
             model.addAttribute("certificateId",certificateId);
-        }else{
-            Member member=memberService.findOneById(memberId);
+        }else if(member.getAgent().getSendCertificateNumber()>=member.getAgent().getCertificateNumber()){
+            model.addAttribute("info","该代理商的证书已经发完了~");
+            model.addAttribute("certificateId",certificateId);
+        }
+        else{
+
             Certificate certificate=certificateService.findOneById(certificateId);
             certificate.setCertificateNo(certificateNo);
             certificateService.modifyCertificate(certificate);
             member.setCertificate(certificate);
             member.setReceiveCertificateDate(new Date());
             member.setCertificateStatus(1);
+            Agent agent=member.getAgent();
+            member.getAgent().setSendCertificateNumber(agent.getSendCertificateNumber()+1);//代理商的证书减1
+            agentService.modifyAgent(agent);
             memberService.modifyMember(member);
         }
         model.addAttribute("pageNo",pageNo);
