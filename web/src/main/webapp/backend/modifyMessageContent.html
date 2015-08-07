@@ -115,7 +115,7 @@
         </div>
     </div>
     <!--/sidebar-->
-    <div class="main-wrap">
+    <div class="main-wrap" style="height: 100%">
         <div class="crumb-wrap">
             <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a><span
                     class="crumb-step">&gt;</span><a href="MessageContent.html" th:href="@{/backend/loadMessageContent}"><span class="crumb-name">资讯指南</span></a><span
@@ -130,18 +130,15 @@
                             <tbody>
                             <tr>
                                 <th><i class="require-red">*</i>上传图片：</th>
-                                <td><img id="img_photo" th:src="${messageContent.pictureUri}" src="images/logo.png" style="width: 100px; height: auto;"/>
-                                    <input name="smallimg" type="file"/></td>
+                                <td><img id="img_photo" th:src="${messageContent.pictureUri}" src="images/logo.png" style="width: 100px; height: auto;"/><input name="smallimg" type="file"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>标题：</th>
-                                <td><input title="" type="text" id="" value="" th:value="${messageContent.title}" size="70"
-                                           name="title" class="common-text"/></td>
+                                <td><input title="" type="text" id="" value="" th:value="${messageContent.title}" size="70" name="title" class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>描述：</th>
-                                <td><textarea title="" name="content" th:text="${messageContent.content}" class="common-textarea"
-                                              id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
+                                <td><textarea title="" name="content" th:text="${messageContent.content}" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
                             </tr>
                             <tr>
                                 <th>置顶</th>

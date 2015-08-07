@@ -1,12 +1,20 @@
 package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.Editor;
+import com.huotu.hotedu.entity.MessageContent;
 import com.huotu.hotedu.entity.Login;
 import com.huotu.hotedu.entity.Manager;
+import com.huotu.hotedu.service.MessageContentService;
+import com.huotu.hotedu.web.service.StaticResourceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -16,6 +24,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class LoginController {
+    /**
+     * 用来储存处理静态资源的接口
+     */
+    @Autowired
+    StaticResourceService staticResourceService;
+
+    @Autowired
+    MessageContentService messageContentService;
 
     /**
      * 进入登录页面
@@ -47,8 +63,18 @@ public class LoginController {
     }
 
     @RequestMapping("/pc/index")
-    public String check() {
+    public String index(Model model) throws Exception{
         String turnPage = "pc/yun-index";
+        Page<MessageContent> pages = messageContentService.loadIndexMessageContent();
+        ArrayList<MessageContent> list = new ArrayList<MessageContent>(13);
+        for(MessageContent messageContent : pages){
+            messageContent.setPictureUri(staticResourceService.getResource(messageContent.getPictureUri()).toURL().toString());
+            list.add(messageContent);
+        }
+
+        for(int i=0;i<12;i++)
+            model.addAttribute("messageContent"+String.valueOf(i),list.get(i));
+
         return turnPage;
     }
 

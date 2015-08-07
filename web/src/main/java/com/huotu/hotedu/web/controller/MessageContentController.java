@@ -43,6 +43,7 @@ public class MessageContentController {
     StaticResourceService staticResourceService;
 
 
+
     /**
      * 搜索符合条件的咨询动态信息
      * @param keywords  搜索关键字
@@ -112,8 +113,9 @@ public class MessageContentController {
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifyMessageContent")
-    public String ModifyMessageContent(Long id, Model model){
+    public String ModifyMessageContent(Long id, Model model) throws Exception{
         MessageContent messageContent=messageContentService.findOneById(id);
+        messageContent.setPictureUri(staticResourceService.getResource(messageContent.getPictureUri()).toURL().toString());
         model.addAttribute("messageContent",messageContent);
         return "/backend/modifyMessageContent";
     }
@@ -170,4 +172,5 @@ public class MessageContentController {
             messageContentService.modify(messageContent);
             return "redirect:/backend/searchMessageContent";
     }
+
 }

@@ -4,6 +4,7 @@ import com.huotu.hotedu.repository.MessageContentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -56,5 +57,12 @@ public class MessageContentService {
     //查找一条资讯动态消息
     public MessageContent findOneById(Long id){
         return messageContentRepository.findOne(id);
+    }
+
+    /**
+     * 加载资讯动态首页界面
+     */
+    public Page<MessageContent> loadIndexMessageContent(){
+        return messageContentRepository.findAll(new PageRequest(0, 12, new Sort(Sort.Direction.DESC, "top", "lastUploadDate")));
     }
 }
