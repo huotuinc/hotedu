@@ -95,7 +95,7 @@
 
     <div class="ysthree">
         <!--报名信息-->
-        <div style="display:block;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
+        <div style="display:none;" th:style="${navigation}=='bmxx'? 'display:block':'display:none'" class="main-wrapi">
             <div style=" float: right; margin-right: 14px;margin-bottom: 6px;margin-top:5px; width:1000px;" class="search-content">
                 <form action="#" id="searchMemberInfo" th:action="@{/pc/searchMembers}" method="get">
                     <p style="height:5px;"></p>
@@ -277,355 +277,350 @@
         <!--消息通知end-->
 
         <!--班级管理 未分班 安排班级 start-->
-        <div id="noClassMemberDiv" style="display:block;" th:style="${navigation}=='bjgl'? 'display:block;':'display:none;'" class="ysthree">
-            <div class="main-wrapi">
-                <div style="margin-right: 14px;margin-bottom: 6px;" class="search-content">
-                    <div style=" text-align:center;display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex;" class="ystwo">
-                        <div>
-                            <a href="#" th:href="@{/pc/loadClassMembers(keywords=${keywords},searchSort=${searchSort},pageNo=${pageNo})}">
-                                <div class="newfb ysss on"><span>未分班</span></div> </a>
+        <div id="noClassMemberDiv" style="display:block;" th:style="${navigation}=='bjgl'? 'display:block;':'display:none;'" class="main-wrapi">
+            <div style="margin-right: 14px;margin-bottom: 6px;" class="search-content">
+                <div style=" text-align:center;display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex; padding-top:15px;" class="ystwo">
+                    <div>
+                        <a href="#" th:href="@{/pc/loadClassMembers(keywords=${keywords},searchSort=${searchSort},pageNo=${pageNo})}">
+                            <div class="newfb ysss on"><span>未分班</span></div> </a>
+                    </div>
+                    <div>
+                        <a href="#" th:href="@{/pc/loadClassExam}">
+                            <div class="newfb ysss"><span>已有班级</span></div> </a>
+                    </div>
+                </div>
+                <p style="clear:both"></p>
+                <form action="#" id="searchClassMembers" method="post" th:action="@{/pc/loadClassMembers}">
+                    <p style="height:5px;"></p>
+                    <!--安排班级start-->
+                    <table style="float: left;" class="search-tab">
+                    <tr>
+                            <th width="10"></th>
+                            <td><input title="" id="noClassCheckAll" type="checkbox" value="checkbox"/></td>
+                            <td><button class="ysss si" name="apbj" value="安排班级" type="button" onclick="noClassMemberArrangeClass()"><span style="color:white">安排班级</span></button></td>
+                        </tr>
+                    </table>
+                    <script>
+                        $("#noClassCheckAll").click(
+                                function(){
+                                    if(this.checked){
+                                        $("input[name='checkboxNoClass']").each(function(){this.checked=true;});
+                                    }else{
+                                        $("input[name='checkboxNoClass']").each(function(){this.checked=false;});
+                                    }
+                                }
+                        );
+                        function noClassMemberArrangeClass() {
+                            var str="";
+                            var sum = 0;
+                            $("input[name='checkboxNoClass']:checkbox").each(function(){
+                                if($(this).attr("checked")){
+                                    if(sum==0)
+                                        str += $(this).parent().parent().children().eq(1).text();
+                                    else
+                                        str += ","+$(this).parent().parent().children().eq(1).text();
+                                    sum++;
+                                }
+                            });
+                            if(sum==0){
+                                check_noClassMember();
+                            }
+                            else{
+                                $("#noClassMemberArrayLis").val(str);
+                                $("#noClassMemberArrangeClassDiv").show();
+                            }
+                        }
+                    </script>
+                    <table style="float: right;" class="search-tab">
+                        <tr>
+                            <th width="10"></th>
+                            <td><select title="searchSort" name="searchSort" id="noClassMemberSearchSort" style=" height:29px;padding: 0 4px; border:1px solid #ccc; vertical-align:middle">
+                                <option value="all">全部</option>
+                                <option value="realName">姓名</option>
+                                <option value="area">区域</option>
+                                <option value="phoneNo">电话</option>
+                            </select></td>
+                            <td><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" value="" th:value="${keywords}"  type="text"/></td>
+                            <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
+                        </tr>
+                    </table>
+                    <!--安排班级end-->
+                </form>
+                <p style="clear:both"></p>
+            </div>
+            <!--安排班级start-->
+            <div class="result-wrap">
+                <form name="myform" class="myform" method="post">
+                    <div class="result-content">
+                        <table class="result-tab" width="100%">
+                            <thead>
+                                <tr>
+                                    <th style="width:80px">选择</th>
+                                    <th style="width:100px">序号</th>
+                                    <th style="width:80px">姓名</th>
+                                    <th style="width:300px">区域</th>
+                                    <th style="width:300px">电话</th>
+                                    <th style="width:80px;">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody th:remove="all-but-first">
+                                <tr th:each="g:${allClassMembersList}">
+                                    <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId" th:text="${g.id}">01</td>
+                                    <td th:text="${g.realName}">小米</td>
+                                    <td th:text="${g.agent.area}">杭州</td>
+                                    <td th:text="${g.phoneNo}">15236699696</td>
+                                    <td><a class="link-update" href="#" th:href="@{/pc/detailMember(id=${g.id})}">查看</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input title="" name="checkboxNoClass" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">01</td>
+                                    <td>小米</td>
+                                    <td title="">杭州</td>
+                                    <td>15236699696</td>
+                                    <td><a class="link-update" href="#">查看</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input title="" name="checkboxNoClass" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">01</td>
+                                    <td>小米</td>
+                                    <td title="">杭州</td>
+                                    <td>15236699696</td>
+                                    <td><a class="link-update" href="#">查看</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input title="" name="checkboxNoClass" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">01</td>
+                                    <td>小米</td>
+                                    <td title="">杭州</td>
+                                    <td>15236699696</td>
+                                    <td><a class="link-update" href="#">查看</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input title="" name="checkboxNoClass" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">01</td>
+                                    <td>小米</td>
+                                    <td title="">杭州</td>
+                                    <td>15236699696</td>
+                                    <td><a class="link-update" href="#">查看</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input title="" name="checkboxNoClass" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">01</td>
+                                    <td>小米</td>
+                                    <td title="">杭州</td>
+                                    <td>15236699696</td>
+                                    <td><a class="link-update" href="#">查看</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input title="" name="checkboxNoClass" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">01</td>
+                                    <td>小米</td>
+                                    <td title="">杭州</td>
+                                    <td>15236699696</td>
+                                    <td><a class="link-update" href="#">查看</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input title="" name="checkboxNoClass" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">0123456789</td>
+                                    <td>小米</td>
+                                    <td title="">杭州</td>
+                                    <td>15236699696</td>
+                                    <td><a class="link-update" href="#">查看</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div style="display: none;">
+                            <td><input title="" type="text" id="noClassMember_hidden_text" value="all" th:value="${searchSort}"/></td>
                         </div>
-                        <div>
-                            <a href="#" th:href="@{/pc/loadClassExam}">
-                                <div class="newfb ysss"><span>已有班级</span></div> </a>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                var $searchSort = $("#noClassMemberSearchSort");
+                                var searchSortValue = $("#noClassMember_hidden_text").val();
+                                $searchSort.val(searchSortValue);
+                            })
+                        </script>
+                        <div style="text-align:center; margin-top:10px;">
+                            <a href="#" th:if="${pageNo}!=0" th:href=" @{/pc/loadClassMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
+                            <a href="#" th:if="${pageNo+1}!=${totalPages}" th:href="@{/pc/loadClassMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
+                            <span th:text="'当前第'+${pageNo+1}">1</span>页/<span th:text="'共'+${totalPages}">1</span>页
                         </div>
                     </div>
-                    <p style="clear:both"></p>
-                    <form action="#" id="searchClassMembers" method="post" th:action="@{/pc/loadClassMembers}">
-                        <p style="height:5px;"></p>
-                        <!--安排班级start-->
-                        <table style="float: left;" class="search-tab">
-                        <tr>
-                                <th width="10"></th>
-                                <td><input title="" id="noClassCheckAll" type="checkbox" value="checkbox"/></td>
-                                <td><button class="ysss si" name="apbj" value="安排班级" type="button" onclick="noClassMemberArrangeClass()"><span style="color:white">安排班级</span></button></td>
-                            </tr>
-                        </table>
-                        <script>
-                            $("#noClassCheckAll").click(
-                                    function(){
-                                        if(this.checked){
-                                            $("input[name='checkboxNoClass']").each(function(){this.checked=true;});
-                                        }else{
-                                            $("input[name='checkboxNoClass']").each(function(){this.checked=false;});
-                                        }
-                                    }
-                            );
-                            function noClassMemberArrangeClass() {
-                                var str="";
-                                var sum = 0;
-                                $("input[name='checkboxNoClass']:checkbox").each(function(){
-                                    if($(this).attr("checked")){
-                                        if(sum==0)
-                                            str += $(this).parent().parent().children().eq(1).text();
-                                        else
-                                            str += ","+$(this).parent().parent().children().eq(1).text();
-                                        sum++;
-                                    }
-                                });
-                                if(sum==0){
-                                    check_noClassMember();
-                                }
-                                else{
-                                    $("#noClassMemberArrayLis").val(str);
-                                    $("#noClassMemberArrangeClassDiv").show();
-                                }
-                            }
-                        </script>
-                        <table style="float: right;" class="search-tab">
-                            <tr>
-                                <th width="10"></th>
-                                <td><select title="searchSort" name="searchSort" id="noClassMemberSearchSort" style=" height:29px;padding: 0 4px; border:1px solid #ccc; vertical-align:middle">
-                                    <option value="all">全部</option>
-                                    <option value="realName">姓名</option>
-                                    <option value="area">区域</option>
-                                    <option value="phoneNo">电话</option>
-                                </select></td>
-                                <td><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" value="" th:value="${keywords}"  type="text"/></td>
-                                <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
-                            </tr>
-                        </table>
-                        <!--安排班级end-->
-                    </form>
-                    <p style="clear:both"></p>
-                </div>
-                <!--安排班级start-->
-                <div class="result-wrap">
-                    <form name="myform" class="myform" method="post">
-                        <div class="result-content">
-                            <table class="result-tab" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th style="width:80px">选择</th>
-                                        <th style="width:100px">序号</th>
-                                        <th style="width:80px">姓名</th>
-                                        <th style="width:300px">区域</th>
-                                        <th style="width:300px">电话</th>
-                                        <th style="width:80px;">操作</th>
-                                    </tr>
-                                </thead>
-                                <tbody th:remove="all-but-first">
-                                    <tr th:each="g:${allClassMembersList}">
-                                        <td><input title="" name="checkboxNoClass" class="u109_input" type="checkbox" value="checkbox"/></td>
-                                        <td class="checkboxId" th:text="${g.id}">01</td>
-                                        <td th:text="${g.realName}">小米</td>
-                                        <td th:text="${g.agent.area}">杭州</td>
-                                        <td th:text="${g.phoneNo}">15236699696</td>
-                                        <td><a class="link-update" href="#" th:href="@{/pc/detailMember(id=${g.id})}">查看</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input title="" name="checkboxNoClass" type="checkbox" value="checkbox"/></td>
-                                        <td class="checkboxId">01</td>
-                                        <td>小米</td>
-                                        <td title="">杭州</td>
-                                        <td>15236699696</td>
-                                        <td><a class="link-update" href="#">查看</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input title="" name="checkboxNoClass" type="checkbox" value="checkbox"/></td>
-                                        <td class="checkboxId">01</td>
-                                        <td>小米</td>
-                                        <td title="">杭州</td>
-                                        <td>15236699696</td>
-                                        <td><a class="link-update" href="#">查看</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input title="" name="checkboxNoClass" type="checkbox" value="checkbox"/></td>
-                                        <td class="checkboxId">01</td>
-                                        <td>小米</td>
-                                        <td title="">杭州</td>
-                                        <td>15236699696</td>
-                                        <td><a class="link-update" href="#">查看</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input title="" name="checkboxNoClass" type="checkbox" value="checkbox"/></td>
-                                        <td class="checkboxId">01</td>
-                                        <td>小米</td>
-                                        <td title="">杭州</td>
-                                        <td>15236699696</td>
-                                        <td><a class="link-update" href="#">查看</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input title="" name="checkboxNoClass" type="checkbox" value="checkbox"/></td>
-                                        <td class="checkboxId">01</td>
-                                        <td>小米</td>
-                                        <td title="">杭州</td>
-                                        <td>15236699696</td>
-                                        <td><a class="link-update" href="#">查看</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input title="" name="checkboxNoClass" type="checkbox" value="checkbox"/></td>
-                                        <td class="checkboxId">01</td>
-                                        <td>小米</td>
-                                        <td title="">杭州</td>
-                                        <td>15236699696</td>
-                                        <td><a class="link-update" href="#">查看</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input title="" name="checkboxNoClass" type="checkbox" value="checkbox"/></td>
-                                        <td class="checkboxId">0123456789</td>
-                                        <td>小米</td>
-                                        <td title="">杭州</td>
-                                        <td>15236699696</td>
-                                        <td><a class="link-update" href="#">查看</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div style="display: none;">
-                                <td><input title="" type="text" id="noClassMember_hidden_text" value="all" th:value="${searchSort}"/></td>
-                            </div>
-                            <script type="text/javascript">
-                                $(document).ready(function () {
-                                    var $searchSort = $("#noClassMemberSearchSort");
-                                    var searchSortValue = $("#noClassMember_hidden_text").val();
-                                    $searchSort.val(searchSortValue);
-                                })
-                            </script>
-                            <div style="text-align:center; margin-top:10px;">
-                                <a href="#" th:if="${pageNo}!=0" th:href=" @{/pc/loadClassMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
-                                <a href="#" th:if="${pageNo+1}!=${totalPages}" th:href="@{/pc/loadClassMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
-                                <span th:text="'当前第'+${pageNo+1}">1</span>页/<span th:text="'共'+${totalPages}">1</span>页
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <!--安排班级end-->
-
+                </form>
             </div>
+            <!--安排班级end-->
         </div>
         <!--班级管理 未分班 安排班级 end-->
         <!--班级管理 已有班级 安排考场 start-->
-        <div id="arrangeClassExamDiv" style="display:block;" th:style="${navigation}=='apkc'? 'display:block;':'display:none;'" class="ysthree">
-            <div class="main-wrapi">
-                <div style="margin-right: 14px;margin-bottom: 6px;" class="search-content">
-                    <div style=" text-align:center;display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex;" class="ystwo">
-                        <div>
-                            <a href="#" th:href="@{/pc/loadClassMembers}">
-                                <div class="newfb ysss"><span>未分班</span></div> </a>
-                        </div>
-                        <div>
-                            <a href="#" th:href="@{/pc/loadClassExam(keywords=${keywords},searchSort=${searchSort},pageNo=${pageNo})}">
-                                <div class="newfb ysss on"><span>已有班级</span></div> </a>
-                        </div>
-
+        <div id="arrangeClassExamDiv" style="display:block;" th:style="${navigation}=='apkc'? 'display:block;':'display:none;'" class="main-wrapi">
+            <div style="margin-right: 14px;margin-bottom: 6px;" class="search-content">
+                <div style=" text-align:center;display: box;display: -ms-box; display: -webkit-box; display: flex; display: -ms-flexbox;display: -webkit-flex; padding-top:15px;" class="ystwo">
+                    <div>
+                        <a href="#" th:href="@{/pc/loadClassMembers}">
+                            <div class="newfb ysss"><span>未分班</span></div> </a>
                     </div>
-                    <p style="clear:both"></p>
-                    <form action="#" id="searchClassExam" method="post" th:action="@{/pc/loadClassExam}">
-                        <p style="height:5px;"></p>
-                        <table style="float: left;" class="search-tab">
-                            <tr>
-                                <th width="10"></th>
-                                <td><input title="" id="classExamCheckAll" type="checkbox" value="checkbox"/></td>
-                                <td><button class="ysss si" name="sub" value="安排考试时间" type="button" onclick="classArrangeExam()"><span style="color:white">安排考试时间</span></button></td>
-                            </tr>
-                        </table>
-                        <script>
-                            $("#classExamCheckAll").click(
-                                    function(){
-                                        if(this.checked){
-                                            $("input[name='checkboxClassExam']").each(function(){this.checked=true;});
-                                        }else{
-                                            $("input[name='checkboxClassExam']").each(function(){this.checked=false;});
-                                        }
+                    <div>
+                        <a href="#" th:href="@{/pc/loadClassExam(keywords=${keywords},searchSort=${searchSort},pageNo=${pageNo})}">
+                            <div class="newfb ysss on"><span>已有班级</span></div> </a>
+                    </div>
+
+                </div>
+                <p style="clear:both"></p>
+                <form action="#" id="searchClassExam" method="post" th:action="@{/pc/loadClassExam}">
+                    <p style="height:5px;"></p>
+                    <table style="float: left;" class="search-tab">
+                        <tr>
+                            <th width="10"></th>
+                            <td><input title="" id="classExamCheckAll" type="checkbox" value="checkbox"/></td>
+                            <td><button class="ysss si" name="sub" value="安排考试时间" type="button" onclick="classArrangeExam()"><span style="color:white">安排考试时间</span></button></td>
+                        </tr>
+                    </table>
+                    <script>
+                        $("#classExamCheckAll").click(
+                                function(){
+                                    if(this.checked){
+                                        $("input[name='checkboxClassExam']").each(function(){this.checked=true;});
+                                    }else{
+                                        $("input[name='checkboxClassExam']").each(function(){this.checked=false;});
                                     }
-                            );
-                            function classArrangeExam() {
-                                var str="";
-                                var sum = 0;
-                                $("input[name='checkboxClassExam']:checkbox").each(function(){
-                                    if($(this).attr("checked")){
-                                        if(sum==0)
-                                            str += $(this).parent().parent().children().eq(1).text();
-                                        else
-                                            str += ","+$(this).parent().parent().children().eq(1).text();
-                                        sum++;
-                                    }
-                                });
-                                if(sum==0){
-                                    check_classExam();
                                 }
-                                else{
-                                    $("#classExamArrayLis").val(str);
-                                    $("#classArrangeExamDiv").show();
+                        );
+                        function classArrangeExam() {
+                            var str="";
+                            var sum = 0;
+                            $("input[name='checkboxClassExam']:checkbox").each(function(){
+                                if($(this).attr("checked")){
+                                    if(sum==0)
+                                        str += $(this).parent().parent().children().eq(1).text();
+                                    else
+                                        str += ","+$(this).parent().parent().children().eq(1).text();
+                                    sum++;
                                 }
+                            });
+                            if(sum==0){
+                                check_classExam();
                             }
-                        </script>
-                        <table style="float: right;" class="search-tab">
-                            <tr>
-                                <th width="10"></th>
-                                <td><select title="searchSort" name="searchSort" id="classExamSearchSort" style=" height:29px;padding: 0 4px; border:1px solid #ccc; vertical-align:middle">
-                                    <option value="all">全部</option>
-                                    <option value="className">班级</option>
-                                    <option value="area">区域</option>
-                                    <option value="memberNum">人数</option>
-                                    <option value="examDate">考试时间</option>
-                                    <option value="examAddress">地点</option>
-                                </select></td>
-                                <td><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" value="" th:value="${keywords}"  type="text"/></td>
-                                <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
-                            </tr>
-                        </table>
-                    </form>
-                    <p style="clear:both"></p>
-                </div>
-                <!--安排考试时间start-->
-                <div class="result-wrap">
-                    <form name="myform" class="myform" method="post">
-                        <div class="result-content">
-                            <table class="result-tab" width="100%">
-                                <thead>
-                                    <th style="width:80px">选择</th>
-                                    <th style="width:80px">序号</th>
-                                    <th style="width:300px">班级</th>
-                                    <th style="width:80px">区域</th>
-                                    <th style="width:80px">人数</th>
-                                    <th style="width:300px">考试时间</th>
-                                    <th style="width:300px">考试地点</th>
-                                    <th style="width:80px;">操作</th>
-                                </thead>
-                                <tbody th:remove="all-but-first">
-                                    <tr th:each="g:${allClassExamList}">
-                                        <td><input title="" name="checkboxClassExam" type="checkbox" value="checkbox"/></td>
-                                        <td class="checkboxId" th:text="${g.id}">01</td>
-                                        <td th:text="${g.className}">201504第一期</td>
-                                        <td th:text="${g.agent.area}">杭州</td>
-                                        <td th:text="${g.memberNum}">60</td>
-                                        <td th:text="${g.exam}==null?'':${#dates.format(g.exam.examDate, 'yyyy-MM-dd')}">2015-7-31</td>
-                                        <td th:text="${g.exam}==null ? '': ${g.exam.examAddress}">火炬大厦</td>
-                                        <td><a href="#" class="link-update" th:href="@{/pc/loadClassTeamDetailInfo(id=${g.id},keywords=${keywords},searchSort=${searchSort},pageNo=${pageNo})}">查看</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input title="" name="checkboxClassExam" type="checkbox" value="checkbox"/></td>
-                                        <td class="checkboxId">01</td>
-                                        <td>201504第一期</td>
-                                        <td>杭州</td>
-                                        <td>60</td>
-                                        <td>2015-04-01</td>
-                                        <td>火炬大厦</td>
-                                        <td><a class="link-update" href="#">查看</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input title="" name="checkboxClassExam" type="checkbox" value="checkbox"/></td>
-                                        <td class="checkboxId">01</td>
-                                        <td>201504第一期</td>
-                                        <td>杭州</td>
-                                        <td>60</td>
-                                        <td>2015-04-01</td>
-                                        <td>火炬大厦</td>
-                                        <td><a class="link-update" href="#">查看</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input title="" name="checkboxClassExam" type="checkbox" value="checkbox"/></td>
-                                        <td class="checkboxId">01</td>
-                                        <td>201504第一期</td>
-                                        <td>杭州</td>
-                                        <td>60</td>
-                                        <td>2015-04-01</td>
-                                        <td>火炬大厦</td>
-                                        <td><a class="link-update" href="#">查看</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input title="" name="checkboxClassExam" type="checkbox" value="checkbox"/></td>
-                                        <td class="checkboxId">01</td>
-                                        <td>201504第一期</td>
-                                        <td>杭州</td>
-                                        <td>60</td>
-                                        <td>2015-04-01</td>
-                                        <td>火炬大厦</td>
-                                        <td><a class="link-update" href="#">查看</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input title="" name="checkboxClassExam" type="checkbox" value="checkbox"/></td>
-                                        <td class="checkboxId">01</td>
-                                        <td>201504第一期</td>
-                                        <td>杭州</td>
-                                        <td>60</td>
-                                        <td>2015-04-01</td>
-                                        <td>火炬大厦</td>
-                                        <td><a class="link-update" href="#">查看</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div style="display: none;">
-                                <td><input title="" type="text" id="classExam_hidden_text" value="all" th:value="${searchSort}"/></td>
-                            </div>
-                            <script type="text/javascript">
-                                $(document).ready(function () {
-                                    var $searchSort = $("#classExamSearchSort");
-                                    var searchSortValue = $("#classExam_hidden_text").val();
-                                    $searchSort.val(searchSortValue);
-                                })
-                            </script>
-                            <div style="text-align:center; margin-top:10px;">
-                                <a href="#" th:if="${pageNo}!=0" th:href=" @{/pc/loadClassExam(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
-                                <a href="#" th:if="${pageNo+1}!=${totalPages}" th:href="@{/pc/loadClassExam(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
-                                <span th:text="'当前第'+${pageNo+1}">1</span>页/<span th:text="'共'+${totalPages}">1</span>页
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <!--安排考试时间end-->
+                            else{
+                                $("#classExamArrayLis").val(str);
+                                $("#classArrangeExamDiv").show();
+                            }
+                        }
+                    </script>
+                    <table style="float: right;" class="search-tab">
+                        <tr>
+                            <th width="10"></th>
+                            <td><select title="searchSort" name="searchSort" id="classExamSearchSort" style=" height:29px;padding: 0 4px; border:1px solid #ccc; vertical-align:middle">
+                                <option value="all">全部</option>
+                                <option value="className">班级</option>
+                                <option value="area">区域</option>
+                                <option value="memberNum">人数</option>
+                                <option value="examDate">考试时间</option>
+                                <option value="examAddress">地点</option>
+                            </select></td>
+                            <td><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" value="" th:value="${keywords}"  type="text"/></td>
+                            <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
+                        </tr>
+                    </table>
+                </form>
+                <p style="clear:both"></p>
             </div>
+            <!--安排考试时间start-->
+            <div class="result-wrap">
+                <form name="myform" class="myform" method="post">
+                    <div class="result-content">
+                        <table class="result-tab" width="100%">
+                            <thead>
+                                <th style="width:80px">选择</th>
+                                <th style="width:80px">序号</th>
+                                <th style="width:300px">班级</th>
+                                <th style="width:80px">区域</th>
+                                <th style="width:80px">人数</th>
+                                <th style="width:300px">考试时间</th>
+                                <th style="width:300px">考试地点</th>
+                                <th style="width:80px;">操作</th>
+                            </thead>
+                            <tbody th:remove="all-but-first">
+                                <tr th:each="g:${allClassExamList}">
+                                    <td><input title="" name="checkboxClassExam" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId" th:text="${g.id}">01</td>
+                                    <td th:text="${g.className}">201504第一期</td>
+                                    <td th:text="${g.agent.area}">杭州</td>
+                                    <td th:text="${g.memberNum}">60</td>
+                                    <td th:text="${g.exam}==null?'':${#dates.format(g.exam.examDate, 'yyyy-MM-dd')}">2015-7-31</td>
+                                    <td th:text="${g.exam}==null ? '': ${g.exam.examAddress}">火炬大厦</td>
+                                    <td><a href="#" class="link-update" th:href="@{/pc/loadClassTeamDetailInfo(id=${g.id},keywords=${keywords},searchSort=${searchSort},pageNo=${pageNo})}">查看</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input title="" name="checkboxClassExam" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">01</td>
+                                    <td>201504第一期</td>
+                                    <td>杭州</td>
+                                    <td>60</td>
+                                    <td>2015-04-01</td>
+                                    <td>火炬大厦</td>
+                                    <td><a class="link-update" href="#">查看</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input title="" name="checkboxClassExam" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">01</td>
+                                    <td>201504第一期</td>
+                                    <td>杭州</td>
+                                    <td>60</td>
+                                    <td>2015-04-01</td>
+                                    <td>火炬大厦</td>
+                                    <td><a class="link-update" href="#">查看</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input title="" name="checkboxClassExam" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">01</td>
+                                    <td>201504第一期</td>
+                                    <td>杭州</td>
+                                    <td>60</td>
+                                    <td>2015-04-01</td>
+                                    <td>火炬大厦</td>
+                                    <td><a class="link-update" href="#">查看</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input title="" name="checkboxClassExam" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">01</td>
+                                    <td>201504第一期</td>
+                                    <td>杭州</td>
+                                    <td>60</td>
+                                    <td>2015-04-01</td>
+                                    <td>火炬大厦</td>
+                                    <td><a class="link-update" href="#">查看</a></td>
+                                </tr>
+                                <tr>
+                                    <td><input title="" name="checkboxClassExam" type="checkbox" value="checkbox"/></td>
+                                    <td class="checkboxId">01</td>
+                                    <td>201504第一期</td>
+                                    <td>杭州</td>
+                                    <td>60</td>
+                                    <td>2015-04-01</td>
+                                    <td>火炬大厦</td>
+                                    <td><a class="link-update" href="#">查看</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div style="display: none;">
+                            <td><input title="" type="text" id="classExam_hidden_text" value="all" th:value="${searchSort}"/></td>
+                        </div>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                var $searchSort = $("#classExamSearchSort");
+                                var searchSortValue = $("#classExam_hidden_text").val();
+                                $searchSort.val(searchSortValue);
+                            })
+                        </script>
+                        <div style="text-align:center; margin-top:10px;">
+                            <a href="#" th:if="${pageNo}!=0" th:href=" @{/pc/loadClassExam(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
+                            <a href="#" th:if="${pageNo+1}!=${totalPages}" th:href="@{/pc/loadClassExam(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
+                            <span th:text="'当前第'+${pageNo+1}">1</span>页/<span th:text="'共'+${totalPages}">1</span>页
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--安排考试时间end-->
         </div>
         <!--班级管理 已有班级 安排考场 end-->
 
