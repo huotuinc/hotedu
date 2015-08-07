@@ -697,20 +697,20 @@
                                 <tr th:each="g:${allExamMembersList}">
                                     <td><input title="" name="checkboxExamMember" type="checkbox" value="checkbox"/></td>
                                     <td class="checkboxId" th:text="${g.id}">01</td>
-                                    <td th:text="${g.realName}">小米</td>
+                                    <td th:text="${g.realName}">小米fdsafsdafsafsafdsafdsafdsafdsafdsafdsf</td>
                                     <td th:text="${g.agent.area}">杭州</td>
                                     <td th:text="${g.phoneNo}">15236699696</td>
                                     <td th:text="${g.passed}==0 ? '': (${g.passed}==1 ? '通过' : '待补考')"></td>
                                     <td th:text="${g.theClass}==null ? '未分班':${g.theClass.className}">201504第一期</td>
-                                    <td th:style="${g.passed}==0 ? 'display:block;':'display:none;'">
+                                    <td style="" th:style="${g.passed}==0 ? '':'display:none;'">
                                         <a class="link-update" href="#" onclick="btn_setExamPass(this)">通过</a>
                                         <a class="link-update" href="#" onclick="btn_setExamNoPass(this)">未通过</a>
                                         <a class="link-update" href="#" th:href="@{/pc/detailMember(id=${g.id})}">查看</a>
                                      </td>
-                                    <td style="display:none;" th:style="${g.passed}==1 ? 'display:block;':'display:none;'">
+                                    <td style="display:none;" th:style="${g.passed}==1 ? '':'display:none;'">
                                         <a class="link-update" href="#" th:href="@{/pc/detailMember(id=${g.id})}">查看</a>
                                     </td>
-                                    <td style="display:none;" th:style="${g.passed}==2 ? 'display:block;':'display:none;'">
+                                    <td style="display:none;" th:style="${g.passed}==2 ? '':'display:none;'">
                                         <a class="link-update" href="#" onclick="btn_setExamPass(this)">通过</a>
                                         <a class="link-update" href="#" th:href="@{/pc/detailMember(id=${g.id})}">查看</a>
                                     </td>
