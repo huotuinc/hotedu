@@ -1233,3 +1233,10 @@ button.btn, input.btn {
 	height: 315px;
 	padding-bottom: 5px
 }
+.thys li{width: 250px;
+  float: left;}
+  .podw{top: 355px;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;}
