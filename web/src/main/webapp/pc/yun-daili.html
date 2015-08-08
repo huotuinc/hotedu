@@ -14,11 +14,6 @@
     <script type="text/javascript" src="js/date/jquery_ui.js"></script>
     <script type="text/javascript" src="js/date/mydate.js"></script>
     <link rel="stylesheet" type="text/css" href="css/jquery_ui.css"/>
-    <script rel="stylesheet" type="text/javascript" th:inline="javascript">
-        $(function(){
-            $("#btn_addMember").click(addMember);
-        });
-    </script>
 </head>
 
 <body style=" background-color:#f0f0f0; background:url(images/banner2.jpg) no-repeat; background-size:cover;">
@@ -121,33 +116,11 @@
                     </table>
                 </form>
             </div>
-            <script>
-                function checkMemberPay() {
-                    var str = "";
-                    var sum = 0;
-                    $("input[name='memberInfo']:checkbox").each(function () {
-                        if ($(this).attr("checked")) {
-                            if (sum == 0)
-                                str += $(this).parent().parent().children().eq(1).text();
-                            else
-                                str += "," + $(this).parent().parent().children().eq(1).text();
-                            sum++;
-                        }
-                    });
-                    if (sum == 0) {
-                        check_payMember();
-                    }
-                    else {
-                        $("#checkPayLis").val(str);
-                        check_payEnter();
-                    }
-                }
-            </script>
             <span style="display: none;">
                  <input title="" type="text" value="" name="checkPayLis" th:value="${checkPayLis}" id="checkPayLis" />
             </span>
             <p style="clear:both;"></p>
-            <div class="result-wrap">
+            <div class="result-wrap" th:unless="${totalPages}==0">
                 <form name="myform" id="myform" method="post">
                     <div class="result-content">
                         <table class="result-tab" width="100%">
@@ -236,9 +209,11 @@
                     </div>
                 </form>
             </div>
+            <div style="text-align: center;margin-top:10px;margin-bottom: 10px;" th:if="${totalPages}==0">
+                <p style="color: red;">暂无数据</p>
+            </div>
         </div>
         <!--报名信息end-->
-
         <!--消息通知-->
         <div style="display:none" class="ysthree">
             <div class="main-wrapi">
@@ -272,7 +247,6 @@
             </div>
         </div>
         <!--消息通知end-->
-
         <!--班级管理 未分班 安排班级 start-->
         <div id="noClassMemberDiv" style="display:block;" th:style="${navigation}=='bjgl'? 'display:block;':'display:none;'" class="main-wrapi">
             <div style="margin-right: 14px;margin-bottom: 6px;" class="search-content">
@@ -346,7 +320,7 @@
                 <p style="clear:both"></p>
             </div>
             <!--安排班级start-->
-            <div class="result-wrap">
+            <div class="result-wrap" th:unless="${totalPages}==0">
                 <form name="myform" class="myform" method="post">
                     <div class="result-content">
                         <table class="result-tab" width="100%">
@@ -440,10 +414,13 @@
                         <div style="text-align:center; margin-top:10px;">
                             <a href="#" th:if="${pageNo}!=0" th:href=" @{/pc/loadClassMembers(pageNo=${pageNo}-1,keywords=${keywords},searchSort=${searchSort})}">上一页</a>
                             <a href="#" th:if="${pageNo+1}!=${totalPages}" th:href="@{/pc/loadClassMembers(pageNo=${pageNo}+1,keywords=${keywords},searchSort=${searchSort})}">下一页</a>
-                            <span th:text="'当前第'+${pageNo+1}">1</span>页/<span th:text="'共'+${totalPages}">1</span>页
+                            <span th:unless="${totalPages}==0" th:text="'当前第'+${pageNo+1}+'页/'">1</span><span th:unless="${totalPages}==0" th:text="'共'+${totalPages}+'页'">1</span>
                         </div>
                     </div>
                 </form>
+            </div>
+            <div style="text-align: center;margin-top:10px;margin-bottom: 10px;" th:if="${totalPages}==0">
+                <p style="color: red;">暂无数据</p>
             </div>
             <!--安排班级end-->
         </div>
@@ -522,7 +499,7 @@
                 <p style="clear:both"></p>
             </div>
             <!--安排考试时间start-->
-            <div class="result-wrap">
+            <div class="result-wrap" th:unless="${totalPages}==0">
                 <form name="myform" class="myform" method="post">
                     <div class="result-content">
                         <table class="result-tab" width="100%">
@@ -617,10 +594,12 @@
                     </div>
                 </form>
             </div>
+            <div style="text-align: center;margin-top:10px;margin-bottom: 10px;" th:if="${totalPages}==0">
+                <p style="color: red;">暂无数据</p>
+            </div>
             <!--安排考试时间end-->
         </div>
         <!--班级管理 已有班级 安排考场 end-->
-
         <!--毕业管理-->
         <div style="display:block" th:style="${navigation}=='bygl'? 'display:block;':'display:none;'" class="main-wrapi">
             <div style="float: right;width:1000px;margin-bottom: 6px;margin-top:5px;" class="search-content">
@@ -671,7 +650,7 @@
             <p style="clear:both"></p>
             <div class="result-wrap">
                 <form name="myform" method="post">
-                    <div class="result-content">
+                    <div class="result-content" th:unless="${totalPages}==0">
                         <table class="result-tab" width="100%">
                             <thead>
                                 <tr>
@@ -771,75 +750,12 @@
                             <span th:text="'当前第'+${pageNo+1}">1</span>页/<span th:text="'共'+${totalPages}">1</span>页
                         </div>
                     </div>
+                    <div style="text-align: center;margin-top:10px;margin-bottom: 10px;" th:if="${totalPages}==0">
+                        <p style="color: red;">暂无数据</p>
+                    </div>
                 </form>
             </div>
         </div>
-
-        <script type="text/javascript">
-            function checkAllExamMember(){
-                var str = "";
-                var sum = 0;
-                $("input[name='checkboxExamMember']:checkbox").each(function () {
-                    if ($(this).attr("checked")) {
-                        if (sum == 0)
-                            str += $(this).parent().parent().children().eq(1).text();
-                        else
-                            str += "," + $(this).parent().parent().children().eq(1).text();
-                        sum++;
-                    }
-                });
-                if (sum == 0) {
-                    check_ExamMember();
-                }
-                else {
-                    $("#checkExamMemberList").val(str);
-                    check_ExamMemberEnter();
-                }
-            }
-            function ifPassedSelect(){
-                var passedSortValue = $("#examMember_passedText").val();
-                $("#examMemberSearchSort").val("passed");
-                $("#examMember_noPassed").hide();
-                $("#examMember_havePassed").show();
-                if(passedSortValue==0)
-                    $("#examMember_havePassed input[name=passedSort][value=0]").attr("checked",'checked');
-                else if(passedSortValue==1)
-                    $("#examMember_havePassed input[name=passedSort][value=1]").attr("checked",'checked');
-                else if(passedSortValue==2)
-                    $("#examMember_havePassed input[name=passedSort][value=2]").attr("checked",'checked');
-                else{
-
-                }
-            }
-            $(document).ready(function () {
-                var $examMemberSearchSort = $("#examMemberSearchSort");
-                $examMemberSearchSort.val($("#examMember_hidden_text").val());
-                if ($examMemberSearchSort.val() == "passed") {
-                    ifPassedSelect();
-                }
-                $examMemberSearchSort.bind("change", function () {
-                    if ($(this).val() == "passed") {
-                        ifPassedSelect();
-                    }
-                    else {
-                        $("#examMember_noPassed").show();
-                        $("#examMember_havePassed").hide();
-                    }
-                });
-                $("#examMember_havePassed").bind("change", function () {
-                    $("#examMember_passedText").val($("#examMember_havePassed input[name='passedSort']:checked ").val());
-                });
-            });
-            $("#examMemberCheckAll").click(
-                    function(){
-                        if(this.checked){
-                            $("input[name='checkboxExamMember']").each(function(){this.checked=true;});
-                        }else{
-                            $("input[name='checkboxExamMember']").each(function(){this.checked=false;});
-                        }
-                    }
-            );
-        </script>
         <!--毕业管理end-->
     </div>
 </div>
@@ -849,7 +765,6 @@
     <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
     <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
 </div>
-
 <!--班级详情弹窗-->
 <div style="display:none" id="classTeamDetailDiv" class="ystci" th:style="${classTeamDetailcss}? 'display:block' : 'display:none' ">
     <div class="box-ys">
@@ -893,16 +808,7 @@
         </div>
     </div>
 </div>
-<script>
-    function btn_classTeamModifyExam() {
-        var classTeamId = $("#classTeamDetailInfoId").val()
-        $("#classExamArrayLis").val(classTeamId);
-        $("#classTeamDetailDiv").hide();
-        $("#classArrangeExamDiv").show();
-    }
-</script>
 <!--班级详情弹窗end-->
-
 <!--安排班级弹窗-->
 <div id="noClassMemberArrangeClassDiv" style="display:none;" class="ystc">
     <div class="box-ys">
@@ -919,7 +825,6 @@
     </div>
 </div>
 <!--安排班级弹窗end-->
-
 <!--新建班级弹窗-->
 <div id="noClassMemberArrangeNewClassDiv" style="display:none" class="ystc">
     <div class="box-ys">
@@ -936,7 +841,6 @@
     </div>
 </div>
 <!--新建班级弹窗end-->
-
 <!--选择已有班级弹窗-->
 <div id="existClassDiv" style="display:none" class="ystc">
     <div class="box-ys">
@@ -956,7 +860,6 @@
     </div>
 </div>
 <!--选择已有班级弹窗end-->
-
 <!--安排考场弹窗-->
 <div id="classArrangeExamDiv" style="display:none;" class="ystc">
     <div class="box-ys">
@@ -973,7 +876,6 @@
     </div>
 </div>
 <!--安排考场弹窗end-->
-
 <!--新建考场弹窗-->
 <div id="classArrangeNewExamDiv" style="display:none" class="ystc">
     <div class="box-ys">
@@ -991,7 +893,6 @@
     </div>
 </div>
 <!--新建考场弹窗end-->
-
 <!--选择已有考场弹窗-->
 <div id="classArrangeExistExamDiv" style="display:none" class="ystc">
     <div class="box-ys">
@@ -1010,7 +911,6 @@
     </div>
 </div>
 <!--选择已有考场弹窗end-->
-
 <!--新增学员弹窗-->
 <div style="display:none" class="ystci" id="addMember">
     <div class="box-ys">
@@ -1081,6 +981,106 @@
     </div>
 </div>
 <!--修改密码弹窗end-->
+<script>
+    function btn_classTeamModifyExam() {
+        var classTeamId = $("#classTeamDetailInfoId").val()
+        $("#classExamArrayLis").val(classTeamId);
+        $("#classTeamDetailDiv").hide();
+        $("#classArrangeExamDiv").show();
+    }
+</script>
+<script type="text/javascript">
+    function checkAllExamMember(){
+        var str = "";
+        var sum = 0;
+        $("input[name='checkboxExamMember']:checkbox").each(function () {
+            if ($(this).attr("checked")) {
+                if (sum == 0)
+                    str += $(this).parent().parent().children().eq(1).text();
+                else
+                    str += "," + $(this).parent().parent().children().eq(1).text();
+                sum++;
+            }
+        });
+        if (sum == 0) {
+            check_ExamMember();
+        }
+        else {
+            $("#checkExamMemberList").val(str);
+            check_ExamMemberEnter();
+        }
+    }
+    function ifPassedSelect(){
+        var passedSortValue = $("#examMember_passedText").val();
+        $("#examMemberSearchSort").val("passed");
+        $("#examMember_noPassed").hide();
+        $("#examMember_havePassed").show();
+        if(passedSortValue==0)
+            $("#examMember_havePassed input[name=passedSort][value=0]").attr("checked",'checked');
+        else if(passedSortValue==1)
+            $("#examMember_havePassed input[name=passedSort][value=1]").attr("checked",'checked');
+        else if(passedSortValue==2)
+            $("#examMember_havePassed input[name=passedSort][value=2]").attr("checked",'checked');
+        else{
+
+        }
+    }
+    $(document).ready(function () {
+        var $examMemberSearchSort = $("#examMemberSearchSort");
+        $examMemberSearchSort.val($("#examMember_hidden_text").val());
+        if ($examMemberSearchSort.val() == "passed") {
+            ifPassedSelect();
+        }
+        $examMemberSearchSort.bind("change", function () {
+            if ($(this).val() == "passed") {
+                ifPassedSelect();
+            }
+            else {
+                $("#examMember_noPassed").show();
+                $("#examMember_havePassed").hide();
+            }
+        });
+        $("#examMember_havePassed").bind("change", function () {
+            $("#examMember_passedText").val($("#examMember_havePassed input[name='passedSort']:checked ").val());
+        });
+    });
+    $("#examMemberCheckAll").click(
+            function(){
+                if(this.checked){
+                    $("input[name='checkboxExamMember']").each(function(){this.checked=true;});
+                }else{
+                    $("input[name='checkboxExamMember']").each(function(){this.checked=false;});
+                }
+            }
+    );
+</script>
+<script rel="stylesheet" type="text/javascript" th:inline="javascript">
+    $(function(){
+        $("#btn_addMember").click(addMember);
+    });
+</script>
+<script>
+    function checkMemberPay() {
+        var str = "";
+        var sum = 0;
+        $("input[name='memberInfo']:checkbox").each(function () {
+            if ($(this).attr("checked")) {
+                if (sum == 0)
+                    str += $(this).parent().parent().children().eq(1).text();
+                else
+                    str += "," + $(this).parent().parent().children().eq(1).text();
+                sum++;
+            }
+        });
+        if (sum == 0) {
+            check_payMember();
+        }
+        else {
+            $("#checkPayLis").val(str);
+            check_payEnter();
+        }
+    }
+</script>
 <script type="text/javascript">
     function goBackToArrangeClassFromNewClass() {
         $("#noClassMemberArrangeClassDiv").show();

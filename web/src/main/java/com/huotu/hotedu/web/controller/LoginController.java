@@ -65,7 +65,7 @@ public class LoginController {
     @RequestMapping("/pc/index")
     public String index(Model model) throws Exception{
         String turnPage = "pc/yun-index";
-        Page<MessageContent> pages = messageContentService.loadIndexMessageContent();
+        /*Page<MessageContent> pages = messageContentService.loadIndexMessageContent();
         ArrayList<MessageContent> list = new ArrayList<MessageContent>(13);
         for(MessageContent messageContent : pages){
             messageContent.setPictureUri(staticResourceService.getResource(messageContent.getPictureUri()).toURL().toString());
@@ -73,7 +73,7 @@ public class LoginController {
         }
 
         for(int i=0;i<12;i++)
-            model.addAttribute("messageContent"+String.valueOf(i),list.get(i));
+            model.addAttribute("messageContent"+String.valueOf(i),list.get(i));*/
 
         return turnPage;
     }
