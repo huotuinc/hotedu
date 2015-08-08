@@ -241,8 +241,11 @@ public class MemberController {
     public String lookMembers(Long id, Model model)throws Exception{
         String turnPage = "/backend/prentice";
         Member member=memberService.findOneById(id);
-        Certificate certificate=certificateService.findOneByMember(member);
-        certificate.setPictureUri(staticResourceService.getResource(certificate.getPictureUri()).toString());
+        Certificate certificate = null;
+        if(member.getCertificateStatus()==2) {
+            certificate=certificateService.findOneByMember(member);
+            certificate.setPictureUri(staticResourceService.getResource(certificate.getPictureUri()).toString());
+        }
         model.addAttribute("member",member);
         model.addAttribute("certificate",certificate);
         return turnPage;
@@ -528,12 +531,12 @@ public class MemberController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/backend/issueCertificate")
-    public String issueCertificate(String certificateNo,long memberId,long certificateId,
+        public String issueCertificate(String certificateNo,long memberId,long certificateId,
                                    @RequestParam(required = false)Integer pageNo,
                                    @RequestParam(required = false)String keywords,
                                    @RequestParam(required = false)String searchSort,
                                    @RequestParam(required = false)String classId,
-                                   String returnPage,
+                                   @RequestParam(required = false)String returnPage,
                                    Model model) {
         Member member = memberService.findOneById(memberId);
         if (certificateService.findOneBycertificateNo(certificateNo) != null) {  //验证发的证书是否已经发过了
@@ -558,13 +561,11 @@ public class MemberController {
         model.addAttribute("pageNo", pageNo);
         if ("applyList".equals(returnPage)) {
             return "redirect:/backend/searchMembers";
-        } else if ("ClassList".equals(returnPage)) {
-            model.addAttribute("pageNo", keywords);
+        }else{
+            model.addAttribute("keywords", keywords);
             model.addAttribute("searchSort", searchSort);
             model.addAttribute("classId", classId);
             return "redirect:/backend/agentClassMember";
-        }else{
-            return "redirect:/backend/searchMembers";
         }
     }
 

@@ -30,7 +30,7 @@
                 var memberId = [[${member.id}]];
                 /*]]>*/
                 /*<![CDATA[*/
-                var certificateId=[[${certificate.id}]];
+                var certificateId=[[${certificate}!=null?${certificate.id}:'']];
                 /*]]>*/
                 var certificateNo=$("#Cer_no").val();
                 if(certificateNo==""){
