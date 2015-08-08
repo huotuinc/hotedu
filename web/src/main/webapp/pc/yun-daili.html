@@ -690,7 +690,7 @@
                             </thead>
                             <tbody th:remove="all-but-first">
                                 <tr th:each="g:${allExamMembersList}">
-                                    <td><input title="" name="checkboxExamMember" type="checkbox" value="checkbox"/></td>
+                                    <td><input title="" th:if="${g.passed}!=1" name="checkboxExamMember" type="checkbox" value="checkbox"/></td>
                                     <td class="checkboxId" th:text="${g.id}">01</td>
                                     <td th:text="${g.realName}">小米fdsafsdafsafsafdsafdsafdsafdsafdsafdsf</td>
                                     <td th:text="${g.agent.area}">杭州</td>
@@ -1050,7 +1050,7 @@
 <!--修改密码弹窗-->
 <div id="showChangePwdDiv" style="display:none" class="ystc">
     <div class="box-ys" width="462px">
-        <P style="text-align:right;"><a href="#" onclick="$('#showChangePwdDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+        <P style="text-align:right;"><a href="#" onclick="$('#changePwdSuccess').text('');;$('#changePwdFailed').text('');$('#showChangePwdDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
         <p style="height:20px"></p>
         <table width="100%" class="insert-tab" style="padding-left:20px" >
             <tbody>

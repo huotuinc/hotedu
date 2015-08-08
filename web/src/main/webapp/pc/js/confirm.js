@@ -335,34 +335,33 @@ $(function() {
         var confirmPwd = $("#confirmPwd").val();
         if(oldPwd==""){
             $("#changePwdFailed").text("密码不能为空！");
-            return;
-        }
-        if(newPwd==""){
+        }else if(newPwd==""){
             $("#changePwdFailed").text("密码不能为空！");
-            return;
-        }
-        if(newPwd!==confirmPwd){
+        }else if(newPwd!==confirmPwd){
             $("#changePwdFailed").text("两次密码不同！");
-            return;
-        }
-        $.ajax({
-            url:"../backend/changePassword",
-            type:"post",
-            dataType:"json",
-            data:{"oldPd":oldPwd,"newPd":newPwd},
-            success:function(result){
-                if(result.status==0){
-                    $("#changePwdSuccess").text(result.message);
-                    $("#changePwdFailed").text("");
-                }else if(result.status==1){
-                    $("#changePwdFailed").text(result.message);
-                    $("#changePwdSuccess").text("");
+        }else {
+            $.ajax({
+                url:"../backend/changePassword",
+                type:"post",
+                dataType:"json",
+                data:{"oldPd":oldPwd,"newPd":newPwd},
+                success:function(result){
+                    if(result.status==0){
+                        $("#changePwdSuccess").text(result.message);
+                        $("#changePwdFailed").text("");
+                    }else if(result.status==1){
+                        $("#changePwdFailed").text(result.message);
+                        $("#changePwdSuccess").text("");
+                    }
+                },
+                error:function(){
+                    alert("系统错误,修改密码失败！");
                 }
-            },
-            error:function(){
-                alert("系统错误,修改密码失败！");
-            }
-        });
+            });
+        }
+        $("#oldPwd").val("");
+        $("#newPwd").val("");
+        $("#confirmPwd").val("");
     })
 });
 
@@ -400,7 +399,6 @@ function btn_applyForCertificateSubmit(){
                     $.MsgBox.AjaxAlert("温馨提示",result.message,function(){
                         $("#applyForCertificateDiv").hide();
                         location.reload();
-                        //$("#personalCenter_href").click();
                     });
                 }
             },
