@@ -165,14 +165,24 @@
         </div>
         <div class="search-wrap">
             <div class="search-content">
-                <form action="#" method="post">
+                <form action="#" method="get" th:action="@{/backend/agentClassMember}">
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
                             <td><select name="searchSort" id="" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
-                                <option value="">全部</option>
+                                <option value="all">全部</option>
+                                <option th:selected="${searchSort}=='payed'?'selected'" value="payed">交费状态</option>
+                                <option th:selected="${searchSort}=='passed'?'selected'" value="passed">考试状态</option>
+                                <option th:selected="${searchSort}=='certificateStatus'?'selected'" value="certificateStatus">领证状态</option>
                             </select></td>
-                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" type="text"/></td>
+                            <input type="hidden" name="classId" th:value="${classTeam.id}"/>
+                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" th:value="${keywords}" type="text"/>
+                                <select th:if="${searchSort}!='all'" name="keywords" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
+                                    <!--<option value="1" th:text="${searchSort}=='payed'?'是':(${searchSort}=='passed'?'通过考试'：'已领证')"></option>-->
+                                    <!--<option value="0" th:text="${searchSort}=='payed'?'否':(${searchSort}=='passed'?'未考试'：'申请中')"></option>-->
+                                    <!--<option value="2" th:if="${searchSort}!='passed'" th:text="${searchSort}=='passed'?'未通过':'未申请'"></option>-->
+                                </select>
+                            </td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
@@ -185,17 +195,6 @@
                 <div class="tko">
                     <div class="result-wrap">
                         <div class="result-content">
-                            <!--<ul class="sys-info-list">-->
-                                <!--<li>-->
-                                    <!--<label class="res-lab">收件人：</label><span class="res-info">XXX</span>-->
-                                <!--</li>-->
-                                <!--<li>-->
-                                    <!--<label class="res-lab">申请时间：</label><span class="res-info">20150401 12：00：00</span>-->
-                                <!--</li>-->
-                                <!--<li>-->
-                                    <!--<label class="res-lab">收件地址:</label><span class="res-info">文一路</span>-->
-                                <!--</li>-->
-                            <!--</ul>-->
                             <ul class="sys-info-list">
                                 <li>
                                     <label class="res-lab">收件人：</label><span class="res-info" th:text="${certificate}!=null? ${certificate.receiveName}:''">加载中...</span>
@@ -213,7 +212,7 @@
                         </div>
                     </div>
                     <div class="result-wrap">
-                        <form action="#" method="post" id="myform" name="myform" th:action="@{/backend/issueCertificate}">
+                        <form action="#" method="post" id="myform" name="myform" th:action="@{/backend/issueCertificate(returnPage='ClassList',classId=${classTeam.id},keywords=${keywords},searchSort=${searchSort})}">
                             <div class="config-items">
                                 <div class="result-content">
                                     <table width="100%" class="insert-tab">
@@ -324,8 +323,7 @@
                         </tr>
                     </table>
                     <div class="list-page">
-                        <a href="#" th:if="${pageNo}>0" th:href="@{/backend/agentClassMember(pageNo=${pageNo}-1,classId=${classTeam.id},agentId=${agent.id})}">上一页</a>
-                        <a href="#" th:if="${totalPages}-1>${pageNo}" th:href="@{/backend/agentClassMember(pageNo=${pageNo}+1,classId=${classTeam.id},agentId=${agent.id})}">下一页</a>
+                        <a href="#" th:if="${totalPages}-1>${pageNo}" th:href="@{/backend/agentClassMember(pageNo=${pageNo}+1,classId=${classTeam.id}}">下一页</a>
                         <span th:text="'当前第'+${pageNo+1}">1</span>页/<span th:text="'共'+${totalPages}">1</span> 页
                     </div>
                 </div>

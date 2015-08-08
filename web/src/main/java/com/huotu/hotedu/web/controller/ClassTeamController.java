@@ -156,9 +156,8 @@ public class ClassTeamController {
     public String agentClassMember(@RequestParam(required = false)Integer pageNo,
                                    @RequestParam(required = false) String keywords,
                                    @RequestParam(required = false,value = "searchSort")String searchSort,
-                                   long classId, long agentId,Model model) throws Exception{
+                                   Long classId,Model model) throws Exception{
         String turnPage="/backend/batch";
-        Agent agent=agentService.findOneById(agentId);
         ClassTeam classTeam=classTeamService.findOneById(classId);
         if(pageNo==null||pageNo<0){
             pageNo=0;
@@ -179,8 +178,8 @@ public class ClassTeamController {
         model.addAttribute("totalPages",pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("keywords", keywords);
+        model.addAttribute("searchSort",searchSort);
         model.addAttribute("totalRecords", totalRecords);
-        model.addAttribute("agent",agent);
         return turnPage;
     }
 

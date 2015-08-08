@@ -47,6 +47,8 @@
                             alert("颁发证书成功！")
                             $("#span_cerStatus").text("已发");
                             $("#Cer_no").val("");
+                            $("#Cer_no").attr("disabled","disabled");
+                            $("#btn_fz").attr("disabled","disabled");
                         }else if(result.status==2){
                             alert("该代理商的证书发完啦~")
                         }
@@ -144,7 +146,7 @@
             <div class="result-wrap">
                 <div class="imessage">
                     <ul>
-                        <li><label class="res-lab">收件人：</label><span  th:text="${certificate.receiveName    }">XXX</span></li>
+                        <li><label class="res-lab">收件人：</label><span  th:text="${certificate.receiveName}">XXX</span></li>
                         <li><label class="res-lab">申请时间：</label><span  th:text="${#calendars.format(member.applyCertificateDate,'yyyy-MM-dd hh:mm:ss')}">20150401 12：00：00</span></li>
                         <li><label class="res-lab">收件地址:</label><span  th:text="${certificate.receiveAddress}">文一路</span></li>
                     </ul>
@@ -159,14 +161,14 @@
                             <tbody>
                             <tr>
                                 <th><i class="require-red">*</i>证书编号：</th>
-                                <td><input type="text" id="Cer_no" value="" size="70" name="certificateNo" class="common-text"/>
+                                <td><input th:disabled="${certificate.certificateNo}!=null?'disabled'" th:value="${certificate.certificateNo}" type="text" id="Cer_no" value="" size="70" name="certificateNo" class="common-text"/>
                                     <!--<input type="hidden" th:value="${certificate}!=null?${certificate.member.id}:''" name="memberId"/>-->
                                     <!--<input type="hidden" th:value="${certificate}!=null?${certificate.id}:''" name="certificateId"/>-->
                                 </td>
                             </tr>
                             <tr>
                                 <th></th>
-                                <td><input id="btn_fz" type="button" value="发证" class="btn btn-primary btn6 mr10"/>
+                                <td><input id="btn_fz" th:disabled="${certificate.certificateNo}!=null?'disabled'" type="button" value="发证" class="btn btn-primary btn6 mr10"/>
                                     <input type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
                                 <!--<span id="span_warn" class="warning-style" style="display: none" th:style="${info}==null?'display: none':'display: block'" th:text="${info}">警告！已经有证书了/格式不正确/</span>-->
                             </tr>

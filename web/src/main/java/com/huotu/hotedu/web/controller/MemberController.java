@@ -530,31 +530,42 @@ public class MemberController {
     @RequestMapping("/backend/issueCertificate")
     public String issueCertificate(String certificateNo,long memberId,long certificateId,
                                    @RequestParam(required = false)Integer pageNo,
+                                   @RequestParam(required = false)String keywords,
+                                   @RequestParam(required = false)String searchSort,
+                                   @RequestParam(required = false)String classId,
                                    String returnPage,
-                                   Model model){
-        Member member=memberService.findOneById(memberId);
-        if(certificateService.findOneBycertificateNo(certificateNo)!=null){  //验证发的证书是否已经发过了
-            model.addAttribute("info","该证书已经发过了");
-            model.addAttribute("certificateId",certificateId);
-        }else if(member.getAgent().getSendCertificateNumber()>=member.getAgent().getCertificateNumber()){
-            model.addAttribute("info","该代理商的证书已经发完了~");
-            model.addAttribute("certificateId",certificateId);
-        }
-        else{
+                                   Model model) {
+        Member member = memberService.findOneById(memberId);
+        if (certificateService.findOneBycertificateNo(certificateNo) != null) {  //验证发的证书是否已经发过了
+            model.addAttribute("info", "该证书已经发过了");
+            model.addAttribute("certificateId", certificateId);
+        } else if (member.getAgent().getSendCertificateNumber() >= member.getAgent().getCertificateNumber()) {
+            model.addAttribute("info", "该代理商的证书已经发完了~");
+            model.addAttribute("certificateId", certificateId);
+        } else {
 
-            Certificate certificate=certificateService.findOneById(certificateId);
+            Certificate certificate = certificateService.findOneById(certificateId);
             certificate.setCertificateNo(certificateNo);
             certificateService.modifyCertificate(certificate);
             member.setCertificate(certificate);
             member.setReceiveCertificateDate(new Date());
             member.setCertificateStatus(1);
-            Agent agent=member.getAgent();
-            member.getAgent().setSendCertificateNumber(agent.getSendCertificateNumber()+1);//代理商的证书减1
+            Agent agent = member.getAgent();
+            member.getAgent().setSendCertificateNumber(agent.getSendCertificateNumber() + 1);//代理商的证书减1
             agentService.modifyAgent(agent);
             memberService.modifyMember(member);
         }
-        model.addAttribute("pageNo",pageNo);
-        return "redirect:/backend/searchMembers";
+        model.addAttribute("pageNo", pageNo);
+        if ("applyList".equals(returnPage)) {
+            return "redirect:/backend/searchMembers";
+        } else if ("ClassList".equals(returnPage)) {
+            model.addAttribute("pageNo", keywords);
+            model.addAttribute("searchSort", searchSort);
+            model.addAttribute("classId", classId);
+            return "redirect:/backend/agentClassMember";
+        }else{
+            return "redirect:/backend/searchMembers";
+        }
     }
 
     /**
