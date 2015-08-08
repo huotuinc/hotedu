@@ -178,7 +178,7 @@ public class ClassTeamController {
         model.addAttribute("totalPages",pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("keywords", keywords);
-        model.addAttribute("searchSort",searchSort);
+        model.addAttribute("searchSort",searchSort==null?"all":searchSort);
         model.addAttribute("totalRecords", totalRecords);
         return turnPage;
     }

@@ -169,18 +169,18 @@
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
-                            <td><select name="searchSort" id="" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
+                            <td><select name="searchSort" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
                                 <option value="all">全部</option>
                                 <option th:selected="${searchSort}=='payed'?'selected'" value="payed">交费状态</option>
                                 <option th:selected="${searchSort}=='passed'?'selected'" value="passed">考试状态</option>
                                 <option th:selected="${searchSort}=='certificateStatus'?'selected'" value="certificateStatus">领证状态</option>
                             </select></td>
                             <input type="hidden" name="classId" th:value="${classTeam.id}"/>
-                            <td><input class="common-text" placeholder="关键字" name="keywords" value="" th:value="${keywords}" type="text"/>
+                            <td><input th:if="${searchSort}=='all'" class="common-text" placeholder="关键字" name="keywords" value="" th:value="${keywords}" type="text"/>
                                 <select th:if="${searchSort}!='all'" name="keywords" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
-                                    <!--<option value="1" th:text="${searchSort}=='payed'?'是':(${searchSort}=='passed'?'通过考试'：'已领证')"></option>-->
-                                    <!--<option value="0" th:text="${searchSort}=='payed'?'否':(${searchSort}=='passed'?'未考试'：'申请中')"></option>-->
-                                    <!--<option value="2" th:if="${searchSort}!='passed'" th:text="${searchSort}=='passed'?'未通过':'未申请'"></option>-->
+                                    <option value="1" th:selected="${keywords}==1?'selected'" th:text="${searchSort}=='payed'? '是':(${searchSort}=='passed'?'通过考试':'已领证')"></option>
+                                    <option value="0" th:selected="${keywords}==0?'selected'" th:text="${searchSort}=='payed'? '否':(${searchSort}=='passed'?'未考试':'未申请')"></option>
+                                    <option value="2" th:selected="${keywords}==2?'selected'" th:if="${searchSort}!='payed'"  th:text="${searchSort}=='passed'?'未通过':'申请中'"></option>
                                 </select>
                             </td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
