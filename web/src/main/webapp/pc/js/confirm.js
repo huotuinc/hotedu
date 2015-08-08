@@ -399,7 +399,8 @@ function btn_applyForCertificateSubmit(){
                 }else if(result.status==1){
                     $.MsgBox.AjaxAlert("温馨提示",result.message,function(){
                         $("#applyForCertificateDiv").hide();
-                        $("#personalCenter_href").trigger("click");
+                        location.reload();
+                        //$("#personalCenter_href").click();
                     });
                 }
             },
