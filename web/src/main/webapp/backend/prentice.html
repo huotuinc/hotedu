@@ -122,20 +122,20 @@
                 <div class="result-content">
                     <ul class="sys-info-list">
                         <li>
-                            <label class="res-lab">照片：</label><span class="res-info"><img src="images/logo.png" th:src="${certificate.pictureUri}" width="100px" height="auto"/></span>
+                            <label class="res-lab">照片：</label><span class="res-info"><img src="images/logo.png" th:src="${certificate}!=null?${certificate.pictureUri}" width="100px" height="auto"/></span>
                         </li>
                         <li>
-                            <label class="res-lab">姓名</label><span class="res-info" th:text="${member.realName}">某某</span>
+                            <label class="res-lab">姓名</label><span class="res-info" th:text="${member.realName}==null?'暂无':${member.realName}">某某</span>
                         </li>
-                        <li><label class="res-lab">电话：</label><span class="res-info" th:text="${member.phoneNo}">1563265895</span></li>
-                        <li><label class="res-lab">区域:</label><span class="res-info" th:text="${member.agent.area}">杭州</span></li>
-                        <li><label class="res-lab">报名时间：</label><span class="res-info" th:text="${#calendars.format(member.applyDate,'yyyy年MM月dd日')}">2014年3月18日</span></li>
-                        <li><label class="res-lab">交费确认时间：</label><span class="res-info" th:text="${#calendars.format(member.payDate,'yyyy-MM-dd hh:mm:ss')}">2015/01/01  13:00:00</span>
+                        <li><label class="res-lab">电话：</label><span class="res-info" th:text="${member.phoneNo}==null?'暂无':${member.phoneNo}">1563265895</span></li>
+                        <li><label class="res-lab">区域:</label><span class="res-info" th:text="${member.agent}==null?'暂无':${member.agent.area}">杭州</span></li>
+                        <li><label class="res-lab">报名时间：</label><span class="res-info" th:text="${member.applyDate}==null?'暂无':${#calendars.format(member.applyDate,'yyyy年MM月dd日')}">2014年3月18日</span></li>
+                        <li><label class="res-lab">交费确认时间：</label><span class="res-info" th:text="${member.payDate}==null?'暂无':${#calendars.format(member.payDate,'yyyy-MM-dd hh:mm:ss')}">2015/01/01  13:00:00</span>
                         </li>
-                        <li><label class="res-lab">确认人：</label><span class="res-info" th:text="${member.confirmPerson}">oo</span></li>
-                        <li><label class="res-lab">考试时间：</label><span class="res-info" th:text="${#calendars.format(member.theClass.exam.examDate,'yyyy-MM-dd hh:mm:ss')}">2105.01.12</span></li>
-                        <li><label class="res-lab">考试地点：</label><span class="res-info" th:text="${member.theClass.exam.examAddress}">杭州</span></li>
-                        <li><label class="res-lab">班级：</label><span class="res-info" th:text="${member.theClass.className}">201504第一期</span></li>
+                        <li><label class="res-lab">确认人：</label><span class="res-info" th:text="${member.confirmPerson}==null?'未安排':${member.confirmPerson}">oo</span></li>
+                        <li><label class="res-lab">考试时间：</label><span class="res-info" th:text="${member.theClass}==null?'未安排':(${member.theClass.exam}==null?'未安排':${#calendars.format(member.theClass.exam.examDate,'yyyy-MM-dd hh:mm:ss')})">2105.01.12</span></li>
+                        <li><label class="res-lab">考试地点：</label><span class="res-info" th:text="${member.theClass}==null?'未安排':(${member.theClass.exam}==null?'未安排':${member.theClass.exam.examAddress})">杭州</span></li>
+                        <li><label class="res-lab">班级：</label><span class="res-info" th:text="${member.theClass}==null?'未安排':${member.theClass.className}">201504第一期</span></li>
                         <li><label class="res-lab">是否通过：</label><span style="color:#FF0004;" class="res-info" th:text="${member.passed}==1?'通过':(${member.passed}==2?'未通过':'未考试')">是</span>
                         </li>
                         <li><label class="res-lab">状态：</label><span id="span_cerStatus" style="color:#FF0004;" class="res-info" th:text="${member.certificateStatus}==1?'已发':(${member.certificateStatus}==2?'申请领证':'未申请')">申请领证/已发</span></li>
@@ -146,9 +146,10 @@
             <div class="result-wrap">
                 <div class="imessage">
                     <ul>
-                        <li><label class="res-lab">收件人：</label><span  th:text="${certificate.receiveName}">XXX</span></li>
-                        <li><label class="res-lab">申请时间：</label><span  th:text="${#calendars.format(member.applyCertificateDate,'yyyy-MM-dd hh:mm:ss')}">20150401 12：00：00</span></li>
-                        <li><label class="res-lab">收件地址:</label><span  th:text="${certificate.receiveAddress}">文一路</span></li>
+                        <li><label class="res-lab">收件人：</label><span  th:text="${certificate}==null?'未填写':${certificate.receiveName}">XXX</span></li>
+                        <li><label class="res-lab">申请时间：</label><span  th:text="${certificate}==null?'未填写':${#calendars.format(member.applyCertificateDate,'yyyy-MM-dd hh:mm:ss')}">20150401 12：00：00</span></li>
+                        <li><label class="res-lab">收件地址:</label><span  th:text="${certificate}==null?'未填写':${certificate.receiveAddress}">文一路</span></li>
+                        <li th:if="${member.certificateStatus}==1"><label class="res-lab">证书编号:</label><span  th:text="${certificate}==null?'未填写':${certificate.certificateNo}">abc123456789</span></li>
                     </ul>
                 </div>
             </div>
@@ -159,16 +160,16 @@
                     <div class="result-content">
                         <table width="100%" class="insert-tab">
                             <tbody>
-                            <tr>
+                            <tr th:if="${member.certificateStatus}==2">
                                 <th><i class="require-red">*</i>证书编号：</th>
-                                <td><input th:disabled="${certificate.certificateNo}!=null?'disabled'" th:value="${certificate.certificateNo}" type="text" id="Cer_no" value="" size="70" name="certificateNo" class="common-text"/>
+                                <td><input type="text" id="Cer_no" value="" size="70" name="certificateNo" class="common-text"/>
                                     <!--<input type="hidden" th:value="${certificate}!=null?${certificate.member.id}:''" name="memberId"/>-->
                                     <!--<input type="hidden" th:value="${certificate}!=null?${certificate.id}:''" name="certificateId"/>-->
                                 </td>
                             </tr>
                             <tr>
                                 <th></th>
-                                <td><input id="btn_fz" th:disabled="${certificate.certificateNo}!=null?'disabled'" type="button" value="发证" class="btn btn-primary btn6 mr10"/>
+                                <td><input th:if="${member.certificateStatus}=='2'" id="btn_fz" type="button" value="发证" class="btn btn-primary btn6 mr10"/>
                                     <input type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
                                 <!--<span id="span_warn" class="warning-style" style="display: none" th:style="${info}==null?'display: none':'display: block'" th:text="${info}">警告！已经有证书了/格式不正确/</span>-->
                             </tr>

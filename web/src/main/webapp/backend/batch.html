@@ -65,6 +65,12 @@
                 $("#span_warn").hide();
             });
 
+            $("#searchSort").change(function(){
+                var type=$("#searchSort option:selected").val();
+
+                changeSearchSelect(type);
+
+            });
 
 
 
@@ -169,15 +175,16 @@
                     <table class="search-tab">
                         <tr>
                             <th width="10"></th>
-                            <td><select name="searchSort" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
+                            <td><select id="searchSort" name="searchSort" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
                                 <option value="all">全部</option>
                                 <option th:selected="${searchSort}=='payed'?'selected'" value="payed">交费状态</option>
                                 <option th:selected="${searchSort}=='passed'?'selected'" value="passed">考试状态</option>
                                 <option th:selected="${searchSort}=='certificateStatus'?'selected'" value="certificateStatus">领证状态</option>
                             </select></td>
                             <input type="hidden" name="classId" th:value="${classTeam.id}"/>
-                            <td><input th:if="${searchSort}=='all'" class="common-text" placeholder="关键字" name="keywords" value="" th:value="${keywords}" type="text"/>
-                                <select th:if="${searchSort}!='all'" name="keywords" style=" height:29px;border-radius: 4px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
+                            <td id="td_key">
+                                <input th:if="${searchSort}=='all'" class="common-text" placeholder="关键字" name="keywords" value="" th:value="${keywords}" type="text"/>
+                                <select th:if="${searchSort}!='all'" name="keywords" style="height:29px;padding: 0px 90px 0px 4px; border:1px solid #ddd; vertical-align:middle">
                                     <option value="1" th:selected="${keywords}==1?'selected'" th:text="${searchSort}=='payed'? '是':(${searchSort}=='passed'?'通过考试':'已领证')"></option>
                                     <option value="0" th:selected="${keywords}==0?'selected'" th:text="${searchSort}=='payed'? '否':(${searchSort}=='passed'?'未考试':'未申请')"></option>
                                     <option value="2" th:selected="${keywords}==2?'selected'" th:if="${searchSort}!='payed'"  th:text="${searchSort}=='passed'?'未通过':'申请中'"></option>
@@ -317,7 +324,7 @@
                             <td th:text="${g.certificateStatus}==1?'已领证':(${g.certificateStatus}==2?'申请中':'')">2015/04/01</td>
                             <td th:text="${classTeam.className}">201504第一期</td>
                             <td><a class="link-update" href="prentice.html" th:href="@{/backend/lookMember(id=${g.id})}">查看</a><br/>
-                                <a class="link-update" href="#" name="a">发证</a><br/>
+                                <a th:if="${g.certificateStatus}==2" class="link-update" href="#" name="a">发证</a><br th:if="${g.certificateStatus}==2"/>
                                 <a class="link-update" href="modifyclassteam.html">修改</a><br/>
                             </td>
                         </tr>

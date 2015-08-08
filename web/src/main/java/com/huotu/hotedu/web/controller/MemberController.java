@@ -191,7 +191,7 @@ public class MemberController {
         model.addAttribute("totalPages",pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("keywords", keywords);
-        model.addAttribute("searchSort", type);
+        model.addAttribute("searchSort", type==null?"all":type);
         model.addAttribute("totalRecords", totalRecords);
         model.addAttribute("navigation","bmxx");
         model.addAttribute("totalMembers",memberService.searchMembers(agent,pageNo,PAGE_SIZE).getTotalElements());

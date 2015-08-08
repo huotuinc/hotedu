@@ -17,15 +17,6 @@
     <script rel="stylesheet" type="text/javascript" th:inline="javascript">
         $(function(){
             $("#btn_addMember").click(addMember);
-            /*<![CDATA[*/
-            var type = [[${searchSort}]];
-            $("#sel_searchMember option").each(function(){
-               if(this.value==type){
-                   $(this).attr("selected", "selected");
-               }
-            });
-            changeSearchSelect(type);
-            /*]]>*/
         });
     </script>
 </head>
@@ -113,12 +104,18 @@
                             <th width="10"></th>
                             <td><select id="sel_searchMember" title="" name="searchSort" style=" height:29px;padding: 0px 4px; border:1px solid #ccc; vertical-align:middle">
                                 <option value="all">全部</option>
-                                <option value="payed">交费状态</option>
-                                <option value="passed">考试状态</option>
-                                <option value="certificateStatus">领证状态</option>
+                                <option th:selected="${searchSort}=='payed'?'selected'" value="payed">交费状态</option>
+                                <option th:selected="${searchSort}=='passed'?'selected'" value="passed">考试状态</option>
+                                <option th:selected="${searchSort}=='certificateStatus'?'selected'" value="certificateStatus">领证状态</option>
                             </select></td>
                             <td id="td_key">
-                                <input id="input_search1" style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" th:value="${keywords}" type="text"/></td>
+                                <input  th:if="${searchSort}=='all'" style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" th:value="${keywords}" value="" type="text"/>
+                                <select th:if="${searchSort}!='all'" name="keywords" style=" height:29px;padding: 0px 90px 0px 4px; border:1px solid #ddd; vertical-align:middle">
+                                    <option class="yssp" value="1" th:selected="${keywords}==1?'selected'" th:text="${searchSort}=='payed'? '是':(${searchSort}=='passed'?'通过考试':'已领证')"></option>
+                                    <option class="yssp" value="0" th:selected="${keywords}==0?'selected'" th:text="${searchSort}=='payed'? '否':(${searchSort}=='passed'?'未考试':'未申请')"></option>
+                                    <option class="yssp" value="2" th:selected="${keywords}==2?'selected'" th:if="${searchSort}!='payed'"  th:text="${searchSort}=='passed'?'未通过':'申请中'"></option>
+                                </select>
+                            </td>
                             <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
@@ -218,7 +215,7 @@
                                 <td th:text="${g.phoneNo}" title="">125656256356</td>
                                 <td th:text="${g.payed}?'是':'否'" title="">是</td>
                                 <td th:text="${#calendars.format(g.applyDate,'yyyy-MM-dd')}" title="">2015.04.01</td>
-                                <td th:text="${g.passed}==0?'':(${g.passed}==1?'通过考试':'未通过考试')" title="">--</td>
+                                <td th:text="${g.passed}==0?'':(${g.passed}==1?'通过考试':'未通过')" title="">--</td>
                                 <td th:text="${g.certificateStatus}==1?'已领证':(${g.certificateStatus}==2?'申请中':'')" title="">--</td>
                                 <!--<td th:text="${g.certificateStatus}" title="">&#45;&#45;</td>-->
                                 <td th:text="${g.theClass}==null? '':${g.theClass.className}" title="">201504第一期</td>
