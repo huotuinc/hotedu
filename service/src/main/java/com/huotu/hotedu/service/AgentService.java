@@ -200,7 +200,8 @@ public class AgentService {
                                 cb.equal(root.get("agent").as(Agent.class), agent),
                                 cb.isTrue(root.get("enabled").as(Boolean.class)),
                                 cb.isTrue(root.get("payed").as(Boolean.class)),
-                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+//                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+                                cb.greaterThan(cb.currentTimestamp(),root.get("theClass").get("exam").get("examDate")),
                                 cb.notEqual(root.get("certificateStatus").as(Integer.class),1)
                         );
                     }
@@ -209,7 +210,8 @@ public class AgentService {
                                 cb.equal(root.get("agent").as(Agent.class), agent),
                                 cb.isTrue(root.get("enabled").as(boolean.class)),
                                 cb.isTrue(root.get("payed").as(Boolean.class)),
-                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+//                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+                                cb.greaterThan(cb.currentTimestamp(),root.get("theClass").get("exam").get("examDate")),
                                 cb.notEqual(root.get("certificateStatus").as(int.class), 1),
                                 cb.equal(root.get("passed").as(Integer.class), passedSortText)
                         );
@@ -221,7 +223,8 @@ public class AgentService {
                                 cb.equal(root.get("agent").as(Agent.class), agent),
                                 cb.isTrue(root.get("enabled").as(Boolean.class)),
                                 cb.isTrue(root.get("payed").as(Boolean.class)),
-                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+//                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+                                cb.greaterThan(cb.currentTimestamp(),root.get("theClass").get("exam").get("examDate")),
                                 cb.notEqual(root.get("certificateStatus").as(int.class), 1)
                         );
                     } else if ("all".equals(searchSort)) {
@@ -229,7 +232,8 @@ public class AgentService {
                                 cb.equal(root.get("agent").as(Agent.class), agent),
                                 cb.isTrue(root.get("enabled").as(boolean.class)),
                                 cb.isTrue(root.get("payed").as(Boolean.class)),
-                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+//                                cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+                                cb.greaterThan(cb.currentTimestamp(),root.get("theClass").get("exam").get("examDate")),
                                 cb.notEqual(root.get("certificateStatus").as(int.class), 1),
                                 cb.or(
                                         cb.like(root.get("realName").as(String.class), "%" + keywords + "%"),
@@ -244,7 +248,8 @@ public class AgentService {
                                     cb.equal(root.get("agent").as(Agent.class), agent),
                                     cb.isTrue(root.get("enabled").as(boolean.class)),
                                     cb.isTrue(root.get("payed").as(Boolean.class)),
-                                    cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+//                                    cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+                                    cb.greaterThan(cb.currentTimestamp(),root.get("theClass").get("exam").get("examDate")),
                                     cb.notEqual(root.get("certificateStatus").as(int.class), 1),
                                     cb.like(root.get("agent").get("area").as(String.class), "%" + keywords + "%")
                             );
@@ -253,7 +258,8 @@ public class AgentService {
                                     cb.equal(root.get("agent").as(Agent.class), agent),
                                     cb.isTrue(root.get("enabled").as(boolean.class)),
                                     cb.isTrue(root.get("payed").as(Boolean.class)),
-                                    cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+//                                    cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+                                    cb.greaterThan(cb.currentTimestamp(),root.get("theClass").get("exam").get("examDate")),
                                     cb.notEqual(root.get("certificateStatus").as(int.class), 1),
                                     cb.like(root.get("theClass").get("className").as(String.class), "%" + keywords + "%")
                             );
@@ -262,7 +268,8 @@ public class AgentService {
                                     cb.equal(root.get("agent").as(Agent.class), agent),
                                     cb.isTrue(root.get("enabled").as(boolean.class)),
                                     cb.isTrue(root.get("payed").as(Boolean.class)),
-                                    cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+//                                    cb.isNotNull(root.get("theClass").as(ClassTeam.class)),
+                                    cb.greaterThan(cb.currentTimestamp(),root.get("theClass").get("exam").get("examDate")),
                                     cb.notEqual(root.get("certificateStatus").as(int.class), 1),
                                     cb.like(root.get(searchSort).as(String.class), "%" + keywords + "%")
                             );
