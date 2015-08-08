@@ -27,7 +27,7 @@
             $("#apply_tab tr a[name='a']").click(function(){
                 var memberTds=$(this).parent().parent().children("td");
                 memberId=memberTds[0].innerHTML;
-                $(":input[type='hidden']").eq(0).attr("value",memberId);
+                $(":input[type='hidden']").eq(1).attr("value",memberId);
 //                var applyDate=memberTds[4].innerHTML;
                 $.ajax({
                     url:"getCertificateByMemberId",
@@ -41,7 +41,7 @@
                             $("#popup_app .res-info").eq(1).text(result.body.receiveAddress);
                             $("#popup_app .res-info").eq(2).text(result.body.phoneNo);
                             certificateId=result.body.id;
-                            $(":input[type='hidden']").eq(1).attr("value",certificateId);
+                            $(":input[type='hidden']").eq(2).attr("value",certificateId);
                             $("#popup_app").show();
                         }else if(result.status==0){
                             alert("ID无效~");
@@ -219,7 +219,7 @@
                         </div>
                     </div>
                     <div class="result-wrap">
-                        <form action="#" method="post" id="myform" name="myform" th:action="@{/backend/issueCertificate(returnPage='ClassList',classId=${classTeam.id},keywords=${keywords},searchSort=${searchSort})}">
+                        <form action="#" method="get" id="myform" name="myform" th:action="@{/backend/issueCertificate(returnPage='ClassList',classId=${classTeam.id},keywords=${keywords},searchSort=${searchSort})}">
                             <div class="config-items">
                                 <div class="result-content">
                                     <table width="100%" class="insert-tab">
