@@ -11,46 +11,51 @@
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
     <script type="text/javascript" src="js/indexuser.js"></script>
 </head>
-
-<body style="background-color:#beeb1f">
+<body>
+<p style="background-color:#beeb1f">
 <div style="min-height:834px">
     <div style="background-color:#fff;">
-    <div  class="headeri">
-    <img src="images/logo.png" class="logoimgi"/>
-        <ul class="navi">
-            <li><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>
-            <li><a href="javascript:void(0)" th:href="@{/pc/loadCompanyIntroduction}">公司简介</a></li>
-            <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
-            <li class="active"><a href="javascript:void(0)" th:href="@{/pc/loadTutors}">师资力量</a></li>
-            <li><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
-            <li><a href="yun-kaoshizn.html" th:href="@{/pc/loadExamGuide}">考试指南</a></li>
-            <li><a href="#">招|应聘</a></li>
-            <li id="loginLi" style="padding:0px 0px 0px 20px;" th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
-                <a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
-            </li>
-            <li id="userLi" style="padding:0px;display:none" th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
-                <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
-                <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
-                <p style="display: none" class="lbpo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
-                    <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
-                    <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
-                    <a href="#" th:href="@{/logout}">退出</a>
-                </p>
-            </li>
-        </ul>
+        <div class="headeri">
+            <img src="images/logo.png" class="logoimgi"/>
+            <ul class="navi">
+                <li><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>
+                <li><a href="javascript:void(0)" th:href="@{/pc/loadCompanyIntroduction}">公司简介</a></li>
+                <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
+                <li class="active"><a href="javascript:void(0)" th:href="@{/pc/loadTutors}">师资力量</a></li>
+                <li><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
+                <li><a href="yun-kaoshizn.html" th:href="@{/pc/loadExamGuide}">考试指南</a></li>
+                <li><a href="#">招|应聘</a></li>
+                <li id="loginLi" style="padding:0px 0px 0px 20px;"
+                    th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
+                    <a href="javascript:void(0)"
+                       onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
+                </li>
+                <li id="userLi" style="padding:0px;display:none" th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
+                    <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}">
+                        <img class="lodingimg" src="images/toux.png" width="100%"/>
+                    </a><!--会员头像-->
+                    <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+
+                    <p style="display: none" class="lbpo">
+                        <!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
+                        <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
+                        <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
+                        <a href="#" th:href="@{/logout}">退出</a>
+                    </p>
+                </li>
+            </ul>
+        </div>
     </div>
-    </div>
-   
 
     <p style="clear:both"></p>
-    <div class="fullSlide">
-    <div class="bd">
-        <ul>
-            <li style="background:url(images/bannerjs.png) center 0 no-repeat;"></li>
-        </ul>
-    </div>
 
-</div>
+    <div class="fullSlide">
+        <div class="bd">
+            <ul>
+                <li style="background:url(images/bannerjs.png) center 0 no-repeat;"></li>
+            </ul>
+        </div>
+    </div>
 
     <p style="height:20px"></p>
 
@@ -58,35 +63,32 @@
         <div class="main-wrap">
 
             <ul class="thys">
-            <a href="#"><li><img src="images/th1.jpg" width="100%"/></li></a>
-            <a href="#"><li><img src="images/th2.jpg" width="100%"/></li></a>
-            <a href="#"><li><img src="images/th3.jpg" width="100%"/></li></a>
-            <a href="#"><li><img src="images/th4.jpg" width="100%"/></li></a>
-            
+                <a href="#">
+                    <li><img src="images/th1.jpg" width="100%"/></li>
+                </a>
+                <a href="#">
+                    <li><img src="images/th2.jpg" width="100%"/></li>
+                </a>
+                <a href="#">
+                    <li><img src="images/th3.jpg" width="100%"/></li>
+                </a>
+                <a href="#">
+                    <li><img src="images/th4.jpg" width="100%"/></li>
+                </a>
+
             </ul>
         </div>
     </div>
 </div>
 <p style="clear:both; height:80px;"></p>
 <div class="jsjj">
-<p style="color:#333; font-size:14px;">
-<b>汤  晓：</b> 唛田文化总经理、唛田网络首席合伙人、品牌营销策划与微分销专家、微信营销与社会化新媒体营销专家；畅销书《钱多多掌柜奋斗记》和《完美团队成功记》。</br>
-<b>龙成东：</b>杭州熬思管理咨询有限公司总经理、老板集团（老板油烟机）特别培训顾问、微商实战系列课程导师，曾经培训过900多家企业</br>
-<b>郭向峰：</b>浙江灵岩文化创意有限公司董事、浙江大学电商网店运营班特聘讲师、电子商务实战运营专家、微创汇、向友汇社群发起人、创客汇副秘书长。</br>
-<b>林小希：</b>长生鸟珍珠博士微商学院院长、曾在阿里巴巴集团B2B工作。 </p>
+    <p style="color:#333; font-size:14px;">
+        <b>汤 晓：</b> 唛田文化总经理、唛田网络首席合伙人、品牌营销策划与微分销专家、微信营销与社会化新媒体营销专家；畅销书《钱多多掌柜奋斗记》和《完美团队成功记》。<br/>
+        <b>龙成东：</b>杭州熬思管理咨询有限公司总经理、老板集团（老板油烟机）特别培训顾问、微商实战系列课程导师，曾经培训过900多家企业<br/>
+        <b>郭向峰：</b>浙江灵岩文化创意有限公司董事、浙江大学电商网店运营班特聘讲师、电子商务实战运营专家、微创汇、向友汇社群发起人、创客汇副秘书长。<br/>
+        <b>林小希：</b>长生鸟珍珠博士微商学院院长、曾在阿里巴巴集团B2B工作。 </p>
 </div>
-
-
-
-
-
-
-
-
-
-
 <p style=" height:60px"></p>
-
 <div class="footer">
     <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
 
@@ -94,13 +96,15 @@
 </div>
 <div>
     <div id="asaimsg" class="AsaiDivShow">
-        <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
-                                                             onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
-            <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
-
+        <P align="right" style="margin:0px; padding:0px;">
+            <a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
+                <FONT style="color:#111; font-size:20px;">×</FONT>
+            </a>
+        </P>
         <div class="sign-in">
             <div class="user-form">
-                <form accept-charset="UTF-8" action="" th:action="@{/pc/index}" class="sign-in__form user-form__form" method="post">
+                <form accept-charset="UTF-8" action="" th:action="@{/pc/index}" class="sign-in__form user-form__form"
+                      method="post">
                     <div class="user-form__fieldset">
                         <label class="user-form__label" for="session_login" style="color:#111">用户名：</label>
                         <input title="" autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
@@ -119,6 +123,7 @@
     </div>
     <div id="asaimsgbg" class="AsaiDivBG"></div>
 </div>
+</p>
 </body>
 </html>
 <script type="text/javascript">
