@@ -590,7 +590,7 @@ public class MemberController {
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
             if(file.getSize()==0){throw new Exception("文件为空！");}
             //保存图片
-            String fileName = StaticResourceService.MESSAGECONTENT_ICON + UUID.randomUUID().toString() + ".png";
+            String fileName = StaticResourceService.MESSAGE_ICON + UUID.randomUUID().toString() + ".png";
             staticResourceService.uploadResource(fileName, file.getInputStream());
             Certificate certificate = certificateService.findOneByMember(mb);
             //判断该学员是否提交过申请信息

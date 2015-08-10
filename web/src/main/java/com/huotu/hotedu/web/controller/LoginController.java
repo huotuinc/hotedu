@@ -1,18 +1,17 @@
 package com.huotu.hotedu.web.controller;
 
-import com.huotu.hotedu.entity.Editor;
-import com.huotu.hotedu.entity.Link;
-import com.huotu.hotedu.entity.Login;
-import com.huotu.hotedu.entity.Manager;
+import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.repository.LinkRepository;
 import com.huotu.hotedu.service.MessageContentService;
 import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -70,16 +69,21 @@ public class LoginController {
         if(lists.size()>0) {
             model.addAttribute("LinkList", lists);
         }
-        /*Page<MessageContent> pages = messageContentService.loadIndexMessageContent();
-        ArrayList<MessageContent> list = new ArrayList<MessageContent>(13);
+        Page<MessageContent> pages = messageContentService.loadIndexMessageContent();
+        List<MessageContent> messageContentList1 = new ArrayList<>();
+        List<MessageContent> messageContentList2 = new ArrayList<>();
+        int sum = 0;
         for(MessageContent messageContent : pages){
             messageContent.setPictureUri(staticResourceService.getResource(messageContent.getPictureUri()).toURL().toString());
-            list.add(messageContent);
+            if(sum==0)
+                messageContentList1.add(messageContent);
+            else
+                messageContentList2.add(messageContent);
+            sum++;
         }
 
-        for(int i=0;i<12;i++)
-            model.addAttribute("messageContent"+String.valueOf(i),list.get(i));*/
-
+        model.addAttribute("messageContentList1",messageContentList1);
+        model.addAttribute("messageContentList2",messageContentList2);
 
         return turnPage;
     }

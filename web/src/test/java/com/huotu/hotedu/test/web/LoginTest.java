@@ -1,5 +1,6 @@
 package com.huotu.hotedu.test.web;
 
+import com.huotu.hotedu.WebTestBase;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.repository.ExamGuideRepository;
 import com.huotu.hotedu.service.LoginService;
@@ -25,23 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
  *
  * @author luffy luffy.ja at gmail.com
  */
-@ActiveProfiles("test")
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = DispatcherServletInitializer.DispatcherServletInitializerConfig.class)
-@WebAppConfiguration
-public class LoginTest extends SpringWebTest {
-
-    protected MockHttpSession loginAs(String userName, String password) throws Exception {
-        MockHttpSession session = (MockHttpSession) this.mockMvc.perform(get("/"))
-                .andReturn().getRequest().getSession(true);
-        session = (MockHttpSession) this.mockMvc.perform(post("/login").session(session)
-                .param("username", userName).param("password", password))
-                .andDo(print())
-                .andReturn().getRequest().getSession();
-
-        saveAuthedSession(session);
-        return session;
-    }
+public class LoginTest extends WebTestBase {
 
     @Autowired
     private LoginService loginService;
@@ -51,7 +36,7 @@ public class LoginTest extends SpringWebTest {
     @Test
     public void index() throws Exception {
         mockMvc.perform(
-                get("/")
+                get("/pc/index")
         )
                 .andDo(print());
     }

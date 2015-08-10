@@ -108,92 +108,78 @@
     <div style="width: 960px; margin: 0 auto;">
         <ul>
             <li style=" float:left;">
-                <a href="#"><p class="tit"><span class="titspan">动态资讯</span> <span><img src="images/play.png" width="18px" height="18px"/></span></p></a>
-                <p class="titen"><span>Dynamic information</span></p>
-                <a href="#"><img class="imgleft" th:src="${messageContent0}==null ? '' : ${messageContent0.pictureUri}" src="images/listone.png" width="126px" height="108px"/></a>
-                <a href="#"><p class="titfont" th:text="${messageContent0}==null ? '无' : ${messageContent0.title}">微商走进校园</p></a>
-                <a href="#"><p class="titlb" th:text="${messageContent0}==null ? '无' : ${messageContent0.content}">
-                    考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
-                </a>
-
-                <p class="titxian"></p>
-                <a href="#"><p class="tittit"><span class="titfive" th:text="${messageContent1}==null ? '无' : ${messageContent1.title}">5月杭州微商大会进行中</span>
-                    <span class="tittime" th:text="${messageContent1}==null ? '无' : ${#calendars.format(messageContent1.lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
-
-                <p style="clear:both"></p>
-                <a href="#"><p class="tittit"><span class="titfive" th:text="${messageContent2}==null ? '无' : ${messageContent2.title}">5月杭州微商大会进行中</span>
-                    <span class="tittime" th:text="${messageContent2}==null ? '无' : ${#calendars.format(messageContent2.lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
-
-                <p style="clear:both"></p>
-                <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span>
-                </p></a>
+                <div th:each="g:${messageContentList1}">
+                    <a href="#"><p class="tit"><span class="titspan">动态资讯</span> <span><img src="images/play.png" style="width: 18px; height: 18px;"/></span></p></a>
+                    <p class="titen"><span>Dynamic information</span></p>
+                    <a href="#"><img class="imgleft" th:src="${g.pictureUri}" src="images/listone.png" style="width:126px; height: 108px;"/></a>
+                    <a href="#"><p class="titfont" th:text="${g.title}">微商走进校园</p></a>
+                    <a href="#"><p class="titlb" th:text="${g.content}">
+                        考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
+                    </a>
+                    <p class="titxian"></p>
+                </div>
+                <div th:each="g:${messageContentList2}">
+                    <a href="#"><p class="tittit"><span class="titfive" th:text="${g.title}">5月杭州微商大会进行中</span>
+                        <span class="tittime" th:text="${#calendars.format(g.lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
+                    <p style="clear:both"></p>
+                </div>
+                    <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></p></a>
             </li>
             <li style=" float:left;">
-                <a href="#"><p class="tit"><span class="titspan">动态资讯</span> <span><img src="images/play.png" width="18px" height="18px"/></span></p></a>
-
-                <p class="titen"><span>Dynamic information</span></p>
-                <a href="#"><img class="imgleft" th:src="${messageContent3}==null ? '' : ${messageContent3.pictureUri}" src="images/listone.png" width="126px" height="108px"/></a>
-                <a href="#"><p class="titfont"  th:text="${messageContent3}==null ? '无' : ${messageContent3.title}">微商走进校园</p></a>
-                <a href="#"><p class="titlb"  th:text="${messageContent3}==null ? '无' : ${messageContent3.content}">
-                    考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
-                </a>
-
-                <p class="titxian"></p>
-                <a href="#"><p class="tittit"><span class="titfive"  th:text="${messageContent4}==null ? '无' : ${messageContent4.title}">5月杭州微商大会进行中</span>
-                    <span class="tittime" th:text="${messageContent4}==null ? '无' : ${#calendars.format(messageContent4.lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
-
-                <p style="clear:both"></p>
-                <a href="#"><p class="tittit"><span class="titfive"  th:text="${messageContent5}==null ? '无' : ${messageContent5.title}">5月杭州微商大会进行中</span>
-                    <span class="tittime" th:text="${messageContent5}==null ? '无' : ${#calendars.format(messageContent6.lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
-
-                <p style="clear:both"></p>
-                <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span>
-                </p></a>
+                <div th:each="g:${messageContentList1}">
+                    <a href="#"><p class="tit"><span class="titspan">最新公告</span> <span><img src="images/play.png" style="width: 18px; height: 18px;"/></span></p></a>
+                    <p class="titen"><span>Dynamic information</span></p>
+                    <a href="#"><img class="imgleft" th:src="${g.pictureUri}" src="images/listone.png" style="width:126px; height: 108px;"/></a>
+                    <a href="#"><p class="titfont" th:text="${g.title}">微商走进校园</p></a>
+                    <a href="#"><p class="titlb" th:text="${g.content}">
+                        考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
+                    </a>
+                    <p class="titxian"></p>
+                </div>
+                <div th:each="g:${messageContentList2}">
+                    <a href="#"><p class="tittit"><span class="titfive" th:text="${g.title}">5月杭州微商大会进行中</span>
+                        <span class="tittime" th:text="${#calendars.format(g.lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
+                    <p style="clear:both"></p>
+                </div>
+                <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></p></a>
             </li>
             <li style=" float:left;">
-                <a href="#"><p class="tit"><span class="titspan">动态资讯</span> <span><img src="images/play.png" width="18px" height="18px"/></span></p></a>
-
-                <p class="titen"><span>Dynamic information</span></p>
-                <a href="#"><img class="imgleft" th:src="${messageContent6}==null ? '' : ${messageContent6.pictureUri}" src="images/listone.png" width="126px" height="108px"/></a>
-                <a href="#"><p class="titfont"  th:text="${messageContent6}==null ? '无' : ${messageContent6.title}">微商走进校园</p></a>
-                <a href="#"><p class="titlb"  th:text="${messageContent6}==null ? '无' : ${messageContent6.title}">
-                    考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
-                </a>
-
-                <p class="titxian"></p>
-                <a href="#"><p class="tittit"><span class="titfive" th:text="${messageContent7}==null ? '无' : ${messageContent7.title}">5月杭州微商大会进行中</span>
-                    <span class="tittime" th:text="${messageContent7}==null ? '无' : ${#calendars.format(messageContent7.lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
-
-                <p style="clear:both"></p>
-                <a href="#"><p class="tittit"><span class="titfive"  th:text="${messageContent8}==null ? '无' : ${messageContent8.title}">5月杭州微商大会进行中</span>
-                    <span class="tittime" th:text="${messageContent8}==null ? '无' : ${#calendars.format(messageContent8.lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
-
-                <p style="clear:both"></p>
-                <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span>
-                </p></a>
+                <div th:each="g:${messageContentList1}">
+                    <a href="#"><p class="tit"><span class="titspan">常见问题</span> <span><img src="images/play.png" style="width: 18px; height: 18px;"/></span></p></a>
+                    <p class="titen"><span>Dynamic information</span></p>
+                    <a href="#"><img class="imgleft" th:src="${g.pictureUri}" src="images/listone.png" style="width:126px; height: 108px;"/></a>
+                    <a href="#"><p class="titfont" th:text="${g.title}">微商走进校园</p></a>
+                    <a href="#"><p class="titlb" th:text="${g.content}">
+                        考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
+                    </a>
+                    <p class="titxian"></p>
+                </div>
+                <div th:each="g:${messageContentList2}">
+                    <a href="#"><p class="tittit"><span class="titfive" th:text="${g.title}">5月杭州微商大会进行中</span>
+                        <span class="tittime" th:text="${#calendars.format(g.lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
+                    <p style="clear:both"></p>
+                </div>
+                <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></p></a>
             </li>
             <li style=" float:left;">
-                <a href="#"><p class="tit"><span class="titspan">动态资讯</span> <span><img src="images/play.png" width="18px" height="18px"/></span></p></a>
-
-                <p class="titen"><span>Dynamic information</span></p>
-                <a href="#"><img class="imgleft" th:src="${messageContent9}==null ? '' : ${messageContent9.pictureUri}" src="images/listone.png" width="126px" height="108px"/></a>
-                <a href="#"><p class="titfont" th:text="${messageContent9}==null ? '无' : ${messageContent9.title}">微商走进校园</p></a>
-                <a href="#"><p class="titlb"  th:text="${messageContent9}==null ? '无' : ${messageContent9.title}">
-                    考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
-                </a>
-
-                <p class="titxian"></p>
-                <a href="#"><p class="tittit"><span class="titfive" th:text="${messageContent10}==null ? '无' : ${messageContent10.title}">5月杭州微商大会进行中</span>
-                    <span class="tittime" th:text="${messageContent10}==null ? '无' : ${#calendars.format(messageContent10.lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
-
-                <p style="clear:both"></p>
-                <a href="#"><p class="tittit"><span class="titfive" th:text="${messageContent11}==null ? '无' : ${messageContent11.title}">5月杭州微商大会进行中</span>
-                    <span class="tittime" th:text="${messageContent11}==null ? '无' : ${#calendars.format(messageContent11.lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
-
-                <p style="clear:both"></p>
-                <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span>
-                </p></a>
+                <div th:each="g:${messageContentList1}">
+                    <a href="#"><p class="tit"><span class="titspan">报名须知</span> <span><img src="images/play.png" style="width: 18px; height: 18px;"/></span></p></a>
+                    <p class="titen"><span>Dynamic information</span></p>
+                    <a href="#"><img class="imgleft" th:src="${g.pictureUri}" src="images/listone.png" style="width:126px; height: 108px;"/></a>
+                    <a href="#"><p class="titfont" th:text="${g.title}">微商走进校园</p></a>
+                    <a href="#"><p class="titlb" th:text="${g.content}">
+                        考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
+                    </a>
+                    <p class="titxian"></p>
+                </div>
+                <div th:each="g:${messageContentList2}">
+                    <a href="#"><p class="tittit"><span class="titfive" th:text="${g.title}">5月杭州微商大会进行中</span>
+                        <span class="tittime" th:text="${#calendars.format(g.lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
+                    <p style="clear:both"></p>
+                </div>
+                <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></p></a>
             </li>
+
         </ul>
     </div>
 </div>

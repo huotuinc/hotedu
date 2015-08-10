@@ -33,7 +33,7 @@ public interface StaticResourceService {
     /**
      * 咨询动态的图片
      */
-    public  String MESSAGECONTENT_ICON="image/messageContent/";
+    public  String MESSAGE_ICON="image/message/";
     /**
      * 会员的头像
      */
@@ -42,6 +42,10 @@ public interface StaticResourceService {
      * 证书所属人的照片
      */
     public  String CERTIFICATE_ICON="image/certificate/";
+    /**
+     * 代理商的照片
+     */
+    public  String AGENT_ICON="image/agent/";
 
     /**
      * 考试指南图片uri

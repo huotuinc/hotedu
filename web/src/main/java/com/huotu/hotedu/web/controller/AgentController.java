@@ -549,7 +549,7 @@ public class AgentController {
         if(file.getSize()==0){throw new Exception("文件为空！");}
 
         //保存图片
-        String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+        String fileName = StaticResourceService.AGENT_ICON + UUID.randomUUID().toString() + ".png";
         staticResourceService.uploadResource(fileName,file.getInputStream());
 
         Agent agent=new Agent();
@@ -587,7 +587,7 @@ public class AgentController {
         if(file.getSize()!=0){
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
             staticResourceService.deleteResource(staticResourceService.getResource(agentService.findOneById(id).getPictureUri()));
-            String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+            String fileName = StaticResourceService.AGENT_ICON + UUID.randomUUID().toString() + ".png";
             staticResourceService.uploadResource(fileName,file.getInputStream());
             agent.setPictureUri(fileName);
         }

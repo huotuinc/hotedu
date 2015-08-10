@@ -62,7 +62,7 @@ public class MessageContentService {
     /**
      * 加载资讯动态首页界面
      */
-    public Page<MessageContent> loadIndexMessageContent(){
-        return messageContentRepository.findAll(new PageRequest(0, 12, new Sort(Sort.Direction.DESC, "top", "lastUploadDate")));
+    public Page<MessageContent> loadIndexMessageContent() {
+        return messageContentRepository.findAll(new PageRequest(0, 3, new Sort(Sort.Direction.DESC, "top", "lastUploadDate")));
     }
 }

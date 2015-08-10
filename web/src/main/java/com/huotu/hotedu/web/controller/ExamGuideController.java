@@ -137,7 +137,7 @@ public class ExamGuideController {
         if(file.getSize()==0){throw new Exception("文件为空！");}
 
         //保存图片
-        String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+        String fileName = StaticResourceService.EXAMGUIDE_ICON + UUID.randomUUID().toString() + ".png";
         staticResourceService.uploadResource(fileName,file.getInputStream());
 
         ExamGuide examGuide = new ExamGuide();
@@ -168,7 +168,7 @@ public class ExamGuideController {
             //获取需要修改的图片路径，并删除
             staticResourceService.deleteResource(staticResourceService.getResource(examGuideService.findOneById(id).getPictureUri()));
             //保存图片
-            String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+            String fileName = StaticResourceService.EXAMGUIDE_ICON + UUID.randomUUID().toString() + ".png";
             staticResourceService.uploadResource(fileName,file.getInputStream());
             examGuide.setPictureUri(fileName);
         }
