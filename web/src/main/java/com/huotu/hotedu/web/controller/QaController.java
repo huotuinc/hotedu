@@ -112,8 +112,9 @@ public class QaController {
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifyQa")
-    public String modifyQa(Long id, Model model){
+    public String modifyQa(Long id, Model model) throws Exception{
         Qa qa=qaService.findOneById(id);
+        qa.setPictureUri(staticResourceService.getResource(qa.getPictureUri()).toURL().toString());
         model.addAttribute("qa",qa);
         return "/backend/modifyqa";
     }
