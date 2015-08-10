@@ -69,6 +69,7 @@ public class LoginController {
         if(lists.size()>0) {
             model.addAttribute("LinkList", lists);
         }
+
         Page<MessageContent> pages = messageContentService.loadIndexMessageContent();
         List<MessageContent> messageContentList1 = new ArrayList<>();
         List<MessageContent> messageContentList2 = new ArrayList<>();
