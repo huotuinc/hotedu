@@ -539,7 +539,7 @@ public class MemberController {
                                    @RequestParam(required = false)String returnPage,
                                    Model model) {
         Member member = memberService.findOneById(memberId);
-        if (certificateService.findOneBycertificateNo(certificateNo) != null) {  //验证发的证书是否已经发过了
+        if (certificateService.findOneBycertificateNo(certificateNo) != null) {//验证发的证书是否已经发过了
             model.addAttribute("info", "该证书已经发过了");
             model.addAttribute("certificateId", certificateId);
         } else if (member.getAgent().getSendCertificateNumber() >= member.getAgent().getCertificateNumber()) {

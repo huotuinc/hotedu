@@ -42,7 +42,7 @@
         <p style=" height:40px;"></p>
         <p style="clear:both"></p>
         <div class="ysthree">
-            <div class="searchLeftS xLeft">
+            <div class="searchLeftS xLeft" th:unless="${totalPages}==0">
                 <!-- 活动列表 -->
                 <div class="upJyBox">
                     <ul th:remove="all-but-first">
@@ -113,6 +113,9 @@
                     <a href="#" th:if="${pageNo+1}!=${totalPages}" th:href="@{/pc/loadExamGuide(pageNo=${pageNo}+1)}">下一页</a>
                     <span th:text="'当前第'+${pageNo+1}">1</span>页/<span th:text="'共'+${totalPages}">1</span>页
                 </div>
+            </div>
+            <div style="text-align: center;margin-top:10px;margin-bottom: 10px;" th:if="${totalPages}==0">
+                <p style="color: red;">暂无数据</p>
             </div>
         </div>
         <p style="clear:both"></p>
