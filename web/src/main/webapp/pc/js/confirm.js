@@ -189,9 +189,17 @@ function check_arrangeNewClass() {
 }
 
 function check_arrangeNewExam() {
+    var examDate = $("#examDate").val().trim();
+    var examAddress = $("#examAddress").val().trim();
+    if(examDate==""){
+        $("#addNewExamError").html("考试时间不能为空!");
+        return;
+    }
+    if(examAddress==""){
+        $("#addNewExamError").html("考试地点不能为空!");
+        return;
+    }
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员安排到新建考场中吗？", function () {
-        var examDate = $("#examDate").val().trim();
-        var examAddress = $("#examAddress").val().trim();
         var classExamArrayLis = $("#classExamArrayLis").val().trim();
         $.ajax({
             url:"addSaveNewExam",
