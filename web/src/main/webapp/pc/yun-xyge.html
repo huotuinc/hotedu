@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/indexnew.css"/>
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+    <script rel="stylesheet" type="text/javascript" src="js/indexuser.js"></script>
     <script type="text/javascript" src="js/confirm.js"></script>
 </head>
 
@@ -26,11 +27,14 @@
                 <li style="padding:0px 0px 0px 20px;display:none"><a href="javascript:void(0)"
                                                                      onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">登录&nbsp;&nbsp;|</a>
                 </li>
-                <li style="padding:0px;"><a href="#"><img class="lodingimgi" src="images/toux.png" width="100%"/></a>
+                <li id="userLi" style="padding:0px;" th:style="${style}">
+                    <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimgi" src="images/toux.png" width="100%"/></a><!--会员头像-->
+                    <p style="display: none" class="zhizheno"><img src="images/lodingj.png" width="18px" height="7px"/></p>
 
-                    <p style="display:none" class="zhizhen"><img src="images/ystoux.png" width="18px" height="7px"/></p>
-
-                    <p style="display:none" class="lbpo"><a href="#">HHSHIJIJ</a> <a href="#">个人中心</a>
+                    <p style="display: none" class="lbpoo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
+                        <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
+                        <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
+                        <a href="#" onclick="showChangePwdForm()">修改密码</a>
                         <a href="#" th:href="@{/logout}">退出</a></p>
                 </li>
             </ul>
@@ -61,7 +65,7 @@
                                 </tr>
                                 <tr>
                                     <th>报名时间：</th>
-                                    <td th:text="${#dates.format(mb.registerDate, 'yyyy-MM-dd hh:ss:mm')}">2015.04.01
+                                    <td th:text="${#dates.format(mb.registerDate, 'yyyy-MM-dd hh:mm:ss')}">2015.04.01
                                     </td>
                                 </tr>
                                 <tr>
@@ -90,7 +94,7 @@
                                 <tbody>
                                 <tr>
                                     <th style="width:150px;">交费时间：</th>
-                                    <td th:text="${!mb.payed}?'暂无':${#dates.format(mb.payDate, 'yyyy-MM-dd hh:ss:mm')}">
+                                    <td th:text="${!mb.payed}?'暂无':${#dates.format(mb.payDate, 'yyyy-MM-dd hh:mm:ss')}">
                                         2015.04.01
                                     </td>
                                     <td style="display: none"><input id="examPassInput" type="text" title="" th:value="${mb.id}" /></td>
