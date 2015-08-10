@@ -5,6 +5,7 @@ import com.huotu.hotedu.entity.Editor;
 import com.huotu.hotedu.repository.TutorRepository;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.test.TestWebConfig;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +89,7 @@ public class TutorControllerTest extends WebTestBase {
 
 
     @Test
-//    @Ignore
+    @Ignore
     public  void errorTest() throws Exception{
         String editName= UUID.randomUUID().toString();
         String passWord=UUID.randomUUID().toString();
