@@ -744,7 +744,7 @@
 </div>
 <!--安排班级弹窗end-->
 <!--新建班级弹窗-->
-<div id="noClassMemberArrangeNewClassDiv" style="display:none" class="ystc">
+<div id="noClassMemberArrangeNewClassDiv" style="display:block" class="ystc">
     <div class="box-ys">
         <form action="#" id="noClassMemberArrangeNewClassDivForm" method="post" th:action="@{/pc/isClassNameExist}">
             <P style="text-align:right;"><a href="#" onclick="$('#noClassMemberArrangeNewClassDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
@@ -753,8 +753,10 @@
             <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="className" id="className" placeholder="班级名称" type="text"/></p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="check_arrangeNewClass()">保存</button></p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="goBackToArrangeClassFromNewClass()">返回</button></p>
-            <span id="addNewClassTeamSuccess" style="color:blue;"/>
-            <span id="addNewClassTeamError" style="color:red;"/>
+            <div style="color:#FF3A00;padding-left:40px; padding-top: 10px;">
+                <span id="addNewClassTeamSuccess" style="color:blue;"/>
+                <span id="addNewClassTeamError" style="color:red;"/>
+            </div>
         </form>
     </div>
 </div>
@@ -799,8 +801,10 @@
             <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="examAddress" id="examAddress" placeholder="考试地点" type="text"/></p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="check_arrangeNewExam()">保存</button></p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="goBackToArrangeExamFromNewExam()">返回</button></p>
-            <span id="addNewExamSuccess" style="color:blue;"/>
-            <span id="addNewExamError" style="color:red; text-align: center;"></span>
+            <div style="color:#FF3A00;padding-left:40px; padding-top: 10px;">
+                <span id="addNewExamSuccess" style="color:blue;"/>
+                <span id="addNewExamError" style="color:red;"></span>
+            </div>
         </form>
     </div>
 </div>
