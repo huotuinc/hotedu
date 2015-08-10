@@ -162,8 +162,12 @@ function check_ExamMemberEnter() {
 }
 
 function check_arrangeNewClass() {
+    var className = $("#className").val().trim();
+    if(className=="") {
+        $("#addNewClassTeamError").html("班级名称不能为空!");
+        return;
+    }
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员安排到新建班级中吗？", function () {
-        var className = $("#className").val().trim();
         var noClassMemberArrayLis = $("#noClassMemberArrayLis").val().trim();
         $.ajax({
             url:"addSaveNewClassTeam",
@@ -255,7 +259,7 @@ function check_arrangeExistExam() {
 }
 
 function btn_setExamPass(h) {
-    $.MsgBox.Confirm("温馨提示", "确认要将选中学员通过考试吗？", function () {
+    $.MsgBox.Confirm("温馨提示", "确认要将选中学员考试通过吗？", function () {
         var memberId = $(h).parent().parent().children().eq(1).text();
         $.ajax({
             url:"setExamPass",
@@ -273,7 +277,7 @@ function btn_setExamPass(h) {
 }
 
 function btn_setExamNoPass(h) {
-    $.MsgBox.Confirm("温馨提示", "确认要将选中学员通过考试吗？", function () {
+    $.MsgBox.Confirm("温馨提示", "确认要将选中学员考试不通过吗？", function () {
         var memberId = $(h).parent().parent().children().eq(1).text();
         $.ajax({
             url:"setExamNoPass",
