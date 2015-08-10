@@ -14,6 +14,32 @@
     <script type="text/javascript" src="js/scroll/jquery.mousewheel.js" th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
     <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js" th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
     <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js" th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
+    <script type="text/javascript">
+        var timer;
+        $(function(){
+            var d=new Date();
+            var year= d.getFullYear();
+            var month= d.getMonth()+1;
+            var date= d.getDate();
+            var hours= d.getHours();
+            var minutes=d.getMinutes();
+            var second= d.getSeconds();
+            $("#bjTime").text(year+"年"+month+"月"+date+"日"+hours+":"+minutes+":"+second);
+        });
+        function calc(){
+            var d=new Date();
+            var year= d.getFullYear();
+            var month= d.getMonth()+1;
+            var date= d.getDate();
+            var hours= d.getHours();
+            var minutes=d.getMinutes();
+            var second= d.getSeconds();
+            $("#bjTime").text(year+"年"+month+"月"+date+"日"+hours+":"+minutes+":"+second);
+        }
+        window.onload=function (){
+            timer=setInterval(calc,1000);
+        }//页面加载后执行
+    </script>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -142,7 +168,7 @@
                         <li><label class="res-lab">系统版本</label><span class="res-info">2.0v</span></li>
                         <li><label class="res-lab">运行环境</label><span class="res-info">Apache/2.2.21 (Win64) PHP/5.3.10</span></li>
                         <li><label class="res-lab">PHP运行方式</label><span class="res-info">apache2handler</span></li>
-                        <li><label class="res-lab">北京时间</label><span class="res-info">2014年3月18日 21:08:24</span></li>
+                        <li><label class="res-lab">北京时间</label><span class="res-info" id="bjTime">2014年3月18日 21:08:24</span></li>
                         <li><label class="res-lab">服务器域名/IP</label><span class="res-info">localhost [ 127.0.0.1 ]</span></li>
                         <li><label class="res-lab">Host</label><span class="res-info">127.0.0.1</span></li>
                     </ul>

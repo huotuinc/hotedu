@@ -324,26 +324,24 @@ public class EnterprisesController {
     @RequestMapping("/backend/modifySaveEnterprise")
     public String ModifySaveEnterprise(Long id,String name,String introduction,String tel,boolean isPutaway,@RequestParam("smallimg") MultipartFile file) throws Exception{
 
+
+        Enterprise enterprise=enterpriseService.findOneById(id);
         if(file.getSize()!=0){
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+            staticResourceService.deleteResource(staticResourceService.getResource(enterpriseService.findOneById(id).getLogoUri()));
+            String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+            staticResourceService.uploadResource(fileName,file.getInputStream());
+            enterprise.setLogoUri(fileName);
         }
-        if(file.getSize()>1024*1024*5){throw new Exception("文件太大");}
-
-
-        staticResourceService.deleteResource(staticResourceService.getResource(enterpriseService.findOneById(id).getLogoUri()));    //获取需要修改的图片路径，并删除
-        String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";                                 //保存图片
-        staticResourceService.uploadResource(fileName,file.getInputStream());                                                       //添加静态图片资源
-        Enterprise enterprise=enterpriseService.findOneById(id);
         enterprise.setTel(tel);
         enterprise.setName(name);
         enterprise.setIsPutaway(isPutaway);
         enterprise.setInformation(introduction);
-        if(file.getSize()!=0){
-            enterprise.setLogoUri(fileName);
-        }
         enterprise.setLastUploadDate(new Date());
         enterpriseService.modify(enterprise);
         return "redirect:/backend/loadEnterprises";
+
+
     }
 
     @RequestMapping("/pc/loadCompanyIntroduction")

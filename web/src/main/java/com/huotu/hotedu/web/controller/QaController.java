@@ -2,6 +2,7 @@ package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.Qa;
 import com.huotu.hotedu.service.QaService;
+import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -9,8 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by shiliting on 2015/6/10.
@@ -30,6 +34,11 @@ public class QaController {
      * 用来储存分页中每页的记录数
      */
     public static final int PAGE_SIZE=10;
+    /**
+     * 用来储存处理静态资源的接口
+     */
+    @Autowired
+    StaticResourceService staticResourceService;
 
 
 
@@ -118,12 +127,21 @@ public class QaController {
     //TODO 是否搞抛出异常
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/addSaveQa")
-    public String addSaveQa(String title,String content,String top){
+    public String addSaveQa(String title,String content,Boolean top,@RequestParam("smallimg") MultipartFile file) throws Exception{
+        //文件格式判断
+        if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+        if(file.getSize()==0){throw new Exception("文件为空！");}
+
+        //保存图片
+        String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+        staticResourceService.uploadResource(fileName,file.getInputStream());
+
         Qa qa=new Qa();
+        qa.setPictureUri(fileName);
         qa.setTitle(title);
         qa.setContent(content);
         qa.setLastUploadDate(new Date());
-        qa.setTop("1".equals(top));
+        qa.setTop(top);
         qaService.addQa(qa);
         return "redirect:/backend/searchQa";
     }
@@ -138,8 +156,17 @@ public class QaController {
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveQa")
-    public String modifySaveQa(Long id,String title,String content,Boolean top){
+    public String modifySaveQa(Long id,String title,String content,Boolean top,@RequestParam("smallimg") MultipartFile file) throws Exception{
         Qa qa=qaService.findOneById(id);
+        if(file.getSize()!=0){
+            if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+            //获取需要修改的图片路径，并删除
+            staticResourceService.deleteResource(staticResourceService.getResource(qaService.findOneById(id).getPictureUri()));
+            //保存图片
+            String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+            staticResourceService.uploadResource(fileName,file.getInputStream());
+            qa.setPictureUri(fileName);
+        }
         qa.setTitle(title);
         qa.setContent(content);
         qa.setTop(top);

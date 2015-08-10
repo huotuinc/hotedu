@@ -24,6 +24,11 @@ public  class Qa implements Serializable {
     private String content;
     @Column
     private boolean top=true;
+    /**
+     * 图片地址
+     */
+    @Column
+    private String pictureUri;
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUploadDate;
 
@@ -71,14 +76,11 @@ public  class Qa implements Serializable {
         this.lastUploadDate = lastUploadDate;
     }
 
-    @Override
-    public String toString() {
-        return "Qa{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", top=" + top +
-                ", lastUploadDate=" + lastUploadDate +
-                '}';
+    public String getPictureUri() {
+        return pictureUri;
+    }
+
+    public void setPictureUri(String pictureUri) {
+        this.pictureUri = pictureUri;
     }
 }

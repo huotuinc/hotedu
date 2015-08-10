@@ -1,19 +1,18 @@
 package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.Editor;
-import com.huotu.hotedu.entity.MessageContent;
+import com.huotu.hotedu.entity.Link;
 import com.huotu.hotedu.entity.Login;
 import com.huotu.hotedu.entity.Manager;
+import com.huotu.hotedu.repository.LinkRepository;
 import com.huotu.hotedu.service.MessageContentService;
 import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +31,8 @@ public class LoginController {
 
     @Autowired
     MessageContentService messageContentService;
+    @Autowired
+    LinkRepository linkRepository;
 
     /**
      * 进入登录页面
@@ -65,6 +66,10 @@ public class LoginController {
     @RequestMapping("/pc/index")
     public String index(Model model) throws Exception{
         String turnPage = "pc/yun-index";
+        List<Link> lists=linkRepository.findAll();
+        if(lists.size()>0) {
+            model.addAttribute("LinkList", lists);
+        }
         /*Page<MessageContent> pages = messageContentService.loadIndexMessageContent();
         ArrayList<MessageContent> list = new ArrayList<MessageContent>(13);
         for(MessageContent messageContent : pages){
@@ -74,6 +79,7 @@ public class LoginController {
 
         for(int i=0;i<12;i++)
             model.addAttribute("messageContent"+String.valueOf(i),list.get(i));*/
+
 
         return turnPage;
     }

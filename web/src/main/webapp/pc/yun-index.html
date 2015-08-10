@@ -226,7 +226,7 @@
         <p style="clear:both; height:30px"></p>
     </div>
 </div>
-<div class="lhx" style=" background-color:#0195ff; color:#fff"><a href="#">友情链接</a>| <a href="http://www.gcvaic.org">公共证书查询入口</a></div>
+<div class="lhx" style=" background-color:#0195ff; color:#fff">友情链接|<a th:each="g:${LinkList}" th:href="${g.url}" th:text="${g.title}+'  '"></a><a href="http://www.gcvaic.org">公共证书查询入口</a></div>
 
 
 <div class="footer">

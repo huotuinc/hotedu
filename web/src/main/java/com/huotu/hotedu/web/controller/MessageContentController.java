@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
-import java.io.IOException;
 import java.util.Date;
 import java.util.UUID;
 
@@ -128,7 +127,7 @@ public class MessageContentController {
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping(value="/backend/addSaveMessageContent",method = RequestMethod.POST)
-    public String addSaveMessageContent(String title,String content,String top,@RequestParam("smallimg") MultipartFile file) throws Exception{
+    public String addSaveMessageContent(String title,String content,Boolean top,@RequestParam("smallimg") MultipartFile file) throws Exception{
             //文件格式判断
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
             if(file.getSize()==0){throw new Exception("文件为空！");}
@@ -141,7 +140,7 @@ public class MessageContentController {
             messageContent.setPictureUri(fileName);
             messageContent.setContent(content);
             messageContent.setLastUploadDate(new Date());
-            messageContent.setTop("1".equals(top));
+            messageContent.setTop(top);
             messageContentService.addMessageContent(messageContent);
             return "redirect:/backend/searchMessageContent";
     }
@@ -157,14 +156,14 @@ public class MessageContentController {
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveMessageContent")
     public String modifySaveMessageContent(Long id,String title,String content,Boolean top,@RequestParam("smallimg") MultipartFile file) throws Exception{
-            //文件格式判断
-            if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
-            if(file.getSize()==0){throw new Exception("文件为空！");}
-
-            //保存图片
-            String fileName = StaticResourceService.MESSAGECONTENT_ICON + UUID.randomUUID().toString() + ".png";
-            staticResourceService.uploadResource(fileName, file.getInputStream());
             MessageContent messageContent=messageContentService.findOneById(id);
+        if(file.getSize()!=0){
+            if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
+            staticResourceService.deleteResource(staticResourceService.getResource(messageContentService.findOneById(id).getPictureUri()));
+            String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+            staticResourceService.uploadResource(fileName,file.getInputStream());
+            messageContent.setPictureUri(fileName);
+        }
             messageContent.setTitle(title);
             messageContent.setContent(content);
             messageContent.setTop(top);

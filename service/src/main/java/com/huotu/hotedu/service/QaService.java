@@ -25,7 +25,7 @@ public class QaService {
 
 
     //分页
-    public Page<Qa> searchQa(int n,int pagesize,String keyword){
+    public Page<Qa> searchQa(int pageNo,int pageSize,String keyword){
         return  qaRepository.findAll(new Specification<Qa>() {
             @Override
             public Predicate toPredicate(Root<Qa> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -34,7 +34,7 @@ public class QaService {
                 }
                 return cb.like(root.get("title").as(String.class),"%"+keyword+"%");
             }
-        },new PageRequest(n, pagesize));
+        },new PageRequest(pageNo, pageSize));
 
     }
 
