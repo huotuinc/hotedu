@@ -2,7 +2,6 @@ package com.huotu.hotedu.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by shiliting on 2015/6/25.
@@ -18,7 +17,7 @@ public  class Company implements Serializable {
     private Long id;
     @Column
     private String title;
-    @Column(length = 5000)
+    @Lob
     private String introduction;
 
     public Long getId() {

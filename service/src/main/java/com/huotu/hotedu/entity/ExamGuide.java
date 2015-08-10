@@ -26,7 +26,7 @@ public  class ExamGuide implements Serializable {
     /**
      * 考试指南内容
      */
-    @Column(length = 5000)
+    @Lob
     private String content;
     /**
      * 是否置顶

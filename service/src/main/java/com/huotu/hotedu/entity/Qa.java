@@ -20,7 +20,7 @@ public  class Qa implements Serializable {
     private Long id;
     @Column
     private String title;
-    @Column(length = 5000)
+    @Lob
     private String content;
     @Column
     private boolean top=true;
