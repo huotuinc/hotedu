@@ -2,7 +2,9 @@ package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.repository.LinkRepository;
+import com.huotu.hotedu.service.ExamGuideService;
 import com.huotu.hotedu.service.MessageContentService;
+import com.huotu.hotedu.service.QaService;
 import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,6 +34,10 @@ public class LoginController {
     MessageContentService messageContentService;
     @Autowired
     LinkRepository linkRepository;
+    @Autowired
+    QaService qaService;
+    @Autowired
+    ExamGuideService examGuideService;
 
     /**
      * 进入登录页面
@@ -70,6 +76,7 @@ public class LoginController {
             model.addAttribute("LinkList", lists);
         }
 
+        //资讯动态
         Page<MessageContent> pages = messageContentService.loadIndexMessageContent();
         List<MessageContent> messageContentList1 = new ArrayList<>();
         List<MessageContent> messageContentList2 = new ArrayList<>();
@@ -82,9 +89,38 @@ public class LoginController {
                 messageContentList2.add(messageContent);
             sum++;
         }
-
         model.addAttribute("messageContentList1",messageContentList1);
         model.addAttribute("messageContentList2",messageContentList2);
+        //常见问题
+        Page<Qa> pages2 = qaService.loadIndexQa();
+        List<Qa> qaList1 = new ArrayList<>();
+        List<Qa> qaList2 = new ArrayList<>();
+        sum = 0;
+        for(Qa qa : pages2){
+            qa.setPictureUri(staticResourceService.getResource(qa.getPictureUri()).toURL().toString());
+            if(sum==0)
+                qaList1.add(qa);
+            else
+                qaList2.add(qa);
+            sum++;
+        }
+        model.addAttribute("qaList1",qaList1);
+        model.addAttribute("qaList2",qaList2);
+        //报名须知
+        Page<ExamGuide> pages3 = examGuideService.loadExamGuide(0, 3);
+        List<ExamGuide> examGuideList1 = new ArrayList<>();
+        List<ExamGuide> examGuideList2 = new ArrayList<>();
+        sum = 0;
+        for(ExamGuide examGuide : pages3){
+            examGuide.setPictureUri(staticResourceService.getResource(examGuide.getPictureUri()).toURL().toString());
+            if(sum==0)
+                examGuideList1.add(examGuide);
+            else
+                examGuideList2.add(examGuide);
+            sum++;
+        }
+        model.addAttribute("examGuideList1",examGuideList1);
+        model.addAttribute("examGuideList2",examGuideList2);
 
         return turnPage;
     }

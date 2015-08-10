@@ -134,7 +134,7 @@ public class QaController {
         if(file.getSize()==0){throw new Exception("文件为空！");}
 
         //保存图片
-        String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+        String fileName = StaticResourceService.QA_ICON + UUID.randomUUID().toString() + ".png";
         staticResourceService.uploadResource(fileName,file.getInputStream());
 
         Qa qa=new Qa();
@@ -164,7 +164,7 @@ public class QaController {
             //获取需要修改的图片路径，并删除
             staticResourceService.deleteResource(staticResourceService.getResource(qaService.findOneById(id).getPictureUri()));
             //保存图片
-            String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+            String fileName = StaticResourceService.QA_ICON + UUID.randomUUID().toString() + ".png";
             staticResourceService.uploadResource(fileName,file.getInputStream());
             qa.setPictureUri(fileName);
         }

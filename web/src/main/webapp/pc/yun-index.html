@@ -122,6 +122,8 @@
                     <a href="#"><p class="tittit"><span class="titfive" th:text="${g.title}">5月杭州微商大会进行中</span>
                         <span class="tittime" th:text="${#calendars.format(g.lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
                     <p style="clear:both"></p>
+                    <a th:remove="all" href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span><span class="tittime">2015/05/10</span></p></a>
+                    <p th:remove="all" style="clear:both"></p>
                 </div>
                     <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></p></a>
             </li>
@@ -140,11 +142,13 @@
                     <a href="#"><p class="tittit"><span class="titfive" th:text="${g.title}">5月杭州微商大会进行中</span>
                         <span class="tittime" th:text="${#calendars.format(g.lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
                     <p style="clear:both"></p>
+                    <a th:remove="all" href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span><span class="tittime">2015/05/10</span></p></a>
+                    <p th:remove="all" style="clear:both"></p>
                 </div>
                 <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></p></a>
             </li>
             <li style=" float:left;">
-                <div th:each="g:${messageContentList1}">
+                <div th:each="g:${qaList1}">
                     <a href="#"><p class="tit"><span class="titspan">常见问题</span> <span><img src="images/play.png" style="width: 18px; height: 18px;"/></span></p></a>
                     <p class="titen"><span>Dynamic information</span></p>
                     <a href="#"><img class="imgleft" th:src="${g.pictureUri}" src="images/listone.png" style="width:126px; height: 108px;"/></a>
@@ -154,15 +158,17 @@
                     </a>
                     <p class="titxian"></p>
                 </div>
-                <div th:each="g:${messageContentList2}">
+                <div th:each="g:${qaList2}">
                     <a href="#"><p class="tittit"><span class="titfive" th:text="${g.title}">5月杭州微商大会进行中</span>
                         <span class="tittime" th:text="${#calendars.format(g.lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
                     <p style="clear:both"></p>
+                    <a th:remove="all" href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span><span class="tittime">2015/05/10</span></p></a>
+                    <p th:remove="all" style="clear:both"></p>
                 </div>
                 <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></p></a>
             </li>
             <li style=" float:left;">
-                <div th:each="g:${messageContentList1}">
+                <div th:each="g:${examGuideList1}">
                     <a href="#"><p class="tit"><span class="titspan">报名须知</span> <span><img src="images/play.png" style="width: 18px; height: 18px;"/></span></p></a>
                     <p class="titen"><span>Dynamic information</span></p>
                     <a href="#"><img class="imgleft" th:src="${g.pictureUri}" src="images/listone.png" style="width:126px; height: 108px;"/></a>
@@ -172,10 +178,12 @@
                     </a>
                     <p class="titxian"></p>
                 </div>
-                <div th:each="g:${messageContentList2}">
+                <div th:each="g:${examGuideList2}">
                     <a href="#"><p class="tittit"><span class="titfive" th:text="${g.title}">5月杭州微商大会进行中</span>
                         <span class="tittime" th:text="${#calendars.format(g.lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
                     <p style="clear:both"></p>
+                    <a th:remove="all" href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span><span class="tittime">2015/05/10</span></p></a>
+                    <p th:remove="all" style="clear:both"></p>
                 </div>
                 <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></p></a>
             </li>

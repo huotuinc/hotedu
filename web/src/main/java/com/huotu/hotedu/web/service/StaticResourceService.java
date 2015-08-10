@@ -46,11 +46,14 @@ public interface StaticResourceService {
      * 代理商的照片
      */
     public  String AGENT_ICON="image/agent/";
-
     /**
      * 考试指南图片uri
      */
     public String EXAMGUIDE_ICON = "image/examGuide/";
+    /**
+     * 常见问题图片uri
+     */
+    public String QA_ICON = "image/qa/";
 
     /**
      * 上传资源

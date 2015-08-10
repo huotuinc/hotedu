@@ -4,6 +4,7 @@ import com.huotu.hotedu.repository.QaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -55,5 +56,12 @@ public class QaService {
     //查找一条常见问题
     public Qa findOneById(Long id){
         return qaRepository.findOne(id);
+    }
+
+    /**
+     * 加载常见问题首页界面
+     */
+    public Page<Qa> loadIndexQa() {
+        return qaRepository.findAll(new PageRequest(0, 3, new Sort(Sort.Direction.DESC, "top", "lastUploadDate")));
     }
 }
