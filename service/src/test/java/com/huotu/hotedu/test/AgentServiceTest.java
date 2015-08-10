@@ -48,6 +48,7 @@ public class AgentServiceTest {
      */
     @Test
     @Rollback
+    @Ignore
     public void testAgent(){
         Agent agen = new Agent();
         agen.setEnabled(true);
