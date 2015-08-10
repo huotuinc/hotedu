@@ -108,10 +108,10 @@
                             </select></td>
                             <td id="td_key">
                                 <input  th:if="${searchSort}=='all'" style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" th:value="${keywords}" value="" type="text"/>
-                                <select th:if="${searchSort}!='all'" name="keywords" style=" height:29px;padding: 0px 90px 0px 4px; border:1px solid #ddd; vertical-align:middle">
-                                    <option class="yssp" value="1" th:selected="${keywords}==1?'selected'" th:text="${searchSort}=='payed'? '是':(${searchSort}=='passed'?'通过考试':'已领证')"></option>
-                                    <option class="yssp" value="0" th:selected="${keywords}==0?'selected'" th:text="${searchSort}=='payed'? '否':(${searchSort}=='passed'?'未考试':'未申请')"></option>
-                                    <option class="yssp" value="2" th:selected="${keywords}==2?'selected'" th:if="${searchSort}!='payed'"  th:text="${searchSort}=='passed'?'未通过':'申请中'"></option>
+                                <select class="yssp" th:if="${searchSort}!='all'" name="keywords" style=" height:29px;padding: 0px 90px 0px 4px; border:1px solid #ddd; vertical-align:middle">
+                                    <option value="1" th:selected="${keywords}==1?'selected'" th:text="${searchSort}=='payed'? '是':(${searchSort}=='passed'?'通过考试':'已领证')"></option>
+                                    <option value="0" th:selected="${keywords}==0?'selected'" th:text="${searchSort}=='payed'? '否':(${searchSort}=='passed'?'未考试':'未申请')"></option>
+                                    <option value="2" th:selected="${keywords}==2?'selected'" th:if="${searchSort}!='payed'"  th:text="${searchSort}=='passed'?'未通过':'申请中'"></option>
                                 </select>
                             </td>
                             <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
