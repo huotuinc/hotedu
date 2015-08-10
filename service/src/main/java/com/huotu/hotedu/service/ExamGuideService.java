@@ -60,11 +60,9 @@ public class ExamGuideService {
 
     /**
      * 加载前台考试指南界面
-     * @param n     第几页
-     * @param pageSize  分页数
      */
-    public Page<ExamGuide> loadExamGuide(int n,int pageSize){
-        return examGuideRepository.findAll(new PageRequest(n, pageSize,new Sort(Sort.Direction.DESC,"top","lastUploadDate")));
+    public Page<ExamGuide> loadExamGuide(Integer pageNo,Integer pageSize){
+        return examGuideRepository.findAll(new PageRequest(0, 3,new Sort(Sort.Direction.DESC,"top","lastUploadDate")));
     }
 
 }

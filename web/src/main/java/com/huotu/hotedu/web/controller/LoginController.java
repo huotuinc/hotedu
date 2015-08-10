@@ -7,13 +7,11 @@ import com.huotu.hotedu.service.MessageContentService;
 import com.huotu.hotedu.service.QaService;
 import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -68,62 +66,106 @@ public class LoginController {
         return turnPage;
     }
 
+
+
+
+
     @RequestMapping("/pc/index")
     public String index(Model model) throws Exception{
         String turnPage = "pc/yun-index";
-        List<Link> lists=linkRepository.findAll();
-        if(lists.size()>0) {
-            model.addAttribute("LinkList", lists);
+        List<Link> linkList=linkRepository.findAll();
+        if(linkList.size()>0) {
+            model.addAttribute("LinkList", linkList);
         }
 
-        //资讯动态
-        Page<MessageContent> pages = messageContentService.loadIndexMessageContent();
-        List<MessageContent> messageContentList1 = new ArrayList<>();
-        List<MessageContent> messageContentList2 = new ArrayList<>();
-        int sum = 0;
-        for(MessageContent messageContent : pages){
-            messageContent.setPictureUri(staticResourceService.getResource(messageContent.getPictureUri()).toURL().toString());
-            if(sum==0)
-                messageContentList1.add(messageContent);
-            else
-                messageContentList2.add(messageContent);
-            sum++;
+
+        List<MessageContent> messageContentList=messageContentService.loadIndexMessageContent().getContent();
+        for(MessageContent mc:messageContentList){
+            mc.setPictureUri(staticResourceService.getResource(mc.getPictureUri()).toString());
         }
-        model.addAttribute("messageContentList1",messageContentList1);
-        model.addAttribute("messageContentList2",messageContentList2);
-        //常见问题
-        Page<Qa> pages2 = qaService.loadIndexQa();
-        List<Qa> qaList1 = new ArrayList<>();
-        List<Qa> qaList2 = new ArrayList<>();
-        sum = 0;
-        for(Qa qa : pages2){
-            qa.setPictureUri(staticResourceService.getResource(qa.getPictureUri()).toURL().toString());
-            if(sum==0)
-                qaList1.add(qa);
-            else
-                qaList2.add(qa);
-            sum++;
+        model.addAttribute("MessageContentList",messageContentList);
+        List<Qa> qaList=qaService.loadIndexQa().getContent();
+        for(Qa qa:qaList){
+            qa.setPictureUri(staticResourceService.getResource(qa.getPictureUri()).toString());
         }
-        model.addAttribute("qaList1",qaList1);
-        model.addAttribute("qaList2",qaList2);
-        //报名须知
-        Page<ExamGuide> pages3 = examGuideService.loadExamGuide(0, 3);
-        List<ExamGuide> examGuideList1 = new ArrayList<>();
-        List<ExamGuide> examGuideList2 = new ArrayList<>();
-        sum = 0;
-        for(ExamGuide examGuide : pages3){
-            examGuide.setPictureUri(staticResourceService.getResource(examGuide.getPictureUri()).toURL().toString());
-            if(sum==0)
-                examGuideList1.add(examGuide);
-            else
-                examGuideList2.add(examGuide);
-            sum++;
+        model.addAttribute("QaList",qaList);
+
+        List<ExamGuide> examGuideList=examGuideService.loadExamGuide(0,3).getContent();
+        for(ExamGuide eg:examGuideList){
+            eg.setPictureUri(staticResourceService.getResource(eg.getPictureUri()).toString());
         }
-        model.addAttribute("examGuideList1",examGuideList1);
-        model.addAttribute("examGuideList2",examGuideList2);
+        model.addAttribute("ExamGuideList",examGuideList);
+
+
+
+//        //资讯动态
+//        Page<MessageContent> pages = messageContentService.loadIndexMessageContent();
+//        List<MessageContent> messageContentList1 = new ArrayList<>();
+//        List<MessageContent> messageContentList2 = new ArrayList<>();
+//        int sum = 0;
+//        for(MessageContent messageContent : pages){
+//            messageContent.setPictureUri(staticResourceService.getResource(messageContent.getPictureUri()).toURL().toString());
+//            if(sum==0)
+//                messageContentList1.add(messageContent);
+//            else
+//                messageContentList2.add(messageContent);
+//            sum++;
+//        }
+//        model.addAttribute("messageContentList1",messageContentList1);
+//        model.addAttribute("messageContentList2",messageContentList2);
+//        //常见问题
+//        Page<Qa> pages2 = qaService.loadIndexQa();
+//        List<Qa> qaList1 = new ArrayList<>();
+//        List<Qa> qaList2 = new ArrayList<>();
+//        sum = 0;
+//        for(Qa qa : pages2){
+//            qa.setPictureUri(staticResourceService.getResource(qa.getPictureUri()).toURL().toString());
+//            if(sum==0)
+//                qaList1.add(qa);
+//            else
+//                qaList2.add(qa);
+//            sum++;
+//        }
+//        model.addAttribute("qaList1",qaList1);
+//        model.addAttribute("qaList2",qaList2);
+//        //报名须知
+//        Page<ExamGuide> pages3 = examGuideService.loadExamGuide(0, 3);
+//        List<ExamGuide> examGuideList1 = new ArrayList<>();
+//        List<ExamGuide> examGuideList2 = new ArrayList<>();
+//        sum = 0;
+//        for(ExamGuide examGuide : pages3){
+//            examGuide.setPictureUri(staticResourceService.getResource(examGuide.getPictureUri()).toURL().toString());
+//            if(sum==0)
+//                examGuideList1.add(examGuide);
+//            else
+//                examGuideList2.add(examGuide);
+//            sum++;
+//        }
+//        model.addAttribute("examGuideList1",examGuideList1);
+//        model.addAttribute("examGuideList2",examGuideList2);
 
         return turnPage;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @RequestMapping("/pc/videoLoginIndex")
     public String videoLoginIndex() {
