@@ -1,6 +1,7 @@
 package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.ExamGuide;
+import com.huotu.hotedu.entity.Result;
 import com.huotu.hotedu.service.ExamGuideService;
 import com.huotu.hotedu.web.service.StaticResourceService;
 import net.minidev.json.JSONObject;
@@ -115,17 +116,17 @@ public class ExamGuideController {
 
     @RequestMapping("/backend/uploadFile")
     @ResponseBody
-    public JSONObject editorUpload(@RequestParam("imgFile")MultipartFile file) throws Exception {
-        JSONObject obj = new JSONObject();
+    public Result editorUpload(@RequestParam("imgFile")MultipartFile file) throws Exception {
+        Result obj = new Result();
         //文件保存目录URL
-        String saveUrl  = StaticResourceService.TUTOR_ICON;
+        String saveUrl  = StaticResourceService.EXAMGUIDE_ICON;
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
         String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + ".png";
         //文件保存目录路径
         String savePath = saveUrl + newFileName;
         URI uri = staticResourceService.uploadResource(savePath, file.getInputStream());
-        obj.put("error", 0);
-        obj.put("url", uri.toString());
+        obj.setError(0);
+        obj.setUrl(uri.toString());
         return obj;
     }
 
@@ -139,8 +140,10 @@ public class ExamGuideController {
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifyExamGuide")
     public String modifyExamGuide(Long id, Model model) throws Exception {
+        String editorUpload = "uploadFile";
         ExamGuide examGuide = examGuideService.findOneById(id);
         examGuide.setPictureUri(staticResourceService.getResource(examGuide.getPictureUri()).toString());
+        model.addAttribute("editorUpload",editorUpload);
         model.addAttribute("examGuide", examGuide);
         return "/backend/modifyguide";
     }

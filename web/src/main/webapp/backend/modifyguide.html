@@ -20,6 +20,15 @@
             th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
     <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
             th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
+    <script charset="utf-8" src="../kindeditor/kindeditor.js"></script>
+    <script charset="utf-8" src="../kindeditor/lang/zh_CN.js"></script>
+    <script th:inline="javascript">
+        KindEditor.ready(function(K) {
+            window.editor = K.create('#editor_id',{
+                uploadJson : [[${editorUpload}]]
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -123,7 +132,7 @@
         </div>
         <div class="jp-container2">
         <div class="result-wrap">
-            <form action="#" th:action="@{/backend/modifySaveExamGuide(id=${examGuide.id})}" method="post" class="myform" name="myform" enctype="multipart/form-data">
+            <form action="#" th:action="@{/backend/modifySaveExamGuide(id=${examGuide.id})}" method="post" class="myform" name="myform" id="editorForm" enctype="multipart/form-data">
                 <div class="config-items">
                     <div class="result-content">
                         <table width="100%" class="insert-tab">
@@ -138,7 +147,7 @@
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>描述：</th>
-                                <td><textarea title="" name="content" th:text="${examGuide.content}" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
+                                <td><textarea title="" name="content" th:text="${examGuide.content}" class="common-textarea" id="editor_id" cols="30" style="width: 98%;width:700px;height:300px;" rows="10"></textarea></td>
                             </tr>
                             <tr>
                                 <th>置顶</th>

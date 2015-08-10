@@ -20,7 +20,7 @@
             th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
     <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
             th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
-    <!--<script charset="utf-8" src="../kindeditor/kindeditor.js"></script>
+    <script charset="utf-8" src="../kindeditor/kindeditor.js"></script>
     <script charset="utf-8" src="../kindeditor/lang/zh_CN.js"></script>
     <script th:inline="javascript">
         KindEditor.ready(function(K) {
@@ -28,7 +28,7 @@
                 uploadJson : [[${editorUpload}]]
             });
         });
-    </script>-->
+    </script>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -132,7 +132,7 @@
         </div>
         <div class="jp-container2">
         <div class="result-wrap">
-            <form action="#" th:action="@{/backend/addSaveExamGuide}" method="post" class="myform" name="myform" enctype="multipart/form-data">
+            <form action="#" th:action="@{/backend/addSaveExamGuide}" method="post" class="myform" name="myform" id="editorForm" enctype="multipart/form-data">
                 <div class="config-items">
                     <div class="result-content">
                         <table width="100%" class="insert-tab">

@@ -14,6 +14,24 @@ public  class Result implements Serializable {
     private int status;//状态信息
     private String message;//消息信息
     private Object body;//主体
+    private int error;
+    private String url;
+
+    public int getError() {
+        return error;
+    }
+
+    public void setError(int error) {
+        this.error = error;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public int getStatus() {
         return status;
