@@ -3,6 +3,8 @@ package com.huotu.hotedu.web.controller;
 import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.service.ExamGuideService;
 import com.huotu.hotedu.web.service.StaticResourceService;
+import net.minidev.json.JSONObject;
+import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,10 +12,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.net.URI;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -100,8 +107,26 @@ public class ExamGuideController {
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/addExamGuide")
-    public String addExamGuide() {
+    public String addExamGuide(Model model) {
+        String editorUpload = "uploadFile";
+        model.addAttribute("editorUpload",editorUpload);
         return "/backend/newguide";
+    }
+
+    @RequestMapping("/backend/uploadFile")
+    @ResponseBody
+    public JSONObject editorUpload(@RequestParam("imgFile")MultipartFile file) throws Exception {
+        JSONObject obj = new JSONObject();
+        //文件保存目录URL
+        String saveUrl  = StaticResourceService.TUTOR_ICON;
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+        String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + ".png";
+        //文件保存目录路径
+        String savePath = saveUrl + newFileName;
+        URI uri = staticResourceService.uploadResource(savePath, file.getInputStream());
+        obj.put("error", 0);
+        obj.put("url", uri.toString());
+        return obj;
     }
 
     /**
@@ -115,7 +140,7 @@ public class ExamGuideController {
     @RequestMapping("/backend/modifyExamGuide")
     public String modifyExamGuide(Long id, Model model) throws Exception {
         ExamGuide examGuide = examGuideService.findOneById(id);
-        examGuide.setPictureUri(staticResourceService.getResource(examGuide.getPictureUri()).toURL().toString());
+        examGuide.setPictureUri(staticResourceService.getResource(examGuide.getPictureUri()).toString());
         model.addAttribute("examGuide", examGuide);
         return "/backend/modifyguide";
     }
