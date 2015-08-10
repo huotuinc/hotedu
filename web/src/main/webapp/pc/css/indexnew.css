@@ -996,6 +996,20 @@ button.btn, input.btn {
 	padding: 10px 10px 0 0;
 	line-height: 22px;
 }
+.searchLeftS.xLeft .upJyBoxConp {
+	padding: 0 10px 0 0;
+}
+.searchLeftS .upJyBoxConp {
+	padding: 10px 30px 0 0;
+	line-height: 22px;
+}
+.searchLeftS .upJyBoxConip {
+	padding: 10px 10px 0 0;
+	line-height: 22px;
+}
+.fright {
+	float: right;
+}
 .ujTitle a {
 	color: #666666;
 	font-size: 14px;
@@ -1011,6 +1025,9 @@ button.btn, input.btn {
 }
 .ml10 {
 	margin-left: 10px;
+}
+.ml20 {
+	margin-right: 10px;
 }
 .fRight {
 	float: right;
@@ -1184,13 +1201,13 @@ button.btn, input.btn {
 	width: 177px
 }
 .smallbox {
-  background-color: #ddd;
-  width: 182px;
-  padding-bottom: 1px;
-  float: left;
-  margin-left: 10px;
-  margin-bottom: 11px;
-  min-height: 156px;
+	background-color: #ddd;
+	width: 182px;
+	padding-bottom: 1px;
+	float: left;
+	margin-left: 10px;
+	margin-bottom: 11px;
+	min-height: 156px;
 }
 .splb {
 	width: 180px;
@@ -1233,16 +1250,34 @@ button.btn, input.btn {
 	height: 315px;
 	padding-bottom: 5px
 }
-.thys li{width: 250px;
-  float: left;}
-  .podw{top: 355px;
-  position: absolute;
-  margin: 0 auto;
-  left: 0;
-  right: 0;}
-  .jsjj{margin: 0 auto;
-  width: 960px;
-  line-height: 31px;
-  background: rgba(255, 255, 255, 0.5);
-  padding: 20px;}
-  .jsjj b{color:#00C3FF; font-size:16px;}
+.thys li {
+	width: 250px;
+	float: left;
+}
+.podw {
+	top: 355px;
+	position: absolute;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+}
+.jsjj {
+	margin: 0 auto;
+	width: 960px;
+	line-height: 31px;
+	background: rgba(255, 255, 255, 0.5);
+	padding: 20px;
+}
+.jsjj b {
+	color: #00C3FF;
+	font-size: 16px;
+}
+.ysxqbt {
+	font-size: 16px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	display: inline-block;
+	width: 900px;
+	line-height: 20px;
+}
