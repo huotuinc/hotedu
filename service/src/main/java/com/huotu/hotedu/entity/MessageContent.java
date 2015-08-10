@@ -26,7 +26,7 @@ public  class MessageContent implements Serializable {
     /**
      * 描述
      */
-    @Column(length = 5000)
+    @Lob
     private String content;
     /**
      * 是否置顶

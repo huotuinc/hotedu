@@ -17,7 +17,7 @@ public  class Huotu implements Serializable {
     private Long id;
     @Column
     private String title;
-    @Column(length = 5000)
+    @Lob
     private String introduction;
 
     public Long getId() {
