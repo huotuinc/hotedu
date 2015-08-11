@@ -56,6 +56,11 @@ public interface StaticResourceService {
     public String QA_ICON = "image/qa/";
 
     /**
+     * 视频缩略图uri
+     */
+    public String VIDEO_ICON="image/video/";
+
+    /**
      * 上传资源
      *
      * @param path 资源路径

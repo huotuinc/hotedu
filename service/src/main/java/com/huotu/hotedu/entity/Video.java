@@ -7,9 +7,9 @@ import java.util.Date;
 /**
  * 视频
  * Created by cwb on 2015/7/10.
+ * Modify by shiliting on 2015/8/11
  */
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"videoName"}))
 @Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
 public class Video implements Serializable {
 
@@ -17,11 +17,23 @@ public class Video implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @Column
+    /**
+     * 视频名称
+     */
     private String videoName;
-    private String videoAddr;
+    /**
+     * 视频播放地址
+     */
+    private String playUrl;
+    /**
+     * 是否免费观看
+     */
     private boolean free = true;
+    /**
+     * 视频缩略图
+     */
+    private String thumbnail;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date uploadTime;
@@ -54,19 +66,27 @@ public class Video implements Serializable {
         this.uploadTime = uploadTime;
     }
 
-    public String getVideoAddr() {
-        return videoAddr;
-    }
-
-    public void setVideoAddr(String videoAddr) {
-        this.videoAddr = videoAddr;
-    }
-
     public String getVideoName() {
         return videoName;
     }
 
     public void setVideoName(String videoName) {
         this.videoName = videoName;
+    }
+
+    public String getPlayUrl() {
+        return playUrl;
+    }
+
+    public void setPlayUrl(String playUrl) {
+        this.playUrl = playUrl;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }
