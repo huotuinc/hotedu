@@ -74,11 +74,13 @@ public class SecurityConfig {
                             "/pc/loadMemberRegister",
                             "/pc/yun-baomin",
                             "/pc/register",
+                            "/pc/baomin",
                             "/pc/loadVideo",
                             "/pc/loadTutors",
                             "/pc/loadCompanyIntroduction",
                             "/image/**",
-                            "/uploadResources/**"
+                            "/uploadResources/**",
+                            "/pc/checkPhoneNo"
                     ).permitAll()   // 允许未登录用户访问静态资源
                     .anyRequest().authenticated()
                     .and()

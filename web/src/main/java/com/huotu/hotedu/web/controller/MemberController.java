@@ -46,6 +46,8 @@ public class MemberController {
     @Autowired
     IqiyiVideoRepository iqiyiVideoRepository;
 
+    public static final String DEFAULT_PASSWORD = "123456";
+
     /**
      * 用来储存分页中每页的记录数
      */
@@ -60,57 +62,157 @@ public class MemberController {
 
 
     /**
+     * Created by cwb on 2015/8/11
+     * 登录后报名
+     */
+    @RequestMapping("/pc/loginBaomin")
+    @ResponseBody
+    public Result loginBaomin(@AuthenticationPrincipal Login user,String areaId) {
+        Result result = new Result();
+        int status = 0;
+        String message = "";
+        if(user==null) {
+            message = "用户还未登录";
+        }else if(user instanceof Member) {
+            if(areaId==null||"".equals(areaId)) {
+                message = "请选择报名区域";
+            }else {
+                Agent agent = agentService.findByAreaId(areaId);
+                if (agent == null) {
+                    message = "该地区报名点临时取消";
+                }else {
+                    Member member = (Member) user;
+                    memberService.addMember(agent,member);
+                    status = 1;
+                    message = "报名成功";
+                }
+            }
+        }
+        result.setStatus(status);
+        result.setMessage(message);
+        return result;
+    }
+
+    /**
      * Created by cwb on 2015/7/21.
-     * 学员报名、注册
+     * Modified by cwb on 2015/8/11.
+     * 未注册学员报名
      * @param realName
      * @param sex
      * @param phoneNo
      * @param areaId
-     * @param model
      * @return
      * @throws Exception
      */
-    @RequestMapping("/pc/register")
-    public String register(String realName,int sex,String phoneNo,String areaId,Model model) throws Exception {
-        String errInfo = "";
-        String msgInfo = "";
-        String turnPage = "/pc/yun-baomin";
-        String style = "padding:0px;display:none";
-        if("".equals(realName)||realName==null) {
-            errInfo = "姓名不能为空";
-        }else if("".equals(phoneNo)||phoneNo==null) {
-            errInfo = "手机号不能为空";
-        }else if("".equals(areaId)||areaId==null) {
-            errInfo = "请选择报名地点";
+    @RequestMapping("/pc/baomin")
+    @ResponseBody
+    public Result baomin(String realName,Integer sex,String phoneNo,String areaId) {
+        Result result = new Result();
+        String message = "";
+        int status = 0;
+        if("".equals(phoneNo)||phoneNo==null) {
+            message = "手机号不能为空";
         }else {
             boolean exist = memberService.isPhoneNoExist(phoneNo);
-            if(exist) {
-                errInfo = "该手机号已被注册";
+            if (exist) {
+                message = "该手机号已注册,请先登录";
             }else {
-                Agent agent = agentService.findByAreaId(areaId);
-                if(agent==null) {
-                    errInfo = "该地区报名点临时取消";
-                    turnPage = "/pc/yun-baomin";
+                if(areaId==null||"".equals(areaId)) {
+                    message = "请选择报名区域";
+                }else if(realName==null||"".equals(realName)) {
+                    message = "姓名不能为空";
+                }else if(sex==null) {
+                    message = "请选择性别";
                 }else {
-                    Member mb = new Member();
-                    Date d = new Date();
-                    mb.setAgent(agent);
-                    mb.setRealName(realName);
-                    mb.setSex(sex);
-                    mb.setPhoneNo(phoneNo);
-                    mb.setLoginName(phoneNo);
-                    mb.setEnabled(true);
-                    mb.setRegisterDate(d);
-                    mb.setApplyDate(d);
-                    loginService.newLogin(mb,"123456");
-                    msgInfo = "报名成功";
+                    Agent agent = agentService.findByAreaId(areaId);
+                    if (agent == null) {
+                        message = "该地区报名点临时取消";
+                    } else {
+                        Member mb = new Member();
+                        Date d = new Date();
+                        mb.setAgent(agent);
+                        mb.setRealName(realName);
+                        mb.setSex(sex);
+                        mb.setPhoneNo(phoneNo);
+                        mb.setLoginName(phoneNo);
+                        mb.setEnabled(true);
+                        mb.setRegisterDate(d);
+                        mb.setApplyDate(d);
+                        loginService.newLogin(mb, DEFAULT_PASSWORD);
+                        status = 1;
+                        message = "报名成功";
+                    }
                 }
             }
         }
-        model.addAttribute("style",style);
-        model.addAttribute("msgInfo",msgInfo);
-        model.addAttribute("errInfo",errInfo);
-        return turnPage;
+        result.setStatus(status);
+        result.setMessage(message);
+        return result;
+    }
+
+    /**
+     * Created by cwb on 2015/8/11
+     * 学员注册
+     */
+    @RequestMapping("/pc/register")
+    @ResponseBody
+    public Result register(String realName,Integer sex,String phoneNo) {
+        Result result = new Result();
+        String message = "";
+        int status = 0;
+        if("".equals(realName)||realName==null) {
+            message = "姓名不能为空";
+        }else if("".equals(phoneNo)||phoneNo==null) {
+            message = "手机号不能为空";
+        }else if(sex==null) {
+            message = "请选择性别";
+        }else {
+            boolean exist = memberService.isPhoneNoExist(phoneNo);
+            if (exist) {
+                message = "该手机号已被注册";
+            } else {
+                Member mb = new Member();
+                Date d = new Date();
+                mb.setRealName(realName);
+                mb.setSex(sex);
+                mb.setPhoneNo(phoneNo);
+                mb.setLoginName(phoneNo);
+                mb.setEnabled(true);
+                mb.setRegisterDate(d);
+                loginService.newLogin(mb,DEFAULT_PASSWORD);
+                status = 1;
+                message = "注册成功";
+            }
+        }
+        result.setStatus(status);
+        result.setMessage(message);
+        return result;
+    }
+
+    /**
+     * Created by cwb on 2015/8/11
+     * 检测手机号是否被注册
+     */
+    @RequestMapping("/pc/checkPhoneNo")
+    @ResponseBody
+    public Result checkPhoneNo(String phoneNo) {
+        Result result = new Result();
+        String message = "";
+        int status = 0;
+        if("".equals(phoneNo)||phoneNo==null) {
+            message = "手机号不能为空";
+        }else {
+            boolean exist = memberService.isPhoneNoExist(phoneNo);
+            if (exist) {
+                message = "该手机号已被注册";
+            }else {
+                status = 1;
+                message = "该手机号可用";
+            }
+        }
+        result.setStatus(status);
+        result.setMessage(message);
+        return result;
     }
 
     /**
