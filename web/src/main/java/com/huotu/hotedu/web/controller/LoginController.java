@@ -47,7 +47,6 @@ public class LoginController {
     }
 
 
-
     @RequestMapping("/pc/index")
     public String index(Model model) throws Exception{
         String turnPage = "pc/yun-index";
@@ -55,24 +54,27 @@ public class LoginController {
         if(linkList.size()>0) {
             model.addAttribute("LinkList", linkList);
         }
-        List<MessageContent> messageContentList=messageContentService.loadIndexMessageContent().getContent();
+
+        List<MessageContent> messageContentList=messageContentService.loadPcMessageContent(0,3).getContent();
         for(MessageContent mc:messageContentList){
             mc.setPictureUri(staticResourceService.getResource(mc.getPictureUri()).toString());
         }
         model.addAttribute("MessageContentList",messageContentList);
-        List<Qa> qaList=qaService.loadIndexQa().getContent();
+        List<Qa> qaList=qaService.loadPcQa(0,3).getContent();
         for(Qa qa:qaList){
             qa.setPictureUri(staticResourceService.getResource(qa.getPictureUri()).toString());
         }
         model.addAttribute("QaList",qaList);
 
-        List<ExamGuide> examGuideList=examGuideService.loadExamGuide(0,3).getContent();
+        List<ExamGuide> examGuideList=examGuideService.loadPcExamGuide(0,3).getContent();
         for(ExamGuide eg:examGuideList){
             eg.setPictureUri(staticResourceService.getResource(eg.getPictureUri()).toString());
         }
         model.addAttribute("ExamGuideList",examGuideList);
+
         return turnPage;
     }
+
 
     @RequestMapping("/pc/videoLoginIndex")
     public String videoLoginIndex() {
@@ -100,18 +102,18 @@ public class LoginController {
         if(linkList.size()>0) {
             model.addAttribute("LinkList", linkList);
         }
-        List<MessageContent> messageContentList=messageContentService.loadIndexMessageContent().getContent();
+        List<MessageContent> messageContentList=messageContentService.loadPcMessageContent(0,3).getContent();
         for(MessageContent mc:messageContentList){
             mc.setPictureUri(staticResourceService.getResource(mc.getPictureUri()).toString());
         }
         model.addAttribute("MessageContentList",messageContentList);
-        List<Qa> qaList=qaService.loadIndexQa().getContent();
+        List<Qa> qaList=qaService.loadPcQa(0,3).getContent();
         for(Qa qa:qaList){
             qa.setPictureUri(staticResourceService.getResource(qa.getPictureUri()).toString());
         }
         model.addAttribute("QaList",qaList);
 
-        List<ExamGuide> examGuideList=examGuideService.loadExamGuide(0,3).getContent();
+        List<ExamGuide> examGuideList=examGuideService.loadPcExamGuide(0,3).getContent();
         for(ExamGuide eg:examGuideList){
             eg.setPictureUri(staticResourceService.getResource(eg.getPictureUri()).toString());
         }

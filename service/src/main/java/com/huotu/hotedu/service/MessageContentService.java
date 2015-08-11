@@ -60,9 +60,9 @@ public class MessageContentService {
     }
 
     /**
-     * 加载资讯动态首页界面
+     * 加载前台资讯动态界面
      */
-    public Page<MessageContent> loadIndexMessageContent() {
-        return messageContentRepository.findAll(new PageRequest(0, 3, new Sort(Sort.Direction.DESC, "top", "lastUploadDate")));
+    public Page<MessageContent> loadPcMessageContent(int n,int pageSize){
+        return messageContentRepository.findAll(new PageRequest(n, pageSize,new Sort(Sort.Direction.DESC,"top","lastUploadDate")));
     }
 }

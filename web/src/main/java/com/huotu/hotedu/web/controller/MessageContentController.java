@@ -172,4 +172,57 @@ public class MessageContentController {
             return "redirect:/backend/searchMessageContent";
     }
 
+    /**
+     * Created by jiashubing on 2015/8/11.
+     * 前台加载考试指南
+     * @param pageNo    第几页
+     * @param model     返回客户端集
+     * @return          yun-dongtaizx.html
+     */
+    @RequestMapping("/pc/loadMessageContent")
+    public String loadMessageContent(@RequestParam(required = false)Integer pageNo,Model model) throws Exception{
+        String turnPage="/pc/yun-dongtaizx";
+        if(pageNo==null||pageNo<0){
+            pageNo=0;
+        }
+        Page<MessageContent> pages = messageContentService.loadPcMessageContent(pageNo, PAGE_SIZE);
+        long totalRecords = pages.getTotalElements();
+        int numEl =  pages.getNumberOfElements();
+        if(numEl==0) {
+            pageNo=pages.getTotalPages()-1;
+            if(pageNo<0) {
+                pageNo = 0;
+            }
+            pages = messageContentService.loadPcMessageContent(pageNo, PAGE_SIZE);
+            totalRecords = pages.getTotalElements();
+        }
+
+        for(MessageContent examGuide : pages){
+            examGuide.setPictureUri(staticResourceService.getResource(examGuide.getPictureUri()).toURL().toString());
+        }
+
+        Date today = new Date();
+        model.addAttribute("allMessageContentList", pages);
+        model.addAttribute("totalPages", pages.getTotalPages());
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("today", today);
+        model.addAttribute("totalRecords", totalRecords);
+        return turnPage;
+    }
+
+    /**
+     * 加载每一条资讯动态的详细信息
+     * @param id    要查看的资讯动态的id
+     * @param model 返回客户端集
+     * @return      yun-xqzixun.html
+     */
+    @RequestMapping("/pc/loadDetailMessageContent")
+    public String loadDetailMessageContent(Long id,Model model) throws Exception{
+        String turnPage="/pc/yun-xqzixun";
+        MessageContent messageContent = messageContentService.findOneById(id);
+        messageContent.setPictureUri(staticResourceService.getResource(messageContent.getPictureUri()).toURL().toString());
+        model.addAttribute("messageContent",messageContent);
+        return turnPage;
+    }
+
 }

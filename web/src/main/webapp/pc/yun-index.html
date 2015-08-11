@@ -126,9 +126,9 @@
                     <p style="clear:both"></p>
                     <a th:if="${MessageContentList.size()}>=3"  href="#"><p class="tittit"><span class="titfive" th:text="${MessageContentList[2].title}">5月杭州微商大会进行中</span>
                         <span class="tittime" th:text="${#calendars.format(MessageContentList[2].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
-                    <p th:remove="all" style="clear:both"></p>
+                    <p style="clear:both"></p>
                 </div>
-                    <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></p></a>
+                <p style="color: #C0C0C0;" class="tittit"><a href="yun-dongtaizx.html" th:href="@{/pc/loadMessageContent}"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></a></p>
             </li>
             <!--最新公告-->
             <li style=" float:left;">
@@ -148,7 +148,7 @@
                     <a th:remove="all" href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span><span class="tittime">2015/05/10</span></p></a>
                     <p style="clear:both"></p>
                 </div>
-                <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></p></a>
+                <p style="color: #C0C0C0;" class="tittit"><a href="#"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></a></p>
             </li>
             <!--常见问题-->
             <li style=" float:left;">
@@ -170,28 +170,29 @@
                         <span class="tittime" th:text="${#calendars.format(QaList[2].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
                     <p style="clear:both"></p>
                 </div>
-                <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></p></a>
+                <p style="color: #C0C0C0;" class="tittit"><a href="yun-changjianwt.html" th:href="@{/pc/loadQa}"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></a></p>
             </li>
             <!--报名须知-->
             <li style=" float:left;">
                 <div>
                     <a href="#"><p class="tit"><span class="titspan">报名须知</span> <span><img src="images/play.png" style="width: 18px; height: 18px;"/></span></p></a>
                     <p class="titen"><span>Application notes</span></p>
-                    <a href="#"><img class="imgleft" src="images/listone.png" style="width:126px; height: 108px;"/></a>
-                    <a href="#"><p class="titfont" th:text="暂无">微商走进校园</p></a>
-                    <a href="#"><p class="titlb" th:text="暂无">
+                    <a href="#"><img class="imgleft" th:src="${ExamGuideList.size()}>=1?${ExamGuideList[0].pictureUri}:'images/listone.png'" src="images/listone.png" style="width:126px; height: 108px;"/></a>
+                    <a href="#"><p class="titfont" th:text="${ExamGuideList.size()}>=1?${ExamGuideList[0].title}:'暂无'">微商走进校园</p></a>
+                    <a href="#"><p class="titlb" th:text="${ExamGuideList.size()}>=1?${ExamGuideList[0].title}:'暂无'">
                         考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
                     </a>
                     <p class="titxian"></p>
                 </div>
                 <div>
-                    <a th:remove="all" href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span>
-                        <span class="tittime">2015/05/10</span></p></a>
+                    <a th:if="${ExamGuideList.size()}>=2" href="#"><p class="tittit"><span class="titfive" th:text="${ExamGuideList[1].title}">5月杭州微商大会进行中</span>
+                        <span class="tittime" th:text="${#calendars.format(ExamGuideList[1].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
                     <p style="clear:both"></p>
-                    <a th:remove="all" href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span><span class="tittime">2015/05/10</span></p></a>
+                    <a th:if="${ExamGuideList.size()}>=3" href="#"><p class="tittit"><span class="titfive" th:text="${ExamGuideList[2].title}">5月杭州微商大会进行中</span>
+                        <span class="tittime" th:text="${#calendars.format(ExamGuideList[2].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span></p></a>
                     <p style="clear:both"></p>
                 </div>
-                <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></p></a>
+                <p style="color: #C0C0C0;" class="tittit"><a href="yun-kaoshizn.html" th:href="@{/pc/loadExamGuide}"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></a></p>
             </li>
         </ul>
     </div>

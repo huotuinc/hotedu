@@ -47,9 +47,10 @@
                 <div class="upJyBox">
                     <ul th:remove="all-but-first">
                         <li th:each="examGuide:${allExamGuideList}">
-                            <div th:style="${examGuide.top} ? 'display:block;' : 'display:none;'"><a class="fLeft mr10" target="_blank" href="#"> <img width="250" height="188" th:src="${examGuide.pictureUri}" src="http://img.zcool.cn/community/035f43555a8ad516ac72520ee625de4.jpg@250w_188h_1c_1e" /> </a></div>
+                            <div th:style="${examGuide.top} ? 'display:block;' : 'display:none;'"><a class="fLeft mr10" target="_blank" href="yun-xqkaoshi.html" th:href="@{/pc/loadDetailExamGuide(id=${examGuide.id})}">
+                                <img width="250" height="188" th:src="${examGuide.pictureUri}" src="http://img.zcool.cn/community/035f43555a8ad516ac72520ee625de4.jpg@250w_188h_1c_1e" /> </a></div>
                             <div th:class="${examGuide.top} ? 'upJyBoxCon' : 'upJyBoxConi' " class="upJyBoxCon">
-                                <div class="ujTitle"> <b><a target="_blank" href="#"><span th:text="${examGuide.title}"></span></a></b> <span class="hotSpan lv2"></span> </div>
+                                <div class="ujTitle"> <b><a target="_blank" href="yun-xqkaoshi.html" th:href="@{/pc/loadDetailExamGuide(id=${examGuide.id})}"><span th:text="${examGuide.title}"></span></a></b> <span class="hotSpan lv2"></span> </div>
                                 <div class="mt5" th:style="${examGuide.top} ? 'height: 134px;' : 'height: 69px;'" style="height: 134px;">
                                     <p class="c999"> <b style="color:#fabe00;">活动</b> - <a href="#">热门话题</a> </p>
                                     <p style="height: 63px;" class="c999 mt5 ofHidden"><span th:text="${examGuide.content}"></span></p>

@@ -146,7 +146,7 @@ public class ExamGuideController {
         String editorUpload = "uploadFile";
         ExamGuide examGuide = examGuideService.findOneById(id);
         examGuide.setPictureUri(staticResourceService.getResource(examGuide.getPictureUri()).toString());
-        model.addAttribute("editorUpload",editorUpload);
+        model.addAttribute("editorUpload", editorUpload);
         model.addAttribute("examGuide", examGuide);
         return "/backend/modifyguide";
     }
@@ -214,7 +214,7 @@ public class ExamGuideController {
     }
 
     /**
-     * Created by shiliting on 2015/8/7.
+     * Created by jiashubing on 2015/8/7.
      * 前台加载考试指南
      * @param pageNo    第几页
      * @param model     返回客户端集
@@ -226,7 +226,7 @@ public class ExamGuideController {
         if(pageNo==null||pageNo<0){
             pageNo=0;
         }
-        Page<ExamGuide> pages = examGuideService.loadExamGuide(pageNo, PAGE_SIZE);
+        Page<ExamGuide> pages = examGuideService.loadPcExamGuide(pageNo, PAGE_SIZE);
         long totalRecords = pages.getTotalElements();
         int numEl =  pages.getNumberOfElements();
         if(numEl==0) {
@@ -234,7 +234,7 @@ public class ExamGuideController {
             if(pageNo<0) {
                 pageNo = 0;
             }
-            pages = examGuideService.loadExamGuide(pageNo, PAGE_SIZE);
+            pages = examGuideService.loadPcExamGuide(pageNo, PAGE_SIZE);
             totalRecords = pages.getTotalElements();
         }
 
@@ -244,10 +244,25 @@ public class ExamGuideController {
 
         Date today = new Date();
         model.addAttribute("allExamGuideList", pages);
-        model.addAttribute("totalPages",pages.getTotalPages());
+        model.addAttribute("totalPages", pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("today", today);
         model.addAttribute("totalRecords", totalRecords);
+        return turnPage;
+    }
+
+    /**
+     * 加载每一条考试指南的详细信息
+     * @param id    要查看的考试指南的id
+     * @param model 返回客户端集
+     * @return      yun-xqkaoshi.html
+     */
+    @RequestMapping("/pc/loadDetailExamGuide")
+    public String loadDetailExamGuide(Long id,Model model) throws Exception{
+        String turnPage="/pc/yun-xqkaoshi";
+        ExamGuide examGuide = examGuideService.findOneById(id);
+        examGuide.setPictureUri(staticResourceService.getResource(examGuide.getPictureUri()).toURL().toString());
+        model.addAttribute("examGuide",examGuide);
         return turnPage;
     }
 }

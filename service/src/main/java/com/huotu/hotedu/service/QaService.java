@@ -59,9 +59,10 @@ public class QaService {
     }
 
     /**
-     * 加载常见问题首页界面
+     * 加载前台考试指南界面
      */
-    public Page<Qa> loadIndexQa() {
-        return qaRepository.findAll(new PageRequest(0, 3, new Sort(Sort.Direction.DESC, "top", "lastUploadDate")));
+    public Page<Qa> loadPcQa(int n,int pageSize){
+        return qaRepository.findAll(new PageRequest(n, pageSize,new Sort(Sort.Direction.DESC,"top","lastUploadDate")));
     }
+
 }
