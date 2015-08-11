@@ -175,7 +175,7 @@ public class LoginController {
 
     @RequestMapping("/pc/loginSuccess")
     public String loginSuccess(@AuthenticationPrincipal Login user) {
-        String turnPage = "pc/yun-index";
+        String turnPage = "redirect:/pc/index";
         if(user instanceof Manager) {
             turnPage = "redirect:/backend/login";
         }else if(user instanceof Editor){

@@ -33,7 +33,7 @@ public class ChangeThePasswordController {
         String turnPage="/backend/changethepassword";
         return turnPage;
     }
-
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/changePassword")
     @ResponseBody
     public Result changePassword(@AuthenticationPrincipal Login user, CharSequence oldPd,String newPd){

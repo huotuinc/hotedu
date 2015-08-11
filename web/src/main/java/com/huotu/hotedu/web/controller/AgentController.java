@@ -63,6 +63,7 @@ public class AgentController {
      * @param noClassMemberArrayLis 复选框选中成员的id集合,Strring类型
      * @return      confirm.js中 check_arrangeNewClass方法
      */
+
     @RequestMapping("/pc/addSaveNewClassTeam")
     @ResponseBody
     public Result addSaveNewClassTeam(@AuthenticationPrincipal Agent agent, String className, String noClassMemberArrayLis) {
@@ -124,6 +125,7 @@ public class AgentController {
      * @param noClassMemberArrayLis 未分班的学员
      * @return      confirm.js中 check_arrangeExistClass方法
      */
+
     @RequestMapping("/pc/addMembersIntoExitClass")
     @ResponseBody
     public Result addMembersIntoExitClass(String className,String noClassMemberArrayLis) {
