@@ -246,7 +246,7 @@
     <img src="images/call.jpg" th:src="@{/pc/images/call.jpg}" style="width:126px; height:65px;"/></div>
 
 <div>
-    <div id="asaimsg" class="AsaiDivShow" th:style="${loginForm}">
+    <div id="asaimsg" class="AsaiDivShow" th:style="${errInfo}==null?'display:none':'display:block'">
         <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
                                                              onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
             <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
@@ -278,11 +278,9 @@
             </div>
         </div>
     </div>
-    <div id="asaimsgbg" class="AsaiDivBG" th:style="${loginForm}"></div>
+    <div id="asaimsgbg" class="AsaiDivBG" th:style="${errInfo}==null?'display:none':'display:block'"></div>
 </div>
 </body>
-<script type="text/javascript" th:remove="all">
-</script>
 <script type="text/javascript">
     jQuery(".fullSlide").slide({
         titCell: ".hd ul",

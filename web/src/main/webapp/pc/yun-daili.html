@@ -28,9 +28,10 @@
                 <li><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
                 <li><a href="yun-kaoshizn.html" th:href="@{/pc/loadExamGuide}">考试指南</a></li>
                 <li><a href="javascript:void(0)">招|应聘</a></li>
+
                 <li style="padding:0px 0px 0px 20px;display:none"><a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">登录</a>
                 </li>
-                <li id="userLi" style="padding:0px;" th:style="${style}">
+                <li id="userLi" style="padding:0px;" th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
                     <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimgi" src="images/toux.png" width="100%"/></a><!--会员头像-->
                     <p style="display: none" class="zhizheno"><img src="images/lodingj.png" width="18px" height="7px"/></p>
 

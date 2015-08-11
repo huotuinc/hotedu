@@ -4,18 +4,9 @@ import com.huotu.hotedu.WebTestBase;
 import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.repository.ExamGuideRepository;
 import com.huotu.hotedu.service.LoginService;
-import com.huotu.hotedu.test.TestWebConfig;
-import com.huotu.hotedu.web.DispatcherServletInitializer;
-import libspringtest.SpringWebTest;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -35,8 +26,10 @@ public class LoginTest extends WebTestBase {
 
     @Test
     public void index() throws Exception {
+
         mockMvc.perform(
-                get("/pc/index")
+                post("/pc/index")
+                .session(loginAs("123456", "4578"))
         )
                 .andDo(print());
     }
