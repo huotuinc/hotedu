@@ -24,10 +24,11 @@
 <body>
 <!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
 <!--@thymesVar id="keywords" type="java.lang.String"-->
-<!--@thymesVar id="sumElement" type="java.lang.Long"-->
-<!--@thymesVar id="sumpage" type="java.lang.Integer"-->
-<!--@thymesVar id="n" type="java.lang.Integer"-->
 <!--@thymesVar id="allMessageContentList" type="org.springframework.data.domain.Page<com.huotu.hotedu.entity.MessageContent>"-->
+<!--@thymesVar id="g" type="com.huotu.hotedu.entity.MessageContent"-->
+<!--@thymesVar id="totalRecords" type="java.lang.long"-->
+<!--@thymesVar id="pageNo" type="java.lang.Integer"-->
+<!--@thymesVar id="totalPages" type="java.lang.Integer"-->
 <div class="topbar-wrap white">
     <div class="topbar-inner clearfix">
         <div class="topbar-logo-wrap clearfix">
@@ -89,7 +90,7 @@
                     </li>
                     <li><p style="height:30px; line-height:30px; margin-left: 20px;">资讯动态</p>
                         <ul class="sub-menu">
-                            <li class="on"><a href="MessageContent.html"
+                            <li class="on"><a href="messageContent.html"
                                               th:href="@{/backend/searchMessageContent}">资讯动态</a></li>
                         </ul>
                     </li>
@@ -202,7 +203,8 @@
                         </tr>
                     </table>
                     <div class="list-page">
-                        <a href="#" th:if="${pageNo}>0" th:href="@{/backend/searchMessageContent(pageNo=${pageNo}-1,keywords=${keywords})}">上一页</a>
+                        <a href="#" th:if="${pageNo>0}" th:href="@{/backend/searchMessageContent(pageNo=${pageNo}-1,keywords=${keywords})}">上一页</a>
+
                         <a href="#" th:if="${totalPages}-1>${pageNo}" th:href="@{/backend/searchMessageContent(pageNo=${pageNo}+1,keywords=${keywords})}">下一页</a>
                         <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
                     </div>

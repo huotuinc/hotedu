@@ -21,6 +21,7 @@
     <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
             th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
 </head>
+<!--@thymesVar id="allMessageContentList" type="org.springframework.data.domain.Page<com.huotu.hotedu.entity.MessageContent>"-->
 <body>
 <div class="topbar-wrap white">
     <div class="topbar-inner clearfix">
@@ -35,7 +36,7 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <!--<li><span th:text="${#authentication.name}"></span></li>-->
+                <li><span th:text="${#authentication.name}"></span></li>
                 <li><a href="changethepassword.html" th:href="@{/backend/loadChangeThePassword}">修改密码</a></li>
                 <li><a href="#" th:href="@{/logout}">退出</a></li>
             </ul>
@@ -130,7 +131,8 @@
                             <tbody>
                             <tr>
                                 <th><i class="require-red">*</i>上传图片：</th>
-                                <td><img id="img_photo" th:src="${messageContent.pictureUri}" src="images/logo.png" style="width: 100px; height: auto;"/><input name="smallimg" type="file"/></td>
+                                <td>
+                                <img id="img_photo" th:src="${messageContent.pictureUri}" src="images/logo.png" style="width: 100px; height: auto;"/><input name="smallimg" type="file"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>标题：</th>

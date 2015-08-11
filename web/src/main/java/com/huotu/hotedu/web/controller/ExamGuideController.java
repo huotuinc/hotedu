@@ -4,8 +4,6 @@ import com.huotu.hotedu.entity.ExamGuide;
 import com.huotu.hotedu.entity.Result;
 import com.huotu.hotedu.service.ExamGuideService;
 import com.huotu.hotedu.web.service.StaticResourceService;
-import net.minidev.json.JSONObject;
-import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
-import java.io.IOException;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;

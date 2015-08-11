@@ -572,11 +572,11 @@ public class MemberController {
 
     /**
      * 用ajaxfileupload上传文件
-     * @param user
-     * @param file
-     * @param response
-     * @return
-     * @throws Exception
+     * @param user       当前用户角色
+     * @param file       上传的文件
+     * @param response   http相应请求
+     * @return           结果集
+     * @throws Exception 上传文件出错异常
      */
     @RequestMapping("/pc/ajaxFileUpload")
     @ResponseBody
