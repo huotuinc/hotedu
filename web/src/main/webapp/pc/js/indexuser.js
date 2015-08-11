@@ -53,7 +53,7 @@ $(function() {
 			dataType:"json",
 			success:function(result){
 				if(result.status==0){
-					alert(result.message);
+					$.MsgBox.Alert("温馨提醒",result.message);
 					$("#noClassMemberArrangeClassDiv").hide();
 					$("#noClassMemberArrangeNewClassDiv").show();
 				}else if(result.status==1){
@@ -69,7 +69,7 @@ $(function() {
 				}
 			},
 			error:function(){
-				alert("系统异常,加载班级列表失败");
+				$.MsgBox.Alert("系统异常","加载班级列表失败");
 			}
 		});
 	})
@@ -83,7 +83,7 @@ $(function() {
 			dataType:"json",
 			success:function(result){
 				if(result.status==0){
-					alert(result.message);
+					$.MsgBox.Alert("温馨提醒",result.message);
 				}else if(result.status==1){
 					$("#classArrangeExamDiv").hide();
 					$("#classArrangeExistExamDiv").show();
@@ -97,7 +97,7 @@ $(function() {
 				}
 			},
 			error:function(){
-				alert("系统异常,加载考场列表失败");
+				$.MsgBox.Alert("系统异常","加载考场列表失败");
 			}
 		});
 	})

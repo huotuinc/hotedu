@@ -245,7 +245,7 @@ public class AgentController {
     public Result loadAvailableClassTeams(@AuthenticationPrincipal Agent agent) {
         Result result = new Result();
         List<ClassTeam> existClassList = agentService.findAvailableClassTeams(agent);
-        if(existClassList==null) {
+        if(existClassList.size()==0) {
             result.setStatus(0);
             result.setMessage("没有可用的班级，请新建");
         }else {
@@ -266,7 +266,7 @@ public class AgentController {
     public Result loadAvailableExamTeams(@AuthenticationPrincipal Agent agent) {
         Result result = new Result();
         List<Exam> existExamList = agentService.findAvailableExamTeams(agent);
-        if(existExamList==null) {
+        if(existExamList.size()==0) {
             result.setStatus(0);
             result.setMessage("没有可用的考场，请新建");
         }else {

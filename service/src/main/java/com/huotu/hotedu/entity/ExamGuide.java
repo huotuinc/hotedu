@@ -24,10 +24,17 @@ public  class ExamGuide implements Serializable {
     @Column
     private String title;
     /**
-     * 考试指南内容
+     * 考试指南描述
      */
     @Lob
     private String content;
+
+    /**
+     * 考试指南详细内容(富文本)
+     */
+    @Lob
+    private String detail;
+
     /**
      * 是否置顶
      */
@@ -44,6 +51,13 @@ public  class ExamGuide implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUploadDate;
 
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
 
     public Long getId() {
         return id;
