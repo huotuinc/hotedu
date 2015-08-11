@@ -204,8 +204,7 @@
                     </table>
                     <div class="list-page">
                         <a href="#" th:if="${pageNo>0}" th:href="@{/backend/searchMessageContent(pageNo=${pageNo}-1,keywords=${keywords})}">上一页</a>
-
-                        <a href="#" th:if="${totalPages}-1>${pageNo}" th:href="@{/backend/searchMessageContent(pageNo=${pageNo}+1,keywords=${keywords})}">下一页</a>
+                        <a href="#" th:if="${totalPages>pageNo+1}" th:href="@{/backend/searchMessageContent(pageNo=${pageNo+1},keywords=${keywords})}">下一页</a>
                         <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页
                     </div>
                 </div>
