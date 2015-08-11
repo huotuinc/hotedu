@@ -22,17 +22,12 @@ public class VideoService {
     @Autowired
     VideoRepository videoRepository;
 
-    //加载视频列表
-    public Page<Video> loadVideo(int n,int pagesize){
-        return videoRepository.findAll(new PageRequest(n,pagesize));
-    }
-
     //分页
     public Page<Video> searchVideo(int n,int pagesize,String keyword) {
         return videoRepository.findAll(new Specification<Video>() {
             @Override
             public Predicate toPredicate(Root<Video> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if (keyword.length()==0) {
+                if ("".equals(keyword)||keyword==null) {
                     return null;
                 }
                 return cb.or(cb.like(root.get("videoName").as(String.class), "%" + keyword + "%"));
@@ -40,17 +35,17 @@ public class VideoService {
         },new PageRequest(n, pagesize));
     }
 
-    public Page<Video> searchVideoById(int n,int pageSize,long id) {
-        return videoRepository.findAll(new Specification<Video>() {
-            @Override
-            public Predicate toPredicate(Root<Video> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if (id==0) {
-                    return null;
-                }
-                return cb.or(cb.equal(root.get("videoName").as(Long.class), id));
-            }
-        },new PageRequest(n, pageSize));
-    }
+//    public Page<Video> searchVideoById(int n,int pageSize,long id) {
+//        return videoRepository.findAll(new Specification<Video>() {
+//            @Override
+//            public Predicate toPredicate(Root<Video> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+//                if (id==0) {
+//                    return null;
+//                }
+//                return cb.or(cb.equal(root.get("videoName").as(Long.class), id));
+//            }
+//        },new PageRequest(n, pageSize));
+//    }
 
     public void delVideo(Long id){
         videoRepository.delete(id);
