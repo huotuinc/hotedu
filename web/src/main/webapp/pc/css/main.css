@@ -15,6 +15,7 @@
 .sub-menu .icon-font{font-size: 11px;}
 /* main */
 .crumb-wrap{height: 40px;line-height: 39px;border-bottom: 1px solid #e5e5e5;background: #f5f5f5;}
+.crumb-wrapf{height: 40px;line-height: 39px;border-bottom: 1px solid #e5e5e5;background: #fff;}
 .crumb-list{padding-left: 12px;}
 .crumb-list .icon-font{margin-right: 5px;}
 .crumb-step{margin: 0 5px;color: #b2c2e0;font-family: serif;}

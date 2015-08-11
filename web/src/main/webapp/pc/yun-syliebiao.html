@@ -46,6 +46,11 @@
                 <!-- 活动列表 -->
                 <div class="upJyBox">
                     <ul th:remove="all-but-first">
+                    
+                     <div class="crumb-wrapf">
+            <div class="crumb-list"><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">活动详情</span></div>
+        </div>
+        
                         <li th:each="examGuide:${allExamGuideList}">
                             <div th:style="${examGuide.top} ? 'display:block;' : 'display:none;'"><a class="fLeft mr10" target="_blank" href="#"> <img width="250" height="188" th:src="${examGuide.pictureUri}" src="http://img.zcool.cn/community/035f43555a8ad516ac72520ee625de4.jpg@250w_188h_1c_1e" /> </a></div>
                             <div th:class="${examGuide.top} ? 'upJyBoxCon' : 'upJyBoxConi' " class="upJyBoxCon">
