@@ -47,14 +47,14 @@
                 <ul style="float:left;padding-left: 10px;" th:remove="all-but-first">
                     <li class="ysbigbox" th:each="g:${video1}">
                         <p class="biglb">
-                            <a th:alt="${g.description}" th:href="${g.pageUrl}" target="_blank">
-                                <img th:alt="${g.description}" width="100%" height="100%" th:src="${g.img}"/>
+                            <a th:alt="${g.content}" th:href="${g.playUrl}" onclick="check_user()">
+                                <img th:alt="${g.content}" width="100%" height="100%" th:src="${g.thumbnail}"/>
                             </a>
                         </p>
 
-                        <p class="bigtit" th:text="${g.fileName}">极限挑战</p>
+                        <p class="bigtit" th:text="${g.videoName}">极限挑战</p>
 
-                        <p class="bigboxo" th:text="${g.description}">极限挑战极限挑战极限挑战极限挑战</p>
+                        <p class="bigboxo" th:text="${g.content}">极限挑战极限挑战极限挑战极限挑战</p>
                     </li>
                 </ul>
 
@@ -62,14 +62,14 @@
                 <ul th:remove="all-but-first">
                     <li class="smallbox" th:each="g:${videos1}">
                         <p class="splb">
-                            <a th:alt="${g.description}" th:href="${g.pageUrl}" target="_blank">
-                                <img th:alt="${g.description}" width="100%" height="100%" th:src="${g.img}"/>
+                            <a th:alt="${g.content}" th:href="${g.playUrl}" onclick="check_user()">
+                                <img th:alt="${g.content}" width="100%" height="100%" th:src="${g.thumbnail}"/>
                             </a>
                         </p>
 
-                        <p class="sptit" th:text="${g.fileName}">极限挑战</p>
+                        <p class="sptit" th:text="${g.videoName}">极限挑战</p>
 
-                        <p class="ysspo" th:text="${g.description}">极限挑战极限挑战极限挑战极限挑战</p>
+                        <p class="ysspo" th:text="${g.content}">极限挑战极限挑战极限挑战极限挑战</p>
                     </li>
                     <li class="smallbox">
                         <p class="splb"></p>
@@ -235,6 +235,14 @@
         <div id="asaimsgbg" class="AsaiDivBG"></div>
     </div>
 </div>
+<a style="display: none" id="check_user_form" href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
+<script th:inline="javascript">
+    function check_user(){
+        var name= [[${#authentication.name}]];
+        if(name == 'anonymousUser')
+            $("#check_user_form").click();
+    }
+</script>
 </body>
 </html>
 
