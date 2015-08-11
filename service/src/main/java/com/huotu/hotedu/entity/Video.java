@@ -34,6 +34,7 @@ public class Video implements Serializable {
      * 视频缩略图
      */
     private String thumbnail;
+    private String content;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date uploadTime;
@@ -88,5 +89,13 @@ public class Video implements Serializable {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

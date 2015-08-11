@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -75,41 +77,42 @@ public class VideoController {
     }
 
 
-//    @RequestMapping("/pc/loadVideo")
-//    public String loadVideo(@RequestParam(required = false) Integer pageNo, Model model) throws IOException {
-//        String turnPage = "/pc/yun-jxspnew";
-//        if (pageNo == null || pageNo < 0) {
-//            pageNo = 0;
-//        }
-//        Page<Video> pages = iqiyiVideoRepository.find(new PageRequest(pageNo, PAGE_SIZE_F));
-//        long totalRecords = pages.getTotalElements();
-//        int numEl = pages.getNumberOfElements();
-//        if (numEl == 0) {
-//            pageNo = pages.getTotalPages() - 1;
-//            if (pageNo < 0) {
-//                pageNo = 0;
-//            }
-//            pages = iqiyiVideoRepository.find(new PageRequest(pageNo, PAGE_SIZE_F));
-//            totalRecords = pages.getTotalElements();
-//        }
-//        List<Video> video1 = new ArrayList<>();
-//        List<Video> videos1 = new ArrayList<>();
-//        int sum = 0;
-//        for (Video video : pages) {
-//            if(sum==0) {
-//                video1.add(video);
-//            }else if (sum < 21) {
-//                videos1.add(video);
-//            }
-//            sum++;
-//        }
-//        model.addAttribute("video1", video1);
-//        model.addAttribute("videos1", videos1);
-//        model.addAttribute("totalPages", pages.getTotalPages());
-//        model.addAttribute("pageNo", pageNo);
-//        model.addAttribute("totalRecords", totalRecords);
-//        return turnPage;
-//    }
+    @RequestMapping("/pc/loadVideo")
+    public String loadVideo(@RequestParam(required = false) Integer pageNo,
+                            @RequestParam(required = false) String keywords,Model model) throws Exception {
+        String turnPage = "/pc/yun-jxspnew";
+        if (pageNo == null || pageNo < 0) {
+            pageNo = 0;
+        }
+        Page<Video> pages = videoService.searchVideo(pageNo, PAGE_SIZE_F, keywords);
+        long totalRecords = pages.getTotalElements();
+        int numEl = pages.getNumberOfElements();
+        if (numEl == 0) {
+            pageNo = pages.getTotalPages() - 1;
+            if (pageNo < 0) {
+                pageNo = 0;
+            }
+            pages = videoService.searchVideo(pageNo, PAGE_SIZE_F, keywords);
+            totalRecords = pages.getTotalElements();
+        }
+        List<Video> video1 = new ArrayList<>();
+        List<Video> videos1 = new ArrayList<>();
+        int sum = 0;
+        for (Video video : pages) {
+            if(sum==0) {
+                video1.add(video);
+            }else if (sum < 21) {
+                videos1.add(video);
+            }
+            sum++;
+        }
+        model.addAttribute("video1", video1);
+        model.addAttribute("videos1", videos1);
+        model.addAttribute("totalPages", pages.getTotalPages());
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("totalRecords", totalRecords);
+        return turnPage;
+    }
 
 
     @PreAuthorize("hasRole('EDITOR')")
@@ -132,7 +135,7 @@ public class VideoController {
 
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping(value = "/backend/addSaveVideo", method = RequestMethod.POST)
-    public String addSaveVideo(String videoName,String playUrl,Boolean free,@RequestParam("thumbnail") MultipartFile file) throws Exception {
+    public String addSaveVideo(String videoName,String content,String playUrl,Boolean free,@RequestParam("thumbnail") MultipartFile file) throws Exception {
         //文件格式判断
         if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
         if(file.getSize()==0){throw new Exception("文件为空！");}
@@ -143,6 +146,7 @@ public class VideoController {
         video.setFree(free);
         video.setPlayUrl(playUrl);
         video.setThumbnail(fileName);
+        video.setContent(content);
         video.setUploadTime(new Date());
         video.setVideoName(videoName);
         videoService.addVideo(video);
@@ -153,7 +157,7 @@ public class VideoController {
 
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveVideo")
-    public String modifySaveVideo(Long id,String videoName,String playUrl,Boolean free,@RequestParam("thumbnail") MultipartFile file) throws Exception{
+    public String modifySaveVideo(Long id,String videoName,String content,String playUrl,Boolean free,@RequestParam("thumbnail") MultipartFile file) throws Exception{
         Video video=videoService.findOneById(id);
         if(file.getSize()!=0){
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
@@ -164,6 +168,7 @@ public class VideoController {
         }
         video.setFree(free);
         video.setVideoName(videoName);
+        video.setContent(content);
         video.setPlayUrl(playUrl);
         video.setUploadTime(new Date());
         videoService.modifyVideo(video);

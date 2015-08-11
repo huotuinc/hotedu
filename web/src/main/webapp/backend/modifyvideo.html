@@ -127,14 +127,20 @@
                         <table width="100%" class="insert-tab">
                             <tbody>
                             <tr>
+                                <th><i class="require-red">*</i>视频缩略图：</th>
+                                <td>
+                                <img src="images/logo.png" th:src="${video.thumbnail}" style="width: 100px; height: auto;"/><input name="thumbnail" type="file"/>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th><i class="require-red">*</i>视频名称：</th>
                                 <td><input title="" th:value="${video.videoName}" type="text" id="videoName" value="" size="70" name="videoName" class="common-text"/></td>
                             </tr>
                             <tr>
-                                <th><i class="require-red">*</i>视频缩略图：</th>
-                                <td>
-                                <img src="images/logo.png" th:src="${video.thumbnail}" style="width: 100px; height: auto;"/><input name="thumbnail" type="file"/>
-                                </td></tr>
+                                <th><i class="require-red">*</i>视频描述：</th>
+                                <td><textarea title="" name="content" th:text="${video.content}" class="common-textarea" cols="30" style="width: 98%;width:700px;height:300px;" rows="10"></textarea></td>
+                            </tr>
+
                             <tr>
                                 <th><i class="require-red">*</i>视频播放地址：</th>
                                 <td><input title="" th:value="${video.playUrl}" type="text" id="playUrl" value="" size="70" name="playUrl" class="common-text"/></td>
