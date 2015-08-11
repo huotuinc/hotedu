@@ -29,7 +29,6 @@ public class LoginTest extends WebTestBase {
 
         mockMvc.perform(
                 post("/pc/index")
-                .session(loginAs("123456", "4578"))
         )
                 .andDo(print());
     }
