@@ -63,6 +63,7 @@ public class AgentController {
      * @param noClassMemberArrayLis 复选框选中成员的id集合,Strring类型
      * @return      confirm.js中 check_arrangeNewClass方法
      */
+
     @RequestMapping("/pc/addSaveNewClassTeam")
     @ResponseBody
     public Result addSaveNewClassTeam(@AuthenticationPrincipal Agent agent, String className, String noClassMemberArrayLis) {
@@ -124,6 +125,7 @@ public class AgentController {
      * @param noClassMemberArrayLis 未分班的学员
      * @return      confirm.js中 check_arrangeExistClass方法
      */
+
     @RequestMapping("/pc/addMembersIntoExitClass")
     @ResponseBody
     public Result addMembersIntoExitClass(String className,String noClassMemberArrayLis) {
@@ -243,7 +245,7 @@ public class AgentController {
     public Result loadAvailableClassTeams(@AuthenticationPrincipal Agent agent) {
         Result result = new Result();
         List<ClassTeam> existClassList = agentService.findAvailableClassTeams(agent);
-        if(existClassList==null) {
+        if(existClassList.size()==0) {
             result.setStatus(0);
             result.setMessage("没有可用的班级，请新建");
         }else {
@@ -264,7 +266,7 @@ public class AgentController {
     public Result loadAvailableExamTeams(@AuthenticationPrincipal Agent agent) {
         Result result = new Result();
         List<Exam> existExamList = agentService.findAvailableExamTeams(agent);
-        if(existExamList==null) {
+        if(existExamList.size()==0) {
             result.setStatus(0);
             result.setMessage("没有可用的考场，请新建");
         }else {

@@ -479,6 +479,7 @@ public class MemberController {
         return result;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/backend/getCertificateByMemberId")
     @ResponseBody
     public Result getCertificateByMemberId(long id){
@@ -499,7 +500,7 @@ public class MemberController {
         return result;
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/backend/issueCertificateAjax")
     @ResponseBody
     public Result issueCertificateAjax(String certificateNo,long memberId,long certificateId){

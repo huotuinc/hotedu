@@ -4,7 +4,6 @@ import com.huotu.hotedu.entity.Result;
 import com.huotu.hotedu.service.VideoService;
 import com.huotu.iqiyi.sdk.IqiyiVideoRepository;
 import com.huotu.iqiyi.sdk.model.Video;
-import com.huotu.iqiyi.sdk.model.VideoForPlay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -137,6 +136,7 @@ public class VideoController {
      * @param fileIds
      * @return
      */
+    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/delVideo")
     @ResponseBody
     public Result delVideo(String fileIds) throws IOException {

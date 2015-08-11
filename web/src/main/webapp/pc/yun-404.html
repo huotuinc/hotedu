@@ -24,7 +24,19 @@
                 <li><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
                 <li><a href="yun-kaoshizn.html" th:href="@{/pc/loadExamGuide}">考试指南</a></li>
                 <li><a href="javascript:void(0)">招|应聘</a></li>
-                <li ><a href="javascript:void(0)" th:href="@{/pc/baominLogin}">登录</a>
+                <!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
+                <li id="loginLi" style="padding:0px 0px 0px 20px;" th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
+                    <a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
+                </li>
+                <!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
+                <li id="userLi" style="padding:0px;display:none" th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
+                    <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
+                    <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+                    <p style="display: none" class="lbpo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
+                        <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
+                        <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
+                        <a href="#" th:href="@{/logout}">退出</a>
+                    </p>
                 </li>
             </ul>
         </div>

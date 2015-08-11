@@ -21,6 +21,7 @@
             <li><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
             <li><a href="yun-kaoshizn.html" th:href="@{/pc/loadExamGuide}">考试指南</a></li>
             <li><a href="#">招|应聘</a></li>
+            <!--@thymesVar id="name" type=""-->
             <li id="loginLi" style="padding:0px 0px 0px 20px;" th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
                 <a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
             </li>
@@ -177,17 +178,17 @@
                     <a href="#"><p class="tit"><span class="titspan">报名须知</span> <span><img src="images/play.png" style="width: 18px; height: 18px;"/></span></p></a>
                     <p class="titen"><span>Application notes</span></p>
                     <a href="#"><img class="imgleft" src="images/listone.png" style="width:126px; height: 108px;"/></a>
-                    <a href="#"><p class="titfont" >微商走进校园</p></a>
-                    <a href="#"><p class="titlb">
+                    <a href="#"><p class="titfont" th:text="暂无">微商走进校园</p></a>
+                    <a href="#"><p class="titlb" th:text="暂无">
                         考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
                     </a>
                     <p class="titxian"></p>
                 </div>
                 <div>
-                    <a href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span>
+                    <a th:remove="all" href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span>
                         <span class="tittime">2015/05/10</span></p></a>
                     <p style="clear:both"></p>
-                    <a href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span><span class="tittime">2015/05/10</span></p></a>
+                    <a th:remove="all" href="#"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span><span class="tittime">2015/05/10</span></p></a>
                     <p style="clear:both"></p>
                 </div>
                 <a href="#"><p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></p></a>
@@ -245,7 +246,7 @@
     <img src="images/call.jpg" th:src="@{/pc/images/call.jpg}" style="width:126px; height:65px;"/></div>
 
 <div>
-    <div id="asaimsg" class="AsaiDivShow" th:style="${loginForm}">
+    <div id="asaimsg" class="AsaiDivShow" th:style="${errInfo}==null?'display:none':'display:block'">
         <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
                                                              onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
             <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
@@ -277,11 +278,9 @@
             </div>
         </div>
     </div>
-    <div id="asaimsgbg" class="AsaiDivBG" th:style="${loginForm}"></div>
+    <div id="asaimsgbg" class="AsaiDivBG" th:style="${errInfo}==null?'display:none':'display:block'"></div>
 </div>
 </body>
-<script type="text/javascript" th:remove="all">
-</script>
 <script type="text/javascript">
     jQuery(".fullSlide").slide({
         titCell: ".hd ul",
