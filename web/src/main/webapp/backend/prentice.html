@@ -112,7 +112,7 @@
             <div class="crumb-list">
                 <i class="icon-font"></i>
                 <a href="certificateapplications.html" th:href="@{/backend/searchMembers}">管理代理商表</a>
-                <span class="crumb-step">&gt;</span><a href="batch.html"><span class="crumb-name">班级详情</span></a>
+                <span class="crumb-step">&gt;</span><a href="batch.html" th:href="@{/backend/agentClassMember(pageNo=${pageNo},keywords=${keywords},searchSort=${searchSort},classId=${member.theClass.id})}"><span class="crumb-name">班级详情</span></a>
                 <span class="crumb-step">&gt;</span><span class="crumb-name">学员详细</span>
             </div>
         </div>

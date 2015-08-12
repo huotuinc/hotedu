@@ -360,7 +360,10 @@ public class MemberController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/backend/lookMember")
-    public String lookMembers(Long id, Model model)throws Exception{
+    public String lookMembers(@RequestParam(required = false)Integer pageNo,
+                              @RequestParam(required = false) String keywords,
+                              @RequestParam(required = false,value = "searchSort")String searchSort,
+                              Long id, Model model)throws Exception{
         String turnPage = "/backend/prentice";
         Member member=memberService.findOneById(id);
         Certificate certificate = null;
@@ -368,6 +371,9 @@ public class MemberController {
             certificate=certificateService.findOneByMember(member);
             certificate.setPictureUri(staticResourceService.getResource(certificate.getPictureUri()).toString());
         }
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("keywords", keywords);
+        model.addAttribute("searchSort",searchSort);
         model.addAttribute("member",member);
         model.addAttribute("certificate",certificate);
         return turnPage;
