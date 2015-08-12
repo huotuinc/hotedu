@@ -99,6 +99,7 @@ public class VideoController {
         List<Video> videos1 = new ArrayList<>();
         int sum = 0;
         for (Video video : pages) {
+            video.setThumbnail(staticResourceService.getResource(video.getThumbnail()).toURL().toString());
             if(sum==0) {
                 video1.add(video);
             }else if (sum < 21) {
