@@ -80,19 +80,19 @@
             <form action="yun-baomin.html">
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="realName" name="realName" placeholder="真实姓名"
-                           type="text"/>
+                           type="text" th:value="${#authentication.principal}=='anonymousUser'?'':${#authentication.principal.realName}" th:readonly="${#authentication.principal}=='anonymousUser'?false:true"/>
                 </p>
 
                 <p class="ysdx">&nbsp;&nbsp;&nbsp;&nbsp;性别：
-                    <input name="sex" value="1" type="radio"/>
+                    <input name="sex" value="1"  th:checked="${#authentication.principal}=='anonymousUser'?false:${#authentication.principal.sex}==1" th:disabled="${#authentication.principal}=='anonymousUser'?false:true" type="radio"/>
                     &nbsp;男&nbsp;&nbsp;
-                    <input name="sex" value="0" type="radio"/>
+                    <input name="sex" value="0"  th:checked="${#authentication.principal}=='anonymousUser'?false:${#authentication.principal.sex}==0" th:disabled="${#authentication.principal}=='anonymousUser'?false:true" type="radio"/>
                     &nbsp;女&nbsp;&nbsp;
                 </p>
 
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="phoneNo" name="phoneNo"
-                           placeholder="真实手机号" type="text"/>
+                           placeholder="真实手机号"  th:value="${#authentication.principal}=='anonymousUser'?'':${#authentication.principal.phoneNo}" th:readonly="${#authentication.principal}=='anonymousUser'?false:true" type="text"/>
                 </p>
 
                 <p>
@@ -112,8 +112,7 @@
             </div>
         </div>
         <p class="yszhuyi"><i style="color:#FFBE00">*</i>提交报名后，我们会通知你，并线下交费。安排班次和考试等事项。<br/>
-            <i style="color:#FFBE00">*</i>姓名是你的登录账号，手机号是你的登录密码。<br/>
-            <i style="color:#FFBE00">*</i>目前考点只设在北上广深，请就近选择报名地点。<br/>
+            <i style="color:#FFBE00">*</i>手机号是你的登录账号，初始登录密码为“123456”。<br/>
         </p>
         
   
@@ -198,6 +197,9 @@
                         注册
                     </button>
                 </p>
+                <div style="text-align: center">
+                    <i style="color:#FFBE00">*</i>注册成功后初始密码为“123456”，您可以登录后在个人中心修改<br/>
+                </div>
             </form>
             <span style="color:red" id="regErrInfo"></span>
             <span style="color:blue" id="regMsgInfo"></span>

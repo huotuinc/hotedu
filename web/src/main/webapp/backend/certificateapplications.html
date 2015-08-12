@@ -252,7 +252,7 @@
                             <td th:text="${#calendars.format(g.applyCertificateDate,'yyyy-MM-dd hh:mm:ss')}">2015/01/01</td>
                             <td th:text="${g.certificateStatus}==1?'已领证':(${g.certificateStatus}==2?'申请中':'')">申请发证</td>
                             <td th:text="${g.theClass}==null? '':${g.theClass.className}">201504第一期</td>
-                            <td><a class="link-update" href="prentice.html" th:href="@{/backend/lookMember(id=${g.id})}">查看</a><br/>
+                            <td><a class="link-update" href="prentice.html" th:href="@{/backend/lookMember(searchSort='certificateStatus',keywords='2',id=${g.id})}">查看</a><br/>
                                 <a class="link-update" href="#">发证</a>
                             </td>
                         </tr>

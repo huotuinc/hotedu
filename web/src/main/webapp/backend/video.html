@@ -196,7 +196,7 @@
                         <tbody th:remove="all-but-first">
                         <!--@thymesVar id="AllVideoList" type="java.lang.Iterable<com.huotu.iqiyi.sdk.model.Video>"-->
                         <tr th:each="g:${AllVideoList}">
-                            <td><img th:src="${g.thumbnail}"/></td>
+                            <td><img th:src="${g.thumbnail}" width="372" height="266"/></td>
                             <td th:text="${g.videoName}">3</td>
                             <td><a th:href="${g.playUrl}" th:text="${g.playUrl}" target="_blank">www.iqiyi.com</a></td>
                             <td th:text="${#calendars.format(g.uploadTime,'yyyy-MM-dd hh:mm:ss')}">2014-07-13 15:15:50

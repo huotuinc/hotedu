@@ -323,7 +323,7 @@
                             <td th:text="${g.passed}==0?'':(${g.passed}==1?'通过考试':'未通过考试')">申请发证</td>
                             <td th:text="${g.certificateStatus}==1?'已领证':(${g.certificateStatus}==2?'申请中':'')">2015/04/01</td>
                             <td th:text="${classTeam.className}">201504第一期</td>
-                            <td><a class="link-update" href="prentice.html" th:href="@{/backend/lookMember(id=${g.id})}">查看</a><br/>
+                            <td><a class="link-update" href="prentice.html" th:href="@{/backend/lookMember(pageNo=${pageNo},keywords=${keywords},searchSort=${searchSort},id=${g.id})}">查看</a><br/>
                                 <a th:if="${g.certificateStatus}==2" class="link-update" href="#" name="a">发证</a><br th:if="${g.certificateStatus}==2"/>
                                 <a class="link-update" href="modifyclassteam.html">修改</a><br/>
                             </td>

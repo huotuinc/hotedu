@@ -27,13 +27,11 @@ public class ChangeThePasswordController {
      * 修改密码
      * @return backend/index.html
      */
-    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/loadChangeThePassword")
     public String loadChangeThePassword() {
         String turnPage="/backend/changethepassword";
         return turnPage;
     }
-    @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/changePassword")
     @ResponseBody
     public Result changePassword(@AuthenticationPrincipal Login user, CharSequence oldPd,String newPd){
