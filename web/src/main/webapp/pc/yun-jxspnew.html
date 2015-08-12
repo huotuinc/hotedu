@@ -43,7 +43,7 @@
 <p style="height: 40px; clear: both;"></p>
     <div style=" width:1280px;" class="ysfour">
         <div>
-            <div>
+            <div th:unless="${totalPages}==0">
 
                 <ul style="float:left;padding-left: 10px;" th:remove="all-but-first">
                     <li class="ysbigbox" th:each="g:${video1}">
