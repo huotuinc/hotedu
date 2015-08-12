@@ -67,6 +67,40 @@
                 <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
                 <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
             </div>
+            <!--登录弹窗-->
+            <div id="asaimsg" class="AsaiDivShow" style="display: none">
+                <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
+                                                                     onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
+                    <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+
+                <div class="sign-in">
+                    <div class="user-form">
+                        <form accept-charset="UTF-8" action="yun-geren.html" th:action="@{/pc/index}"
+                              class="sign-in__form user-form__form" method="post">
+
+                            <div class="user-form__fieldset">
+                                <label class="user-form__label" for="username" style="color:#111">用户名：</label>
+                                <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
+                                       id="username" name="username" placeholder="ID" type="text"/>
+                            </div>
+                            <div class="user-form__fieldset">
+                                <label class="user-form__label" for="password" style="color:#111">密码：</label>
+                                <input class="sign-in__field user-form__field" id="password" name="password"
+                                       placeholder="password" type="password"/>
+
+                            </div>
+                            <button class="sign-in__button user-form__button" name="button" type="submit">
+                                登录
+                            </button>
+                            <button class="sign-in__button user-form__button" id="goToRegister" type="button">
+                                注册
+                            </button>
+                        </form>
+                        <span style="color:red" th:text="${errInfo}"></span>
+                    </div>
+                </div>
+            </div>
+            <!--登录弹窗end-->
             <!--注册弹窗-->
             <div id="regDiv" class="AsaiDivShow" style="display:none">
                 <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"

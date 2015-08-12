@@ -580,6 +580,9 @@ $(function() {
                     $("#regPhoneNo").val("");
                     $("#regRealName").val("");
                     $("input[name='regSex']").removeAttr('checked');
+                    $("#regErrInfo").text("");
+                    $("#phoneErr").text("");
+                    $("#phoneRig").text("");
                     $("#regMsgInfo").text(result.message);
                 }
             },
