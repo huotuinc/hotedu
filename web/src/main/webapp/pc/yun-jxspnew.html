@@ -221,7 +221,7 @@
 
             <div class="sign-in">
                 <div class="user-form">
-                    <form accept-charset="UTF-8" action="#" th:action="@{/pc/videoLoginIndex}"
+                    <form accept-charset="UTF-8" action="#" th:action="@{/pc/index}"
                           class="sign-in__form user-form__form" method="post">
                         <div class="user-form__fieldset">
                             <label class="user-form__label" for="session_login" style="color:#111">用户名：</label>
@@ -243,14 +243,6 @@
         <div id="asaimsgbg" class="AsaiDivBG"></div>
     </div>
 </div>
-<!--<a style="display: none" id="check_user_form" href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>-->
-<!--<script th:inline="javascript">-->
-    <!--function check_user(){-->
-        <!--var name= [[${#authentication.name}]];-->
-        <!--if(name == 'anonymousUser')-->
-            <!--$("#check_user_form").click();-->
-    <!--}-->
-<!--</script>-->
 </body>
 </html>
 
