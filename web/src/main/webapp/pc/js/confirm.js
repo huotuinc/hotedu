@@ -552,12 +552,12 @@ $(function() {
         var sex = $("input[name='regSex']:checked").val();
         if(phoneNo=="") {
             $("#regMsgInfo").text("");
-            $("#regErrInfo").text("手机号不能为空");
+            $("#phoneErr").text("手机号不能为空");
             return;
         }
         if(!reg.test(phoneNo)){
             $("#regMsgInfo").text("");
-            $("#regErrInfo").text("请填入正确的手机号！");
+            $("#phoneErr").text("请填入正确的手机号！");
             return;
         }
         if(realName=="") {
@@ -580,7 +580,9 @@ $(function() {
                     $("#regMsgInfo").text("");
                     $("#regErrInfo").text(result.message);
                 }else if(result.status==1) {
-                    $("#regErrInfo").text("");
+                    $("#regPhoneNo").val("");
+                    $("#regRealName").val("");
+                    $("input[name='regSex']").removeAttr('checked');
                     $("#regMsgInfo").text(result.message);
                 }
             },
@@ -590,7 +592,6 @@ $(function() {
         });
     });
 });
-//注册弹窗关闭事件
 function hideRegisterForm() {
     $("#regPhoneNo").val("");
     $("#regRealName").val("");
