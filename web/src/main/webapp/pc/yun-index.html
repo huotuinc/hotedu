@@ -155,9 +155,7 @@
 
                     <p style="clear:both"></p>
                 </div>
-                <p style="color: #C0C0C0;" class="tittit"><a href="yun-dongtaizx.html"
-                                                             th:href="@{/pc/loadMessageContent}"><span
-                        style="color: #C0C0C0;" class="tittime">查看更多＞</span></a></p>
+                <p style="color: #C0C0C0;" class="tittit"><a href="javascript:void(0)"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></a></p>
             </li>
             <!--最新公告-->
             <li style=" float:left;">
@@ -223,7 +221,7 @@
 
                     <p style="clear:both"></p>
                 </div>
-                <p style="color: #C0C0C0;" class="tittit"><a href="yun-changjianwt.html" th:href="@{/pc/loadQa}"><span
+                <p style="color: #C0C0C0;" class="tittit"><a href="javascript:void(0)"><span
                         style="color: #C0C0C0;" class="tittime">查看更多＞</span></a></p>
             </li>
             <!--报名须知-->
@@ -233,17 +231,21 @@
                             src="images/play.png" style="width: 18px; height: 18px;"/></span></p></a>
 
                     <p class="titen"><span>Application notes</span></p>
-                    <a href="javascript:void(0)"><img class="imgleft" src="images/listfour.jpg"
+                    <a th:href="@{/pc/loadMemberRegister}" href="javascript:void(0)"><img class="imgleft" src="images/listfour.jpg"
                                                       style="width:126px; height: 108px;"/></a>
-                    <a href="javascript:void(0)"><p class="titfont">报名时间</p></a>
-                    <a href="javascript:void(0)"><p class="titlb">
-                        即日起报名，每期50人以上即可开班。</p>
+                    <a th:href="@{/pc/loadMemberRegister}" href="javascript:void(0)"><p class="titfont">报名时间</p></a>
+                    <a th:href="@{/pc/loadMemberRegister}" href="javascript:void(0)"><p class="titlb">
+                        1、报名时间： 即日起报名，每期50人以上即开班。
+                        2、报名渠道：1.公司官网报名；2.代理商处报名；3.公司总部报名；4.微信公众号报名；
+                        3、报名费用： 2680元/人: 包括报名费、证书费、辅导资料费和考务费。
+                        4、报名资料：报名表1张；个人身份证复印件1份；学历证书或学生证复印件一张，或在职证明一张；两寸白底彩色照片2张。
+                        5、考核方式： 理论考试时间100分钟，满分100分，60分即通过。</p>
                     </a>
 
                     <p class="titxian"></p>
                 </div>
-                <div>
-                    <a th:remove="all" href="javascript:void(0)"><p class="tittit"><span class="titfive">报名渠道</span>
+                <div th:remove="all">
+                    <a  href="javascript:void(0)"><p class="tittit"><span class="titfive">报名渠道</span>
                         <span class="tittime">2015/08/10</span></p></a>
 
                     <p style="clear:both"></p>
@@ -252,7 +254,7 @@
 
                     <p style="clear:both"></p>
                 </div>
-                <p style="color: #C0C0C0;" class="tittit"><a href="yun-kaoshizn.html"><span style="color: #C0C0C0;"
+                <p style="color: #C0C0C0;" class="tittit"><a href="yun-kaoshizn.html" th:href="@{/pc/loadMemberRegister}"><span style="color: #C0C0C0;"
                                                                                             class="tittime">查看更多＞</span></a>
                 </p>
             </li>
