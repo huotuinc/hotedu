@@ -329,7 +329,7 @@ public class EnterprisesController {
         if(file.getSize()!=0){
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
             staticResourceService.deleteResource(staticResourceService.getResource(enterpriseService.findOneById(id).getLogoUri()));
-            String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+            String fileName = StaticResourceService.COMPANY_LOGO + UUID.randomUUID().toString() + ".png";
             staticResourceService.uploadResource(fileName,file.getInputStream());
             enterprise.setLogoUri(fileName);
         }
