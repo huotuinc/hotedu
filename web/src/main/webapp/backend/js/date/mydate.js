@@ -1,6 +1,6 @@
 $(function (){
     $("#dateStart").datepicker({
-        dateFormat:'yy.mm.dd',  //更改时间显示模式
+        dateFormat:'yy-mm-dd',  //更改时间显示模式
         showAnim:"fadeIn",       //显示日历的效果slide、fadeIn、show等
         changeMonth:false,       //是否显示月份的下拉菜单，默认为false
         changeYear:true,        //是否显示年份的下拉菜单，默认为false
@@ -14,7 +14,7 @@ $(function (){
 });
 
     $("#dateEnd").datepicker({
-        dateFormat:'yy.mm.dd',  //更改时间显示模式
+        dateFormat:'yy-mm-dd',  //更改时间显示模式
         showAnim:"fadeIn",       //显示日历的效果slide、fadeIn、show等
         changeMonth:false,       //是否显示月份的下拉菜单，默认为false
         changeYear:true,        //是否显示年份的下拉菜单，默认为false

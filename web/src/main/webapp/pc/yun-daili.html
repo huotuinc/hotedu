@@ -11,8 +11,12 @@
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
     <script rel="stylesheet" type="text/javascript" src="js/indexuser.js"></script>
     <script type="text/javascript" src="js/confirm.js"></script>
+    <!--日期控件-->
     <script type="text/javascript" src="js/date/jquery_ui.js"></script>
     <script type="text/javascript" src="js/date/mydate.js"></script>
+    <script type="text/javascript" src="js/date/jquery-ui-timepicker-addon.js"></script>
+    <script type="text/javascript" src="js/date/jquery-ui-timepicker-zh-CN.js"></script>
+    <link type="text/css" href="css/jquery-ui-timepicker-addon.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="css/jquery_ui.css"/>
 </head>
 
@@ -455,7 +459,7 @@
                                     <td th:text="${g.className}">201504第一期</td>
                                     <td th:text="${g.agent.area}">杭州</td>
                                     <td th:text="${g.memberNum}">60</td>
-                                    <td th:text="${g.exam}==null?'':${#dates.format(g.exam.examDate, 'yyyy-MM-dd')}">2015-7-31</td>
+                                    <td th:text="${g.exam}==null?'':${#dates.format(g.exam.examDate, 'yyyy-MM-dd HH:mm:ss')}">2015-7-31</td>
                                     <td th:text="${g.exam}==null ? '': ${g.exam.examAddress}">火炬大厦</td>
                                     <td><a href="#" class="link-update" th:href="@{/pc/loadClassTeamDetailInfo(id=${g.id},keywords=${keywords},searchSort=${searchSort},pageNo=${pageNo})}">查看</a></td>
                                 </tr>

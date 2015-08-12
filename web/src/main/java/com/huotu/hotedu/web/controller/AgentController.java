@@ -97,9 +97,9 @@ public class AgentController {
      */
     @RequestMapping("/pc/addSaveNewExam")
     @ResponseBody
-    public Result addSaveNewExam(@AuthenticationPrincipal Agent agent,@DateTimeFormat(pattern = "yyyy-MM-dd")Date examDate,String examAddress, String classExamArrayLis) {
+    public Result addSaveNewExam(@AuthenticationPrincipal Agent agent,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")Date examDate,String examAddress, String classExamArrayLis) {
         Result result = new Result();
-        String examName = examAddress + new SimpleDateFormat("yyyy-MM-dd").format(examDate);
+        String examName = examAddress + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(examDate);
         if(agentService.isExamNameAvailable(examName)){
             MyJsonUtil myJsonUtil = new MyJsonUtil();
             ArrayList<Long> arrayList = myJsonUtil.convertJsonBytesToArrayList(classExamArrayLis);
