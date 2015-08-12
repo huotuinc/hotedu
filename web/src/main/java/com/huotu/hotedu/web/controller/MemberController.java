@@ -546,7 +546,7 @@ public class MemberController {
     @RequestMapping("/pc/applyForCertificate")
     @ResponseBody
     public Result applyForCertificate(@AuthenticationPrincipal Login user,
-                                      String receiveName,String receiveAddress,String contactAddress,String phoneNo)throws Exception {
+                                      String receiveName,String receiveAddress,String phoneNo)throws Exception {
 
         Result result = new Result();
         if(user==null) {
@@ -559,14 +559,12 @@ public class MemberController {
                 certificate = new Certificate();
                 certificate.setReceiveName(receiveName);
                 certificate.setReceiveAddress(receiveAddress);
-                certificate.setContactAddress(contactAddress);
                 certificate.setPhoneNo(phoneNo);
                 certificate.setMember(mb);
                 mb.setCertificateStatus(0);
             }else {
                 certificate.setReceiveName(receiveName);
                 certificate.setReceiveAddress(receiveAddress);
-                certificate.setContactAddress(contactAddress);
                 certificate.setPhoneNo(phoneNo);
                 mb.setCertificateStatus(2);
                 //设置学员的申请领证时间

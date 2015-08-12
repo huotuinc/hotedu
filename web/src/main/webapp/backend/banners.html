@@ -183,7 +183,7 @@
                             <td th:text="${g.id}">01</td>
                             <td title="" th:text="${g.title}">66666.jpg</td>
                             <td title="" th:text="${g.content}">美美美美美美美美</td>
-                            <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/hh.mm.ss')}">2015.01.01/13.00.00</td>
+                            <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/HH.mm.ss')}">2015.01.01/13.00.00</td>
                             <td><a class="link-update" href="modifybanners.html" th:href="@{/backend/modifyBanners(id=${g.id})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a>
                                 <a class="real-delete" th:class="real-delete" href="#" th:href="@{/backend/delBanners(id=${g.id},n=${n},keywords=${keywords},sumpage=${sumpage},sumElement=${sumElement})}"></a>

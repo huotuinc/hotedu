@@ -164,7 +164,7 @@
                 <ul class="sys-info-list">
                     <li><label class="res-lab">班级：</label><span class="res-info" th:text="${classTeam.className}">201504第一期</span></li>
                     <li><label class="res-lab">区域：</label><span class="res-info" th:text="${classTeam.agent.area}">杭州</span></li>
-                    <li><label class="res-lab">考试时间:</label><span class="res-info" th:text="${classTeam.exam}==null?'':${#calendars.format(classTeam.exam.examDate,'yyyy.MM.dd/hh.mm.ss')}">2015.01.01/13.00.00</span></li>
+                    <li><label class="res-lab">考试时间:</label><span class="res-info" th:text="${classTeam.exam}==null?'':${#calendars.format(classTeam.exam.examDate,'yyyy.MM.dd/HH.mm.ss')}">2015.01.01/13.00.00</span></li>
                     <li><label class="res-lab">考试地点：</label><span class="res-info" th:text="${classTeam.exam}==null?'':${classTeam.exam.examAddress}">XXXX</span></li>
                 </ul>
             </div>
@@ -319,7 +319,7 @@
                             <td th:text="${g.agent.area}">杭州</td>
                             <td th:text="${g.phoneNo}">150638956236</td>
                             <td th:text="${g.payed}?'是':'否'">是</td>
-                            <td th:text="${#calendars.format(g.applyDate,'yyyy-MM-dd hh.mm.ss')}"></td>
+                            <td th:text="${#calendars.format(g.applyDate,'yyyy-MM-dd HH.mm.ss')}"></td>
                             <td th:text="${g.passed}==0?'':(${g.passed}==1?'通过考试':'未通过考试')">申请发证</td>
                             <td th:text="${g.certificateStatus}==1?'已领证':(${g.certificateStatus}==2?'申请中':'')">2015/04/01</td>
                             <td th:text="${classTeam.className}">201504第一期</td>

@@ -65,7 +65,7 @@
                                 </tr>
                                 <tr>
                                     <th>报名时间：</th>
-                                    <td th:text="${#dates.format(mb.registerDate, 'yyyy-MM-dd hh:mm:ss')}">2015.04.01
+                                    <td th:text="${#dates.format(mb.registerDate, 'yyyy-MM-dd HH:mm:ss')}">2015.04.01
                                     </td>
                                 </tr>
                                 <tr>
@@ -94,7 +94,7 @@
                                 <tbody>
                                 <tr>
                                     <th style="width:150px;">交费时间：</th>
-                                    <td th:text="${!mb.payed}?'暂无':${#dates.format(mb.payDate, 'yyyy-MM-dd hh:mm:ss')}">
+                                    <td th:text="${!mb.payed}?'暂无':${#dates.format(mb.payDate, 'yyyy-MM-dd HH:mm:ss')}">
                                         2015.04.01
                                     </td>
                                     <td style="display: none"><input id="examPassInput" type="text" title="" th:value="${mb.id}" /></td>
@@ -109,7 +109,7 @@
                                 </tr>
                                 <tr>
                                     <th>考试时间：</th>
-                                    <td th:text="${mb.theClass==null}?'未安排':(${mb.theClass.exam==null}?'未安排':${#dates.format(mb.theClass.exam.examDate, 'yyyy-MM-dd hh:ss:mm')})">
+                                    <td th:text="${mb.theClass==null}?'未安排':(${mb.theClass.exam==null}?'未安排':${#dates.format(mb.theClass.exam.examDate, 'yyyy-MM-dd hh:mm:ss')})">
                                         2015.04.01
                                     </td>
                                 </tr>
