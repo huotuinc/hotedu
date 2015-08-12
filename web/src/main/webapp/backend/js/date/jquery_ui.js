@@ -8531,6 +8531,8 @@ $.extend(Datepicker.prototype, {
 	/* Action for current link. */
 	_gotoToday: function(id) {
 		var date,
+			onSelect,
+			dateStr,
 			target = $(id),
 			inst = this._getInst(target[0]);
 
@@ -8543,6 +8545,25 @@ $.extend(Datepicker.prototype, {
 			inst.selectedDay = date.getDate();
 			inst.drawMonth = inst.selectedMonth = date.getMonth();
 			inst.drawYear = inst.selectedYear = date.getFullYear();
+		}
+		dateStr = this._formatDate(inst);
+		if (inst.input) {
+			inst.input.val(dateStr);
+		}
+		this._updateAlternate(inst);
+
+		onSelect = this._get(inst, "onSelect");
+		if (onSelect) {
+			onSelect.apply((inst.input ? inst.input[0] : null), [dateStr, inst]);  // trigger custom callback
+		} else if (inst.input) {
+			inst.input.trigger("change"); // fire the change event
+		}
+
+		if (inst.inline){
+			this._updateDatepicker(inst);
+		} else {
+			this._hideDatepicker();
+			this._lastInput = null;
 		}
 		this._notifyChange(inst);
 		this._adjustDate(target);

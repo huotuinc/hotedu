@@ -163,8 +163,9 @@ function check_ExamMemberEnter() {
 
 function check_arrangeNewClass() {
     var className = $("#className").val().trim();
+    var $text = $("#addNewClassTeamError");
     if(className=="") {
-        $("#addNewClassTeamError").text("班级名称不能为空!");
+        $text.text("班级名称不能为空!");
         return;
     }
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员安排到新建班级中吗？", function () {
@@ -176,7 +177,7 @@ function check_arrangeNewClass() {
             dataType:"json",
             success:function(result){
                 if(result.status==0){
-                    $("#addNewClassTeamError").text(result.message);
+                    $text.text(result.message);
                 }else if(result.status==1){
                     $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchClassMembers").submit();});
                 }
@@ -191,12 +192,13 @@ function check_arrangeNewClass() {
 function check_arrangeNewExam() {
     var examDate = $("#examDate").val().trim();
     var examAddress = $("#examAddress").val().trim();
+    var $text = $("#addNewExamError");
     if(examDate==""){
-        $("#addNewExamError").text("考试时间不能为空!");
+        $text.text("考试时间不能为空!");
         return;
     }
     if(examAddress==""){
-        $("#addNewExamError").text("考试地点不能为空!");
+        $text.text("考试地点不能为空!");
         return;
     }
     $.MsgBox.Confirm("温馨提示", "确认要将选中学员安排到新建考场中吗？", function () {
@@ -208,7 +210,7 @@ function check_arrangeNewExam() {
             dataType:"json",
             success:function(result){
                 if(result.status==0){
-                    $("#addNewExamError").text(result.message);
+                    $text.text(result.message);
                 }else if(result.status==1){
                     $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchClassExam").submit();});
                 }
