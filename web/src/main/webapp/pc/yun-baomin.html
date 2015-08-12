@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
     <script rel="stylesheet" type="text/javascript" src="js/indexuser.js"></script>
-    <script src="js/confirm.js"/>
+    <script src="js/confirm.js"></script>
 </head>
 <body style="background-color:#f0f0f0">
 <div style="min-height:834px">
@@ -67,19 +67,19 @@
             <form action="yun-baomin.html">
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="realName" name="realName" placeholder="真实姓名"
-                           type="text"/>
+                           type="text" th:value="${#authentication.principal}=='anonymousUser'?'':${#authentication.principal.realName}" th:readonly="${#authentication.principal}=='anonymousUser'?false:true"/>
                 </p>
 
                 <p class="ysdx">&nbsp;&nbsp;&nbsp;&nbsp;性别：
-                    <input name="sex" value="1" type="radio"/>
+                    <input name="sex" value="1"  th:checked="${#authentication.principal}=='anonymousUser'?false:${#authentication.principal.sex}==1" th:disabled="${#authentication.principal}=='anonymousUser'?false:true" type="radio"/>
                     &nbsp;男&nbsp;&nbsp;
-                    <input name="sex" value="0" type="radio"/>
+                    <input name="sex" value="0"  th:checked="${#authentication.principal}=='anonymousUser'?false:${#authentication.principal.sex}==0" th:disabled="${#authentication.principal}=='anonymousUser'?false:true" type="radio"/>
                     &nbsp;女&nbsp;&nbsp;
                 </p>
 
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="phoneNo" name="phoneNo"
-                           placeholder="真实手机号" type="text"/>
+                           placeholder="真实手机号"  th:value="${#authentication.principal}=='anonymousUser'?'':${#authentication.principal.phoneNo}" th:readonly="${#authentication.principal}=='anonymousUser'?false:true" type="text"/>
                 </p>
 
                 <p>
@@ -99,8 +99,7 @@
             </div>
         </div>
         <p class="yszhuyi"><i style="color:#FFBE00">*</i>提交报名后，我们会通知你，并线下交费。安排班次和考试等事项。<br/>
-            <i style="color:#FFBE00">*</i>姓名是你的登录账号，手机号是你的登录密码。<br/>
-            <i style="color:#FFBE00">*</i>目前考点只设在北上广深，请就近选择报名地点。<br/>
+            <i style="color:#FFBE00">*</i>手机号是你的登录账号，初始登录密码为“123456”。<br/>
         </p>
     </div>
 </div>
@@ -179,6 +178,9 @@
                     <button class="sign-in__button user-form__button" id="registerBtn" type="button">
                         注册
                     </button>
+                </p>
+                <p class="yszhuyi">
+                    <i style="color:#FFBE00">*</i>注册成功后初始密码为“123456”，您可以登录后在个人中心修改<br/>
                 </p>
             </form>
             <span style="color:red" id="regErrInfo"></span>

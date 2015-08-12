@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
     <script rel="stylesheet" type="text/javascript" src="js/indexuser.js" ></script>
-    <script src="js/confirm.js"/>
+    <script src="js/confirm.js"></script>
 </head>
 <body style="background-color:#f0f0f0">
 <div style="min-height:834px">
@@ -53,7 +53,7 @@
                             </a>
                         </p>
                         <p th:if="${#authentication.name}=='anonymousUser'" class="biglb">
-                            <a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">
+                            <a href="javascript:void(0)" onclick="javascript:pleaseLoginFirst()">
                                 <img th:alt="${g.videoName}" width="100%" height="100%" th:src="${g.thumbnail}"/>
                             </a>
                         </p>
@@ -72,7 +72,7 @@
                             </a>
                         </p>
                         <p th:if="${#authentication.name}=='anonymousUser'" class="splb">
-                            <a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">
+                            <a href="javascript:void(0)" onclick="javascript:pleaseLoginFirst()">
                                 <img th:alt="${g.videoName}" width="100%" height="100%" th:src="${g.thumbnail}"/>
                             </a>
                         </p>
@@ -294,6 +294,13 @@
         <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
     </div>
 </div>
+<script>
+    function pleaseLoginFirst() {
+        $.MsgBox.Confirm("温馨提示","您需要先登录后才可以观看视频噢~",function() {
+            document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block';
+        });
+    }
+</script>
 </body>
 </html>
 
