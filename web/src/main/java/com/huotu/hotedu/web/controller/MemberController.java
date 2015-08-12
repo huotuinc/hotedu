@@ -46,7 +46,6 @@ public class MemberController {
     @Autowired
     IqiyiVideoRepository iqiyiVideoRepository;
 
-    public static final String DEFAULT_PASSWORD = "123456";
 
     /**
      * 用来储存分页中每页的记录数
@@ -65,7 +64,7 @@ public class MemberController {
      * Created by cwb on 2015/8/11
      * 登录后报名
      */
-    @RequestMapping("/pc/loginBaomin")
+    /*@RequestMapping("/pc/loginBaomin")
     @ResponseBody
     public Result loginBaomin(@AuthenticationPrincipal Login user,String areaId) {
         Result result = new Result();
@@ -92,7 +91,7 @@ public class MemberController {
         result.setMessage(message);
         return result;
     }
-
+*/
     /**
      * Created by cwb on 2015/7/21.
      * Modified by cwb on 2015/8/11.
@@ -159,7 +158,7 @@ public class MemberController {
                     mb.setEnabled(true);
                     mb.setRegisterDate(d);
                     mb.setApplyDate(d);
-                    loginService.newLogin(mb, DEFAULT_PASSWORD);
+                    loginService.newLogin(mb, phoneNo.substring(7));
                     status = 1;
                     message = "报名成功";
                 }
@@ -199,7 +198,7 @@ public class MemberController {
                 mb.setLoginName(phoneNo);
                 mb.setEnabled(true);
                 mb.setRegisterDate(d);
-                loginService.newLogin(mb,DEFAULT_PASSWORD);
+                loginService.newLogin(mb,phoneNo.substring(7));
                 status = 1;
                 message = "注册成功";
             }

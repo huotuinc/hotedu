@@ -107,7 +107,7 @@
             <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
         </div>
         <!--登录弹窗-->
-        <div id="asaimsg" class="AsaiDivShow" style="display: none">
+        <div id="asaimsg" class="AsaiDivShow" style="display: none" th:style="${errInfo}==null?'display: none':'display: block'">
             <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
                                                                  onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
                 <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
@@ -118,9 +118,9 @@
                           class="sign-in__form user-form__form" method="post">
 
                         <div class="user-form__fieldset">
-                            <label class="user-form__label" for="username" style="color:#111">用户名：</label>
+                            <label class="user-form__label" for="username" style="color:#111">手机号：</label>
                             <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
-                                   id="username" name="username" placeholder="ID" type="text"/>
+                                   id="username" name="username" placeholder="请输入您的手机号" type="text"/>
                         </div>
                         <div class="user-form__fieldset">
                             <label class="user-form__label" for="password" style="color:#111">密码：</label>
@@ -176,11 +176,11 @@
                                 登录
                             </button>
                             <button class="sign-in__button user-form__button" id="registerBtn" type="button">
-                                注册
+                                提交
                             </button>
                         </p>
                         <div style="text-align: center">
-                            <i style="color:#FFBE00">*</i>注册成功后初始密码为“123456”，您可以登录后在个人中心修改<br/>
+                            <i style="color:#FFBE00">*</i>注册成功后初始密码为手机号后四位，您可以登录后在个人中心修改<br/>
                         </div>
                     </form>
                     <span style="color:red" id="regErrInfo"></span>
