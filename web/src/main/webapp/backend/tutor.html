@@ -195,7 +195,7 @@
                             <td th:text="${g.name}"></td>
                             <td th:text="${g.qualification}"></td>
                             <td th:text="${g.area}"></td>
-                            <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/HH.mm.ss')}">2015.01.01/13.00.00</td>
+                            <td th:text="${#calendars.format(g.lastUploadDate,'yyyy-MM-dd HH:mm:ss')}">2015.01.01/13.00.00</td>
                             <td><a class="link-update" href="modifytutor.html" th:href="@{/backend/modifyTutor(id=${g.id})}">修改</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a><br/>
                                 <a class="real-delete" href="#" th:href="@{/backend/delTutor(id=${g.id},pageNo=${pageNo},searchSort=${searchSort},keywords=${keywords},dateStart=${dateStart},dateEnd=${dateEnd})}" ></a>

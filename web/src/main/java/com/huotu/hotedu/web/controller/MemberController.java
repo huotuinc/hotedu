@@ -367,7 +367,7 @@ public class MemberController {
         String turnPage = "/backend/prentice";
         Member member=memberService.findOneById(id);
         Certificate certificate = null;
-        if(member.getCertificateStatus()==2) {
+        if(member.getCertificateStatus()!=0) {
             certificate=certificateService.findOneByMember(member);
             certificate.setPictureUri(staticResourceService.getResource(certificate.getPictureUri()).toString());
         }

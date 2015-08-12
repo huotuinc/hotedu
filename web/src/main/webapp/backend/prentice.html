@@ -130,10 +130,10 @@
                         <li><label class="res-lab">电话：</label><span class="res-info" th:text="${member.phoneNo}==null?'暂无':${member.phoneNo}">1563265895</span></li>
                         <li><label class="res-lab">区域:</label><span class="res-info" th:text="${member.agent}==null?'暂无':${member.agent.area}">杭州</span></li>
                         <li><label class="res-lab">报名时间：</label><span class="res-info" th:text="${member.applyDate}==null?'暂无':${#calendars.format(member.applyDate,'yyyy年MM月dd日')}">2014年3月18日</span></li>
-                        <li><label class="res-lab">交费确认时间：</label><span class="res-info" th:text="${member.payDate}==null?'暂无':${#calendars.format(member.payDate,'yyyy-MM-dd HH:mm:ss')}">2015/01/01  13:00:00</span>
+                        <li><label class="res-lab">交费确认时间：</label><span class="res-info" th:text="${member.payDate}==null?'暂无':${#calendars.format(member.payDate,'yyyy-MM-dd hh:mm:ss')}">2015/01/01  13:00:00</span>
                         </li>
                         <li><label class="res-lab">确认人：</label><span class="res-info" th:text="${member.confirmPerson}==null?'未安排':${member.confirmPerson}">oo</span></li>
-                        <li><label class="res-lab">考试时间：</label><span class="res-info" th:text="${member.theClass}==null?'未安排':(${member.theClass.exam}==null?'未安排':${#calendars.format(member.theClass.exam.examDate,'yyyy-MM-dd HH:mm:ss')})">2105.01.12</span></li>
+                        <li><label class="res-lab">考试时间：</label><span class="res-info" th:text="${member.theClass}==null?'未安排':(${member.theClass.exam}==null?'未安排':${#calendars.format(member.theClass.exam.examDate,'yyyy-MM-dd hh:mm:ss')})">2105.01.12</span></li>
                         <li><label class="res-lab">考试地点：</label><span class="res-info" th:text="${member.theClass}==null?'未安排':(${member.theClass.exam}==null?'未安排':${member.theClass.exam.examAddress})">杭州</span></li>
                         <li><label class="res-lab">班级：</label><span class="res-info" th:text="${member.theClass}==null?'未安排':${member.theClass.className}">201504第一期</span></li>
                         <li><label class="res-lab">是否通过：</label><span style="color:#FF0004;" class="res-info" th:text="${member.passed}==1?'通过':(${member.passed}==2?'未通过':'未考试')">是</span>
@@ -147,7 +147,7 @@
                 <div class="imessage">
                     <ul>
                         <li><label class="res-lab">收件人：</label><span  th:text="${certificate}==null?'未填写':${certificate.receiveName}">XXX</span></li>
-                        <li><label class="res-lab">申请时间：</label><span  th:text="${certificate}==null?'未填写':${#calendars.format(member.applyCertificateDate,'yyyy-MM-dd HH:mm:ss')}">20150401 12：00：00</span></li>
+                        <li><label class="res-lab">申请时间：</label><span  th:text="${certificate}==null?'未填写':${#calendars.format(member.applyCertificateDate,'yyyy-MM-dd hh:mm:ss')}">20150401 12：00：00</span></li>
                         <li><label class="res-lab">收件地址:</label><span  th:text="${certificate}==null?'未填写':${certificate.receiveAddress}">文一路</span></li>
                         <li th:if="${member.certificateStatus}==1"><label class="res-lab">证书编号:</label><span  th:text="${certificate}==null?'未填写':${certificate.certificateNo}">abc123456789</span></li>
                     </ul>

@@ -64,8 +64,8 @@
     <div class="main-wrap">
 
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="certificateapplications.html" th:href="@{/backend/searchAgents}">管理代理商表</a><span
-                    class="crumb-step">&gt;</span><span class="crumb-name">查看代理名下</span></div>
+            <div class="crumb-list"><i class="icon-font"></i><a href="certificateapplications.html" th:href="@{/backend/searchAgents}">管理代理商表</a>
+                <span class="crumb-step">&gt;</span><span class="crumb-name">代理商详细</span></div>
         </div>
         <div class="jp-container2">
         <div class="result-content">
@@ -156,7 +156,7 @@
                             <td th:text="${g.className}" title="">201504第一期</td>
                             <td th:text="${g.agent.area}">杭州</td>
                             <td th:text="${g.memberNum}">60</td>
-                            <td th:text="${g.exam}==null?'':${#calendars.format(g.exam.examDate,'yyyy.MM.dd/HH.mm.ss')}">2015/04/01</td>
+                            <td th:text="${g.exam}==null?'':${#calendars.format(g.exam.examDate,'yyyy-MM-dd HH:mm:ss')}">2015/04/01</td>
                             <td th:text="${g.exam}==null?'':${g.exam.examAddress}"></td>
                             <td><a class="link-update" href="batch.html" th:href="@{/backend/agentClassMember(classId=${g.id})}">查看</a><br/></td>
                         </tr>

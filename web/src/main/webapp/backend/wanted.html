@@ -230,7 +230,7 @@
                             <td th:text="${g.tel}">15068564912</td>
                             <td th:text="${g.quyu}">杭州</td>
                             <td th:text="${g.num}">30次</td>
-                            <td th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd/HH.mm.ss')}">2015.01.01/13.00.00</td>
+                            <td th:text="${#calendars.format(g.lastUploadDate,'yyyy-MM-dd HH:mm:ss')}">2015.01.01/13.00.00</td>
                             <td>
                                 <a class="link-update" href="information.html" th:href="@{/backend/viewWanted}">查看</a><br/>
                                 <a class="link-update" href="#" onclick="check_del(this)">删除</a>
