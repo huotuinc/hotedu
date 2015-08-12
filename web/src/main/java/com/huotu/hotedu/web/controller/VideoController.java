@@ -163,7 +163,7 @@ public class VideoController {
         if(file.getSize()!=0){
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
             staticResourceService.deleteResource(staticResourceService.getResource(videoService.findOneById(id).getThumbnail()));
-            String fileName = StaticResourceService.TUTOR_ICON + UUID.randomUUID().toString() + ".png";
+            String fileName = StaticResourceService.VIDEO_ICON + UUID.randomUUID().toString() + ".png";
             staticResourceService.uploadResource(fileName,file.getInputStream());
             video.setThumbnail(fileName);
         }
