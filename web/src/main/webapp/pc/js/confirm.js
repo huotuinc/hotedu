@@ -450,3 +450,154 @@ function ajaxFileUpload() {
         }
     });
 }
+
+//学员注册、报名
+$(function() {
+    $("#baominSubmit").click(function() {
+        var reg=/^(13|14|15|17|18)\d{9}$/;
+        var phoneNo = $("#phoneNo").val();
+        var realName = $("#realName").val();
+        var areaId = jQuery("#areaId  option:selected").val();
+        var sex = $("input[name='sex']:checked").val();
+        if(phoneNo=="") {
+            $("#msgInfo").text("");
+            $("#errInfo").text("手机号不能为空");
+            return;
+        }
+        if(!reg.test(phoneNo)){
+            $("#msgInfo").text("");
+            $("#errInfo").text("请填入正确的手机号！");
+            return false;
+        }
+        if(realName=="") {
+            $("#msgInfo").text("");
+            $("#errInfo").text("姓名不能为空");
+            return;
+        }
+        if(sex==""||sex==null) {
+            $("#msgInfo").text("");
+            $("#errInfo").text("请选择性别");
+            return;
+        }
+        if(areaId==""||areaId==null){
+            $("#msgInfo").text("");
+            $("#errInfo").text("请选择报名区域");
+            return;
+        }
+        $.ajax({
+            url:"baomin",
+            type:"post",
+            dataType:"json",
+            data:{"phoneNo":phoneNo,"realName":realName,"sex":sex,"areaId":areaId},
+            success:function(result){
+                if(result.status==0) {
+                    $("#msgInfo").text("");
+                    $("#errInfo").text(result.message);
+                }else if(result.status==1) {
+                    $("#errInfo").text("");
+                    $("#msgInfo").text(result.message);
+                }
+            },
+            error:function(){
+                $.MsgBox.Alert("系统异常","请求失败");
+            }
+        });
+    });
+    $("#goToRegister").click(function() {
+        $("#asaimsg").hide();
+        $("#regDiv").show();
+    });
+    $("#goToLogin").click(function() {
+        $("#regDiv").hide();
+        $("#asaimsg").show();
+    });
+    $("#regPhoneNo").blur(function(){
+        var reg=/^(13|14|15|17|18)\d{9}$/;
+        var phoneNo = $("#regPhoneNo").val();
+        if(phoneNo=="") {
+            $("#phoneRig").text("");
+            $("#phoneErr").text("手机号不能为空");
+            $("#regPhoneNo").focus();
+            return;
+        }
+        if(!reg.test(phoneNo)){
+            $("#phoneRig").text("");
+            $("#phoneErr").text("请填入正确的手机号！");
+            $("#regPhoneNo").focus();
+            return;
+        }
+        $.ajax({
+            url:"checkPhoneNo",
+            type:"post",
+            dataType:"json",
+            data:{"phoneNo":phoneNo},
+            success:function(result){
+                if(result.status==0) {
+                    $("#phoneRig").text("");
+                    $("#phoneErr").text(result.message);
+                }else if(result.status==1) {
+                    $("#phoneErr").text("");
+                    $("#phoneRig").text(result.message);
+                }
+            },
+            error:function(){
+                $.MsgBox.Alert("系统异常","请求失败");
+            }
+        });
+    });
+    $("#registerBtn").click(function(){
+        var reg=/^(13|14|15|17|18)\d{9}$/;
+        var phoneNo = $("#regPhoneNo").val();
+        var realName = $("#regRealName").val();
+        var sex = $("input[name='regSex']:checked").val();
+        if(phoneNo=="") {
+            $("#regMsgInfo").text("");
+            $("#regErrInfo").text("手机号不能为空");
+            return;
+        }
+        if(!reg.test(phoneNo)){
+            $("#regMsgInfo").text("");
+            $("#regErrInfo").text("请填入正确的手机号！");
+            return;
+        }
+        if(realName=="") {
+            $("#regMsgInfo").text("");
+            $("#regErrInfo").text("姓名不能为空");
+            return;
+        }
+        if(sex==""||sex==null) {
+            $("#regMsgInfo").text("");
+            $("#regErrInfo").text("请选择性别");
+            return;
+        }
+        $.ajax({
+            url:"register",
+            type:"post",
+            dataType:"json",
+            data:{"phoneNo":phoneNo,"realName":realName,"sex":sex},
+            success:function(result){
+                if(result.status==0) {
+                    $("#regMsgInfo").text("");
+                    $("#regErrInfo").text(result.message);
+                }else if(result.status==1) {
+                    $("#regErrInfo").text("");
+                    $("#regMsgInfo").text(result.message);
+                }
+            },
+            error:function(){
+                $.MsgBox.Alert("系统异常","请求失败");
+            }
+        });
+    });
+});
+//注册弹窗关闭事件
+function hideRegisterForm() {
+    $("#regPhoneNo").val("");
+    $("#regRealName").val("");
+    $("input[name='regSex']").removeAttr('checked');
+    $("#regErrInfo").text("");
+    $("#regMsgInfo").text("");
+    $("#phoneErr").text("");
+    $("#phoneRig").text("");
+    document.getElementById('regDiv').style.display='none';document.getElementById('asaimsgbg').style.display='none';
+}

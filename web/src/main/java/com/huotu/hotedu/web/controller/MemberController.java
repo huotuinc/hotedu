@@ -106,42 +106,62 @@ public class MemberController {
      */
     @RequestMapping("/pc/baomin")
     @ResponseBody
-    public Result baomin(String realName,Integer sex,String phoneNo,String areaId) {
+    public Result baomin(@AuthenticationPrincipal Login user,String realName,Integer sex,String phoneNo,String areaId) {
         Result result = new Result();
         String message = "";
         int status = 0;
-        if("".equals(phoneNo)||phoneNo==null) {
+        Member mb = null;
+        Date d = new Date();
+        Agent agent = null;
+        //输入校验
+        if(phoneNo==null||"".equals(phoneNo)) {
             message = "手机号不能为空";
+        }else if(realName==null||"".equals(realName)) {
+            message = "姓名不能为空";
+        }else if(sex==null) {
+            message = "请选择性别";
+        }else if(areaId==null||"".equals(areaId)) {
+            message = "请选择报名区域";
         }else {
+            agent = agentService.findByAreaId(areaId);
             boolean exist = memberService.isPhoneNoExist(phoneNo);
+            //手机号已被注册
             if (exist) {
-                message = "该手机号已注册,请先登录";
-            }else {
-                if(areaId==null||"".equals(areaId)) {
-                    message = "请选择报名区域";
-                }else if(realName==null||"".equals(realName)) {
-                    message = "姓名不能为空";
-                }else if(sex==null) {
-                    message = "请选择性别";
-                }else {
-                    Agent agent = agentService.findByAreaId(areaId);
+                //学员已登录
+                if (user instanceof Member) {
                     if (agent == null) {
                         message = "该地区报名点临时取消";
                     } else {
-                        Member mb = new Member();
-                        Date d = new Date();
-                        mb.setAgent(agent);
-                        mb.setRealName(realName);
-                        mb.setSex(sex);
-                        mb.setPhoneNo(phoneNo);
-                        mb.setLoginName(phoneNo);
-                        mb.setEnabled(true);
-                        mb.setRegisterDate(d);
-                        mb.setApplyDate(d);
-                        loginService.newLogin(mb, DEFAULT_PASSWORD);
-                        status = 1;
-                        message = "报名成功";
+                        mb = ((Member) user);
+                        if (mb.getAgent() != null) {
+                            message = "您已经报名过了";
+                        } else {
+                            mb.setAgent(agent);
+                            mb.setApplyDate(d);
+                            memberService.addMember(agent, mb);
+                            status = 1;
+                            message = "报名成功";
+                        }
                     }
+                } else {//学员未登录
+                    message = "该手机号已注册,请先登录";
+                }
+            } else {//手机号可用
+                if (agent == null) {
+                    message = "该地区报名点临时取消";
+                } else {
+                    mb = new Member();
+                    mb.setAgent(agent);
+                    mb.setRealName(realName);
+                    mb.setSex(sex);
+                    mb.setPhoneNo(phoneNo);
+                    mb.setLoginName(phoneNo);
+                    mb.setEnabled(true);
+                    mb.setRegisterDate(d);
+                    mb.setApplyDate(d);
+                    loginService.newLogin(mb, DEFAULT_PASSWORD);
+                    status = 1;
+                    message = "报名成功";
                 }
             }
         }

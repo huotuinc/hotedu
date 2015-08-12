@@ -10,6 +10,7 @@
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
     <script rel="stylesheet" type="text/javascript" src="js/indexuser.js" ></script>
+    <script src="js/confirm.js"/>
 </head>
 <body style="background-color:#f0f0f0">
 <div style="min-height:834px">
@@ -206,41 +207,91 @@
             </div>
         </div>
     </div>
+    <!--登录弹窗-->
+    <div id="asaimsg" class="AsaiDivShow" style="display: none">
+        <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
+                                                             onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
+            <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+
+        <div class="sign-in">
+            <div class="user-form">
+                <form accept-charset="UTF-8" action="yun-geren.html" th:action="@{/pc/index}"
+                      class="sign-in__form user-form__form" method="post">
+
+                    <div class="user-form__fieldset">
+                        <label class="user-form__label" for="username" style="color:#111">用户名：</label>
+                        <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
+                               id="username" name="username" placeholder="ID" type="text"/>
+                    </div>
+                    <div class="user-form__fieldset">
+                        <label class="user-form__label" for="password" style="color:#111">密码：</label>
+                        <input class="sign-in__field user-form__field" id="password" name="password"
+                               placeholder="password" type="password"/>
+
+                    </div>
+                    <button class="sign-in__button user-form__button" name="button" type="submit">
+                        登录
+                    </button>
+                    <button class="sign-in__button user-form__button" id="goToRegister" type="button">
+                        去注册
+                    </button>
+                </form>
+                <span style="color:red" th:text="${errInfo}"></span>
+            </div>
+        </div>
+    </div>
+    <!--登录弹窗end-->
+    <!--注册弹窗-->
+    <div id="regDiv" class="AsaiDivShow" style="display: none">
+        <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
+                                                             onclick="javascript:hideRegisterForm()">
+            <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+
+        <div class="sign-in">
+            <div class="user-form">
+                <form action="yun-baomin.html">
+                    <p>
+                        <input class="ysw500 sign-in__field ys-form__field" id="regPhoneNo" name="regPhoneNo"
+                               placeholder="真实手机号" type="text"/>
+                        <span style="color:red" id="phoneErr"/>
+                        <span style="color:green" id="phoneRig"/>
+                    </p>
+
+                    <p>
+                        <input class="ysw500 sign-in__field ys-form__field" id="regRealName" name="regRealName"
+                               placeholder="真实姓名" type="text"/>
+                    </p>
+
+                    <p>
+
+                    <div class="user-form__fieldset">
+                        <label class="user-form__label" style="color:#111">性别：</label>
+                        <input name="regSex" value="1" type="radio"/>
+                        &nbsp;男&nbsp;&nbsp;
+                        <input name="regSex" value="0" type="radio"/>
+                        &nbsp;女&nbsp;&nbsp;
+                    </div>
+                    </p>
+                    <p style="text-align:center;">
+                        <button class="sign-in__button user-form__button" id="goToLogin" type="button">
+                            去登录
+                        </button>
+                        <button class="sign-in__button user-form__button" id="registerBtn" type="button">
+                            注册
+                        </button>
+                    </p>
+                </form>
+                <span style="color:red" id="regErrInfo"></span>
+                <span style="color:blue" id="regMsgInfo"></span>
+            </div>
+        </div>
+    </div>
+    <!--注册弹窗end-->
+    <div id="asaimsgbg" class="AsaiDivBG" style="display: none"></div>
     <div class="footer">
         <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
 
         <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
-    </div>
-    <div>
-
-
-        <div id="asaimsg" class="AsaiDivShow">
-            <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
-                                                                 onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
-                <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
-
-            <div class="sign-in">
-                <div class="user-form">
-                    <form accept-charset="UTF-8" action="#" th:action="@{/pc/index}"
-                          class="sign-in__form user-form__form" method="post">
-                        <div class="user-form__fieldset">
-                            <label class="user-form__label" for="session_login" style="color:#111">用户名：</label>
-                            <input title="" autocapitalize="off" autocorrect="off"
-                                   class="sign-in__field user-form__field"
-                                   id="session_login" name="username" placeholder="ID" type="text"/>
-                        </div>
-                        <div class="user-form__fieldset">
-                            <label class="user-form__label" for="session_password" style="color:#111">密码：</label>
-                            <input title="" class="sign-in__field user-form__field" id="session_password"
-                                   name="password" placeholder="password" type="password"/>
-                        </div>
-                        <button class="sign-in__button user-form__button" name="button" type="submit">登录<i
-                                class="icon-arrow-right user-form__button-icon"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div id="asaimsgbg" class="AsaiDivBG"></div>
     </div>
 </div>
 </body>
