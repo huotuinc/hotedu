@@ -82,7 +82,7 @@
             <form action="yun-baomin.html">
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="realName" name="realName" placeholder="真实姓名"
-                           type="text" th:value="${mbInfo}==null?'':${mbInfo.realName}" th:readonly="${mbInfo}==null?false:true"/>
+                           maxlength="20" type="text" th:value="${mbInfo}==null?'':${mbInfo.realName}" th:readonly="${mbInfo}==null?false:true"/>
                 </p>
 
                 <p class="ysdx">&nbsp;&nbsp;&nbsp;&nbsp;性别：
@@ -94,7 +94,7 @@
 
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="phoneNo" name="phoneNo"
-                           placeholder="真实手机号"  th:value="${mbInfo}==null?'':${mbInfo.phoneNo}" th:readonly="${mbInfo}==null?false:true" type="text"/>
+                           placeholder="真实手机号"  th:value="${mbInfo}==null?'':${mbInfo.phoneNo}" th:readonly="${mbInfo}==null?false:true" maxlength="20" type="text"/>
                 </p>
 
                 <p>
@@ -140,7 +140,7 @@
                 <div class="user-form__fieldset">
                     <label class="user-form__label" for="username" style="color:#111">手机号：</label>
                     <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
-                           id="username" name="username" placeholder="请输入您的手机号" type="text"/>
+                           id="username" name="username" placeholder="请输入您的手机号" maxlength="20" type="text"/>
                 </div>
                 <div class="user-form__fieldset">
                     <label class="user-form__label" for="password" style="color:#111">密码：</label>
@@ -171,14 +171,14 @@
             <form action="yun-baomin.html">
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="regPhoneNo" name="regPhoneNo"
-                           placeholder="真实手机号" type="text"/>
+                           placeholder="真实手机号" maxlength="20" type="text"/>
                     <span style="color:red" id="phoneErr"/>
                     <span style="color:green" id="phoneRig"/>
                 </p>
                 <p style="height:10px;"></p>
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="regRealName" name="regRealName"
-                           placeholder="真实姓名" type="text"/>
+                           placeholder="真实姓名" maxlength="20" type="text"/>
                 </p>
 
                 <p>

@@ -148,15 +148,15 @@
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>收件人：</th>
-                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="receiveName" name="receiveName" th:value="${certificate}==null?'':${certificate.receiveName}" type="text" size="50" class="common-text"/></td>
+                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="receiveName" name="receiveName" th:value="${certificate}==null?'':${certificate.receiveName}" maxlength="20" type="text" size="50" class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>收件地址：</th>
-                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="receiveAddress" name="receiveAddress" th:value="${certificate}==null?'':${certificate.receiveAddress}" title="" type="text" value="" size="50" class="common-text"/></td>
+                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="receiveAddress" name="receiveAddress" th:value="${certificate}==null?'':${certificate.receiveAddress}" title="" maxlength="50" type="text" value="" size="50" class="common-text"/></td>
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>联系电话：</th>
-                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="phoneNo" name="phoneNo" th:value="${certificate}==null?'':${certificate.phoneNo}" title="" type="text" value="" size="50" class="common-text"/></td>
+                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="phoneNo" name="phoneNo" th:value="${certificate}==null?'':${certificate.phoneNo}" title="" maxlength="20" type="text" value="" size="50" class="common-text"/></td>
                             </tr>
                             </tbody>
                         </table>
@@ -218,7 +218,7 @@
                     <div class="user-form__fieldset">
                         <label class="user-form__label" for="session_login" style="color:#111">用户名：</label>
                         <input title="" autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
-                               id="session_login" name="session[login]" placeholder="ID" type="text"/>
+                               id="session_login" name="session[login]" placeholder="ID" maxlength="20" type="text"/>
                     </div>
                     <div class="user-form__fieldset">
                         <label class="user-form__label" for="session_password" style="color:#111">密码：</label>

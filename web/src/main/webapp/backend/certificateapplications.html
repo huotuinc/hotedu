@@ -182,7 +182,7 @@
                                         <tbody>
                                         <tr>
                                             <th><i class="require-red">*</i>证书编号：</th>
-                                            <td><input id="Cer_no" type="text" value="" size="30" name="certificateNo" class="common-text"/></td>
+                                            <td><input title="" id="Cer_no" maxlength="50"  type="text" value="" size="30" name="certificateNo" class="common-text"/></td>
                                             <input type="hidden" th:value="${certificate}!=null?${certificate.member.id}:''" name="memberId"/>
                                             <input type="hidden"  th:value="${certificate}!=null?${certificate.id}:''" name="certificateId"/>
 

@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -506,12 +505,11 @@ public class AgentController {
      * 进入修改代理商页面
      * @param id       代理商ID
      * @param model    返回的参数
-     * @param request  请求
      * @return
      */
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/backend/modifyAgent")
-    public String modifyAgent(Long id, Model model,HttpServletRequest request) throws Exception{
+    public String modifyAgent(Long id, Model model) throws Exception{
         Agent agent=agentService.findOneById(id);
         if(agent.getPictureUri()!=null) {
             agent.setPictureUri(staticResourceService.getResource(agent.getPictureUri()).toURL().toString());
@@ -603,16 +601,5 @@ public class AgentController {
         agentService.modifyAgent(agent);
         return "redirect:/backend/searchAgents";
     }
-
-    /*@PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping("/backend/lookAgentClass")
-    public String lookAgent(long id,Model model) throws  Exception{
-        String turnPage="/backend/agent";
-        Agent agent=agentService.findOneById(id);
-        agent.setPictureUri(staticResourceService.getResource(agent.getPictureUri()).toURL().toString());
-        model.addAttribute("agent",agent);
-        model.addAttribute("totalMembers",memberService.searchMembers(agent,0,PAGE_SIZE).getTotalElements());
-        return turnPage;
-    }*/
 
 }

@@ -165,7 +165,7 @@
                             <tbody>
                             <tr th:if="${member.certificateStatus}==2">
                                 <th><i class="require-red">*</i>证书编号：</th>
-                                <td><input type="text" id="Cer_no" value="" size="70" name="certificateNo" class="common-text"/>
+                                <td><input maxlength="50" type="text" id="Cer_no" value="" size="70" name="certificateNo" class="common-text"/>
                                     <!--<input type="hidden" th:value="${certificate}!=null?${certificate.member.id}:''" name="memberId"/>-->
                                     <!--<input type="hidden" th:value="${certificate}!=null?${certificate.id}:''" name="certificateId"/>-->
                                 </td>

@@ -115,7 +115,7 @@
                                 <option th:selected="${searchSort}=='certificateStatus'?'selected'" value="certificateStatus">领证状态</option>
                             </select></td>
                             <td id="td_key">
-                                <input  th:if="${searchSort}=='all'" style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" th:value="${keywords}" value="" type="text"/>
+                                <input  th:if="${searchSort}=='all'" style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" th:value="${keywords}" value="" maxlength="200" type="text"/>
                                 <select class="yssp" th:if="${searchSort}!='all'" name="keywords" style=" height:29px;padding: 0px 90px 0px 4px; border:1px solid #ddd; vertical-align:middle">
                                     <option value="1" th:selected="${keywords}==1?'selected'" th:text="${searchSort}=='payed'? '是':(${searchSort}=='passed'?'通过考试':'已领证')"></option>
                                     <option value="0" th:selected="${keywords}==0?'selected'" th:text="${searchSort}=='payed'? '否':(${searchSort}=='passed'?'未考试':'未申请')"></option>
@@ -291,7 +291,7 @@
                                 <option value="area">区域</option>
                                 <option value="phoneNo">电话</option>
                             </select></td>
-                            <td><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" value="" th:value="${keywords}"  type="text"/></td>
+                            <td><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" value="" th:value="${keywords}"  maxlength="200" type="text"/></td>
                             <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
@@ -433,7 +433,7 @@
                                 <option value="examDate">考试时间</option>
                                 <option value="examAddress">地点</option>
                             </select></td>
-                            <td><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" value="" th:value="${keywords}"  type="text"/></td>
+                            <td><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" value="" th:value="${keywords}"  maxlength="200" type="text"/></td>
                             <td><input title="" class="ysss" name="sub" value="搜索" type="submit"/></td>
                         </tr>
                     </table>
@@ -563,7 +563,7 @@
                                 <option value="className">班级</option>
                             </select></td>
                             <td>
-                                <div id="examMember_noPassed"><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" value="" th:value="${keywords}" type="text"/></div>
+                                <div id="examMember_noPassed"><input style="border: 1px solid #ddd;" title="" class="yssp " placeholder="关键字" name="keywords" value="" th:value="${keywords}" maxlength="200" type="text"/></div>
                                 <div id="examMember_havePassed" style="display:none; width: 157px;">
                                     <input title="" type="radio" name="passedSort" value="0" />未参加
                                     <input title="" type="radio" name="passedSort" value="1" />通过
@@ -758,7 +758,7 @@
             <P style="text-align:right;"><a href="#" onclick="$('#noClassMemberArrangeNewClassDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
            <p style="height:20px"></p>
             <span style="display: none;"><input title="" type="text" value="" name="noClassMemberArrayLis" th:value="${noClassMemberArrayLis}" id="noClassMemberArrayLis" /></span>
-            <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="className" id="className" placeholder="班级名称" type="text"/></p>
+            <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="className" id="className" placeholder="班级名称" maxlength="50" type="text"/></p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="check_arrangeNewClass()">保存</button></p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="goBackToArrangeClassFromNewClass()">返回</button></p>
             <div style="color:#FF3A00;padding-left:40px; padding-top: 10px;">
@@ -805,7 +805,7 @@
             <p style="height:20px"></p>
             <span style="display: none;"><input title="" type="text" value="" name="classExamArrayLis" th:value="${classExamArrayLis}" id="classExamArrayLis" /></span>
             <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="examDate" id="examDate" placeholder="考试时间" type="text" readonly="readonly"/></p>
-            <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="examAddress" id="examAddress" placeholder="考试地点" type="text"/></p>
+            <p><input style="width:500px;" title="" class="sign-in__field ys-form__field" name="examAddress" id="examAddress" placeholder="考试地点" maxlength="20" type="text"/></p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="check_arrangeNewExam()">保存</button></p>
             <p><button class="sign-in__button ys-form__button" name="button" type="button" onclick="goBackToArrangeExamFromNewExam()">返回</button></p>
             <div style="color:#FF3A00;padding-left:40px; padding-top: 10px;">
@@ -853,7 +853,7 @@
 
         <div class="ys500 ystx">
             <p>
-                <input id="txt_memberName" title="" class="ysw500 sign-in__field ys-form__field" name="realName" placeholder="姓名" type="text"/>
+                <input id="txt_memberName" title="" class="ysw500 sign-in__field ys-form__field" name="realName" placeholder="姓名" maxlength="20" type="text"/>
             </p>
 
             <p id="radio_memberSex" class="ysdx">&nbsp;&nbsp;&nbsp;&nbsp;性别：
@@ -864,7 +864,7 @@
 
             <p>
                 <input id="txt_memberphoneNo" title="" class="ysw500 sign-in__field ys-form__field" name="phoneNo" placeholder="真实手机号"
-                       type="text"/>
+                       maxlength="20" type="text"/>
             </p>
 
             <p style="text-align:center;">
