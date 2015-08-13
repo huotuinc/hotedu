@@ -134,7 +134,10 @@ function check_payEnter() {
             data:{"checkPayLis":arrayLis},
             dataType:"json",
             success:function(result){
-                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchMemberInfo").submit();});
+                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){
+                    //$("#searchMemberInfo").submit();
+                    window.location.href = window.location.href.replace(/#/g,'');
+                });
             },
             error:function(){
                 alert("安排失败");
@@ -152,7 +155,10 @@ function check_ExamMemberEnter() {
             data:{"checkExamMemberList":arrayLis},
             dataType:"json",
             success:function(result){
-                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchGraduationMembers").submit();});
+                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){
+                    //$("#searchGraduationMembers").submit();
+                    window.location.href = window.location.href.replace(/#/g,'');
+                });
             },
             error:function(){
                 alert("安排失败");
@@ -179,7 +185,10 @@ function check_arrangeNewClass() {
                 if(result.status==0){
                     $text.text(result.message);
                 }else if(result.status==1){
-                    $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchClassMembers").submit();});
+                    $.MsgBox.AjaxAlert("温馨提示",result.message,function(){
+                        //$("#searchClassMembers").submit();
+                        window.location.href = window.location.href.replace(/#/g,'');
+                    });
                 }
             },
             error:function(){
@@ -212,7 +221,10 @@ function check_arrangeNewExam() {
                 if(result.status==0){
                     $text.text(result.message);
                 }else if(result.status==1){
-                    $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchClassExam").submit();});
+                    $.MsgBox.AjaxAlert("温馨提示",result.message,function(){
+                        //$("#searchClassExam").submit();
+                        window.location.href = window.location.href.replace(/#/g,'');
+                    });
                 }
             },
             error:function(){
@@ -235,7 +247,10 @@ function check_ArrangeExistClass() {
                 if(result.status==0){
                     $("#errInfo_existClass").text(result.message);
                 }else if(result.status==1){
-                    $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchClassMembers").submit();});
+                    $.MsgBox.AjaxAlert("温馨提示",result.message,function(){
+                        //$("#searchClassMembers").submit();
+                        window.location.href = window.location.href.replace(/#/g,'');
+                    });
                 }
             },
             error:function(){
@@ -258,7 +273,10 @@ function check_arrangeExistExam() {
                 if(result.status==0){
                     $("#errInfo_existExam").text(result.message);
                 }else if(result.status==1){
-                    $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchClassExam").submit();});
+                    $.MsgBox.AjaxAlert("温馨提示",result.message,function(){
+                        //$("#searchClassExam").submit();
+                        window.location.href = window.location.href.replace(/#/g,'');
+                    });
                 }
             },
             error:function(){
@@ -277,7 +295,10 @@ function btn_setExamPass(h) {
             data:{"id":memberId},
             dataType:"json",
             success:function(result){
-                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchGraduationMembers").submit();});
+                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){
+                    //$("#searchGraduationMembers").submit();
+                    window.location.href = window.location.href.replace(/#/g,'');
+                });
             },
             error:function(){
                 alert("操作失败");
@@ -295,7 +316,10 @@ function btn_setExamNoPass(h) {
             data:{"id":memberId},
             dataType:"json",
             success:function(result){
-                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchGraduationMembers").submit();});
+                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){
+                    //$("#searchGraduationMembers").submit();
+                    window.location.href = window.location.href.replace(/#/g,'');
+                });
             },
             error:function(){
                 alert("操作失败");
@@ -314,7 +338,10 @@ function btn_modifyClassTeamInfo(h) {
             data:{"id":classId,"className":className},
             dataType:"json",
             success:function(result){
-                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){ $("#searchClassExam").submit();});
+                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){
+                    //$("#searchClassExam").submit();
+                    window.location.href = window.location.href.replace(/#/g,'');
+                });
             },
             error:function(){
                 alert("操作失败");
