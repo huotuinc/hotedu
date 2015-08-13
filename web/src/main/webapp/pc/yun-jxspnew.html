@@ -47,14 +47,14 @@
 
                 <ul style="float:left;padding-left: 10px;" th:remove="all-but-first">
                     <li class="ysbigbox" th:each="g:${video1}">
-                        <p th:if="${#authentication.name}!='anonymousUser'" class="biglb">
+                        <p th:if="${#authentication.name}!='anonymousUser'" class="biglb" style="background-color: #000000;">
                             <a th:alt="${g.content}" th:href="${g.playUrl}" target="_blank">
-                                <img th:alt="${g.content}" width="100%" height="100%" th:src="${g.thumbnail}"/>
+                                <img th:alt="${g.content}" src="images/1-1.jpg" style="width: 100%;height: 80%; padding-top: 7%" th:src="${g.thumbnail}"/>
                             </a>
                         </p>
-                        <p th:if="${#authentication.name}=='anonymousUser'" class="biglb">
+                        <p th:if="${#authentication.name}=='anonymousUser'" class="biglb" style="background-color: #000000;">
                             <a href="javascript:void(0)" onclick="javascript:pleaseLoginFirst()">
-                                <img th:alt="${g.videoName}" width="100%" height="100%" th:src="${g.thumbnail}"/>
+                                <img th:alt="${g.videoName}" style="width: 100%;height: 80%; padding-top: 7%" src="images/1-1.jpg" th:src="${g.thumbnail}"/>
                             </a>
                         </p>
                         <p class="bigtit" th:text="${g.videoName}">极限挑战</p>
