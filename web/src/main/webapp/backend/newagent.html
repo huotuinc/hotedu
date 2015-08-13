@@ -72,7 +72,7 @@
         </div>
         <div class="jp-container2">
         <div class="result-wrap">
-            <form action="#" method="post" class="myform" name="myform" th:action="@{/backend/addSaveAgent}" enctype="multipart/form-data">
+            <form id="editorForm" action="#" id="editorForm" method="post" class="myform" name="myform" th:action="@{/backend/addSaveAgent}" enctype="multipart/form-data">
                 <div class="config-items">
                     <div class="result-content">
                         <table width="100%" class="insert-tab">
@@ -118,14 +118,6 @@
                                 <td><input title="" type="text" value="" size="70" name="level" class="common-text"/>
                                 </td>
                             </tr>
-                            <!--<tr>-->
-                                <!--<th><i class="require-red">*</i>设置代理级别：</th>-->
-                                <!--<td><select title="" name="level" class="required">-->
-                                    <!--<option value="1">一级代理</option>-->
-                                    <!--<option value="2">二级代理</option>-->
-                                    <!--<option value="3">三级代理</option>-->
-                                <!--</select></td>-->
-                            <!--</tr>-->
                             <tr>
                                 <th></th>
                                 <td><input type="button" value="保存" class="btn btn-primary btn6 mr10" onclick="check_save(this)"/><input
