@@ -514,8 +514,9 @@ public class AgentController {
     public String modifyAgent(Long id, Model model,HttpServletRequest request) throws Exception{
         Agent agent=agentService.findOneById(id);
         //返回
-//        agent.setPictureUri(request.getContextPath() + "/uploadResources" + agent.getPictureUri());
-        agent.setPictureUri(staticResourceService.getResource(agent.getPictureUri()).toURL().toString());
+        if(agent.getPictureUri()!=null) {
+            agent.setPictureUri(staticResourceService.getResource(agent.getPictureUri()).toURL().toString());
+        }
         model.addAttribute("agent",agent);
         return "/backend/modifyAgent";
     }
