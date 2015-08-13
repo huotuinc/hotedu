@@ -111,7 +111,7 @@
 
 <p style="clear:both"></p>
 <!--登录弹窗-->
-<div id="asaimsg" class="AsaiDivShow" style="display: none" th:style="${errInfo}==null?'display: none':'display: block'">
+<div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none" th:style="${errInfo}==null?'display: none':'display: block'">
     <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
                                                          onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
         <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
@@ -145,7 +145,7 @@
 </div>
 <!--登录弹窗end-->
 <!--注册弹窗-->
-<div id="regDiv" class="AsaiDivShow" style="display:none">
+<div th:replace="pc/loginPopup::registPopupDiv"  id="regDiv" class="AsaiDivShow" style="display:none">
     <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
                                                          onclick="javascript:hideRegisterForm()">
         <FONT style="color:#111; font-size:20px;">×</FONT></a></P>

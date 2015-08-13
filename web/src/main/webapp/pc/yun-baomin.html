@@ -161,7 +161,7 @@
 </div>
 <!--登录弹窗end-->
 <!--注册弹窗-->
-<div id="regDiv" class="AsaiDivShow" style="display:none">
+<div th:replace="pc/loginPopup::registPopupDiv"  id="regDiv" class="AsaiDivShow" style="display:none">
     <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
                                                          onclick="javascript:hideRegisterForm()">
         <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
