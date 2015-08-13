@@ -334,7 +334,7 @@
                             </td>
                         </tr>
                     </table>
-                    <div class="list-page">
+                    <div class="list-page" th:if="${totalPages>0}">
                         <a href="#" th:if="${totalPages}-1>${pageNo}" th:href="@{/backend/agentClassMember(pageNo=${pageNo}+1,classId=${classTeam.id}}">下一页</a>
                         <span th:text="'当前第'+${pageNo+1}">1</span>页/<span th:text="'共'+${totalPages}">1</span> 页
                     </div>

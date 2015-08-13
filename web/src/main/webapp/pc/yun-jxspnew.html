@@ -197,7 +197,7 @@
                 <p style="clear:both;"></p>
 
 
-                <div class="list-page">
+                <div class="list-page" th:if="${totalPages>0}">
                     <a href="#" th:if="${pageNo}!=0"
                        th:href="@{/pc/loadVideo(pageNo=${pageNo}-1,keywords=${keywords})}">上一页</a>
                     <a href="#" th:if="${pageNo+1}!=${totalPages}"

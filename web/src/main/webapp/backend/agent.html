@@ -82,7 +82,7 @@
             <ul style=" float:left;" class="sys-info-list">
                 <li><label class="res-lab">级别：</label><span class="res-info" th:text="${agent.level}">杭州区总代理</span></li>
                 <li><label class="res-lab">联系方式:</label><span class="res-info" th:text="${agent.phoneNo}">15263458967</span></li>
-                <li><label class="res-lab">注册时间：</label><span class="res-info" th:text="${#calendars.format(agent.registerDate,'yyyy年MM月dd日')}">2014年3月18日</span></li>
+                <li><label class="res-lab">注册时间：</label><span class="res-info" th:text="${agent.registerDate}==null?'':${#calendars.format(agent.registerDate,'yyyy年MM月dd日')}">2014年3月18日</span></li>
             </ul>
             <ul style=" float:left;" class="sys-info-list">
                 <li><label class="res-lab">总人数：</label><span class="res-info" th:text="${totalMembers}+'人'">900人</span></li>
@@ -163,7 +163,7 @@
                         </tr>
 
                     </table>
-                    <div class="list-page">
+                    <div class="list-page" th:if="${totalPages>0}"  >
                         <a href="#" th:if="${pageNo}>0" th:href="@{/backend/searchExamGuide(pageNo=${pageNo}-1,keywords=${keywords},id=${agent.id})}">上一页</a>
                         <a href="#" th:if="${totalPages}-1>${pageNo}" th:href="@{/backend/searchExamGuide(pageNo=${pageNo}+1,keywords=${keywords},id=${agent.id})}">下一页</a>
                         <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页

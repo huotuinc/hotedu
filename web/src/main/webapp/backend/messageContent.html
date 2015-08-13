@@ -25,7 +25,6 @@
 <!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
 <!--@thymesVar id="keywords" type="java.lang.String"-->
 <!--@thymesVar id="allMessageContentList" type="org.springframework.data.domain.Page<com.huotu.hotedu.entity.MessageContent>"-->
-<!--@thymesVar id="g" type="com.huotu.hotedu.entity.MessageContent"-->
 <!--@thymesVar id="totalRecords" type="java.lang.long"-->
 <!--@thymesVar id="pageNo" type="java.lang.Integer"-->
 <!--@thymesVar id="totalPages" type="java.lang.Integer"-->
@@ -50,7 +49,7 @@
     </div>
 </div>
 <div class="container clearfix">
-    <div class="sidebar-wrap">
+    <div th:include="backend/sidebar::sidebar" class="sidebar-wrap">
         <div class="sidebar-title">
             <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}"
                  style=" width:160px;margin-left: -10px;"/>
@@ -190,7 +189,7 @@
                                 <a class="link-delete" href="#">删除</a>
                             </td>
                         </tr>
-
+                        <!--@thymesVar id="g" type="com.huotu.hotedu.entity.MessageContent"-->
                         <tr th:each="g:${allMessageContentList}">
                             <td th:text="${g.id}">01</td>
                             <td title="" th:text="${g.title}">mou某mou某mou某mou某</td>
@@ -202,7 +201,7 @@
                             </td>
                         </tr>
                     </table>
-                    <div class="list-page">
+                    <div class="list-page" th:if="${totalPages>0}">
                         <a href="#" th:if="${pageNo>0}" th:href="@{/backend/searchMessageContent(pageNo=${pageNo}-1,keywords=${keywords})}">上一页</a>
                         <a href="#" th:if="${totalPages>pageNo+1}" th:href="@{/backend/searchMessageContent(pageNo=${pageNo+1},keywords=${keywords})}">下一页</a>
                         <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页

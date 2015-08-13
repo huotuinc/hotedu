@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="container clearfix">
-    <div class="sidebar-wrap">
+    <div th:include="backend/sidebar::sidebar" class="sidebar-wrap">
         <div class="sidebar-title">
             <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}"
                  style=" width:160px;margin-left: -10px;"/>
@@ -190,7 +190,7 @@
                             </td>
                         </tr>
                     </table>
-                    <div class="list-page">
+                    <div class="list-page" th:if="${totalPages>0}">
                         <a href="#" th:href="@{/backend/pageBanners(n=${n}-1,keywords=${keywords},searchSort=${searchSort},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage})}">上一页</a>
                         <a href="#" th:href="@{/backend/pageBanners(n=${n}+1,keywords=${keywords},searchSort=${searchSort},dateStart=${dateStart},dateEnd=${dateEnd},sumpage=${sumpage})}">下一页</a>
                         <span th:text="${sumElement}">2</span> 条 <span th:text="${n}+1">1</span>/<span th:text="${sumpage}">1</span> 页

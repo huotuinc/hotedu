@@ -1,0 +1,74 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div class="sidebar-wrap" th:fragment="sidebar">
+        <div class="sidebar-title">
+            <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}"
+                 style=" width:160px;margin-left: -10px;"/>
+        </div>
+        <div class="sidebar-content">
+            <div class="jp-container">
+                <ul class="sidebar-list">
+                    <li><p style="height:30px; line-height:30px; margin-left: 20px;">企业信息</p>
+                        <ul class="sub-menu">
+                            <li th:class="${allWantedList}!=null?'on'"><a href="wanted.html" th:href="@{/backend/loadWanted}">招聘信息</a></li>
+                            <li th:class="${allEnterprisesList}!=null?'on'"><a href="enterprises.html" th:href=" @{/backend/loadEnterprises}">发布企业</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p style="height:30px; line-height:30px; margin-left: 20px;">banner图</p>
+                        <ul class="sub-menu">
+                            <li th:class="${allbannersList}!=null?'on'"><a href="banners.html" th:href="@{/backend/loadBanners}">banner图</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p style="height:30px; line-height:30px; margin-left: 20px;">考试指南</p>
+                        <ul class="sub-menu">
+                            <li th:class="${allGuideList}!=null?'on'"><a href="examguide.html" th:href="@{/backend/searchExamGuide}">考试指南</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p style="height:30px; line-height:30px; margin-left: 20px;">友情链接</p>
+                        <ul class="sub-menu" style="display:block;">
+                            <li th:class="${allLinkList}!=null?'on'"><a href="link.html" th:href="@{/backend/searchLink}">友情链接</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p style="height:30px; line-height:30px; margin-left: 20px;">常见问题</p>
+                        <ul class="sub-menu">
+                            <li th:class="${allQaList}!=null?'on'"><a href="qa.html" th:href="@{/backend/searchQa}">常见问题</a></li>
+                        </ul>
+                    </li>
+                    <li><p style="height:30px; line-height:30px; margin-left: 20px;">资讯动态</p>
+                        <ul class="sub-menu">
+                            <li th:class="${allMessageContentList}!=null?'on'"><a href="MessageContent.html" th:href="@{/backend/searchMessageContent}">资讯动态</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p style="height:30px; line-height:30px; margin-left: 20px;">公司简介</p>
+                        <ul class="sub-menu">
+                            <li th:class="${Huotu}!=null?'on'"><a href="editenterprise.html" th:href="@{/backend/loadEditenterprise}">公司简介编辑</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <p style="height:30px; line-height:30px; margin-left: 20px;">视频</p>
+                        <ul class="sub-menu">
+                            <li th:class="${AllVideoList}!=null?'on'"><a href="video.html" th:href="@{/backend/loadVideo}">教学视频</a></li>
+                            <li><a href="http://www.baidu.com" target="_blank">精彩录制</a></li>
+                            <li><a href="http://www.baidu.com" target="_blank">经验分享</a></li>
+                            <li><a href="http://www.baidu.com" target="_blank">其他视频</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p style="height:30px; line-height:30px; margin-left: 20px;">师资力量</p>
+                        <ul class="sub-menu">
+                            <li th:class="${allTutorList}!=null?'on'"><a href="tutor.html" th:href="@{/backend/searchTutor}">师资力量</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -148,9 +148,10 @@
             <div class="result-wrap">
                 <div class="imessage">
                     <ul>
-                        <li><label class="res-lab">收件人：</label><span  th:text="${certificate}==null?'未填写':${certificate.receiveName}">XXX</span></li>
-                        <li><label class="res-lab">申请时间：</label><span  th:text="${certificate}==null?'未填写':${#calendars.format(member.applyCertificateDate,'yyyy-MM-dd hh:mm:ss')}">20150401 12：00：00</span></li>
+                        <li><label class="res-lab">收 件 人:</label><span  th:text="${certificate}==null?'未填写':${certificate.receiveName}">XXX</span></li>
+                        <li><label class="res-lab">申请时间:</label><span  th:text="${certificate}==null?'未填写':${#calendars.format(member.applyCertificateDate,'yyyy-MM-dd hh:mm:ss')}">20150401 12：00：00</span></li>
                         <li><label class="res-lab">收件地址:</label><span  th:text="${certificate}==null?'未填写':${certificate.receiveAddress}">文一路</span></li>
+                        <li><label class="res-lab">收件电话:</label><span  th:text="${certificate}==null?'未填写':${certificate.phoneNo}">13012345678</span></li>
                         <li th:if="${member.certificateStatus}==1"><label class="res-lab">证书编号:</label><span  th:text="${certificate}==null?'未填写':${certificate.certificateNo}">abc123456789</span></li>
                     </ul>
                 </div>
