@@ -22,10 +22,14 @@
                 <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
                 <li><a href="javascript:void(0)" th:href="@{/pc/loadTutors}">师资力量</a></li>
                 <li><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
-                <li class="active"><a href="yun-kaoshizn.html" th:href="@{/pc/loadExamGuide}">考试指南</a></li>
+                <li>
+                    <a href="javascript:void(0)" th:if="${#authentication.name}=='anonymousUser'" onclick="javascript:pleaseLoginFirst()">考试指南</a>
+                    <a href="yun-kaoshizn.html" th:if="${#authentication.name}!='anonymousUser'" th:href="@{/pc/loadExamGuide}">考试指南</a>
+                </li>
                 <li><a href="#">招|应聘</a></li>
-                <li id="loginLi" style="padding:0px 0px 0px 20px;" th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
-                    <a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
+                <li id="loginLi" style="padding:0px 0px 0px 20px;"
+                    th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
+                    <a href="javascript:void(0)" id="showLoginForm">登录</a>
                 </li>
                 <li id="userLi" style="padding:0px;display:none" th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
                     <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->

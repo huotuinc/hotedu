@@ -513,7 +513,6 @@ public class AgentController {
     @RequestMapping("/backend/modifyAgent")
     public String modifyAgent(Long id, Model model,HttpServletRequest request) throws Exception{
         Agent agent=agentService.findOneById(id);
-        //返回
         if(agent.getPictureUri()!=null) {
             agent.setPictureUri(staticResourceService.getResource(agent.getPictureUri()).toURL().toString());
         }
@@ -605,15 +604,15 @@ public class AgentController {
         return "redirect:/backend/searchAgents";
     }
 
-//    @PreAuthorize("hasRole('ADMIN')")
-//    @RequestMapping("/backend/lookAgentClass")
-//    public String lookAgent(long id,Model model) throws  Exception{
-//        String turnPage="/backend/agent";
-//        Agent agent=agentService.findOneById(id);
-//        agent.setPictureUri(staticResourceService.getResource(agent.getPictureUri()).toURL().toString());
-//        model.addAttribute("agent",agent);
-//        model.addAttribute("totalMembers",memberService.searchMembers(agent,0,PAGE_SIZE).getTotalElements());
-//        return turnPage;
-//    }
+    /*@PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping("/backend/lookAgentClass")
+    public String lookAgent(long id,Model model) throws  Exception{
+        String turnPage="/backend/agent";
+        Agent agent=agentService.findOneById(id);
+        agent.setPictureUri(staticResourceService.getResource(agent.getPictureUri()).toURL().toString());
+        model.addAttribute("agent",agent);
+        model.addAttribute("totalMembers",memberService.searchMembers(agent,0,PAGE_SIZE).getTotalElements());
+        return turnPage;
+    }*/
 
 }

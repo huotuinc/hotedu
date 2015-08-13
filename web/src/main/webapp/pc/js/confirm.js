@@ -629,3 +629,17 @@ function hideRegisterForm() {
     $("#phoneRig").text("");
     document.getElementById('regDiv').style.display='none';document.getElementById('asaimsgbg').style.display='none';
 }
+
+$(function () {
+   $("#showLoginForm").click(function(){
+       $("#loginFailedInfo").text("");
+       $("#asaimsg").show();
+       $("#asaimsgbg").show();
+   });
+});
+
+function pleaseLoginFirst() {
+    $.MsgBox.Confirm("温馨提示","您需要先登录后才可以观看视频噢~",function() {
+        document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block';
+    });
+}

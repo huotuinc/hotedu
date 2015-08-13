@@ -23,12 +23,14 @@
                 <li class="active"><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
                 <li><a href="javascript:void(0)" th:href="@{/pc/loadTutors}">师资力量</a></li>
                 <li><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
-                <li><a href="yun-kaoshizn.html" th:href="@{/pc/loadExamGuide}">考试指南</a></li>
+                <li>
+                    <a href="javascript:void(0)" th:if="${#authentication.name}=='anonymousUser'" onclick="javascript:pleaseLoginFirst()">考试指南</a>
+                    <a href="yun-kaoshizn.html" th:if="${#authentication.name}!='anonymousUser'" th:href="@{/pc/loadExamGuide}">考试指南</a>
+                </li>
                 <li><a href="#">招|应聘</a></li>
                 <li id="loginLi" style="padding:0px 0px 0px 20px;"
                     th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
-                    <a href="javascript:void(0)"
-                       onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
+                    <a href="javascript:void(0)" id="showLoginForm">登录</a>
                 </li>
                 <li id="userLi" style="padding:0px;display:none"
                     th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
@@ -112,7 +114,7 @@
             </div>
         </div>
         <p class="yszhuyi"><i style="color:#FFBE00">*</i>提交报名后，我们会通知你，并线下交费。安排班次和考试等事项。<br/>
-            <i style="color:#FFBE00">*</i>手机号就是您的登录账号，初始登录密码为您的手机号。<br/>
+            <i style="color:#FFBE00">*</i>手机号就是您的登录账号，初始登录密码为您的手机号后四位。<br/>
         </p>
         
   
@@ -127,7 +129,7 @@
 <!--登录弹窗-->
 <div id="asaimsg" class="AsaiDivShow" style="display: none" th:style="${errInfo}==null?'display: none':'display: block'">
     <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
-                                                         onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
+                                                         onclick="document.getElementById('loginFailedInfo').text='';document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
         <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
 
     <div class="sign-in">
@@ -153,7 +155,7 @@
                     注册
                 </button>
             </form>
-            <span style="color:red" th:text="${errInfo}"></span>
+            <span style="color:red" id="loginFailedInfo" th:text="${errInfo}"></span>
         </div>
     </div>
 </div>

@@ -72,6 +72,7 @@ public class SecurityConfig {
                             "/pc/js/**",
                             "/pc/**.html",
                             "/pc/loadMemberRegister",
+                            "/pc/loadExamGuide",
                             "/pc/yun-baomin",
                             "/pc/register",
                             "/pc/baomin",

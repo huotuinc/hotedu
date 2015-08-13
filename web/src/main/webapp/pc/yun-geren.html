@@ -23,11 +23,14 @@
                 <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
                 <li><a href="#" th:href="@{/pc/loadTutors}">师资力量</a></li>
                 <li><a href="#" th:href="@{/pc/loadVideo}">教学视频</a></li>
-                <li><a href="#" th:href="@{/pc/loadExamGuide}">考试指南</a></li>
+                <li>
+                    <a href="javascript:void(0)" th:if="${#authentication.name}=='anonymousUser'" onclick="javascript:pleaseLoginFirst()">考试指南</a>
+                    <a href="yun-kaoshizn.html" th:if="${#authentication.name}!='anonymousUser'" th:href="@{/pc/loadExamGuide}">考试指南</a>
+                </li>
                 <li><a href="#">招|应聘</a></li>
                 <!--@thymesVar id="style" type="java.lang.String"-->
                 <li id="userLi" style="padding:0px;">
-                    <a id="memberLi" href="#"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
+                    <a id="memberLi" href="#"><img class="lodingimgi" src="images/toux.png" width="100%"/></a><!--会员头像-->
                     <p class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
                     <p class="lbpo"><a href="#" id="personalCenter_href" th:href="@{/pc/loadPersonalCenter}" th:text="${#authentication.name}">个人中心</a>
                         <a href="#" onclick="showChangePwdForm()">修改密码</a>
