@@ -113,7 +113,7 @@
                                 </tr>
                                 <tr>
                                     <th>考试时间：</th>
-                                    <td th:text="${mb.theClass==null}?'未安排':(${mb.theClass.exam==null}?'未安排':${#dates.format(mb.theClass.exam.examDate, 'yyyy-MM-dd hh:mm:ss')})">
+                                    <td th:text="${mb.theClass==null}?'未安排':(${mb.theClass.exam==null}?'未安排':${#dates.format(mb.theClass.exam.examDate, 'yyyy-MM-dd HH:mm:ss')})">
                                         2015.04.01
                                     </td>
                                 </tr>

@@ -222,8 +222,8 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
             if(agentRepository.count()==0){
                 Agent agent=new Agent();
                 Date d = new Date();
-                agent.setCorporation("杨震昊");
-                agent.setPhoneNo("15968872933");
+                agent.setCorporation("樊老师");
+                agent.setPhoneNo("13575749204");
                 agent.setName("火图科技");
                 agent.setLoginName("hotedu");
                 agent.setArea("杭州");

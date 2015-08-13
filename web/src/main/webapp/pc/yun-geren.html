@@ -68,7 +68,7 @@
 
                 <p>班级：<span th:text="${mb.theClass==null}?'未安排':${mb.theClass.className}">201204第一期</span></p>
 
-                <p>报名时间：<span th:text="${mb.applyDate}==null?'':${#dates.format(mb.applyDate, 'yyyy-MM-dd hh:mm:ss')}">2105.01.01</span></p>
+                <p>报名时间：<span th:text="${mb.applyDate}==null?'':${#dates.format(mb.applyDate, 'yyyy-MM-dd HH:mm:ss')}">2105.01.01</span></p>
 
                 <p><span>考试通过：<b><span th:text="${mb.passed}==0?'还未考试':(${mb.passed}==1?'通过':'未通过')">未知</span></b></span>&nbsp;&nbsp;&nbsp;<span>考试时间：<b><span
                         th:text="${mb.theClass==null}?'未安排':(${mb.theClass.exam==null}?'未安排':${#dates.format(mb.theClass.exam.examDate, 'yyyy-MM-dd')})">未知</span></b></span>&nbsp;&nbsp;&nbsp;<span>考试地点：<b><span

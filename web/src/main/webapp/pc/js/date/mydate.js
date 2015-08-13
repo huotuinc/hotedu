@@ -2,7 +2,7 @@ $(function () {
     $("#examDate").datetimepicker({
         dateFormat:'yy-mm-dd',
         showSecond: true,
-        timeFormat: 'hh:mm:ss',
+        timeFormat: 'HH:mm:ss',
         stepHour: 1,
         stepMinute: 1,
         stepSecond: 1,
