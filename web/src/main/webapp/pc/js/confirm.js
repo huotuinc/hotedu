@@ -639,7 +639,7 @@ $(function () {
 });
 
 function pleaseLoginFirst() {
-    $.MsgBox.Confirm("温馨提示","您需要先登录后才可以观看视频噢~",function() {
+    $.MsgBox.Confirm("温馨提示","您需要先登录才可以进行此项操作噢~",function() {
         document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block';
     });
 }
