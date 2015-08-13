@@ -12,6 +12,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -64,6 +65,7 @@ public class MessageContentControllerTest extends WebTestBase {
 
     @Test
     @Rollback
+    @Ignore
     public void messageContentTest() throws Exception {
 
         //准备测试环境
@@ -317,6 +319,7 @@ public class MessageContentControllerTest extends WebTestBase {
 
 
     @Test
+    @Ignore
     public void modifyMessageContentTest() throws Exception{
         Random random = new Random();
         //准备测试环境
@@ -384,7 +387,7 @@ public class MessageContentControllerTest extends WebTestBase {
     }
     @Test
     @Rollback
-//    @Ignore
+    @Ignore
     public void modifySaveMessageContent()throws Exception{
         //准备测试环境
         Random random = new Random();

@@ -53,45 +53,18 @@ public class MemberController {
     public static final int PAGE_SIZE=10;
 
     @RequestMapping("/pc/loadMemberRegister")
-    public String load(Model model) {
+    public String load(@AuthenticationPrincipal Login user,Model model) {
+        Member mb = null;
+        if(user instanceof Member) {
+            mb = (Member)user;
+        }
         String style = "padding:0px;display:none";
+        model.addAttribute("mbInfo",mb);
         model.addAttribute("style",style);
         return "pc/yun-baomin";
     }
 
 
-    /**
-     * Created by cwb on 2015/8/11
-     * 登录后报名
-     */
-    /*@RequestMapping("/pc/loginBaomin")
-    @ResponseBody
-    public Result loginBaomin(@AuthenticationPrincipal Login user,String areaId) {
-        Result result = new Result();
-        int status = 0;
-        String message = "";
-        if(user==null) {
-            message = "用户还未登录";
-        }else if(user instanceof Member) {
-            if(areaId==null||"".equals(areaId)) {
-                message = "请选择报名区域";
-            }else {
-                Agent agent = agentService.findByAreaId(areaId);
-                if (agent == null) {
-                    message = "该地区报名点临时取消";
-                }else {
-                    Member member = (Member) user;
-                    memberService.addMember(agent,member);
-                    status = 1;
-                    message = "报名成功";
-                }
-            }
-        }
-        result.setStatus(status);
-        result.setMessage(message);
-        return result;
-    }
-*/
     /**
      * Created by cwb on 2015/7/21.
      * Modified by cwb on 2015/8/11.
@@ -565,7 +538,11 @@ public class MemberController {
                 certificate.setReceiveName(receiveName);
                 certificate.setReceiveAddress(receiveAddress);
                 certificate.setPhoneNo(phoneNo);
-                mb.setCertificateStatus(2);
+                if(certificate.getPictureUri()==null||"".equals(certificate.getPictureUri())) {
+                    mb.setCertificateStatus(0);
+                }else {
+                    mb.setCertificateStatus(2);
+                }
                 //设置学员的申请领证时间
                 mb.setApplyCertificateDate(new Date());
             }
