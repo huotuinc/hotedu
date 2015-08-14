@@ -6,6 +6,7 @@ import com.huotu.hotedu.service.ClassTeamService;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.service.MemberService;
 import com.huotu.hotedu.web.service.StaticResourceService;
+import com.sun.jndi.toolkit.url.Uri;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -586,9 +588,15 @@ public class AgentController {
         Agent agent=agentService.findOneById(id);
         if(file.getSize()!=0){
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
-            staticResourceService.deleteResource(staticResourceService.getResource(agentService.findOneById(id).getPictureUri()));
+            String agentPicUrl = agentService.findOneById(id).getPictureUri();
+            if(agentPicUrl!=null&&!"".equals(agentPicUrl)) {
+                URI agentPicUri = staticResourceService.getResource(agentPicUrl);
+                if(agentPicUri!=null) {
+                    staticResourceService.deleteResource(agentPicUri);
+                }
+            }
             String fileName = StaticResourceService.AGENT_ICON + UUID.randomUUID().toString() + ".png";
-            staticResourceService.uploadResource(fileName,file.getInputStream());
+            staticResourceService.uploadResource(fileName, file.getInputStream());
             agent.setPictureUri(fileName);
         }
         agent.setArea(area);
