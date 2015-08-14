@@ -513,8 +513,8 @@ public class AgentController {
     @RequestMapping("/backend/modifyAgent")
     public String modifyAgent(Long id, Model model) throws Exception{
         Agent agent=agentService.findOneById(id);
-        if(agent.getPictureUri()!=null) {
-            agent.setPictureUri(staticResourceService.getResource(agent.getPictureUri()).toURL().toString());
+        if(agent.getPictureUri()!=null&&!"".equals(agent.getPictureUri())) {
+            agent.setPictureUri(staticResourceService.getResource(agent.getPictureUri()).toString());
         }
         model.addAttribute("agent",agent);
         return "/backend/modifyAgent";
@@ -591,6 +591,7 @@ public class AgentController {
             String agentPicUrl = agentService.findOneById(id).getPictureUri();
             if(agentPicUrl!=null&&!"".equals(agentPicUrl)) {
                 URI agentPicUri = staticResourceService.getResource(agentPicUrl);
+                //TODO 可能有问题，不一定为null
                 if(agentPicUri!=null) {
                     staticResourceService.deleteResource(agentPicUri);
                 }

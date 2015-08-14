@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
+import java.net.URI;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -328,9 +329,15 @@ public class EnterprisesController {
         Enterprise enterprise=enterpriseService.findOneById(id);
         if(file.getSize()!=0){
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
-            staticResourceService.deleteResource(staticResourceService.getResource(enterpriseService.findOneById(id).getLogoUri()));
+            String enterprisePicUrl = enterpriseService.findOneById(id).getLogoUri();
+            if(enterprisePicUrl!=null&&!"".equals(enterprisePicUrl)) {
+                URI enterprisePicUri = staticResourceService.getResource(enterprisePicUrl);
+                if(enterprisePicUri!=null) {
+                    staticResourceService.deleteResource(enterprisePicUri);
+                }
+            }
             String fileName = StaticResourceService.COMPANY_LOGO + UUID.randomUUID().toString() + ".png";
-            staticResourceService.uploadResource(fileName,file.getInputStream());
+            staticResourceService.uploadResource(fileName, file.getInputStream());
             enterprise.setLogoUri(fileName);
         }
         enterprise.setTel(tel);
