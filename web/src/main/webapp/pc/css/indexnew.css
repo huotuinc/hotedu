@@ -1282,7 +1282,8 @@ button.btn, input.btn {
 	line-height: 20px;
 }
 .ysxz{  color: #333;
-  border: 1px solid #C5C5C5;
   padding: 10px;
-  text-align: center;
   line-height: 26px;}
+  .dddys{border: 1px solid #C5C5C5;
+  width:700px;
+  margin-left:150px;}
