@@ -134,7 +134,7 @@
                         <li><label class="res-lab">报名时间：</label><span class="res-info" th:text="${member.applyDate}==null?'暂无':${#calendars.format(member.applyDate,'yyyy年MM月dd日')}">2014年3月18日</span></li>
                         <li><label class="res-lab">交费确认时间：</label><span class="res-info" th:text="${member.payDate}==null?'暂无':${#calendars.format(member.payDate,'yyyy-MM-dd HH:mm:ss')}">2015/01/01  13:00:00</span>
                         </li>
-                        <li><label class="res-lab">确认人：</label><span class="res-info" th:text="${member.confirmPerson}==null?'未安排':${member.confirmPerson}">oo</span></li>
+                        <li><label class="res-lab">确认人：</label><span class="res-info" th:text="${member.agent.corporation}==null?'未知':${member.agent.corporation}">oo</span></li>
                         <li><label class="res-lab">考试时间：</label><span class="res-info" th:text="${member.theClass}==null?'未安排':(${member.theClass.exam}==null?'未安排':${#calendars.format(member.theClass.exam.examDate,'yyyy-MM-dd HH:mm:ss')})">2105.01.12</span></li>
                         <li><label class="res-lab">考试地点：</label><span class="res-info" th:text="${member.theClass}==null?'未安排':(${member.theClass.exam}==null?'未安排':${member.theClass.exam.examAddress})">杭州</span></li>
                         <li><label class="res-lab">班级：</label><span class="res-info" th:text="${member.theClass}==null?'未安排':${member.theClass.className}">201504第一期</span></li>

@@ -78,7 +78,7 @@
             <li class="lirightp">
                 <p>交费状态：<span th:text="${mb.payed}?'已交费':'未交费'">成功</span></p>
 
-                <p>区域负责人：<span th:text="${mb.agent}==null?'':${mb.agent.name}">啦啦啦</span></p>
+                <p>区域负责人：<span th:text="${mb.agent}==null?'':${mb.agent.corporation}">啦啦啦</span></p>
 
                 <p>联系方式：<span th:text="${mb.agent}==null?'':${mb.agent.phoneNo}">15062356895</span></p>
 
