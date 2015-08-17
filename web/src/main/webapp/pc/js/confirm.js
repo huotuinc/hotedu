@@ -572,8 +572,7 @@ $(function() {
     $("#registerBtn").click(function(){
         var reg=/^(13|14|15|17|18)\d{9}$/;
         var phoneNo = $("#regPhoneNo").val();
-        /*var realName = $("#regRealName").val();
-        var sex = $("input[name='regSex']:checked").val();*/
+        var authCode = $("#regAuthCode").val();
         if(phoneNo=="") {
             $("#regMsgInfo").text("");
             $("#phoneErr").text("手机号不能为空");
@@ -584,21 +583,16 @@ $(function() {
             $("#phoneErr").text("请填入正确的手机号！");
             return;
         }
-        /*if(realName=="") {
+        if(authCode=="") {
             $("#regMsgInfo").text("");
-            $("#regErrInfo").text("姓名不能为空");
+            $("#authCodeErr").text("验证码不能为空");
             return;
         }
-        if(sex==""||sex==null) {
-            $("#regMsgInfo").text("");
-            $("#regErrInfo").text("请选择性别");
-            return;
-        }*/
         $.ajax({
             url:"register",
             type:"post",
             dataType:"json",
-            data:{"phoneNo":phoneNo},
+            data:{"phoneNo":phoneNo,"authCode":authCode},
             success:function(result){
                 if(result.status==0) {
                     $("#regMsgInfo").text("");
@@ -610,14 +604,39 @@ $(function() {
                     $("#regErrInfo").text("");
                     $("#phoneErr").text("");
                     $("#phoneRig").text("");
-                   // $("#regMsgInfo").text(result.message);
-                    alert("注册成功！");
+                    $.MsgBox.Alert("温馨提示","注册成功！");
                     $("#username").val(result.message);
                     $("#password").val(result.message.substring(7,11));
                     $("#btn_login").click();
                 }
             },
             error:function(){
+                $.MsgBox.Alert("系统异常","请求失败");
+            }
+        });
+    });
+    $("#regAuthCodeBtn").click(function() {
+        var phoneNo = $("#regPhoneNo").val();
+        if(phoneNo=="") {
+            $("#regMsgInfo").text("");
+            $("#phoneErr").text("请先填写手机号");
+            $("#regPhoneNo").focus();
+            return;
+        }
+        $.ajax({
+            url:"sendSMS",
+            type:"post",
+            dataType:"json",
+            data:{"phone":phoneNo,"type":1},
+            success:function(result) {
+                if(result.status==1) {
+                    settime($("#regAuthCodeBtn"));
+                    $.MsgBox.Alert("温馨提示",result.message);
+                }else if(result.status==0) {
+                    $.MsgBox.Alert("错误信息",result.message);
+                }
+            },
+            error:function() {
                 $.MsgBox.Alert("系统异常","请求失败");
             }
         });

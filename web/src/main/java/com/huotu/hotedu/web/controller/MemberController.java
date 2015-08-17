@@ -1,13 +1,19 @@
 package com.huotu.hotedu.web.controller;
 
+import com.huotu.hotedu.common.exception.InterrelatedException;
 import com.huotu.hotedu.entity.*;
-import com.huotu.hotedu.service.AgentService;
-import com.huotu.hotedu.service.CertificateService;
-import com.huotu.hotedu.service.LoginService;
-import com.huotu.hotedu.service.MemberService;
+import com.huotu.hotedu.model.CodeType;
+import com.huotu.hotedu.model.VerificationType;
+import com.huotu.hotedu.service.*;
+import com.huotu.hotedu.util.EnumHelper;
+import com.huotu.hotedu.util.StringHelper;
+import com.huotu.hotedu.util.SysRegex;
 import com.huotu.hotedu.web.service.StaticResourceService;
 import com.huotu.iqiyi.sdk.IqiyiVideoRepository;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 
 
@@ -32,6 +39,8 @@ import java.util.UUID;
  */
 @Controller
 public class MemberController {
+
+    private static final Log log = LogFactory.getLog(MemberController.class);
 
     @Autowired
     private MemberService memberService;
@@ -45,6 +54,10 @@ public class MemberController {
     private CertificateService certificateService;
     @Autowired
     IqiyiVideoRepository iqiyiVideoRepository;
+    @Autowired
+    private Environment env;
+    @Autowired
+    VerificationService verificationService;
 
 
     /**
@@ -143,17 +156,72 @@ public class MemberController {
     }
 
     /**
+     * 发送验证码
+     *
+     * @param phone     String(11)
+     * @param type      类型  1：注册    2：忘记密码
+     * @param codeType  0文本 1语音
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/pc/sendSMS")
+    @ResponseBody
+    public Result sendSMS(String phone,int type, @RequestParam(required = false) Integer codeType) {
+        Result result = new Result();
+        VerificationType verificationType = EnumHelper.getEnumType(VerificationType.class, type);
+        Date date = new Date();
+        // **********************************************************
+        // 发送短信前处理
+        if (!SysRegex.IsValidMobileNo(phone)) {
+            result.setMessage("不合法的手机号");
+        }else {
+            if (checkPhoneNo(phone).getStatus() == 0) {
+                result.setMessage("该手机号已经被注册，请选择其他手机号");
+            }
+            Random rnd = new Random();
+            String code = StringHelper.RandomNum(rnd, 4);
+            try {
+                verificationService.sendCode(phone, VerificationService.VerificationProject.hotedu, code, date, verificationType, codeType != null ? EnumHelper.getEnumType(CodeType.class, codeType) : CodeType.text);
+                result.setStatus(1);
+                result.setMessage("发送成功");
+                return result;
+            } catch (IllegalStateException ex) {
+                result.setMessage("验证码发送间隔为60秒");
+                return result;
+            } catch (IllegalArgumentException ex) {
+                result.setMessage("不合法的手机号");
+                return result;
+            } catch (NoSuchMethodException ex) {
+                //发送类别不受支持！
+                result.setMessage("短信发送通道不稳定，请重新尝试");
+                return result;
+            } catch (InterrelatedException ex) {
+                //第三方错误！
+                log.error("短信发送失败", ex);
+                result.setMessage("短信发送通道不稳定，请重新尝试");
+                return result;
+            }
+        }
+        return result;
+    }
+
+    /**
      * Created by cwb on 2015/8/11
      * 学员注册
      */
     @RequestMapping("/pc/register")
     @ResponseBody
-    public Result register(@RequestParam(required = false)String realName,@RequestParam(required = false)Integer sex,String phoneNo) {
+    public Result register(String phoneNo,String authCode) {
         Result result = new Result();
         String message = "";
+        Date date = new Date();
         int status = 0;
         if("".equals(phoneNo)||phoneNo==null) {
             message = "手机号不能为空";
+        }else if (!SysRegex.IsValidNum(authCode)) {//不合法的验证码
+            message = "无效的验证码";
+        }else if(!verificationService.verifyCode(phoneNo, VerificationService.VerificationProject.hotedu, authCode, date, VerificationType.BIND_REGISTER)) {
+            message = "错误的验证码";
         }else {
             boolean exist = memberService.isPhoneNoExist(phoneNo);
             if (exist) {
@@ -161,8 +229,6 @@ public class MemberController {
             } else {
                 Member mb = new Member();
                 Date d = new Date();
-                /*mb.setRealName(realName);
-                mb.setSex(sex);*/
                 mb.setPhoneNo(phoneNo);
                 mb.setLoginName(phoneNo);
                 mb.setEnabled(true);
