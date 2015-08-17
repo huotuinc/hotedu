@@ -610,7 +610,11 @@ $(function() {
                     $("#regErrInfo").text("");
                     $("#phoneErr").text("");
                     $("#phoneRig").text("");
-                    $("#regMsgInfo").text(result.message);
+                   // $("#regMsgInfo").text(result.message);
+                    alert("注册成功！");
+                    $("#username").val(result.message);
+                    $("#password").val(result.message.substring(7,11));
+                    $("#btn_login").click();
                 }
             },
             error:function(){

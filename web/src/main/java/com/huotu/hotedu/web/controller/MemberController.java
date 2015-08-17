@@ -169,11 +169,10 @@ public class MemberController {
                 mb.setRegisterDate(d);
                 loginService.newLogin(mb,phoneNo.substring(7));
                 status = 1;
-                message = "注册成功";
+                result.setMessage(mb.getPhoneNo());
             }
         }
         result.setStatus(status);
-        result.setMessage(message);
         return result;
     }
 
