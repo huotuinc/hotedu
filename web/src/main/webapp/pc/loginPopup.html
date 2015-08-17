@@ -23,11 +23,9 @@
                            placeholder="password" type="password"/>
 
                 </div>
-                <button id="btn_login" class="sign-in__button user-form__button" name="button" type="submit">
+                <div class="user-form__href" align="right"><a id="goToRegister" href="javascript:void(0)">免费注册</a></div>
+                <button id="btn_login" class="sign-in__button user-form__button" name="btn_login" type="submit">
                     登录
-                </button>
-                <button class="sign-in__button user-form__button" id="goToRegister" type="button">
-                    注册
                 </button>
             </form>
             <span style="color:red" id="loginFailedInfo" th:text="${errInfo}"></span>
@@ -54,25 +52,14 @@
                     <span style="color:green" id="phoneRig"/>
                 </p>
                 <p style="height:10px;"></p>
-                <p>
-                    <input class="ysw500 sign-in__field ys-form__field" id="regRealName" name="regRealName"
-                           placeholder="真实姓名" maxlength="20" type="text"/>
-                </p>
-
-                <p>
-
-                <div class="user-form__fieldset">
-                    &nbsp;&nbsp;&nbsp;&nbsp;性别：
-                    <input name="regSex" value="1" type="radio"/>
-                    &nbsp;男&nbsp;&nbsp;
-                    <input name="regSex" value="0" type="radio"/>
-                    &nbsp;女&nbsp;&nbsp;
-                </div>
+                <p style="margin: 0 auto;">
+                    <input class="ys-form__field" id="regMessage" name="regMessage"
+                           placeholder="短信验证码" maxlength="6" type="text" style="float: left; margin-top: 10px; margin-left:40px; width: 350px;"/>
+                    <button class="user-form__yanzheng" type="button">
+                        获取验证码
+                    </button>
                 </p>
                 <p style="text-align:center;">
-                    <button class="sign-in__button user-form__button" id="goToLogin" type="button">
-                        登录
-                    </button>
                     <button class="sign-in__button user-form__button" id="registerBtn" type="button">
                         提交
                     </button>
