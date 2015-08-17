@@ -252,19 +252,20 @@ h1 {
 	margin-right:100px;
 }
 .user-form__yanzheng {
-	display: inline-block;
-	white-space: nowrap;
-	border: none;
-	font: bold 14px/32px "微软雅黑";
-	color: #fcfcfc;
-	margin-top: 10px;
-	margin-bottom: 20px;
-	height: 47px;
-	width: 105px;
-	line-height: 45px;
-	cursor: pointer;
-	font: normal 17px "微软雅黑";
-	background-color: #258BFF;
+  display: inline-block;
+  white-space: nowrap;
+  border: none;
+  font: bold 14px/32px "微软雅黑";
+  color: #fcfcfc;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  height: 47px;
+  width: 105px;
+  line-height: 45px;
+  cursor: pointer;
+  font: normal 17px "微软雅黑";
+  background-color: #258BFF;
+  margin-left: -77px;
 }
 .user-form__button {
 	display: inline-block;
