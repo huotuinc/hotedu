@@ -53,11 +53,8 @@
                 </p>
                 <p style="height:10px;"></p>
                 <p style="margin: 0 auto;">
-                    <input class="ys-form__field" id="regMessage" name="regMessage"
-                           placeholder="短信验证码" maxlength="6" type="text" style="float: left; margin-top: 10px; margin-left:40px; width: 350px;"/>
-                    <button class="user-form__yanzheng" type="button">
-                        获取验证码
-                    </button>
+                    <input class="ys-form__field" id="regMessage" name="regMessage" placeholder="短信验证码" maxlength="6" type="text" style="float: left; margin-top: 10px; margin-left:40px; width:430px;"/>
+                    <input id="verify_btn" value="获取验证码" class="user-form__yanzheng" type="button" onclick="settime(this)" />
                 </p>
                 <p style="text-align:center;">
                     <button class="sign-in__button user-form__button" id="registerBtn" type="button">
