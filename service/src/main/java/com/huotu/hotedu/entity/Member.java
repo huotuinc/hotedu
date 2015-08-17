@@ -210,10 +210,6 @@ public class Member extends Login {
         this.certificateStatus = certificateStatus;
     }
 
-    @Override
-    public String getUsername() {
-        return realName;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -572,8 +572,8 @@ $(function() {
     $("#registerBtn").click(function(){
         var reg=/^(13|14|15|17|18)\d{9}$/;
         var phoneNo = $("#regPhoneNo").val();
-        var realName = $("#regRealName").val();
-        var sex = $("input[name='regSex']:checked").val();
+        /*var realName = $("#regRealName").val();
+        var sex = $("input[name='regSex']:checked").val();*/
         if(phoneNo=="") {
             $("#regMsgInfo").text("");
             $("#phoneErr").text("手机号不能为空");
@@ -584,7 +584,7 @@ $(function() {
             $("#phoneErr").text("请填入正确的手机号！");
             return;
         }
-        if(realName=="") {
+        /*if(realName=="") {
             $("#regMsgInfo").text("");
             $("#regErrInfo").text("姓名不能为空");
             return;
@@ -593,12 +593,12 @@ $(function() {
             $("#regMsgInfo").text("");
             $("#regErrInfo").text("请选择性别");
             return;
-        }
+        }*/
         $.ajax({
             url:"register",
             type:"post",
             dataType:"json",
-            data:{"phoneNo":phoneNo,"realName":realName,"sex":sex},
+            data:{"phoneNo":phoneNo},
             success:function(result){
                 if(result.status==0) {
                     $("#regMsgInfo").text("");

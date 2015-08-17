@@ -148,16 +148,12 @@ public class MemberController {
      */
     @RequestMapping("/pc/register")
     @ResponseBody
-    public Result register(String realName,Integer sex,String phoneNo) {
+    public Result register(@RequestParam(required = false)String realName,@RequestParam(required = false)Integer sex,String phoneNo) {
         Result result = new Result();
         String message = "";
         int status = 0;
-        if("".equals(realName)||realName==null) {
-            message = "姓名不能为空";
-        }else if("".equals(phoneNo)||phoneNo==null) {
+        if("".equals(phoneNo)||phoneNo==null) {
             message = "手机号不能为空";
-        }else if(sex==null) {
-            message = "请选择性别";
         }else {
             boolean exist = memberService.isPhoneNoExist(phoneNo);
             if (exist) {
@@ -165,8 +161,8 @@ public class MemberController {
             } else {
                 Member mb = new Member();
                 Date d = new Date();
-                mb.setRealName(realName);
-                mb.setSex(sex);
+                /*mb.setRealName(realName);
+                mb.setSex(sex);*/
                 mb.setPhoneNo(phoneNo);
                 mb.setLoginName(phoneNo);
                 mb.setEnabled(true);

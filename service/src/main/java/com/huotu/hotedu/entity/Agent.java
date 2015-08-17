@@ -157,10 +157,6 @@ public class Agent extends Login{
         this.sex = sex;
     }
 
-    @Override
-    public String getUsername() {
-        return name;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
