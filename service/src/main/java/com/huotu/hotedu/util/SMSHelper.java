@@ -4,7 +4,7 @@ import com.huotu.hotedu.entity.Result;
 
 public class SMSHelper {
 	private static String serverUrl = "http://222.73.117.158/msg/HttpBatchSendSM";
-	private static String account = "fenmao";
+	private static String account = "yunshang";
 	private static String pswd = "Txb123456";
 
 	public SMSHelper() {

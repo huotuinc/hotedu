@@ -1,6 +1,7 @@
 package com.huotu.hotedu.service.impl;
 
 import com.huotu.hotedu.common.exception.InterrelatedException;
+import com.huotu.hotedu.entity.Result;
 import com.huotu.hotedu.entity.VerificationCode;
 import com.huotu.hotedu.model.CodeType;
 import com.huotu.hotedu.model.VerificationType;
@@ -21,9 +22,11 @@ public abstract class AbstractVerificationService implements VerificationService
     @Autowired
     private VerificationCodeRepository verificationCodeRepository;
     /**
-     * 允许间隔60
+     * 允许重发时间间隔60
      */
     private int gapSeconds = 60;
+
+    private int invalidSeconds = 600;
 
     @Transactional
     public void sendCode(String mobile, VerificationService.VerificationProject project, String code, Date currentDate, VerificationType type, CodeType sentType)
@@ -39,38 +42,44 @@ public abstract class AbstractVerificationService implements VerificationService
             throw new NoSuchMethodException("还不支持语音播报");
         }
 
-        VerificationCode verificationCode = verificationCodeRepository.findByMobileAndTypeAndCodeType(mobile, type, sentType);
-        if (verificationCode != null) {
+        List<VerificationCode> codeList = verificationCodeRepository.findByMobileAndTypeAndCodeTypeAndSendTimeGreaterThan(mobile, type, sentType,new Date(currentDate.getTime() - gapSeconds * 1000));
+        if (codeList.size()>0) {
             //刚刚发送过
-            if (currentDate.getTime() - verificationCode.getSendTime().getTime() < gapSeconds * 1000) {
-                throw new IllegalStateException("刚刚发过");
-            }
+            throw new IllegalStateException("刚刚发过");
         } else {
-            verificationCode = new VerificationCode();
+            VerificationCode verificationCode = new VerificationCode();
             verificationCode.setMobile(mobile);
             verificationCode.setType(type);
             verificationCode.setCodeType(sentType);
+            verificationCode.setSendTime(currentDate);
+            verificationCode.setCode(code);
+            verificationCodeRepository.save(verificationCode);
+            doSend(project, verificationCode);
         }
-        verificationCode.setSendTime(currentDate);
-        verificationCode.setCode(code);
-        verificationCode = verificationCodeRepository.save(verificationCode);
-
-        doSend(project, verificationCode);
     }
 
     protected abstract void doSend(VerificationProject project, VerificationCode code) throws InterrelatedException;
 
     @Transactional
-    public boolean verifyCode(String mobile, VerificationProject project, String code, Date currentDate, VerificationType type) throws IllegalArgumentException {
-        if (!SysRegex.IsValidMobileNo(mobile)) {
-            throw new IllegalArgumentException("号码不对");
+    public Result verifyCode(String phoneNo,String code) throws IllegalArgumentException {
+        Result result = new Result();
+        if(!SysRegex.IsValidNum(code)) {
+            result.setMessage("无效的验证码");
+        }else {
+            List<VerificationCode> codeList = verificationCodeRepository.findByMobileAndCodeOrderBySendTimeDesc(phoneNo, code);
+            if (codeList.size() == 0) {
+                result.setMessage("错误的验证码");
+            } else {
+                VerificationCode verificationCode = codeList.get(0);
+                if ((verificationCode.getSendTime().getTime() + invalidSeconds * 1000) < new Date().getTime()) {
+                    result.setMessage("验证码已失效，请重新发送");
+                } else {
+                    result.setStatus(1);
+                    result.setMessage("验证码正确");
+                }
+            }
         }
-        List<VerificationCode> codeList = verificationCodeRepository.findByMobileAndTypeAndSendTimeGreaterThan(mobile, type, new Date(currentDate.getTime() - gapSeconds * 1000));
-        for (VerificationCode verificationCode : codeList) {
-            if (verificationCode.getCode().equals(code))
-                return true;
-        }
-        return false;
+        return result;
     }
 
     public int getGapSeconds() {
@@ -79,5 +88,13 @@ public abstract class AbstractVerificationService implements VerificationService
 
     public void setGapSeconds(int gapSeconds) {
         this.gapSeconds = gapSeconds;
+    }
+
+    public int getInvalidSeconds() {
+        return invalidSeconds;
+    }
+
+    public void setInvalidSeconds(int invalidSeconds) {
+        this.invalidSeconds = invalidSeconds;
     }
 }

@@ -16,20 +16,18 @@ import java.util.List;
 public interface VerificationCodeRepository extends JpaRepository<VerificationCode,Long> {
 
     /**
-     * 根据手机和类型返回验证码
-     * @param mobile
-     * @param type
-     * @param codeType
+     *
+     * @param code
      * @return
      */
-    VerificationCode findByMobileAndTypeAndCodeType(String mobile, VerificationType type, CodeType codeType);
+    List<VerificationCode> findByMobileAndCodeOrderBySendTimeDesc(String phoneNo, String code);
 
     /**
-     * 根据手机和类型返回验证码
+     *
      * @param mobile
      * @param type
-     * @param last 最晚许可的发送时间
+     * @param last 最晚的发送时间
      * @return
      */
-    List<VerificationCode> findByMobileAndTypeAndSendTimeGreaterThan(String mobile, VerificationType type, Date last);
+    List<VerificationCode> findByMobileAndTypeAndCodeTypeAndSendTimeGreaterThan(String mobile, VerificationType type,CodeType codeType, Date last);
 }

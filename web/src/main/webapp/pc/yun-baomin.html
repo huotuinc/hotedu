@@ -82,7 +82,7 @@
             <form action="yun-baomin.html">
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="realName" name="realName" placeholder="真实姓名"
-                           maxlength="20" type="text" th:value="${mbInfo}==null?'':${mbInfo.realName}" th:readonly="${mbInfo}==null?false:true"/>
+                           maxlength="20" type="text" th:value="${mbInfo}==null?'':${mbInfo.realName}" th:readonly="${mbInfo}==null?false:(${mbInfo.realName}==null?'':${mbInfo.realName})/>
                 </p>
 
                 <p class="ysdx">&nbsp;&nbsp;&nbsp;&nbsp;性别：
@@ -99,8 +99,8 @@
 
                 <p>
                     <select name="areaId" id="areaId" class="ysxlk" size="1">
-                        <option value="001">杭州市</option>
-                        <option value="000" style="display: none;" selected="selected">请选择考试地点</option>
+                        <option value="001">浙江省</option>
+                        <option value="000" style="display: none;" selected="selected">请选择报名区域</option>
                     </select>
                 </p>
                 <p style="text-align:center;">

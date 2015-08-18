@@ -1,6 +1,7 @@
 package com.huotu.hotedu.service;
 
 import com.huotu.hotedu.common.exception.InterrelatedException;
+import com.huotu.hotedu.entity.Result;
 import com.huotu.hotedu.model.CodeType;
 import com.huotu.hotedu.model.VerificationType;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,15 +70,10 @@ public interface VerificationService {
 
     /**
      * 验证该验证码
-     * @param mobile 接受者手机
-     * @param project 项目信息，比如短信内容包含什么来着
-     * @param code 验证码
-     * @param currentDate 当前日期
-     * @param type 验证码类型
      * @return true表示验证通过
      * @throws IllegalArgumentException 手机号码或者其他参数有误
      */
     @Transactional
-    boolean verifyCode(String mobile, VerificationProject project, String code, Date currentDate, VerificationType type) throws IllegalArgumentException;
+    Result verifyCode(String phoneNo,String code) throws IllegalArgumentException;
 
 }

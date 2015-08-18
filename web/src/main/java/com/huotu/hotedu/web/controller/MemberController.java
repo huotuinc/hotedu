@@ -172,7 +172,9 @@ public class MemberController {
         Date date = new Date();
         // **********************************************************
         // 发送短信前处理
-        if (!SysRegex.IsValidMobileNo(phone)) {
+        if("".equals(phone)||phone==null) {
+            result.setMessage("手机号不能为空");
+        }else if(!SysRegex.IsValidMobileNo(phone)) {
             result.setMessage("不合法的手机号");
         }else {
             if (checkPhoneNo(phone).getStatus() == 0) {
@@ -218,27 +220,29 @@ public class MemberController {
         int status = 0;
         if("".equals(phoneNo)||phoneNo==null) {
             message = "手机号不能为空";
-        }else if (!SysRegex.IsValidNum(authCode)) {//不合法的验证码
-            message = "无效的验证码";
-        }else if(!verificationService.verifyCode(phoneNo, VerificationService.VerificationProject.hotedu, authCode, date, VerificationType.BIND_REGISTER)) {
-            message = "错误的验证码";
         }else {
             boolean exist = memberService.isPhoneNoExist(phoneNo);
             if (exist) {
                 message = "该手机号已被注册";
             } else {
-                Member mb = new Member();
-                Date d = new Date();
-                mb.setPhoneNo(phoneNo);
-                mb.setLoginName(phoneNo);
-                mb.setEnabled(true);
-                mb.setRegisterDate(d);
-                loginService.newLogin(mb,phoneNo.substring(7));
-                status = 1;
-                result.setMessage(mb.getPhoneNo());
+                result = verificationService.verifyCode(phoneNo,authCode);
+                if(result.getStatus()==0) {
+                    message = result.getMessage();
+                }else {
+                    Member mb = new Member();
+                    Date d = new Date();
+                    mb.setPhoneNo(phoneNo);
+                    mb.setLoginName(phoneNo);
+                    mb.setEnabled(true);
+                    mb.setRegisterDate(d);
+                    loginService.newLogin(mb, phoneNo.substring(7));
+                    status = 1;
+                    message = mb.getPhoneNo();
+                }
             }
         }
         result.setStatus(status);
+        result.setMessage(message);
         return result;
     }
 

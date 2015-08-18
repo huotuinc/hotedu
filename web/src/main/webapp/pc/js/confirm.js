@@ -535,20 +535,21 @@ $(function() {
         $("#regDiv").hide();
         $("#asaimsg").show();
     });
-    $("#regPhoneNo").blur(function(){
+    $("#regPhoneNo").blur(checkPhoneNo);
+    function checkPhoneNo() {
         var reg=/^(13|14|15|17|18)\d{9}$/;
         var phoneNo = $("#regPhoneNo").val();
         if(phoneNo=="") {
             $("#phoneRig").text("");
             $("#phoneErr").text("手机号不能为空");
             $("#regPhoneNo").focus();
-            return;
+            return false;
         }
         if(!reg.test(phoneNo)){
             $("#phoneRig").text("");
             $("#phoneErr").text("请填入正确的手机号！");
             $("#regPhoneNo").focus();
-            return;
+            return false;
         }
         $.ajax({
             url:"checkPhoneNo",
@@ -566,9 +567,10 @@ $(function() {
             },
             error:function(){
                 $.MsgBox.Alert("系统异常","请求失败");
+                return false;
             }
         });
-    });
+    }
     $("#registerBtn").click(function(){
         var reg=/^(13|14|15|17|18)\d{9}$/;
         var phoneNo = $("#regPhoneNo").val();
@@ -584,8 +586,7 @@ $(function() {
             return;
         }
         if(authCode=="") {
-            $("#regMsgInfo").text("");
-            $("#authCodeErr").text("验证码不能为空");
+            $.MsgBox.Alert("温馨提示","验证码不能为空");
             return;
         }
         $.ajax({
@@ -600,7 +601,6 @@ $(function() {
                 }else if(result.status==1) {
                     $("#regPhoneNo").val("");
                     $("#regRealName").val("");
-                    $("input[name='regSex']").removeAttr('checked');
                     $("#regErrInfo").text("");
                     $("#phoneErr").text("");
                     $("#phoneRig").text("");
@@ -617,12 +617,6 @@ $(function() {
     });
     $("#regAuthCodeBtn").click(function() {
         var phoneNo = $("#regPhoneNo").val();
-        if(phoneNo=="") {
-            $("#regMsgInfo").text("");
-            $("#phoneErr").text("请先填写手机号");
-            $("#regPhoneNo").focus();
-            return;
-        }
         $.ajax({
             url:"sendSMS",
             type:"post",
@@ -630,7 +624,8 @@ $(function() {
             data:{"phone":phoneNo,"type":1},
             success:function(result) {
                 if(result.status==1) {
-                    settime($("#regAuthCodeBtn"));
+                    var o = document.getElementById("regAuthCodeBtn");
+                    settime(o);
                     $.MsgBox.Alert("温馨提示",result.message);
                 }else if(result.status==0) {
                     $.MsgBox.Alert("错误信息",result.message);
@@ -641,6 +636,21 @@ $(function() {
             }
         });
     });
+    var wait=60;
+    function settime(o) {
+        if (wait == 0) {
+            o.removeAttribute("disabled");
+            o.setAttribute("style","background-color : #258BFF");
+            o.value="免费获取验证码";
+            wait = 60;
+        } else {
+            o.setAttribute("disabled", true);
+            o.setAttribute("style","background-color : #999999");
+            o.value="重新发送(" + wait + ")";
+            wait--;
+            setTimeout(function() {settime(o)}, 1000)
+        }
+    }
 });
 function hideRegisterForm() {
     $("#regPhoneNo").val("");

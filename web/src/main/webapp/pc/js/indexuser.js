@@ -148,21 +148,6 @@ function addMember(){
 	});
 }
 
-var wait=60;
-function settime(o) {
-	if (wait == 0) {
-		o.removeAttribute("disabled");
-		o.setAttribute("style","background-color : #258BFF");
-		o.value="免费获取验证码";
-		wait = 60;
-	} else {
-		o.setAttribute("disabled", true);
-		o.setAttribute("style","background-color : #999999");
-		o.value="重新发送(" + wait + ")";
-		wait--;
-		setTimeout(function() {settime(o)}, 1000)
-	}
-}
 
 
 
