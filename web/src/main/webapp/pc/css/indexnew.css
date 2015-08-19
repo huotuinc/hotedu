@@ -1222,7 +1222,7 @@ button.btn, input.btn {
 	width: 177px
 }
 .smallbox {
-	width: 238px;
+	width:319px;
 	padding-bottom: 1px;
 	float: left;
 	margin-left: 10px;
@@ -1230,10 +1230,10 @@ button.btn, input.btn {
 	min-height:186px;
 }
 .splb {
-	width: 238px;
+	width:320px;
 	background-color: #fff;
 	border: solid 1px #888;
-	height: 134px
+	height:180px
 }
 .sptit {
 	font-size: 14px;
