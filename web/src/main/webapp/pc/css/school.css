@@ -1,0 +1,246 @@
+.bigbox {
+	min-width: 1240px;
+}
+.section1 {
+	background: url(../images/pc1.jpg) 50%;
+}
+.section2 {
+	background: url(../images/pc2.jpg) 50%;
+}
+.section3 {
+	background: url(../images/pc3.jpg) 50%;
+}
+.section4 {
+	background: url(../images/pc4.jpg) 50%;
+}
+.section5 {
+	background: url(../images/pc5.jpg) 50%;
+}
+.section6 {
+	background: url(../images/pc6.jpg) 50%;
+}
+.school-list {
+	position: relative;
+	margin: 0 auto;
+	width: 80px;
+	height: 615px;
+	background: url(../images/navigation.png) no-repeat center;
+	top: 0;
+	left: 0px;
+}
+.school-bar {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 80px;
+	z-index: 1;
+}
+.tab-list {
+	color: #fafafa;
+	position: relative;
+	top: 288px;
+	text-align: center;
+	font-size: 14px;
+}
+.tab-list li.li-active {
+	background-color: #00dfb8;
+}
+.tab-list li {
+	padding: 8px 0px 7px 0px;
+	cursor: pointer;
+	overflow: hidden;
+}
+.pcfont1 {
+	background: url(../images/font1.png) no-repeat;
+	position: absolute;
+	top: 142px;
+	width: 653px;
+	height: 234px;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+}
+.boxone {
+	margin-right: auto;
+	margin-left: auto;
+	width: 1240px;
+	position: relative;
+	top: -450px;
+}
+.buttomone {
+	background-color: #00dfb8;
+	color: #fff;
+	font-size: 16px;
+	position: absolute;
+	width: 300px;
+	text-align: center;
+	padding: 14px 0px;
+	border-radius: 30px;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	top: 600px;
+}
+.boxtwo {
+	margin-right: auto;
+	margin-left: auto;
+	width: 1240px;
+}
+.pcfont2 {
+	position: absolute;
+	top: -220px;
+	width: 532px;
+	height: 148px;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+}
+.pcfour {
+	margin: 0 auto;
+	position: absolute;
+	left: 0;
+	right: 0;
+	width: 1000px;
+}
+.pcfour span {
+	margin: 10px;
+}
+.boxthree {
+	margin-right: auto;
+	margin-left: auto;
+	width: 1240px;
+	position: relative;
+	top: -46px;
+}
+.on {
+	background-color: #00dfb8;
+	width: 100px;
+	height: 6px;
+	clear: both;
+}
+.massages {
+	float: left;
+	font-size: 22px;
+	line-height: 6px;
+}
+.more {
+	float: right;
+	font-size: 14px;
+	color: #4A4A4A;
+}
+.xian {
+	border-bottom: 1px solid #8E8E8E
+}
+.ulmages {
+	width: 1000px;
+	margin: 0 auto;
+	padding: 50px 0px;
+}
+.ulliimg {
+	float: left;
+	padding: 0px 10px;
+}
+.ullifont {
+	float: left;
+	width: 700px;
+	margin-left: 15px;
+}
+.ullip1 {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	display: inline-block;
+	font-size: 16px;
+	line-height: 20px;
+}
+.ullip2 {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	display: inline-block;
+	height: 40px;
+	font-size: 14px;
+	margin-top: 8px;
+}
+.newmages {
+	background-color: #ee9327;
+	font-size: 12px;
+	padding: 5px;
+	color: #fff;
+	width: 49px;
+}
+.newtime {
+	font-size: 12px;
+	padding: 5px;
+	float: right;
+	color: #4A4A4A;
+}
+.ptop {
+	margin-top: 49px;
+}
+.pcfont4 {
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+}
+.titfour {
+	color: #484356;
+	font-size: 21px;
+	margin-bottom: 18px;
+}
+.ulfour {
+	width: 1000px;
+	margin: 0 auto;
+}
+.ulfour li {
+	float: left;
+	margin-right: 10px;
+}
+.ulfour .liblue {
+	background-color: #77b3e6;
+	color: #fff;
+	width: 240px;
+	height: 69px;
+	text-align: center;
+	line-height: 33px;
+	padding: 3px 0px;
+}
+.liblue b {
+	font-size: 18px;
+}
+.ulfour .lipink {
+	background-color: #f88ba7;
+	color: #fff;
+	width: 190px;
+	height: 69px;
+	text-align: center;
+	line-height: 33px;
+	padding: 3px 0px;
+}
+.boxfive {
+	margin-right: auto;
+	margin-left: auto;
+	width: 1240px;
+	position: relative;
+	top: -637px;
+}
+.pcfont5 {
+	position: absolute;
+	top: 252px;
+	width: 535px;
+	height: 116px;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+}
+.wd-green {
+	background: url(../images/wd1.png) no-repeat;
+	width: 408px;
+	height: 381px;
+	position: absolute;
+	margin-top: 412px;
+}
+.ulfive {
+	position: absolute;
+	margin-top: 385px;
+	margin-left: 179px;
+}
