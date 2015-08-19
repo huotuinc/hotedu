@@ -120,4 +120,4 @@ textarea:focus,input[type="text"]:focus,input[type="password"]:focus,input[type=
 .list-page a{margin:0 5px;padding:2px 7px;border:1px solid #ccc;background:#f3f3f3;}
 .list-page a:hover{background:#e4e4e4;border:1px solid #908f8f;}
 .list-page .current{margin:0 5px;padding:2px 7px;background:#f60;border:1px solid #fe8101;color:#fff;}
-textarea{height: 300px; resize:none;}
+textarea{height: 300px; width: 99%; resize:none;}
