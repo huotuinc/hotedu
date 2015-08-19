@@ -160,7 +160,8 @@ public class VideoController {
 
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveVideo")
-    public String modifySaveVideo(Long id,String videoName,String content,String playUrl,Boolean free,@RequestParam("thumbnail") MultipartFile file) throws Exception{
+    public String modifySaveVideo(Long id,String videoName,String content,String playUrl,Integer videoNo,Boolean complete,
+                                  Boolean free,@RequestParam("thumbnail") MultipartFile file) throws Exception{
         Video video=videoService.findOneById(id);
         if(file.getSize()!=0){
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
@@ -173,6 +174,8 @@ public class VideoController {
         video.setVideoName(videoName);
         video.setContent(content);
         video.setPlayUrl(playUrl);
+        video.setVideoNo(videoNo);
+        video.setComplete(complete);
         video.setUploadTime(new Date());
         videoService.modifyVideo(video);
         return "redirect:/backend/loadVideo";
@@ -180,7 +183,7 @@ public class VideoController {
 
     /**
      * 删除视频
-     * @param id
+     * @param id 删除视频的ID
      * @return
      */
     @PreAuthorize("hasRole('EDITOR')")
