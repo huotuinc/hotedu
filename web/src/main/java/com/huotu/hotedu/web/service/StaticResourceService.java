@@ -61,6 +61,11 @@ public interface StaticResourceService {
     public String VIDEO_ICON="image/video/";
 
     /**
+     * 富文本中的图片
+     */
+    public String RICHTEXT_IMG  ="richText/attached/";
+
+    /**
      * 上传资源
      *
      * @param path 资源路径

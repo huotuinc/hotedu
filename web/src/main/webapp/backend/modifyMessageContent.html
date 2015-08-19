@@ -20,7 +20,6 @@
             th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
     <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
             th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
-</head>
 <!--@thymesVar id="allMessageContentList" type="org.springframework.data.domain.Page<com.huotu.hotedu.entity.MessageContent>"-->
 <body>
 <div class="topbar-wrap white">
@@ -140,7 +139,7 @@
                             </tr>
                             <tr>
                                 <th><i class="require-red">*</i>描述：</th>
-                                <td><textarea title="" name="content" th:text="${messageContent.content}" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
+                                <td><textarea title="" name="content" class="common-textarea" th:text="${messageContent.content}" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
                             </tr>
                             <tr>
                                 <th>置顶</th>
@@ -163,5 +162,8 @@
     </div>
     <!--/main-->
 </div>
+<script charset="utf-8" src="richText/kindeditor-min.js" th:src="@{/backend/richText/kindeditor-min.js}"></script>
+<script charset="utf-8" src="richText/lang/zh_CN.js" th:src="@{/backend/richText/lang/zh_CN.js}"></script>
+<script charset="utf-8" src="richText/init.js" th:src="@{/backend/richText/init.js}"></script>
 </body>
 </html>

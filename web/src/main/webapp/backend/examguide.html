@@ -125,11 +125,11 @@
             <div class="search-content">
                 <form action="#" th:action="@{/backend/searchExamGuide}" method="get">
                     <table class="search-tab">
-                        <td>
+                        <tr>
                             <th width="10"></th>
-                            <td>
-                                <input class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}" id="keywords" maxlength="200" type="text"/></td></td>
+                                <td><input class="common-text" placeholder="关键字" name="keywords" th:value="${keywords}" id="keywords"  axlength="200" type="text"/></td>
                             <td><input class="btn btn-primary btn2" name="sub" value="搜索" type="submit"/></td>
+                        </tr>
                     </table>
                 </form>
             </div>

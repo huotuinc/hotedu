@@ -157,6 +157,7 @@ function delVideoByFileId(obj) {
 
 function check_save(h) {
     $.MsgBox.Confirm("温馨提示", "即将保存内容，确定继续吗？", function () {
+        editor.sync();
         $("#editorForm").submit();
     });
 }

@@ -101,6 +101,7 @@ public class MessageContentController {
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/addMessageContent")
     public String addMessageContent(){
+
         return "/backend/newMessageContent";
     }
 
@@ -224,5 +225,4 @@ public class MessageContentController {
         model.addAttribute("messageContent",messageContent);
         return turnPage;
     }
-
 }
