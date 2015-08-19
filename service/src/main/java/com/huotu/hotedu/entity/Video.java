@@ -51,6 +51,19 @@ public class Video implements Serializable {
      */
     private boolean complete;
 
+    /**
+     * 视频时长
+     */
+    private String duration;
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
     public int getVideoNo() {
         return videoNo;
     }

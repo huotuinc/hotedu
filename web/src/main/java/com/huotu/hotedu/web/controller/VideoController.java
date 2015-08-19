@@ -44,7 +44,9 @@ public class VideoController {
     public static final int PAGE_SIZE = 5;//每张页面的记录数
     public static final int PAGE_SIZE_F = 21;
 
-    //后台显示所有视频信息
+    /**
+     * 后台显示所有视频信息
+     */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/loadVideo")
     public String searchVideo(@RequestParam(required = false) Integer pageNo,
@@ -76,42 +78,34 @@ public class VideoController {
         return turnPage;
     }
 
-
+    /**
+     * 前台显示所有视频信息
+     */
     @RequestMapping("/pc/loadVideo")
-    public String loadVideo(@RequestParam(required = false) Integer pageNo,
-                            @RequestParam(required = false) String keywords,Model model) throws Exception {
-        String turnPage = "/pc/yun-jxspnew";
-        if (pageNo == null || pageNo < 0) {
-            pageNo = 0;
+    public String loadVideo(Model model) throws Exception {
+        String turnPage = "/pc/yun-jxspnewone";
+        List<Video> videoList1=videoService.loadPcSmallVideo(0, 6).getContent();
+        for(Video v1:videoList1){
+            v1.setThumbnail(staticResourceService.getResource(v1.getThumbnail()).toString());
         }
-        Page<Video> pages = videoService.searchVideo(pageNo, PAGE_SIZE_F, keywords);
-        long totalRecords = pages.getTotalElements();
-        int numEl = pages.getNumberOfElements();
-        if (numEl == 0) {
-            pageNo = pages.getTotalPages() - 1;
-            if (pageNo < 0) {
-                pageNo = 0;
-            }
-            pages = videoService.searchVideo(pageNo, PAGE_SIZE_F, keywords);
-            totalRecords = pages.getTotalElements();
+        List<Video> videoList2=videoService.loadPcSmallVideo(1, 6).getContent();
+        for(Video v2:videoList2){
+            v2.setThumbnail(staticResourceService.getResource(v2.getThumbnail()).toString());
         }
-        List<Video> video1 = new ArrayList<>();
-        List<Video> videos1 = new ArrayList<>();
-        int sum = 0;
-        for (Video video : pages) {
-            video.setThumbnail(staticResourceService.getResource(video.getThumbnail()).toURL().toString());
-            if(sum==0) {
-                video1.add(video);
-            }else if (sum < 21) {
-                videos1.add(video);
-            }
-            sum++;
+        List<Video> videoList3=videoService.loadPcSmallVideo(2, 6).getContent();
+        for(Video v3:videoList3){
+            v3.setThumbnail(staticResourceService.getResource(v3.getThumbnail()).toString());
         }
-        model.addAttribute("video1", video1);
-        model.addAttribute("videos1", videos1);
-        model.addAttribute("totalPages", pages.getTotalPages());
-        model.addAttribute("pageNo", pageNo);
-        model.addAttribute("totalRecords", totalRecords);
+        List<Video> videoList4=videoService.loadPcSmallVideo(3, 6).getContent();
+        for(Video v4:videoList4){
+            v4.setThumbnail(staticResourceService.getResource(v4.getThumbnail()).toString());
+        }
+
+        model.addAttribute("videoList1",videoList1);
+        model.addAttribute("videoList2",videoList2);
+        model.addAttribute("videoList3",videoList3);
+        model.addAttribute("videoList4",videoList4);
+
         return turnPage;
     }
 

@@ -24,39 +24,27 @@ public class VideoService {
     VideoRepository videoRepository;
 
     //分页
-    public Page<Video> searchVideo(int n,int pagesize,String keyword) {
+    public Page<Video> searchVideo(int n, int pagesize, String keyword) {
         return videoRepository.findAll(new Specification<Video>() {
             @Override
             public Predicate toPredicate(Root<Video> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                if ("".equals(keyword)||keyword==null) {
+                if ("".equals(keyword) || keyword == null) {
                     return null;
                 }
                 return cb.or(cb.like(root.get("videoName").as(String.class), "%" + keyword + "%"));
             }
-        },new PageRequest(n, pagesize));
+        }, new PageRequest(n, pagesize));
     }
 
-//    public Page<Video> searchVideoById(int n,int pageSize,long id) {
-//        return videoRepository.findAll(new Specification<Video>() {
-//            @Override
-//            public Predicate toPredicate(Root<Video> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-//                if (id==0) {
-//                    return null;
-//                }
-//                return cb.or(cb.equal(root.get("videoName").as(Long.class), id));
-//            }
-//        },new PageRequest(n, pageSize));
-//    }
-
-    public void delVideo(Long id){
+    public void delVideo(Long id) {
         videoRepository.delete(id);
     }
 
-    public void addVideo(Video video){
+    public void addVideo(Video video) {
         videoRepository.save(video);
     }
 
-    public void modifyVideo(Video video){
+    public void modifyVideo(Video video) {
         videoRepository.save(video);
     }
 
@@ -66,5 +54,17 @@ public class VideoService {
 
     public List<Video> findByComplete(boolean complete) {
         return videoRepository.findByComplete(complete);
+    }
+
+    /**
+     * 前台加载video页面
+     */
+    public Page<Video> loadPcSmallVideo(int n, int pageSize) {
+        return videoRepository.findAll(new Specification<Video>() {
+            @Override
+            public Predicate toPredicate(Root<Video> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                return cb.isFalse(root.get("complete").as(Boolean.class));
+            }
+        }, new PageRequest(n, pageSize));
     }
 }
