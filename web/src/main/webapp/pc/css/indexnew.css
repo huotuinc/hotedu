@@ -138,21 +138,9 @@
 	position: absolute;
 	top: 64px;
 	z-index: 1;
-	margin-left: -39px;
+	margin-left: -52px;
 	color: #fff;
-	width: 52px;
-	text-align: center;
-	line-height: 20px;
-}
-.lbpop {
-	background: rgba(60, 60, 60, 0.5);
-	padding: 10px 40px;
-	position: absolute;
-	top: 53px;
-	z-index: 1;
-	margin-left: -50px;
-	color: #fff;
-	width: 52px;
+	width: 76px;
 	text-align: center;
 	line-height: 20px;
 }
@@ -162,7 +150,7 @@
 	white-space: nowrap;
 	overflow: hidden;
 	display: inline-block;
-	width: 53px;
+	width: 79px;
 	height: 20px;
 }
 .lbpoo {
@@ -171,9 +159,9 @@
 	position: absolute;
 	top: 45px;
 	z-index: 1;
-	margin-left: -36px;
+	margin-left: -53px;
 	color: #fff;
-	width: 52px;
+	width: 82px;
 	text-align: center;
 	line-height: 20px;
 }
@@ -183,7 +171,7 @@
 	white-space: nowrap;
 	overflow: hidden;
 	display: inline-block;
-	width: 53px;
+	width: 83px;
 	height: 20px;
 }
 .lodingg {

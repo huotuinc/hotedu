@@ -23,8 +23,7 @@
         <li><a href="javascript:void(0)" th:href="@{/pc/loadTutors}">师资力量</a></li>
         <li><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
         <li>
-            <a href="javascript:void(0)" th:if="${#authentication.name}=='anonymousUser'" onclick="javascript:pleaseLoginFirst()">考试指南</a>
-            <a href="yun-kaoshizn.html" th:if="${#authentication.name}!='anonymousUser'" th:href="@{/pc/loadExamGuide}">考试指南</a>
+            <a href="javascript:void(0)" th:href="@{/pc/loadPeixun}">培训内容</a>
         </li>
         <li><a href="#">招|应聘</a></li>
         <li id="loginLi" style="padding:0px 0px 0px 20px;"
