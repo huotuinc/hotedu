@@ -24,15 +24,19 @@
                 <li><a href="#" th:href="@{/pc/loadTutors}">师资力量</a></li>
                 <li><a href="#" th:href="@{/pc/loadVideo}">教学视频</a></li>
                 <li>
-                    <a href="javascript:void(0)" th:if="${#authentication.name}=='anonymousUser'" onclick="javascript:pleaseLoginFirst()">考试指南</a>
-                    <a href="yun-kaoshizn.html" th:if="${#authentication.name}!='anonymousUser'" th:href="@{/pc/loadExamGuide}">考试指南</a>
+                    <a href="javascript:void(0)" th:if="${#authentication.name}=='anonymousUser'"
+                       onclick="javascript:pleaseLoginFirst()">考试指南</a>
+                    <a href="yun-kaoshizn.html" th:if="${#authentication.name}!='anonymousUser'"
+                       th:href="@{/pc/loadExamGuide}">考试指南</a>
                 </li>
                 <li><a href="#">招|应聘</a></li>
                 <!--@thymesVar id="style" type="java.lang.String"-->
                 <li id="userLi" style="padding:0px;">
                     <a id="memberLi" href="#"><img class="lodingimgi" src="images/toux.png" width="100%"/></a><!--会员头像-->
-                    <p class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
-                    <p class="lbpo"><a href="#" id="personalCenter_href" th:href="@{/pc/loadPersonalCenter}" th:text="${#authentication.name}">个人中心</a>
+                    <p class="zhizheno"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+
+                    <p class="lbpoo"><a href="#" id="personalCenter_href" th:href="@{/pc/loadPersonalCenter}"
+                                       th:text="${#authentication.name}">个人中心</a>
                         <a href="#" onclick="showChangePwdForm()">修改密码</a>
                         <a href="#" th:href="@{/logout}">退出</a></p>
                 </li>
@@ -68,11 +72,12 @@
 
                 <p>班级：<span th:text="${mb.theClass==null}?'未安排':${mb.theClass.className}">201204第一期</span></p>
 
-                <p>报名时间：<span th:text="${mb.applyDate}==null?'':${#dates.format(mb.applyDate, 'yyyy-MM-dd HH:mm:ss')}">2105.01.01</span></p>
+                <p>报名时间：<span th:text="${mb.applyDate}==null?'':${#dates.format(mb.applyDate, 'yyyy-MM-dd HH:mm:ss')}">2105.01.01</span>
+                </p>
 
-                <p><span>考试通过：<b><span th:text="${mb.passed}==0?'还未考试':(${mb.passed}==1?'通过':'未通过')">未知</span></b></span>&nbsp;&nbsp;&nbsp;<span>考试时间：<b><span
-                        th:text="${mb.theClass==null}?'未安排':(${mb.theClass.exam==null}?'未安排':${#dates.format(mb.theClass.exam.examDate, 'yyyy-MM-dd HH:mm:ss')})">未知</span></b></span>&nbsp;&nbsp;&nbsp;<span>考试地点：<b><span
-                        th:text="${mb.theClass==null}?'未安排':(${mb.theClass.exam==null}?'未安排':${mb.theClass.exam.examAddress})">未知</span></b></span>
+                <p><span>考试通过：<b><span th:text="${mb.passed}==0?'还未考试':(${mb.passed}==1?'通过':'未通过')">未知</span></b></span>&nbsp;&nbsp;&nbsp;
+                    <span>考试时间：<b><span th:text="${mb.theClass==null}?'未安排':(${mb.theClass.exam==null}?'未安排':${#dates.format(mb.theClass.exam.examDate, 'yyyy-MM-dd HH:mm:ss')})">未知</span></b></span>&nbsp;&nbsp;&nbsp;
+                    <br/><span>考试地点：<b><span th:text="${mb.theClass==null}?'未安排':(${mb.theClass.exam==null}?'未安排':${mb.theClass.exam.examAddress})">未知</span></b></span>
                 </p>
             </li>
             <li class="lirightp">
@@ -133,39 +138,52 @@
 <!--申请领证弹窗-->
 <div style="display:none;" class="ystci" id="applyForCertificateDiv">
     <div class="box-ysi">
-        <P style="text-align:right;"><a href="#" onclick="$('#applyForCertificateDiv').hide();"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+        <P style="text-align:right;"><a href="#" onclick="$('#applyForCertificateDiv').hide();"><FONT
+                style="color:#111; font-size:20px;">×</FONT></a></P>
+
         <div class="ys761 ystx" style="margin-top: 10px;">
-                <div class="config-items">
-                    <div class="result-content">
-                        <table width="100%" class="insert-tab">
-                            <tbody>
-                            <tr>
-                                <th><i class="require-red">*</i>上传一寸照：</th>
-                                <td>
-                                    <img id="img_photo" th:src="${picUrl}==1?${certificate.pictureUri}" src="images/toux.png" style="width: 50px; height: auto;"/>
-                                    <input id="pictureImg" name="pictureImg" type="file"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><i class="require-red">*</i>收件人：</th>
-                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="receiveName" name="receiveName" th:value="${certificate}==null?'':${certificate.receiveName}" maxlength="20" type="text" size="50" class="common-text"/></td>
-                            </tr>
-                            <tr>
-                                <th><i class="require-red">*</i>收件地址：</th>
-                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="receiveAddress" name="receiveAddress" th:value="${certificate}==null?'':${certificate.receiveAddress}" title="" maxlength="50" type="text" value="" size="50" class="common-text"/></td>
-                            </tr>
-                            <tr>
-                                <th><i class="require-red">*</i>联系电话：</th>
-                                <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="phoneNo" name="phoneNo" th:value="${certificate}==null?'':${certificate.phoneNo}" title="" maxlength="20" type="text" value="" size="50" class="common-text"/></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <p style="height:10px"></p>
-                        <div style="float:right;">
-                            <button title="" type="button" class="btni btn-primaryi btn6 mr10" onclick="btn_applyForCertificateSubmit()">提交</button>
-                        </div>
+            <div class="config-items">
+                <div class="result-content">
+                    <table width="100%" class="insert-tab">
+                        <tbody>
+                        <tr>
+                            <th><i class="require-red">*</i>上传一寸照：</th>
+                            <td>
+                                <img id="img_photo" th:src="${picUrl}==1?${certificate.pictureUri}"
+                                     src="images/toux.png" style="width: 50px; height: auto;"/>
+                                <input id="pictureImg" name="pictureImg" type="file"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><i class="require-red">*</i>收件人：</th>
+                            <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="receiveName"
+                                       name="receiveName" th:value="${certificate}==null?'':${certificate.receiveName}"
+                                       maxlength="20" type="text" size="50" class="common-text"/></td>
+                        </tr>
+                        <tr>
+                            <th><i class="require-red">*</i>收件地址：</th>
+                            <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="receiveAddress"
+                                       name="receiveAddress"
+                                       th:value="${certificate}==null?'':${certificate.receiveAddress}" title=""
+                                       maxlength="50" type="text" value="" size="50" class="common-text"/></td>
+                        </tr>
+                        <tr>
+                            <th><i class="require-red">*</i>联系电话：</th>
+                            <td><input style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;" id="phoneNo"
+                                       name="phoneNo" th:value="${certificate}==null?'':${certificate.phoneNo}" title=""
+                                       maxlength="20" type="text" value="" size="50" class="common-text"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p style="height:10px"></p>
+
+                    <div style="float:right;">
+                        <button title="" type="button" class="btni btn-primaryi btn6 mr10"
+                                onclick="btn_applyForCertificateSubmit()">提交
+                        </button>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>
@@ -173,43 +191,48 @@
 <!--修改密码弹窗-->
 <div id="showChangePwdDiv" style="display:none" class="ystc">
     <div class="box-ys" width="462px">
-            <P style="text-align:right;"><a href="#" onclick="$('#showChangePwdDiv').hide();$('#changePwdSuccess').text('');$('#changePwdFailed').text('')"><FONT style="color:#111; font-size:20px;">×</FONT></a></P>
-            <p style="height:20px"></p>
-            <table width="100%" class="insert-tab" style="padding-left:20px" >
-                <tbody>
-                <tr>
-                    <th><i class="require-red">*</i>旧密码：</th>
-                    <td><input id="oldPwd" style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;"
-                               type="password" size="20"
-                               class="common-text"/>
-                    </td>
-                </tr>
-                <tr>
-                    <th><i class="require-red">*</i>新密码：</th>
-                    <td><input id="newPwd" style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;"
-                               type="password" size="20"
-                               class="common-text"/></td>
-                </tr>
-                <tr>
-                    <th><i class="require-red">*</i>确认密码：</th>
-                    <td><input id="confirmPwd" style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;"
-                               type="password" size="20"
-                               class="common-text"/></td>
-                </tr>
-                </tbody>
-            </table>
-            <p style="height:20px"/>
-            <div style="float:right;">
-                <button type="button" class="btni btn-primaryi btn6 mr10" id="submitNewPwdButton">提交</button>
-            </div>
-            <span id="changePwdSuccess" style="color:blue;"/>
-            <span id="changePwdFailed" style="color:red;"/>
+        <P style="text-align:right;"><a href="#"
+                                        onclick="$('#showChangePwdDiv').hide();$('#changePwdSuccess').text('');$('#changePwdFailed').text('')"><FONT
+                style="color:#111; font-size:20px;">×</FONT></a></P>
+
+        <p style="height:20px"></p>
+        <table width="100%" class="insert-tab" style="padding-left:20px">
+            <tbody>
+            <tr>
+                <th><i class="require-red">*</i>旧密码：</th>
+                <td><input id="oldPwd" style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;"
+                           type="password" size="20"
+                           class="common-text"/>
+                </td>
+            </tr>
+            <tr>
+                <th><i class="require-red">*</i>新密码：</th>
+                <td><input id="newPwd" style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;"
+                           type="password" size="20"
+                           class="common-text"/></td>
+            </tr>
+            <tr>
+                <th><i class="require-red">*</i>确认密码：</th>
+                <td><input id="confirmPwd" style=" background-color: #F1F1F1;border: 1px solid #F1F1F1;"
+                           type="password" size="20"
+                           class="common-text"/></td>
+            </tr>
+            </tbody>
+        </table>
+        <p style="height:20px"/>
+
+        <div style="float:right;">
+            <button type="button" class="btni btn-primaryi btn6 mr10" id="submitNewPwdButton">提交</button>
+        </div>
+        <span id="changePwdSuccess" style="color:blue;"/>
+        <span id="changePwdFailed" style="color:red;"/>
     </div>
 </div>
 <!--修改密码弹窗end-->
 <div>
     <div id="asaimsg" class="AsaiDivShow">
-        <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
+        <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
+                                                             onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
             <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
 
         <div class="sign-in">
@@ -240,51 +263,51 @@
     }
 </script>
 <script type="text/javascript" th:inline="javascript">
-    $(function(){
-        $("#btn_applyCertificate").click(function(){
+    $(function () {
+        $("#btn_applyCertificate").click(function () {
             /*<![CDATA[*/
             var memberId = [[${mb.id}]];
             /*]]>*/
             $.ajax({
-                url:"checkIsPassExam",
-                type:"post",
-                data:{"id":memberId},
-                dataType:"json",
-                success:function(result){
-                    if(result.status==1){
+                url: "checkIsPassExam",
+                type: "post",
+                data: {"id": memberId},
+                dataType: "json",
+                success: function (result) {
+                    if (result.status == 1) {
                         $('#applyForCertificateDiv').show()
-                    }else if(result.status==0){
-                        $.MsgBox.Alert("温馨提醒","还没参加考试呢~");
-                    }else if(result.status==2){
-                        $.MsgBox.Alert("温馨提醒","考试未通过，无法申请领证哦~");
+                    } else if (result.status == 0) {
+                        $.MsgBox.Alert("温馨提醒", "还没参加考试呢~");
+                    } else if (result.status == 2) {
+                        $.MsgBox.Alert("温馨提醒", "考试未通过，无法申请领证哦~");
                     }
                 },
-                error:function(){
-                    $.MsgBox.Alert("系统异常","系统出错了，请联系我们技术人员！");
+                error: function () {
+                    $.MsgBox.Alert("系统异常", "系统出错了，请联系我们技术人员！");
                 }
             });
         });
-        $("#btn_showCertificate").click(function(){
+        $("#btn_showCertificate").click(function () {
             /*<![CDATA[*/
             var memberId = [[${mb.id}]];
             /*]]>*/
             $.ajax({
-                url:"checkHaveCertificate",
-                type:"post",
-                data:{"id":memberId},
-                dataType:"json",
-                success:function(result){
-                    if(result.status==1){
+                url: "checkHaveCertificate",
+                type: "post",
+                data: {"id": memberId},
+                dataType: "json",
+                success: function (result) {
+                    if (result.status == 1) {
                         //跳转链接
-                        $.MsgBox.Confirm("温馨提醒","您的证书编号为："+result.body+" 请保存并在公共证书查询网站中查询！",function() {
-                            window.location.href="http://www.gcvaic.org";
+                        $.MsgBox.Confirm("温馨提醒", "您的证书编号为：" + result.body + " 请保存并在公共证书查询网站中查询！", function () {
+                            window.location.href = "http://www.gcvaic.org";
                         });
-                    }else if(result.status==0){
-                        $.MsgBox.Alert("温馨提醒","还没领到证书哦~");
+                    } else if (result.status == 0) {
+                        $.MsgBox.Alert("温馨提醒", "还没领到证书哦~");
                     }
                 },
-                error:function(){
-                    $.MsgBox.Alert("温馨提醒","系统异常,获取考试信息失败！");
+                error: function () {
+                    $.MsgBox.Alert("温馨提醒", "系统异常,获取考试信息失败！");
                 }
             });
         });

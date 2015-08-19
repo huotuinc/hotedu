@@ -142,15 +142,17 @@
                     <p class="titxian"></p>
                 </div>
                 <div>
-                    <a th:if="${MessageContentList.size()}>=2" href="javascript:void(0)"><p class="tittit">
-                        <span class="titfive" th:text="${MessageContentList[1].title}">5月杭州微商大会进行中</span>
-                        <span class="tittime" th:text="${#calendars.format(MessageContentList[1].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
+                    <a th:if="${MessageContentList.size()}>=2" href="javascript:void(0)"><p class="tittit"><span
+                            class="titfive" th:text="${MessageContentList[1].title}">5月杭州微商大会进行中</span>
+                        <span class="tittime"
+                              th:text="${#calendars.format(MessageContentList[1].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
                     </p></a>
 
                     <p style="clear:both"></p>
-                    <a th:if="${MessageContentList.size()}>=3" href="javascript:void(0)"><p class="tittit">
-                        <span class="titfive" th:text="${MessageContentList[2].title}">5月杭州微商大会进行中</span>
-                        <span class="tittime" th:text="${#calendars.format(MessageContentList[2].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
+                    <a th:if="${MessageContentList.size()}>=3" href="javascript:void(0)"><p class="tittit"><span
+                            class="titfive" th:text="${MessageContentList[2].title}">5月杭州微商大会进行中</span>
+                        <span class="tittime"
+                              th:text="${#calendars.format(MessageContentList[2].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
                     </p></a>
 
                     <p style="clear:both"></p>

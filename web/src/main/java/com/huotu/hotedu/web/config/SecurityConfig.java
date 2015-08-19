@@ -83,7 +83,6 @@ public class SecurityConfig {
                             "/uploadResources/**",
                             "/pc/checkPhoneNo",
                             "/pc/sendSMS",
-                            "/pc/playVideo",
                             "/ueditor/**"
                     ).permitAll()   // 允许未登录用户访问静态资源
                     .anyRequest().authenticated()
