@@ -6,7 +6,6 @@ $(function(){
     var contentHeight2 = height - (115);
     var contentWidth = width-(200);
     var contentHeight3 = height - (90);
-    //console.log(contentHeight3);
     $(".sidebar-wrap").css("height",contentHeight);
     $(".jp-container").css("max-height",contentHeight2);
     $(".main-wrap").css("height",contentHeight);
@@ -21,13 +20,11 @@ $(window).resize(function () {
     var contentHeight2 = height - (115);
     var contentWidth = width-(200);
     var contentHeight3 = height - (90);
-    //console.log(contentHeight3);
     $(".sidebar-wrap").css("height",contentHeight);
     $(".jp-container").css("max-height",contentHeight2);
     $(".main-wrap").css("height",contentHeight);
     $jp2.css("width",contentWidth);
     $jp2.css("max-height",contentHeight3);
     //刷新
-    // window.location.reload(true);
-    location.href=location.href;
+    window.location.href = window.location.href.replace(/#/g,'');
 });
