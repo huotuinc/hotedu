@@ -136,7 +136,7 @@ public class VideoController {
 
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping(value = "/backend/addSaveVideo", method = RequestMethod.POST)
-    public String addSaveVideo(String videoName,String content,String playUrl,Boolean free,@RequestParam("thumbnail") MultipartFile file) throws Exception {
+    public String addSaveVideo(String videoName,String content,String playUrl,Integer videoNo,Boolean complete,Boolean free,@RequestParam("thumbnail") MultipartFile file) throws Exception {
         //文件格式判断
         if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
         if(file.getSize()==0){throw new Exception("文件为空！");}
@@ -148,6 +148,8 @@ public class VideoController {
         video.setPlayUrl(playUrl);
         video.setThumbnail(fileName);
         video.setContent(content);
+        video.setVideoNo(videoNo);
+        video.setComplete(complete);
         video.setUploadTime(new Date());
         video.setVideoName(videoName);
         videoService.addVideo(video);
