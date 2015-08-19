@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -191,10 +192,13 @@ public class VideoController {
     }
 
     @RequestMapping("/pc/playVideo")
-    public String playVideo(Model model,Long id) {
-        String turnPage = "";
-        Video video = videoService.findOneById(id);
+    public String playVideo(Model model,int videoNo) throws URISyntaxException {
+        String turnPage = "/pc/yun-jxspxx";
+        Video video = videoService.findByVideoNo(videoNo);
         List<Video> videoList = videoService.findByComplete(video.isComplete());
+        for(Video v:videoList) {
+            v.setThumbnail(staticResourceService.getResource(v.getThumbnail()).toString());
+        }
         model.addAttribute("video",video);
         model.addAttribute("videoList",videoList);
         return turnPage;

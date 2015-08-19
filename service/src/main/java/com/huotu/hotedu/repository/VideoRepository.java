@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface VideoRepository extends JpaRepository<Video,Long>,ClassicsRepository<Video>,JpaSpecificationExecutor<Video> {
     List<Video> findByComplete(boolean complete);
+
+    Video findByVideoNo(int videoNo);
 }

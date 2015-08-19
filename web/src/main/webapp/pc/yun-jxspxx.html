@@ -1,307 +1,308 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8"/>
-<title>教学视频</title>
-<link rel="stylesheet" type="text/css" href="css/common.css"/>
-<link rel="stylesheet" type="text/css" href="css/index.css"/>
-<link rel="stylesheet" type="text/css" href="css/indexnew.css"/>
-<link rel="stylesheet" type="text/css" href="css/main.css"/>
-<link rel="stylesheet" type="text/css" href="css/spxx.css"/>
-<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
-<script rel="stylesheet" type="text/javascript" src="js/indexuser.js"></script>
-<script src="js/confirm.js"></script>
+    <meta charset="utf-8"/>
+    <title>教学视频</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="css/spxx.css"/>
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+    <script rel="stylesheet" type="text/javascript" src="js/indexuser.js"></script>
+    <script src="js/confirm.js"></script>
 </head>
 <style>
-.onxian {
-	background-color: #4a7df2;
-	height: 6px;
-	width: 100px;
-	clear: both;
-}
-.massages {
-	float: left;
-	font-size: 16px;
-	line-height: 30px;
-}
-.xian {
-	border-bottom: 1px solid #8E8E8E
-}
+    .onxian {
+        background-color: #4a7df2;
+        height: 6px;
+        width: 100px;
+        clear: both;
+    }
+
+    .massages {
+        float: left;
+        font-size: 16px;
+        line-height: 30px;
+    }
+
+    .xian {
+        border-bottom: 1px solid #8E8E8E
+    }
 </style>
 <body style="background-color:#f0f0f0">
 <div style="min-height:834px">
-<div style="background-color:#fff;">
-  <div class="headeri"><img src="images/logo.png" class="logoimgi"/>
-    <ul class="navi">
-      <li><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>
-      <li><a href="javascript:void(0)" th:href="@{/pc/loadCompanyIntroduction}">公司简介</a></li>
-      <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
-      <li><a href="javascript:void(0)" th:href="@{/pc/loadTutors}">师资力量</a></li>
-      <li class="active"><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
-      <li><a href="javascript:void(0)" th:if="${#authentication.name}=='anonymousUser'"
-                       onclick="javascript:pleaseLoginFirst()">考试指南</a> <a href="yun-kaoshizn.html"
-                                                                           th:if="${#authentication.name}!='anonymousUser'"
-                                                                           th:href="@{/pc/loadExamGuide}">考试指南</a></li>
-      <li><a href="#">招|应聘</a></li>
-      <li id="loginLi" style="padding:0px 0px 0px 20px;"
+    <div style="background-color:#fff;">
+        <div class="headeri"><img src="images/logo.png" class="logoimgi"/>
+            <ul class="navi">
+                <li><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>
+                <li><a href="javascript:void(0)" th:href="@{/pc/loadCompanyIntroduction}">公司简介</a></li>
+                <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
+                <li><a href="javascript:void(0)" th:href="@{/pc/loadTutors}">师资力量</a></li>
+                <li class="active"><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
+                <li><a href="javascript:void(0)" th:href="@{/pc/loadPeixun}">培训内容</a></li>
+                <li><a href="#">招|应聘</a></li>
+                <li id="loginLi" style="padding:0px 0px 0px 20px;"
                     th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'"><a
                         href="javascript:void(0)" id="showLoginForm">登录</a></li>
-      <li id="userLi" style="padding:0px;display:none"
+                <li id="userLi" style="padding:0px;display:none"
                     th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'"><a id="memberLi"
                                                                                                         href="#"
                                                                                                         th:href="@{/pc/loadPersonalCenter}"><img
                         class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
-        <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/> </p>
-        <p style="display: none" class="lbpo"> 
-          <!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"--> 
-          <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a> <a href="#"
-                                                                                                  th:href="@{/pc/loadPersonalCenter}">个人中心</a> <a href="#" th:href="@{/logout}">退出</a></p>
-      </li>
-    </ul>
-  </div>
-</div>
-<p style="height: 40px; clear: both;"></p>
-<div style=" width:1000px;" class="ysfour">
-  <div>
-    <div th:unless="${totalPages}==0"> 
-      <!--lin-->
-      <div>
-        <div class="auto con_player con_player_list">
-          <div class="player_container">
-            <div id="player" class="player">
-              <div class="player_box" style="opacity: 1; left: 887.5px;">
-                <div class="player_drag_bar" style="display: none;">
-                  <iframe frameborder="0" class="mask" src="about:blank"></iframe>
-                  <span>点击按住该条进行拖动</span></div>
-                <div class="player_main">
-                  <object id="tudouHomePlayer" name="tudouHomePlayer" width="100%" height="100%" data="#" type="application/x-shockwave-flash">
-                    <param name="allowfullscreen" value="true">
-                    <param name="allowscriptaccess" value="always">
-                    <param name="bgcolor" value="#000000">
-                    <param name="wMode" value="direct">
-                    <param name="quality" value="high">
-                    <param name="allowFullScreenInteractive" value="true">
-                    <param name="flashvars" value="">
-                  </object>
-                </div>
-              </div>
-            </div>
-            <div class="player_list" style="display:block;">
-              <div class="feed_wrap" id="feedInfo">
-                <div class="inner">
-                  <div class="feed_main">
-                    <h2 class=""><a href="#" target="_blank">云商学院系列教学视频</a></h2>
-                  </div>
-                </div>
-              </div>
-              <div class="hd">
-                <ul class="tab_nav fix ">
-                  <li class="zy_part_btn active" id="albumPartBtn"> <a href="#">精彩片段</a> </li>
-                  </li>
-                </ul>
-              </div>
-              <div class="bd tab_panel">
-                <div class="tab_panel_item" id="albumPart" style="display: block;">
-                  <div class="scrollbar tab_panel_pic " style="height:381px; overflow: auto;overflow-x: hidden;scrollbar-face-color: #fff;">
-                    <div class="scroll_box fix">
-                      <div class="pack" id=" " data-pjax=" ">
-                        <div class="pic">
-                          <div class="index"><i class="bg"></i><em>1</em></div>
-                          <a title="云商学院第一课" href="#" class="inner"><img src="{images}" data-src=" " class="quic"></a>
-                          <div class="vtime"><i class="bg"></i><em>00:59</em></div>
-                          <div class="mask"></div>
-                        </div>
-                        <div class="txt">
-                          <h6><a title="云商学院第一课" href="#">云商学院第一课</a></h6>
-                          <ul class="info">
-                            <li class="cate"><span>第一节</span></li>
-                            <li><span>956次播放</span></li>
-                          </ul>
-                        </div>
-                        <i class="playing"></i> </div>
-                      <div class="pack" id=" " data-pjax=" ">
-                        <div class="pic">
-                          <div class="index"><i class="bg"></i><em>1</em></div>
-                          <a title="云商学院第一课" href="#" class="inner"><img src="{images}" data-src=" " class="quic"></a>
-                          <div class="vtime"><i class="bg"></i><em>00:59</em></div>
-                          <div class="mask"></div>
-                        </div>
-                        <div class="txt">
-                          <h6><a title="云商学院第一课" href="#">云商学院第一课</a></h6>
-                          <ul class="info">
-                            <li class="cate"><span>第一节</span></li>
-                            <li><span>956次播放</span></li>
-                          </ul>
-                        </div>
-                        <i class="playing"></i> </div>
-                      <div class="pack" id=" " data-pjax=" ">
-                        <div class="pic">
-                          <div class="index"><i class="bg"></i><em>1</em></div>
-                          <a title="云商学院第一课" href="#" class="inner"><img src="{images}" data-src=" " class="quic"></a>
-                          <div class="vtime"><i class="bg"></i><em>00:59</em></div>
-                          <div class="mask"></div>
-                        </div>
-                        <div class="txt">
-                          <h6><a title="云商学院第一课" href="#">云商学院第一课</a></h6>
-                          <ul class="info">
-                            <li class="cate"><span>第一节</span></li>
-                            <li><span>956次播放</span></li>
-                          </ul>
-                        </div>
-                        <i class="playing"></i> </div>
-                      <div class="pack" id=" " data-pjax=" ">
-                        <div class="pic">
-                          <div class="index"><i class="bg"></i><em>1</em></div>
-                          <a title="云商学院第一课" href="#" class="inner"><img src="{images}" data-src=" " class="quic"></a>
-                          <div class="vtime"><i class="bg"></i><em>00:59</em></div>
-                          <div class="mask"></div>
-                        </div>
-                        <div class="txt">
-                          <h6><a title="云商学院第一课" href="#">云商学院第一课</a></h6>
-                          <ul class="info">
-                            <li class="cate"><span>第一节</span></li>
-                            <li><span>956次播放</span></li>
-                          </ul>
-                        </div>
-                        <i class="playing"></i> </div>
-                      <div class="pack" id=" " data-pjax=" ">
-                        <div class="pic">
-                          <div class="index"><i class="bg"></i><em>1</em></div>
-                          <a title="云商学院第一课" href="#" class="inner"><img src="{images}" data-src=" " class="quic"></a>
-                          <div class="vtime"><i class="bg"></i><em>00:59</em></div>
-                          <div class="mask"></div>
-                        </div>
-                        <div class="txt">
-                          <h6><a title="云商学院第一课" href="#">云商学院第一课</a></h6>
-                          <ul class="info">
-                            <li class="cate"><span>第一节</span></li>
-                            <li><span>956次播放</span></li>
-                          </ul>
-                        </div>
-                        
-                        <i class="playing"></i> </div>
-                        <div class="pack" id=" " data-pjax=" ">
-                        <div class="pic">
-                          <div class="index"><i class="bg"></i><em>1</em></div>
-                          <a title="云商学院第一课" href="#" class="inner"><img src="{images}" data-src=" " class="quic"></a>
-                          <div class="vtime"><i class="bg"></i><em>00:59</em></div>
-                          <div class="mask"></div>
-                        </div>
-                        <div class="txt">
-                          <h6><a title="云商学院第一课" href="#">云商学院第一课</a></h6>
-                          <ul class="info">
-                            <li class="cate"><span>第一节</span></li>
-                            <li><span>956次播放</span></li>
-                          </ul>
-                        </div>
-                        
-                        <i class="playing"></i> </div>
-                        <div class="pack" id=" " data-pjax=" ">
-                        <div class="pic">
-                          <div class="index"><i class="bg"></i><em>1</em></div>
-                          <a title="云商学院第一课" href="#" class="inner"><img src="{images}" data-src=" " class="quic"></a>
-                          <div class="vtime"><i class="bg"></i><em>00:59</em></div>
-                          <div class="mask"></div>
-                        </div>
-                        <div class="txt">
-                          <h6><a title="云商学院第一课" href="#">云商学院第一课</a></h6>
-                          <ul class="info">
-                            <li class="cate"><span>第一节</span></li>
-                            <li><span>956次播放</span></li>
-                          </ul>
-                        </div>
-                        
-                        <i class="playing"></i> </div>
-                        <div class="pack" id=" " data-pjax=" ">
-                        <div class="pic">
-                          <div class="index"><i class="bg"></i><em>1</em></div>
-                          <a title="云商学院第一课" href="#" class="inner"><img src="{images}" data-src=" " class="quic"></a>
-                          <div class="vtime"><i class="bg"></i><em>00:59</em></div>
-                          <div class="mask"></div>
-                        </div>
-                        <div class="txt">
-                          <h6><a title="云商学院第一课" href="#">云商学院第一课</a></h6>
-                          <ul class="info">
-                            <li class="cate"><span>第一节</span></li>
-                            <li><span>956次播放</span></li>
-                          </ul>
-                        </div>
-                        
-                        <i class="playing"></i> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                    <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/>
+                    </p>
+
+                    <p style="display: none" class="lbpo">
+                        <!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
+                        <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a> <a href="#"
+                                                                                                  th:href="@{/pc/loadPersonalCenter}">个人中心</a>
+                        <a href="#" th:href="@{/logout}">退出</a></p>
+                </li>
+            </ul>
         </div>
-      </div>
     </div>
-  </div>
-  <p style=" height:20px;  border-bottom: 1px solid #C3C3C3; clear:both; margin-bottom:10px;"></p>
-  <p style="font-size:14px;color: #909090; line-height:20px;">微商是一门独立的新兴学科，具有较强的理论性与实践操作性。微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
-  <!--登录弹窗-->
-  <div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none"
-         th:style="${errInfo}==null?'display: none':'display: block'">
-    <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
-                                                             onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'"> <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
-    <div class="sign-in">
-      <div class="user-form">
-        <form accept-charset="UTF-8" action="yun-geren.html" th:action="@{/pc/index}"
-                      class="sign-in__form user-form__form" method="post">
-          <div class="user-form__fieldset">
-            <label class="user-form__label" for="username" style="color:#111">手机号：</label>
-            <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
-                               id="username" name="username" placeholder="请输入您的手机号" maxlength="20" type="text"/>
-          </div>
-          <div class="user-form__fieldset">
-            <label class="user-form__label" for="password" style="color:#111">密码：</label>
-            <input class="sign-in__field user-form__field" id="password" name="password"
-                               placeholder="password" type="password"/>
-          </div>
-          <div class="user-form__href" align="right"><a id="goToRegister" href="javascript:void(0)">免费注册</a> </div>
-          <button id="btn_login" class="sign-in__button user-form__button" name="btn_login" type="submit"> 登录 </button>
-        </form>
-        <span style="color:red" id="loginFailedInfo" th:text="${errInfo}"></span></div>
+    <p style="height: 40px; clear: both;"></p>
+
+    <div style=" width:1000px;" class="ysfour">
+        <div>
+            <div>
+                <!--lin-->
+                <div>
+                    <div class="auto con_player con_player_list">
+                        <div class="player_container">
+                            <div id="player" class="player">
+                                <div class="player_box" style="opacity: 1; left: 887.5px;">
+                                    <div class="player_drag_bar" style="display: none;">
+                                        <iframe frameborder="0" class="mask" src="about:blank"></iframe>
+                                        <span>点击按住该条进行拖动</span></div>
+                                    <div class="player_main">
+                                        <embed src="http://player.youku.com/player.php/Type/Folder/Fid/25987354/Ob/1/sid/XMTMwNjQ5MjI0NA==/v.swf"
+                                               th:src="${video.playUrl}"
+                                               quality="high" width="100%" height="90%" align="middle"
+                                               allowScriptAccess="always" allowFullScreen="true" mode="transparent"
+                                               type="application/x-shockwave-flash">
+                                        </embed>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="player_list" style="display:block;">
+                                <div class="feed_wrap" id="feedInfo">
+                                    <div class="inner">
+                                        <div class="feed_main">
+                                            <h2 class=""><a href="#" target="_blank">云商学院系列教学视频</a></h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hd">
+                                    <ul class="tab_nav fix ">
+                                        <li class="zy_part_btn active" id="albumPartBtn"><a href="#">视频列表</a></li>
+                                    </ul>
+                                </div>
+                                <div class="bd tab_panel">
+                                    <div class="tab_panel_item" id="albumPart" style="display: block;">
+                                        <div class="scrollbar tab_panel_pic "
+                                             style="height:381px; overflow: auto;overflow-x: hidden;scrollbar-face-color: #fff;">
+                                            <div class="scroll_box fix" th:remove="all-but-first" th:each="video:${videoList}">
+                                                <div class="pack" id=" " data-pjax=" ">
+                                                    <div class="pic">
+                                                        <a  th:alt="${video.videoName}" href="#" th:href="@{/pc/playVideo(videoNo=${video.videoNo})}"
+                                                           class="inner">
+                                                            <img src="{images}" th:src="${video.thumbnail}" data-src=" "
+                                                                 class="quic"/>
+                                                        </a>
+
+                                                        <div class="vtime"><i class="bg"></i><em
+                                                                th:text="${video.duration}">00:59</em></div>
+                                                        <div class="mask"></div>
+                                                    </div>
+                                                    <div class="txt">
+                                                        <h6><a title="云商学院第一课" href="#" th:href="@{/pc/playVideo(videoNo=${video.videoNo})}" th:text="${video.videoName}">云商学院第一课</a></h6>
+                                                    </div>
+                                                    <i class="playing"></i>
+                                                </div>
+                                                <div class="pack" id=" " data-pjax=" ">
+                                                    <div class="pic">
+                                                        <div class="index"><i class="bg"></i><em>1</em></div>
+                                                        <a title="云商学院第一课" href="#" class="inner"><img src="{images}"
+                                                                                                       data-src=" "
+                                                                                                       class="quic"/></a>
+
+                                                        <div class="vtime"><i class="bg"></i><em>00:59</em></div>
+                                                        <div class="mask"></div>
+                                                    </div>
+                                                    <div class="txt">
+                                                        <h6><a title="云商学院第一课" href="#">云商学院第一课</a></h6>
+                                                        <ul class="info">
+                                                            <li class="cate"><span>第一节</span></li>
+                                                            <li><span>956次播放</span></li>
+                                                        </ul>
+                                                    </div>
+                                                    <i class="playing"></i>
+                                                </div>
+                                                <div class="pack" id=" " data-pjax=" ">
+                                                    <div class="pic">
+                                                        <div class="index"><i class="bg"></i><em>1</em></div>
+                                                        <a title="云商学院第一课" href="#" class="inner"><img src="{images}"
+                                                                                                       data-src=" "
+                                                                                                       class="quic"/></a>
+
+                                                        <div class="vtime"><i class="bg"></i><em>00:59</em></div>
+                                                        <div class="mask"></div>
+                                                    </div>
+                                                    <div class="txt">
+                                                        <h6><a title="云商学院第一课" href="#">云商学院第一课</a></h6>
+                                                        <ul class="info">
+                                                            <li class="cate"><span>第一节</span></li>
+                                                            <li><span>956次播放</span></li>
+                                                        </ul>
+                                                    </div>
+                                                    <i class="playing"></i>
+                                                </div>
+                                                <div class="pack" id=" " data-pjax=" ">
+                                                    <div class="pic">
+                                                        <div class="index"><i class="bg"></i><em>1</em></div>
+                                                        <a title="云商学院第一课" href="#" class="inner"><img src="{images}"
+                                                                                                       data-src=" "
+                                                                                                       class="quic"/></a>
+
+                                                        <div class="vtime"><i class="bg"></i><em>00:59</em></div>
+                                                        <div class="mask"></div>
+                                                    </div>
+                                                    <div class="txt">
+                                                        <h6><a title="云商学院第一课" href="#">云商学院第一课</a></h6>
+                                                        <ul class="info">
+                                                            <li class="cate"><span>第一节</span></li>
+                                                            <li><span>956次播放</span></li>
+                                                        </ul>
+                                                    </div>
+                                                    <i class="playing"></i>
+                                                </div>
+                                                <div class="pack" id=" " data-pjax=" ">
+                                                    <div class="pic">
+                                                        <div class="index"><i class="bg"></i><em>1</em></div>
+                                                        <a title="云商学院第一课" href="#" class="inner"><img src="{images}"
+                                                                                                       data-src=" "
+                                                                                                       class="quic"/></a>
+
+                                                        <div class="vtime"><i class="bg"></i><em>00:59</em></div>
+                                                        <div class="mask"></div>
+                                                    </div>
+                                                    <div class="txt">
+                                                        <h6><a title="云商学院第一课" href="#">云商学院第一课</a></h6>
+                                                        <ul class="info">
+                                                            <li class="cate"><span>第一节</span></li>
+                                                            <li><span>956次播放</span></li>
+                                                        </ul>
+                                                    </div>
+                                                    <i class="playing"></i>
+                                                </div>
+                                                <div class="pack" id=" " data-pjax=" ">
+                                                    <div class="pic">
+                                                        <div class="index"><i class="bg"></i><em>1</em></div>
+                                                        <a title="云商学院第一课" href="#" class="inner"><img src="{images}"
+                                                                                                       data-src=" "
+                                                                                                       class="quic"/></a>
+
+                                                        <div class="vtime"><i class="bg"></i><em>00:59</em></div>
+                                                        <div class="mask"></div>
+                                                    </div>
+                                                    <div class="txt">
+                                                        <h6><a title="云商学院第一课" href="#">云商学院第一课</a></h6>
+                                                        <ul class="info">
+                                                            <li class="cate"><span>第一节</span></li>
+                                                            <li><span>956次播放</span></li>
+                                                        </ul>
+                                                    </div>
+                                                    <i class="playing"></i>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p style=" height:20px;  border-bottom: 1px solid #C3C3C3; clear:both; margin-bottom:10px;"></p>
+
+        <p style="font-size:14px;color: #909090; line-height:20px;">
+            微商是一门独立的新兴学科，具有较强的理论性与实践操作性。微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
+        <!--登录弹窗-->
+        <div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none"
+             th:style="${errInfo}==null?'display: none':'display: block'">
+            <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
+                                                                 onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
+                <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
+
+            <div class="sign-in">
+                <div class="user-form">
+                    <form accept-charset="UTF-8" action="yun-geren.html" th:action="@{/pc/index}"
+                          class="sign-in__form user-form__form" method="post">
+                        <div class="user-form__fieldset">
+                            <label class="user-form__label" for="username" style="color:#111">手机号：</label>
+                            <input autocapitalize="off" autocorrect="off" class="sign-in__field user-form__field"
+                                   id="username" name="username" placeholder="请输入您的手机号" maxlength="20" type="text"/>
+                        </div>
+                        <div class="user-form__fieldset">
+                            <label class="user-form__label" for="password" style="color:#111">密码：</label>
+                            <input class="sign-in__field user-form__field" id="password" name="password"
+                                   placeholder="password" type="password"/>
+                        </div>
+                        <div class="user-form__href" align="right"><a id="goToRegister" href="javascript:void(0)">免费注册</a>
+                        </div>
+                        <button id="btn_login" class="sign-in__button user-form__button" name="btn_login" type="submit">
+                            登录
+                        </button>
+                    </form>
+                    <span style="color:red" id="loginFailedInfo" th:text="${errInfo}"></span></div>
+            </div>
+        </div>
+        <!--登录弹窗end-->
+        <!--注册弹窗-->
+        <div th:replace="pc/loginPopup::registPopupDiv" id="regDiv" class="AsaiDivShow" style="display:none">
+            <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
+                                                                 onclick="javascript:hideRegisterForm()"> <FONT
+                    style="color:#111; font-size:20px;">×</FONT></a></P>
+
+            <div class="sign-in">
+                <div class="user-form">
+                    <form action="yun-baomin.html">
+                        <p>
+                            <input class="ysw500 sign-in__field ys-form__field" id="regPhoneNo" name="regPhoneNo"
+                                   placeholder="真实手机号" maxlength="20" type="text"/>
+                            <span style="color:red" id="phoneErr"/> <span style="color:green" id="phoneRig"/></p>
+
+                        <p style="height:10px;"></p>
+
+                        <p style="margin: 0 auto;">
+                            <input class="ys-form__field" id="regMessage" name="regMessage"
+                                   placeholder="短信验证码" maxlength="6" type="text"
+                                   style="float: left; margin-top: 10px; margin-left:40px; width: 350px;"/>
+                            <button class="user-form__yanzheng" type="button"> 获取验证码</button>
+                        </p>
+                        <p style="text-align:center;">
+                            <button class="sign-in__button user-form__button" id="registerBtn" type="button"> 提交</button>
+                        </p>
+                        <div style="text-align: center"><i style="color:#FFBE00">*</i>注册成功后初始密码为手机号后四位，您可以登录后在个人中心修改<br/>
+                        </div>
+                    </form>
+                    <span style="color:red" id="regErrInfo"></span> <span style="color:blue" id="regMsgInfo"></span></div>
+            </div>
+        </div>
+        <!--注册弹窗end-->
+
+        <div id="asaimsgbg" class="AsaiDivBG" style="display: none"></div>
     </div>
-  </div>
-  <!--登录弹窗end--> 
-  <!--注册弹窗-->
-  <div th:replace="pc/loginPopup::registPopupDiv" id="regDiv" class="AsaiDivShow" style="display:none">
-    <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
-                                                             onclick="javascript:hideRegisterForm()"> <FONT
-                style="color:#111; font-size:20px;">×</FONT></a></P>
-    <div class="sign-in">
-      <div class="user-form">
-        <form action="yun-baomin.html">
-          <p>
-            <input class="ysw500 sign-in__field ys-form__field" id="regPhoneNo" name="regPhoneNo"
-                               placeholder="真实手机号" maxlength="20" type="text"/>
-            <span style="color:red" id="phoneErr"/> <span style="color:green" id="phoneRig"/> </p>
-          <p style="height:10px;"></p>
-          <p style="margin: 0 auto;">
-            <input class="ys-form__field" id="regMessage" name="regMessage"
-                               placeholder="短信验证码" maxlength="6" type="text"
-                               style="float: left; margin-top: 10px; margin-left:40px; width: 350px;"/>
-            <button class="user-form__yanzheng" type="button"> 获取验证码</button>
-          </p>
-          <p style="text-align:center;">
-            <button class="sign-in__button user-form__button" id="registerBtn" type="button"> 提交</button>
-          </p>
-          <div style="text-align: center"><i style="color:#FFBE00">*</i>注册成功后初始密码为手机号后四位，您可以登录后在个人中心修改<br/>
-          </div>
-        </form>
-        <span style="color:red" id="regErrInfo"></span> <span style="color:blue" id="regMsgInfo"></span></div>
+    <div style="position: fixed;bottom: 0;" class="footer">
+        <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
+
+        <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
     </div>
-  </div>
-  <!--注册弹窗end-->
-  
-  <div id="asaimsgbg" class="AsaiDivBG" style="display: none"></div>
-</div>
-<div style="position: fixed;bottom: 0;" class="footer">
-  <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
-  <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
 </div>
 </body>
 </html>

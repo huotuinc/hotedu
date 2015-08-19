@@ -67,4 +67,8 @@ public class VideoService {
             }
         }, new PageRequest(n, pageSize));
     }
+
+    public Video findByVideoNo(int videoNo) {
+        return videoRepository.findByVideoNo(videoNo);
+    }
 }

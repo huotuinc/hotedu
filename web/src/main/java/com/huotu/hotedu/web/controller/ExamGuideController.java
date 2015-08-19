@@ -371,4 +371,10 @@ public class ExamGuideController {
         model.addAttribute("examGuide",examGuide);
         return turnPage;
     }
+
+    @RequestMapping("/pc/loadPeixun")
+    public String loadPeixun() {
+        return "/pc/yun-peixun";
+    }
+
 }
