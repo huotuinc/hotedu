@@ -126,6 +126,12 @@
 	top: 50px;
 	margin-left: 18px;
 }
+.zhizhenp {
+	position: absolute;
+	z-index: 1;
+	top: 39px;
+	margin-left: 7px;
+}
 .lbpo {
 	background: rgba(60, 60, 60, 0.5);
 	padding: 10px 40px;
@@ -133,6 +139,18 @@
 	top: 64px;
 	z-index: 1;
 	margin-left: -39px;
+	color: #fff;
+	width: 52px;
+	text-align: center;
+	line-height: 20px;
+}
+.lbpop {
+	background: rgba(60, 60, 60, 0.5);
+	padding: 10px 40px;
+	position: absolute;
+	top: 53px;
+	z-index: 1;
+	margin-left: -50px;
 	color: #fff;
 	width: 52px;
 	text-align: center;
