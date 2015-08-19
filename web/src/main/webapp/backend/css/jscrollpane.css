@@ -17,9 +17,9 @@
 .jspVerticalBar .jspArrow:focus{outline:none;}
 .jspCorner{background:#eeeef4;float:left;height:100%;}
 /*height决定了是否会出现滚动条*/
-.jp-container{width:189px;position:relative;float:left;border: 0;}
+.jp-container{width:189px;position:relative;float:left;border: 0;height:100%; }
 .jp-container:hover,.jp-container:active{border: 0;}
-.jp-container2{position:relative;float:left;border: 0;}
+.jp-container2{position:relative;float:left;border: 0;height:100%; }
 .jp-container2:hover,.jp-container2:active{border: 0;}
 /* Yuk! CSS Hack for IE6 3 pixel bug :( */
 * html .jspCorner{margin:0 -3px 0 0;}

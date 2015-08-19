@@ -217,7 +217,7 @@ public class ExamGuideController {
 
     @RequestMapping("/backend/examGuideUpload")
     @ResponseBody
-    public Result editorUpload(@RequestParam("imgFile")MultipartFile file,HttpResponse response) {
+    public Result editorUpload(@RequestParam("dir")MultipartFile file,HttpResponse response) throws Exception {
         Result obj = new Result();
         //文件保存目录URL
         String saveUrl  = StaticResourceService.EXAMGUIDE_ICON;

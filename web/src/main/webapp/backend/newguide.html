@@ -20,32 +20,18 @@
             th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
     <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
             th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
-    <!--<link rel="stylesheet" href="../kindeditor-4.1.10/themes/default/default.css" />
+    <link rel="stylesheet" href="../kindeditor-4.1.10/themes/default/default.css" />
     <link rel="stylesheet" href="../kindeditor-4.1.10/plugins/code/prettify.css" />
     <script charset="utf-8" src="../kindeditor-4.1.10/kindeditor.js"></script>
     <script charset="utf-8" src="../kindeditor-4.1.10/lang/zh_CN.js"></script>
     <script charset="utf-8" src="../kindeditor-4.1.10/plugins/code/prettify.js"></script>
-    <script th:inline="javascript">
+    <script>
         KindEditor.ready(function(K) {
-            window.editor = K.create("#editor",{
-                cssPath : "../kindeditor-4.1.10/plugins/code/prettify.css",
-                uploadJson : "examGuideUpload",
-                fileManagerJson : "examGuideFileManager",
-                allowFileManager : true,
-                afterCreate : function() {
-                    var self = this;
-                    K.ctrl(document, 13, function() {
-                        self.sync();
-                        document.forms["myform"].submit();
-                    });
-                    K.ctrl(self.edit.doc, 13, function() {
-                        self.sync();
-                        document.forms["myform"].submit();
-                    });
-                }
+            window.editor = K.create('#editor_id',{
+                uploadJson : "examGuideUpload"
             });
         });
-    </script>-->
+    </script>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -149,7 +135,7 @@
         </div>
         <div class="jp-container2">
         <div class="result-wrap">
-            <form action="#" th:action="@{/backend/addSaveExamGuide}" method="post" class="myform" name="myform" id="editorForm" enctype="multipart/form-data">
+            <form action="#" th:action="@{/backend/addSaveExamGuide}" method="post" name="myform" id="editorForm" enctype="multipart/form-data">
                 <div class="config-items">
                     <div class="result-content">
                         <table width="100%" class="insert-tab">
@@ -173,7 +159,8 @@
                             <tr>
                                 <th><i class="require-red">*</i>详细：</th>
                                 <td>
-                                    <textarea id="editor" name="detail" style="width:700px;height:300px;"></textarea>
+                                    <textarea id="editor_id" name="detail" style="width:700px;height:300px;">&lt;strong&gt;HTML内容&lt;/strong&gt;
+                                   </textarea>
                                 </td>
                             </tr>
                             <tr>
