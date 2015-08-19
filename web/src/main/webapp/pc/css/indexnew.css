@@ -1350,3 +1350,14 @@ button.btn, input.btn {
 	float: left;
 	margin-right: 10px;
 }
+.fenge{border-bottom: 1px solid #868686;
+  clear: both;
+  height: 10px;
+  margin-bottom: 30px;}
+  .time{position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 5px;
+  margin-top: 155px;
+  margin-left: 264px;}
