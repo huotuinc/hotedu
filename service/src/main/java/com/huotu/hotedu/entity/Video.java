@@ -17,10 +17,14 @@ public class Video implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column
+    /**
+     * 视频编号
+     */
+    private int videoNo;
     /**
      * 视频名称
      */
+    @Column
     private String videoName;
     /**
      * 视频播放地址
@@ -36,8 +40,32 @@ public class Video implements Serializable {
     private String thumbnail;
     private String content;
 
+    /**
+     * 上传时间
+     */
     @Temporal(TemporalType.TIMESTAMP)
     private Date uploadTime;
+
+    /**
+     * 是否完整版
+     */
+    private boolean complete;
+
+    public int getVideoNo() {
+        return videoNo;
+    }
+
+    public void setVideoNo(int videoNo) {
+        this.videoNo = videoNo;
+    }
+
+    public boolean isComplete() {
+        return complete;
+    }
+
+    public void setComplete(boolean complete) {
+        this.complete = complete;
+    }
 
     public boolean isFree() {
         return free;

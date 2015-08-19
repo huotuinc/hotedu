@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 /**
  * Created by cwb on 2015/7/10.
@@ -61,5 +62,9 @@ public class VideoService {
 
     public Video findOneById(Long id) {
         return videoRepository.findOne(id);
+    }
+
+    public List<Video> findByComplete(boolean complete) {
+        return videoRepository.findByComplete(complete);
     }
 }

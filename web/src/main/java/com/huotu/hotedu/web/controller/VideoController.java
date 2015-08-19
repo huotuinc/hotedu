@@ -191,5 +191,15 @@ public class VideoController {
         return returnPage;
     }
 
+    @RequestMapping("/pc/playVideo")
+    public String playVideo(Model model,Long id) {
+        String turnPage = "";
+        Video video = videoService.findOneById(id);
+        List<Video> videoList = videoService.findByComplete(video.isComplete());
+        model.addAttribute("video",video);
+        model.addAttribute("videoList",videoList);
+        return turnPage;
+    }
+
 }
 
