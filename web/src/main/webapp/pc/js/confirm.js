@@ -604,7 +604,7 @@ $(function() {
                     $("#regErrInfo").text("");
                     $("#phoneErr").text("");
                     $("#phoneRig").text("");
-                    $.MsgBox.Alert("温馨提示","注册成功！");
+                    $.MsgBox.Alert("温馨提示","注册成功，初始密码为您的手机后四位，请牢记！");
                     $("#username").val(result.message);
                     $("#password").val(result.message.substring(7,11));
                     $("#btn_login").click();
