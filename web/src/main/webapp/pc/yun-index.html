@@ -29,7 +29,7 @@
             th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
             <a href="javascript:void(0)" id="showLoginForm">登录</a>
         </li>
-        <li id="userLi" style="padding:0px;display:none"
+        <li id="userLi" style="padding:0px;display:block"
             th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
             <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png"
                                                                                width="100%"/></a><!--会员头像-->

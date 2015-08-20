@@ -35,7 +35,7 @@ public class Member extends Login {
     private String realName;
 
     /**
-     * 性别：0代表女生，1代表男生
+     * 性别：1代表男生, 2代表女生
      */
     private int sex;
     /**

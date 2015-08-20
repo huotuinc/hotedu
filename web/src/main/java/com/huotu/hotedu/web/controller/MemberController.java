@@ -123,6 +123,8 @@ public class MemberController {
                         } else {
                             mb.setAgent(agent);
                             mb.setApplyDate(d);
+                            mb.setRealName(realName);
+                            mb.setSex(sex);
                             memberService.addMember(agent, mb);
                             status = 1;
                             message = "报名成功";

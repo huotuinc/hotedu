@@ -201,7 +201,7 @@
 }
 .AsaiDivShow {
 	display: none;
-	position: absolute;
+	position:fixed;
 	left: 50%;
 	right: 50%;
 	top: 8px;
@@ -417,7 +417,7 @@ font-size:14px； float: left;
 	margin-top: 31px;
 }
 .boboxs {
-	height: 133px;
+	height: 140px;
 	width: 95%;
 	margin: 0 auto;
 	margin-top: -35px;

@@ -85,9 +85,9 @@
                 </p>
 
                 <p class="ysdx">&nbsp;&nbsp;&nbsp;&nbsp;性别：
-                    <input name="sex" value="1"  th:checked="${mbInfo}==null?false:${mbInfo.sex}==1" type="radio"/>
+                    <input name="sex" value="1"  th:checked="${mbInfo}==null?false:${mbInfo.sex}==1" th:disabled="${mbInfo}==null?false:${mbInfo.sex}!=0" type="radio"/>
                     &nbsp;男&nbsp;&nbsp;
-                    <input name="sex" value="0"  th:checked="${mbInfo}==null?false:${mbInfo.sex}==0" type="radio"/>
+                    <input name="sex" value="2"  th:checked="${mbInfo}==null?false:${mbInfo.sex}==2" th:disabled="${mbInfo}==null?false:${mbInfo.sex}!=0" type="radio"/>
                     &nbsp;女&nbsp;&nbsp;
                 </p>
 
@@ -98,8 +98,8 @@
 
                 <p>
                     <select name="areaId" id="areaId" class="ysxlk" size="1">
-                        <option value="001">杭州市</option>
-                        <option value="000" style="display: none;" selected="selected">请选择考点</option>
+                        <option value="001" th:selected="${mbInfo}==null?false:${mbInfo.agent}!=null" >杭州市</option>
+                        <option value="000" style="display: none;"  th:disabled="${mbInfo}==null?false:${mbInfo.agent}!=null" th:selected="${mbInfo}==null?true:${mbInfo.agent}==null" selected="selected">请选择考点</option>
                     </select>
                 </p>
                 <p style="text-align:center;">
