@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -701,7 +702,7 @@ public class MemberController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/backend/issueCertificate")
-        public String issueCertificate(String certificateNo,long memberId,long certificateId,
+    public String issueCertificate(String certificateNo,long memberId,long certificateId,
                                    @RequestParam(required = false)Integer pageNo,
                                    @RequestParam(required = false)String keywords,
                                    @RequestParam(required = false)String searchSort,
