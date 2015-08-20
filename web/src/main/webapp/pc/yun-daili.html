@@ -71,9 +71,9 @@
             <li class="newr liright">
                 <p>总人数：<b th:text="${totalMembers}">900</b></p>
 
-                <p>已发证：<b th:text="${#authentication.principal.sendCertificateNumber}">400</b></p>
+                <p>已发证：<b th:text="${agent}==null?'':${agent.sendCertificateNumber}">400</b></p>
 
-                <p>剩余证：<b th:text="${#authentication.principal.certificateNumber}-${#authentication.principal.sendCertificateNumber}">200</b></p>
+                <p>剩余证：<b th:text="${agent}==null?'':${agent.certificateNumber}-${agent.sendCertificateNumber}">200</b></p>
             </li>
         </ul>
     </div>
