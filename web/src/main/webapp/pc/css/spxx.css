@@ -406,7 +406,7 @@ i, em {
   width: 96px;
   height: auto;
 }
-.pack .pic .vtime {
+.pack .pic .vtimei {
   position: absolute;
   bottom: 0;
   right: 41px;
@@ -414,6 +414,39 @@ i, em {
   overflow: hidden;
   left: -1px;
   width: 98px;
+}
+.pack .pic .vtimei .bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: #000;
+  opacity: .5;
+  filter: alpha(opacity=50);
+}
+.pack .pic .vtimei em {
+  display: block;
+  padding: 2px 0px;
+  width:76px;
+  color: #FFF;
+  text-align: center;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+
+
+
+
+.pack .pic .vtime {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  overflow: hidden;
 }
 .pack .pic .vtime .bg {
   position: absolute;
@@ -429,13 +462,15 @@ i, em {
 }
 .pack .pic .vtime em {
   display: block;
-  padding: 2px 0px;
-  width:76px;
   color: #FFF;
   text-align: center;
   font-size: 12px;
   line-height: 16px;
 }
+
+
+
+
 .player_list .tab_panel_pic .pack .pic .mask {
   display: none;
 }
