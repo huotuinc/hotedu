@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8"/>
     <title>云商学院</title>
-   <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
-  <link rel="stylesheet" type="text/css" href="css/indexnew.css"/>
+    <link rel="stylesheet" type="text/css" href="css/indexnew.css"/>
 
     <script type="text/javascript" src="js/cookie_util.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
     <script type="text/javascript" src="js/indexuser.js"></script>
     <script src="js/confirm.js"></script>
-        <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
 </head>
 <body>
 <div style="background-color:#fff;" class="headeri"><img src="images/logo.png" class="logoimgi"/>
@@ -49,25 +49,23 @@
 <p style="clear:both"></p>
 
 
-
-
 <div class="fullSlide">
-		
-		<div class="bd">
-			<ul>
-                 <li style="background:url(images/banner22.jpg)  center 0 no-repeat;"><a href="" title=""></a></li>				
-				<li style="background:url(images/banner33.jpg)  center 0 no-repeat;"><a href="" title=""></a></li>				
-				<li style="background:url(images/banner11.jpg)  center 0 no-repeat;"><a href="" title=""></a></li>
-				
-			</ul>
-		</div>
 
-		<div class="hd"><ul></ul></div>
-	</div>
-    
-    
-    
-    
+    <div class="bd">
+        <ul>
+            <li style="background:url(images/banner22.jpg)  center 0 no-repeat;"><a href="" title=""></a></li>
+            <li style="background:url(images/banner33.jpg)  center 0 no-repeat;"><a href="" title=""></a></li>
+            <li style="background:url(images/banner11.jpg)  center 0 no-repeat;"><a href="" title=""></a></li>
+
+        </ul>
+    </div>
+
+    <div class="hd">
+        <ul></ul>
+    </div>
+</div>
+
+
 <p style="clear:both"></p>
 
 <p style="height:20px"></p>
@@ -163,7 +161,9 @@
 
                     <p style="clear:both"></p>
                 </div>
-                <p style="color: #C0C0C0;" class="tittit"><a href="javascript:void(0)"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span></a></p>
+                <p style="color: #C0C0C0;" class="tittit"><a href="javascript:void(0)"><span style="color: #C0C0C0;"
+                                                                                             class="tittime">查看更多＞</span></a>
+                </p>
             </li>
             <!--最新公告-->
             <li style=" float:left;">
@@ -182,11 +182,13 @@
                     <p class="titxian"></p>
                 </div>
                 <div>
-                    <a th:remove="all" href="javascript:void(0)"><p class="tittit"><span class="titfive">5月杭州微商大会进行中</span>
+                    <a th:remove="all" href="javascript:void(0)"><p class="tittit"><span
+                            class="titfive">5月杭州微商大会进行中</span>
                         <span class="tittime">2015/05/10</span></p></a>
 
                     <p style="clear:both"></p>
-                    <a th:remove="all" href="javascript:void(0)"><p class="tittit"><span class="titfive">6月杭州微商大会进行中</span><span
+                    <a th:remove="all" href="javascript:void(0)"><p class="tittit"><span
+                            class="titfive">6月杭州微商大会进行中</span><span
                             class="tittime">2015/06/10</span></p></a>
 
                     <p style="clear:both"></p>
@@ -207,7 +209,8 @@
                                                       src="images/listthree.jpg"
                                                       style="width:126px; height: 108px;"/></a>
                     <a href="javascript:void(0)"><p class="titfont"
-                                                    th:text="${QaList.size()}>=1?${QaList[0].title}:'通过微商运营师的培训能学到什么？'">微商走进校园</p></a>
+                                                    th:text="${QaList.size()}>=1?${QaList[0].title}:'通过微商运营师的培训能学到什么？'">
+                        微商走进校园</p></a>
                     <a href="javascript:void(0)"><p class="titlb"
                                                     th:text="${QaList.size()}>=1?${QaList[0].content}:'微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。'">
                         考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
@@ -239,8 +242,9 @@
                             src="images/play.png" style="width: 18px; height: 18px;"/></span></p></a>
 
                     <p class="titen"><span>Application notes</span></p>
-                    <a th:href="@{/pc/loadMemberRegister}" href="javascript:void(0)"><img class="imgleft" src="images/listfour.jpg"
-                                                      style="width:126px; height: 108px;"/></a>
+                    <a th:href="@{/pc/loadMemberRegister}" href="javascript:void(0)"><img class="imgleft"
+                                                                                          src="images/listfour.jpg"
+                                                                                          style="width:126px; height: 108px;"/></a>
                     <a th:href="@{/pc/loadMemberRegister}" href="javascript:void(0)"><p class="titfont">报名时间</p></a>
                     <a th:href="@{/pc/loadMemberRegister}" href="javascript:void(0)"><p class="titlb">
                         1、报名时间： 即日起报名，每期50人以上即开班。
@@ -253,7 +257,7 @@
                     <p class="titxian"></p>
                 </div>
                 <div th:remove="all">
-                    <a  href="javascript:void(0)"><p class="tittit"><span class="titfive">报名渠道</span>
+                    <a href="javascript:void(0)"><p class="tittit"><span class="titfive">报名渠道</span>
                         <span class="tittime">2015/08/10</span></p></a>
 
                     <p style="clear:both"></p>
@@ -262,8 +266,10 @@
 
                     <p style="clear:both"></p>
                 </div>
-                <p style="color: #C0C0C0;" class="tittit"><a href="yun-kaoshizn.html" th:href="@{/pc/loadMemberRegister}"><span style="color: #C0C0C0;"
-                                                                                            class="tittime">查看更多＞</span></a>
+                <p style="color: #C0C0C0;" class="tittit"><a href="yun-kaoshizn.html"
+                                                             th:href="@{/pc/loadMemberRegister}"><span
+                        style="color: #C0C0C0;"
+                        class="tittime">查看更多＞</span></a>
                 </p>
             </li>
         </ul>
@@ -325,7 +331,8 @@
     <img src="images/call.jpg" th:src="@{/pc/images/call.jpg}" style="width:126px; height:65px;"/></div>
 
 <!--登录弹窗-->
-<div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none" th:style="${errInfo}==null?'display: none':'display: block'">
+<div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'">
     <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
                                                          onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
         <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
@@ -371,11 +378,16 @@
                     <span style="color:red" id="phoneErr"/>
                     <span style="color:green" id="phoneRig"/>
                 </p>
+
                 <p style="height:10px;"></p>
+
                 <p style="margin: 0 auto;">
-                    <input class="ys-form__field" id="regMessage" name="regMessage" placeholder="短信验证码" maxlength="6" type="text" style="float: left; margin-top: 10px; margin-left:40px; width:430px;"/>
-                    <input id="verify_btn" value="获取验证码" class="user-form__yanzheng" type="button" onclick="settime(this)" />
+                    <input class="ys-form__field" id="regMessage" name="regMessage" placeholder="短信验证码" maxlength="6"
+                           type="text" style="float: left; margin-top: 10px; margin-left:40px; width:430px;"/>
+                    <input id="verify_btn" value="获取验证码" class="user-form__yanzheng" type="button"
+                           onclick="settime(this)"/>
                 </p>
+
                 <p style="text-align:center;">
                     <button class="sign-in__button user-form__button" id="registerBtn" type="button">
                         提交
@@ -391,11 +403,19 @@
     </div>
 </div>
 <!--注册弹窗end-->
-<div id="asaimsgbg" class="AsaiDivBG" style="display: none" th:style="${errInfo}==null?'display: none':'display: block'"></div>
+<div id="asaimsgbg" class="AsaiDivBG" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'"></div>
 </body>
- 
+
 
 </html>
 <script type="text/javascript">
-		jQuery(".fullSlide").slide({ titCell:".hd ul", mainCell:".bd ul", effect:"fold",  autoPlay:true, autoPage:true, trigger:"click" });
-	</script>
+    jQuery(".fullSlide").slide({
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        effect: "fold",
+        autoPlay: true,
+        autoPage: true,
+        trigger: "click"
+    });
+</script>

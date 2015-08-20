@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -47,9 +48,11 @@ public class BannersService {
     public void delBanners(Long id){bannersRepository.delete(id);}
 
     //增加一条banners信息
+    @Transactional
     public void addBanners(Banners banners){bannersRepository.save(banners);}
 
     //修改一条banners信息
+    @Transactional
     public void modify(Banners banners){bannersRepository.save(banners);}
 
     //查找一条banners消息

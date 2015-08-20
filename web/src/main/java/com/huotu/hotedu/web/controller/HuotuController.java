@@ -5,6 +5,7 @@ import com.huotu.hotedu.service.HuotuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -50,7 +51,7 @@ public class HuotuController {
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/saveEditenterprise")
-    //TODO 方法名应该以小写开头 by CJ(已经解决)
+    @Transactional
     public String saveHuotu(String title,String introduction,Model model){
         Huotu huotu=null;
         List<Huotu> list=huotuService.findHuotu();

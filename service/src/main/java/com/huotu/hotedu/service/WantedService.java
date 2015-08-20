@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -58,6 +59,7 @@ public class WantedService {
         wantedRepository.delete(id);
     }
 
+    @Transactional
     public void addWanted(Wanted video){
         wantedRepository.save(video);
     }

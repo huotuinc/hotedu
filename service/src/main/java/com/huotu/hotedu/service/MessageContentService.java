@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -45,11 +46,13 @@ public class MessageContentService {
     }
 
     //增加一条资讯动态信息
+    @Transactional
     public void addMessageContent(MessageContent MessageContent){
         messageContentRepository.save(MessageContent);
     }
 
     //修改一条资讯动态信息
+    @Transactional
     public void modify(MessageContent MessageContent){
         messageContentRepository.save(MessageContent);
 

@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -45,11 +46,13 @@ public class QaService {
     }
 
     //增加一条常见问题
+    @Transactional
     public void addQa(Qa Qa){
         qaRepository.save(Qa);
     }
 
     //修改一条常见问题
+    @Transactional
     public void modify(Qa Qa){
         qaRepository.save(Qa);
     }

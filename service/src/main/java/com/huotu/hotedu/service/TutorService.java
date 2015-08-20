@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -110,10 +111,12 @@ public class TutorService {
     }
 
     //增加一位导师
+    @Transactional
     public void addTutor(Tutor tutor){
         tutorRepository.save(tutor);
     }
     //修改一位导师信息
+    @Transactional
     public void modify(Tutor tutor){
         tutorRepository.save(tutor);
 

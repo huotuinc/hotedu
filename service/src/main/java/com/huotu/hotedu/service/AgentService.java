@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -40,6 +41,7 @@ public class AgentService {
      * 添加一位代理商
      * @param agent 代理商对象
      */
+    @Transactional
     public Agent addAgent(Agent agent){
         return agentRepository.save(agent);
     }
@@ -76,6 +78,7 @@ public class AgentService {
      * @param className 修改名称
      * @return      班级对象
      */
+    @Transactional
     public ClassTeam modifyClassTeamName(Long id, String className) {
         ClassTeam classTeam = classTeamRepository.findOne(id);
         classTeam.setClassName(className);
@@ -280,6 +283,7 @@ public class AgentService {
      * @param allNoClassMemberList  需要分班的成员
      * @param classTeam             分配的班级
      */
+    @Transactional
     public void arrangeClass(ArrayList<Long> allNoClassMemberList,ClassTeam classTeam){
         Member mb = null;
         int memberNum = 0;
@@ -299,6 +303,7 @@ public class AgentService {
      * @param classExamArrayLis  需要分考场的班级
      * @param exam             分配的考场
      */
+    @Transactional
     public void arrangeExam(ArrayList<Long> classExamArrayLis,Exam exam){
         ClassTeam ct = null;
         for(int i=0; i<classExamArrayLis.size();i++){
@@ -314,6 +319,7 @@ public class AgentService {
      * 增加班级
      * @param classTeam  班级名字
      */
+    @Transactional
     public ClassTeam addClassTeam(ClassTeam classTeam){
         return classTeamRepository.save(classTeam);
     }
@@ -323,6 +329,7 @@ public class AgentService {
      * 增加考场
      * @param newExam  增加的考场
      */
+    @Transactional
     public Exam addExam(Agent agent,Exam newExam){
         newExam.setAgent(agent);
         Exam exam = examRepository.save(newExam);
@@ -335,6 +342,7 @@ public class AgentService {
      * @param agent         代理商
      * @param classTeam     添加的班级
      */
+    @Transactional
     public ClassTeam agentAddClassTeam(Agent agent,ClassTeam classTeam){
         classTeam.setAgent(agent);
         return classTeamRepository.save(classTeam);
@@ -425,6 +433,7 @@ public class AgentService {
      * @param id  学员id
      * @param x   1为通过，2为不通过
      */
+    @Transactional
     public void setExamPassById(Long id,int x){
         Member member=memberRepository.findOne(id);
         member.setPassed(x);
@@ -436,6 +445,7 @@ public class AgentService {
      *  多个学员确认通过考试
      * @param arrayList 学员id集合
      */
+    @Transactional
     public void allMemberPassExam(ArrayList<Long> arrayList){
         Member mb = null;
         Date d = new Date();
@@ -487,6 +497,7 @@ public class AgentService {
      * 修改代理商
      * @param agent   修改过的代理商
      */
+    @Transactional
     public void modifyAgent(Agent agent){
         agentRepository.save(agent);
     }

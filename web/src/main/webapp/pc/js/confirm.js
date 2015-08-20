@@ -462,9 +462,7 @@ function ajaxFileUpload() {
         data: "",
         success:function(result){
             if(result.status==1){
-                $.MsgBox.AjaxAlert("温馨提示",result.message,function(){
-                    $("#img_photo").attr("src",result.body.pictureUri);
-                });
+                $("#img_photo").attr("src",result.body.pictureUri);
             }else {
                 $.MsgBox.Alert("温馨提示","程序出错了");
             }

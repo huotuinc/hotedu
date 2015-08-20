@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -44,11 +45,13 @@ public class ExamGuideService {
     }
 
     //增加一条考试信息
+    @Transactional
     public void addExamGuide(ExamGuide examGuide){
         examGuideRepository.save(examGuide);
     }
 
     //修改一条考试信息
+    @Transactional
     public void modify(ExamGuide examGuide){
         examGuideRepository.save(examGuide);
 

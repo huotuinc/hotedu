@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -78,10 +79,12 @@ public class EnterpriseService {
     }
 
     //增加一个企业
+    @Transactional
     public void addEnterprise(Enterprise enterprise){
         enterpriseRepository.save(enterprise);
     }
     //修改一个企业信息
+    @Transactional
     public void modify(Enterprise enterprise){
         enterpriseRepository.save(enterprise);
     }

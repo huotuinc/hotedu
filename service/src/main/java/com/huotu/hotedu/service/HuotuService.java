@@ -3,6 +3,8 @@ import com.huotu.hotedu.entity.Huotu;
 import com.huotu.hotedu.repository.HuotuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 /**
@@ -15,6 +17,7 @@ public class HuotuService {
     @Autowired
     private HuotuRepository huotuRepository;
     //修改公司
+    @Transactional
     public void modifyHuotu(Huotu huotu){
         huotuRepository.save(huotu);
     }

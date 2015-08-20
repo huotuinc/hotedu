@@ -5,6 +5,7 @@ import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.repository.CertificateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by cwb on 2015/8/6.
@@ -15,7 +16,7 @@ public class CertificateService {
     @Autowired
     private CertificateRepository certificateRepository;
 
-
+    @Transactional
     public Certificate addCertificate(Certificate certificate) {
         return certificateRepository.save(certificate);
     }
@@ -30,6 +31,7 @@ public class CertificateService {
     public Certificate findOneById(Long id){
         return certificateRepository.findOne(id);
     }
+    @Transactional
     public void modifyCertificate(Certificate certificate){
         certificateRepository.save(certificate);
     }

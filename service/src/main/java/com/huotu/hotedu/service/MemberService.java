@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class MemberService {
      * @param mb 学员对象
      * @return 持久化学员对象
      */
+    @Transactional
     public Member addMember(Agent agent,Member mb) {
         mb.setAgent(agent);
         return memberRepository.save(mb);
@@ -190,6 +192,7 @@ public class MemberService {
      * 禁用学员
      * @param id 学员id
      */
+    @Transactional
     public void delMember(Long id){
             Member mb= findOneById(id);
             mb.setEnabled(false);
@@ -201,6 +204,7 @@ public class MemberService {
      * 单个学员确认交费
      * @param id 学员id
      */
+    @Transactional
     public void checkPay(Long id){
         Member mb= findOneById(id);
         Date d = new Date();
@@ -214,6 +218,7 @@ public class MemberService {
      *  多个学员确认缴费
      * @param arrayList 学员id集合
      */
+    @Transactional
     public void checkPayList(ArrayList<Long> arrayList){
         Member mb = null;
         Date d = new Date();
@@ -224,6 +229,7 @@ public class MemberService {
             memberRepository.save(mb);
         }
     }
+    @Transactional
     public void modifyMember(Member member){
         memberRepository.save(member);
     }

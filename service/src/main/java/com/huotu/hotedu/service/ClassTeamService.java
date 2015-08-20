@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -48,9 +49,11 @@ public class ClassTeamService  {
     public void delClassTeam(Long id){classTeamRepository.delete(id);}
 
     //增加一个classteam
+    @Transactional
     public void addClassTeam(ClassTeam classteam){classTeamRepository.save(classteam);}
 
     //修改一个classteam
+    @Transactional
     public void modify(ClassTeam classTeam){classTeamRepository.save(classTeam);}
 
     //查找一个classteam
