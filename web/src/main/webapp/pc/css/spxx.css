@@ -409,9 +409,11 @@ i, em {
 .pack .pic .vtime {
   position: absolute;
   bottom: 0;
-  right: 0;
+  right: 41px;
   z-index: 1;
   overflow: hidden;
+  left: -1px;
+  width: 98px;
 }
 .pack .pic .vtime .bg {
   position: absolute;
@@ -427,7 +429,8 @@ i, em {
 }
 .pack .pic .vtime em {
   display: block;
-  padding: 0 2px;
+  padding: 2px 0px;
+  width:76px;
   color: #FFF;
   text-align: center;
   font-size: 12px;
