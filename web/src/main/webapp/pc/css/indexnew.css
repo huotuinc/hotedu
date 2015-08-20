@@ -473,12 +473,12 @@ font-size:14px； float: left;
 	padding: 5px 0px;
 	text-align: center;
 }
-.on {
+ /*.on {
 	width: 50%;
 	float: left;
 	background-color: #ddd;
 	padding: 5px 0px;
-}
+} */
 .yssize {
 	width: 96%;
 	margin: 0 auto;

@@ -3,14 +3,15 @@
 <head>
     <meta charset="utf-8"/>
     <title>云商学院</title>
-    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+   <link rel="stylesheet" type="text/css" href="css/common.css"/>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
-    <link rel="stylesheet" type="text/css" href="css/indexnew.css"/>
-    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/indexnew.css"/>
+
     <script type="text/javascript" src="js/cookie_util.js"></script>
     <script type="text/javascript" src="js/indexuser.js"></script>
     <script src="js/confirm.js"></script>
+        <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
 </head>
 <body>
 <div style="background-color:#fff;" class="headeri"><img src="images/logo.png" class="logoimgi"/>
@@ -46,21 +47,27 @@
 </div>
 
 <p style="clear:both"></p>
+
+
+
+
 <div class="fullSlide">
 		
 		<div class="bd">
 			<ul>
-     <li style="background:url(images/banner22.jpg)  center 0 no-repeat;"><a href="" title=""></a></li>
-				
+                 <li style="background:url(images/banner22.jpg)  center 0 no-repeat;"><a href="" title=""></a></li>				
 				<li style="background:url(images/banner33.jpg)  center 0 no-repeat;"><a href="" title=""></a></li>				
 				<li style="background:url(images/banner11.jpg)  center 0 no-repeat;"><a href="" title=""></a></li>
-                <li style="background:url(images/banner22.jpg) center 0 no-repeat;"><a href="" title=""></a></li>
 				
 			</ul>
 		</div>
 
 		<div class="hd"><ul></ul></div>
 	</div>
+    
+    
+    
+    
 <p style="clear:both"></p>
 
 <p style="height:20px"></p>
@@ -386,14 +393,9 @@
 <!--注册弹窗end-->
 <div id="asaimsgbg" class="AsaiDivBG" style="display: none" th:style="${errInfo}==null?'display: none':'display: block'"></div>
 </body>
-<script type="text/javascript">
-    jQuery(".fullSlide").slide({
-        titCell: ".hd ul",
-        mainCell: ".bd ul",
-        effect: "fold",
-        autoPlay: true,
-        autoPage: true,
-        trigger: "click"
-    });
-</script>
+ 
+
 </html>
+<script type="text/javascript">
+		jQuery(".fullSlide").slide({ titCell:".hd ul", mainCell:".bd ul", effect:"fold",  autoPlay:true, autoPage:true, trigger:"click" });
+	</script>
