@@ -52,8 +52,8 @@ public class VideoService {
         return videoRepository.findOne(id);
     }
 
-    public List<Video> findByComplete(boolean complete) {
-        return videoRepository.findByComplete(complete);
+    public List<Video> findByCompleteAndVideoNoNotOrderByVideoNoAsc(boolean complete,int videoNo) {
+        return videoRepository.findByCompleteAndVideoNoNotOrderByVideoNoAsc(complete, videoNo);
     }
 
     /**

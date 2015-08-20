@@ -33,6 +33,13 @@
 </style>
 <body style="background-color:#f0f0f0">
 <div style="min-height:834px">
+    <div style="width: 126px; height: 189px; position: fixed; top:220px; right: 20px; display: block; z-index: 100;">
+        <div style="display: block; width: 126px; height: 126px;"><img src="images/weixin.png"
+                                                                       th:src="@{/pc/images/weixin.png}"
+                                                                       style="width: 126px; height: 126px;"/></div>
+        <div style="background-color: #f1f1f1; text-align: center; font-size: 16px; font-family: '微软雅黑'; color: #666; height: 30px; line-height: 30px; display: block;">
+            <a href="http://www.fanmore.cn/d.html" style="color: #333; font-size: 14px;">点击下载</a></div>
+        <img src="images/call.jpg" th:src="@{/pc/images/call.jpg}" style="width:126px; height:65px;"/></div>
     <div style="background-color:#fff;">
         <div class="headeri"><img src="images/logo.png" class="logoimgi"/>
             <ul class="navi">
@@ -71,7 +78,9 @@
                 <!--lin-->
                 <div>
                     <div class="auto con_player con_player_list">
-                        <p style="  font-size: 20px;padding: 20px 0px;"><b>微商基础课程第八课： 微店日常管理和团队建设8-3</b></p>
+                        <p style="  font-size: 20px;padding: 20px 0px;"><b><span th:text="${video.videoName}">微商基础课程第八课： 微店日常管理和团队建设8-3</span></b>
+                        </p>
+
                         <div class="player_container">
                             <div id="player" class="player">
                                 <div class="player_box" style="opacity: 1; left: 887.5px;">
@@ -105,23 +114,30 @@
                                     <div class="tab_panel_item" id="albumPart" style="display: block;">
                                         <div class="scrollbar tab_panel_pic "
                                              style="height:381px; overflow: auto;overflow-x: hidden;scrollbar-face-color: #fff;">
-                                            <div class="scroll_box fix" th:remove="all-but-first" th:each="video:${videoList}">
-                                                <div class="pack" id=" " data-pjax=" ">
+                                            <div class="scroll_box fix" th:remove="all-but-first"
+                                                 th:each="v:${videoList}">
+                                                <div class="pack" data-pjax=" ">
                                                     <div class="pic">
-                                                        <a  th:alt="${video.videoName}" href="#" th:href="@{/pc/playVideo(videoNo=${video.videoNo})}"
+                                                        <a th:alt="${v.videoName}" href="#"
+                                                           th:href="@{/pc/playVideo(videoNo=${v.videoNo})}"
                                                            class="inner">
-                                                            <img src="{images}" th:src="${video.thumbnail}" data-src=" "
+                                                            <img src="{images}" th:src="${v.thumbnail}" data-src=" "
                                                                  class="quic"/>
                                                         </a>
-                                                       
-                                                        <div class="vtimei"><i class="bg">
-                                                        
-                                                        </i><em
-                                                                th:text="${video.duration}"><img style="width:15px; margin-right:4px;" src="images/iconfont-bofang.png" />正在播放</em></div>
+
+                                                        <div class="vtimei" th:class="${video.videoNo}==${v.videoNo}?'vtimei':'vtime'">
+                                                            <i class="bg"></i>
+                                                            <em>
+                                                                <img th:if="${video.videoNo}==${v.videoNo}" style="width:15px; margin-right:4px;" src="images/iconfont-bofang.png"/>
+                                                                <span th:text="${video.videoNo}==${v.videoNo}?'正在播放':${v.duration}">正在播放</span>
+                                                            </em>
+                                                        </div>
                                                         <div class="mask"></div>
                                                     </div>
                                                     <div class="txt">
-                                                        <h6><a title="云商学院第一课" href="#" th:href="@{/pc/playVideo(videoNo=${video.videoNo})}" th:text="${video.videoName}">云商学院第一课</a></h6>
+                                                        <h6><a title="云商学院第一课" href="#"
+                                                               th:href="@{/pc/playVideo(videoNo=${v.videoNo})}"
+                                                               th:text="${v.videoName}">云商学院第一课</a></h6>
                                                     </div>
                                                     <i class="playing"></i>
                                                 </div>
@@ -234,7 +250,8 @@
         <p style=" height:20px;  border-bottom: 1px solid #C3C3C3; clear:both; margin-bottom:10px;"></p>
 
         <p style="font-size:14px;color: #909090; line-height:20px;">
-            微商是一门独立的新兴学科，具有较强的理论性与实践操作性。微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。<br/>2014为微商元年，2015直接迎来了微商的爆发！<br/><b style="  font-size: 16px;
+            微商是一门独立的新兴学科，具有较强的理论性与实践操作性。微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。<br/>2014为微商元年，2015直接迎来了微商的爆发！<br/><b
+                style="  font-size: 16px;
   line-height: 44px">咨询热线:13575749204 樊老师</b></p>
         <!--登录弹窗-->
         <div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none"
@@ -257,7 +274,8 @@
                             <input class="sign-in__field user-form__field" id="password" name="password"
                                    placeholder="password" type="password"/>
                         </div>
-                        <div class="user-form__href" align="right"><a id="goToRegister" href="javascript:void(0)">免费注册</a>
+                        <div class="user-form__href" align="right"><a id="goToRegister"
+                                                                      href="javascript:void(0)">免费注册</a>
                         </div>
                         <button id="btn_login" class="sign-in__button user-form__button" name="btn_login" type="submit">
                             登录
@@ -290,12 +308,15 @@
                             <button class="user-form__yanzheng" type="button"> 获取验证码</button>
                         </p>
                         <p style="text-align:center;">
-                            <button class="sign-in__button user-form__button" id="registerBtn" type="button"> 提交</button>
+                            <button class="sign-in__button user-form__button" id="registerBtn" type="button"> 提交
+                            </button>
                         </p>
-                        <div style="text-align: center"><i style="color:#FFBE00">*</i>注册成功后初始密码为手机号后四位，您可以登录后在个人中心修改<br/>
+                        <div style="text-align: center"><i
+                                style="color:#FFBE00">*</i>注册成功后初始密码为手机号后四位，您可以登录后在个人中心修改<br/>
                         </div>
                     </form>
-                    <span style="color:red" id="regErrInfo"></span> <span style="color:blue" id="regMsgInfo"></span></div>
+                    <span style="color:red" id="regErrInfo"></span> <span style="color:blue" id="regMsgInfo"></span>
+                </div>
             </div>
         </div>
         <!--注册弹窗end-->

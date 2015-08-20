@@ -74,7 +74,7 @@
 
                 <p><span>考试通过：<b><span th:text="${mb.passed}==0?'还未考试':(${mb.passed}==1?'通过':'未通过')">未知</span></b></span>&nbsp;&nbsp;&nbsp;
                     <span>考试时间：<b><span th:text="${mb.theClass==null}?'未安排':(${mb.theClass.exam==null}?'未安排':${#dates.format(mb.theClass.exam.examDate, 'yyyy-MM-dd HH:mm:ss')})">未知</span></b></span>&nbsp;&nbsp;&nbsp;
-                    <br/><span>考试地点：<b><span th:text="${mb.theClass==null}?'未安排':(${mb.theClass.exam==null}?'未安排':${mb.theClass.exam.examAddress})">未知</span></b></span>
+                    <br/><span>考试地点：<b><span th:text="${mb.theClass==null}?'未安排':(${mb.theClass.exam==null}?'未安排':${mb.theClass.exam.examAddress})">未知</span></b></span><br/>
                 </p>
             </li>
             <li class="lirightp">

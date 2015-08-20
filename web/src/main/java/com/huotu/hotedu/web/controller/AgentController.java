@@ -6,7 +6,6 @@ import com.huotu.hotedu.service.ClassTeamService;
 import com.huotu.hotedu.service.LoginService;
 import com.huotu.hotedu.service.MemberService;
 import com.huotu.hotedu.web.service.StaticResourceService;
-import com.sun.jndi.toolkit.url.Uri;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -504,6 +503,7 @@ public class AgentController {
 
 
     /**
+     * Create by shiliting on 2015,8,20
      * 进入修改代理商页面
      * @param id       代理商ID
      * @param model    返回的参数
@@ -521,6 +521,7 @@ public class AgentController {
     }
 
     /**
+     * Create by shiliting on 2015,8,20
      * 跳转到添加代理商页面
      * @return
      */
@@ -532,6 +533,7 @@ public class AgentController {
 
 
     /**
+     * Create by shiliting on 2015,8,20
      * 添加代理商
      * @param name        代理商姓名
      * @param loginName   登录用户名
@@ -570,6 +572,7 @@ public class AgentController {
 
 
     /**
+     * Create by shiliting on 2015,8,20
      * 修改一位代理商
      * @param id          代理商ID
      * @param name        代理商姓名

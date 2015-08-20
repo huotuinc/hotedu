@@ -131,7 +131,7 @@ public class VideoController {
 
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping(value = "/backend/addSaveVideo", method = RequestMethod.POST)
-    public String addSaveVideo(String videoName,String content,String playUrl,Integer videoNo,Boolean complete,Boolean free,@RequestParam("thumbnail") MultipartFile file) throws Exception {
+    public String addSaveVideo(String duration,String videoName,String content,String playUrl,Integer videoNo,Boolean complete,Boolean free,@RequestParam("thumbnail") MultipartFile file) throws Exception {
         //文件格式判断
         if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
         if(file.getSize()==0){throw new Exception("文件为空！");}
@@ -142,6 +142,7 @@ public class VideoController {
         video.setFree(free);
         video.setPlayUrl(playUrl);
         video.setThumbnail(fileName);
+        video.setDuration(duration);
         video.setContent(content);
         video.setVideoNo(videoNo);
         video.setComplete(complete);
@@ -155,7 +156,7 @@ public class VideoController {
 
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveVideo")
-    public String modifySaveVideo(Long id,String videoName,String content,String playUrl,Integer videoNo,Boolean complete,
+    public String modifySaveVideo(Long id,String duration,String videoName,String content,String playUrl,Integer videoNo,Boolean complete,
                                   Boolean free,@RequestParam("thumbnail") MultipartFile file) throws Exception{
         Video video=videoService.findOneById(id);
         if(file.getSize()!=0){
@@ -167,6 +168,7 @@ public class VideoController {
         }
         video.setFree(free);
         video.setVideoName(videoName);
+        video.setDuration(duration);
         video.setContent(content);
         video.setPlayUrl(playUrl);
         video.setVideoNo(videoNo);
@@ -195,9 +197,13 @@ public class VideoController {
     public String playVideo(Model model,int videoNo) throws URISyntaxException {
         String turnPage = "/pc/yun-jxspxx";
         Video video = videoService.findByVideoNo(videoNo);
-        List<Video> videoList = videoService.findByComplete(video.isComplete());
-        for(Video v:videoList) {
+        video.setThumbnail(staticResourceService.getResource(video.getThumbnail()).toString());
+        List<Video> videos = videoService.findByCompleteAndVideoNoNotOrderByVideoNoAsc(video.isComplete(),videoNo);
+        List<Video> videoList = new ArrayList<>();
+        videoList.add(video);
+        for(Video v:videos) {
             v.setThumbnail(staticResourceService.getResource(v.getThumbnail()).toString());
+            videoList.add(v);
         }
         model.addAttribute("video",video);
         model.addAttribute("videoList",videoList);
