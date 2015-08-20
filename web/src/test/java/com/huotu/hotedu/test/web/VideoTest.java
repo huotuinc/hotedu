@@ -33,13 +33,6 @@ public class VideoTest extends WebTestBase {
     @Autowired
     IqiyiVideoRepository iqiyiVideoRepository;
 
-    @Test
-    public void printAll() throws IOException {
-        for(Video video:iqiyiVideoRepository.findAll()){
-            VideoForPlay play = iqiyiVideoRepository.play(video.getFileId());
-            System.out.println(play);
-        }
-    }
 
     @Test
     public void page() throws Exception {
