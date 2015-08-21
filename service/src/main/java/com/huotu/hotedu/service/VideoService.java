@@ -5,6 +5,7 @@ import com.huotu.hotedu.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,7 +69,7 @@ public class VideoService {
             public Predicate toPredicate(Root<Video> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 return cb.isFalse(root.get("complete").as(Boolean.class));
             }
-        }, new PageRequest(n, pageSize));
+        }, new PageRequest(n, pageSize, new Sort(Sort.Direction.ASC,"videoNo")));
     }
 
     public Video findByVideoNo(int videoNo) {

@@ -121,7 +121,7 @@ public class VideoController {
 
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifyVideo")
-    public String ModifyVideo(Long id, Model model) throws Exception{
+    public String modifyVideo(Long id, Model model) throws Exception{
         Video video=videoService.findOneById(id);
         video.setThumbnail(staticResourceService.getResource(video.getThumbnail()).toString());
         model.addAttribute("video",video);
