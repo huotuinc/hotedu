@@ -70,6 +70,7 @@ public class MemberController {
         Member mb = null;
         if (user instanceof Member) {
             mb = (Member) user;
+            mb=memberService.findOneById(mb.getId());
         }
         String style = "padding:0px;display:none";
         model.addAttribute("mbInfo",mb);
@@ -351,7 +352,7 @@ public class MemberController {
             }
             pages = memberService.searchMembers(agent, pageNo, PAGE_SIZE, keywords, type);
         }
-        model.addAttribute("agent", agent);
+        model.addAttribute("agent", agentService.findAgentById(agent.getId()));
         model.addAttribute("allMemberList", pages);
         model.addAttribute("totalPages", pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
@@ -465,7 +466,7 @@ public class MemberController {
         if (pageNo == null || pageNo < 0) {
             pageNo = 0;
         }
-        model.addAttribute("agent", agent);
+        model.addAttribute("agent", agentService.findAgentById(agent.getId()));
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("keywords", keywords);
         model.addAttribute("searchSort", type);

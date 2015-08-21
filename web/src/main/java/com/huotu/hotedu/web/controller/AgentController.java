@@ -195,7 +195,7 @@ public class AgentController {
             pageNo = pageNo<0 ? 0 : pageNo;
             pages = agentService.findNoClassMembers(agent, pageNo, PAGE_SIZE, keywords, searchSort);
         }
-        model.addAttribute("agent", agent);
+        model.addAttribute("agent", agentService.findAgentById(agent.getId()));
         model.addAttribute("allClassMembersList", pages);
         model.addAttribute("totalMembers", memberService.searchMembers(agent, pageNo, PAGE_SIZE).getTotalElements());
         model.addAttribute("navigation", "bjgl");
@@ -276,7 +276,7 @@ public class AgentController {
             pageNo = pageNo<0 ? 0 : pageNo;
             pages = agentService.findClassArrangeExam(agent, pageNo, PAGE_SIZE, keywords, searchSort);
         }
-        model.addAttribute("agent", agent);
+        model.addAttribute("agent", agentService.findAgentById(agent.getId()));
         model.addAttribute("allClassExamList", pages);
         model.addAttribute("totalMembers", memberService.searchMembers(agent, pageNo, PAGE_SIZE).getTotalElements());
         model.addAttribute("navigation", "apkc");
@@ -318,7 +318,7 @@ public class AgentController {
             pageNo = pageNo<0 ? 0 : pageNo;
             pages = agentService.findExamedMembers(agent, pageNo, PAGE_SIZE, keywords, passedSortText, searchSort);
         }
-        model.addAttribute("agent", agent);
+        model.addAttribute("agent", agentService.findAgentById(agent.getId()));
         model.addAttribute("allExamMembersList", pages);
         model.addAttribute("totalMembers", memberService.searchMembers(agent, pageNo, PAGE_SIZE).getTotalElements());
         model.addAttribute("navigation", "bygl");
@@ -387,7 +387,7 @@ public class AgentController {
 
         Page<ClassTeam> pages = agentService.findClassArrangeExam(agent, pageNo, PAGE_SIZE, keywords, searchSort);
         long totalRecords = pages.getTotalElements();
-        model.addAttribute("agent", agent);
+        model.addAttribute("agent", agentService.findAgentById(agent.getId()));
         model.addAttribute("allClassExamList", pages);
         model.addAttribute("totalMembers", memberService.searchMembers(agent, pageNo, PAGE_SIZE).getTotalElements());
         model.addAttribute("navigation", "apkc");
