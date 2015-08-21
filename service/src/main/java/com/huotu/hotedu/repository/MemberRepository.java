@@ -21,6 +21,6 @@ public interface MemberRepository  extends JpaRepository<Member,Long>,ClassicsRe
 
     Member findByLoginName(String loginName);
 
-    Member findBycertificate(Certificate certificate);
+    Member findByCertificate(Certificate certificate);
 
 }

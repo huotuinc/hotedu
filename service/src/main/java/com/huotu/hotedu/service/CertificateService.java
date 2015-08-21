@@ -22,11 +22,11 @@ public class CertificateService {
     }
 
     public Certificate findOneByMember(Member member){
-        return certificateRepository.findBymember(member);
+        return certificateRepository.findByMember(member);
     }
 
-    public Certificate findOneBycertificateNo(String no){
-        return certificateRepository.findBycertificateNo(no);
+    public Certificate findOneByCertificateNo(String no){
+        return certificateRepository.findByCertificateNo(no);
     }
     public Certificate findOneById(Long id){
         return certificateRepository.findOne(id);

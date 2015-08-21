@@ -245,7 +245,7 @@ public class MemberService {
     }
 
     public Member findOneByCertificate(Certificate certificate){
-        return memberRepository.findBycertificate(certificate);
+        return memberRepository.findByCertificate(certificate);
     }
 
 }

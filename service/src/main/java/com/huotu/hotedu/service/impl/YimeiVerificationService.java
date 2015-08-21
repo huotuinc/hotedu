@@ -18,7 +18,7 @@ import java.util.Locale;
 /**
  * @author CJ
  */
-@Profile("!cloopenEnabled")
+//@Profile("!cloopenEnabled")
 @Service
 public class YimeiVerificationService extends AbstractVerificationService implements VerificationService {
 
@@ -37,7 +37,7 @@ public class YimeiVerificationService extends AbstractVerificationService implem
 
     @Override
     protected void doSend(VerificationProject project, VerificationCode code) throws InterrelatedException {
-        if (env.acceptsProfiles("test") && !env.acceptsProfiles("prod"))
+        if (env.acceptsProfiles("test"))
             return;
 
         String smsContent = new Formatter(Locale.CHINA).format(project.getFormat(),code.getCode()).toString();

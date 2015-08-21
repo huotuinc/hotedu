@@ -53,8 +53,8 @@ public abstract class AbstractVerificationService implements VerificationService
             verificationCode.setCodeType(sentType);
             verificationCode.setSendTime(currentDate);
             verificationCode.setCode(code);
-            verificationCodeRepository.save(verificationCode);
             doSend(project, verificationCode);
+            verificationCodeRepository.save(verificationCode);
         }
     }
 

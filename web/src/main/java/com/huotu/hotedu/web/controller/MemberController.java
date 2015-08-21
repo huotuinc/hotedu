@@ -18,7 +18,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -676,7 +675,7 @@ public class MemberController {
     public Result issueCertificateAjax(String certificateNo,long memberId,long certificateId){
         Member member=memberService.findOneById(memberId);
         Result result=new Result();
-        if(certificateService.findOneBycertificateNo(certificateNo)!=null){  //验证发的证书是否已经发过了
+        if(certificateService.findOneByCertificateNo(certificateNo)!=null){  //验证发的证书是否已经发过了
             result.setStatus(0);
         }else if(member.getAgent().getSendCertificateNumber()>=member.getAgent().getCertificateNumber()){
             result.setStatus(2);
@@ -710,14 +709,13 @@ public class MemberController {
                                    @RequestParam(required = false)String returnPage,
                                    Model model) {
         Member member = memberService.findOneById(memberId);
-        if (certificateService.findOneBycertificateNo(certificateNo) != null) {//验证发的证书是否已经发过了
+        if (certificateService.findOneByCertificateNo(certificateNo) != null) {//验证发的证书是否已经发过了
             model.addAttribute("info", "该证书已经发过了");
             model.addAttribute("certificateId", certificateId);
         } else if (member.getAgent().getSendCertificateNumber() >= member.getAgent().getCertificateNumber()) {
             model.addAttribute("info", "该代理商的证书已经发完了~");
             model.addAttribute("certificateId", certificateId);
         } else {
-
             Certificate certificate = certificateService.findOneById(certificateId);
             certificate.setCertificateNo(certificateNo);
             certificateService.modifyCertificate(certificate);
