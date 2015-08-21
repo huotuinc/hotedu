@@ -131,16 +131,13 @@
                             src="images/play.png" style="width: 18px; height: 18px;"/></span></p></a>
 
                     <p class="titen"><span>Dynamic information</span></p>
-                    <a href="javascript:void(0)"><img class="imgleft"
-                                                      th:src="${MessageContentList.size()}>=1?${MessageContentList[0].pictureUri}:'images/listone.jpg'"
-                                                      src="images/listone.jpg" style="width:126px; height: 108px;"/></a>
-                    <a href="javascript:void(0)"><p class="titfont"
-                                                    th:text="${MessageContentList.size()}>=1?${MessageContentList[0].title}:'“微商”悄然兴起'">
-                        微商走进校园</p></a>
+                    <a href="javascript:void(0)"><img class="imgleft" src="images/listone.jpg" style="width:126px; height: 108px;"/></a>
+                    <a href="javascript:void(0)"><p class="titfont" >
+                        “微商”悄然兴起</p></a>
                     <a href="javascript:void(0)">
-                        <p class="titlb"
-                           th:text="${MessageContentList.size()}>=1?${MessageContentList[0].synopsis}:'什么是微商？至今没有权威定义。在朋友圈刷屏的卖家、品牌的微信代理商，以及自媒体发展起来的微信卖家，都被视为微商。'">
-                            考察要点在于对同察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
+                        <p class="titlb">
+                            什么是微商？至今没有权威定义。在朋友圈刷屏的卖家、品牌的微信代理商，以及自媒体发展起来的微信卖家，都被视为微商。
+                        </p>
                     </a>
 
                     <p class="titxian"></p>
