@@ -204,7 +204,7 @@
                                 <td th:text="${g.theClass}==null? '':${g.theClass.className}" title="">201504第一期</td>
                                 <td><a class="link-update" href="#"
                                        th:href="@{/pc/detailMember(id=${g.id})}">查看</a><br/>
-                                    <a class="link-update" href="#" onclick="check_del(this)">删除</a><br/>
+                                    <a class="link-update" href="#" th:if="${!g.payed}" onclick="check_del(this)">删除</a>
                                     <a style="display: none;" class="real-delete" href="#" th:if="${!g.payed}" th:href="@{/pc/delMember(id=${g.id},pageNo=${pageNo},keywords=${keywords},searchSort=${searchSort})}"></a>
                                 </td>
                             </tr>
