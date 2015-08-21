@@ -145,7 +145,8 @@
 
                     <p class="titxian"></p>
                 </div>
-                <div>
+                <!--暂时注释掉，使用静态页面-->
+              <!--  <div>
                     <a th:if="${MessageContentList.size()}>=2" href="javascript:void(0)"><p class="tittit"><span
                             class="titfive" th:text="${MessageContentList[1].title}">5月杭州微商大会进行中</span>
                         <span class="tittime"
@@ -158,9 +159,8 @@
                         <span class="tittime"
                               th:text="${#calendars.format(MessageContentList[2].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
                     </p></a>
-
                     <p style="clear:both"></p>
-                </div>
+                </div>-->
                 <p style="color: #C0C0C0;" class="tittit"><a href="javascript:void(0)"><span style="color: #C0C0C0;"
                                                                                              class="tittime">查看更多＞</span></a>
                 </p>
@@ -181,7 +181,7 @@
 
                     <p class="titxian"></p>
                 </div>
-                <div>
+               <!-- <div>
                     <a th:remove="all" href="javascript:void(0)"><p class="tittit"><span
                             class="titfive">5月杭州微商大会进行中</span>
                         <span class="tittime">2015/05/10</span></p></a>
@@ -192,7 +192,7 @@
                             class="tittime">2015/06/10</span></p></a>
 
                     <p style="clear:both"></p>
-                </div>
+                </div>-->
                 <p style="color: #C0C0C0;" class="tittit"><a href="javascript:void(0)"><span style="color: #C0C0C0;"
                                                                                              class="tittime">查看更多＞</span></a>
                 </p>
@@ -218,20 +218,20 @@
 
                     <p class="titxian"></p>
                 </div>
-                <div>
-                    <a th:if="${QaList.size()}>=2" href="#"><p class="tittit"><span class="titfive"
-                                                                                    th:text="${QaList[1].title}">5月杭州微商大会进行中</span>
-                        <span class="tittime" th:text="${#calendars.format(QaList[1].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
-                    </p></a>
+                <!--暂时注释掉，使用静态页面-->
+                <!--  <div>
+                      <a th:if="${QaList.size()}>=2" href="#"><p class="tittit"><span class="titfive"
+                                                                                      th:text="${QaList[1].title}">5月杭州微商大会进行中</span>
+                          <span class="tittime" th:text="${#calendars.format(QaList[1].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
+                      </p></a>
 
-                    <p style="clear:both"></p>
-                    <a th:if="${QaList.size()}>=3" href="#"><p class="tittit"><span class="titfive"
-                                                                                    th:text="${QaList[2].title}">5月杭州微商大会进行中</span>
-                        <span class="tittime" th:text="${#calendars.format(QaList[2].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
-                    </p></a>
-
-                    <p style="clear:both"></p>
-                </div>
+                      <p style="clear:both"></p>
+                      <a th:if="${QaList.size()}>=3" href="#"><p class="tittit"><span class="titfive"
+                                                                                      th:text="${QaList[2].title}">5月杭州微商大会进行中</span>
+                          <span class="tittime" th:text="${#calendars.format(QaList[2].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
+                      </p></a>
+                      <p style="clear:both"></p>
+                  </div>-->
                 <p style="color: #C0C0C0;" class="tittit"><a href="javascript:void(0)"><span
                         style="color: #C0C0C0;" class="tittime">查看更多＞</span></a></p>
             </li>
@@ -256,7 +256,7 @@
 
                     <p class="titxian"></p>
                 </div>
-                <div th:remove="all">
+                <!--<div th:remove="all">
                     <a href="javascript:void(0)"><p class="tittit"><span class="titfive">报名渠道</span>
                         <span class="tittime">2015/08/10</span></p></a>
 
@@ -265,7 +265,7 @@
                         <span class="tittime">2015/08/10</span></p></a>
 
                     <p style="clear:both"></p>
-                </div>
+                </div>-->
                 <p style="color: #C0C0C0;" class="tittit"><a href="yun-kaoshizn.html"
                                                              th:href="@{/pc/loadMemberRegister}"><span
                         style="color: #C0C0C0;"
