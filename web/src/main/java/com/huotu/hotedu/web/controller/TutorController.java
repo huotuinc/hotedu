@@ -222,7 +222,8 @@ public class TutorController {
     }
 
     @RequestMapping("/pc/loadTutors")
-    public String loadTutors() {
+    public String loadTutors(Model model) {
+        model.addAttribute("flag","yun-shizi.html");  //此属性用来给前台确定当前是哪个页面
         String turnPage = "pc/yun-shizi";
         return turnPage;
     }

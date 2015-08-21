@@ -74,6 +74,7 @@ public class MemberController {
         String style = "padding:0px;display:none";
         model.addAttribute("mbInfo",mb);
         model.addAttribute("style",style);
+        model.addAttribute("flag","yun-baomin.html");  //此属性用来给前台确定当前是哪个页面
         return "pc/yun-baomin";
     }
 

@@ -208,6 +208,7 @@ public class MessageContentController {
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("today", today);
         model.addAttribute("totalRecords", totalRecords);
+        model.addAttribute("flag","yun-index.html");  //此属性用来给前台确定当前是哪个页面
         return turnPage;
     }
 
@@ -223,6 +224,7 @@ public class MessageContentController {
         MessageContent messageContent = messageContentService.findOneById(id);
         messageContent.setPictureUri(staticResourceService.getResource(messageContent.getPictureUri()).toURL().toString());
         model.addAttribute("messageContent",messageContent);
+        model.addAttribute("flag","yun-index.html");  //此属性用来给前台确定当前是哪个页面
         return turnPage;
     }
 }

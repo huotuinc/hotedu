@@ -14,7 +14,7 @@
     <script src="js/confirm.js"></script>
 </head>
 <body>
-<div style="background-color:#fff;" class="headeri"><img src="images/logo.png" class="logoimgi"/>
+<div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri"><img src="images/logo.png" class="logoimgi"/>
     <ul class="navi">
         <li><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>
         <li><a href="javascript:void(0)" th:href="@{/pc/loadCompanyIntroduction}">公司简介</a></li>

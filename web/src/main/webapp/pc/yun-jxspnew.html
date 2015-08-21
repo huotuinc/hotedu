@@ -14,7 +14,7 @@
 </head>
 <body style="background-color:#f0f0f0">
 <div style="min-height:834px">
-    <div style="background-color:#fff;">
+    <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;">
     <div  class="headeri">
     <img src="images/logo.png" class="logoimgi"/>
         <ul class="navi">
@@ -279,7 +279,7 @@
     </div>
     <!--注册弹窗end-->
     <div id="asaimsgbg" class="AsaiDivBG" style="display: none"></div>
-    <div class="footer">
+    <div th:include="pc/loginPopup::footerDiv" class="footer">
         <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
 
         <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>

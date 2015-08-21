@@ -71,6 +71,7 @@ public class LoginController {
             eg.setPictureUri(staticResourceService.getResource(eg.getPictureUri()).toString());
         }
         model.addAttribute("ExamGuideList",examGuideList);
+        model.addAttribute("flag","yun-index.html");  //此属性用来给前台确定当前是哪个页面
 
         return turnPage;
     }
