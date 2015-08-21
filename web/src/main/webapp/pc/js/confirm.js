@@ -108,6 +108,11 @@ $(document).ready(function () {
     });
 });
 
+function check_del(h) {
+    $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
+        $(h).siblings(".real-delete")[0].click();
+    });
+}
 
 function check_noClassMember() {
     $.MsgBox.Alert("温馨提示", "请选择需要安排分班的学员！");

@@ -128,7 +128,6 @@ $(document).ready(function () {
 function check_del(h) {
     $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
           $(h).siblings(".real-delete")[0].click();
-          console.log($(h).siblings(".real-delete")[0]);
     });
 }
 
