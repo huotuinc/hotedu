@@ -1095,9 +1095,10 @@ button.btn, input.btn {
 	width: 500px
 }
 .yszhuyi {
-	margin-left: 248px;
-	line-height: 26px;
-	color: #999;
+  margin-left: 248px;
+  line-height: 26px;
+  color: #616161;
+  font-size: 14px;
 }
 .yk {
 	line-height: 30px;
@@ -1289,7 +1290,7 @@ button.btn, input.btn {
 }
 .jsjj {
 	margin: 0 auto;
-	width: 960px;
+	width:1072px;
 	line-height: 31px;
 	background: rgba(255, 255, 255, 0.5);
 	padding: 20px;
