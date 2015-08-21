@@ -639,7 +639,7 @@ $(function() {
         if (wait == 0) {
             o.removeAttribute("disabled");
             o.setAttribute("style","background-color : #258BFF");
-            o.value="免费获取验证码";
+            o.value="获取验证码";
             wait = 60;
         } else {
             o.setAttribute("disabled", true);
