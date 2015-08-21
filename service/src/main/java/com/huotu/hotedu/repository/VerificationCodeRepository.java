@@ -17,10 +17,10 @@ public interface VerificationCodeRepository extends JpaRepository<VerificationCo
 
     /**
      *
-     * @param code
+     * @param type
      * @return
      */
-    List<VerificationCode> findByMobileAndCodeOrderBySendTimeDesc(String phoneNo, String code);
+    List<VerificationCode> findByMobileAndTypeOrderBySendTimeDesc(String phoneNo, VerificationType type);
 
     /**
      *

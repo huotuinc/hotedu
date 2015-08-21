@@ -195,8 +195,7 @@ public class MemberService {
     @Transactional
     public void delMember(Long id){
             Member mb= findOneById(id);
-            mb.setEnabled(false);
-            memberRepository.save(mb);
+            mb.setAgent(null);
     }
 
     /**

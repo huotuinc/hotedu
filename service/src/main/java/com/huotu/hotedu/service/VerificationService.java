@@ -75,6 +75,6 @@ public interface VerificationService {
      * @throws IllegalArgumentException 手机号码或者其他参数有误
      */
     @Transactional
-    Result verifyCode(String phoneNo,String code) throws IllegalArgumentException;
+    Result verifyCode(String phoneNo,String code,VerificationType type) throws IllegalArgumentException;
 
 }

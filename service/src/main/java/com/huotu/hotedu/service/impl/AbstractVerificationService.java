@@ -61,21 +61,23 @@ public abstract class AbstractVerificationService implements VerificationService
     protected abstract void doSend(VerificationProject project, VerificationCode code) throws InterrelatedException;
 
     @Transactional
-    public Result verifyCode(String phoneNo,String code) throws IllegalArgumentException {
+    public Result verifyCode(String phoneNo,String code,VerificationType type) throws IllegalArgumentException {
         Result result = new Result();
         if(!SysRegex.IsValidNum(code)) {
             result.setMessage("无效的验证码");
         }else {
-            List<VerificationCode> codeList = verificationCodeRepository.findByMobileAndCodeOrderBySendTimeDesc(phoneNo, code);
+            List<VerificationCode> codeList = verificationCodeRepository.findByMobileAndTypeOrderBySendTimeDesc(phoneNo, type);
             if (codeList.size() == 0) {
-                result.setMessage("错误的验证码");
+                result.setMessage("请先发送验证码");
             } else {
                 VerificationCode verificationCode = codeList.get(0);
                 if ((verificationCode.getSendTime().getTime() + invalidSeconds * 1000) < new Date().getTime()) {
                     result.setMessage("验证码已失效，请重新发送");
-                } else {
+                } else if(verificationCode.getCode().equals(code)){
                     result.setStatus(1);
                     result.setMessage("验证码正确");
+                }else {
+                    result.setMessage("验证码错误");
                 }
             }
         }
