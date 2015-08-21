@@ -129,7 +129,7 @@ public class MemberController {
                             mb.setSex(sex);
                             memberService.addMember(agent, mb);
                             status = 1;
-                            message = "报名成功";
+                            message = "申请报名成功";
                         }
                     }
                 } else {//学员未登录
