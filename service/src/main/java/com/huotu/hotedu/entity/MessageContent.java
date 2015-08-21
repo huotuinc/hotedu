@@ -24,7 +24,12 @@ public  class MessageContent implements Serializable {
     @Column
     private String title;
     /**
-     * 描述
+     * 简介
+     */
+    @Column
+    private String synopsis;
+    /**
+     * 内容
      */
     @Lob
     private String content;
@@ -96,14 +101,11 @@ public  class MessageContent implements Serializable {
         this.pictureUri = pictureUri;
     }
 
-    @Override
-    public String toString() {
-        return "MessageContent{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", top=" + top +
-                ", lastUploadDate=" + lastUploadDate +
-                '}';
+    public String getSynopsis() {
+        return synopsis;
+    }
+
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
     }
 }

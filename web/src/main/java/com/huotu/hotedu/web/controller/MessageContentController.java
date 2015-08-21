@@ -128,7 +128,7 @@ public class MessageContentController {
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping(value="/backend/addSaveMessageContent",method = RequestMethod.POST)
-    public String addSaveMessageContent(String title,String content,Boolean top,@RequestParam("smallimg") MultipartFile file) throws Exception{
+    public String addSaveMessageContent(String title,String synopsis,String content,Boolean top,@RequestParam("smallimg") MultipartFile file) throws Exception{
             //文件格式判断
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
             if(file.getSize()==0){throw new Exception("文件为空！");}
@@ -138,6 +138,7 @@ public class MessageContentController {
 
             MessageContent messageContent=new MessageContent();
             messageContent.setTitle(title);
+            messageContent.setSynopsis(synopsis);
             messageContent.setPictureUri(fileName);
             messageContent.setContent(content);
             messageContent.setLastUploadDate(new Date());
@@ -156,7 +157,7 @@ public class MessageContentController {
      */
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveMessageContent")
-    public String modifySaveMessageContent(Long id,String title,String content,Boolean top,@RequestParam("smallimg") MultipartFile file) throws Exception{
+    public String modifySaveMessageContent(Long id,String title,String content,String synopsis,Boolean top,@RequestParam("smallimg") MultipartFile file) throws Exception{
             MessageContent messageContent=messageContentService.findOneById(id);
         if(file.getSize()!=0){
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
@@ -166,6 +167,7 @@ public class MessageContentController {
             messageContent.setPictureUri(fileName);
         }
             messageContent.setTitle(title);
+            messageContent.setSynopsis(synopsis);
             messageContent.setContent(content);
             messageContent.setTop(top);
             messageContent.setLastUploadDate(new Date());
