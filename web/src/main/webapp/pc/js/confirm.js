@@ -522,7 +522,7 @@ $(function() {
                     $("#errInfo").text(result.message);
                 }else if(result.status==1) {
                     $("#errInfo").text("");
-                    $("#msgInfo").text(result.message);
+                    $.MsgBox.Alert("温馨提示",result.message);
                 }
             },
             error:function(){
