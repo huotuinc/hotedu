@@ -376,7 +376,7 @@ public class AgentController {
 
     /**
      * Created by jiashubing on 2015/7/31.
-     * 设置学员通过考试
+     * 设置学员未通过考试
      * @param id  学员id
      * @return  confirm.js中 btn_setExamNoPass方法
      */

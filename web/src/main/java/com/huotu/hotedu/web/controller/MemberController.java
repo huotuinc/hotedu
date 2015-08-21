@@ -593,6 +593,7 @@ public class MemberController {
             result.setMessage("尚未登录,请登录");
         }else if(user instanceof Member) {
             Member mb=(Member)user;
+            mb = memberService.findOneById(mb.getId());
             Certificate certificate = certificateService.findOneByMember(mb);
             if(certificate==null) {
                 certificate = new Certificate();
