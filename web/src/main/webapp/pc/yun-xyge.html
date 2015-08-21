@@ -21,12 +21,12 @@
                 <li><a href="javascript:void(0)">公司简介</a></li>
                 <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
                 <li><a href="javascript:void(0)">师资力量</a></li>
-                <li><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
+                <li><a href="yun-jxspnewone.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
                 <li>
                     <a href="javascript:void(0)" th:if="${#authentication.name}=='anonymousUser'" onclick="javascript:pleaseLoginFirst()">考试指南</a>
                     <a href="yun-kaoshizn.html" th:if="${#authentication.name}!='anonymousUser'" th:href="@{/pc/loadExamGuide}">考试指南</a>
                 </li>
-                <li><a href="about.html">招|应聘</a></li>
+                <li><a href="yun-about.html">招|应聘</a></li>
                 <li id="loginLi" style="padding:0px 0px 0px 20px;"
                     th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
                     <a href="javascript:void(0)" id="showLoginForm">登录</a>
