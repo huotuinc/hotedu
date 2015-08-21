@@ -70,28 +70,6 @@ public class AgentControllerTest extends SpringWebTest{
         ).andDo(print());
     }
 
-    /**
-     * 测试将学员保存到已有班级中
-     * @throws Exception
-     */
-    @Test
-    @Rollback
-    public void addSaveExistClassTeamTest() throws Exception {
-        ArrayList<Long> arrayList = new ArrayList<>();
-        arrayList.add((long)1);
-        arrayList.add((long)2);
-        ClassTeam classTeam = new ClassTeam();
-        classTeam.setClassName("测试nihao");
-        ClassTeam ct = agentService.addClassTeam(classTeam);
-        MyJsonUtil myJsonUtil = new MyJsonUtil();
-        String stringArrayList = myJsonUtil.convertObjectToJsonBytes(arrayList);
-        mockMvc.perform(
-                post("/pc/addSaveExistClassTeam")
-                        .param("classId", ct.getId().toString())
-                        .param("arrayList", stringArrayList)
-        ).andDo(print());
-    }
-
     /**.
      * 1.测试新增学员
      */

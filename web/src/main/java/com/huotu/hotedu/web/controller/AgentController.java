@@ -170,32 +170,6 @@ public class AgentController {
 
     /**
      * Created by jiashubing on 2015/7/24.
-     * 将学员保存到已有班级中
-     * @param className  已有班级的id
-     * @param noClassMemberArrayLis 复选框选中成员的id集合,Strring类型
-     * @param model    返回客户端集
-     * @return 新建班级页面
-     */
-    @RequestMapping("/pc/addSaveExistClassTeam")
-    public String addSaveExistClassTeam(String className, String noClassMemberArrayLis, Model model) {
-        String errInfo = "";
-        String msgInfo = "";
-        String turnPage = "redirect:/pc/loadClassMembers";
-        MyJsonUtil myJsonUtil = new MyJsonUtil();
-        ArrayList<Long> arrayList = myJsonUtil.convertJsonBytesToArrayList(noClassMemberArrayLis);
-        if (arrayList == null || arrayList.isEmpty()) {
-            errInfo = "成员集合为空，没有需要安排分班的学员";
-        } else {
-            ClassTeam classTeam = agentService.findClassTeamById(Long.parseLong(className));
-            agentService.arrangeClass(arrayList, classTeam);
-        }
-        model.addAttribute("errInfo", errInfo);
-        model.addAttribute("msgInfo", msgInfo);
-        return turnPage;
-    }
-
-    /**
-     * Created by jiashubing on 2015/7/24.
      * 显示未分班的学员信息
      * 加载、搜索、上一页、下一页
      * @param agent      当前代理商
