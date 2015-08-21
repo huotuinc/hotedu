@@ -106,6 +106,7 @@ public class VideoController {
         model.addAttribute("videoList2",videoList2);
         model.addAttribute("videoList3",videoList3);
         model.addAttribute("videoList4",videoList4);
+        model.addAttribute("flag","yun-jxspnewone.html");  //此属性用来给前台确定当前是哪个页面
 
         return turnPage;
     }
@@ -207,6 +208,7 @@ public class VideoController {
         }
         model.addAttribute("video",video);
         model.addAttribute("videoList",videoList);
+        model.addAttribute("flag","yun-jxspxx.html");  //此属性用来给前台确定当前是哪个页面
         return turnPage;
     }
 

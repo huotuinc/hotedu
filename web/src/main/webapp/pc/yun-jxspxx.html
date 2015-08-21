@@ -40,7 +40,7 @@
         <div style="background-color: #f1f1f1; text-align: center; font-size: 16px; font-family: '微软雅黑'; color: #666; height: 30px; line-height: 30px; display: block;">
             <a href="http://www.fanmore.cn/d.html" style="color: #333; font-size: 14px;">点击下载</a></div>
         <img src="images/call.jpg" th:src="@{/pc/images/call.jpg}" style="width:126px; height:65px;"/></div>
-    <div style="background-color:#fff;">
+    <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;">
         <div class="headeri"><img src="images/logo.png" class="logoimgi"/>
             <ul class="navi">
                 <li><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>

@@ -34,8 +34,6 @@
 </div>
 <!--登录弹窗end-->
 
-
-
 <!--注册弹窗-->
 <div th:fragment="registPopupDiv" id="regDiv" class="AsaiDivShow" style="display:none">
     <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
@@ -72,6 +70,40 @@
 </div>
 <!--注册弹窗end-->
 
+<!--头部header-->
+<div style="background-color:#fff;" th:fragment="headerDiv">
+    <!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
+    <div class="headeri">
+        <img src="images/logo.png" class="logoimgi"/>
+        <ul class="navi">
+            <li th:class="${flag=='yun-index.html'}?'active'" class="active"><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>
+            <li th:class="${flag=='yun-about.html'}?'active'"><a href="javascript:void(0)" th:href="@{/pc/loadCompanyIntroduction}">公司简介</a></li>
+            <li th:class="${flag=='yun-baomin.html'}?'active'"><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
+            <li th:class="${flag=='yun-shizi.html'}?'active'"><a href="javascript:void(0)" th:href="@{/pc/loadTutors}">师资力量</a></li>
+            <li th:class="${flag=='yun-jxspnewone.html'}?'active'"><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
+            <li th:class="${flag=='yun-peixun.html'}?'active'"><a href="javascript:void(0)" th:href="@{/pc/loadPeixun}">培训内容</a></li>
+            <li ><a href="#">招|应聘</a></li>
+
+            <li id="loginLi" style="padding:0px 0px 0px 20px;" th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
+                <a href="javascript:void(0)" id="showLoginForm">登录</a>
+            </li>
+            <li id="userLi" style="padding:0px;display:none" th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
+                <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}">
+                    <img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
+                <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+                <p style="display: none" class="lbpo">
+                    <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
+                    <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
+                    <a href="#" th:href="@{/logout}">退出</a>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--头部headerEnd-->
+
+
+
 <!--底部footer-->
 <div th:fragment="footerDiv" class="footer">
     <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
@@ -79,6 +111,7 @@
     <p>客服电话：13575749204 &nbsp;地址：杭州市滨江区西兴街道阡陌路482号智慧e谷B座4楼</p>
 
 </div>
+<!--底部footerEnd-->
 
 </body>
 </html>

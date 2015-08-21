@@ -352,8 +352,9 @@ public class EnterprisesController {
     }
 
     @RequestMapping("/pc/loadCompanyIntroduction")
-    public String loadCompanyIntroduction(@AuthenticationPrincipal Login login) {
+    public String loadCompanyIntroduction(@AuthenticationPrincipal Login login,Model model) {
         String turnPage = "pc/yun-about";
+        model.addAttribute("flag","yun-about.html");  //此属性用来给前台确定当前是哪个页面
         return turnPage;
     }
 

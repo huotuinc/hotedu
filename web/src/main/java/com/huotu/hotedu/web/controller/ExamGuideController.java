@@ -7,7 +7,6 @@ import com.huotu.hotedu.web.service.StaticResourceService;
 import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -354,6 +351,7 @@ public class ExamGuideController {
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("today", today);
         model.addAttribute("totalRecords", totalRecords);
+        model.addAttribute("flag","yun-peixun.html");  //此属性用来给前台确定当前是哪个页面
         return turnPage;
     }
 
@@ -369,11 +367,13 @@ public class ExamGuideController {
         ExamGuide examGuide = examGuideService.findOneById(id);
         examGuide.setPictureUri(staticResourceService.getResource(examGuide.getPictureUri()).toURL().toString());
         model.addAttribute("examGuide",examGuide);
+        model.addAttribute("flag","yun-peixun.html");  //此属性用来给前台确定当前是哪个页面
         return turnPage;
     }
 
     @RequestMapping("/pc/loadPeixun")
-    public String loadPeixun() {
+    public String loadPeixun(Model model) {
+        model.addAttribute("flag","yun-peixun.html");  //此属性用来给前台确定当前是哪个页面
         return "/pc/yun-peixun";
     }
 

@@ -206,6 +206,7 @@ public class QaController {
         }
 
         Date today = new Date();
+        model.addAttribute("flag","yun-index.html");  //此属性用来给前台确定当前是哪个页面
         model.addAttribute("allQaList", pages);
         model.addAttribute("totalPages", pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
@@ -226,6 +227,7 @@ public class QaController {
         Qa qa = qaService.findOneById(id);
         qa.setPictureUri(staticResourceService.getResource(qa.getPictureUri()).toURL().toString());
         model.addAttribute("qa",qa);
+        model.addAttribute("flag","yun-index.html");  //此属性用来给前台确定当前是哪个页面
         return turnPage;
     }
 

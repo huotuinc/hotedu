@@ -13,8 +13,10 @@
     <script type="text/javascript" src="js/indexuser.js"></script>
     <script src="js/confirm.js"></script>
 </head>
+<!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
 <body>
-<div style="background-color:#fff;" class="headeri"><img src="images/logo.png" class="logoimgi"/>
+<div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;" class="headeri">
+    <img src="images/logo.png" class="logoimgi"/>
     <ul class="navi">
         <li><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>
         <li class="active"><a href="javascript:void(0)" th:href="@{/pc/loadCompanyIntroduction}">公司简介</a></li>
@@ -32,7 +34,7 @@
         <li id="userLi" style="padding:0px;display:none" th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
             <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
             <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
-            <p style="display: none" class="lbpo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
+            <p style="display: none" class="lbpo">
                 <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
                 <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
                 <a href="#" th:href="@{/logout}">退出</a>
@@ -176,7 +178,7 @@
 </div>
 <!--注册弹窗end-->
 <div id="asaimsgbg" class="AsaiDivBG"></div>
-<div class="footer">
+<div th:include="pc/loginPopup::footerDiv" class="footer">
 <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
 <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区西兴街道阡陌路482号智慧E谷B幢4楼</p>
 </div>
