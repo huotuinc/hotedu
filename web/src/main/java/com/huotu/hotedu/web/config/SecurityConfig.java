@@ -6,7 +6,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -85,6 +84,7 @@ public class SecurityConfig {
                             "/pc/playVideo",
                             "/pc/sendSMS",
                             "/pc/loadPeixun",
+                            "/pc/loadRecruitment",
                             "/ueditor/**"
                     ).permitAll()   // 允许未登录用户访问静态资源
                     .anyRequest().authenticated()

@@ -82,7 +82,7 @@
             <li th:class="${flag=='yun-shizi.html'}?'active'"><a href="javascript:void(0)" th:href="@{/pc/loadTutors}">师资力量</a></li>
             <li th:class="${flag=='yun-jxspnewone.html'}?'active'"><a href="yun-jxspnew.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
             <li th:class="${flag=='yun-peixun.html'}?'active'"><a href="javascript:void(0)" th:href="@{/pc/loadPeixun}">培训内容</a></li>
-            <li ><a href="#">招|应聘</a></li>
+            <li th:class="${flag=='yun-sorry.html'}?'active'"><a href="#" th:href="@{/pc/loadRecruitment}">招|应聘</a></li>
 
             <li id="loginLi" style="padding:0px 0px 0px 20px;" th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
                 <a href="javascript:void(0)" id="showLoginForm">登录</a>

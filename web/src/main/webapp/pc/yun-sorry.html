@@ -13,7 +13,7 @@
 </head>
 <body style="background-color:#f0f0f0">
 <div style="min-height:834px">
-    <div style=" background-color:#fff;">
+    <div th:replace="pc/loginPopup::headerDiv" style=" background-color:#fff;">
         <div style=" background-color:#fff; font-size:14px;" class="header"><img src="images/logo.png"
                                                                                  th:src="@{/pc/images/logo.png}"
                                                                                  class="logoimg"/>
@@ -48,7 +48,7 @@
         </div>
     </div>
     <div style="position: absolute; background-image: url('images/temp.jpg'); width: 1903px; height: 1000px;">
-        <a href="yun-index.html"><span style="position: absolute; width: 224px; height: 46px;
+        <a href="yun-index.html" th:href="@{/pc/index}"><span style="position: absolute; width: 224px; height: 46px;
         margin-top:357px; margin-left:  993px;"></span></a>
     </div>
     <!--<a href="yun-index.html"><img src="images/temp.jpg"/></a>-->
