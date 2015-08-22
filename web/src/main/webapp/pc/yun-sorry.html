@@ -23,15 +23,13 @@
                 <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
                 <li><a href="javascript:void(0)">师资力量</a></li>
                 <li><a href="yun-jxspnewone.html" th:href="@{/pc/loadVideo}">教学视频</a></li>
-                <li><a href="yun-kaoshizn.html" th:href="@{/pc/loadExamGuide}">考试指南</a></li>
+                <li><a href="javascript:void(0)" th:href="@{/pc/loadPeixun}">培训内容</a></li>
                 <li><a href="javascript:void(0)">招|应聘</a></li>
-                <!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
                 <li id="loginLi" style="padding:0px 0px 0px 20px;"
                     th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
                     <a href="javascript:void(0)"
                        onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
                 </li>
-                <!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
                 <li id="userLi" style="padding:0px;display:none"
                     th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
                     <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg"
@@ -41,7 +39,6 @@
                     </p>
 
                     <p style="display: none" class="lbpo">
-                        <!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
                         <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
                         <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
                         <a href="#" th:href="@{/logout}">退出</a>
@@ -50,18 +47,7 @@
             </ul>
         </div>
     </div>
-    <a href="">
-        <div class="fullSlide">
-
-            <div class="bd">
-                <ul style="position: relative; width: 1903px; height: 648px;">
-                    <li th:style="'position: absolute; width: 1903px; left: 0px; top: 0px; display: list-item; opacity: 0.975664; background:url(pc/images/404.png) 50% 0px no-repeat;'"
-                        style="position: absolute; width: 1903px; left: 0px; top: 0px; display: list-item; opacity: 0.975664; background:url(images/404.png) 50% 0px no-repeat;"></li>
-                </ul>
-            </div>
-        </div>
-    </a>
-
+    <a href="yun-index.html"><img src="images/temp.jpg"/></a>
 </div>
 <p style="clear:both"></p>
 
