@@ -14,6 +14,7 @@
 </head>
 <body>
 <p style="background-color:#beeb1f">
+
 <div style="min-height:834px">
     <div th:replace="pc/loginPopup::headerDiv" style="background-color:#fff;">
         <div class="headeri">
@@ -32,11 +33,13 @@
                     th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
                     <a href="javascript:void(0)" id="showLoginForm">登录</a>
                 </li>
-                <li id="userLi" style="padding:0px;display:none" th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
+                <li id="userLi" style="padding:0px;display:none"
+                    th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
                     <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}">
                         <img class="lodingimg" src="images/toux.png" width="100%"/>
                     </a><!--会员头像-->
-                    <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+                    <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/>
+                    </p>
 
                     <p style="display: none" class="lbpo">
                         <!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->
@@ -65,41 +68,43 @@
         <div class="main-wrap">
 
             <ul class="thys">
-                <a href="#">
-                    <li><img src="images/th1.jpg" width="100%"/></li>
-                </a>
-                <a href="#">
-                    <li><img src="images/th2.jpg" width="100%"/></li>
-                </a>
-                <a href="#">
-                    <li><img src="images/th3.jpg" width="100%"/></li>
-                </a>
-                <a href="#">
-                    <li><img src="images/th4.jpg" width="100%"/></li>
-                </a>
+
+                <li><img src="images/th1.jpg" width="100%"/></li>
+
+
+                <li><img src="images/th2.jpg" width="100%"/></li>
+
+
+                <li><img src="images/th3.jpg" width="100%"/></li>
+
+                <li><img src="images/th4.jpg" width="100%"/></li>
+
 
             </ul>
         </div>
     </div>
 </div>
 <p style="clear:both; height:80px;"></p>
+
 <div class="jsjj">
     <p style="color:#333; font-size:14px;">
         <b>林小希：</b>长生鸟珍珠博士微商学院院长、曾在阿里巴巴集团B2B工作。 <br/>
         <b>郭向峰：</b>浙江灵岩文化创意有限公司董事、浙江大学电商网店运营班特聘讲师、电子商务实战运营专家、微创汇、向友汇社群发起人、创客汇副秘书长。<br/>
         <b>汤&nbsp;&nbsp; 晓：</b> 唛田文化总经理、唛田网络首席合伙人、品牌营销策划与微分销专家、微信营销与社会化新媒体营销专家；畅销书《钱多多掌柜奋斗记》和《完美团队成功记》。<br/>
         <b>龙成东：</b>杭州熬思管理咨询有限公司总经理、老板集团（老板油烟机）特别培训顾问、微商实战系列课程导师，曾经培训过900多家企业。</p>
-        
-       
+
+
 </div>
 <p style=" height:60px"></p>
+
 <div th:include="pc/loginPopup::footerDiv" class="footer">
     <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
 
     <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
 </div>
 <!--登录弹窗-->
-<div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none" th:style="${errInfo}==null?'display: none':'display: block'">
+<div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none"
+     th:style="${errInfo}==null?'display: none':'display: block'">
     <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"
                                                          onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">
         <FONT style="color:#111; font-size:20px;">×</FONT></a></P>
@@ -145,11 +150,16 @@
                     <span style="color:red" id="phoneErr"/>
                     <span style="color:green" id="phoneRig"/>
                 </p>
+
                 <p style="height:10px;"></p>
+
                 <p style="margin: 0 auto;">
-                    <input class="ys-form__field" id="regMessage" name="regMessage" placeholder="短信验证码" maxlength="6" type="text" style="float: left; margin-top: 10px; margin-left:40px; width:430px;"/>
-                    <input id="verify_btn" value="获取验证码" class="user-form__yanzheng" type="button" onclick="settime(this)" />
+                    <input class="ys-form__field" id="regMessage" name="regMessage" placeholder="短信验证码" maxlength="6"
+                           type="text" style="float: left; margin-top: 10px; margin-left:40px; width:430px;"/>
+                    <input id="verify_btn" value="获取验证码" class="user-form__yanzheng" type="button"
+                           onclick="settime(this)"/>
                 </p>
+
                 <p style="text-align:center;">
                     <button class="sign-in__button user-form__button" id="registerBtn" type="button">
                         提交
