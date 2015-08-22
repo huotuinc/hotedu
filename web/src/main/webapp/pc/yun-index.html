@@ -53,10 +53,9 @@
 
     <div class="bd">
         <ul>
-            <li style="background:url(images/banner22.jpg)  center 0 no-repeat;"><a href="" title=""></a></li>
-            <li style="background:url(images/banner33.jpg)  center 0 no-repeat;"><a href="" title=""></a></li>
-            <li style="background:url(images/banner11.jpg)  center 0 no-repeat;"><a href="" title=""></a></li>
-
+            <li style="background:url(images/banner22.jpg)  center 0 no-repeat;"></li>
+            <li style="background:url(images/banner33.jpg)  center 0 no-repeat;"></li>
+            <li style="background:url(images/banner11.jpg)  center 0 no-repeat;"></li>
         </ul>
     </div>
 
@@ -76,41 +75,45 @@
 
     <div class="hximg">
         <ul>
-            <li class="pone"><a href="">
-                <p class="  ystitle">微商基础课程</p>
+            <li class="pone">
+                <a href="" th:href="@{/pc/loadVideo}">
+                    <p class="  ystitle">微商基础课程</p>
 
-                <p class="poneimg"></p>
-            </a>
+                    <p class="poneimg"></p>
 
-                <p class=" ysmf">免费教程</p>
 
-                <p class=" yssz">5,673人已学习</p>
+                    <p class=" ysmf">免费教程</p>
+
+                    <p class=" yssz">5,673人已学习</p>
+                </a>
             </li>
-            <li class="ptwo"><a href="">
-                <p class="ystitle">微商强化课程</p>
+            <li class="ptwo">
+                <a href="" th:href="@{/pc/loadPeixun}">
+                    <p class="ystitle">微商强化课程</p>
 
-                <p class="ptwoimg"></p>
-            </a>
+                    <p class="ptwoimg"></p>
 
-                <p class="ysmf">会员制 2680元／年</p>
 
-                <p class="yssz">728人已学习</p>
+                    <p class="ysmf">会员制 2680元／年</p>
+
+                    <p class="yssz">728人已学习</p>
+                </a>
             </li>
-            <li class="pfour"><a href="">
+            <li class="pfour">
                 <p class="pfour ystitle">求职应聘</p>
 
                 <p class="pfourimg"></p>
-            </a>
+
 
                 <p class="ysmf">合作入驻企业</p>
 
                 <p class="yssz">50余家企业</p>
             </li>
-            <li class="pthree"><a href="">
+            <li class="pthree">
                 <p class="pthree ystitle">今日直播</p>
 
                 <p class="pthreeimg"></p>
-            </a>
+
 
                 <p class="ysmf">视频讲座直播</p>
 
@@ -143,24 +146,23 @@
                     <p class="titxian"></p>
                 </div>
                 <!--暂时注释掉，使用静态页面-->
-              <!--  <div>
-                    <a th:if="${MessageContentList.size()}>=2" href="javascript:void(0)"><p class="tittit"><span
-                            class="titfive" th:text="${MessageContentList[1].title}">5月杭州微商大会进行中</span>
-                        <span class="tittime"
-                              th:text="${#calendars.format(MessageContentList[1].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
-                    </p></a>
+                <!--  <div>
+                      <a th:if="${MessageContentList.size()}>=2" href="javascript:void(0)"><p class="tittit"><span
+                              class="titfive" th:text="${MessageContentList[1].title}">5月杭州微商大会进行中</span>
+                          <span class="tittime"
+                                th:text="${#calendars.format(MessageContentList[1].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
+                      </p></a>
 
-                    <p style="clear:both"></p>
-                    <a th:if="${MessageContentList.size()}>=3" href="javascript:void(0)"><p class="tittit"><span
-                            class="titfive" th:text="${MessageContentList[2].title}">5月杭州微商大会进行中</span>
-                        <span class="tittime"
-                              th:text="${#calendars.format(MessageContentList[2].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
-                    </p></a>
-                    <p style="clear:both"></p>
-                </div>-->
-                <p style="color: #C0C0C0;" class="tittit"><a href="javascript:void(0)"><span style="color: #C0C0C0;"
-                                                                                             class="tittime">查看更多＞</span></a>
-                </p>
+                      <p style="clear:both"></p>
+                      <a th:if="${MessageContentList.size()}>=3" href="javascript:void(0)"><p class="tittit"><span
+                              class="titfive" th:text="${MessageContentList[2].title}">5月杭州微商大会进行中</span>
+                          <span class="tittime"
+                                th:text="${#calendars.format(MessageContentList[2].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
+                      </p></a>
+                      <p style="clear:both"></p>
+                  </div>-->
+                <!--<p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span>
+                </p>-->
             </li>
             <!--最新公告-->
             <li style=" float:left;">
@@ -178,21 +180,20 @@
 
                     <p class="titxian"></p>
                 </div>
-               <!-- <div>
-                    <a th:remove="all" href="javascript:void(0)"><p class="tittit"><span
-                            class="titfive">5月杭州微商大会进行中</span>
-                        <span class="tittime">2015/05/10</span></p></a>
+                <!-- <div>
+                     <a th:remove="all" href="javascript:void(0)"><p class="tittit"><span
+                             class="titfive">5月杭州微商大会进行中</span>
+                         <span class="tittime">2015/05/10</span></p></a>
 
-                    <p style="clear:both"></p>
-                    <a th:remove="all" href="javascript:void(0)"><p class="tittit"><span
-                            class="titfive">6月杭州微商大会进行中</span><span
-                            class="tittime">2015/06/10</span></p></a>
+                     <p style="clear:both"></p>
+                     <a th:remove="all" href="javascript:void(0)"><p class="tittit"><span
+                             class="titfive">6月杭州微商大会进行中</span><span
+                             class="tittime">2015/06/10</span></p></a>
 
-                    <p style="clear:both"></p>
-                </div>-->
-                <p style="color: #C0C0C0;" class="tittit"><a href="javascript:void(0)"><span style="color: #C0C0C0;"
-                                                                                             class="tittime">查看更多＞</span></a>
-                </p>
+                     <p style="clear:both"></p>
+                 </div>-->
+                <!--<p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span>
+                </p>-->
             </li>
             <!--常见问题-->
             <li style=" float:left;">
@@ -229,8 +230,8 @@
                       </p></a>
                       <p style="clear:both"></p>
                   </div>-->
-                <p style="color: #C0C0C0;" class="tittit"><a href="javascript:void(0)"><span
-                        style="color: #C0C0C0;" class="tittime">查看更多＞</span></a></p>
+                <!--<p style="color: #C0C0C0;" class="tittit"><a href="javascript:void(0)"><span
+                        style="color: #C0C0C0;" class="tittime">查看更多＞</span></a></p>-->
             </li>
             <!--报名须知-->
             <li style=" float:left;">
@@ -263,11 +264,11 @@
 
                     <p style="clear:both"></p>
                 </div>-->
-                <p style="color: #C0C0C0;" class="tittit"><a href="yun-kaoshizn.html"
+                <!--<p style="color: #C0C0C0;" class="tittit"><a href="yun-kaoshizn.html"
                                                              th:href="@{/pc/loadMemberRegister}"><span
                         style="color: #C0C0C0;"
                         class="tittime">查看更多＞</span></a>
-                </p>
+                </p>-->
             </li>
         </ul>
     </div>
