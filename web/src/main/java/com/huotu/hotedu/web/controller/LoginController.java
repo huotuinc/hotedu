@@ -7,6 +7,7 @@ import com.huotu.hotedu.service.MessageContentService;
 import com.huotu.hotedu.service.QaService;
 import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mobile.device.Device;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,7 +55,6 @@ public class LoginController {
         if(linkList.size()>0) {
             model.addAttribute("LinkList", linkList);
         }
-
         List<MessageContent> messageContentList=messageContentService.loadPcMessageContent(0,3).getContent();
         for(MessageContent mc:messageContentList){
             mc.setPictureUri(staticResourceService.getResource(mc.getPictureUri()).toString());
@@ -72,7 +72,6 @@ public class LoginController {
         }
         model.addAttribute("ExamGuideList",examGuideList);
         model.addAttribute("flag","yun-index.html");  //此属性用来给前台确定当前是哪个页面
-
         return turnPage;
     }
 

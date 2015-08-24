@@ -1,5 +1,6 @@
 package com.huotu.hotedu.web.config;
 
+import com.huotu.hotedu.util.HoteduTemplateResolver;
 import com.huotu.iqiyi.sdk.springboot.IqiyiConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -7,6 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
+import org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.*;
@@ -14,11 +17,6 @@ import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
-import org.thymeleaf.templatemode.ITemplateModeHandler;
-import org.thymeleaf.templateparser.ITemplateParser;
-import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
-import org.thymeleaf.templatewriter.ITemplateWriter;
-
 import java.util.List;
 
 /**
@@ -45,6 +43,16 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
     @Bean
     public CommonsMultipartResolver multipartResolver() {
         return new CommonsMultipartResolver();
+    }
+
+    @Bean
+    public DeviceHandlerMethodArgumentResolver deviceHandlerMethodArgumentResolver() {
+        return new DeviceHandlerMethodArgumentResolver();
+    }
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(deviceHandlerMethodArgumentResolver());
     }
 
     @Override
@@ -86,10 +94,19 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.addDialect(new SpringSecurityDialect());
         engine.addDialect(new Java8TimeDialect());
-        ServletContextTemplateResolver rootTemplateResolver = new ServletContextTemplateResolver();
+        HoteduTemplateResolver templateResolver = new HoteduTemplateResolver();
+        templateResolver.setCharacterEncoding("UTF-8");
+        templateResolver.setCacheable(false);
+        /*if (env.acceptsProfiles("test")) {
+            System.out.println("Develement Mode");
+            templateResolver.setCacheable(false);
+        }*/
+        engine.setTemplateResolver(templateResolver);
+        /*ServletContextTemplateResolver rootTemplateResolver = new ServletContextTemplateResolver();
         rootTemplateResolver.setPrefix("/");
         rootTemplateResolver.setSuffix(".html");
         rootTemplateResolver.setCharacterEncoding("UTF-8");
+
 
         // start cache
         if (env.acceptsProfiles("dev")) {
@@ -97,12 +114,13 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
             rootTemplateResolver.setCacheable(false);
         }
 
-        engine.setTemplateResolver(rootTemplateResolver);
+        engine.setTemplateResolver(rootTemplateResolver);*/
 
         resolver.setTemplateEngine(engine);
         resolver.setOrder(1);
 //        resolver.setViewNames(new String[]{"*.html"});
         resolver.setCharacterEncoding("UTF-8");
+
 
         //在初始化Thymeleaf的时候 应该增加它的方言,spring添加方言
 //        engine.addDialect(new SpringSecurityDialect());
