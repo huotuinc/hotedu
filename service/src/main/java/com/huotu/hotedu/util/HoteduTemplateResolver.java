@@ -6,7 +6,6 @@ import org.thymeleaf.resourceresolver.IResourceResolver;
 import org.thymeleaf.resourceresolver.ServletContextResourceResolver;
 import org.thymeleaf.spring4.context.SpringWebContext;
 import org.thymeleaf.templateresolver.TemplateResolver;
-import org.thymeleaf.util.StringUtils;
 import org.thymeleaf.util.Validate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,7 +63,9 @@ public class HoteduTemplateResolver extends TemplateResolver {
         String unaliasedName = newTemplateName.toString();
 
         final StringBuilder resourceName = new StringBuilder();
-        resourceName.append("/");
+        if(!unaliasedName.startsWith("/")) {
+            resourceName.append("/");
+        }
         resourceName.append(unaliasedName);
         resourceName.append(".html");
 

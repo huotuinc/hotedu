@@ -17,7 +17,10 @@ import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -90,29 +93,26 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
     }
 
     public ThymeleafViewResolver viewResolver() {
+        //缓存的模板
+        Set<String> cacheablePatterns = new HashSet<>();
+        //在此处添加需要缓存的模板...
+        cacheablePatterns.add("pc/yun-about");
+
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+        HoteduTemplateResolver templateResolver = new HoteduTemplateResolver();
+        templateResolver.setCharacterEncoding("UTF-8");
+        //总体不缓存
+        templateResolver.setCacheable(false);
+        //设置个别需要缓存的模板名单
+        templateResolver.setCacheablePatterns(cacheablePatterns);
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.addDialect(new SpringSecurityDialect());
         engine.addDialect(new Java8TimeDialect());
-        HoteduTemplateResolver templateResolver = new HoteduTemplateResolver();
-        templateResolver.setCharacterEncoding("UTF-8");
-        templateResolver.setCacheable(false);
-        /*if (env.acceptsProfiles("test")) {
-            System.out.println("Develement Mode");
-            templateResolver.setCacheable(false);
-        }*/
         engine.setTemplateResolver(templateResolver);
         /*ServletContextTemplateResolver rootTemplateResolver = new ServletContextTemplateResolver();
         rootTemplateResolver.setPrefix("/");
         rootTemplateResolver.setSuffix(".html");
         rootTemplateResolver.setCharacterEncoding("UTF-8");
-
-
-        // start cache
-        if (env.acceptsProfiles("dev")) {
-            System.out.println("Develement Mode");
-            rootTemplateResolver.setCacheable(false);
-        }
 
         engine.setTemplateResolver(rootTemplateResolver);*/
 
@@ -120,7 +120,6 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
         resolver.setOrder(1);
 //        resolver.setViewNames(new String[]{"*.html"});
         resolver.setCharacterEncoding("UTF-8");
-
 
         //在初始化Thymeleaf的时候 应该增加它的方言,spring添加方言
 //        engine.addDialect(new SpringSecurityDialect());
