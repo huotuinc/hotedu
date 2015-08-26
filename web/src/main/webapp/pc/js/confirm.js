@@ -450,10 +450,8 @@ function btn_applyForCertificateSubmit(){
     });
 }
 
-$(function() {
-   $("#pictureImg").change(function() {
-       ajaxFileUpload();
-   });
+$("#pictureImg").live("change",function(){
+    ajaxFileUpload();
 });
 
 //ajax文件上传

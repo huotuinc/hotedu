@@ -505,7 +505,7 @@ public class MemberController {
         mb.setLoginName(phoneNo);
         mb.setRegisterDate(d);
         mb.setApplyDate(d);
-        loginService.newLogin(mb, "123456");
+        loginService.newLogin(mb, phoneNo.substring(7));
         result.setStatus(0);
         result.setMessage("注册成功");
         return result;
