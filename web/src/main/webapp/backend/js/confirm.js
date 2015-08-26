@@ -22,16 +22,16 @@
         var _html = "";
         _html += '<div id="mb_box"></div><div id="mb_con_pop"><span id="mb_tit">' + title + '</span>';
         if (type == "alert") {
-            _html += '<a id="mb_ico">x</a><div id="mb_msg">' + msg + '</div><div id="mb_btnbox">';
+            _html += '<a id="mb_ico">x</a><div id="mb_msg"><div id="mb_img"><img src="images/info.gif" alt="警告"/></div><div id="mb_txt">' + msg + '</div></div><div id="mb_btnbox">';
             _html += '<input id="mb_btn_ok" type="button" value="确定" />';
         }
         if (type == "confirm" || type == "Save") {
-            _html += '<a id="mb_ico">x</a><div id="mb_msg">' + msg + '</div><div id="mb_btnbox">';
+            _html += '<a id="mb_ico">x</a><div id="mb_msg"><div id="mb_img"><img src="images/important.gif" alt="警告"/></div><div id="mb_txt">' + msg + '</div></div><div id="mb_btnbox">';
             _html += '<input id="mb_btn_ok" type="button" value="确定" />';
             _html += '<input id="mb_btn_no" type="button" value="取消" />';
         }
         if (type == "ajaxAlert") {
-            _html += '<div id="mb_msg">' + msg + '</div><div id="mb_btnbox">';
+            _html += '<div id="mb_msg"><div id="mb_img"><img src="images/info.gif" alt="警告"/></div><div id="mb_txt">' + msg + '</div></div><div id="mb_btnbox">';
             _html += '<input id="mb_btn_ok" type="button" value="确定" />';
         }
         _html += '</div></div>';
@@ -55,20 +55,25 @@
         $("#mb_tit").css({
             display: 'block', fontSize: '14px', color: '#444', padding: '10px 15px',
             backgroundColor: '#DDD', borderRadius: '15px 15px 0 0',
-            borderBottom: '3px solid #009BFE', fontWeight: 'bold'
+            borderBottom: '3px solid #006EFF', fontWeight: 'bold'
+        });
+        $("#mb_img").css({
+            width:'20px',float:'left', padding: '14px 20px 14px 20px',borderBottom: '1px dashed #DDD'
+        });
+        $("#mb_txt").css({
+            width:'300px',float:'left', padding: '20px', borderBottom: '1px dashed #DDD'
         });
         $("#mb_msg").css({
-            padding: '20px', lineHeight: '20px',
-            borderBottom: '1px dashed #DDD', fontSize: '13px'
+            lineHeight: '20px', border:'1px', fontSize: '13px'
         });
         $mb_ico.css({
             display: 'block', position: 'absolute', right: '10px', top: '9px',
             border: '1px solid Gray', width: '18px', height: '18px', textAlign: 'center',
             lineHeight: '16px', cursor: 'pointer', borderRadius: '12px', fontFamily: '微软雅黑'
         });
-        $("#mb_btnbox").css({margin: '15px 0 10px 0', textAlign: 'center'});
-        $("#mb_btn_ok,#mb_btn_no").css({width: '85px', height: '30px', color: 'white', border: 'none'});
-        $("#mb_btn_ok").css({backgroundColor: '#007CFF'});
+        $("#mb_btnbox").css({clear:'both',margin: '71px 0 10px 0', textAlign: 'center'});
+        $("#mb_btn_ok,#mb_btn_no").css({width: '85px', height: '30px', color: 'white', border: 'none','border-radius': '5px',cursor: 'pointer'});
+        $("#mb_btn_ok").css({backgroundColor: '#006EFF'});
         $("#mb_btn_no").css({backgroundColor: 'gray', marginLeft: '20px'});
         //右上角关闭按钮hover样式
         $mb_ico.hover(function () {
@@ -101,13 +106,8 @@
 })(jQuery);
 
 $(document).ready(function () {
-    //静态页面弹出添加时后应有
-    //$("#link-add").bind("click", function () {
-    //    $.MsgBox.Alert("消息", "添加成功！");
-    //});
-//              回调函数可以直接写方法function(){}
     $(".link-delete").bind("click", function () {
-        $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
+        $.MsgBox.Confirm("友情提示", "执行删除后将无法恢复，确定继续吗？", function () {
             /*alert("你居然真的删除了...");*/
         });
     });
@@ -126,14 +126,14 @@ $(document).ready(function () {
 //$(h).parents().children().eq(3)[0]就是获取到了同td下的第三个孩子 .find()不能准确找到 .next()也选不中，这里用前台调试
 //.click() 就是点击当前链接的效果
 function check_del(h) {
-    $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
+    $.MsgBox.Confirm("友情提示", "执行删除后将无法恢复，确定继续吗？", function () {
           $(h).siblings(".real-delete")[0].click();
     });
 }
 
 function delVideoByFileId(obj) {
     var fileIds = $(obj).parent().children().eq(0).val();
-    $.MsgBox.Confirm("温馨提示", "执行删除后将无法恢复，确定继续吗？", function () {
+    $.MsgBox.Confirm("友情提示", "执行删除后将无法恢复，确定继续吗？", function () {
         $.ajax({
             url:"delVideo",
             type:"post",
@@ -155,7 +155,7 @@ function delVideoByFileId(obj) {
 }
 
 function check_save(h) {
-    $.MsgBox.Confirm("温馨提示", "即将保存内容，确定继续吗？", function () {
+    $.MsgBox.Confirm("友情提示", "即将保存内容，确定继续吗？", function () {
         editor.sync();
         $("#editorForm").submit();
     });
@@ -169,7 +169,7 @@ function check_add() {
 
 //TODO ajax不能异步上传文件，这个功能未实现
 function btn_addVideo(){
-    $.MsgBox.Confirm("温馨提示", "确认要上传该视频吗？", function () {
+    $.MsgBox.Confirm("友情提示", "确认要上传该视频吗？", function () {
         var videoName = $("#videoName").val().trim();
         var description = $("#description").val();
         var tags = $("#tags").val().trim();
