@@ -53,7 +53,7 @@
             backgroundColor: 'White', borderRadius: '15px'
         });
         $("#mb_tit").css({
-            height:'18px',display: 'block', fontSize: '14px', color: '#444', padding: '10px 15px',
+            height:'13px',display: 'block', fontSize: '14px', color: '#444', padding: '10px 15px',
             backgroundColor: '#DDD', borderRadius: '15px 15px 0 0',
             borderBottom: '3px solid #006EFF', fontWeight: 'bold'
         });
@@ -72,7 +72,7 @@
             border: '1px solid Gray', width: '18px', height: '18px',textAlign: 'center',
             lineHeight: '18px', cursor: 'pointer', borderRadius: '12px', fontFamily: '微软雅黑'
         });
-        $("#mb_btnbox").css({clear:'both',margin: '71px 0 10px 0', textAlign: 'center'});
+        $("#mb_btnbox").css({clear:'both',margin: '73px 0 10px 0', textAlign: 'center'});
         $("#mb_btn_ok,#mb_btn_no").css({width: '85px', height: '30px', color: 'white', border: 'none','border-radius': '5px',cursor: 'pointer'});
         $("#mb_btn_ok").css({backgroundColor: '#006EFF'});
         $("#mb_btn_no").css({backgroundColor: 'gray', marginLeft: '20px'});
