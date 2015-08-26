@@ -772,7 +772,13 @@ public class MemberController {
             Certificate certificate = certificateService.findOneByMember(mb);
             //判断该学员是否提交过申请信息
             if (certificate != null) {
-                certificate.setPictureUri(fileName);
+                if(certificate.getPictureUri() == null || ("").equals(certificate.getPictureUri()))
+                    certificate.setPictureUri(fileName);
+                else{
+                    staticResourceService.deleteResource(certificate.getPictureUri());
+                    certificateService.deletePic(certificate);
+                    certificate.setPictureUri(fileName);
+                }
                 certificateService.addCertificate(certificate);
                 certificate.setPictureUri(staticResourceService.getResource(certificate.getPictureUri()).toString());
             } else {

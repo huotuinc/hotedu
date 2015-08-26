@@ -21,6 +21,12 @@ public class CertificateService {
         return certificateRepository.save(certificate);
     }
 
+    @Transactional
+    public Certificate deletePic(Certificate certificate) {
+        certificate.setPictureUri("");
+        return certificateRepository.save(certificate);
+    }
+
     public Certificate findOneByMember(Member member){
         return certificateRepository.findByMember(member);
     }
