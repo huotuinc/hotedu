@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -37,6 +38,8 @@ public class LoginController {
     QaService qaService;
     @Autowired
     ExamGuideService examGuideService;
+    @Autowired
+    private  HttpServletRequest request;
 
     /**
      * 进入登录页面
@@ -83,8 +86,21 @@ public class LoginController {
     }
 
     @RequestMapping("/pc/loginSuccess")
-    public String loginSuccess(@AuthenticationPrincipal Login user) {
+    public String loginSuccess(@AuthenticationPrincipal Login user,HttpServletRequest request) {
         String turnPage = "redirect:/pc/index";
+        String retUrl = request.getHeader("Referer");
+        if(retUrl != null){
+            String[] url = retUrl.split("/");
+            turnPage="redirect:";
+            for (int i = 0 ; i <url.length ; i++ ) {
+                if("hotedu".equals(url[i])){
+                    for(int j=i+1; j<url.length; j++){
+                        turnPage += "/" + url[j];
+                    }
+                    break;
+                }
+            }
+        }
         if(user instanceof Manager) {
             turnPage = "redirect:/backend/login";
         }else if(user instanceof Editor){
