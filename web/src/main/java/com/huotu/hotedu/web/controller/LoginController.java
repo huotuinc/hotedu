@@ -40,14 +40,6 @@ public class LoginController {
     @Autowired
     private  HttpServletRequest request;
 
-    /**
-     * 进入登录页面
-     * @return login.html
-     */
-    @RequestMapping("/backend/login")
-    public String index(){
-        return "backend/index";
-    }
 
     @RequestMapping("/pc/logoutSuccess")
     public String logout() {
@@ -128,9 +120,9 @@ public class LoginController {
             }
         }
         if(user instanceof Manager) {
-            turnPage = "redirect:/backend/login";
+            turnPage = "redirect:/backend/index";
         }else if(user instanceof Editor){
-            turnPage = "redirect:/backend/login";
+            turnPage = "redirect:/backend/index";
         }
         return turnPage;
     }

@@ -1,0 +1,88 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* 效果导航 */
+.effectNav {
+	margin-top: 10px;
+	border-top: 1px solid #666;
+	background: #999;
+	padding-bottom: 10px;
+}
+.effectNav h3 {
+	padding: 0 10px;
+	background: #ddd;
+	background: #333;
+	color: #fff;
+}
+.effectNav ul {
+	font-size: 0;
+}
+.effectNav li {
+	display: inline-block;
+	font-size: 12px;
+	padding: 0 10px;
+	margin: 10px 0 0 10px;
+	background: #cdcdcd;
+}
+.effectNav li.new {
+	background: #fce8cd;
+}
+/* 本例子css -------------------------------------- */
+.picScroll {
+	margin: 10px auto;
+	text-align: center;
+}
+.picScroll .bd ul {
+	width: 100%;
+	float: left;
+}
+.picScroll .bd li {
+	width: 31%;
+	float: left;
+	font-size: 14px;
+	text-align: center;
+	margin: 0px 1%;
+}
+.picScroll .bd li a {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* 取消链接高亮 */
+}
+.picScroll .bd li img {
+	width: 100%;
+	background: url(images/loading.gif) #fff center center no-repeat;
+}
+.picScroll .hd {
+	line-height: 40px;
+	overflow: hidden;
+	margin: 0 auto;
+	width: 23%;
+}
+.picScroll .hd ul {
+	padding-top: 16px;
+}
+.picScroll .hd li {
+  float: left;
+  width: 10px;
+  height: 10px;
+  background: #D0D0D0;
+  margin: 0 7px;
+  overflow: hidden;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+.picScroll .hd .on {
+	background: #80BD6D;
+}
+.picScroll .prev, .picScroll .next {
+	display: block;
+
+}
+.picScroll .next {
+	background-position: -34px -7px;
+}
+.picScroll .prevStop {
+	background-position: -6px -40px;
+}
+.picScroll .nextStop {
+	background-position: -34px -40px;
+}

@@ -26,7 +26,7 @@ public class HoteduTemplateResolver extends TemplateResolver {
     protected String computeResourceName(TemplateProcessingParameters templateProcessingParameters) {
         checkInitialized();
 
-        final String templateName = templateProcessingParameters.getTemplateName();
+        String templateName = templateProcessingParameters.getTemplateName();
         StringBuilder newTemplateName = new StringBuilder();
         if(!templateName.endsWith("_mobile")) {
             //检查访问方式是否为移动端
@@ -55,6 +55,19 @@ public class HoteduTemplateResolver extends TemplateResolver {
                 isFromMobile = session.getAttribute("ua").equals("mobile");
             }
             if (isFromMobile) {
+                String strPrix = "mobile";
+                if(templateName.startsWith("pc/")||templateName.startsWith("/pc/")) {
+                    String[] url = templateName.split("/");
+                    for (int i = 0 ; i <url.length ; i++ ) {
+                        if("pc".equals(url[i])){
+                            for(int j=i+1; j<url.length; j++){
+                                strPrix += "/" + url[j];
+                            }
+                            break;
+                        }
+                    }
+                }
+                templateName = strPrix;
                 newTemplateName.append(templateName).append("_mobile");
             } else {
                 newTemplateName.append(templateName);
