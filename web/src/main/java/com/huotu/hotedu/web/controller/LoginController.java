@@ -6,12 +6,14 @@ import com.huotu.hotedu.service.ExamGuideService;
 import com.huotu.hotedu.service.MessageContentService;
 import com.huotu.hotedu.service.QaService;
 import com.huotu.hotedu.web.service.StaticResourceService;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.Device;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +54,7 @@ public class LoginController {
 
     @RequestMapping("/pc/logoutSuccess")
     public String logout() {
-        String turnPage = "pc/yun-index";
+        String turnPage = "redirect:/pc/index";
         String retUrl = request.getHeader("Referer");
         if(retUrl != null){
             String[] url = retUrl.split("/");
@@ -60,6 +62,10 @@ public class LoginController {
             for (int i = 0 ; i <url.length ; i++ ) {
                 if("hotedu".equals(url[i])){
                     for(int j=i+1; j<url.length; j++){
+                        if(url[j].contains("?")) {
+                            turnPage += "/"+url[j].substring(0,url[j].indexOf("?"));
+                            break;
+                        }
                         turnPage += "/" + url[j];
                     }
                     break;
@@ -114,6 +120,10 @@ public class LoginController {
             for (int i = 0 ; i <url.length ; i++ ) {
                 if("hotedu".equals(url[i])){
                     for(int j=i+1; j<url.length; j++){
+                        if(url[j].contains("?")) {
+                            turnPage += "/"+url[j].substring(0,url[j].indexOf("?"));
+                            break;
+                        }
                         turnPage += "/" + url[j];
                     }
                     break;
@@ -129,10 +139,27 @@ public class LoginController {
     }
 
     @RequestMapping("/pc/loginFailed")
-    public String loginFailed(Model model) throws Exception{
-        String returnPage = "pc/yun-index";
+    public String loginFailed(HttpServletRequest request,Model model) throws Exception{
+        String turnPage = "pc/yun-index";
         String errInfo = "用户或密码错误";
-
+        /*String turnPage = "redirect:/pc/index";
+        String retUrl = request.getHeader("Referer");
+        if(retUrl != null){
+            String[] url = retUrl.split("/");
+            turnPage="redirect:";
+            for (int i = 0 ; i <url.length ; i++ ) {
+                if("hotedu".equals(url[i])){
+                    for(int j=i+1; j<url.length; j++){
+                        if(url[j].contains("?")) {
+                            turnPage += "/"+url[j].substring(0,url[j].indexOf("?"));
+                            break;
+                        }
+                        turnPage += "/" + url[j];
+                    }
+                    break;
+                }
+            }
+        }*/
         List<Link> linkList=linkRepository.findAll();
         if(linkList.size()>0) {
             model.addAttribute("LinkList", linkList);
@@ -154,7 +181,7 @@ public class LoginController {
         }
         model.addAttribute("ExamGuideList",examGuideList);
         model.addAttribute("errInfo",errInfo);
-        return returnPage;
+        return turnPage;
     }
 
 }

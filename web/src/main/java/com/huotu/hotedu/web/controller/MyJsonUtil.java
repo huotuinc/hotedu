@@ -39,12 +39,30 @@ public class MyJsonUtil {
         return arrayList;
     }
 
-
-    public static void main(String[] args){
+   /* public static void main(String[] args){
         MyJsonUtil m = new MyJsonUtil();
         String s = "5,4,3,2,1";
         ArrayList<Long> arrayList =  m.convertJsonBytesToArrayList(s);
         String json = m.convertObjectToJsonBytes(arrayList);
         System.out.println(json);
-    }
+        String retUrl = "http://localhost:8080/hotedu/pc/index?errInfo=hhh&aa=1";
+        String ans="";
+        if(retUrl != null){
+            String[] url = retUrl.split("/");
+            ans="redirect:";
+            for (int i = 0 ; i <url.length ; i++ ) {
+                if("hotedu".equals(url[i])){
+                    for(int j=i+1; j<url.length; j++){
+                        if(url[j].contains("?")) {
+                            ans += "/"+url[j].substring(0,url[j].indexOf("?"));
+                            break;
+                        }
+                        ans += "/" + url[j];
+                    }
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }*/
 }
