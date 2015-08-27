@@ -101,6 +101,7 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         HoteduTemplateResolver templateResolver = new HoteduTemplateResolver();
         templateResolver.setCharacterEncoding("UTF-8");
+        templateResolver.setTemplateMode("HTML5");
         //总体不缓存
         templateResolver.setCacheable(false);
         //设置个别需要缓存的模板名单

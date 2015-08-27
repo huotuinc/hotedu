@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -28,6 +29,7 @@ public class SecurityConfig {
     public static final String pcLoginURI = "/pc/index";
     public static final String pcLoginSuccessURI = "/pc/loginSuccess";
     public static final String pcLoginFailedURI = "/pc/loginFailed";
+    public static final String pcLogoutSuccessURI = "/pc/logoutSuccess";
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -85,6 +87,7 @@ public class SecurityConfig {
                             "/pc/sendSMS",
                             "/pc/loadPeixun",
                             "/pc/loadRecruitment",
+                            "/pc/logoutSuccess",
                             "/ueditor/**"
                     ).permitAll()   // 允许未登录用户访问静态资源
                     .anyRequest().authenticated()
@@ -95,7 +98,9 @@ public class SecurityConfig {
                     .loginPage(pcLoginURI)
                     .defaultSuccessUrl(pcLoginSuccessURI, true)
                     .failureUrl(pcLoginFailedURI)
-                    .permitAll();
+                    .permitAll()
+                    .and()
+                    .logout().logoutSuccessUrl(pcLogoutSuccessURI);
 //                    .and()
             //允许用户进行HTTP基本身份验证
 //                    .httpBasic();

@@ -83,7 +83,6 @@
                     <input class="ysw500 sign-in__field ys-form__field" id="realName" name="realName" placeholder="真实姓名"
                            maxlength="20" type="text" th:value="${mbInfo}==null?'':${mbInfo.realName}" th:readonly="${mbInfo}==null?false:(${mbInfo.realName}!=null?true:false)"/>
                 </p>
-
                 <p class="ysdx">&nbsp;&nbsp;&nbsp;&nbsp;性别：
                     <input name="sex" value="1"  th:checked="${mbInfo}==null?false:${mbInfo.sex}==1" th:disabled="${mbInfo}==null?false:${mbInfo.sex}!=0" type="radio"/>
                     &nbsp;男&nbsp;&nbsp;

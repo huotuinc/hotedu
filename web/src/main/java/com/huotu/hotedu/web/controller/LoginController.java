@@ -50,6 +50,25 @@ public class LoginController {
         return "backend/index";
     }
 
+    @RequestMapping("/pc/logoutSuccess")
+    public String logout() {
+        String turnPage = "pc/yun-index";
+        String retUrl = request.getHeader("Referer");
+        if(retUrl != null){
+            String[] url = retUrl.split("/");
+            turnPage="redirect:";
+            for (int i = 0 ; i <url.length ; i++ ) {
+                if("hotedu".equals(url[i])){
+                    for(int j=i+1; j<url.length; j++){
+                        turnPage += "/" + url[j];
+                    }
+                    break;
+                }
+            }
+        }
+        return turnPage;
+    }
+
 
     @RequestMapping("/pc/index")
     public String index(Model model) throws Exception{
