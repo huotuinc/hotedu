@@ -383,6 +383,16 @@
 	right: 23px;
 	font-size: 12px;
 }
+.timelist {
+	position: absolute;
+	background: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	padding: 4px 7px;
+	border-radius: 5px;
+	margin-top: -29px;
+	right: 7px;
+	font-size: 12px;
+}
 .splb {
 	width: 100%;
 	background-color: #fff;
@@ -496,3 +506,19 @@
 .jsjj b {
 	color: #048BEB;
 }
+.play {
+	background-color: #242424;
+	color: #fff;
+	padding: 10px;
+	font-size: 14px;
+}
+.fontjs {
+	font-size: 12px;
+	width: 95%;
+	margin: 0 auto;
+	color: #838383;
+}
+.fontjs b{
+	font-size:14px;
+	line-height: 33px;
+	}
