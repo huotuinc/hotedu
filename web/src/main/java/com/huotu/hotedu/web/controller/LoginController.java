@@ -6,17 +6,14 @@ import com.huotu.hotedu.service.ExamGuideService;
 import com.huotu.hotedu.service.MessageContentService;
 import com.huotu.hotedu.service.QaService;
 import com.huotu.hotedu.web.service.StaticResourceService;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mobile.device.Device;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -181,6 +178,7 @@ public class LoginController {
         }
         model.addAttribute("ExamGuideList",examGuideList);
         model.addAttribute("errInfo",errInfo);
+        model.addAttribute("flag","yun-index.html");  //此属性用来给前台确定当前是哪个页面
         return turnPage;
     }
 
