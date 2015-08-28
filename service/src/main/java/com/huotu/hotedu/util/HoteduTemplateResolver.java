@@ -55,7 +55,7 @@ public class HoteduTemplateResolver extends TemplateResolver {
                 isFromMobile = session.getAttribute("ua").equals("mobile");
             }
             if (isFromMobile) {
-                String strPrix = "mobile";
+                String strPrix = "/mobile";
                 if(templateName.startsWith("pc/")||templateName.startsWith("/pc/")) {
                     String[] url = templateName.split("/");
                     for (int i = 0 ; i <url.length ; i++ ) {
