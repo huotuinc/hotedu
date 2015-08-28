@@ -48,7 +48,7 @@
 }
 .picScroll .bd li img {
 	width: 100%;
-	background: url(images/loading.gif) #fff center center no-repeat;
+	background: url(../images/lodingj.png) #fff center center no-repeat;
 }
 .picScroll .hd {
 	line-height: 40px;
