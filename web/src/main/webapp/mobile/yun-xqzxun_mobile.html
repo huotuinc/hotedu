@@ -45,11 +45,9 @@
     var Y;
     var $body = $("body");
     $body.on("touchstart", function(e) {
-        e.preventDefault();
         startY = e.originalEvent.changedTouches[0].pageY;
     });
     $body.on("touchmove", function(e) {
-        e.preventDefault();
         moveEndY = e.originalEvent.changedTouches[0].pageY;
         Y = moveEndY - startY;
         if (Y>0) {
