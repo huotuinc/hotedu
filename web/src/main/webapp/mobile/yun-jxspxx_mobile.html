@@ -7,11 +7,20 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 <meta name="format-detection" content="telephone=no"/>
 <meta name="description" content=""/>
+<<<<<<< Updated upstream:web/src/main/webapp/mobile/yun-jxspxx_mobile.html
 <link rel="stylesheet" type="text/css" href="../mobile/css/common.css"/>
 <link rel="stylesheet" type="text/css" href="../mobile/css/lunbo.css"/>
 <link rel="stylesheet" type="text/css" href="../mobile/css/schoolm.css"/>
 <script src="../mobile/js/TouchSlide.1.1.js"></script>
 <title>云商学院视频页</title>
+=======
+<link rel="stylesheet" type="text/css" href="css/common.css"/>
+<link rel="stylesheet" type="text/css" href="css/lunbo.css"/>
+<link rel="stylesheet" type="text/css" href="css/schoolm.css"/>
+<script src="../mobile/js/TouchSlide.1.1.js" type="text/javascript"></script>
+<script src="../mobile/js/jquery-1.8.3.min.js"></script>
+    <title>云商学院视频页</title>
+>>>>>>> Stashed changes:web/src/main/webapp/mobile/videodetails.html
 </head>
 
 <body>
@@ -58,5 +67,27 @@
  
   </div>
 </div>
+<script>
+    //以下是导航栏的动画效果实现
+    var startY;
+    var moveEndY;
+    var Y;
+    var $body = $("body");
+    $body.on("touchstart", function(e) {
+        e.preventDefault();
+        startY = e.originalEvent.changedTouches[0].pageY;
+    });
+    $body.on("touchmove", function(e) {
+        e.preventDefault();
+        moveEndY = e.originalEvent.changedTouches[0].pageY;
+        Y = moveEndY - startY;
+        if (Y>0) {
+            $(".daoh").slideDown(200);
+        }
+        else {
+            $(".daoh").slideUp(200);
+        }
+    });
+</script>
 </body>
 </html>

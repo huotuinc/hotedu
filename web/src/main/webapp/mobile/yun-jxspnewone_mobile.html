@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../mobile/css/lunbo.css"/>
     <link rel="stylesheet" type="text/css" href="../mobile/css/schoolm.css"/>
     <script src="../mobile/js/TouchSlide.1.1.js"></script>
+    <script src="../mobile/js/jquery-1.8.3.min.js"></script>
     <title>云商学院视频页</title>
 </head>
 
@@ -155,5 +156,27 @@
 
     </div>
 </div>
+<script>
+    //以下是导航栏的动画效果实现
+    var startY;
+    var moveEndY;
+    var Y;
+    var $body = $("body");
+    $body.on("touchstart", function(e) {
+        e.preventDefault();
+        startY = e.originalEvent.changedTouches[0].pageY;
+    });
+    $body.on("touchmove", function(e) {
+        e.preventDefault();
+        moveEndY = e.originalEvent.changedTouches[0].pageY;
+        Y = moveEndY - startY;
+        if (Y>0) {
+            $(".daoh").slideDown(200);
+        }
+        else {
+            $(".daoh").slideUp(200);
+        }
+    });
+</script>
 </body>
 </html>
