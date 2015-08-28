@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <meta name="format-detection" content="telephone=no"/>
@@ -29,9 +30,13 @@
         <li style="display:none;"><img src="../mobile/images/sp4.jpg" style="width:150px; height: 205px;"/></li>
         <li class="next">
             <p class="toptitle"><b style="color:#005FE1;">云商学院教学视频系列课程</b></p>
+
             <p>讲师：<i>龙成东/林小希/汤晓/郭向峰</i></p>
+
             <p>类型：<i>微商/学习/培训</i></p>
+
             <p>内容提供：<i>云商学院</i></p>
+
             <p>简介：<i>微商是一门独立的新兴学科，具有较强的理论性与实践操作性。微商运营师的培训
                 考证旨在使学员在掌握微商概念及基本运行模式后，通过视频学习、课堂讲授、案例分析
                 和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析
@@ -39,63 +44,114 @@
         </li>
     </ul>
     <div>
-        <ul>
-            <li>
-                <p class="massages"><b>龙成东</b></p>
-                <p class="onxian"></p>
-                <p style="clear:both; height:3px;"></p>
-                <p class="xian"></p>
-                <p style="clear:both;height:18px;"></p>
-            </li>
-            <li class="smallbox">
-                <p class="time">24:01</p>
-                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="../mobile/images/3.png"/> </a> </p>
-                <p class="sptit"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
+        <p class="massages"><b>龙成东</b></p>
+        <p class="onxian"></p>
+        <p style="clear:both; height:3px;"></p>
+        <p class="xian"></p>
+        <p style="clear:both;height:18px;"></p>
+        <ul th:remove="all-but-first">
+            <li class="smallbox" th:each="v1:${videoList1}">
+                <p class="time" th:text="${v1.duration}">24:01</p>
+
+                <p class="splb">
+                    <a href="javascript:void(0)" th:href="@{/pc/playVideo(videoNo=${v1.videoNo})}">
+                        <img style="width:100%" src="../mobile/images/3.png" th:src="${v1.thumbnail}"/>
+                    </a>
+                </p>
+
+                <p class="sptit" th:text="${v1.videoName}"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
             </li>
 
             <li class="smallbox">
                 <p class="time">24:01</p>
-                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="../mobile/images/3.png"/> </a> </p>
+
+                <p class="splb"><a href="javascript:void(0)" target=""> <img style="width:100%"
+                                                                             src="../mobile/images/3.png"/> </a></p>
+
                 <p class="sptit"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
             </li>
             <li class="smallbox">
                 <p class="time">24:01</p>
-                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="../mobile/images/3.png"/> </a> </p>
+
+                <p class="splb"><a href="javascript:void(0)" target=""> <img style="width:100%"
+                                                                             src="../mobile/images/3.png"/> </a></p>
+
+                <p class="sptit"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
+            </li>
+        </ul>
+        <p style="height:20px; clear:both"></p>
+        <p class="massages"><b>林小希</b></p>
+        <p class="onxian"></p>
+        <p style="clear:both; height:3px;"></p>
+        <p class="xian"></p>
+        <p style="clear:both;height:18px;"></p>
+        <ul th:remove="all-but-first">
+            <li class="smallbox" th:each="v2:${videoList2}">
+                <p class="time" th:text="${v2.duration}">24:01</p>
+                <p class="splb">
+                    <a href="javascript:void(0)" th:href="@{/pc/playVideo(videoNo=${v2.videoNo})}">
+                        <img style="width:100%" src="../mobile/images/3.png" th:src="${v2.thumbnail}"/>
+                    </a>
+                </p>
+
+                <p class="sptit" th:text="${v2.videoName}"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
+            </li>
+
+            <li class="smallbox">
+                <p class="time">24:01</p>
+
+                <p class="splb"><a href="javascript:void(0)" target=""> <img style="width:100%"
+                                                                             src="../mobile/images/3.png"/> </a></p>
+
+                <p class="sptit"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
+            </li>
+            <li class="smallbox">
+                <p class="time">24:01</p>
+
+                <p class="splb"><a href="javascript:void(0)" target=""> <img style="width:100%"
+                                                                             src="../mobile/images/3.png"/> </a></p>
+
                 <p class="sptit"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
             </li>
 
         </ul>
+        <p style="height:20px; clear:both"></p>
+        <p class="massages"><b>汤晓</b></p>
+        <p class="onxian"></p>
+        <p style="clear:both; height:3px;"></p>
+        <p class="xian"></p>
+        <p style="clear:both;height:18px;"></p>
+        <ul th:remove="all-but-first">
+            <li class="smallbox" th:each="v3:${videoList3}">
+                <p class="time" th:text="${v3.duration}">24:01</p>
+                <p class="splb">
+                    <a href="javascript:void(0)" th:href="@{/pc/playVideo(videoNo=${v3.videoNo})}">
+                        <img style="width:100%" src="../mobile/images/3.png" th:src="${v3.thumbnail}"/>
+                    </a>
+                </p>
 
-        <ul>
+                <p class="sptit" th:text="${v3.videoName}"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
+            </li>
+        </ul>
+        <p style="height:20px; clear:both"></p>
+        <p class="massages"><b>郭向峰</b></p>
+        <p class="onxian"></p>
+        <p style="clear:both; height:3px;"></p>
+        <p class="xian"></p>
+        <p style="clear:both;height:18px;"></p>
+        <ul th:remove="all-but-first">
+            <li class="smallbox" th:each="v4:${videoList4}">
+                <p class="time" th:text="${v4.duration}">24:01</p>
+                <p class="splb">
+                    <a href="javascript:void(0)" th:href="@{/pc/playVideo(videoNo=${v4.videoNo})}">
+                        <img style="width:100%" src="../mobile/images/3.png" th:src="${v4.thumbnail}"/>
+                    </a>
+                </p>
 
-            <p style="height:20px; clear:both"></p>
-            <li>
-                <p class="massages"><b>林小希</b></p>
-                <p class="onxian"></p>
-                <p style="clear:both; height:3px;"></p>
-                <p class="xian"></p>
-                <p style="clear:both;height:18px;"></p>
+                <p class="sptit" th:text="${v4.videoName}"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
             </li>
-            <li class="smallbox">
-                <p class="time">24:01</p>
-                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="../mobile/images/3.png"/> </a> </p>
-                <p class="sptit"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
-            </li>
-
-            <li class="smallbox">
-                <p class="time">24:01</p>
-                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="../mobile/images/3.png"/> </a> </p>
-                <p class="sptit"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
-            </li>
-            <li class="smallbox">
-                <p class="time">24:01</p>
-                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="../mobile/images/3.png"/> </a> </p>
-                <p class="sptit"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
-            </li>
-
         </ul>
         <p style="height:50px; clear:both"></p>
-
 
     </div>
 </div>
