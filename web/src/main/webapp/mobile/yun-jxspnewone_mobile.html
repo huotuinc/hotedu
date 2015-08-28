@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1"/>
@@ -7,26 +7,26 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <meta name="format-detection" content="telephone=no"/>
     <meta name="description" content=""/>
-    <link rel="stylesheet" type="text/css" href="css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="css/lunbo.css"/>
-    <link rel="stylesheet" type="text/css" href="css/schoolm.css"/>
-    <script src="js/TouchSlide.1.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="../mobile/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="../mobile/css/lunbo.css"/>
+    <link rel="stylesheet" type="text/css" href="../mobile/css/schoolm.css"/>
+    <script src="../mobile/js/TouchSlide.1.1.js"></script>
     <title>云商学院视频页</title>
 </head>
 
 <body>
 <div class="daoh">
     <ul>
-        <li><a href="#">学院首页</a></li>
-        <li><a href="#">教学视频</a></li>
-        <li><a href="#">动态资讯</a></li>
-        <li><a href="#">师资力量</a></li>
-        <li><a href="#">我要报名</a></li>
+        <li><a href="#" th:href="@{/pc/index}">学院首页</a></li>
+        <li><a href="#" th:href="@{/pc/loadVideo}">教学视频</a></li>
+        <li><a href="javascript:void(0)">动态资讯</a></li>
+        <li><a href="#" th:href="@{/pc/loadTutors}">师资力量</a></li>
+        <li><a href="#" th:href="@{/pc/loadMemberRegister}">我要报名</a></li>
     </ul>
 </div>
 <div>
     <ul class="topth">
-        <li style="display:none;"><img src="../pc/images/sp4.jpg" style="width:150px; height: 205px;"/></li>
+        <li style="display:none;"><img src="../mobile/images/sp4.jpg" style="width:150px; height: 205px;"/></li>
         <li class="next">
             <p class="toptitle"><b style="color:#005FE1;">云商学院教学视频系列课程</b></p>
             <p>讲师：<i>龙成东/林小希/汤晓/郭向峰</i></p>
@@ -49,18 +49,18 @@
             </li>
             <li class="smallbox">
                 <p class="time">24:01</p>
-                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="images/3.png"/> </a> </p>
+                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="../mobile/images/3.png"/> </a> </p>
                 <p class="sptit"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
             </li>
 
             <li class="smallbox">
                 <p class="time">24:01</p>
-                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="images/3.png"/> </a> </p>
+                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="../mobile/images/3.png"/> </a> </p>
                 <p class="sptit"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
             </li>
             <li class="smallbox">
                 <p class="time">24:01</p>
-                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="images/3.png"/> </a> </p>
+                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="../mobile/images/3.png"/> </a> </p>
                 <p class="sptit"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
             </li>
 
@@ -78,18 +78,18 @@
             </li>
             <li class="smallbox">
                 <p class="time">24:01</p>
-                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="images/3.png"/> </a> </p>
+                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="../mobile/images/3.png"/> </a> </p>
                 <p class="sptit"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
             </li>
 
             <li class="smallbox">
                 <p class="time">24:01</p>
-                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="images/3.png"/> </a> </p>
+                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="../mobile/images/3.png"/> </a> </p>
                 <p class="sptit"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
             </li>
             <li class="smallbox">
                 <p class="time">24:01</p>
-                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="images/3.png"/> </a> </p>
+                <p  class="splb"> <a href="javascript:void(0)"  target=""> <img style="width:100%" src="../mobile/images/3.png"/> </a> </p>
                 <p class="sptit"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
             </li>
 

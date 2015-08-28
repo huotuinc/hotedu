@@ -1,30 +1,30 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <meta name="format-detection" content="telephone=no"/>
     <meta name="description" content=""/>
-    <link rel="stylesheet" type="text/css" href="css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="css/lunbo.css"/>
-    <link rel="stylesheet" type="text/css" href="css/schoolm.css"/>
-    <script src="js/TouchSlide.1.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="../mobile/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="../mobile/css/lunbo.css"/>
+    <link rel="stylesheet" type="text/css" href="../mobile/css/schoolm.css"/>
+    <script src="../mobile/js/TouchSlide.1.1.js"></script>
     <title>云商学院报名页</title>
 </head>
 
 <body style="background-color:#00a0e8;">
 <div class="daoh">
     <ul>
-        <li><a href="#">学院首页</a></li>
-        <li><a href="#">教学视频</a></li>
-        <li><a href="#">动态资讯</a></li>
-        <li><a href="#">师资力量</a></li>
-        <li><a href="#">我要报名</a></li>
+        <li><a href="#" th:href="@{/pc/index}">学院首页</a></li>
+        <li><a href="#" th:href="@{/pc/loadVideo}">教学视频</a></li>
+        <li><a href="javascript:void(0)">动态资讯</a></li>
+        <li><a href="#" th:href="@{/pc/loadTutors}">师资力量</a></li>
+        <li><a href="#" th:href="@{/pc/loadMemberRegister}">我要报名</a></li>
     </ul>
 </div>
-
 
 
 <div style="width:100%" id="">
@@ -32,25 +32,30 @@
     <div class="section section7">
         <div class="boxupone">
             <p style="height:40px;"></p>
-            <input id=" " name=" "placeholder="填写姓名" maxlength=" " type="text"/>
-            <input id=" " name=" "placeholder="手机号" maxlength=" " type="text"/>
+            <input  name=" " placeholder="填写姓名" maxlength=" " type="text"/>
+            <input  name=" " placeholder="手机号" maxlength=" " type="text"/>
+
             <div class="selectys">
-                <select id="orderTimeDataSel" class="textys">
+                <select  class="textys">
                     <option>性别</option>
                     <option>男</option>
                     <option>女</option>
                 </select>
             </div>
             <div class="selectys">
-                <select id="orderTimeDataSel" class="textys">
+                <select  class="textys">
                     <option>选择地区</option>
                     <option>杭州市</option>
                 </select>
             </div>
-            <div style="display:none;" class="upbutton" id="registerBtn" type="button">性别</div>
-            <div style="display:none;"  class="upbuttons"><a href=""><img src="images/boys.png"/></a><a href=""/><img src="images/girl.png"/></a></div>
-            <button class="up-button" id="registerBtn" type="button">提交</button>
+            <div style="display:none;" class="upbutton"  type="button">性别</div>
+            <div style="display:none;" class="upbuttons">
+                <a href=""><img src="../mobile/images/boys.png"/></a>
+                <a href=""><img src="../mobile/images/girl.png"/></a>
+            </div>
+            <button class="up-button"  type="button">提交</button>
             <p style="font-size:14px; color:#363636">请保持手机开机状态，以便我们能联系到你。</p>
+
             <p style="height:40px;"></p>
         </div>
     </div>
@@ -60,15 +65,27 @@
     <!--up2-->
     <div style="background-color:#3cbbf4;">
         <p style="height:40px;"></p>
-        <div class="pcfont7"><img style="width:100%;" src="images/font7.png" /></div>
+
+        <div class="pcfont7"><img style="width:100%;" src="../mobile/images/font7.png"/></div>
         <p style="height:80px;"></p>
+
         <div class="boxtab">
             <table class="result-tab" width="100%">
-                <tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;报名时间：即日起报名，每期50人以上即开班。</td></tr>
-                <tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;报名渠道：公司官网报名 / 代理商处报名 / 公司总部报名 / 微信公众号报名</td></tr>
-                <tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;报名费用：2680元/人: 包括报名费、证书费、辅导资料费和考务费。     </td></tr>
-                <tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;报名资料： 报名表1张；个人身份证复印件1份；学历证书或学生证复印件一张，或在职证明一张；两寸白底彩色照片2张。</td></tr>
-                <tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;考核方式：理论考试时间100分钟，满分100分，60分即通过。</td></tr>
+                <tr>
+                    <td>&nbsp;&nbsp;●&nbsp;&nbsp;报名时间：即日起报名，每期50人以上即开班。</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;●&nbsp;&nbsp;报名渠道：公司官网报名 / 代理商处报名 / 公司总部报名 / 微信公众号报名</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;●&nbsp;&nbsp;报名费用：2680元/人: 包括报名费、证书费、辅导资料费和考务费。</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;●&nbsp;&nbsp;报名资料： 报名表1张；个人身份证复印件1份；学历证书或学生证复印件一张，或在职证明一张；两寸白底彩色照片2张。</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;●&nbsp;&nbsp;考核方式：理论考试时间100分钟，满分100分，60分即通过。</td>
+                </tr>
             </table>
 
         </div>
@@ -76,26 +93,33 @@
     <!--up2 end-->
 
 
-
     <!--up3-->
     <div style="background-color:#00a0e8;">
         <p style="height:40px;"></p>
-        <div class="pcfont7"><img style="width:100%;" src="images/font8.png" /></div>
+
+        <div class="pcfont7"><img style="width:100%;" src="../mobile/images/font8.png"/></div>
         <p style="height:30px;"></p>
+
         <div style="margin:0 auto; color:#fff; line-height:27px; font-size:14px; margin:10px;">
             <p>&nbsp;&nbsp;●&nbsp;&nbsp;咨询热线：13575749204&nbsp;&nbsp;樊老师&nbsp;&nbsp;&nbsp;&nbsp;15968872933&nbsp;&nbsp;包老师</p>
+
             <p>&nbsp;&nbsp;●&nbsp;&nbsp;加盟代理咨询：18606703888&nbsp;&nbsp;周老师 </p>
+
             <p>&nbsp;&nbsp;●&nbsp;&nbsp;咨询QQ群：435012734&nbsp;&nbsp;樊老师</p>
+
             <p>&nbsp;&nbsp;●&nbsp;&nbsp;公司官网：www.huobanj.com</p>
+
             <p>&nbsp;&nbsp;●&nbsp;&nbsp;联系地址：杭州市滨江区西兴街道阡陌路482号智慧E谷B幢4楼</p>
+
             <p style="height:30px;"></p>
-            <p style=" width:80%; margin:0 auto;"><img style="width:100%" src="images/map.png" /></p>
+
+            <p style=" width:80%; margin:0 auto;"><img style="width:100%" src="../mobile/images/map.png"/></p>
+
             <p style="height:60px;"></p>
         </div>
     </div>
     <!--up3 end-->
 </div>
-
 
 
 </body>

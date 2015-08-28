@@ -145,7 +145,7 @@
 }
 .daoh {
 	position: fixed;
-	bottom: 0;
+	bottom: 0px;
 	background: rgba(13,13,13,0.5);
 	z-index: 1;
 	left: 0;

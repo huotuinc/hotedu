@@ -12,16 +12,16 @@
     <link rel="stylesheet" type="text/css" href="../mobile/css/lunbo.css"/>
     <link rel="stylesheet" type="text/css" href="../mobile/css/schoolm.css"/>
     <script src="../mobile/js/TouchSlide.1.1.js"></script>
-    <title>云商学院首页-mobile</title>
+    <title>云商学院首页</title>
 </head>
 <body>
 <div class="daoh">
     <ul>
-        <li><a href="#">学院首页</a></li>
-        <li><a href="#">教学视频</a></li>
-        <li><a href="#">动态资讯</a></li>
-        <li><a href="#">师资力量</a></li>
-        <li><a href="#">我要报名</a></li>
+        <li><a href="#" th:href="@{/pc/index}">学院首页</a></li>
+        <li><a href="#" th:href="@{/pc/loadVideo}">教学视频</a></li>
+        <li><a href="javascript:void(0)">动态资讯</a></li>
+        <li><a href="#" th:href="@{/pc/loadTutors}">师资力量</a></li>
+        <li><a href="#" th:href="@{/pc/loadMemberRegister}">我要报名</a></li>
     </ul>
 </div>
 
@@ -30,7 +30,7 @@
     <p><img src="../mobile/images/pc1.jpg" width="100%"/></p>
 
     <p class="pcone"><img src="../mobile/images/font1.png" width="100%"/></p>
-    <a href="">
+    <a href="" th:href="@{/pc/loadMemberRegister}">
         <div class="buttomone"><b>我要报名</b></div>
     </a>
 </div>

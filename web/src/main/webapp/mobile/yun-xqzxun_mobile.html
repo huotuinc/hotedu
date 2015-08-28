@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1">
@@ -7,21 +7,21 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
     <meta name="description" content="">
-    <link rel="stylesheet" type="text/css" href="../pc/css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="css/lunbo.css"/>
-    <link rel="stylesheet" type="text/css" href="css/schoolm.css"/>
-    <script src="js/TouchSlide.1.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="../pc/../mobile/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="../mobile/css/lunbo.css"/>
+    <link rel="stylesheet" type="text/css" href="../mobile/css/schoolm.css"/>
+    <script src="../mobile/js/TouchSlide.1.1.js"></script>
     <title>云商学院动态资讯</title>
 </head>
 
 <body>
 <div class="daoh">
     <ul>
-        <li><a href="#">学院首页</a></li>
-        <li><a href="#">教学视频</a></li>
-        <li><a href="#">动态资讯</a></li>
-        <li><a href="#">师资力量</a></li>
-        <li><a href="#">我要报名</a></li>
+        <li><a href="#" th:href="@{/pc/index}">学院首页</a></li>
+        <li><a href="#" th:href="@{/pc/loadVideo}">教学视频</a></li>
+        <li><a href="javascript:void(0)">动态资讯</a></li>
+        <li><a href="#" th:href="@{/pc/loadTutors}">师资力量</a></li>
+        <li><a href="#" th:href="@{/pc/loadMemberRegister}">我要报名</a></li>
     </ul>
 </div>
 
@@ -29,7 +29,7 @@
     <ul class="toplist">
         <li>
             <p style="font-size:20px;"><b>通过微商运营师的培训能学到什么？</b></p>
-            <p><img style="width:100%" src="images/listone.png" /></p>
+            <p><img style="width:100%" src="../mobile/iamges/listone.png" /></p>
 
             <p>微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
             <p><span class="hottime">2015.01.01</span></p>
