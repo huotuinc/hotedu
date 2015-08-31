@@ -72,7 +72,7 @@ public class LoginController {
         if(linkList.size()>0) {
             model.addAttribute("linkList", linkList);
         }
-        List<MessageContent> messageContentList=messageContentService.loadPcMessageContent(0,5).getContent();
+        List<MessageContent> messageContentList=messageContentService.loadPcMessageContent(0,4).getContent();
         for(MessageContent mc:messageContentList){
             mc.setPictureUri(staticResourceService.getResource(mc.getPictureUri()).toString());
         }

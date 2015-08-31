@@ -20,58 +20,78 @@
     <ul>
         <li><a href="#" th:href="@{/pc/index}">学院首页</a></li>
         <li><a href="#" th:href="@{/pc/loadVideo}">教学视频</a></li>
-        <li><a href="javascript:void(0)">动态资讯</a></li>
+        <li><a href="#" th:href="@{/pc/loadMessageContent}">动态资讯</a></li>
         <li><a href="#" th:href="@{/pc/loadTutors}">师资力量</a></li>
         <li><a href="#" th:href="@{/pc/loadMemberRegister}">我要报名</a></li>
     </ul>
 </div>
 
 <div>
-    <a href="#">
-        <ul class="toplist">
-            <li>
-                <p><img style="width:100%" src="../mobile/images/listone.png" /></p>
-                <p><b>通过微商运营师的培训能学到什么？</b></p>
-                <p class="listpp">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
-                <p><span class="toptime">热门话题</span><span class="hottime">2015.01.01</span></p>
-            </li>
-        </ul>
-    </a>
-    <p style="clear:both; height:20px;"></p>
-    <a href="#">
-        <ul class="toplistone">
-            <li class="imglist"><img style="width:100%" src="../mobile/images/listone.png" /></li>
-            <li class="listfont">
-                <p class="listt"><b>通过微商运营师的培训能学到什么？</b></p>
-                <p class="lists">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
-                <p><span class="hottime">2015.01.01</span></p>
-            </li>
-        </ul>
-    </a>
-    <p style="clear:both; height:10px;"></p>
-    <a href="#">
-        <ul class="toplistone">
-            <li class="imglist"><img style="width:100%" src="../mobile/images/listone.png" /></li>
-            <li class="listfont">
-                <p class="listt"><b>通过微商运营师的培训能学到什么？</b></p>
-                <p class="lists">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
-                <p><span class="hottime">2015.01.01</span></p>
-            </li>
-        </ul>
-    </a>
-    <p style="clear:both; height:10px;"></p>
-    <a href="#">
-        <ul class="toplistone">
-            <li class="imglist"><img style="width:100%" src="../mobile/images/listone.png" /></li>
-            <li class="listfont">
-                <p class="listt"><b>通过微商运营师的培训能学到什么？</b></p>
-                <p class="lists">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
-                <p><span class="hottime">2015.01.01</span></p>
-            </li>
-        </ul>
-    </a>
-    <p style="clear:both; height:10px;"></p>
-
+    <ul th:remove="all-but-first">
+        <li th:each="g:${allMessageContentList}">
+            <a href="#" th:href="@{/pc/loadDetailMessageContent(id=${g.id})}">
+                <ul th:if="${g.top}" class="toplist">
+                    <li>
+                        <p><img style="width:100%" src="../mobile/images/listone.png" th:src="${g.pictureUri}"/></p>
+                        <p><b th:text="${g.title}">通过微商运营师的培训能学到什么？</b></p>
+                        <p class="listpp" th:text="${g.synopsis}">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
+                        <p>
+                            <!--<span class="toptime">热门话题</span>-->
+                            <span class="hottime" th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd')}">2015.01.01</span>
+                        </p>
+                    </li>
+                </ul>
+                <ul th:if="${!g.top}" class="toplistone">
+                    <li class="imglist"><img style="width:100%" src="../mobile/images/listone.png" th:src="${g.pictureUri}"/></li>
+                    <li class="listfont">
+                        <p class="listt" th:text="${g.title}"><b>通过微商运营师的培训能学到什么？</b></p>
+                        <p class="lists" th:text="${g.synopsis}">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
+                        <p><span class="hottime" th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd')}">2015.01.01</span></p>
+                    </li>
+                </ul>
+            </a>
+            <p style="clear:both; height:20px;"></p>
+        </li>
+        <li>
+            <a href="#">
+                <ul class="toplistone">
+                    <li class="imglist"><img style="width:100%" src="../mobile/images/listone.png" /></li>
+                    <li class="listfont">
+                        <p class="listt"><b>通过微商运营师的培训能学到什么？</b></p>
+                        <p class="lists">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
+                        <p><span class="hottime">2015.01.01</span></p>
+                    </li>
+                </ul>
+            </a>
+            <p style="clear:both; height:10px;"></p>
+        </li>
+        <li>
+            <a href="#">
+                <ul class="toplistone">
+                    <li class="imglist"><img style="width:100%" src="../mobile/images/listone.png" /></li>
+                    <li class="listfont">
+                        <p class="listt"><b>通过微商运营师的培训能学到什么？</b></p>
+                        <p class="lists">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
+                        <p><span class="hottime">2015.01.01</span></p>
+                    </li>
+                </ul>
+            </a>
+            <p style="clear:both; height:10px;"></p>
+        </li>
+        <li>
+            <a href="#">
+                <ul class="toplistone">
+                    <li class="imglist"><img style="width:100%" src="../mobile/images/listone.png" /></li>
+                    <li class="listfont">
+                        <p class="listt"><b>通过微商运营师的培训能学到什么？</b></p>
+                        <p class="lists">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
+                        <p><span class="hottime">2015.01.01</span></p>
+                    </li>
+                </ul>
+            </a>
+            <p style="clear:both; height:10px;"></p>
+        </li>
+    </ul>
 </div>
 <p style="clear:both; height:50px;"></p>
 <script>

@@ -451,7 +451,7 @@
 	overflow: hidden;
 	display: inline-block;
 	width: 100%;
-	height: 79px;
+	max-height: 79px;
 }
 .hottime {
 	float: right;
