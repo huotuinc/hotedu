@@ -89,7 +89,9 @@
                     <input name="sex" value="2"  th:checked="${mbInfo}==null?false:${mbInfo.sex}==2" th:disabled="${mbInfo}==null?false:${mbInfo.sex}!=0" type="radio"/>
                     &nbsp;女&nbsp;&nbsp;
                 </p>
-
+                <div style="text-align: center;">
+                <span style="color: red;" id="phoneErr_baomin"></span><span style="color: blue" id="phoneRig_baomin"></span>
+                </div>
                 <p>
                     <input class="ysw500 sign-in__field ys-form__field" id="phoneNo" name="phoneNo"
                            placeholder="真实手机号"  th:value="${mbInfo}==null?'':${mbInfo.phoneNo}" th:readonly="${mbInfo}==null?false:true" maxlength="20" type="text"/>
@@ -209,4 +211,40 @@
         autoPage: true,
         trigger: "click"
     });
+    $("#phoneNo").blur(checkPhoneNo);
+    function checkPhoneNo() {
+        var reg=/^(13|14|15|17|18)\d{9}$/;
+        var phoneNo = $("#phoneNo").val();
+        if(phoneNo=="") {
+            $("#phoneRig_baomin").text("");
+            $("#phoneErr_baomin").text("手机号不能为空");
+            $("#phoneNo").focus();
+            return;
+        }
+        if(!reg.test(phoneNo)){
+            $("#phoneRig_baomin").text("");
+            $("#phoneErr_baomin").text("请填入正确的手机号！");
+            $("#phoneNo").focus();
+            return false;
+        }
+        $.ajax({
+            url:"checkPhoneNo",
+            type:"post",
+            dataType:"json",
+            data:{"phoneNo":phoneNo},
+            success:function(result){
+                if(result.status==0) {
+                    $("#phoneErr_baomin").text(result.message);
+                    $("#phoneRig_baomin").text("");
+                }else if(result.status==1) {
+                    $("#phoneErr_baomin").text("");
+                    $("#phoneRig_baomin").text(result.message);
+                }
+            },
+            error:function(){
+                $.MsgBox.Alert("系统异常","请求失败");
+                return false;
+            }
+        });
+    }
 </script>

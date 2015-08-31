@@ -33,28 +33,27 @@
     <div class="section section7">
         <div class="boxupone">
             <p style="height:40px;"></p>
-            <input  name=" " placeholder="填写姓名" maxlength=" " type="text"/>
-            <input  name=" " placeholder="手机号" maxlength=" " type="text"/>
-
+            <input  id="realName" name="realName" placeholder="填写姓名" maxlength="20" type="text"/>
+            <input  id="phoneNo" name="phoneNo" placeholder="手机号" maxlength="20" type="text"/>
+            <span style="color: red;" id="phoneErr"></span><span style="color: blue" id="phoneRig"></span>
             <div class="selectys">
-                <select  class="textys">
-                    <option>性别</option>
-                    <option>男</option>
-                    <option>女</option>
+                <select id="sex" name="sex" class="textys">
+                    <option selected="selected" value="">选择性别</option>
+                    <option value="1">男</option>
+                    <option value="2">女</option>
                 </select>
             </div>
             <div class="selectys">
-                <select  class="textys">
-                    <option>选择地区</option>
-                    <option>杭州市</option>
+                <select class="textys"  id="areaId" name="areaId">
+                    <option selected="selected" value="">选择考点</option>
+                    <option value="001">杭州市</option>
                 </select>
             </div>
-            <div style="display:none;" class="upbutton"  type="button">性别</div>
-            <div style="display:none;" class="upbuttons">
+           <!-- <div style="display:none;" class="upbuttons">
                 <a href=""><img src="../mobile/images/boys.png"/></a>
                 <a href=""><img src="../mobile/images/girl.png"/></a>
-            </div>
-            <button class="up-button"  type="button">提交</button>
+            </div>-->
+            <button id="baominSubmitButton" class="up-button"  type="button">提交</button>
             <p style="font-size:14px; color:#363636">请保持手机开机状态，以便我们能联系到你。</p>
 
             <p style="height:40px;"></p>
@@ -123,6 +122,93 @@
 </div>
 
 <script>
+    //报名
+    $(function() {
+        $("#baominSubmitButton").click(function() {
+            var reg=/^(13|14|15|17|18)\d{9}$/;
+            var phoneNo = $("#phoneNo").val();
+            var realName = $("#realName").val();
+            var areaId = jQuery("#areaId  option:selected").val();
+            var sex = $("#sex").val();
+            if(phoneNo=="") {
+                alert("手机号不能为空");
+                return;
+            }
+            if(!reg.test(phoneNo)){
+                alert("请填入正确的手机号!");
+                return false;
+            }
+            if(realName=="") {
+                alert("姓名不能为空");
+                return;
+            }
+            if(sex==""||sex==null) {
+                alert("请选择性别");
+                return;
+            }
+            if(areaId==""||areaId==null){
+                alert("请选择报名区域");
+                return;
+            }
+            $.ajax({
+                url:"baomin",
+                type:"post",
+                dataType:"json",
+                data:{"phoneNo":phoneNo,"realName":realName,"sex":sex,"areaId":areaId},
+                success:function(result){
+                    if(result.status==0) {
+                        $("#msgInfo").text("");
+                        $("#errInfo").text(result.message);
+                    }else if(result.status==1) {
+                        $("#errInfo").text("");
+//                        $.MsgBox.Alert("友情提示",result.message);
+                        alert(result.message);
+                    }
+                },
+                error:function(){
+//                    $.MsgBox.Alert("系统异常","请求失败");
+                    alert("请求失败");
+                }
+            });
+        });
+        $("#phoneNo").blur(checkPhoneNo);
+        function checkPhoneNo() {
+            var reg=/^(13|14|15|17|18)\d{9}$/;
+            var phoneNo = $("#phoneNo").val();
+            if(phoneNo=="") {
+                $("#phoneRig").text("");
+                $("#phoneErr").text("手机号不能为空");
+                $("#phoneNo").focus();
+                return;
+            }
+            if(!reg.test(phoneNo)){
+                $("#phoneRig").text("");
+                $("#phoneErr").text("请填入正确的手机号！");
+                $("#phoneNo").focus();
+                return false;
+            }
+            $.ajax({
+                url:"checkPhoneNo",
+                type:"post",
+                dataType:"json",
+                data:{"phoneNo":phoneNo},
+                success:function(result){
+                    if(result.status==0) {
+                        $("#phoneErr").text(result.message);
+                        $("#phoneRig").text("");
+                    }else if(result.status==1) {
+                        $("#phoneErr").text("");
+                        $("#phoneRig").text(result.message);
+                    }
+                },
+                error:function(){
+//                    $.MsgBox.Alert("系统异常","请求失败");
+                    alert("请求失败");
+                    return false;
+                }
+            });
+        }
+    });
     //以下是导航栏的动画效果实现
     var startY;
     var moveEndY;
