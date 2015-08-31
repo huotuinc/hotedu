@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1"/>
-<meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-<meta name="format-detection" content="telephone=no"/>
-<meta name="description" content=""/>
-<link rel="stylesheet" type="text/css" href="../mobile/css/common.css"/>
-<link rel="stylesheet" type="text/css" href="../mobile/css/lunbo.css"/>
-<link rel="stylesheet" type="text/css" href="../mobile/css/schoolm.css"/>
-<script src="../mobile/js/TouchSlide.1.1.js"></script>
-<script src="../mobile/js/jquery-1.8.3.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
-<title>云商学院视频页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" content=""/>
+    <link rel="stylesheet" type="text/css" href="../mobile/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="../mobile/css/lunbo.css"/>
+    <link rel="stylesheet" type="text/css" href="../mobile/css/schoolm.css"/>
+    <script src="../mobile/js/TouchSlide.1.1.js"></script>
+    <script src="../mobile/js/jquery-1.8.3.min.js"></script>
+    <title>云商学院视频页</title>
     <script>
         function changeVideSize() {
             var height = $(window).height();
             var width = $(window).width();
-            $("#videoSize").css("width",width);
-            $("#videoSize").css("height",width*0.556);
+            $("#videoSize").css("width", width);
+            $("#videoSize").css("height", width * 0.556);
         }
         $(function() {
             changeVideSize();
+        })
+        $(function () {
+            $(window).bind("resize",function(){
+                changeVideSize();
+            });
+
         });
-        $(window).on("orientationchange",changeVideSize);
     </script>
 </head>
 <body>
@@ -39,11 +42,15 @@
     </ul>
 </div>
 <div>
-    <p class="sptit" th:text="${video.videoName}" style="margin-top: 10px; margin-bottom: 10px;"><b>第七课：</b> 微店日常管理和团队建设7-1</p>
+    <p class="sptit" th:text="${video.videoName}" style="margin-top: 10px; margin-bottom: 10px;"><b>第七课：</b>
+        微店日常管理和团队建设7-1</p>
 
-    <div id="videoSize"> <iframe allowScriptAccess="always" quality="high" height="100%" width="100%" th:src="${video.playUrl}" src="http://player.youku.com/embed/XMTMwNjA4MzgzMg==" allowfullscreen="true">
-    </iframe></div>
-    <p ><img style="width:18px; height:18px; margin-right:5px;" src="../mobile/images/iconfont-bofang.png"/>正在播放</p>
+    <div id="videoSize">
+        <iframe allowScriptAccess="always" quality="high" height="100%" width="100%" th:src="${video.playUrl}"
+                src="http://player.youku.com/embed/XMTMwNjA4MzgzMg==" allowfullscreen="true">
+        </iframe>
+    </div>
+    <p><img style="width:18px; height:18px; margin-right:5px;" src="../mobile/images/iconfont-bofang.png"/>正在播放</p>
 
 
     <p class="fontjs" style="margin-top: 10px; text-indent:2em;">
@@ -63,7 +70,8 @@
                     </a>
                 </li>
                 <li style="width:68%; float:left; font-size:14px;">
-                    <a href="javascript:void(0)" th:href="@{/pc/playVideo(videoNo=${v.videoNo})}" th:text="${v.videoName}"><b>第一节</b><br/>微店日常管理和团队建设7-1</a>
+                    <a href="javascript:void(0)" th:href="@{/pc/playVideo(videoNo=${v.videoNo})}"
+                       th:text="${v.videoName}"><b>第一节</b><br/>微店日常管理和团队建设7-1</a>
                 </li>
             </ul>
             <ul>
@@ -89,13 +97,13 @@
     var moveEndY;
     var Y;
     var $body = $("body");
-    $body.on("touchstart", function(e) {
+    $body.on("touchstart", function (e) {
         startY = e.originalEvent.changedTouches[0].pageY;
     });
-    $body.on("touchmove", function(e) {
+    $body.on("touchmove", function (e) {
         moveEndY = e.originalEvent.changedTouches[0].pageY;
         Y = moveEndY - startY;
-        if (Y>0) {
+        if (Y > 0) {
             $(".daoh").slideDown(200);
         }
         else {
