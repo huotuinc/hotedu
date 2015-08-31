@@ -151,24 +151,24 @@ public class LoginController {
         }*/
         List<Link> linkList=linkRepository.findAll();
         if(linkList.size()>0) {
-            model.addAttribute("LinkList", linkList);
+            model.addAttribute("linkList", linkList);
         }
         List<MessageContent> messageContentList=messageContentService.loadPcMessageContent(0,3).getContent();
         for(MessageContent mc:messageContentList){
             mc.setPictureUri(staticResourceService.getResource(mc.getPictureUri()).toString());
         }
-        model.addAttribute("MessageContentList",messageContentList);
+        model.addAttribute("messageContentList",messageContentList);
         List<Qa> qaList=qaService.loadPcQa(0,3).getContent();
         for(Qa qa:qaList){
             qa.setPictureUri(staticResourceService.getResource(qa.getPictureUri()).toString());
         }
-        model.addAttribute("QaList",qaList);
+        model.addAttribute("qaList",qaList);
 
         List<ExamGuide> examGuideList=examGuideService.loadPcExamGuide(0,3).getContent();
         for(ExamGuide eg:examGuideList){
             eg.setPictureUri(staticResourceService.getResource(eg.getPictureUri()).toString());
         }
-        model.addAttribute("ExamGuideList",examGuideList);
+        model.addAttribute("examGuideList",examGuideList);
         model.addAttribute("errInfo",errInfo);
         model.addAttribute("flag","yun-index.html");  //此属性用来给前台确定当前是哪个页面
         return turnPage;
