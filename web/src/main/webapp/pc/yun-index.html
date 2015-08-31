@@ -148,17 +148,17 @@
                 </div>
                 <!--暂时注释掉，使用静态页面-->
                 <!--  <div>
-                      <a th:if="${MessageContentList.size()}>=2" href="javascript:void(0)"><p class="tittit"><span
-                              class="titfive" th:text="${MessageContentList[1].title}">5月杭州微商大会进行中</span>
+                      <a th:if="${messageContentList.size()}>=2" href="javascript:void(0)"><p class="tittit"><span
+                              class="titfive" th:text="${messageContentList[1].title}">5月杭州微商大会进行中</span>
                           <span class="tittime"
-                                th:text="${#calendars.format(MessageContentList[1].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
+                                th:text="${#calendars.format(messageContentList[1].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
                       </p></a>
 
                       <p style="clear:both"></p>
-                      <a th:if="${MessageContentList.size()}>=3" href="javascript:void(0)"><p class="tittit"><span
-                              class="titfive" th:text="${MessageContentList[2].title}">5月杭州微商大会进行中</span>
+                      <a th:if="${messageContentList.size()}>=3" href="javascript:void(0)"><p class="tittit"><span
+                              class="titfive" th:text="${messageContentList[2].title}">5月杭州微商大会进行中</span>
                           <span class="tittime"
-                                th:text="${#calendars.format(MessageContentList[2].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
+                                th:text="${#calendars.format(messageContentList[2].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
                       </p></a>
                       <p style="clear:both"></p>
                   </div>-->
@@ -204,14 +204,14 @@
 
                     <p class="titen"><span>Common problem</span></p>
                     <img class="imgleft"
-                                                      th:src="${QaList.size()}>=1?${QaList[0].pictureUri}:'images/logo_huoban.jpg'"
+                                                      th:src="${qaList.size()}>=1?${qaList[0].pictureUri}:'images/logo_huoban.jpg'"
                                                       src="images/logo_huoban.jpg"
                                                       style="width:126px; height: 108px;"/>
                     <a href="javascript:void(0)"><p class="titfont"
-                                                    th:text="${QaList.size()}>=1?${QaList[0].title}:'通过微商运营师的培训能学到什么？'">
+                                                    th:text="${qaList.size()}>=1?${qaList[0].title}:'通过微商运营师的培训能学到什么？'">
                         微商走进校园</p></a>
                     <a href="javascript:void(0)"><p class="titlb"
-                                                    th:text="${QaList.size()}>=1?${QaList[0].content}:'微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。'">
+                                                    th:text="${qaList.size()}>=1?${qaList[0].content}:'微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。'">
                         考察要点在于对同考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力考察要点在于对同义转换的反应能力义转换的反应能力，大家要花功夫分析选项中哪些词语容易被替换掉</p>
                     </a>
 
@@ -219,15 +219,15 @@
                 </div>
                 <!--暂时注释掉，使用静态页面-->
                 <!--  <div>
-                      <a th:if="${QaList.size()}>=2" href="#"><p class="tittit"><span class="titfive"
-                                                                                      th:text="${QaList[1].title}">5月杭州微商大会进行中</span>
-                          <span class="tittime" th:text="${#calendars.format(QaList[1].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
+                      <a th:if="${qaList.size()}>=2" href="#"><p class="tittit"><span class="titfive"
+                                                                                      th:text="${qaList[1].title}">5月杭州微商大会进行中</span>
+                          <span class="tittime" th:text="${#calendars.format(qaList[1].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
                       </p></a>
 
                       <p style="clear:both"></p>
-                      <a th:if="${QaList.size()}>=3" href="#"><p class="tittit"><span class="titfive"
-                                                                                      th:text="${QaList[2].title}">5月杭州微商大会进行中</span>
-                          <span class="tittime" th:text="${#calendars.format(QaList[2].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
+                      <a th:if="${qaList.size()}>=3" href="#"><p class="tittit"><span class="titfive"
+                                                                                      th:text="${qaList[2].title}">5月杭州微商大会进行中</span>
+                          <span class="tittime" th:text="${#calendars.format(qaList[2].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
                       </p></a>
                       <p style="clear:both"></p>
                   </div>-->
@@ -308,7 +308,7 @@
         <p style="clear:both; height:30px"></p>
     </div>
 </div>
-<div class="lhx" style=" background-color:#0195ff; color:#fff">友情链接|<a th:each="g:${LinkList}" th:href="${g.url}"
+<div class="lhx" style=" background-color:#0195ff; color:#fff">友情链接|<a th:each="g:${linkList}" th:href="${g.url}"
                                                                        th:target="'_blank'"
                                                                        th:text="${g.title}+'  '"></a><a
         href="http://www.gcvaic.org" target="_blank">公共证书查询入口</a></div>

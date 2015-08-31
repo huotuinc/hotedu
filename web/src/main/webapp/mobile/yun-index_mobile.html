@@ -57,61 +57,72 @@
 <div style="background:url(../mobile/images/pc3.jpg) no-repeat;  background-size: 100%; padding-top:20px;">
     <p class="massages">动态资讯</p>
 
-    <p class="more">查看全部＞</p>
+    <p class="more"><a href="../mobile/yun-dongtaizx_mobile.html" th:href="@{/pc/loadMessageContent}">查看全部＞ </a></p>
 
     <p class="on"></p>
 
     <p style="clear:both"></p>
 
     <p class="xian"></p>
-    <ul class="ulmages">
-        <li class="ulliimg"><img src="../mobile/images/listone.png"/></li>
-        <li class="ullifont">
-            <p class="ullip1"><b>通过微商运营师的培训能学到什么？</b></p>
+    <ul th:remove="all-but-first">
+        <li th:each="g:${messageContentList}">
+            <ul class="ulmages">
+                <li class="ulliimg"><img src="../mobile/images/listone.png" th:src="${g.pictureUri}"/></li>
+                <li class="ullifont">
+                    <p class="ullip1"><b th:text="${g.title}">通过微商运营师的培训能学到什么？</b></p>
 
-            <p class="ullip2">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行
-                模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
+                    <p class="ullip2" th:text="${g.synopsis}">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行
+                        模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
 
-            <p class="ptop"><span class="newmages">最新消息</span> <span class="newtime">2015.01.01</span></p>
+                    <p class="ptop">
+                        <span class="newtime" th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd')}">2015.01.01</span></p>
+                </li>
+            </ul>
+            <p style="height:5px; clear:both"></p>
+        </li>
+        <li>
+            <ul class="ulmages">
+                <li class="ulliimg"><img src="../mobile/images/listone.png"/></li>
+                <li class="ullifont">
+                    <p class="ullip1"><b>通过微商运营师的培训能学到什么？</b></p>
+
+                    <p class="ullip2">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行
+                        模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
+
+                    <p class="ptop"><span class="newmages">最新消息</span> <span class="newtime">2015.01.01</span></p>
+                </li>
+            </ul>
+            <p style="height:5px; clear:both"></p>
+        </li>
+        <li>
+            <ul class="ulmages">
+                <li class="ulliimg"><img src="../mobile/images/listone.png"/></li>
+                <li class="ullifont">
+                    <p class="ullip1"><b>通过微商运营师的培训能学到什么？</b></p>
+
+                    <p class="ullip2">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行
+                        模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
+                    <p class="ptop"><span class="newmages">最新消息</span> <span class="newtime">2015.01.01</span></p>
+                </li>
+            </ul>
+            <p style="height:5px; clear:both"></p>
+        </li>
+        <li>
+            <ul class="ulmages">
+                <li class="ulliimg"><img src="../mobile/images/listone.png"/></li>
+                <li class="ullifont">
+                    <p class="ullip1"><b>通过微商运营师的培训能学到什么？</b></p>
+
+                    <p class="ullip2">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行
+                        模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
+
+                    <p class="ptop"><span class="newmages">最新消息</span> <span class="newtime">2015.01.01</span></p>
+                </li>
+            </ul>
+            <p style="height:5px; clear:both"></p>
         </li>
     </ul>
-    <p style="height:5px; clear:both"></p>
-    <ul class="ulmages">
-        <li class="ulliimg"><img src="../mobile/images/listone.png"/></li>
-        <li class="ullifont">
-            <p class="ullip1"><b>通过微商运营师的培训能学到什么？</b></p>
-
-            <p class="ullip2">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行
-                模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
-
-            <p class="ptop"><span class="newmages">最新消息</span> <span class="newtime">2015.01.01</span></p>
-        </li>
-    </ul>
-    <p style="height:5px; clear:both"></p>
-    <ul class="ulmages">
-        <li class="ulliimg"><img src="../mobile/images/listone.png"/></li>
-        <li class="ullifont">
-            <p class="ullip1"><b>通过微商运营师的培训能学到什么？</b></p>
-
-            <p class="ullip2">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行
-                模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
-
-            <p class="ptop"><span class="newmages">最新消息</span> <span class="newtime">2015.01.01</span></p>
-        </li>
-    </ul>
-    <p style="height:5px; clear:both"></p>
-    <ul class="ulmages">
-        <li class="ulliimg"><img src="../mobile/images/listone.png"/></li>
-        <li class="ullifont">
-            <p class="ullip1"><b>通过微商运营师的培训能学到什么？</b></p>
-
-            <p class="ullip2">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行
-                模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
-
-            <p class="ptop"><span class="newmages">最新消息</span> <span class="newtime">2015.01.01</span></p>
-        </li>
-    </ul>
-    <p style="height:25px; clear:both"></p>
+    <p style="height:20px; clear:both"></p>
 </div>
 <!--3-->
 
