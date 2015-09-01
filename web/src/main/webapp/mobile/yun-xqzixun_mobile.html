@@ -13,6 +13,13 @@
     <script src="../mobile/js/TouchSlide.1.1.js"></script>
     <script src="../mobile/js/jquery-1.8.3.min.js"></script>
     <title>云商学院动态资讯</title>
+    <style>
+        .title {
+            font-size: 20px;
+            width: 95%;
+            margin-left: 10px;
+        }
+    </style>
     <style type="text/css">
         #content img{
             width: 100%;
@@ -31,16 +38,15 @@
     </ul>
 </div>
 
-<div>
+<div class="title"><b th:text="${messageContent.title}">通过微商运营师的培训能学到什么？</b></div>
+<div >
     <ul class="toplist">
         <li>
-            <p style="font-size:20px;"><b th:text="${messageContent.title}">通过微商运营师的培训能学到什么？</b></p>
             <div id="content">
                 <div th:utext="${messageContent.content}">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</div>
             </div>
-
             <p><span class="hottime" th:text="${#calendars.format(messageContent.lastUploadDate,'yyyy.MM.dd')}">2015.01.01</span></p>
-        </li>
+       </li>
     </ul>
 </div>
 <p style="clear:both; height:50px;"></p>
@@ -65,7 +71,7 @@
     });
 
     $(function(){
-        $("p").css("text-align","center");
+        $("p").css("text-align","left");
         $("p").css("text-indent","0");
     })
 </script>
