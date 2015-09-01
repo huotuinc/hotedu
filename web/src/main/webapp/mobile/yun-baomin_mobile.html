@@ -23,7 +23,7 @@
         <li><a href="#" th:href="@{/pc/loadVideo}">教学视频</a></li>
         <li><a href="#" th:href="@{/pc/loadMessageContent}">动态资讯</a></li>
         <li><a href="#" th:href="@{/pc/loadTutors}">师资力量</a></li>
-        <li><a href="#" th:href="@{/pc/loadMemberRegister}">我要报名</a></li>
+        <li><a href="#" id="baomin" th:href="@{/pc/loadMemberRegister}">我要报名</a></li>
     </ul>
 </div>
 
@@ -161,12 +161,11 @@
                         $("#errInfo").text(result.message);
                     }else if(result.status==1) {
                         $("#errInfo").text("");
-//                        $.MsgBox.Alert("友情提示",result.message);
                         alert(result.message);
+                        window.location.reload();
                     }
                 },
                 error:function(){
-//                    $.MsgBox.Alert("系统异常","请求失败");
                     alert("请求失败");
                 }
             });

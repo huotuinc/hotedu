@@ -526,7 +526,9 @@ $(function() {
                     $("#errInfo").text(result.message);
                 }else if(result.status==1) {
                     $("#errInfo").text("");
-                    $.MsgBox.Alert("友情提示",result.message);
+                    $.MsgBox.AjaxAlert("友情提示",result.message,function() {
+                        window.location.reload();
+                    });
                 }
             },
             error:function(){

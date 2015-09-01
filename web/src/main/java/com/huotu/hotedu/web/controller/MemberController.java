@@ -151,7 +151,7 @@ public class MemberController {
                     mb.setApplyDate(d);
                     loginService.newLogin(mb, phoneNo.substring(7));
                     status = 1;
-                    message = "报名成功";
+                    message = "申请报名成功";
                 }
             }
         }
