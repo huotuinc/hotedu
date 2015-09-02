@@ -2,8 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport"
-          content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1"/>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <meta name="format-detection" content="telephone=no"/>
@@ -17,18 +16,18 @@
 </head>
 
 <body style="background-color:#00a0e8;">
-<div class="daoh">
-    <ul>
-        <li><a href="#" th:href="@{/pc/index}">学院首页</a></li>
-        <li><a href="#" th:href="@{/pc/loadVideo}">教学视频</a></li>
-        <li><a href="#" th:href="@{/pc/loadMessageContent}">动态资讯</a></li>
-        <li><a href="#" th:href="@{/pc/loadTutors}">师资力量</a></li>
-        <li><a href="#" id="baomin" th:href="@{/pc/loadMemberRegister}">我要报名</a></li>
-    </ul>
+<div class="xwlv_tab_wrap">
+    <span class="xwlv_tab_inner">
+        <a href="#" th:href="@{/pc/index}">首页</a>
+        <a href="#" th:href="@{/pc/loadVideo}">视频</a>
+        <a href="#" th:href="@{/pc/loadMessageContent}">资讯</a>
+       <a href="#" th:href="@{/pc/loadTutors}">师资</a>
+       <a href="#" th:href="@{/pc/loadMemberRegister}" class="on">报名</a>
+    </span>
 </div>
+<div style="height: 44px;"></div>
 
-
-<div style="width:100%" id="">
+<div style="width:100%;" id="">
     <!--up-->
     <div class="section section7">
         <div class="boxupone">
@@ -209,7 +208,7 @@
         }
     });
     //以下是导航栏的动画效果实现
-    var startY;
+    /*var startY;
     var moveEndY;
     var Y;
     var $body = $("body");
@@ -225,7 +224,7 @@
         else {
             $(".daoh").slideUp(200);
         }
-    });
+    });*/
 </script>
 </body>
 </html>

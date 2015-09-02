@@ -17,15 +17,19 @@
 </head>
 <body>
 
-<div class="daoh">
-    <ul>
-        <li><a href="#" th:href="@{/pc/index}">学院首页</a></li>
-        <li><a href="#" th:href="@{/pc/loadVideo}">教学视频</a></li>
-        <li><a href="#" th:href="@{/pc/loadMessageContent}">动态资讯</a></li>
-        <li><a href="#" th:href="@{/pc/loadTutors}">师资力量</a></li>
-        <li><a href="#" th:href="@{/pc/loadMemberRegister}">我要报名</a></li>
-    </ul>
+<div class="xwlv_tab_wrap">
+    <span class="xwlv_tab_inner">
+        <a class="on" href="#" th:href="@{/pc/index}">首页</a>
+        <a href="#" th:href="@{/pc/loadVideo}">视频</a>
+        <a href="#" th:href="@{/pc/loadMessageContent}">资讯</a>
+        <a href="#" th:href="@{/pc/loadTutors}">师资</a>
+        <a href="#" th:href="@{/pc/loadMemberRegister}">报名</a>
+    </span>
 </div>
+<div style="height: 44px;"></div>
+
+
+
 <!--1-->
 <div>
     <p><img src="../mobile/images/pc1.jpg" width="100%"/></p>
@@ -76,10 +80,12 @@
                             模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
 
                         <p class="ptop">
-                            <span class="newtime" th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd')}">2015.01.01</span></p>
+                            <span class="newtime" th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd')}">2015.01.01</span>
+                        </p>
                     </li>
                 </ul>
             </a>
+
             <p style="height:5px; clear:both"></p>
         </li>
         <li>
@@ -104,6 +110,7 @@
 
                     <p class="ullip2">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行
                         模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
+
                     <p class="ptop"><span class="newmages">最新消息</span> <span class="newtime">2015.01.01</span></p>
                 </li>
             </ul>
@@ -150,7 +157,7 @@
         <li>
             <a href="javascript:void(0)" th:href="@{/pc/playVideo(videoNo=10003)}">
                 <p class="liblue"><b>第三课</b><br/>
-                   朋友圈营销的六脉神剑
+                    朋友圈营销的六脉神剑
                 </p>
             </a>
         </li>
@@ -171,7 +178,7 @@
         <li>
             <a href="javascript:void(0)" th:href="@{/pc/playVideo(videoNo=10006)}">
                 <p class="liblue"><b>第六课</b><br/>
-                   快速构建微营销的赢利模式
+                    快速构建微营销的赢利模式
                 </p>
             </a>
         </li>
@@ -315,23 +322,23 @@
             switchLoad: "_src" //切换加载，真实图片路径为"_src"
         });
         //以下是导航栏的动画效果实现
-        var startY;
-        var moveEndY;
-        var Y;
-        var $body = $("body");
-        $body.on("touchstart", function(e) {
-            startY = e.originalEvent.changedTouches[0].pageY;
-        });
-        $body.on("touchmove", function(e) {
-            moveEndY = e.originalEvent.changedTouches[0].pageY;
-            Y = moveEndY - startY;
-            if (Y>0) {
-                $(".daoh").slideDown(200);
-            }
-            else {
-                $(".daoh").slideUp(200);
-            }
-        });
+        /*var startY;
+         var moveEndY;
+         var Y;
+         var $body = $("body");
+         $body.on("touchstart", function(e) {
+         startY = e.originalEvent.changedTouches[0].pageY;
+         });
+         $body.on("touchmove", function(e) {
+         moveEndY = e.originalEvent.changedTouches[0].pageY;
+         Y = moveEndY - startY;
+         if (Y>0) {
+         $(".daoh").slideDown(200);
+         }
+         else {
+         $(".daoh").slideUp(200);
+         }
+         });*/
     </script>
 </div>
 <!--6-->

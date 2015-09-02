@@ -145,31 +145,25 @@
 }
 .daoh {
 	position: fixed;
-	bottom: 0px;
-	background: rgba(13,13,13,0.5);
 	z-index: 1;
+	top: 0;
 	left: 0;
 	right: 0;
 	margin: 0 auto;
+
+	 background-color:red;
 }
-.daoh ul {
-	width: 100%;
+.daoh span a {
+
 	display: box;
 	display: -ms-box;
 	display: -webkit-box;
-	display: flex;
 	display: -ms-flexbox;
 	display: -webkit-flex;
+
 }
-.daoh li {
-	float: left;
-	width: 50%;
-	text-align: center;
-	color: #fff;
-	font-size: 14px;
-	padding: 15px 12px;
-}
-.daoh li a {
+
+.daoh   a {
 	color: #fff
 }
 .stwd li {
@@ -336,7 +330,7 @@
 	color: #333
 }
 .topth .next {
-	margin: 10px;
+	margin: 39px 10px 10px 10px;
 	font-size: 12px;
 	line-height: 21px;
 }
@@ -521,3 +515,52 @@
 	font-size:14px;
 	line-height: 33px;
 	}
+
+
+/**/
+.xwlv_tab_wrap {
+	background: #fff;
+	border-bottom: 1px solid #ddd;
+	height: 44px; line-height: 44px; position: fixed;top:0px;left:0px;right:0px; z-index: 999999;
+}
+
+.xwlv_tab_inner {
+	display: box;
+	display: -ms-box;
+	display: -webkit-box;
+	display: flex;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+}
+
+.xwlv_tab_inner a {
+	font-size: 16px;
+	width: 200px;
+	height: 43px;
+	line-height: 46px;
+	padding-bottom: 3px;
+	text-align: center;
+
+}
+
+a, a:visited {
+	text-decoration: none;
+	color: #333;
+}
+
+.xwlv_tab_inner a {
+	display: block;
+	flex: 1;
+	-ms-flex: 1;
+	-webkit-flex: 1;
+	box-flex: 1;
+	-ms-box-flex: 1;
+	-webkit-box-flex: 1;
+}
+
+.xwlv_tab_inner .on {
+	color: #2dbeff;
+	padding-bottom: 0;
+	border-bottom: 3px solid #2dbeff;
+	z-index: 1;
+}

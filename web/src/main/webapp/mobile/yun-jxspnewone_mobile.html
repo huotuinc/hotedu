@@ -17,15 +17,16 @@
 </head>
 
 <body>
-<div class="daoh">
-    <ul>
-        <li><a href="#" th:href="@{/pc/index}">学院首页</a></li>
-        <li><a href="#" th:href="@{/pc/loadVideo}">教学视频</a></li>
-        <li><a href="#" th:href="@{/pc/loadMessageContent}">动态资讯</a></li>
-        <li><a href="#" th:href="@{/pc/loadTutors}">师资力量</a></li>
-        <li><a href="#" th:href="@{/pc/loadMemberRegister}">我要报名</a></li>
-    </ul>
+<div class="xwlv_tab_wrap">
+    <span class="xwlv_tab_inner">
+        <a href="#" th:href="@{/pc/index}">首页</a>
+        <a class="on" href="#" th:href="@{/pc/loadVideo}">视频</a>
+        <a href="#" th:href="@{/pc/loadMessageContent}">资讯</a>
+        <a href="#" th:href="@{/pc/loadTutors}">师资</a>
+        <a href="#" th:href="@{/pc/loadMemberRegister}">报名</a>
+    </span>
 </div>
+<div style="height: 44px;"></div>
 <div>
     <ul class="topth">
         <li style="display:none;"><img src="../mobile/images/sp4.jpg" style="width:150px; height: 205px;"/></li>
@@ -158,7 +159,7 @@
 </div>
 <script>
     //以下是导航栏的动画效果实现
-    var startY;
+    /*var startY;
     var moveEndY;
     var Y;
     var $body = $("body");
@@ -174,7 +175,7 @@
         else {
             $(".daoh").slideUp(200);
         }
-    });
+    });*/
 </script>
 </body>
 </html>
