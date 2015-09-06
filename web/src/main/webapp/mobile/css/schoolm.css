@@ -446,7 +446,6 @@
 .toplist p {
 	font-size: 14px;
 	color: #333;
-	margin-bottom: 7px;
 }
 .toplist b {
 	width: 100%;
@@ -466,7 +465,7 @@
 .hottime {
 	float: right;
 	color: #7E7E7E;
-	padding: 5px;
+	padding: 0 5px;
 	font-size: 12px;
 }
 .toptime {
@@ -478,11 +477,13 @@
 }
 .lists {
 	font-size: 12px;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+	/*text-overflow: ellipsis;*/
+	/*white-space: nowrap;*/
+	line-height: 17px;
+	height:53px;
+	/*display: inline-block;*/
+	width: 98%;
 	overflow: hidden;
-	display: inline-block;
-	width: 100%;
 }
 .listt {
 	text-overflow: ellipsis;
@@ -498,6 +499,7 @@
 }
 .imglist {
 	width: 30%;
+	height: 92px;
 	float: left;
 	margin-right: 5px;
 }
