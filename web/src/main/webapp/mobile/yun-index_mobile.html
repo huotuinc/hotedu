@@ -19,11 +19,11 @@
 
 <div class="xwlv_tab_wrap">
     <span class="xwlv_tab_inner">
-        <a class="on" href="#" th:href="@{/pc/index}">首页</a>
-        <a href="#" th:href="@{/pc/loadVideo}">视频</a>
-        <a href="#" th:href="@{/pc/loadMessageContent}">资讯</a>
-        <a href="#" th:href="@{/pc/loadTutors}">师资</a>
-        <a href="#" th:href="@{/pc/loadMemberRegister}">报名</a>
+        <a class="on" href="yun-index_mobile.html" th:href="@{/pc/index}">首页</a>
+        <a href="yun-jxspnewone_mobile.html" th:href="@{/pc/loadVideo}">视频</a>
+        <a href="yun-dongtaizx_mobile.html" th:href="@{/pc/loadMessageContent}">资讯</a>
+        <a href="yun-shizi_mobile.html" th:href="@{/pc/loadTutors}">师资</a>
+        <a href="yun-baomin_mobile.html" th:href="@{/pc/loadMemberRegister}">报名</a>
     </span>
 </div>
 <div style="height: 44px;"></div>
@@ -321,23 +321,38 @@
             pnLoop: "false", // 前后按钮不循环
             switchLoad: "_src" //切换加载，真实图片路径为"_src"
         });
-        //以下是导航栏的动画效果实现
-        /*var startY;
+        /*动画效果暂定解决方案
+         //以下是导航栏的动画效果实现
+         var startY;
          var moveEndY;
          var Y;
          var $body = $("body");
+         // 线程 IDs
+         var mouseover_tid = [];
+         var mouseout_tid = [];
+         var index=0;
          $body.on("touchstart", function(e) {
-         startY = e.originalEvent.changedTouches[0].pageY;
+             for(var i in mouseover_tid){
+             clearInterval(mouseover_tid[i]);}
+             mouseover_tid = [];
+             index=0;
+             startY = e.originalEvent.changedTouches[0].pageY;
          });
          $body.on("touchmove", function(e) {
-         moveEndY = e.originalEvent.changedTouches[0].pageY;
-         Y = moveEndY - startY;
-         if (Y>0) {
-         $(".daoh").slideDown(200);
-         }
-         else {
-         $(".daoh").slideUp(200);
-         }
+             mouseover_tid[index++] = setInterval(function() {
+             moveEndY = e.originalEvent.changedTouches[0].pageY;
+             Y = moveEndY - startY;
+             if (Y>0) {
+                $(".daoh").slideDown(400);
+             }
+             else {
+                $(".daoh").slideUp(400);
+             }
+             for(var i in mouseover_tid){
+                 clearInterval(mouseover_tid[i]);}
+                 mouseover_tid = [];
+                 index=0;
+             }, 100);
          });*/
     </script>
 </div>

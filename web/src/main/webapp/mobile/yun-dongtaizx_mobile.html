@@ -13,31 +13,46 @@
     <script src="../mobile/js/TouchSlide.1.1.js"></script>
     <script src="../mobile/js/jquery-1.8.3.min.js"></script>
     <title>云商学院动态资讯</title>
+
+    <style type="text/css">
+        /*公共样式*/
+        body{ padding-top:50px; line-height:20px;}
+        .topContent, .messageContent{width:98%;}
+        .topContent{margin:10px auto 0}
+        .topContent .msgPic{width: 98%; margin: 5px 1%;}
+        .topContent h4 {overflow: hidden;text-overflow: ellipsis;white-space: nowrap; margin: 0 1%;}
+        .topContent p {float:left;width: 98%;overflow: hidden;font-size: 13px;max-height: 90px;line-height: 18px; text-indent: 2em; margin: 0 1%;}
+        .topContent .pubTime{float: right;position:relative;text-align:right;font-size: 13px; color:#999;padding-right:14px; width: 98%}
+        .messageContent{margin: 0 auto;}
+        .messageContent .msgPic{float:left;margin-right: 5px; width:30%; height：width;}
+        .messageContent p {float:left;
+            width: 66%;overflow: hidden;font-size: 12px;height: 5em;}
+        .messageContent h5 {float:left;overflow: hidden;text-overflow: ellipsis;white-space: nowrap}
+        .messageContent .pubTime{position:relative;float:right;padding-right: 10px;font-size: 13px; color:#999;}
+    </style>
 </head>
 
 <body>
 <div class="xwlv_tab_wrap">
     <span class="xwlv_tab_inner">
-        <a href="#" th:href="@{/pc/index}">首页</a>
-        <a href="#" th:href="@{/pc/loadVideo}">视频</a>
-        <a class="on" href="#" th:href="@{/pc/loadMessageContent}">资讯</a>
-        <a href="#" th:href="@{/pc/loadTutors}">师资</a>
-        <a href="#" th:href="@{/pc/loadMemberRegister}">报名</a>
+        <a href="yun-index_mobile.html" th:href="@{/pc/index}">首页</a>
+        <a href="yun-jxspnewone_mobile.html" th:href="@{/pc/loadVideo}">视频</a>
+        <a class="on" href="yun-dongtaizx_mobile.html" th:href="@{/pc/loadMessageContent}">资讯</a>
+        <a href="yun-shizi_mobile.html" th:href="@{/pc/loadTutors}">师资</a>
+        <a href="yun-baomin_mobile.html" th:href="@{/pc/loadMemberRegister}">报名</a>
     </span>
 </div>
-<div style="height: 44px;"></div>
-
 <div>
     <ul th:remove="all-but-first">
-        <li th:each="g:${allMessageContentList}">
-            <a href="#" th:href="@{/pc/loadDetailMessageContent(id=${g.id})}">
+        <li th:each="g:${allMessageContentList}" style="margin-bottom: 20px">
+            <!--<a href="#" th:href="@{/pc/loadDetailMessageContent(id=${g.id})}">
                 <ul th:if="${g.top}" class="toplist">
                     <li>
                         <p><img style="width:100%" src="../mobile/images/listone.png" th:src="${g.pictureUri}"/></p>
                         <p><b th:text="${g.title}">通过微商运营师的培训能学到什么？</b></p>
                         <p class="listpp" th:text="${g.synopsis}">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
                         <p>
-                            <!--<span class="toptime">热门话题</span>-->
+                            &lt;!&ndash;<span class="toptime">热门话题</span>&ndash;&gt;
                             <span class="hottime" th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd')}">2015.01.01</span>
                         </p>
                     </li>
@@ -51,7 +66,22 @@
                     </li>
                 </ul>
             </a>
-            <p style="clear:both; height:20px;"></p>
+            <p style="clear:both; height:20px;"></p>-->
+            <a href="#" th:href="@{/pc/loadDetailMessageContent(id=${g.id})}">
+                <div class="topContent" th:if="${g.top}">
+                    <img class="msgPic" src="images/head01.jpg" th:src="${g.pictureUri}" width="95%" />
+                    <h4 th:text="${g.title}">樱桃小丸子</h4>
+                    <p th:text="${g.synopsis}">奥鹏教育是由教育部高等教育司2001年12月批准立项试点，2005年4月正式批准运营的远程教育公共服务体系，为遍布全国的学员提供学历(专升本，高起专)和非学历教育咨询、报名、学习辅导、课程考试、交费等7X24小时学习支持服务400-810-6736。</p>
+                    <span class="pubTime" th:text="${#calendars.format(g.lastUploadDate,'yyyy/MM/dd')}">10分钟前</span>
+                </div>
+                <div class="messageContent" th:if="${!g.top}">
+                    <img class="msgPic" src="images/head01.jpg" th:src="${g.pictureUri}"/>
+                    <h5 th:text="${g.title}">樱桃小丸子</h5>
+                    <p th:text="${g.synopsis}">奥鹏教育是由教育部高等教育司2001年12月批准立项试点，2005年4月正式批准运营的远程教育公共服务体系，为遍布全国的学员提供学历(专升本，高起专)和非学历教育咨询、报名、学习辅导、课程考试、交费等7X24小时学习支持服务400-810-6736。</p>
+                    <span class="pubTime" th:text="${#calendars.format(g.lastUploadDate,'yyyy/MM/dd')}">10分钟前</span>
+                </div>
+            </a>
+            <p style="clear:both; height:5px;"></p>
         </li>
         <li>
             <a href="#">
@@ -96,24 +126,13 @@
 </div>
 <p style="clear:both; height:50px;"></p>
 <script>
-    //以下是导航栏的动画效果实现
-    /*var startY;
-    var moveEndY;
-    var Y;
-    var $body = $("body");
-    $body.on("touchstart", function(e) {
-        startY = e.originalEvent.changedTouches[0].pageY;
-    });
-    $body.on("touchmove", function(e) {
-        moveEndY = e.originalEvent.changedTouches[0].pageY;
-        Y = moveEndY - startY;
-        if (Y>0) {
-            $(".daoh").slideDown(200);
-        }
-        else {
-            $(".daoh").slideUp(200);
-        }
-    });*/
+//    $(function(){
+////       $(document).ready(function() {
+//        var $messageMsgPic = $(".messageContent .msgPic");
+//        $messageMsgPic.css("height", $messageMsgPic.width());
+//        $(".messageContent").css("height", $messageMsgPic.width());
+//       }
+//            //TODO 不能写完整，不然手机上图片就加载出错了，无语
 </script>
 </body>
 </html>
