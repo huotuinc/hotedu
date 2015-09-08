@@ -50,7 +50,7 @@ public class LoginController {
             String[] url = retUrl.split("/");
             turnPage="redirect:";
             for (int i = 0 ; i <url.length ; i++ ) {
-                if("hotedu".equals(url[i])){
+                if("hotedu".equals(url[i]) || "www.huobanj.com".equals(url[i])){
                     for(int j=i+1; j<url.length; j++){
                         if(url[j].contains("?")) {
                             turnPage += "/"+url[j].substring(0,url[j].indexOf("?"));
@@ -108,7 +108,7 @@ public class LoginController {
             String[] url = retUrl.split("/");
             turnPage="redirect:";
             for (int i = 0 ; i <url.length ; i++ ) {
-                if("hotedu".equals(url[i])){
+                if("hotedu".equals(url[i]) || "www.huobanj.com".equals(url[i])){
                     for(int j=i+1; j<url.length; j++){
                         if(url[j].contains("?")) {
                             turnPage += "/"+url[j].substring(0,url[j].indexOf("?"));
@@ -138,7 +138,7 @@ public class LoginController {
             String[] url = retUrl.split("/");
             turnPage="redirect:";
             for (int i = 0 ; i <url.length ; i++ ) {
-                if("hotedu".equals(url[i])){
+                if("hotedu".equals(url[i]) || "www.huobanj.com".equals(url[i])){
                     for(int j=i+1; j<url.length; j++){
                         if(url[j].contains("?")) {
                             turnPage += "/"+url[j].substring(0,url[j].indexOf("?"));
