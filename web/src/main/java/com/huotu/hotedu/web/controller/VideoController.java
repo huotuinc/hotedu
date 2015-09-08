@@ -3,6 +3,7 @@ package com.huotu.hotedu.web.controller;
 import com.huotu.hotedu.entity.Video;
 import com.huotu.hotedu.service.VideoService;
 import com.huotu.hotedu.web.service.StaticResourceService;
+import org.atteo.evo.inflector.English;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -114,17 +115,19 @@ public class VideoController {
 
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/addVideo")
-    public String addVideo() {
+    public String addVideo(Integer pageNo, Model model) {
+        model.addAttribute("pageNo",pageNo);
         return "/backend/newvideo";
     }
 
 
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifyVideo")
-    public String modifyVideo(Long id, Model model) throws Exception{
+    public String modifyVideo(Long id,Integer pageNo, Model model) throws Exception{
         Video video=videoService.findOneById(id);
         video.setThumbnail(staticResourceService.getResource(video.getThumbnail()).toString());
         model.addAttribute("video",video);
+        model.addAttribute("pageNo",pageNo);
         return "/backend/modifyvideo";
     }
 
@@ -132,7 +135,7 @@ public class VideoController {
 
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping(value = "/backend/addSaveVideo", method = RequestMethod.POST)
-    public String addSaveVideo(String duration,String videoName,String content,String playUrl,Integer videoNo,Boolean complete,Boolean free,@RequestParam("thumbnail") MultipartFile file) throws Exception {
+    public String addSaveVideo(Integer pageNo,String duration,String videoName,String content,String playUrl,Integer videoNo,Boolean complete,Boolean free,@RequestParam("thumbnail") MultipartFile file,Model model) throws Exception {
         //文件格式判断
         if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
         if(file.getSize()==0){throw new Exception("文件为空！");}
@@ -150,6 +153,7 @@ public class VideoController {
         video.setUploadTime(new Date());
         video.setVideoName(videoName);
         videoService.addVideo(video);
+        model.addAttribute("pageNo",pageNo);
         return "redirect:/backend/loadVideo";
     }
 
@@ -157,8 +161,8 @@ public class VideoController {
 
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/modifySaveVideo")
-    public String modifySaveVideo(Long id,String duration,String videoName,String content,String playUrl,Integer videoNo,Boolean complete,
-                                  Boolean free,@RequestParam("thumbnail") MultipartFile file) throws Exception{
+    public String modifySaveVideo(Long id,Integer pageNo,String duration,String videoName,String content,String playUrl,Integer videoNo,Boolean complete,
+                                  Boolean free,@RequestParam("thumbnail") MultipartFile file,Model model) throws Exception{
         Video video=videoService.findOneById(id);
         if(file.getSize()!=0){
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
@@ -176,6 +180,7 @@ public class VideoController {
         video.setComplete(complete);
         video.setUploadTime(new Date());
         videoService.modifyVideo(video);
+        model.addAttribute("pageNo",pageNo);
         return "redirect:/backend/loadVideo";
     }
 
