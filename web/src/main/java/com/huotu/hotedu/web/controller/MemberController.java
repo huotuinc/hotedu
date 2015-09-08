@@ -134,7 +134,7 @@ public class MemberController {
                         }
                     }
                 } else {//学员未登录
-                    message = "该手机号已注册,请先登录";
+                    message = "该手机号已注册";
                 }
             } else {//手机号可用
                 if (agent == null) {

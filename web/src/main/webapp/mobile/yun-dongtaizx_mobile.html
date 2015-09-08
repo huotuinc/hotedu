@@ -61,7 +61,7 @@
                 <ul th:if="${!g.top}" class="toplistone">
                     <li class="imglist"><img style="width:100%; height: 92px;" src="../mobile/images/listone.png" th:src="${g.pictureUri}"/></li>
                     <li class="listfont">
-                        <p class="listt" th:text="${g.title}"><b>通过微商运营师的培训能学到什么？</b></p>
+                        <p class="listt"><b th:text="${g.title}">通过微商运营师的培训能学到什么？</b></p>
                         <p class="lists" th:text="${g.synopsis}">微商运营师的培训考证旨在使学员在掌握微商概念及基本运行模式后，且通过视频学习、课堂讲授、案例分析和交流互动等方法和形式，使学员掌握微商的基本概念、理论知识；培养学员发现、分析和解决微信营销中实际存在的营销推广问题的能力。</p>
                         <p><span class="hottime" th:text="${#calendars.format(g.lastUploadDate,'yyyy.MM.dd')}">2015.01.01</span></p>
                     </li>

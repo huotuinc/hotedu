@@ -193,10 +193,10 @@
                 data: {"phoneNo": phoneNo, "realName": realName, "sex": sex, "areaId": areaId},
                 success: function (result) {
                     if (result.status == 0) {
-                        $("#msgInfo").text("");
-                        $("#errInfo").text(result.message);
+                        $("#phoneErr").text(result.message);
+                        $("#phoneErrBg").show();
                     } else if (result.status == 1) {
-                        $("#errInfo").text("");
+                        $("#phoneErrBg").hide();
                         alert(result.message);
                         window.location.reload();
                     }
@@ -240,6 +240,7 @@
                 success: function (result) {
                     if (result.status == 0) {
                         $("#phoneErrBg").show();
+                        $("#phoneRig").hide();
                         $("#phoneErr").text(result.message);
                     } else if (result.status == 1) {
                         $("#phoneErrBg").hide();
