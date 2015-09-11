@@ -22,24 +22,34 @@ KindEditor.ready(function (K) {
                         reader = new FileReader();
                         reader.onload = function( e ){
                             var img = new Image();
-                            img.src = e.target.result;
-                            deal(img);
-                            $body.appendChild( img );
+                            var imgsrc = e.target.result;
+                            img.src = imgsrc;
+                            $.ajax({
+                                type: "POST",
+                                url: "ajaxEditorFileUpload",
+                                data: {"imgsrc":imgsrc},
+                                success: function (result) {
+                                    //console.log("上传成功");
+                                    img.src = result.url;
+                                    $body.appendChild( img );
+                                },
+                                error:function() {
+                                    alert("图片上传失败，请使用工具栏图片上传工具上传")
+                                    //console.log("上传失败");
+                                }
+                            });
                         };
                         reader.readAsDataURL( blob );
                 };
                 //获取粘贴事件
                 $body.addEventListener( 'paste', function( e ){
-                    console.log(e);
                     window.clipboardData = e.clipboardData;
                     var i = 0, items, item, types;
                     if( clipboardData ){
                         items = clipboardData.items;
-                        console.log(items)
                         if( !items ){
                             return;
                         }
-
                         item = items[0];
                         types = clipboardData.types || [];
                         for( ; i < types.length; i++ ){
@@ -49,6 +59,7 @@ KindEditor.ready(function (K) {
                             }
                         }
                         if( item && item.kind === 'file' && item.type.match(/^image\//i) ){
+                            //上传图片
                             imgReader( item );
                         }
 
@@ -57,19 +68,4 @@ KindEditor.ready(function (K) {
             })();
         }
     });
-    //上传图片的ajax
-    function deal(img) {
-        var src = img.src;
-            $.ajax({
-                type: "POST",
-                url: "ajaxEditorFileUpload",
-                data: {"imgsrc":src},
-                success: function (org) {
-                    //console.log("上传成功");
-                },
-                error:function() {
-                    //console.log("上传失败");
-                }
-            });
-      }
 });
