@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.UUID;
 
@@ -101,7 +102,6 @@ public class MessageContentController {
     @PreAuthorize("hasRole('EDITOR')")
     @RequestMapping("/backend/addMessageContent")
     public String addMessageContent(){
-
         return "/backend/newMessageContent";
     }
 
