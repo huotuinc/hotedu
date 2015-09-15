@@ -217,14 +217,14 @@
         var reg=/^(13|14|15|17|18)\d{9}$/;
         var phoneNo = $("#phoneNo").val();
         if(phoneNo=="") {
-            $("#phoneRig_baomin").text("");
-            $("#phoneErr_baomin").text("手机号不能为空");
+            $("#msgInfo").text("");
+            $("#errInfo").text("手机号不能为空");
             $("#phoneNo").focus();
             return;
         }
         if(!reg.test(phoneNo)){
-            $("#phoneRig_baomin").text("");
-            $("#phoneErr_baomin").text("请填入正确的手机号！");
+            $("#msgInfo").text("");
+            $("#errInfo").text("请填入正确的手机号！");
             $("#phoneNo").focus();
             return false;
         }
@@ -235,11 +235,11 @@
             data:{"phoneNo":phoneNo},
             success:function(result){
                 if(result.status==0) {
-                    $("#phoneErr_baomin").text(result.message);
-                    $("#phoneRig_baomin").text("");
+                    $("#errInfo").text(result.message);
+                    $("#msgInfo").text("");
                 }else if(result.status==1) {
-                    $("#phoneErr_baomin").text("");
-                    $("#phoneRig_baomin").text(result.message);
+                    $("#errInfo").text("");
+                    $("#msgInfo").text(result.message);
                 }
             },
             error:function(){
