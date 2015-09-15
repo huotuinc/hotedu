@@ -27,10 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 
 /**
@@ -73,6 +70,8 @@ public class MemberController {
             mb=memberService.findOneById(mb.getId());
         }
         String style = "padding:0px;display:none";
+        List<Agent> agentList = agentService.findAvailableAgents();
+        model.addAttribute("agentList",agentList);
         model.addAttribute("mbInfo",mb);
         model.addAttribute("style",style);
         model.addAttribute("flag","yun-baomin.html");  //此属性用来给前台确定当前是哪个页面

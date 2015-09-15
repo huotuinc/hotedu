@@ -45,23 +45,6 @@ public class LoginController {
     @RequestMapping("/pc/logoutSuccess")
     public String logout() {
         String turnPage = "redirect:/pc/index";
-        String retUrl = request.getHeader("Referer");
-        if(retUrl != null){
-            String[] url = retUrl.split("/");
-            turnPage="redirect:";
-            for (int i = 0 ; i <url.length ; i++ ) {
-                if("hotedu".equals(url[i]) || url[i].contains("www")){
-                    for(int j=i+1; j<url.length; j++){
-                        if(url[j].contains("?")) {
-                            turnPage += "/"+url[j].substring(0,url[j].indexOf("?"));
-                            break;
-                        }
-                        turnPage += "/" + url[j];
-                    }
-                    break;
-                }
-            }
-        }
         return turnPage;
     }
 
@@ -103,26 +86,7 @@ public class LoginController {
     @RequestMapping("/pc/loginSuccess")
     public String loginSuccess(@AuthenticationPrincipal Login user,HttpServletRequest request) {
         String turnPage = "redirect:/pc/index";
-        String retUrl = request.getHeader("Referer");
-        if(retUrl != null){
-            String[] url = retUrl.split("/");
-            turnPage="redirect:";
-            for (int i = 0 ; i <url.length ; i++ ) {
-                if("hotedu".equals(url[i]) || url[i].contains("www")){
-                    for(int j=i+1; j<url.length; j++){
-                        if(url[j].contains("?")) {
-                            turnPage += "/"+url[j].substring(0,url[j].indexOf("?"));
-                            break;
-                        }
-                        turnPage += "/" + url[j];
-                    }
-                    break;
-                }
-            }
-        }
-        if(user instanceof Manager) {
-            turnPage = "redirect:/backend/index";
-        }else if(user instanceof Editor){
+        if(user instanceof Manager||user instanceof Editor) {
             turnPage = "redirect:/backend/index";
         }
         return turnPage;

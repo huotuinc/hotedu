@@ -521,7 +521,8 @@ public class AgentController {
      */
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/backend/addSaveAgent",method = RequestMethod.POST)
-    public String addSaveAgent(String name,String loginName,int sex,String area,String phoneNo,String level,int certificateNumber,@RequestParam("smallimg") MultipartFile file) throws Exception{
+    public String addSaveAgent(String areaId,String name,String loginName,int sex,String area,String phoneNo,String level,int certificateNumber,@RequestParam("smallimg") MultipartFile file) throws Exception{
+
         //文件格式判断
         if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
         if(file.getSize()==0){throw new Exception("文件为空！");}
@@ -531,6 +532,7 @@ public class AgentController {
         staticResourceService.uploadResource(fileName,file.getInputStream());
 
         Agent agent=new Agent();
+        agent.setAreaId(areaId);
         agent.setPictureUri(fileName);
         agent.setArea(area);
         agent.setName(name);
@@ -561,7 +563,7 @@ public class AgentController {
      */
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/backend/modifySaveAgent")
-    public String modifySaveAgent(Long id,String name,String loginName,int sex,String area,String phoneNo,String level,int certificateNumber,@RequestParam("smallimg") MultipartFile file) throws Exception{
+    public String modifySaveAgent(String areaId,Long id,String name,String loginName,int sex,String area,String phoneNo,String level,int certificateNumber,@RequestParam("smallimg") MultipartFile file) throws Exception{
         Agent agent=agentService.findOneById(id);
         if(file.getSize()!=0){
             if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
@@ -578,6 +580,7 @@ public class AgentController {
             agent.setPictureUri(fileName);
         }
         agent.setArea(area);
+        agent.setAreaId(areaId);
         agent.setName(name);
         agent.setPhoneNo(phoneNo);
         agent.setLevel(level);
@@ -587,5 +590,25 @@ public class AgentController {
         agentService.modifyAgent(agent);
         return "redirect:/backend/searchAgents";
     }
+
+    /**
+     * 异步检测代理商编号是否可用
+     * @param areaId
+     * @return
+     */
+    @RequestMapping("/backend/checkAreaId")
+    @ResponseBody
+    public Result checkAreaId(String areaId) {
+        Result result = new Result();
+        boolean areaIdAvailable = agentService.checkAreaIdAvailable(areaId);
+        if(!areaIdAvailable) {
+            result.setStatus(0);
+            result.setMessage("该编号已存在");
+        }else {
+            result.setStatus(1);
+        }
+        return result;
+    }
+
 
 }

@@ -512,4 +512,20 @@ public class AgentService {
     }
 
 
+    /**
+     *
+     * @param areaId
+     * @return
+     */
+    public boolean checkAreaIdAvailable(String areaId) {
+        Agent agent = agentRepository.findByAreaId(areaId);
+        if(agent==null) {
+            return true;
+        }
+        return false;
+    }
+
+    public List<Agent> findAvailableAgents() {
+        return agentRepository.findAll();
+    }
 }
