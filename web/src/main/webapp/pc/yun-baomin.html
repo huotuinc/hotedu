@@ -98,11 +98,17 @@
                 </p>
 
                 <p>
-                    <select name="areaId" id="areaId" class="ysxlk" size="1">
-                        <option value="001" th:selected="${mbInfo}==null?false:${mbInfo.agent}!=null" >杭州市</option>
-                        <option value="002" th:selected="${mbInfo}==null?false:${mbInfo.agent}!=null" >青岛</option>
+                    <select name="areaId" id="areaId" class="ysxlk" size="1"
+                            th:style="${#authentication.name}=='anonymousUser'?'display:block':'display:none'">
+                        <option th:each="g:${agentList}" th:value="${g.areaId}" th:text="${g.area}" th:selected="${mbInfo}==null?false:${mbInfo.agent}!=null" >杭州市</option>
                         <option value="000" style="display: none;"  th:disabled="${mbInfo}==null?false:${mbInfo.agent}!=null" th:selected="${mbInfo}==null?true:${mbInfo.agent}==null" selected="selected">请选择考点</option>
                     </select>
+                    <select name="areaId" id="areaId" class="ysxlk" size="1"
+                            th:style="${#authentication.name}=='anonymousUser'?'display:none':'display:block'" disabled="disabled">
+                        <option th:each="g:${agentList}" th:value="${g.areaId}" th:text="${g.area}" th:selected="${mbInfo}==null?false:${mbInfo.agent}!=null" >杭州市</option>
+                        <option value="000" style="display: none;"  th:disabled="${mbInfo}==null?false:${mbInfo.agent}!=null" th:selected="${mbInfo}==null?true:${mbInfo.agent}==null" selected="selected">请选择考点</option>
+                    </select>
+
                 </p>
                 <p style="text-align:center;">
                     <button class="ysw500 sign-in__button ys-form__button" id="baominSubmit" type="button">

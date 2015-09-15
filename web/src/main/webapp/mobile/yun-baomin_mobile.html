@@ -70,8 +70,7 @@
             <div class="selectys">
                 <select class="textys" id="areaId" name="areaId">
                     <option selected="selected" value="" disabled="disabled">选择考点</option>
-                    <option value="001">杭州市</option>
-                    <option value="002">青岛</option>
+                    <option th:each="g:${agentList}" th:value="${g.areaId}" th:text="${g.area}">杭州市</option>
                 </select>
             </div>
             <!-- <div style="display:none;" class="upbuttons">
