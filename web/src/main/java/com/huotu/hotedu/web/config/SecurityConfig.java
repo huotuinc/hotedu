@@ -95,6 +95,7 @@ public class SecurityConfig {
                             "/pc/logoutSuccess",
                             "/ueditor/**",
                             "/",
+                            "/pc/haierSignup",
                             "/pc/index"
                     ).permitAll()   // 允许未登录用户访问静态资源
                     .anyRequest().authenticated()

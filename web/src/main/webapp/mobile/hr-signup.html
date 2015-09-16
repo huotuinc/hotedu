@@ -1,23 +1,26 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1"/>
-<meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-<meta name="format-detection" content="telephone=no"/>
-<meta name="description" content=""/>
-<link rel="stylesheet" type="text/css" href="css/common.css"/>
-<link rel="stylesheet" type="text/css" href="css/lunbo.css"/>
-<link rel="stylesheet" type="text/css" href="css/hr.css"/>
-<script src="js/TouchSlide.1.1.js"></script>
-<title>云商学院报名页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" content=""/>
+    <link rel="stylesheet" type="text/css" href="../mobile/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="../mobile/css/lunbo.css"/>
+    <link rel="stylesheet" type="text/css" href="../mobile/css/hr.css"/>
+    <script src="../mobile/js/TouchSlide.1.1.js"></script>
+    <script src="../mobile/js/jquery-1.8.3.min.js"></script>
+    <title>云商学院报名页</title>
 </head>
 
 <body style="background-color:#0059a9;">
-<img style="width:100%" src="images/banner.jpg" />
+<img style="width:100%" src="../mobile/images/banner.jpg"/>
+
 <div style="width:100%" id="">
- <!--up-->
+    <!--up-->
 
 
     <div class="section section7">
@@ -28,7 +31,7 @@
                 <span class="phoneErr"><img
                         src="../mobile/images/iconfont-cuowu2.png"
                         style="width:16px; vertical-align:middle;"/>&nbsp;<span id="phoneErr"
-                        style="font-size: 12px"></span>
+                                                                                style="font-size: 12px"></span>
                 </span>
             </p>
 
@@ -46,8 +49,6 @@
             </div>
 
 
-            <span style="color: red;" id=""></span><span style="color: blue" id=""></span>
-
             <div class="selectys">
                 <select id="sex" name="sex" class="textys">
                     <option selected="selected" value="" disabled="disabled">选择性别</option>
@@ -58,7 +59,7 @@
             <div class="selectys">
                 <select class="textys" id="areaId" name="areaId">
                     <option selected="selected" value="" disabled="disabled">选择考点</option>
-                    <option th:each="g:${agentList}" th:value="${g.areaId}" th:text="${g.area}">杭州市</option>
+                    <option value="002">青岛</option>
                 </select>
             </div>
             <!-- <div style="display:none;" class="upbuttons">
@@ -73,145 +74,288 @@
     </div>
     <!--up end-->
 
-<!--4-->
-<div style="padding-top:20px;">
-  <p style="width:80%; margin:0 auto;"><img style="width:100%" src="images/font4w.png"/></p>
-  <ul class="ulfour">
-    <p class="titfour"><b>线上视频学习：在线学习8课时，每节课约30分钟</b></p>
-    <p class="titfour"><b><a style="color:#fff;" href="http://www.huobanj.com/pc/index">www.huobanj.com官方学习平台</a></b></p>
-    <li>
-      <p class="liblue"> <b>第一课</b></br>
-        微电商&nbsp;&nbsp;大生意 </p>
-    </li>
-    <li>
-      <p class="liblue"> <b>第二课</b></br>
-        微信基础入门和微商技巧 </p>
-    </li>
-    <li>
-      <p class="liblue"> <b>第三课</b></br>
-        朋友圈营销的六脉神剑 </p>
-    </li>
-    <li>
-      <p class="liblue"> <b>第四课</b></br>
-        微商快速引流的三大法则 </p>
-    </li>
-    <li>
-      <p class="liblue"> <b>第五课</b></br>
-        公众账号的基本玩法 </p>
-    </li>
-    <li>
-      <p class="liblue"> <b>第六课</b></br>
-        快速构建微营销的赢利模式 </p>
-    </li>
-    <li>
-      <p class="liblue"> <b>第七课</b></br>
-        微店日常管理和团队建设 </p>
-    </li>
-    <li>
-      <p class="liblue"> <b>第八课</b></br>
-        掘金微商财富的17个秘诀 </p>
-    </li>
-  </ul>
-  <ul class="ulfour">
-    <p class="titfour"><b>线下培训：2天10课时的集中面授</b></p>
-    <li>
-      <p class="lipink"> <b>第一课</b></br>
-        微商行业的法律安全 </p>
-    </li>
-    <li> <p class="lipink">
-    <b>第二课</b></br>
-      微商运营师概要和行业前景
-      </p>
-    </li>
-    <li>
-      <p class="lipink"> <b>第三课</b></br>
-        微商基础入门知识 </p>
-    </li>
-    <li>
-      <p class="lipink"> <b>第四课</b></br>
-        订阅号,服务号的申请和运用 </p>
-    </li>
-    <li>
-      <p class="lipink"> <b>第五课</b></br>
-        选好产品就是成功的一半 </p>
-    </li>
-    <li>
-      <p class="lipink"> <b>第六课</b></br>
-        玩转朋友圈的营销技巧 </p>
-    </li>
-    <li>
-      <p class="lipink"> <b>第七课</b></br>
-        线上线下引流冲业绩 </p>
-    </li>
-    <li>
-      <p class="lipink"> <b>第八课</b></br>
-        打造微商的金牌团队 </p>
-    </li>
-    <li>
-      <p class="lipink"> <b>第九课</b></br>
-        微商案例深度剖析 </p>
-    </li>
-    <li>
-      <p class="lipink"> <b>第十课</b></br>
-        微商金口才+考前辅导 </p>
-    </li>
-  </ul>
-  <p style="height:25px; clear:both"></p>
+    <!--4-->
+    <div style="padding-top:20px;">
+        <p style="width:80%; margin:0 auto;"><img style="width:100%" src="../mobile/images/font4w.png"/></p>
+        <ul class="ulfour">
+            <p class="titfour"><b>线上视频学习：在线学习8课时，每节课约30分钟</b></p>
+
+            <p class="titfour"><b><a style="color:#fff;"
+                                     href="http://www.huobanj.com">www.huobanj.com官方学习平台</a></b></p>
+            <li>
+                <a href="javascript:void(0)" th:href="@{/pc/playVideo(videoNo=10001)}">
+                    <p class="liblue"><b>第一课</b><br/>
+                        微电商&nbsp;&nbsp;大生意
+                    </p>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" th:href="@{/pc/playVideo(videoNo=10002)}">
+                    <p class="liblue"><b>第二课</b><br/>
+                        微信基础入门和微商技巧
+                    </p>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" th:href="@{/pc/playVideo(videoNo=10003)}">
+                <p class="liblue"><b>第三课</b><br/>
+                    朋友圈营销的六脉神剑 </p>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" th:href="@{/pc/playVideo(videoNo=10004)}">
+                <p class="liblue"><b>第四课</b><br/>
+                    微商快速引流的三大法则 </p>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" th:href="@{/pc/playVideo(videoNo=10005)}">
+                <p class="liblue"><b>第五课</b><br/>
+                    公众账号的基本玩法 </p>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" th:href="@{/pc/playVideo(videoNo=10006)}">
+                <p class="liblue"><b>第六课</b><br/>
+                    快速构建微营销的赢利模式 </p>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" th:href="@{/pc/playVideo(videoNo=10007)}">
+                <p class="liblue"><b>第七课</b><br/>
+                    微店日常管理和团队建设 </p>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" th:href="@{/pc/playVideo(videoNo=10008)}">
+                <p class="liblue"><b>第八课</b><br/>
+                    掘金微商财富的17个秘诀 </p>
+                </a>
+            </li>
+        </ul>
+        <ul class="ulfour">
+            <p class="titfour"><b>线下培训：2天10课时的集中面授</b></p>
+            <li>
+                <p class="lipink"><b>第一课</b><br/>
+                    微商行业的法律安全 </p>
+            </li>
+            <li><p class="lipink">
+                <b>第二课</b><br/>
+                微商运营师概要和行业前景
+            </p>
+            </li>
+            <li>
+                <p class="lipink"><b>第三课</b><br/>
+                    微商基础入门知识 </p>
+            </li>
+            <li>
+                <p class="lipink"><b>第四课</b><br/>
+                    订阅号,服务号的申请和运用 </p>
+            </li>
+            <li>
+                <p class="lipink"><b>第五课</b><br/>
+                    选好产品就是成功的一半 </p>
+            </li>
+            <li>
+                <p class="lipink"><b>第六课</b><br/>
+                    玩转朋友圈的营销技巧 </p>
+            </li>
+            <li>
+                <p class="lipink"><b>第七课</b><br/>
+                    线上线下引流冲业绩 </p>
+            </li>
+            <li>
+                <p class="lipink"><b>第八课</b><br/>
+                    打造微商的金牌团队 </p>
+            </li>
+            <li>
+                <p class="lipink"><b>第九课</b><br/>
+                    微商案例深度剖析 </p>
+            </li>
+            <li>
+                <p class="lipink"><b>第十课</b><br/>
+                    微商金口才+考前辅导 </p>
+            </li>
+        </ul>
+        <p style="height:25px; clear:both"></p>
+    </div>
+    <!--4-->
+
+
+    <div>
+        <p><img style="width:100%" src="../mobile/images/bannerjs.png"/></p>
+
+        <p style="width:50%; float:left"><img style="width:100%" src="../mobile/images/th1.jpg"/></p>
+
+        <p style="width:50%; float:left"><img style="width:100%" src="../mobile/images/th2.jpg"/></p>
+
+        <p style="width:50%; float:left"><img style="width:100%" src="../mobile/images/th3.jpg"/></p>
+
+        <p style="width:50%; float:left"><img style="width:100%" src="../mobile/images/th4.jpg"/></p>
+
+        <p style="height:5px; clear:both;"></p>
+
+        <div class="jsjj">
+            <p style="color:#D2D2D2; font-size:14px;">
+                <b>林小希：</b>长生鸟珍珠博士微商学院院长、曾在阿里巴巴集团B2B工作。 <br/>
+                <b>郭向峰：</b>浙江灵岩文化创意有限公司董事、浙江大学电商网店运营班特聘讲师、电子商务实战运营专家、微创汇、向友汇社群发起人、创客汇副秘书长。<br/>
+                <b>汤&nbsp;&nbsp; 晓：</b> 唛田文化总经理、唛田网络首席合伙人、品牌营销策划与微分销专家、微信营销与社会化新媒体营销专家；畅销书《钱多多掌柜奋斗记》和《完美团队成功记》。<br/>
+                <b>龙成东：</b>杭州熬思管理咨询有限公司总经理、老板集团（老板油烟机）特别培训顾问、微商实战系列课程导师，曾经培训过900多家企业。
+            </p>
+
+        </div>
+    </div>
+
+
+    <!--up2-->
+    <div style="background-color:#0078E4;">
+        <p style="height:40px;"></p>
+
+        <div class="pcfont7"><img style="width:100%;" src="../mobile/images/font7.png"/></div>
+        <p style="height:80px;"></p>
+
+        <div class="boxtab">
+            <table class="result-tab" width="100%">
+                <tr>
+                    <td>&nbsp;&nbsp;●&nbsp;&nbsp;报名时间：即日起报名，每期50人以上即开班。</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;●&nbsp;&nbsp;报名费用：2680元/人: 包括报名费、证书费、辅导资料费和考务费。</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;●&nbsp;&nbsp;报名资料： 报名表1张；个人身份证复印件1份；学历证书或学生证复印件一张，或在职证明一张；两寸白底彩色照片2张。</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;●&nbsp;&nbsp;考核方式：理论考试时间100分钟，满分100分，60分即通过。</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;●&nbsp;&nbsp;报名方式：报名请加QQ群：488614349，参与更多社群活动。</td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+    <!--up2 end-->
+
+    <!--up3-->
+    <div style="background-color:#0078E4;">
+        <p style="height:10px;"></p>
+
+        <div class="pcfont7"><img style="width:100%;" src="../mobile/images/font9.png"/></div>
+        <p style="height:80px;"></p>
+
+        <div class="boxtab">
+            <img style="width:100%" src="../mobile/images/book.png"/>
+
+        </div>
+    </div>
+    <!--up3 end-->
+
 </div>
-<!--4--> 
-
-
-<div>
-<p><img style="width:100%" src="images/bannerjs.png" /></p>
-<p style="width:50%; float:left"><img style="width:100%"  src="images/th1.jpg" /></p>
-<p style="width:50%; float:left"><img style="width:100%"  src="images/th2.jpg" /></p>
-<p style="width:50%; float:left"><img style="width:100%"  src="images/th3.jpg" /></p>
-<p style="width:50%; float:left"><img style="width:100%"  src="images/th4.jpg" /></p>
-<p style="height:5px; clear:both;"></p>
-<div class="jsjj">
-<p style="color:#D2D2D2; font-size:14px;">
-        <b>林小希：</b>长生鸟珍珠博士微商学院院长、曾在阿里巴巴集团B2B工作。 <br/>
-        <b>郭向峰：</b>浙江灵岩文化创意有限公司董事、浙江大学电商网店运营班特聘讲师、电子商务实战运营专家、微创汇、向友汇社群发起人、创客汇副秘书长。<br/>
-        <b>汤&nbsp;&nbsp; 晓：</b> 唛田文化总经理、唛田网络首席合伙人、品牌营销策划与微分销专家、微信营销与社会化新媒体营销专家；畅销书《钱多多掌柜奋斗记》和《完美团队成功记》。<br/>
-        <b>龙成东：</b>杭州熬思管理咨询有限公司总经理、老板集团（老板油烟机）特别培训顾问、微商实战系列课程导师，曾经培训过900多家企业。
-        </p>
-        
-</div>        
-</div>
-
-
-
-<!--up2-->
-	<div style="background-color:#0078E4;"> 
-    <p style="height:40px;"></p>
-    <div class="pcfont7"><img style="width:100%;" src="images/font7.png" /></div>
-    <p style="height:80px;"></p>
-    <div class="boxtab">
-<table class="result-tab" width="100%">
-<tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;报名时间：即日起报名，每期50人以上即开班。</td></tr>
-<tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;报名费用：2680元/人: 包括报名费、证书费、辅导资料费和考务费。</td></tr>
-<tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;报名资料： 报名表1张；个人身份证复印件1份；学历证书或学生证复印件一张，或在职证明一张；两寸白底彩色照片2张。</td></tr>
-<tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;考核方式：理论考试时间100分钟，满分100分，60分即通过。</td></tr>
-<tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;报名方式：报名请加QQ群：488614349，参与更多社群活动。</td></tr>
-</table>
-    
-    </div>
-    </div>
-<!--up2 end-->    
-
- <!--up3-->
-	<div style="background-color:#0078E4;"> 
-    <p style="height:10px;"></p>
-    <div class="pcfont7"><img style="width:100%;" src="images/font9.png" /></div>
-    <p style="height:80px;"></p>
-    <div class="boxtab">
-    <img style="width:100%" src="images/book.png"  />
-    
-    </div>
-    </div>
-<!--up3 end-->    
- 
-</div>
+<script>
+    //报名
+    $(function () {
+        $("#baominSubmitButton").click(function () {
+            var reg0 = /^[0-9]*$/;
+            var reg = /^(13|14|15|17|18)\d{9}$/;
+            var phoneNo = $("#phoneNo").val();
+            var realName = $("#realName").val();
+            var areaId = jQuery("#areaId  option:selected").val();
+            var sex = $("#sex").val();
+            if (phoneNo == "") {
+                $("#phoneErrBg").show();
+                $("#phoneErr").text("手机号不能为空");
+                return;
+            }
+            if (!reg0.test(phoneNo)) {
+                $("#phoneErrBg").show();
+                $("#phoneErr").text("手机号只能输入数字！");
+                return;
+            }
+            if (!reg.test(phoneNo)) {
+                $("#phoneErrBg").show();
+                $("#phoneErr").text("请填入正确的手机号！");
+                return;
+            }
+            if (realName == "") {
+                $("#phoneErrBg").show();
+                $("#phoneErr").text("姓名不能为空！");
+                return;
+            }
+            if (sex == "" || sex == null) {
+                $("#phoneErrBg").show();
+                $("#phoneErr").text("请选择性别！");
+                return;
+            }
+            if (areaId == "" || areaId == null) {
+                $("#phoneErrBg").show();
+                $("#phoneErr").text("请选择考点！");
+                return;
+            }
+            $.ajax({
+                url: "../pc/baomin",
+                type: "post",
+                dataType: "json",
+                data: {"phoneNo": phoneNo, "realName": realName, "sex": sex, "areaId": areaId},
+                success: function (result) {
+                    if (result.status == 0) {
+                        $("#phoneErr").text(result.message);
+                        $("#phoneErrBg").show();
+                    } else if (result.status == 1) {
+                        $("#phoneErrBg").hide();
+                        alert(result.message);
+                        window.location.reload();
+                    }
+                },
+                error: function () {
+                    alert("请求失败");
+                }
+            });
+        });
+        $("#phoneNo").blur(checkPhoneNo);
+        function checkPhoneNo() {
+            var reg0 = /^[0-9]*$/;
+            var reg = /^(13|14|15|17|18)\d{9}$/;
+            var phoneNo = $("#phoneNo").val();
+            if (phoneNo == "") {
+                $("#phoneRig").hide();
+                $("#phoneErrBg").show();
+                $("#phoneErr").text("手机号不能为空！");
+                return;
+            }
+            if (!reg0.test(phoneNo)) {
+                $("#phoneErrBg").show();
+                $("#phoneErr").text("手机号只能输入数字！");
+                return;
+            }
+            if (!reg.test(phoneNo)) {
+                $("#phoneRig").hide();
+                $("#phoneErrBg").show();
+                $("#phoneErr").text("请填入正确的手机号！");
+                return;
+            }
+            $.ajax({
+                url: "../pc/checkPhoneNo",
+                type: "post",
+                dataType: "json",
+                data: {"phoneNo": phoneNo},
+                success: function (result) {
+                    if (result.status == 0) {
+                        $("#phoneErrBg").show();
+                        $("#phoneRig").hide();
+                        $("#phoneErr").text(result.message);
+                    } else if (result.status == 1) {
+                        $("#phoneErrBg").hide();
+                        $("#phoneRig").show();
+                    }
+                },
+                error: function () {
+                    alert("请求失败！");
+                }
+            });
+        }
+    });
+</script>
 
 </body>
 </html>

@@ -54,7 +54,6 @@
 }
 .xian {
 	border-bottom: 1px solid #DBDBDB;
-；
 }
 .ulmages {
 	width: 100%;
@@ -117,16 +116,15 @@
 	margin: 0 auto;
 }
 .ulfour .liblue {
-  background-color: #fff;
-  color: #474747;
-  text-align: center;
-  line-height: 28px;
-  font-size: 12px;
-  width: 47%;
-  float: left;
-  margin: 1%;
-  margin-bottom: 3px;
-  border: solid 1px #ddd;
+	background-color: #77b3e6;
+	color: #fff;
+	text-align: center;
+	line-height: 28px;
+	font-size: 12px;
+	width: 48%;
+	float: left;
+	margin: 1%;
+	margin-bottom: 3px;
 }
 .liblue b {
 	font-size: 16px;
@@ -135,15 +133,15 @@
 	font-size: 16px;
 }
 .ulfour .lipink {
-  background-color: #FFFFFF;
-  color: #333;
-  text-align: center;
-  line-height: 28px;
-  font-size: 12px;
-  width: 48%;
-  float: left;
-  margin: 1%;
-  margin-bottom: 3px;
+	background-color: #f88ba7;
+	color: #fff;
+	text-align: center;
+	line-height: 28px;
+	font-size: 12px;
+	width: 48%;
+	float: left;
+	margin: 1%;
+	margin-bottom: 3px;
 }
 .daoh {
 	position: fixed;
@@ -414,6 +412,9 @@
 	position: relative;
 	margin-bottom: 10px;
 }
+.io{ position: relative;}
+.io .phoneRig{ position: absolute;right:10px;top:10px; background-color: #fff}
+.io .phoneRig img{ width:20px; }
 .textys {
 	height: 40px;
 	-webkit-appearance: none;

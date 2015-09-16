@@ -523,13 +523,15 @@ public class AgentController {
     @RequestMapping(value = "/backend/addSaveAgent",method = RequestMethod.POST)
     public String addSaveAgent(String areaId,String name,String loginName,int sex,String area,String phoneNo,String level,int certificateNumber,@RequestParam("smallimg") MultipartFile file) throws Exception{
 
+        String fileName = null;
         //文件格式判断
-        if(ImageIO.read(file.getInputStream())==null){throw new Exception("不是图片！");}
-        if(file.getSize()==0){throw new Exception("文件为空！");}
-
-        //保存图片
-        String fileName = StaticResourceService.AGENT_ICON + UUID.randomUUID().toString() + ".png";
-        staticResourceService.uploadResource(fileName,file.getInputStream());
+        if(ImageIO.read(file.getInputStream())!=null){
+            if(file.getSize()!=0) {
+                //保存图片
+                fileName = StaticResourceService.AGENT_ICON + UUID.randomUUID().toString() + ".png";
+                staticResourceService.uploadResource(fileName,file.getInputStream());
+            }
+        }
 
         Agent agent=new Agent();
         agent.setAreaId(areaId);

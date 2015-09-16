@@ -795,4 +795,9 @@ public class MemberController {
         return result;
     }
 
+    @RequestMapping("/pc/haierSignup")
+    public String haierSingup() {
+        return "/mobile/hr-signup_mobile";
+    }
+
 }
