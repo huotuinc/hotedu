@@ -519,7 +519,7 @@ public class AgentController {
      * @return            重定向到搜索代理商
      * @throws Exception  图片出错异常
      */
-    @PreAuthorize("hasRole('ADMIN')")
+    /*@PreAuthorize("hasRole('ADMIN')")*/
     @RequestMapping(value = "/backend/addSaveAgent",method = RequestMethod.POST)
     public String addSaveAgent(String areaId,String name,String loginName,int sex,String area,String phoneNo,String level,int certificateNumber,@RequestParam("smallimg") MultipartFile file) throws Exception{
 
@@ -612,5 +612,25 @@ public class AgentController {
         return result;
     }
 
+    @RequestMapping("/backend/checkOtherAreaId")
+    @ResponseBody
+    public Result checkOtherAreaId(String areaId,long agentId) {
+        Result result = new Result();
+        boolean areaIdAvailable = agentService.checkAreaIdAvailable(areaId);
+        if(!areaIdAvailable) {
+            Agent agent = agentService.findOneById(agentId);
+            if(agent!=null) {
+                if(areaId.equals(agent.getAreaId())) {
+                    result.setStatus(1);
+                }else {
+                    result.setStatus(0);
+                    result.setMessage("该编号已存在");
+                }
+            }
+        }else {
+            result.setStatus(1);
+        }
+        return result;
+    }
 
 }

@@ -91,7 +91,7 @@
                                 <th><i class="require-red">*</i>代理商编号：</th>
                                 <td><input title="" th:value="${agent.areaId}" maxlength="20" type="text" value="" size="70" id="areaId" name="areaId" class="common-text"/>
                                     <span id="areaIdErrInfo" style="color: red"></span>
-
+                                    <input hidden="hidden" th:value="${agent.id}" id="agentId"/>
                                 </td>
                             </tr>
                             <tr>
@@ -170,19 +170,20 @@
         });
     }
     $(function() {
-        $("#areaId").blur(checkAreaId);
+//        $("#areaId").blur(checkAreaId);
         $("#btn_submitAgent").click(function() {
             var areaId = $("#areaId").val();
+            var agentId = $("#agentId").val();
             if(areaId=="") {
                 $("#areaIdErrInfo").text("代理商编号不能为空！");
                 $("#areaId").focus();
                 return;
             }
             $.ajax({
-                url: "checkAreaId",
+                url: "checkOtherAreaId",
                 type: "post",
                 dataType: "json",
-                data: {"areaId": areaId},
+                data: {"areaId": areaId,"agentId":agentId},
                 success: function (result) {
                     if (result.status == 0) {
                         $("#areaIdErrInfo").text(result.message);

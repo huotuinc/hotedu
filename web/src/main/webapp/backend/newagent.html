@@ -20,6 +20,7 @@
             th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
     <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
             th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
+    <script src="js/ajaxfileupload.js"></script>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -79,7 +80,7 @@
                             <tbody>
                             <tr>
                                 <th><i class="require-red">*</i>上传照片：</th>
-                                <td><img src="images/logo.png"  style="width: 100px; height: auto;"/><input name="smallimg" type="file"/><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>-->
+                                <td><img src="images/logo.png"  style="width: 100px; height: auto;"/><input id="smallimg" name="smallimg" type="file"/><!--<input type="submit" onclick="submitForm('/jscss/admin/design/upload')" value="上传图片"/>-->
                                 </td>
                             </tr>
                             <tr>
@@ -168,32 +169,6 @@
     }
     $(function() {
         $("#areaId").blur(checkAreaId);
-        $("#btn_submitAgent").click(function() {
-            var areaId = $("#areaId").val();
-            if(areaId=="") {
-                $("#areaIdErrInfo").text("代理商编号不能为空！");
-                $("#areaId").focus();
-                return;
-            }
-            $.ajax({
-                url: "checkAreaId",
-                type: "post",
-                dataType: "json",
-                data: {"areaId": areaId},
-                success: function (result) {
-                    if (result.status == 0) {
-                        $("#areaIdErrInfo").text(result.message);
-                        $("#areaId").focus();
-                    } else if (result.status == 1) {
-                        $("#areaIdErrInfo").text("");
-                        $("#editorForm").submit();
-                    }
-                },
-                error: function () {
-                    alert("请求失败！");
-                }
-            });
-        });
     });
 </script>
 </html>
