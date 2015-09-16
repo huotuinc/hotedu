@@ -85,7 +85,7 @@ public class LoginController {
     }
 
     @RequestMapping("/pc/loginSuccess")
-    public String loginSuccess(@AuthenticationPrincipal Login user,HttpServletRequest request) throws URISyntaxException {
+    public String loginSuccess(@AuthenticationPrincipal Login user,Model model) throws URISyntaxException {
         String turnPage = "redirect:/pc/index";
         if(user instanceof Manager||user instanceof Editor) {
             turnPage = "redirect:/backend/index";
