@@ -17,33 +17,62 @@
 <body style="background-color:#0059a9;">
 <img style="width:100%" src="images/banner.jpg" />
 <div style="width:100%" id="">
-<!--up-->
-<div class="section section7">
-<div class="boxupone">
-<p style="height:40px;"></p>
-<input id=" " name=" "placeholder="填写姓名" maxlength=" " type="text"/>
-<input id=" " name=" "placeholder="手机号" maxlength=" " type="text"/>
-<div class="selectys"> 
-<select id="orderTimeDataSel" class="textys"> 
-<option>性别</option> 
-<option>男</option> 
-<option>女</option> 
-</select> 
-</div>
-<div class="selectys"> 
-<select id="orderTimeDataSel" class="textys"> 
-<option>选择地区</option> 
-<option>杭州市</option> 
-</select> 
-</div>
-<div style="display:none;" class="upbutton" id="registerBtn" type="button">性别</div>
-<div style="display:none;"  class="upbuttons"><a href=""><img src="images/boys.png"/></a><a href=""><img src="images/girl.png"/></a></div>
-<button class="up-button" id="registerBtn" type="button">提交</button>
-<p style="font-size:14px; color:#363636">请保持手机开机状态，以便我们能联系到你。</p>
-<p style="height:40px;"></p>
-</div>
-</div>
-<!--up end-->
+ <!--up-->
+
+
+    <div class="section section7">
+        <div class="boxupone">
+            <p style="height:50px;"></p>
+
+            <p id="phoneErrBg" class="phoneErrBgCss" style="display:none;">
+                <span class="phoneErr"><img
+                        src="../mobile/images/iconfont-cuowu2.png"
+                        style="width:16px; vertical-align:middle;"/>&nbsp;<span id="phoneErr"
+                        style="font-size: 12px"></span>
+                </span>
+            </p>
+
+
+            <div class="selectys io">
+                <input id="realName" name="realName" placeholder="填写姓名" maxlength="20" type="text"/>
+            </div>
+            <div class="selectys io">
+                <input id="phoneNo" name="phoneNo" placeholder="手机号" maxlength="20" type="text"/>
+                <span class="phoneRig" id="phoneRig" style="display:none"><img
+                        src="../mobile/images/iconfont-gou64.png"/></span>
+                <!--<span class="phoneRig"  style="display:block"><img id="quchu"
+                        src="../mobile/images/iconfont-quchu.png" /></span>-->
+
+            </div>
+
+
+            <span style="color: red;" id=""></span><span style="color: blue" id=""></span>
+
+            <div class="selectys">
+                <select id="sex" name="sex" class="textys">
+                    <option selected="selected" value="" disabled="disabled">选择性别</option>
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                </select>
+            </div>
+            <div class="selectys">
+                <select class="textys" id="areaId" name="areaId">
+                    <option selected="selected" value="" disabled="disabled">选择考点</option>
+                    <option th:each="g:${agentList}" th:value="${g.areaId}" th:text="${g.area}">杭州市</option>
+                </select>
+            </div>
+            <!-- <div style="display:none;" class="upbuttons">
+                 <a href=""><img src="../mobile/images/boys.png"/></a>
+                 <a href=""><img src="../mobile/images/girl.png"/></a>
+             </div>-->
+            <button id="baominSubmitButton" class="up-button" type="button">提交</button>
+            <p style="font-size:14px; color:#363636">请保持手机开机状态，以便我们能联系到你。</p>
+
+            <p style="height:40px;"></p>
+        </div>
+    </div>
+    <!--up end-->
+
 <!--4-->
 <div style="padding-top:20px;">
   <p style="width:80%; margin:0 auto;"><img style="width:100%" src="images/font4w.png"/></p>
