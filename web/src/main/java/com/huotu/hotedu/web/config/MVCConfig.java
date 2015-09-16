@@ -8,8 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
-import org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+//import org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver;
+//import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.*;
@@ -48,15 +48,15 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
         return new CommonsMultipartResolver();
     }
 
-    @Bean
+  /* @Bean
     public DeviceHandlerMethodArgumentResolver deviceHandlerMethodArgumentResolver() {
         return new DeviceHandlerMethodArgumentResolver();
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(deviceHandlerMethodArgumentResolver());
-    }
+    }*/
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {

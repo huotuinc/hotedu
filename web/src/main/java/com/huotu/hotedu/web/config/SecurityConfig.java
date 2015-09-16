@@ -26,7 +26,7 @@ public class SecurityConfig {
     /**
      * 登录请求的URI
      */
-    public static final String pcLoginURI = "/pc/login";
+    public static final String pcLoginURI = "/pc/index";
     public static final String pcLoginSuccessURI = "/pc/loginSuccess";
     public static final String pcLoginFailedURI = "/pc/loginFailed";
     public static final String pcLogoutSuccessURI = "/pc/logoutSuccess";
