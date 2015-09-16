@@ -35,7 +35,6 @@ public class SecurityConfig {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private UserDetailsService userDetailsService;
-
     // Since MultiSecurityConfig does not extend GlobalMethodSecurityConfiguration and
     // define an AuthenticationManager, it will try using the globally defined
     // AuthenticationManagerBuilder to create one

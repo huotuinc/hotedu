@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -84,10 +85,19 @@ public class LoginController {
     }
 
     @RequestMapping("/pc/loginSuccess")
-    public String loginSuccess(@AuthenticationPrincipal Login user,HttpServletRequest request) {
+    public String loginSuccess(@AuthenticationPrincipal Login user,HttpServletRequest request) throws URISyntaxException {
         String turnPage = "redirect:/pc/index";
         if(user instanceof Manager||user instanceof Editor) {
             turnPage = "redirect:/backend/index";
+        }
+        if(user instanceof Agent) {
+            String newPicUrl = null;
+            if(((Agent) user).getPictureUri()!=null&&!"".equals(((Agent) user).getPictureUri())) {
+                if(staticResourceService.getResource(((Agent) user).getPictureUri())!=null) {
+                    newPicUrl = staticResourceService.getResource(((Agent) user).getPictureUri()).toString();
+                }
+            }
+            ((Agent) user).setPictureUri(newPicUrl);
         }
         return turnPage;
     }

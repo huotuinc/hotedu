@@ -38,7 +38,7 @@
                 <li style="padding:0px 0px 0px 20px;display:none"><a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='none';document.getElementById('asaimsgbg').style.display='none'">登录</a>
                 </li>
                 <li id="userLi" style="padding:0px;" th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
-                    <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimgi" src="images/toux.png" width="100%"/></a><!--会员头像-->
+                    <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimgi" src="images/toux.png" width="100%" th:src="${#authentication.name}!='anonymousUser'?(${#authentication.principal.pictureUri}!=''?${#authentication.principal.pictureUri}:'images/lodingj.png'):'images/lodingj.png'"/></a><!--会员头像-->
                     <p style="display: none" class="zhizheno"><img src="images/lodingj.png" width="18px" height="7px"/></p>
 
                     <p style="display: none" class="lbpoo"><!--@thymesVar id="#authentication" type="org.springframework.security.core.Authentication"-->

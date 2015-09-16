@@ -89,8 +89,8 @@
             </li>
             <li id="userLi" style="padding:0px;display:none" th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
                 <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}">
-                    <img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
-                <p style="display: none" class="zhizheni"><img src="images/lodingj.png" width="18px" height="7px"/></p>
+                    <img class="lodingimg" src="images/toux.png" width="100%" th:src="${#authentication.name}!='anonymousUser'?(${#authentication.principal.pictureUri}!=null?${#authentication.principal.pictureUri}:'images/toux.png'):'images/toux.png'"/></a><!--会员头像-->
+                <p style="display: none" class="zhizheni"><img src="images/lodingj.png"  width="18px" height="7px"/></p>
                 <p style="display: none" class="lbpo">
                     <a href="javascript:void(0)" th:text="${#authentication.name}">ABC</a>
                     <a href="#" th:href="@{/pc/loadPersonalCenter}">个人中心</a>
