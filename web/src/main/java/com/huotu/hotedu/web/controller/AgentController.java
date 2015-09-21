@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -525,12 +528,12 @@ public class AgentController {
 
         String fileName = null;
         //文件格式判断
-        if(ImageIO.read(file.getInputStream())!=null){
-            if(file.getSize()!=0) {
-                //保存图片
-                fileName = StaticResourceService.AGENT_ICON + UUID.randomUUID().toString() + ".png";
-                staticResourceService.uploadResource(fileName,file.getInputStream());
-            }
+        BufferedImage image = ImageIO.read(file.getInputStream());
+        if(image!=null){
+            fileName = StaticResourceService.AGENT_ICON + UUID.randomUUID().toString() + ".png";
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            ImageIO.write(image,"png",buffer);
+            staticResourceService.uploadResource(fileName,new ByteArrayInputStream(buffer.toByteArray()));
         }
 
         Agent agent=new Agent();

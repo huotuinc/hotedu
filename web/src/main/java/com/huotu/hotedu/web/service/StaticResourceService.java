@@ -25,7 +25,7 @@ public interface StaticResourceService {
     /**
      * 企业的LOGO
      */
-    public  String COMPANY_LOGO="image/company/";
+    String COMPANY_LOGO="image/company/";
     /**
      * 导师的头像
      */
