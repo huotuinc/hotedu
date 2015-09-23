@@ -327,7 +327,6 @@ public class ExamGuideControllerTest extends WebTestBase {
         loginService.newLogin(manager, password);
         //准备测试环境END
 
-
         mockMvc.perform(
                 get("/backend/addExamGuide")
         )
@@ -377,7 +376,6 @@ public class ExamGuideControllerTest extends WebTestBase {
         loginService.newLogin(member, password);
         loginService.newLogin(editor, password);
         loginService.newLogin(manager, password);
-
 
 
         ExamGuide examGuide=new ExamGuide();
