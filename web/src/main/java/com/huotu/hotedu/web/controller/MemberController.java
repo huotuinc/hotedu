@@ -800,4 +800,9 @@ public class MemberController {
         return "/mobile/hr-signup_mobile";
     }
 
+    @RequestMapping("/pc/ruiliSignup")
+    public String ruiliSignup() {
+        return "/mobile/rl-signup_mobile";
+    }
+
 }
