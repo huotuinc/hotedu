@@ -239,12 +239,40 @@
 	width: 85%;
 	position: relative;
 }
+.textys {
+  height: 40px;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  font-size: 16px;
+  padding: 0px 10px;
+  display: block;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #FFFFFF;
+  color: #A9A9A9;
+  border-radius: 4px;
+}
+.boxupone .selectys.io input {
+  padding: 0px;
+  margin-bottom: 0px;
+  width: 100%;
+  border: 0px solid #FFF;
+  background-color: #fff;
+  border-radius: 4px;
+  height: 40px;
+  line-height: 40px;
+  text-indent: 12px;
+}
 .boxupone input {
 	padding: 10px;
 	width: 93%;
 	margin-bottom: 10px;
 	border: solid 1px #fff;
 }
+
+
 .upbutton {
 	background-color: #fff;
 	border: 1px solid #fff;
