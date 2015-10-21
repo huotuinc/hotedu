@@ -228,6 +228,9 @@ h1 {
 	float: left;
 	display: inline;
 }
+.user-h52{
+	  padding-top: 52px; 
+}
 .user-form__fieldset {
 	width: 80%;
 }
