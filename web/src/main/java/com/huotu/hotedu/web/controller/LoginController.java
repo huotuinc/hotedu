@@ -98,6 +98,7 @@ public class LoginController {
                 }
             }
             ((Agent) user).setPictureUri(newPicUrl);
+            turnPage = "redirect:/pc/loadPersonalCenter";
         }
         return turnPage;
     }
