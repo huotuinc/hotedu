@@ -583,7 +583,7 @@ $(function() {
     $("#registerBtn").click(function(){
         var reg=/^(13|14|15|17|18)\d{9}$/;
         var phoneNo = $("#regPhoneNo").val();
-        var authCode = $("#regAuthCode").val();
+        //var authCode = $("#regAuthCode").val();
         if(phoneNo=="") {
             $("#regMsgInfo").text("");
             $("#phoneErr").text("手机号不能为空");
@@ -594,15 +594,16 @@ $(function() {
             $("#phoneErr").text("请填入正确的手机号！");
             return;
         }
-        if(authCode=="") {
-            $.MsgBox.Alert("友情提示","验证码不能为空");
-            return;
-        }
+        //if(authCode=="") {
+        //    $.MsgBox.Alert("友情提示","验证码不能为空");
+        //    return;
+        //}
         $.ajax({
             url:"register",
             type:"post",
             dataType:"json",
-            data:{"phoneNo":phoneNo,"authCode":authCode},
+            //data:{"phoneNo":phoneNo,"authCode":authCode},
+            data:{"phoneNo":phoneNo},
             success:function(result){
                 if(result.status==0) {
                     $("#regMsgInfo").text("");

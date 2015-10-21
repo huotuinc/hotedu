@@ -24,6 +24,15 @@ public  class Result implements Serializable {
     private int total_count;
     private List<Hashtable> file_list;
 
+    public Result() {
+
+    }
+
+    public Result(int status, String message) {
+        this.status = status;
+        this.message = message;
+    }
+
     public String getMoveup_dir_path() {
         return moveup_dir_path;
     }

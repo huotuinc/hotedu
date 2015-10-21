@@ -217,10 +217,23 @@ public class MemberController {
     @RequestMapping("/pc/register")
     @ResponseBody
     public Result register(String phoneNo, String authCode) {
-        Result result = new Result();
+        if ("".equals(phoneNo) || phoneNo == null) {
+            return new Result(0,"手机号不能为空");
+        }
+        if(memberService.isPhoneNoExist(phoneNo)) {
+            return new Result(0,"该手机号已被注册");
+        }
+        Member mb = new Member();
+        Date d = new Date();
+        mb.setPhoneNo(phoneNo);
+        mb.setLoginName(phoneNo);
+        mb.setEnabled(true);
+        mb.setRegisterDate(d);
+        loginService.newLogin(mb, phoneNo.substring(7));
+        return new Result(1,mb.getPhoneNo());
+        /*Result result = new Result();
         VerificationType verificationType = EnumHelper.getEnumType(VerificationType.class, 1);
         String message = "";
-        Date date = new Date();
         int status = 0;
         if ("".equals(phoneNo) || phoneNo == null) {
             message = "手机号不能为空";
@@ -247,7 +260,7 @@ public class MemberController {
         }
         result.setStatus(status);
         result.setMessage(message);
-        return result;
+        return result;*/
     }
 
     /**

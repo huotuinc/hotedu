@@ -225,14 +225,12 @@
         if(phoneNo=="") {
             $("#msgInfo").text("");
             $("#errInfo").text("手机号不能为空");
-            $("#phoneNo").focus();
             return;
         }
         if(!reg.test(phoneNo)){
             $("#msgInfo").text("");
             $("#errInfo").text("请填入正确的手机号！");
-            $("#phoneNo").focus();
-            return false;
+            return;
         }
         $.ajax({
             url:"checkPhoneNo",
