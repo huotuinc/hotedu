@@ -286,6 +286,55 @@
 	color: #fff;
 	margin-bottom: 10px;
 }
+
+.up-buttonone {
+  background-color: #3584FD;
+  border: 1px solid #3584FD;
+  text-align: center;
+  padding: 10px 0px;
+  width: 100%;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.up-buttonone:hover {
+	background-color: #00a0e8;
+	border: 1px solid #00a0e8;
+	text-align: center;
+	padding: 10px 0px;
+	width: 100%;
+	color: #fff;
+	margin-bottom: 10px;
+}
+.boxupone .selectys.io input {
+  padding: 0px;
+  margin-bottom: 0px;
+  width: 100%;
+  border: 0px solid #FFF;
+  background-color: #fff;
+  border-radius: 4px;
+  height: 40px;
+  line-height: 40px;
+  text-indent: 12px;
+}
+.textys {
+  height: 40px;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  font-size: 16px;
+  padding: 0px 10px;
+  display: block;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #FFFFFF;
+  color: #A9A9A9;
+  border-radius: 4px;
+}
+select {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
 .pcfont7 {
 	width: 50%;
 	margin: 0 auto;
@@ -410,7 +459,6 @@
 .selectys {
 	margin-top: 0px;
 	outline: none;
-	border: 1px solid #BBBBBB;
 	border-radius: 4px;
 	position: relative;
 	margin-bottom: 10px;
