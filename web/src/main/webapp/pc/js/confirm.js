@@ -544,7 +544,7 @@ $(function() {
         $("#regDiv").hide();
         $("#asaimsg").show();
     });
-    $("#regPhoneNo").blur(checkPhoneNo);
+    //$("#regPhoneNo").blur(checkPhoneNo);
     function checkPhoneNo() {
         var reg=/^(13|14|15|17|18)\d{9}$/;
         var phoneNo = $("#regPhoneNo").val();
@@ -586,11 +586,13 @@ $(function() {
         //var authCode = $("#regAuthCode").val();
         if(phoneNo=="") {
             $("#regMsgInfo").text("");
+            $("#regErrInfo").text("");
             $("#phoneErr").text("手机号不能为空");
             return;
         }
         if(!reg.test(phoneNo)){
             $("#regMsgInfo").text("");
+            $("#regErrInfo").text("");
             $("#phoneErr").text("请填入正确的手机号！");
             return;
         }
@@ -607,6 +609,7 @@ $(function() {
             success:function(result){
                 if(result.status==0) {
                     $("#regMsgInfo").text("");
+                    $("#phoneErr").text("");
                     $("#regErrInfo").text(result.message);
                 }else if(result.status==1) {
                     $("#regPhoneNo").val("");
