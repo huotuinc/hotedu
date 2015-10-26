@@ -813,6 +813,11 @@ public class MemberController {
         return "/mobile/hr-signup_mobile";
     }
 
+    @RequestMapping("/pc/haierPay")
+    public String haierPay() {
+        return "/mobile/hr-pay_mobile";
+    }
+
     @RequestMapping("/pc/ruiliSignup")
     public String ruiliSignup() {
         return "/mobile/rl-signup_mobile";

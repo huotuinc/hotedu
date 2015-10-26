@@ -58,18 +58,12 @@
                     <option value="2">女</option>
                 </select>
             </div>
-            <div class="selectys">
-                <select class="textys" id="areaId" name="areaId">
-                    <option selected="selected" value="" disabled="disabled">选择考点</option>
-                    <option th:each="g:${agentList}" th:value="${g.areaId}" th:text="${g.area}">杭州市</option>
-                </select>
-            </div>
-            <!-- <div style="display:none;" class="upbuttons">
+            <input value="002" id="areaId" type="hidden"/>
+             <!--<div style="display:none;" class="upbuttons">
                  <a href=""><img src="../mobile/images/boys.png"/></a>
                  <a href=""><img src="../mobile/images/girl.png"/></a>
              </div>-->
             <button id="baominSubmitButton" class="up-button" type="button">提交</button>
-             <button id="baominSubmitButton" class="up-buttonone" type="button">缴费</button>
             <p style="font-size:14px; color:#363636">请保持手机开机状态，以便我们能联系到你。</p>
 
             <p style="height:40px;"></p>
