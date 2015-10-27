@@ -29,7 +29,7 @@ import java.util.Set;
  */
 @Configuration
 @EnableWebMvc
-@Import(IqiyiConfig.class)  // add by CJ for IqiyiVideoRepository
+@Import(IqiyiConfig.class)
 @ComponentScan({
         "com.huotu.hotedu.web.service",
         "com.huotu.hotedu.web.advice",
