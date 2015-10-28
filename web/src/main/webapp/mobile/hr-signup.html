@@ -15,7 +15,17 @@
     <script src="../mobile/js/jquery-1.8.3.min.js"></script>
     <title>云商学院报名页</title>
 </head>
-
+<style>
+    .io .phoneRig {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        background-color: #fff;
+    }
+    .io .phoneRig img {
+        width: 20px;
+    }
+</style>
 <body style="background-color:#0059a9;">
 <img style="width:100%" src="../mobile/images/banner.jpg"/>
 
@@ -43,8 +53,6 @@
                 <input id="phoneNo" name="phoneNo" placeholder="手机号" maxlength="20" type="text"/>
                 <span class="phoneRig" id="phoneRig" style="display:none"><img
                         src="../mobile/images/iconfont-gou64.png"/></span>
-                <!--<span class="phoneRig"  style="display:block"><img id="quchu"
-                        src="../mobile/images/iconfont-quchu.png" /></span>-->
 
             </div>
 
@@ -59,39 +67,36 @@
                 </select>
             </div>
             <div class="selectys">
-                <select class="textys" id="areaId" name="areaId">
+                <select name="areaId" id="areaId" size="1" class="textys">
                     <option selected="selected" value="" disabled="disabled">选择考点</option>
-                    <option th:each="g:${agentList}" th:value="${g.areaId}" th:text="${g.area}">杭州市</option>
+                    <option value="002" >青岛</option>
                 </select>
             </div>
-            <!-- <div style="display:none;" class="upbuttons">
+            <!--<input value="002" id="areaId" type="hidden"/>-->
+             <!--<div style="display:none;" class="upbuttons">
                  <a href=""><img src="../mobile/images/boys.png"/></a>
                  <a href=""><img src="../mobile/images/girl.png"/></a>
              </div>-->
             <button id="baominSubmitButton" class="up-button" type="button">提交</button>
-             <button id="baominSubmitButton" class="up-buttonone" type="button">缴费</button>
             <p style="font-size:14px; color:#363636">请保持手机开机状态，以便我们能联系到你。</p>
 
             <p style="height:40px;"></p>
         </div>
     </div>
     <!--up end-->
-<!--2-->
-<div>
-  <div class="bigfour">
-    <p class="pctwo"> <img src="images/font2.png" width="100%"/></p>
-    <p style="height:20px"></p>
-    <ul>
-      <li><img src="images/topone.png"/></li>
-      <li><img src="images/toptwo.png"/></li>
-      <li><img src="images/topthree.png"/></li>
-      <li><img src="images/topfour.png"/></li>
-      </li>
-    </ul>
-    <p> <img src="images/pc2.jpg" width="100%"/></p>
-  </div>
-</div>
-<!--2--> 
+    <div>
+        <div class="bigfour">
+            <p class="pctwo"> <img src="../mobile/images/font2.png" width="100%"/></p>
+            <p style="height:20px"></p>
+            <ul>
+                <li><img src="../mobile/images/topone.png"/></li>
+                <li><img src="../mobile/images/toptwo.png"/></li>
+                <li><img src="../mobile/images/topthree.png"/></li>
+                <li><img src="../mobile/images/topfour.png"/></li>
+            </ul>
+            <p> <img src="../mobile/images/pc2.jpg" width="100%"/></p>
+        </div>
+    </div>
     <!--4-->
     <div style="padding-top:20px;">
         <p style="width:80%; margin:0 auto;"><img style="width:100%" src="../mobile/images/font4w.png"/></p>
@@ -236,6 +241,7 @@
         <p style="height:80px;"></p>
 
         <div class="boxtab">
+<<<<<<< HEAD
           <table class="result-tab" width="100%">
 <tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;报名时间：即日起报名，每期50人以上即开班。</td></tr>
 <tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;报名费用：1680元/人: 包括报名费、证书费、辅导资料费和考务费。</td></tr>
@@ -246,6 +252,36 @@
 <tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;微信公众平台：创客魔方VentureBase。</td></tr>
 <tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;微信号：18669798115。</td></tr>
 </table>
+=======
+            <!--<table class="result-tab" width="100%">
+                <tr>
+                    <td>&nbsp;&nbsp;●&nbsp;&nbsp;报名时间：即日起报名，每期50人以上即开班。</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;●&nbsp;&nbsp;报名费用：原价2680元/人，首期特惠价1680元/人: 包括报名费、证书费、辅导资料费和考务费。</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;●&nbsp;&nbsp;报名资料： 报名表1张；个人身份证复印件1份；学历证书或学生证复印件一张，或在职证明一张；两寸白底彩色照片2张。</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;●&nbsp;&nbsp;考核方式：理论考试时间100分钟，满分100分，60分即通过。</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;●&nbsp;&nbsp;报名方式：报名请加QQ群：488614349，参与更多社群活动。</td>
+                </tr>
+            </table>-->
+            <table class="result-tab" width="100%">
+                <tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;报名时间：即日起报名，每期50人以上即开班。</td></tr>
+                <tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;报名费用：1680元/人: 包括报名费、证书费、辅导资料费和考务费。</td></tr>
+                <tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;报名资料： 报名表1张；个人身份证复印件1份；学历证书或学生证复印件一张，或在职证明一张；两寸白底彩色照片2张。</td></tr>
+                <tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;考核方式：理论考试时间100分钟，满分100分，60分即通过。</td></tr>
+                <tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;报名方式：报名请加QQ群：488614349，参与更多社群活动。</td></tr>
+                <tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;QQ群:创客魔方伙伴特训营 165762090。</td></tr>
+                <tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;微信公众平台：创客魔方VentureBase。</td></tr>
+                <tr><td>&nbsp;&nbsp;●&nbsp;&nbsp;微信号：18669798115。</td></tr>
+            </table>
+>>>>>>> 2f51156bd9eb2fd11733f8a7803eac68a794fc99
+
 
         </div>
     </div>

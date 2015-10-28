@@ -1,7 +1,7 @@
 package com.huotu.hotedu.web.controller;
 
-import com.huotu.hotedu.common.exception.InterrelatedException;
 import com.huotu.hotedu.entity.*;
+import com.huotu.hotedu.exception.InterrelatedException;
 import com.huotu.hotedu.model.CodeType;
 import com.huotu.hotedu.model.VerificationType;
 import com.huotu.hotedu.service.*;
@@ -170,7 +170,7 @@ public class MemberController {
      */
     @RequestMapping("/pc/sendSMS")
     @ResponseBody
-    public Result sendSMS(String phone, int type, @RequestParam(required = false) Integer codeType) {
+    public Result sendSMS(String phone, int type, @RequestParam(required = false) Integer codeType) throws InterrelatedException {
         Result result = new Result();
         VerificationType verificationType = EnumHelper.getEnumType(VerificationType.class, type);
         Date date = new Date();
@@ -198,11 +198,6 @@ public class MemberController {
                 return result;
             } catch (NoSuchMethodException ex) {
                 //发送类别不受支持！
-                result.setMessage("短信发送通道不稳定，请重新尝试");
-                return result;
-            } catch (InterrelatedException ex) {
-                //第三方错误！
-                log.error("短信发送失败", ex);
                 result.setMessage("短信发送通道不稳定，请重新尝试");
                 return result;
             }
@@ -811,6 +806,11 @@ public class MemberController {
     @RequestMapping("/pc/haierSignup")
     public String haierSingup() {
         return "/mobile/hr-signup_mobile";
+    }
+
+    @RequestMapping("/pc/haierPay")
+    public String haierPay() {
+        return "/mobile/hr-pay_mobile";
     }
 
     @RequestMapping("/pc/ruiliSignup")

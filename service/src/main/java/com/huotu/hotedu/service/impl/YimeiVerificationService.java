@@ -1,14 +1,13 @@
 package com.huotu.hotedu.service.impl;
 
-import com.huotu.hotedu.common.exception.InterrelatedException;
 import com.huotu.hotedu.entity.Result;
 import com.huotu.hotedu.entity.VerificationCode;
+import com.huotu.hotedu.exception.InterrelatedException;
 import com.huotu.hotedu.service.VerificationService;
 import com.huotu.hotedu.util.SMSHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 

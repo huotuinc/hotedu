@@ -2,6 +2,7 @@ package com.huotu.hotedu.web.controller;
 
 import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.repository.LinkRepository;
+import com.huotu.hotedu.repository.NoticeRepository;
 import com.huotu.hotedu.service.ExamGuideService;
 import com.huotu.hotedu.service.MessageContentService;
 import com.huotu.hotedu.service.QaService;
@@ -35,6 +36,8 @@ public class LoginController {
     @Autowired
     LinkRepository linkRepository;
     @Autowired
+    NoticeRepository noticeRepository;
+    @Autowired
     QaService qaService;
     @Autowired
     ExamGuideService examGuideService;
@@ -53,6 +56,9 @@ public class LoginController {
     @RequestMapping("/pc/index")
     public String index(Model model) throws Exception{
         String turnPage = "pc/yun-index";
+        Notice notice = noticeRepository.findByEnabled(true);
+        notice.setPicUrl(staticResourceService.getResource(notice.getPicUrl()).toString());
+        model.addAttribute("notice",notice);
         List<Link> linkList=linkRepository.findAll();
         if(linkList.size()>0) {
             model.addAttribute("linkList", linkList);

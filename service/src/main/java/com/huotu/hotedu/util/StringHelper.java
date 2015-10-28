@@ -1,13 +1,15 @@
 package com.huotu.hotedu.util;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
-import java.util.Random;
+import java.util.*;
 
 public class StringHelper {
     public static String getIp(HttpServletRequest request) {
@@ -174,6 +176,30 @@ public class StringHelper {
         } catch (Exception ex) {
             return null;
         }
+    }
+
+    /**
+     * 微信支付签名算法sign
+     * @param characterEncoding
+     * @param parameters
+     * @return
+     */
+    public static String createSign(String characterEncoding,SortedMap<Object,Object> parameters,String key) throws UnsupportedEncodingException {
+        StringBuffer sb = new StringBuffer();
+        Set es = parameters.entrySet();//所有参与传参的参数按照accsii排序（升序）
+        Iterator it = es.iterator();
+        while(it.hasNext()) {
+            Map.Entry entry = (Map.Entry)it.next();
+            String k = (String)entry.getKey();
+            Object v = entry.getValue();
+            if(null != v && !"".equals(v)
+                    && !"sign".equals(k) && !"key".equals(k)) {
+                sb.append(k + "=" + v + "&");
+            }
+        }
+        sb.append("key=" + key);
+        String sign = DigestUtils.md5Hex(sb.toString().getBytes(characterEncoding)).toUpperCase();
+        return sign;
     }
 
 }

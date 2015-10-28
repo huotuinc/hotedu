@@ -1,8 +1,10 @@
 package com.huotu.hotedu.web.service;
 
+import com.huotu.hotedu.common.CommonEnum;
 import com.huotu.hotedu.entity.Agent;
 import com.huotu.hotedu.entity.Huotu;
 import com.huotu.hotedu.entity.Manager;
+import com.huotu.hotedu.entity.Notice;
 import com.huotu.hotedu.repository.*;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.EnterpriseService;
@@ -53,7 +55,11 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     private MemberRepository memberRepository;
     @Autowired
+    private NoticeRepository noticeRepository;
+    @Autowired
     private Environment environment;
+    @Autowired
+    StaticResourceService staticResourceService;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -80,6 +86,12 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
 
             if (environment.acceptsProfiles("test")){
 
+            }
+            if(noticeRepository.count()==0) {
+                Notice notice = new Notice();
+                notice.setType(CommonEnum.NoticeType.Course);
+                notice.setLinkUrl("/pc/loadMemberRegister");
+                noticeRepository.save(notice);
             }
             // 做一些初始化工作 比如
             /*if (examGuideRepository.count()==0){

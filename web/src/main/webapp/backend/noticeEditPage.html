@@ -1,0 +1,138 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>云商学院后台管理</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
+    <script type="text/javascript" src="js/libs/jquery-1.7.2.min.js" th:src="@{/backend/js/libs/jquery-1.7.2.min.js}"></script>
+    <script type="text/javascript" src="js/libs/modernizr.min.js"
+            th:src="@{/backend/js/libs/modernizr.min.js}"></script>
+    <!--滚动条-->
+    <script type="text/javascript" src="js/scroll/scroll_height_width.js" th:src="@{/backend/js/scroll/scroll_height_width.js}"></script>
+    <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
+    <script type="text/javascript" src="js/scroll/jquery.mousewheel.js"
+            th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
+    <script type="text/javascript" src="js/scroll/scroll_startstop.events.jquery.js"
+            th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
+    <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
+            th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
+</head>
+<body>
+<div class="topbar-wrap white">
+    <div class="topbar-inner clearfix">
+        <div class="topbar-logo-wrap clearfix">
+            <h1 class="topbar-logo none"><a href="index.html" class="navbar-brand">云商学院后台管理</a></h1>
+            <ul class="navbar-list clearfix">
+                <li><a href="index.html" th:href="@{/backend/index}">首页</a></li>
+                <li><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a></li>
+                <li><a href="certificateapplications.html" th:href="@{/backend/searchMembers}">代理商管理</a></li>
+                <li><a class="on" href="notice.html" th:href="@{/backend/notices}">公告管理</a></li>
+            </ul>
+        </div>
+        <div class="top-info-wrap">
+            <ul class="top-info-list clearfix">
+                <li><span th:text="${#authentication.name}"></span></li>
+                <li><a href="changethepassword.html" th:href="@{/backend/loadChangeThePassword}">修改密码</a></li>
+                <li><a href="#" th:href="@{/logout}">退出</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container clearfix">
+    <div class="sidebar-wrap">
+        <div class="sidebar-title">
+            <img src="images/htlogo.png" th:src="@{/backend/images/htlogo.png}"
+                 style=" width:160px;margin-left: -10px;"/>
+        </div>
+        <div class="sidebar-content">
+            <div class="jp-container">
+                <ul class="sidebar-list">
+                    <li>
+                        <p style="height:30px; line-height:30px; margin-left: 20px;">公告管理</p>
+                        <ul class="sub-menu" style="display:block;">
+                            <li><a href="certificateapplications.html"
+                                   th:href="@{/backend/notices}">公告列表</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--/sidebar-->
+    <div class="main-wrap">
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="wanted.html" th:href="@{/backend/notices}">公告管理</a><span
+                    class="crumb-step">&gt;</span><a href="video.html" th:href="@{/backend/notices}"><span class="crumb-name">公告列表</span></a><span
+                    class="crumb-step">&gt;</span><span class="crumb-name">编辑公告</span></div>
+        </div>
+        <div class="jp-container2">
+            <div class="result-wrap">
+                <form id="editorForm" action="#" th:action="@{/backend/notices/{noticeId}(noticeId=${notice.id})}" method="post" class="myform" name="myform" enctype="multipart/form-data">
+                    <div class="config-items">
+                        <div class="result-content">
+                            <table width="100%" class="insert-tab">
+                                <tbody>
+                                <tr>
+                                    <th><i class="require-red">*</i>公告图片：</th>
+                                    <td>
+                                        <img src="images/logo.png" th:src="${notice.picUrl}" style="width: 100px; height: auto;"/><input name="pic" type="file"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th><i class="require-red">*</i>链接地址：</th>
+                                    <td><input title="" th:value="${notice.linkUrl}" maxlength="200" type="text" id="playUrl" value="" size="70" name="linkUrl" class="common-text"/></td>
+                                </tr>
+
+                                <tr>
+                                    <th></th>
+                                    <td>
+                                        <input type="submit" value="提交" class="btn btn-primary btn6 mr10"/>
+                                        <input type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--/main-->
+</div>
+</body>
+<script type="text/javascript">
+    //上传图片
+    function ajaxTaskFileUpload(obj) {
+        //设置加载图标的显示
+//            $('#loading').show();
+
+        $.ajaxFileUpload
+        ({
+            url: 'file/uploadTaskImage',
+            secureuri: false,
+            fileElementId: 'btnImgUrlFile',
+            dataType: 'text',
+            data: "",
+            success: function (response, status) {
+//                    $('#loading').hide();
+                if (response.split("|")[0] == "1") {
+                    window.parent.$("#showtaskpicurl").attr("src", response.split("|")[1].split("^")[0]);
+                    window.parent.$("#bigPictureUrl").val(response.split("|")[1].split("^")[1]);
+                    window.parent.$("#smallPictureUrl").val(response.split("|")[1].split("^")[2]);
+                } else {
+                    alert(response.split("|")[1]);
+                }
+            },
+            error: function (data, status, e) {
+//                    $('#loading').hide();
+                //这里处理的是网络异常，返回参数解析异常，DOM操作异常
+                alert("上传发生异常");
+            }
+        })
+        return false;
+    }
+</script>
+</html>

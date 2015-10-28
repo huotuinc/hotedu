@@ -1,13 +1,12 @@
 package com.huotu.hotedu.service;
 
-import com.huotu.hotedu.common.exception.InterrelatedException;
 import com.huotu.hotedu.entity.Result;
+import com.huotu.hotedu.exception.InterrelatedException;
 import com.huotu.hotedu.model.CodeType;
 import com.huotu.hotedu.model.VerificationType;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-import java.util.Formatter;
 
 /**
  * 通用验证码服务
@@ -67,7 +66,7 @@ public interface VerificationService {
      */
     @Transactional
     void sendCode(String mobile, VerificationProject project, String code, Date currentDate, VerificationType type, CodeType sentType)
-            throws IllegalStateException, IllegalArgumentException, NoSuchMethodException, InterrelatedException;
+            throws IllegalStateException, IllegalArgumentException, NoSuchMethodException, InterrelatedException, InterrelatedException;
 
     /**
      * 验证该验证码
