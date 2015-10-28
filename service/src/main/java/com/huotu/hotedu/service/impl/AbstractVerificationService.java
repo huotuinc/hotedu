@@ -1,6 +1,6 @@
 package com.huotu.hotedu.service.impl;
 
-import com.huotu.hotedu.common.exception.InterrelatedException;
+import com.huotu.hotedu.exception.InterrelatedException;
 import com.huotu.hotedu.entity.Result;
 import com.huotu.hotedu.entity.VerificationCode;
 import com.huotu.hotedu.model.CodeType;

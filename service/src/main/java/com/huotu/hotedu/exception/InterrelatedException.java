@@ -1,4 +1,4 @@
-package com.huotu.hotedu.common.exception;
+package com.huotu.hotedu.exception;
 
 /**
  * 第三方错误

@@ -29,41 +29,44 @@ public interface StaticResourceService {
     /**
      * 导师的头像
      */
-    public  String TUTOR_ICON="image/tutor/";
+    String TUTOR_ICON="image/tutor/";
     /**
      * 咨询动态的图片
      */
-    public  String MESSAGE_ICON="image/message/";
+    String MESSAGE_ICON="image/message/";
     /**
      * 会员的头像
      */
-    public  String MEMBER_ICON="image/member/";
+    String MEMBER_ICON="image/member/";
     /**
      * 证书所属人的照片
      */
-    public  String CERTIFICATE_ICON="image/certificate/";
+    String CERTIFICATE_ICON="image/certificate/";
     /**
      * 代理商的照片
      */
-    public  String AGENT_ICON="image/agent/";
+    String AGENT_ICON="image/agent/";
     /**
      * 考试指南图片uri
      */
-    public String EXAMGUIDE_ICON = "image/examGuide/";
+    String EXAMGUIDE_ICON = "image/examGuide/";
     /**
      * 常见问题图片uri
      */
-    public String QA_ICON = "image/qa/";
+    String QA_ICON = "image/qa/";
 
     /**
      * 视频缩略图uri
      */
-    public String VIDEO_ICON="image/video/";
+    String VIDEO_ICON="image/video/";
 
     /**
      * 富文本中的图片
      */
-    public String RICHTEXT_IMG  ="richText/attached/";
+    String RICHTEXT_IMG  ="richText/attached/";
+
+    String NOTICE_IMG = "image/notice/";
+
 
     /**
      * 上传资源
