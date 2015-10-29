@@ -101,9 +101,9 @@
                                                                      th:href="@{/backend/notices/{noticeId}(noticeId=${notice.id})}">修改</a>
                                     <br/>
                                     <a class="link-update" th:attr="noticeId=${notice.id}" th:case="false"
-                                       onclick="changeNoticeStatus(this,'1')">开启</a>
+                                       onclick="changeNoticeStatus(this,true)">开启</a>
                                     <a class="link-update" th:attr="noticeId=${notice.id}" th:case="true"
-                                       onclick="changeNoticeStatus(this,'0')">关闭</a>
+                                       onclick="changeNoticeStatus(this,false)">关闭</a>
                                 </td>
 
                             </tr>
@@ -119,14 +119,14 @@
 </div>
 <script>
     function changeNoticeStatus(obj, status) {
-        var noticeId = $(obj).attr("noticeId");
+        var noticeId = parseInt($(obj).attr("noticeId"));
         var enabled = status;
         $.ajax({
             type: "post",
             contentType: "application/json; charset=utf-8",
             url: "changeNoticeStatus",
-            data: '{"noticeId":'+noticeId+',"enabled":'+enabled+'}',
-            processData:false,
+            data: JSON.stringify(GetJsonData()),
+//            processData:false,
             dataType: "json",
             success: function (result) {
                 if (result.status == 1) {
@@ -141,6 +141,13 @@
             }
 
         });
+        function GetJsonData() {
+            var json = {
+                "noticeId": noticeId,
+                "enabled": enabled
+            };
+            return json;
+        }
 
     }
 </script>

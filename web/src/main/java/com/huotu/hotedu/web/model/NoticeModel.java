@@ -5,23 +5,24 @@ package com.huotu.hotedu.web.model;
  */
 public class NoticeModel {
 
-    private String noticeId;
+    private long noticeId;
 
-    private String enabled;
+    private boolean enabled;
 
-    public String getNoticeId() {
+    public long getNoticeId() {
         return noticeId;
     }
 
-    public void setNoticeId(String noticeId) {
+    public void setNoticeId(long noticeId) {
         this.noticeId = noticeId;
     }
 
-    public String getEnabled() {
+
+    public boolean isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(String enabled) {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 }

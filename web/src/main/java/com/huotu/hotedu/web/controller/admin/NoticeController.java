@@ -93,8 +93,8 @@ public class NoticeController {
     @ResponseBody
     @Transactional
     public Result changeNoticeStatus(@RequestBody NoticeModel noticeModel) {
-        Notice notice = noticeRepository.findOne(Long.parseLong(noticeModel.getNoticeId()));
-        notice.setEnabled("1".equals(noticeModel.getEnabled())?true:false);
+        Notice notice = noticeRepository.findOne(noticeModel.getNoticeId());
+        notice.setEnabled(noticeModel.isEnabled());
         noticeRepository.save(notice);
         Result result = new Result();
         result.setStatus(1);
