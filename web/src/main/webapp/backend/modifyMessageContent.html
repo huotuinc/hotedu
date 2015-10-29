@@ -154,7 +154,7 @@
                             </tr>
                             <tr>
                                 <th></th>
-                                <td><input type="button" value="修改" class="btn btn-primary btn6 mr10" onclick="check_save(this)"/><input
+                                <td><input type="button" value="修改" class="btn btn-primary btn6 mr10" onclick="save(this)"/><input
                                         type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
                             </tr>
                             </tbody>
@@ -170,5 +170,13 @@
 <script charset="utf-8" src="richText/kindeditor-min.js" th:src="@{/backend/richText/kindeditor-min.js}"></script>
 <script charset="utf-8" src="richText/lang/zh_CN.js" th:src="@{/backend/richText/lang/zh_CN.js}"></script>
 <script charset="utf-8" src="richText/init.js" th:src="@{/backend/richText/init.js}"></script>
+<script>
+    function save(obj) {
+        $.MsgBox.Confirm("友情提示", "即将保存内容，确定继续吗？", function () {
+            editor.sync();
+            $("#editorForm").submit();
+        });
+    }
+</script>
 </body>
 </html>
