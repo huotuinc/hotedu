@@ -1,6 +1,5 @@
 package com.huotu.hotedu.web.controller;
 
-import com.huotu.hotedu.entity.ClassTeam;
 import com.huotu.hotedu.entity.Agent;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.test.TestWebConfig;
@@ -56,7 +55,7 @@ public class AgentControllerTest extends SpringWebTest{
      * @throws Exception
      */
     @Test
-    @Rollback
+        @Rollback
     public void addSaveNewClassTeamTest() throws Exception {
         ArrayList<Long> arrayList = new ArrayList<>();
         arrayList.add((long)1);
