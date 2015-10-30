@@ -1,0 +1,152 @@
+.titfour {
+color: #484356;
+  font-size: 14px;
+  margin-bottom:30px;
+  text-align: center;
+  margin-top:30px;
+}
+.ulfour {
+	width: 100%;
+	margin: 0 auto;
+}
+.liblue b {
+	font-size: 16px;
+}
+.lipink b {
+	font-size: 16px;
+}
+.ulfour .yswhite {
+	background-color: #fff;
+	color: #333;
+	text-align: center;
+	line-height:50px;
+	font-size: 12px;
+	width: 48%;
+	float: left;
+	margin: 1%;
+	margin-bottom: 3px;
+}
+.ysoneschool img{
+	width:100%;
+}
+.titfour b{
+	  background-color: #ffae00;
+  color: #fff;
+  padding: 7px 23px;
+	}
+.section7 {
+	background: url(../images/up.png) no-repeat;
+	background-size: 100%;
+}	
+.boxupone {
+	margin: 0 auto;
+	width: 85%;
+	position: relative;
+}
+.boxupone input {
+	padding: 10px;
+	width: 93%;
+	margin-bottom: 10px;
+	border: solid 1px #fff;
+}	
+.phoneErrBgCss {
+	background-color: rgba(0, 0, 0, 0.4);
+	padding: 5px 10px;
+	color: #fff;
+	text-align: center;
+	margin: -38px auto 9px auto;
+	border-radius: 4px;
+}	
+.selectys {
+	margin-top: 0px;
+	outline: none;
+	border: 1px solid #BBBBBB;
+	border-radius: 4px;
+	position: relative;
+	margin-bottom: 10px;
+}
+.io{ position: relative;}
+.io .phoneRig{ position: absolute;right:10px;top:10px; background-color: #fff}
+.io .phoneRig img{ width:20px; }
+.boxupone .selectys.io input
+{
+	padding: 0px;
+	margin-bottom: 0px;
+	width: 100%;
+	border: 0px solid #FFF; background-color: #fff;
+	border-radius: 4px;height: 40px; line-height: 40px;
+	text-indent: 12px;
+
+}	
+.upbutton {
+	background-color: #fff;
+	border: 1px solid #fff;
+	text-align: center;
+	padding: 10px 0px;
+	width: 100%;
+	color: #A9A9A9;
+	margin-bottom: 10px;
+}
+.upbuttons {
+	background-color: #fff;
+	border: 1px solid #fff;
+	text-align: center;
+	width: 100%;
+	padding: 4px 0px;
+	color: #A9A9A9;
+	margin-bottom: 10px;
+}
+.upbuttons img {
+	width: 30px;
+	height: 30px;
+	padding: 2px;
+}
+.up-button {
+	background-color: #2dbeff;
+	border: 1px solid #2dbeff;
+	text-align: center;
+	padding: 10px 0px;
+	width: 100%;
+	color: #fff;
+	margin-bottom: 10px;
+}
+.up-button:hover {
+	background-color: #00a0e8;
+	border: 1px solid #00a0e8;
+	text-align: center;
+	padding: 10px 0px;
+	width: 100%;
+	color: #fff;
+	margin-bottom: 10px;
+}	
+.textys {
+	height: 40px;
+	-webkit-appearance: none;
+	appearance: none;
+	border: none;
+	font-size: 16px;
+	padding: 0px 10px;
+	display: block;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	background-color: #FFFFFF;
+	color: #A9A9A9;
+	border-radius: 4px;
+}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
