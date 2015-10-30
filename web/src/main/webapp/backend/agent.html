@@ -163,7 +163,7 @@
                         </tr>
 
                     </table>
-                    <div class="list-page" th:if="${totalPages>0}"  >
+                    <div class="list-page" th:if="${totalPages>0}">
                         <a href="#" th:if="${pageNo}>0" th:href="@{/backend/searchExamGuide(pageNo=${pageNo}-1,keywords=${keywords},id=${agent.id})}">上一页</a>
                         <a href="#" th:if="${totalPages}-1>${pageNo}" th:href="@{/backend/searchExamGuide(pageNo=${pageNo}+1,keywords=${keywords},id=${agent.id})}">下一页</a>
                         <span th:text="${totalRecords}">2</span> 条 <span th:text="${pageNo}+1">1</span>/<span th:text="${totalPages}">1</span> 页

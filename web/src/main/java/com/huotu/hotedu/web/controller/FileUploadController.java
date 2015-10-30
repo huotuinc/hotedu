@@ -1,27 +1,21 @@
 package com.huotu.hotedu.web.controller;
 
-import com.huotu.hotedu.entity.Certificate;
-import com.huotu.hotedu.entity.Login;
-import com.huotu.hotedu.entity.Member;
 import com.huotu.hotedu.entity.Result;
 import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.util.Map;
 import java.util.UUID;
@@ -44,7 +38,6 @@ public class FileUploadController {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
         MultipartFile file=fileMap.get("imgFile");
-        response.setHeader("X-frame-Options","SAMEORIGIN");
         if(ImageIO.read(file.getInputStream())==null||file.getSize()==0){
             result.setError(1);
             result.setMessage("图片格式错误！");
