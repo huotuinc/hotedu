@@ -57,7 +57,9 @@ public class LoginController {
     public String index(Model model) throws Exception{
         String turnPage = "pc/yun-index";
         Notice notice = noticeRepository.findByEnabled(true);
-        notice.setPicUrl(staticResourceService.getResource(notice.getPicUrl()).toString());
+        if(notice!=null) {
+            notice.setPicUrl(staticResourceService.getResource(notice.getPicUrl()).toString());
+        }
         model.addAttribute("notice",notice);
         List<Link> linkList=linkRepository.findAll();
         if(linkList.size()>0) {

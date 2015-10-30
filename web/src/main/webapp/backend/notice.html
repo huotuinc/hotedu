@@ -5,14 +5,16 @@
     <title>云商学院后台管理</title>
     <link rel="stylesheet" type="text/css" href="css/common.css" th:href="@{/backend/css/common.css}"/>
     <link rel="stylesheet" type="text/css" href="css/main.css" th:href="@{/backend/css/main.css}"/>
-    <script type="text/javascript" src="js/libs/jquery-1.7.2.min.js" th:src="@{/backend/js/libs/jquery-1.7.2.min.js}"></script>
+    <script type="text/javascript" src="js/libs/jquery-1.7.2.min.js"
+            th:src="@{/backend/js/libs/jquery-1.7.2.min.js}"></script>
     <script type="text/javascript" src="js/libs/modernizr.min.js"
             th:src="@{/backend/js/libs/modernizr.min.js}"></script>
     <!--警告框控件-->
     <link rel="stylesheet" type="text/css" href="css/jquery_confirm.css" th:href="@{/backend/css/jquery_confirm.css}"/>
     <script type="text/javascript" src="js/confirm.js" th:src="@{/backend/js/confirm.js}"></script>
     <!--滚动条-->
-    <script type="text/javascript" src="js/scroll/scroll_height_width.js" th:src="@{/backend/js/scroll/scroll_height_width.js}"></script>
+    <script type="text/javascript" src="js/scroll/scroll_height_width.js"
+            th:src="@{/backend/js/scroll/scroll_height_width.js}"></script>
     <link rel="stylesheet" type="text/css" href="css/jscrollpane.css" th:href="@{/backend/css/jscrollpane.css}"/>
     <script type="text/javascript" src="js/scroll/jquery.mousewheel.js"
             th:src="@{/backend/js/scroll/jquery.mousewheel.js}"></script>
@@ -65,7 +67,8 @@
     <!--/sidebar-->
     <div class="main-wrap">
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="notice.html" th:href="@{/backend/notices}">公告管理</a><span
+            <div class="crumb-list"><i class="icon-font"></i><a href="notice.html"
+                                                                 th:href="@{/backend/notices}">公告管理</a><span
                     class="crumb-step">&gt;</span><span class="crumb-name">公告列表</span>
             </div>
         </div>
@@ -80,12 +83,12 @@
                     <div class="result-content">
                         <table class="result-tab" width="100%">
                             <thead>
-                                <th style="width:80px">序号</th>
-                                <th style="width:80px;">公告类别</th>
-                                <th style="width:80px">公告图片</th>
-                                <th style="width:100px">状态</th>
-                                <th style="width:80px">图片链接</th>
-                                <th style="width:80px">操作</th>
+                            <th style="width:80px">序号</th>
+                            <th style="width:80px;">公告类别</th>
+                            <th style="width:80px">公告图片</th>
+                            <th style="width:100px">状态</th>
+                            <th style="width:80px">图片链接</th>
+                            <th style="width:80px">操作</th>
                             </thead>
                             <tbody th:remove="all-but-first">
                             <tr th:each="notice:${noticeList}">
@@ -94,10 +97,13 @@
                                 <td th:text="${notice.picUrl}">开启</td>
                                 <td th:text="${notice.enabled}==true?'开启':'关闭'">hotedu</td>
                                 <td>/pc/loadMemberRegister</td>
-                                <td th:switch="${notice.enabled}"><a class="link-update" th:href="@{/backend/notices/{noticeId}(noticeId=${notice.id})}">修改</a>
+                                <td th:switch="${notice.enabled}"><a class="link-update"
+                                                                     th:href="@{/backend/notices/{noticeId}(noticeId=${notice.id})}">修改</a>
                                     <br/>
-                                    <a class="link-update" th:case="false">开启</a>
-                                    <a class="link-update" th:case="true" onclick="changeNoticeStatus()">关闭</a>
+                                    <a class="link-update" th:attr="noticeId=${notice.id}" th:case="false"
+                                       onclick="changeNoticeStatus(this,true)">开启</a>
+                                    <a class="link-update" th:attr="noticeId=${notice.id}" th:case="true"
+                                       onclick="changeNoticeStatus(this,false)">关闭</a>
                                 </td>
 
                             </tr>
@@ -111,5 +117,39 @@
     </div>
     <!--/main-->
 </div>
+<script>
+    function changeNoticeStatus(obj, status) {
+        var noticeId = parseInt($(obj).attr("noticeId"));
+        var enabled = status;
+        $.ajax({
+            type: "post",
+            contentType: "application/json; charset=utf-8",
+            url: "changeNoticeStatus",
+            data: JSON.stringify(GetJsonData()),
+//            processData:false,
+            dataType: "json",
+            success: function (result) {
+                if (result.status == 1) {
+                    window.location.reload();
+                } else if (result.status == 0) {
+                    $.MsgBox.Alert("修改失败", result.message);
+                }
+            },
+            error: function () {
+                $.MsgBox.Alert("系统异常", "请求失败");
+                return false;
+            }
+
+        });
+        function GetJsonData() {
+            var json = {
+                "noticeId": noticeId,
+                "enabled": enabled
+            };
+            return json;
+        }
+
+    }
+</script>
 </body>
 </html>

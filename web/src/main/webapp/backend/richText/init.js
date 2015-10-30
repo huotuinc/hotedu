@@ -1,8 +1,8 @@
 KindEditor.ready(function (K) {
     window.editor = K.create('#content', {
         resizeType: '0',
-        uploadJson: 'fileUploadImage'
-        , items: [
+        uploadJson: 'fileUploadImage',
+        items: [
             'source', 'undo', 'redo', '|', 'preview', 'cut', 'copy', 'paste',
             'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
             'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
