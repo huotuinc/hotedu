@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
-    <title th:text="${messageContent.title}">动态资讯详情</title>
+    <title >动态资讯详情</title>
     <link rel="stylesheet" type="text/css" href="css/common.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" />
@@ -50,17 +50,19 @@
                 <!-- 活动列表 -->
                 <div class="upJyBox">
                   <div class="crumb-wrapf">
-                    <div class="crumb-list"><a href="yun-index.html" th:href="@{/pc/index}">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">常见问题</span></div>
+                    <div class="crumb-list"><a href="yun-index.html" th:href="@{/pc/index}">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">动态资讯列表</span></div>
                     </div>
                     <ul>
+                        <tr th:each="g:${messageContent}">
                         <li>
-                        <b class="ysxqbt"><span th:text="${messageContent.title}">我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题</span></b>
+                        <b class="ysxqbt"><span th:text="${g.title}">我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题</span></b>
                         <p style="clear:both;"></p>
-                            <div class="mt5 c999"> <span class="fLeft"><a href="#" target="_blank">火图科技</a><span class="ml10">21小时前发起</span></span></div></li>
-                        <li><img src="images/8ca155a87b4e000001c3105cfca7.jpg" width="100%" th:src="${messageContent.pictureUri}"/></li>
-                        <li style="line-height:22px; font-size:14px;">
-                        <span th:text="${messageContent.content}">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</span></li>
-                     </ul>
+                            <img src="images/8ca155a87b4e000001c3105cfca7.jpg" width="100%" th:src="${g.pictureUri}"/>
+                            <div class="mt5 c999"> <span class="fLeft"  th:text="${g.synopsis}"><a href="#" target="_blank">火图科技</a></span></div>
+                            <div class="mt5 c999"> <span class="fLeft" ><a href="#" target="_blank">火图科技</a><span class="ml10" th:text="${#calendars.format(g.lastUploadDate,'yyyy-MM-dd HH:mm:ss')}"></span></span></div></li>
+
+
+                      </tr> </ul>
                 </div>
             </div>
         </div>

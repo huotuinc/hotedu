@@ -74,8 +74,43 @@ public class MessageContentController {
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("keywords", keywords);
         model.addAttribute("totalRecords", totalRecords);
+
+//        MessageContent messageContent = messageContentService.findByTitle("微商");
+
+        return turnPage;
+
+    }
+
+
+    @RequestMapping("/pc/messagelist")
+    public String messagelist(@RequestParam(required = false)Integer pageNo,
+                              @RequestParam(required = false) String keywords, Model model) {
+        String turnPage = "pc/yun-xqzixun";
+
+        if(pageNo==null||pageNo<0){
+            pageNo=0;
+        }
+        Page<MessageContent> pages = messageContentService.searchMessageContent(pageNo, PAGE_SIZE, keywords);
+        long totalRecords = pages.getTotalElements();
+        int numEl =  pages.getNumberOfElements();
+        int pageSize = pages.getSize();
+        if(numEl==0) {
+            pageNo=pages.getTotalPages()-1;
+            if(pageNo<0) {
+                pageNo = 0;
+            }
+            pages = messageContentService.searchMessageContent(pageNo, PAGE_SIZE, keywords);
+            totalRecords = pages.getTotalElements();
+        }
+        model.addAttribute("messageContent", pages);
+        model.addAttribute("totalPages",pages.getTotalPages());
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("keywords", keywords);
+        model.addAttribute("totalRecords", totalRecords);
+
         return turnPage;
     }
+
 
 
     /**

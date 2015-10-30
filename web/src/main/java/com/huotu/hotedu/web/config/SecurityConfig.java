@@ -94,6 +94,7 @@ public class SecurityConfig {
                             "/pc/loadRecruitment",
                             "/pc/logoutSuccess",
                             "/ueditor/**",
+                            "/pc/messagelist",
                             "/",
                             "/pc/haierSignup",
                             "/pc/ruiliSignup",
