@@ -31,9 +31,9 @@ public class FileUploadController {
 
     static BASE64Decoder decoder = new sun.misc.BASE64Decoder();
 
-    @RequestMapping(value="/backend/fileUploadImage",method = RequestMethod.POST)
+        @RequestMapping(value="/backend/fileUploadImage",method = RequestMethod.POST,produces = "application/json")
     @ResponseBody
-    public Result fileUploadUeImage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Result fileUploadUeImage(HttpServletRequest request) throws Exception {
         Result result=new Result();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();

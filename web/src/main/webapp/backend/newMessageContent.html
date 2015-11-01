@@ -20,15 +20,9 @@
             th:src="@{/backend/js/scroll/scroll_startstop.events.jquery.js}"></script>
     <script type="text/javascript" src="js/scroll/jquery.jscrollpane.min.js"
             th:src="@{/backend/js/scroll/jquery.jscrollpane.min.js}"></script>
-
-    <script type="text/javascript">
-        $(function(){
-           $(":input[name='smallimg']").change(function(){
-
-           });
-        });
-    </script>
-
+    <script charset="utf-8" src="richText/kindeditor-min.js" th:src="@{/backend/richText/kindeditor-min.js}"></script>
+    <script charset="utf-8" src="richText/lang/zh_CN.js" th:src="@{/backend/richText/lang/zh_CN.js}"></script>
+    <script charset="utf-8" src="richText/init.js" th:src="@{/backend/richText/init.js}"></script>
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -161,7 +155,7 @@
                             </tr>
                             <tr>
                                 <th></th>
-                                <td><input type="button" value="保存" class="btn btn-primary btn6 mr10" onclick="save(this)"/>
+                                <td><input type="submit" value="保存" class="btn btn-primary btn6 mr10" />
                                     <input type="button" value="返回" onclick="history.go(-1)" class="btn btn6"/></td>
                             </tr>
                             </tbody>
@@ -175,9 +169,7 @@
     </div>
     <!--/main-->
 </div>
-<script charset="utf-8" src="richText/kindeditor-min.js" th:src="@{/backend/richText/kindeditor-min.js}"></script>
-<script charset="utf-8" src="richText/lang/zh_CN.js" th:src="@{/backend/richText/lang/zh_CN.js}"></script>
-<script charset="utf-8" src="richText/init.js" th:src="@{/backend/richText/init.js}"></script>
+
 <script>
     function save(obj) {
         $.MsgBox.Confirm("友情提示", "即将保存内容，确定继续吗？", function () {
