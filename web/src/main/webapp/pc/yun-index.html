@@ -274,18 +274,18 @@
                             src="images/play.png" style="width: 18px; height: 18px;"/></span></p>
 
                     <p class="titen"><span>Dynamic information</span></p>
-                    <img class="imgleft" src="images/logo_huoban.jpg" style="width:126px; height: 108px;"/>
-                    <a href="javascript:void(0)"><p class="titfont" >
+                    <img class="imgleft" src="images/logo_huoban.jpg"   th:src="${messageContentList[0].pictureUri}"  style="width:126px; height: 108px;"/>
+                    <a href="javascript:void(0)"><p class="titfont" th:text="${messageContentList[0].title}" >
                         “微商”悄然兴起</p></a>
                     <a href="javascript:void(0)">
-                        <p class="titlb">
+                        <p class="titlb" th:text="${messageContentList[0].synopsis}" >
                             什么是微商？至今没有权威定义。在朋友圈刷屏的卖家、品牌的微信代理商，以及自媒体发展起来的微信卖家，都被视为微商。
                         </p>
                     </a>
-                    <p class="titxian"> <a href="" th:href="@{/pc/messagelist}">查看更多</a></p>
+                    <p class="titxian"> <a href=""></a></p>
                 </div>
                 <!--暂时注释掉，使用静态页面-->
-                <!--  <div>
+                  <div>
                       <a th:if="${messageContentList.size()}>=2" href="javascript:void(0)"><p class="tittit"><span
                               class="titfive" th:text="${messageContentList[1].title}">5月杭州微商大会进行中</span>
                           <span class="tittime"
@@ -299,9 +299,9 @@
                                 th:text="${#calendars.format(messageContentList[2].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
                       </p></a>
                       <p style="clear:both"></p>
-                  </div>-->
-                <!--<p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span>
-                </p>-->
+                  </div>
+                <p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime" ><a href="" th:href="@{/pc/messagelist}">查看更多＞</a></span>
+                </p>
             </li>
             <!--最新公告-->
             <li style=" float:left;">
