@@ -13,7 +13,6 @@ import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URI;
@@ -31,7 +30,7 @@ public class FileUploadController {
 
     static BASE64Decoder decoder = new sun.misc.BASE64Decoder();
 
-        @RequestMapping(value="/backend/fileUploadImage",method = RequestMethod.POST,produces = "application/json")
+        @RequestMapping(value="/backend/fileUploadImage",method = RequestMethod.POST)
     @ResponseBody
     public Result fileUploadUeImage(HttpServletRequest request) throws Exception {
         Result result=new Result();

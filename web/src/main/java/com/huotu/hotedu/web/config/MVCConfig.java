@@ -8,8 +8,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
-//import org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver;
-//import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.MediaType;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.*;
@@ -18,9 +19,13 @@ import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+//import org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver;
+//import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 
 /**
  * Created by luffy on 2015/6/10.
@@ -70,7 +75,15 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
 
     }
 
-//    @Override
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON));
+        converters.add(converter);
+    }
+
+
+    //    @Override
 //    public void addResourceHandlers(ResourceHandlerRegistry registry) {
 //        super.addResourceHandlers(registry);
 //        registry.addResourceHandler("/js/**").addResourceLocations("/backend/js/");
