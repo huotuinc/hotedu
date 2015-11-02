@@ -51,28 +51,28 @@
             <!-- 活动列表 -->
             <div class="upJyBox">
                 <div class="crumb-wrapf">
-                    <div class="crumb-list"><a href="yun-index.html" th:href="@{/pc/index}">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">动态资讯详情</span></div>
+                    <div class="crumb-list"><a href="yun-index.html" th:href="@{/pc/index}">首页</a><span class="crumb-step">&gt;</span><a href="yun-index.html" th:href="@{/pc/messagelist}">资讯列表</a><span class="crumb-step">&gt;</span><span class="crumb-name">动态资讯详情</span></div>
                 </div>
                 <ul>
                     <li>
-                        <b class="ysxqbt"><span th:text="${messageContent.title}">我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题</span></b>
+                        <b class="ysxqbt"><span th:utext="${messageContent.title}">我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题</span></b>
                         <p style="clear:both;"></p>
                         </li>
-                    <li><img src="images/8ca155a87b4e000001c3105cfca7.jpg" width="100%" th:src="${messageContent.pictureUri}"/></li>
+                    <!--  <li><img src="images/8ca155a87b4e000001c3105cfca7.jpg" width="100%" th:src="${messageContent.pictureUri}"/></li>-->
                     <li style="line-height:22px; font-size:14px;">
-                        <span th:text="${messageContent.synopsis}">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</span></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <p style="clear:both"></p>
-    <p style=" height:60px"></p>
-    <div>
-        <div th:include="pc/loginPopup::footerDiv" class="footer">
-            <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
-            <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
-        </div>
-        <!--登录弹窗-->
+                          <span th:utext="${messageContent.content}">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</span></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <p style="clear:both"></p>
+      <p style=" height:60px"></p>
+      <div>
+          <div th:include="pc/loginPopup::footerDiv" class="footer">
+              <p>Copyright&copy;2013-2015. 杭州火图科技有限公司,浙ICP备13027761号-4</p>
+              <p>客服电话：0571-86870107 &nbsp;地址：杭州市滨江区智汇领地科技园A幢803室（信诚路和江南大道交叉口）</p>
+          </div>
+          <!--登录弹窗-->
         <div th:replace="pc/loginPopup::loginPopupDiv" id="asaimsg" class="AsaiDivShow" style="display: none"
              th:style="${errInfo}==null?'display: none':'display: block'">
             <P align="right" style="margin:0px; padding:0px;"><a href="javascript:void(0)"

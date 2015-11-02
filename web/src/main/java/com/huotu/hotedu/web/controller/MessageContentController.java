@@ -81,6 +81,10 @@ public class MessageContentController {
 
     }
 
+    /**
+     * 展示咨询动态列表
+     * @return      pc/yun-listzixun.html
+     */
 
     @RequestMapping("/pc/messagelist")
     public String messagelist(@RequestParam(required = false)Integer pageNo,
@@ -92,7 +96,9 @@ public class MessageContentController {
         Page<MessageContent> pages = messageContentService.searchMessageContent(pageNo, PAGE_SIZE, keywords);
         for(MessageContent messageContent:pages) {
             messageContent.setPictureUri(staticResourceService.getResource(messageContent.getPictureUri()).toString());
+           // messageContent.setContent(staticResourceService.getResource(messageContent.getContent()).toString());
         }
+
         long totalRecords = pages.getTotalElements();
         int numEl =  pages.getNumberOfElements();
         int pageSize = pages.getSize();
@@ -262,6 +268,7 @@ public class MessageContentController {
         String turnPage="/pc/yun-xqzixun";
         MessageContent messageContent = messageContentService.findOneById(id);
         messageContent.setPictureUri(staticResourceService.getResource(messageContent.getPictureUri()).toURL().toString());
+
         model.addAttribute("messageContent",messageContent);
         model.addAttribute("flag","yun-index.html");  //此属性用来给前台确定当前是哪个页面
         return turnPage;

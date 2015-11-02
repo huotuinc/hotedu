@@ -54,13 +54,13 @@
                 </div>
                 <ul th:remove="all-but-first">
                     <li th:each="g:${messageContent}">
-                        <div><a class="fLeft mr10" target="_blank" href="" th:href="@{/pc/loadDetailMessageContent(id=${g.id})}">
+                        <div><a class="fLeft mr10"  href="" th:href="@{/pc/loadDetailMessageContent(id=${g.id})}">
                             <img style="width: 250px; height: 188px;" th:style="${g.top} ? 'width: 250px; height: 188px;' : 'width: 120px; height: 90px;'" th:src="${g.pictureUri}" src="http://img.zcool.cn/community/035f43555a8ad516ac72520ee625de4.jpg@250w_188h_1c_1e" /> </a></div>
                         <div th:class="${g.top} ? 'upJyBoxCon' : 'upJyBoxConi' " class="upJyBoxCon">
-                            <div class="ujTitle"> <b><a target="_blank" href="yun-xqkaoshi.html" th:href="@{/pc/loadDetailMessageContent(id=${g.id})}"><span th:text="${g.title}"></span></a></b> <span class="hotSpan lv2"></span> </div>
+                            <div class="ujTitle"> <b><a  href="" th:href="@{/pc/loadDetailMessageContent(id=${g.id})}"><span th:text="${g.title}"></span></a></b> <span class="hotSpan lv2"></span> </div>
                             <div class="mt5" th:style="${g.top} ? 'height: 134px;' : 'height: 69px;'" style="height: 134px;">
 
-                                <p style="height: 63px;" class="c999 mt5 ofHidden"><span th:text="${g.content}"></span></p>
+                                <p style="height: 63px;" class="c999 mt5 ofHidden"><span th:text="${g.synopsis}"></span></p>
                             </div>
                             <div class="mt5 c999"> <span class="fLeft"><a href="#" target="_blank">火图科技</a>
                                     <span class="ml10" th:text="${#calendars.format(g.lastUploadDate,'yyyy-MM-dd/HH:mm:ss')} + '发起'"></span>
