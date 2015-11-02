@@ -1,7 +1,7 @@
 KindEditor.ready(function (K) {
     window.editor = K.create('#content', {
         resizeType: '0',
-        uploadJson: 'fileUploadImage'
+        uploadJson: 'kindeditorUpload'
         , afterCreate : function() {
             //获取富文本框body
             var $body = $('.ke-edit-iframe').contents().find('body')[0];

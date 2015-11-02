@@ -65,6 +65,7 @@ public class SecurityConfig {
                             "/backend/fonts/**",
                             "/backend/js/**",
                             "/backend/**.html",
+                            "/richText/**",
                             "/mobile/**",
                             "/pc/css/**",
                             "/pc/images/**",

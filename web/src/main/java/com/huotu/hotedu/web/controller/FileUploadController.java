@@ -11,12 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import sun.misc.BASE64Decoder;
 
-import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URI;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -30,19 +27,15 @@ public class FileUploadController {
 
     static BASE64Decoder decoder = new sun.misc.BASE64Decoder();
 
-        @RequestMapping(value="/backend/fileUploadImage",method = RequestMethod.POST)
+    @RequestMapping(value="/backend/kindeditorUpload",method = RequestMethod.POST)
     @ResponseBody
-    public Result fileUploadUeImage(HttpServletRequest request) throws Exception {
+    public Result fileUploadUeImage(MultipartHttpServletRequest request) throws Exception {
         Result result=new Result();
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-        MultipartFile file=fileMap.get("imgFile");
-        if(ImageIO.read(file.getInputStream())==null||file.getSize()==0){
-            result.setError(1);
-            result.setMessage("图片格式错误！");
-            return result;
-        }
-        String fileName = StaticResourceService.RICHTEXT_IMG + UUID.randomUUID().toString() + ".png";
+        MultipartFile file=request.getFile("imgFile");
+        //取得扩展名
+        String fileExt = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1).toLowerCase();
+        String fileName = StaticResourceService.RICHTEXT_UPLOAD + UUID.randomUUID().toString() + "."+fileExt;
+
         URI uri =staticResourceService.uploadResource(fileName, file.getInputStream());
         result.setError(0);
         result.setUrl(uri.toString());
@@ -67,7 +60,7 @@ public class FileUploadController {
                 ByteArrayInputStream bais = new ByteArrayInputStream(bytes1);
 
                 //上传至服务器
-                String fileName = StaticResourceService.RICHTEXT_IMG + UUID.randomUUID().toString() + ".png";
+                String fileName = StaticResourceService.RICHTEXT_UPLOAD + UUID.randomUUID().toString() + ".png";
                 URI uri =staticResourceService.uploadResource(fileName, bais);
 
                 result.setStatus(0);

@@ -63,7 +63,7 @@ public interface StaticResourceService {
     /**
      * 富文本中的图片
      */
-    String RICHTEXT_IMG  ="richText/attached/";
+    String RICHTEXT_UPLOAD  ="richText/attached/";
 
     String NOTICE_IMG = "image/notice/";
 
