@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletResponse;
 import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.UUID;
@@ -35,7 +34,7 @@ public class MessageContentController {
     /**
      * 用来储存分页中每页的记录数
      */
-    public static final int PAGE_SIZE=10;
+    public static final int PAGE_SIZE=2;
 
     /**
      * 用来储存处理静态资源的接口
@@ -87,35 +86,20 @@ public class MessageContentController {
      */
 
     @RequestMapping("/pc/messagelist")
-    public String messagelist(@RequestParam(required = false)Integer pageNo,
-                              @RequestParam(required = false) String keywords, Model model) throws URISyntaxException {
+    public String messagelist(Integer pageNo, Model model) throws URISyntaxException {
         String turnPage = "pc/yun-listzixun";
-        if(pageNo==null||pageNo<0){
-            pageNo=0;
+        if(pageNo==null||pageNo<1){
+            pageNo=1;
         }
-        Page<MessageContent> pages = messageContentService.searchMessageContent(pageNo, PAGE_SIZE, keywords);
+        Page<MessageContent> pages = messageContentService.searchMessageContent(pageNo-1, PAGE_SIZE, "");
         for(MessageContent messageContent:pages) {
             messageContent.setPictureUri(staticResourceService.getResource(messageContent.getPictureUri()).toString());
-           // messageContent.setContent(staticResourceService.getResource(messageContent.getContent()).toString());
         }
-
         long totalRecords = pages.getTotalElements();
-        int numEl =  pages.getNumberOfElements();
-        int pageSize = pages.getSize();
-        if(numEl==0) {
-            pageNo=pages.getTotalPages()-1;
-            if(pageNo<0) {
-                pageNo = 0;
-            }
-            pages = messageContentService.searchMessageContent(pageNo, PAGE_SIZE, keywords);
-            totalRecords = pages.getTotalElements();
-        }
-        model.addAttribute("messageContent", pages);
+        model.addAttribute("messageList", pages);
         model.addAttribute("totalPages",pages.getTotalPages());
         model.addAttribute("pageNo", pageNo);
-        model.addAttribute("keywords", keywords);
         model.addAttribute("totalRecords", totalRecords);
-
         return turnPage;
     }
 

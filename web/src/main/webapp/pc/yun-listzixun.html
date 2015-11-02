@@ -50,10 +50,10 @@
             <!-- 活动列表 -->
             <div class="upJyBox">
                 <div class="crumb-wrapf">
-                    <div class="crumb-list"><a href="#">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">资讯列表</span></div>
+                    <div class="crumb-list"><a href="#" th:href="@{/pc/index}">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">资讯列表</span></div>
                 </div>
                 <ul th:remove="all-but-first">
-                    <li th:each="g:${messageContent}">
+                    <li th:each="g:${messageList}">
                         <div><a class="fLeft mr10"  href="" th:href="@{/pc/loadDetailMessageContent(id=${g.id})}">
                             <img style="width: 250px; height: 188px;" th:style="${g.top} ? 'width: 250px; height: 188px;' : 'width: 120px; height: 90px;'" th:src="${g.pictureUri}" src="http://img.zcool.cn/community/035f43555a8ad516ac72520ee625de4.jpg@250w_188h_1c_1e" /> </a></div>
                         <div th:class="${g.top} ? 'upJyBoxCon' : 'upJyBoxConi' " class="upJyBoxCon">
@@ -71,9 +71,9 @@
                 </ul>
             </div>
             <div style="text-align:center; margin-top:10px;">
-                <a href="#" th:if="${pageNo}!=0" th:href=" @{/pc/messagelist(pageNo=${pageNo}-1)}">上一页</a>
-                <a href="#" th:if="${pageNo+1}!=${totalPages}" th:href="@{/pc/messagelist(pageNo=${pageNo}+1)}">下一页</a>
-                <span th:text="'当前第'+${pageNo+1}">1</span>页/<span th:text="'共'+${totalPages}">1</span>页
+                <a href="#" th:if="${pageNo}!=1" th:href=" @{/pc/messagelist(pageNo=${pageNo}-1)}">上一页</a>
+                <a href="#" th:if="${pageNo}!=${totalPages}" th:href="@{/pc/messagelist(pageNo=${pageNo}+1)}">下一页</a>
+                <span th:text="'当前第'+${pageNo}">1</span>页/<span th:text="'共'+${totalPages}">1</span>页
             </div>
         </div>
         <div style="text-align: center;margin-top:10px;margin-bottom: 10px;" th:if="${totalPages}==0">

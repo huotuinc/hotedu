@@ -41,8 +41,6 @@ public class LoginController {
     QaService qaService;
     @Autowired
     ExamGuideService examGuideService;
-    @Autowired
-    private  HttpServletRequest request;
 
 
 
@@ -52,38 +50,6 @@ public class LoginController {
         return turnPage;
     }
 
-
-    @RequestMapping("/pc/index")
-    public String index(Model model) throws Exception{
-        String turnPage = "pc/yun-index";
-        Notice notice = noticeRepository.findByEnabled(true);
-        if(notice!=null) {
-            notice.setPicUrl(staticResourceService.getResource(notice.getPicUrl()).toString());
-        }
-        model.addAttribute("notice",notice);
-        List<Link> linkList=linkRepository.findAll();
-        if(linkList.size()>0) {
-            model.addAttribute("linkList", linkList);
-        }
-        List<MessageContent> messageContentList=messageContentService.loadPcMessageContent(0,4).getContent();
-        for(MessageContent mc:messageContentList){
-            mc.setPictureUri(staticResourceService.getResource(mc.getPictureUri()).toString());
-        }
-        model.addAttribute("messageContentList",messageContentList);
-        List<Qa> qaList=qaService.loadPcQa(0,3).getContent();
-        for(Qa qa:qaList){
-            qa.setPictureUri(staticResourceService.getResource(qa.getPictureUri()).toString());
-        }
-        model.addAttribute("qaList",qaList);
-
-        List<ExamGuide> examGuideList=examGuideService.loadPcExamGuide(0,3).getContent();
-        for(ExamGuide eg:examGuideList){
-            eg.setPictureUri(staticResourceService.getResource(eg.getPictureUri()).toString());
-        }
-        model.addAttribute("examGuideList",examGuideList);
-        model.addAttribute("flag","yun-index.html");  //此属性用来给前台确定当前是哪个页面
-        return turnPage;
-    }
 
 
     @RequestMapping("/pc/videoLoginIndex")

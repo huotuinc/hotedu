@@ -1,13 +1,20 @@
 package com.huotu.hotedu.web.controller;
 
-import com.huotu.hotedu.entity.Login;
+import com.huotu.hotedu.entity.*;
+import com.huotu.hotedu.repository.LinkRepository;
+import com.huotu.hotedu.repository.NoticeRepository;
+import com.huotu.hotedu.service.ExamGuideService;
+import com.huotu.hotedu.service.MessageContentService;
+import com.huotu.hotedu.service.QaService;
+import com.huotu.hotedu.web.service.StaticResourceService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.ServletContext;
+import java.util.List;
 
 /**
  * Created by shiliting on 2015/6/10.
@@ -16,6 +23,21 @@ import javax.servlet.ServletContext;
  */
 @Controller
 public class IndexController {
+
+
+    @Autowired
+    StaticResourceService staticResourceService;
+
+    @Autowired
+    MessageContentService messageContentService;
+    @Autowired
+    LinkRepository linkRepository;
+    @Autowired
+    NoticeRepository noticeRepository;
+    @Autowired
+    QaService qaService;
+    @Autowired
+    ExamGuideService examGuideService;
 
     /**
      * 前台首页控制器
@@ -66,6 +88,38 @@ public class IndexController {
     @RequestMapping("/")
     public String loadWeb() {
         return "redirect:/pc/index";
+    }
+
+    @RequestMapping("/pc/index")
+    public String index(Model model) throws Exception{
+        String turnPage = "pc/yun-index";
+        Notice notice = noticeRepository.findByEnabled(true);
+        if(notice!=null) {
+            notice.setPicUrl(staticResourceService.getResource(notice.getPicUrl()).toString());
+        }
+        model.addAttribute("notice",notice);
+        List<Link> linkList=linkRepository.findAll();
+        if(linkList.size()>0) {
+            model.addAttribute("linkList", linkList);
+        }
+        List<MessageContent> messageContentList=messageContentService.loadPcMessageContent(0,4).getContent();
+        for(MessageContent mc:messageContentList){
+            mc.setPictureUri(staticResourceService.getResource(mc.getPictureUri()).toString());
+        }
+        model.addAttribute("messageContentList",messageContentList);
+        List<Qa> qaList=qaService.loadPcQa(0,3).getContent();
+        for(Qa qa:qaList){
+            qa.setPictureUri(staticResourceService.getResource(qa.getPictureUri()).toString());
+        }
+        model.addAttribute("qaList",qaList);
+
+        List<ExamGuide> examGuideList=examGuideService.loadPcExamGuide(0,3).getContent();
+        for(ExamGuide eg:examGuideList){
+            eg.setPictureUri(staticResourceService.getResource(eg.getPictureUri()).toString());
+        }
+        model.addAttribute("examGuideList",examGuideList);
+        model.addAttribute("flag","yun-index.html");  //此属性用来给前台确定当前是哪个页面
+        return turnPage;
     }
 
 }
