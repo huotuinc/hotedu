@@ -34,7 +34,7 @@ public class MessageContentController {
     /**
      * 用来储存分页中每页的记录数
      */
-    public static final int PAGE_SIZE=2;
+    public static final int PAGE_SIZE=10;
 
     /**
      * 用来储存处理静态资源的接口
