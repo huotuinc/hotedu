@@ -366,26 +366,7 @@
 
                     <p class="titxian"></p>
                 </div>
-               <!--暂时注释掉，使用静态页面-->
-                  <div>
-                      <a th:if="${messageContentList.size()}>=2" th:href="@{/pc/loadDetailMessageContent(id=${messageContentList[1].id})}"><p class="tittit"><span
-                              class="titfive" th:text="${messageContentList[1].title}">5月杭州微商大会进行中</span>
-                          <span class="tittime"
-                                th:text="${#calendars.format(messageContentList[1].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
-                      </p></a>
-
-                      <p style="clear:both"></p>
-                      <a th:if="${messageContentList.size()}>=3" th:href="@{/pc/loadDetailMessageContent(id=${messageContentList[2].id})}"><p class="tittit"><span
-                              class="titfive" th:text="${messageContentList[2].title}">5月杭州微商大会进行中</span>
-                          <span class="tittime"
-                                th:text="${#calendars.format(messageContentList[2].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
-                      </p></a>
-                      <p style="clear:both"></p>
-                  </div>
-                <a th:href="@{/pc/messagelist}">
-                <p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span>
-                </p>
-                </a>
+   
             </li>
             <!--报名须知-->
             <li style=" float:left;">
@@ -408,26 +389,7 @@
 
                     <p class="titxian"></p>
                 </div>
-                  <!--暂时注释掉，使用静态页面-->
-                  <div>
-                      <a th:if="${messageContentList.size()}>=2" th:href="@{/pc/loadDetailMessageContent(id=${messageContentList[1].id})}"><p class="tittit"><span
-                              class="titfive" th:text="${messageContentList[1].title}">5月杭州微商大会进行中</span>
-                          <span class="tittime"
-                                th:text="${#calendars.format(messageContentList[1].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
-                      </p></a>
-
-                      <p style="clear:both"></p>
-                      <a th:if="${messageContentList.size()}>=3" th:href="@{/pc/loadDetailMessageContent(id=${messageContentList[2].id})}"><p class="tittit"><span
-                              class="titfive" th:text="${messageContentList[2].title}">5月杭州微商大会进行中</span>
-                          <span class="tittime"
-                                th:text="${#calendars.format(messageContentList[2].lastUploadDate,'yyyy/MM/dd')}">2015/05/10</span>
-                      </p></a>
-                      <p style="clear:both"></p>
-                  </div>
-                <a th:href="@{/pc/messagelist}">
-                <p style="color: #C0C0C0;" class="tittit"><span style="color: #C0C0C0;" class="tittime">查看更多＞</span>
-                </p>
-                </a>
+            
             </li>
         </ul>
     </div>
