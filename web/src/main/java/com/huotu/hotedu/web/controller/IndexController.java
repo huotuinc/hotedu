@@ -5,6 +5,7 @@ import com.huotu.hotedu.repository.LinkRepository;
 import com.huotu.hotedu.repository.NoticeRepository;
 import com.huotu.hotedu.service.ExamGuideService;
 import com.huotu.hotedu.service.MessageContentService;
+import com.huotu.hotedu.service.NoticeService;
 import com.huotu.hotedu.service.QaService;
 import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,8 @@ public class IndexController {
     LinkRepository linkRepository;
     @Autowired
     NoticeRepository noticeRepository;
+    @Autowired
+    NoticeService noticeService;
     @Autowired
     QaService qaService;
     @Autowired
@@ -93,31 +96,48 @@ public class IndexController {
     @RequestMapping("/pc/index")
     public String index(Model model) throws Exception{
         String turnPage = "pc/yun-index";
-        Notice notice = noticeRepository.findByEnabled(true);
-        if(notice!=null) {
-            notice.setPicUrl(staticResourceService.getResource(notice.getPicUrl()).toString());
+        //最新公告
+        List<Notice> noticeList = noticeService.getPage(0,3,false).getContent();
+        for(Notice notice:noticeList) {
+            if(notice.getPicUrl()!=null) {
+                notice.setPicUrl(staticResourceService.getResource(notice.getPicUrl()).toString());
+            }
+        }
+        model.addAttribute("noticeList",noticeList);
+        //浮动广告
+        List<Notice> notices = noticeRepository.findByEnabled(true);
+        Notice notice = null;
+        if(notices.size()>0) {
+            notice = notices.get(0);
+            if(notice.getPicUrl()!=null) {
+                notice.setPicUrl(staticResourceService.getResource(notice.getPicUrl()).toString());
+            }
         }
         model.addAttribute("notice",notice);
+
+        //友情链接
         List<Link> linkList=linkRepository.findAll();
         if(linkList.size()>0) {
             model.addAttribute("linkList", linkList);
         }
+        //咨询动态
         List<MessageContent> messageContentList=messageContentService.loadPcMessageContent(0,4).getContent();
         for(MessageContent mc:messageContentList){
             mc.setPictureUri(staticResourceService.getResource(mc.getPictureUri()).toString());
         }
         model.addAttribute("messageContentList",messageContentList);
+        //常见问题
         List<Qa> qaList=qaService.loadPcQa(0,3).getContent();
         for(Qa qa:qaList){
             qa.setPictureUri(staticResourceService.getResource(qa.getPictureUri()).toString());
         }
         model.addAttribute("qaList",qaList);
-
-        List<ExamGuide> examGuideList=examGuideService.loadPcExamGuide(0,3).getContent();
+        //考试指南
+       /* List<ExamGuide> examGuideList=examGuideService.loadPcExamGuide(0,3).getContent();
         for(ExamGuide eg:examGuideList){
             eg.setPictureUri(staticResourceService.getResource(eg.getPictureUri()).toString());
         }
-        model.addAttribute("examGuideList",examGuideList);
+        model.addAttribute("examGuideList",examGuideList);*/
         model.addAttribute("flag","yun-index.html");  //此属性用来给前台确定当前是哪个页面
         return turnPage;
     }

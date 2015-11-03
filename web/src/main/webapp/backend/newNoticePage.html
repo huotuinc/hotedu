@@ -70,7 +70,7 @@
         </div>
         <div class="jp-container2">
             <div class="result-wrap">
-                <form id="editorForm" action="#" th:action="@{/backend/notices/{noticeId}(noticeId=${notice.id})}" method="post" class="myform" name="myform" enctype="multipart/form-data">
+                <form id="editorForm" action="#" th:action="@{/backend/notices}" method="post" class="myform" name="myform" enctype="multipart/form-data">
                     <div class="config-items">
                         <div class="result-content">
                             <table width="100%" class="insert-tab">
@@ -78,24 +78,25 @@
                                 <tr>
                                     <th><i class="require-red">*</i>公告图片：</th>
                                     <td>
-                                        <img src="images/logo.png" th:src="${notice.picUrl}" style="width: 100px; height: auto;"/><input name="pic" type="file"/>
+                                        <img src="images/logo.png" style="width: 100px; height: auto;"/><input name="pic" type="file"/>
                                     </td>
                                 </tr>
+
                                 <tr>
                                     <th><i class="require-red">*</i>链接地址：</th>
-                                    <td><input title="" th:value="${notice.linkUrl}" maxlength="200" type="text" id="playUrl" value="" size="70" name="linkUrl" class="common-text"/></td>
+                                    <td><input title=""  maxlength="200" type="text" id="playUrl" value="" size="70" name="linkUrl" class="common-text"/></td>
                                 </tr>
                                 <tr>
                                     <th><i class="require-red">*</i>标题：</th>
-                                    <td><input title="" maxlength="50" type="text" id="" value="" th:value="${notice.title}" size="70" name="title" class="common-text"/></td>
+                                    <td><input title="" maxlength="50" type="text" id="" value=""  size="70" name="title" class="common-text"/></td>
                                 </tr>
                                 <tr>
                                     <th><i class="require-red">*</i>简介：</th>
-                                    <td><textarea maxlength="255" title="" name="synopsis" class="common-textarea" th:text="${notice.synopsis}" id="synopsis" style="width:44%;height: 100px;"></textarea></td>
+                                    <td><textarea maxlength="255" title="" name="synopsis" class="common-textarea"  id="synopsis" style="width:44%;height: 100px;"></textarea></td>
                                 </tr>
                                 <tr>
                                     <th><i class="require-red">*</i>内容：</th>
-                                    <td><textarea title="" name="content" class="common-textarea" th:text="${notice.content}" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
+                                    <td><textarea title="" name="content" class="common-textarea"  id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
                                 </tr>
 
                                 <tr>

@@ -91,6 +91,8 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 Notice notice = new Notice();
                 notice.setType(CommonEnum.NoticeType.Course);
                 notice.setLinkUrl("/pc/loadMemberRegister");
+                notice.setLastUpdateTime(new Date());
+                notice.setEnabled(false);
                 noticeRepository.save(notice);
             }
             // 做一些初始化工作 比如

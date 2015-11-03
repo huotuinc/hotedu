@@ -3,6 +3,7 @@ package com.huotu.hotedu.entity;
 import com.huotu.hotedu.common.CommonEnum;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * 公告
@@ -15,6 +16,22 @@ public class Notice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    /**
+     * 标题
+     */
+    @Column
+    private String title;
+    /**
+     * 简介
+     */
+    @Column
+    private String synopsis;
+    /**
+     * 内容
+     */
+    @Lob
+    private String content;
 
     /**
      * 公告类型
@@ -39,6 +56,44 @@ public class Notice {
      */
     @Column(name = "picUrl")
     private String picUrl;
+
+    /**
+     * 更新日期
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastUpdateTime;
+
+    public Date getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSynopsis() {
+        return synopsis;
+    }
+
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setLastUpdateTime(Date lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
+    }
 
     public CommonEnum.NoticeType getType() {
         return type;

@@ -43,6 +43,27 @@ public class FileUploadController {
     }
 
     /**
+     * 最新公告修改页面富文本上传
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value="/backend/notices/kindeditorUpload",method = RequestMethod.POST)
+    @ResponseBody
+    public Result fileUpload(MultipartHttpServletRequest request) throws Exception {
+        Result result=new Result();
+        MultipartFile file=request.getFile("imgFile");
+        //取得扩展名
+        String fileExt = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1).toLowerCase();
+        String fileName = StaticResourceService.RICHTEXT_UPLOAD + UUID.randomUUID().toString() + "."+fileExt;
+
+        URI uri =staticResourceService.uploadResource(fileName, file.getInputStream());
+        result.setError(0);
+        result.setUrl(uri.toString());
+        return result;
+    }
+
+    /**
      * Created by jiashubing on 2015/9/9.
      * ctrl+v富文本粘贴图片的ajax上传
      * @param imgsrc    图片网络地址

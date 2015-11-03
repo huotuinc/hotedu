@@ -78,6 +78,7 @@ public class SecurityConfig {
                             "/pc/register",
                             "/pc/baomin",
                             "/pc/loadVideo",
+                            "/pc/notices",
                             "/pc/loadMessageContent",
                             "/pc/loadDetailMessageContent",
                             "/pc/loadTutors",

@@ -1,11 +1,14 @@
 package com.huotu.hotedu.web.controller.admin;
 
+import com.huotu.hotedu.common.CommonEnum;
 import com.huotu.hotedu.entity.Notice;
 import com.huotu.hotedu.entity.Result;
 import com.huotu.hotedu.repository.NoticeRepository;
+import com.huotu.hotedu.service.NoticeService;
 import com.huotu.hotedu.web.model.NoticeModel;
 import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.imageio.ImageIO;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,23 +31,55 @@ import java.util.UUID;
 @Controller
 public class NoticeController {
 
+    private static final int PAGE_SIZE = 10;
+
     @Autowired
     NoticeRepository noticeRepository;
+    @Autowired
+    NoticeService noticeService;
+
     @Autowired
     StaticResourceService staticResourceService;
 
     /**
-     * 显示公告列表页面
+     * 前台公告列表
+     * @return
+     */
+    @RequestMapping(value = "/pc/notices",method = RequestMethod.GET)
+    public ModelAndView loadNoticeList() {
+        List<Notice> noticeList = noticeRepository.findAll();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("pc/noticeList");
+        modelAndView.addObject("noticeList",noticeList);
+        return modelAndView;
+    }
+
+    /**
+     * 后台显示公告列表页面
      * @return
      */
     @RequestMapping(value = "/backend/notices",method = RequestMethod.GET)
-    public ModelAndView showNoticeList() {
-        List<Notice> noticeList = noticeRepository.findAll();
+    public ModelAndView showNoticeList(Integer pageNo) {
+        if(pageNo==null||pageNo<1) {
+            pageNo = 1;
+        }
+        Page<Notice> noticeList = noticeService.getPage(pageNo-1,PAGE_SIZE,null);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("backend/notice");
+        modelAndView.setViewName("backend/noticeList");
+        modelAndView.addObject("currentPage",pageNo);
+        modelAndView.addObject("totalPages",noticeList.getTotalPages());
+        modelAndView.addObject("totalRecords",noticeList.getTotalElements());
         modelAndView.addObject("noticeList",noticeList);
         return  modelAndView;
     }
+
+    @RequestMapping("/backend/addNotice")
+    public ModelAndView showAddNoticePage() {
+        ModelAndView modelAndView  = new ModelAndView();
+        modelAndView.setViewName("backend/newNoticePage");
+        return modelAndView;
+    }
+
 
     /**
      * 根据ID加载公告修改页面
@@ -59,8 +95,26 @@ public class NoticeController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/backend/notices",method = RequestMethod.POST)
+    public ModelAndView saveNotice(MultipartFile pic,Notice notice) throws Exception{
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/backend/notices");
+        if(pic.getSize()!=0) {
+            //取得扩展名
+            String fileExt = pic.getOriginalFilename().substring(pic.getOriginalFilename().lastIndexOf(".") + 1).toLowerCase();
+            String fileName = StaticResourceService.NOTICE_IMG + UUID.randomUUID().toString() + "."+fileExt;
+            staticResourceService.uploadResource(fileName, pic.getInputStream());
+            notice.setPicUrl(fileName);
+        }
+        notice.setLastUpdateTime(new Date());
+        notice.setType(CommonEnum.NoticeType.Course);
+        notice.setEnabled(false);
+        noticeRepository.save(notice);
+        return  modelAndView;
+    }
+
     /**
-     * 修改公告图片和链接地址
+     * 修改公告
      * @param pic
      * @param noticeId
      * @param linkUrl
@@ -69,7 +123,7 @@ public class NoticeController {
      */
     @RequestMapping(value = "/backend/notices/{noticeId}",method = RequestMethod.POST)
     @Transactional
-    public ModelAndView modifyNotice(MultipartFile pic,@PathVariable long noticeId,String linkUrl) throws Exception {
+    public ModelAndView modifyNotice(MultipartFile pic,@PathVariable long noticeId,String linkUrl,String title,String synopsis,String content) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/backend/notices");
         Notice notice = noticeRepository.findOne(noticeId);
@@ -84,6 +138,9 @@ public class NoticeController {
             staticResourceService.uploadResource(fileName, pic.getInputStream());
             notice.setPicUrl(fileName);
         }
+        notice.setTitle(title);
+        notice.setSynopsis(synopsis);
+        notice.setContent(content);
         notice.setLinkUrl(linkUrl);
         noticeRepository.save(notice);
         return modelAndView;

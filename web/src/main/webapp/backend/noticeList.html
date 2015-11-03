@@ -32,7 +32,7 @@
                 <li><a href="index.html" th:href="@{/backend/index}">首页</a></li>
                 <li><a href="wanted.html" th:href="@{/backend/loadWanted}">网站维护</a></li>
                 <li><a href="certificateapplications.html" th:href="@{/backend/searchMembers}">代理商管理</a></li>
-                <li><a class="on" href="notice.html" th:href="@{/backend/notices}">公告管理</a></li>
+                <li><a class="on" href="noticeList.html" th:href="@{/backend/notices}">公告管理</a></li>
             </ul>
         </div>
         <div class="top-info-wrap">
@@ -67,7 +67,7 @@
     <!--/sidebar-->
     <div class="main-wrap">
         <div class="crumb-wrap">
-            <div class="crumb-list"><i class="icon-font"></i><a href="notice.html"
+            <div class="crumb-list"><i class="icon-font"></i><a href="noticeList.html"
                                                                  th:href="@{/backend/notices}">公告管理</a><span
                     class="crumb-step">&gt;</span><span class="crumb-name">公告列表</span>
             </div>
@@ -75,11 +75,12 @@
         <div class="jp-container2">
             <div class="result-wrap">
                 <form name="myform" id="myform" method="post">
-                    <!--<div class="result-title">
+                    <div class="result-title">
                         <div class="result-list">
-                            <a href="/hotedu/backend/addAgent"><i class="icon-font">+</i>新增代理商</a>
+                            <a href="newMessageContent.html" th:href="@{/backend/addNotice}"><i
+                                    class="icon-font">+</i>新建</a>
                         </div>
-                    </div>-->
+                    </div>
                     <div class="result-content">
                         <table class="result-tab" width="100%">
                             <thead>
@@ -109,7 +110,14 @@
                             </tr>
                             </tbody>
                         </table>
-
+                        <div style="text-align:center; margin-top:10px;">
+                            <a href="#" th:if="${currentPage}!=1" th:href=" @{/backend/notices(pageNo=${currentPage}-1)}">上一页</a>
+                            <a href="#" th:if="${currentPage}!=${totalPages}" th:href="@{/backend/notices(pageNo=${currentPage}+1)}">下一页</a>
+                            <span th:text="'当前第'+${currentPage}">1</span>页/<span th:text="'共'+${totalPages}">1</span>页
+                        </div>
+                        <div style="text-align: center;margin-top:10px;margin-bottom: 10px;" th:if="${totalPages}==0">
+                            <p style="color: red;">暂无数据</p>
+                        </div>
                     </div>
                 </form>
             </div>
