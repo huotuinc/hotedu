@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
-    <title>资讯列表</title>
+    <title >公告详情</title>
     <link rel="stylesheet" type="text/css" href="css/common.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <link rel="stylesheet" type="text/css" href="css/indexnew.css" />
@@ -18,7 +18,7 @@
         <div  class="headeri">
             <img src="images/logo.png" class="logoimgi"/>
             <ul class="navi">
-                <li class="active"><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>
+                <li><a href="yun-index.html" th:href="@{/pc/index}">首页</a></li>
                 <li><a href="javascript:void(0)" th:href="@{/pc/loadCompanyIntroduction}">公司简介</a></li>
                 <li><a href="yun-baomin.html" th:href="@{/pc/loadMemberRegister}">考证报名</a></li>
                 <li><a href="javascript:void(0)" th:href="@{/pc/loadTutors}">师资力量</a></li>
@@ -28,8 +28,9 @@
                     <a href="yun-kaoshizn.html" th:if="${#authentication.name}!='anonymousUser'" th:href="@{/pc/loadExamGuide}">考试指南</a>
                 </li>
                 <li><a href="#">招|应聘</a></li>
-                <li id="loginLi" style="padding:0px 0px 0px 20px;" th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
-                    <a href="javascript:void(0)" onclick="document.getElementById('asaimsg').style.display='block';document.getElementById('asaimsgbg').style.display='block'">登录</a>
+                <li id="loginLi" style="padding:0px 0px 0px 20px;"
+                    th:style="${#authentication.name}=='anonymousUser'?'padding:0px 0px 0px 20px;':'display:none'">
+                    <a href="javascript:void(0)" id="showLoginForm">登录</a>
                 </li>
                 <li id="userLi" style="padding:0px;display:none" th:style="${#authentication.name}=='anonymousUser'?'display:none':'padding:0px'">
                     <a id="memberLi" href="#" th:href="@{/pc/loadPersonalCenter}"><img class="lodingimg" src="images/toux.png" width="100%"/></a><!--会员头像-->
@@ -46,38 +47,22 @@
     <p style=" height:40px;"></p>
     <p style="clear:both"></p>
     <div class="ysthree">
-        <div class="searchLeftS xLeft" th:unless="${totalPages}==0">
+        <div class="searchLeftS xLeft">
             <!-- 活动列表 -->
             <div class="upJyBox">
                 <div class="crumb-wrapf">
-                    <div class="crumb-list"><a href="#" th:href="@{/pc/index}">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">资讯列表</span></div>
+                    <div class="crumb-list"><a href="yun-index.html" th:href="@{/pc/index}">首页</a><span class="crumb-step">&gt;</span><a href="yun-index.html" th:href="@{/pc/noticelist}">公告列表</a><span class="crumb-step">&gt;</span><span class="crumb-name">公告详情</span></div>
                 </div>
-                <ul th:remove="all-but-first">
-                    <li th:each="g:${messageList}">
-                        <div><a class="fLeft mr10"  href="" th:href="@{/pc/loadDetailMessageContent(id=${g.id})}">
-                            <img style="width: 250px; height: 188px;" th:style="${g.top} ? 'width: 250px; height: 188px;' : 'width: 120px; height: 90px;'" th:src="${g.pictureUri}" src="http://img.zcool.cn/community/035f43555a8ad516ac72520ee625de4.jpg@250w_188h_1c_1e" /> </a></div>
-                        <div th:class="${g.top} ? 'upJyBoxCon' : 'upJyBoxConi' " class="upJyBoxCon">
-                            <div class="ujTitle"> <b><a  href="" th:href="@{/pc/loadDetailMessageContent(id=${g.id})}"><span th:text="${g.title}"></span></a></b> <span class="hotSpan lv2"></span> </div>
-                            <div class="mt5" th:style="${g.top} ? 'height: 134px;' : 'height: 69px;'" style="height: 134px;">
-
-                                <p style="height: 63px;" class="c999 mt5 ofHidden"><span th:text="${g.synopsis}"></span></p>
-                            </div>
-                            <div class="mt5 c999"> <span class="fLeft"><a href="#" target="_blank"></a>
-                                    <span class="ml10" th:text="${#calendars.format(g.lastUploadDate,'yyyy-MM-dd/HH:mm:ss')} + '发起'"></span>
-                                </span></div>
-                        </div>
+                <ul>
+                    <li>
+                        <b class="ysxqbt"><span th:utext="${notice.title}">我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题</span></b>
+                        <p style="clear:both;"></p>
                     </li>
-
+                    <!--  <li><img src="images/8ca155a87b4e000001c3105cfca7.jpg" width="100%" th:src="${messageContent.pictureUri}"/></li>-->
+                    <li style="line-height:22px; font-size:14px;">
+                        <span th:utext="${notice.content}">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</span></li>
                 </ul>
             </div>
-            <div style="text-align:center; margin-top:10px;">
-                <a href="#" th:if="${pageNo}!=1" th:href=" @{/pc/messagelist(pageNo=${pageNo}-1)}">上一页</a>
-              <span>当前第</span><span style="font-weight:bold;"  th:text= "${pageNo}">1</span>页/<span  style="font-weight:bold;"  th:text="'共'+${totalPages}">1</span>页
-                <a href="#" th:if="${pageNo}!=${totalPages}" th:href="@{/pc/messagelist(pageNo=${pageNo}+1)}">下一页</a>
-            </div>
-        </div>
-        <div style="text-align: center;margin-top:10px;margin-bottom: 10px;" th:if="${totalPages}==0">
-            <p style="color: red;">暂无数据</p>
         </div>
     </div>
     <p style="clear:both"></p>
@@ -157,8 +142,8 @@
                     <span style="color:blue" id="regMsgInfo"></span>
                 </div>
             </div>
-            </div>
         </div>
+    </div>
 </div>
 </body>
 </html>
