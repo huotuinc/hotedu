@@ -307,14 +307,14 @@
                             src="images/play.png" style="width: 18px; height: 18px;"/></span></p>
 
                     <p class="titen"><span>Dynamic information</span></p>
-                    <a th:href="@{/pc/loadDetailMessageContent(id=${messageContentList[0].id})}">
+                    <a th:if="${messageContentList.size()}>0" th:href="@{/pc/loadDetailMessageContent(id=${messageContentList[0].id})}" >
                         <img class="imgleft" src="images/logo_huoban.jpg"
                              th:src="@{${messageContentList[0].pictureUri}}" style="width:126px; height: 108px;"/>
                     </a>
-                    <a href="javascript:void(0)"><p class="titfont" th:text="${messageContentList[0].title}">
+                    <a href="javascript:void(0)"><p class="titfont" th:if="${messageContentList.size()}>0" th:text="${messageContentList[0].title}" >
                         “微商”悄然兴起</p></a>
                     <a href="javascript:void(0)">
-                        <p class="titlb" th:text="${messageContentList[0].synopsis}">
+                        <p class="titlb" th:if="${messageContentList.size()}>0" th:text="${messageContentList[0].synopsis}" >
                             什么是微商？至今没有权威定义。在朋友圈刷屏的卖家、品牌的微信代理商，以及自媒体发展起来的微信卖家，都被视为微商。
                         </p>
                     </a>
@@ -351,11 +351,11 @@
                             src="images/play.png" style="width: 18px; height: 18px;" /></span></p>
 
                     <p class="titen"><span>Latest statement</span></p>
-                    <a  th:href="@{/pc/loadDetailNotice(noticeId=${noticeList[0].id})}">
+                    <a th:if="${noticeList.size()}>0" th:href="@{/pc/loadDetailNotice(noticeId=${noticeList[0].id})}">
                     <img class="imgleft" src="images/logo_huoban.jpg" th:src="${noticeList.size()}>=1?${noticeList[0].picUrl}:'images/logo_huoban.jpg'"
                          style="width:126px; height: 108px;"/></a>
-                    <a href="javascript:void(0)" th:href="@{/pc/loadDetailNotice(noticeId=${noticeList[0].id})}" ><p class="titfont"  th:text="${noticeList.size()}>=1?${noticeList[0].title}:'微商论剑-杭州第五站'">微商论剑-杭州第五站</p></a>
-                    <a href="javascript:void(0)" th:href="@{/pc/loadDetailNotice(noticeId=${noticeList[0].id})}" ><p class="titlb" th:text="${noticeList.size()}>=1?${noticeList[0].synopsis}:'火图科技迄今为止已在杭城成功举办4站'">
+                    <a th:if="${noticeList.size()}>0"  th:href="@{/pc/loadDetailNotice(noticeId=${noticeList[0].id})}" ><p class="titfont"  th:text="${noticeList.size()}>=1?${noticeList[0].title}:'微商论剑-杭州第五站'">微商论剑-杭州第五站</p></a>
+                    <a th:if="${noticeList.size()}>0" th:href="@{/pc/loadDetailNotice(noticeId=${noticeList[0].id})}" ><p class="titlb" th:text="${noticeList.size()}>=1?${noticeList[0].synopsis}:'火图科技迄今为止已在杭城成功举办4站'">
                         火图科技迄今为止已在杭城成功举办4站"微商论剑"，并赶赴衢州、建德多地巡演，吸引当地众多传统企业前来观摩。这一次，火图科技将集结胡庆余堂、姚生记、天天快递、长生鸟于云咖啡，让你看看，品牌微商的力量有多强！</p>
                     </a>
 
