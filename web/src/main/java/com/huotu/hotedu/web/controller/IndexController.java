@@ -3,6 +3,7 @@ package com.huotu.hotedu.web.controller;
 import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.repository.LinkRepository;
 import com.huotu.hotedu.repository.NoticeRepository;
+import com.huotu.hotedu.repository.SEOConfigRepository;
 import com.huotu.hotedu.service.ExamGuideService;
 import com.huotu.hotedu.service.MessageContentService;
 import com.huotu.hotedu.service.NoticeService;
@@ -41,6 +42,8 @@ public class IndexController {
     QaService qaService;
     @Autowired
     ExamGuideService examGuideService;
+    @Autowired
+    SEOConfigRepository seoConfigRepository;
 
     /**
      * 前台首页控制器
@@ -96,6 +99,20 @@ public class IndexController {
     @RequestMapping("/pc/index")
     public String index(Model model) throws Exception{
         String turnPage = "pc/yun-index";
+        //SEO配置
+        List<SEOConfig> seoConfigs = seoConfigRepository.findAll();
+        SEOConfig seoConfig = null;
+        if(seoConfigs.size()==0) {
+            seoConfig = new SEOConfig();
+            seoConfig.setTitle("赢在微商，连接一切，全国首批微商运营师证书-伙聚教育云商学院");
+            seoConfig.setKeywords("微商培训,微信营销课程,微信营销技巧,赢在微商,伙聚教育,火图科技,云商学院");
+            seoConfig.setDescription("赢在微商，连接一切。伙聚教育云商学院是国内首家获得工信部微商运营师证书的微商培训学院。" +
+                    "我们提供整套移动营销解决方案，我们只做最专业的学习平台、最系统的微商培训、最权威的考证服务！一次缴费，免费复训；一证在手，工作不愁！");
+        }else {
+            seoConfig = seoConfigs.get(0);
+        }
+        model.addAttribute("seo",seoConfig);
+
         //最新公告
         List<Notice> noticeList = noticeService.getPage(0,3,false).getContent();
         for(Notice notice:noticeList) {

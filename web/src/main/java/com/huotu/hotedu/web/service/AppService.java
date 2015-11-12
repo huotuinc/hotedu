@@ -1,10 +1,7 @@
 package com.huotu.hotedu.web.service;
 
 import com.huotu.hotedu.common.CommonEnum;
-import com.huotu.hotedu.entity.Agent;
-import com.huotu.hotedu.entity.Huotu;
-import com.huotu.hotedu.entity.Manager;
-import com.huotu.hotedu.entity.Notice;
+import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.repository.*;
 import com.huotu.hotedu.service.AgentService;
 import com.huotu.hotedu.service.EnterpriseService;
@@ -16,6 +13,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -60,8 +58,11 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
     private Environment environment;
     @Autowired
     StaticResourceService staticResourceService;
+    @Autowired
+    SEOConfigRepository seoConfigRepository;
 
     @Override
+    @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
         if (event.getApplicationContext().getParent() == null) {
@@ -71,9 +72,6 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 manager.setLoginName("admin");
                 loginService.newLogin(manager,"admin");
             }
-        }
-
-        if (event.getApplicationContext().getParent() == null) {
             if(huotuRepository.count()==0){
                 Huotu huotu=new Huotu();
                 huotu.setTitle("杭州火图科技有限公司");
@@ -94,6 +92,14 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
                 notice.setLastUpdateTime(new Date());
                 notice.setEnabled(false);
                 noticeRepository.save(notice);
+            }
+            if(seoConfigRepository.count()==0) {
+                SEOConfig seoConfig = new SEOConfig();
+                seoConfig.setTitle("赢在微商，连接一切，全国首批微商运营师证书-伙聚教育云商学院");
+                seoConfig.setKeywords("微商培训,微信营销课程,微信营销技巧,赢在微商,伙聚教育,火图科技,云商学院");
+                seoConfig.setDescription("赢在微商，连接一切。伙聚教育云商学院是国内首家获得工信部微商运营师证书的微商培训学院。" +
+                        "我们提供整套移动营销解决方案，我们只做最专业的学习平台、最系统的微商培训、最权威的考证服务！一次缴费，免费复训；一证在手，工作不愁！");
+                seoConfigRepository.save(seoConfig);
             }
             // 做一些初始化工作 比如
             /*if (examGuideRepository.count()==0){
