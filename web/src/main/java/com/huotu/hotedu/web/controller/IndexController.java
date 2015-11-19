@@ -15,7 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -98,7 +101,53 @@ public class IndexController {
 
     @RequestMapping("/pc/index")
     public String index(Model model) throws Exception{
-        String turnPage = "pc/yun-index";
+        init(model);
+        return "pc/yun-index";
+    }
+
+    @RequestMapping("/pc/logoutSuccess")
+    public String logout() {
+        String turnPage = "redirect:/pc/index";
+        return turnPage;
+    }
+
+
+
+    @RequestMapping("/pc/videoLoginIndex")
+    public String videoLoginIndex() {
+        String turnPage = "pc/yun-jxspnew";
+        return turnPage;
+    }
+
+    @RequestMapping("/pc/loginSuccess")
+    public String loginSuccess(@AuthenticationPrincipal Login user,Model model) throws URISyntaxException {
+        String turnPage = "redirect:/pc/index";
+        if(user instanceof Manager||user instanceof Editor) {
+            turnPage = "redirect:/backend/index";
+        }
+        if(user instanceof Agent) {
+            String newPicUrl = null;
+            if(((Agent) user).getPictureUri()!=null&&!"".equals(((Agent) user).getPictureUri())) {
+                if(staticResourceService.getResource(((Agent) user).getPictureUri())!=null) {
+                    newPicUrl = staticResourceService.getResource(((Agent) user).getPictureUri()).toString();
+                }
+            }
+            ((Agent) user).setPictureUri(newPicUrl);
+            turnPage = "redirect:/pc/loadPersonalCenter";
+        }
+        return turnPage;
+    }
+
+    @RequestMapping("/pc/loginFailed")
+    public String loginFailed(Model model) throws Exception{
+        init(model);
+        String errInfo = "用户或密码错误";
+        model.addAttribute("errInfo",errInfo);
+        model.addAttribute("flag","yun-index.html");  //此属性用来给前台确定当前是哪个页面
+        return "pc/yun-index";
+    }
+
+    public void init(Model model) throws Exception{
         //SEO配置
         List<SEOConfig> seoConfigs = seoConfigRepository.findAll();
         SEOConfig seoConfig = null;
@@ -149,14 +198,6 @@ public class IndexController {
             qa.setPictureUri(staticResourceService.getResource(qa.getPictureUri()).toString());
         }
         model.addAttribute("qaList",qaList);
-        //考试指南
-       /* List<ExamGuide> examGuideList=examGuideService.loadPcExamGuide(0,3).getContent();
-        for(ExamGuide eg:examGuideList){
-            eg.setPictureUri(staticResourceService.getResource(eg.getPictureUri()).toString());
-        }
-        model.addAttribute("examGuideList",examGuideList);*/
         model.addAttribute("flag","yun-index.html");  //此属性用来给前台确定当前是哪个页面
-        return turnPage;
     }
-
 }

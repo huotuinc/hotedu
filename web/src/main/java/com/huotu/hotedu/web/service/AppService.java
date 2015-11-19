@@ -15,6 +15,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
+import javax.servlet.ServletContext;
 import java.util.Date;
 
 /**
@@ -60,6 +62,11 @@ public class AppService implements ApplicationListener<ContextRefreshedEvent> {
     StaticResourceService staticResourceService;
     @Autowired
     SEOConfigRepository seoConfigRepository;
+
+    /*@PostConstruct
+    public void init(){
+        servletContext.getSessionCookieConfig().setMaxAge(10);
+    }*/
 
     @Override
     @Transactional

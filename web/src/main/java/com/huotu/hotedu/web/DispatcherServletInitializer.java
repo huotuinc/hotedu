@@ -10,6 +10,9 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  * @author luffy luffy.ja at gmail.com
  */
 public class DispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
 
@@ -29,6 +32,5 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
     @Configuration
     @ComponentScan({"com.huotu.hotedu.config","com.huotu.hotedu.web.config"})
     public static class DispatcherServletInitializerConfig{
-
     }
 }
