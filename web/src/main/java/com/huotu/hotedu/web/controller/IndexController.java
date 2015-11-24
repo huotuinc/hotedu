@@ -3,6 +3,7 @@ package com.huotu.hotedu.web.controller;
 import com.huotu.hotedu.entity.*;
 import com.huotu.hotedu.repository.LinkRepository;
 import com.huotu.hotedu.repository.NoticeRepository;
+import com.huotu.hotedu.repository.SEOConfigRepository;
 import com.huotu.hotedu.service.ExamGuideService;
 import com.huotu.hotedu.service.MessageContentService;
 import com.huotu.hotedu.service.NoticeService;
@@ -14,7 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -41,6 +45,8 @@ public class IndexController {
     QaService qaService;
     @Autowired
     ExamGuideService examGuideService;
+    @Autowired
+    SEOConfigRepository seoConfigRepository;
 
     /**
      * 前台首页控制器
@@ -95,7 +101,67 @@ public class IndexController {
 
     @RequestMapping("/pc/index")
     public String index(Model model) throws Exception{
-        String turnPage = "pc/yun-index";
+        init(model);
+        return "pc/yun-index";
+    }
+
+    @RequestMapping("/pc/logoutSuccess")
+    public String logout() {
+        String turnPage = "redirect:/pc/index";
+        return turnPage;
+    }
+
+
+
+    @RequestMapping("/pc/videoLoginIndex")
+    public String videoLoginIndex() {
+        String turnPage = "pc/yun-jxspnew";
+        return turnPage;
+    }
+
+    @RequestMapping("/pc/loginSuccess")
+    public String loginSuccess(@AuthenticationPrincipal Login user,Model model) throws URISyntaxException {
+        String turnPage = "redirect:/pc/index";
+        if(user instanceof Manager||user instanceof Editor) {
+            turnPage = "redirect:/backend/index";
+        }
+        if(user instanceof Agent) {
+            String newPicUrl = null;
+            if(((Agent) user).getPictureUri()!=null&&!"".equals(((Agent) user).getPictureUri())) {
+                if(staticResourceService.getResource(((Agent) user).getPictureUri())!=null) {
+                    newPicUrl = staticResourceService.getResource(((Agent) user).getPictureUri()).toString();
+                }
+            }
+            ((Agent) user).setPictureUri(newPicUrl);
+            turnPage = "redirect:/pc/loadPersonalCenter";
+        }
+        return turnPage;
+    }
+
+    @RequestMapping("/pc/loginFailed")
+    public String loginFailed(Model model) throws Exception{
+        init(model);
+        String errInfo = "用户或密码错误";
+        model.addAttribute("errInfo",errInfo);
+        model.addAttribute("flag","yun-index.html");  //此属性用来给前台确定当前是哪个页面
+        return "pc/yun-index";
+    }
+
+    public void init(Model model) throws Exception{
+        //SEO配置
+        List<SEOConfig> seoConfigs = seoConfigRepository.findAll();
+        SEOConfig seoConfig = null;
+        if(seoConfigs.size()==0) {
+            seoConfig = new SEOConfig();
+            seoConfig.setTitle("赢在微商，连接一切，全国首批微商运营师证书-伙聚教育云商学院");
+            seoConfig.setKeywords("微商培训,微信营销课程,微信营销技巧,赢在微商,伙聚教育,火图科技,云商学院");
+            seoConfig.setDescription("赢在微商，连接一切。伙聚教育云商学院是国内首家获得工信部微商运营师证书的微商培训学院。" +
+                    "我们提供整套移动营销解决方案，我们只做最专业的学习平台、最系统的微商培训、最权威的考证服务！一次缴费，免费复训；一证在手，工作不愁！");
+        }else {
+            seoConfig = seoConfigs.get(0);
+        }
+        model.addAttribute("seo",seoConfig);
+
         //最新公告
         List<Notice> noticeList = noticeService.getPage(0,3,false).getContent();
         for(Notice notice:noticeList) {
@@ -132,14 +198,6 @@ public class IndexController {
             qa.setPictureUri(staticResourceService.getResource(qa.getPictureUri()).toString());
         }
         model.addAttribute("qaList",qaList);
-        //考试指南
-       /* List<ExamGuide> examGuideList=examGuideService.loadPcExamGuide(0,3).getContent();
-        for(ExamGuide eg:examGuideList){
-            eg.setPictureUri(staticResourceService.getResource(eg.getPictureUri()).toString());
-        }
-        model.addAttribute("examGuideList",examGuideList);*/
         model.addAttribute("flag","yun-index.html");  //此属性用来给前台确定当前是哪个页面
-        return turnPage;
     }
-
 }

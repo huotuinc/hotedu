@@ -82,6 +82,8 @@ public class SecurityConfig {
                             "/pc/loadMessageContent",
                             "/pc/loadDetailMessageContent",
                             "/pc/loadTutors",
+                            "/pc/noticelist",
+                            "/pc/loadDetailNotice",
                             "/pc/loadCompanyIntroduction",
                             "/image/**",
                             "/uploadResources/**",

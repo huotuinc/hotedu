@@ -10,16 +10,13 @@ import com.huotu.hotedu.web.service.StaticResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.imageio.ImageIO;
 import javax.transaction.Transactional;
+import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -53,6 +50,50 @@ public class NoticeController {
         modelAndView.addObject("noticeList",noticeList);
         return modelAndView;
     }
+
+
+    /**
+     * 前台公告列表（查看更多）
+     * @return
+     */
+    @RequestMapping(value = "/pc/noticelist",method = RequestMethod.GET)
+    public ModelAndView NoticeList(Integer pageNo) throws URISyntaxException {
+        if(pageNo==null||pageNo<1) {
+            pageNo = 1;
+        }
+        Page<Notice> noticeList = noticeService.getPage(pageNo-1,PAGE_SIZE,null);
+
+        for(Notice notice:noticeList) {
+            if(notice.getPicUrl()!=null) {
+                notice.setPicUrl(staticResourceService.getResource(notice.getPicUrl()).toString());
+            }
+        }
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("pc/yun-listnotice");
+        modelAndView.addObject("noticeList",noticeList);
+        modelAndView.addObject("pageNo",pageNo);
+        modelAndView.addObject("totalPages",noticeList.getTotalPages());
+        modelAndView.addObject("totalRecords",noticeList.getTotalElements());
+        return modelAndView;
+    }
+
+    /**
+     * 加载每一条公告的详细信息
+     * @param noticeId    要查看的公告的id
+     * @return      yun-listnotice.html
+     */
+    @RequestMapping(value = "/pc/loadDetailNotice",method = RequestMethod.GET)
+    public ModelAndView loadDetailNotice( long noticeId) throws Exception{
+        Notice notice = noticeRepository.findOne(noticeId);
+        notice.setPicUrl(staticResourceService.getResource(notice.getPicUrl()).toURL().toString());
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("pc/yun-xqnotice");
+        modelAndView.addObject("notice",notice);
+
+        return modelAndView;
+    }
+
 
     /**
      * 后台显示公告列表页面
